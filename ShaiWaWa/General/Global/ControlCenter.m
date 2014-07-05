@@ -29,10 +29,15 @@
 
 + (void)makeKeyAndVisible
 {
+    //LoginViewController
     AppDelegate * appDelegate = [[self class] appDelegate];
-    [[self class] setNavigationTitleWhiteColor];
+    //[[self class] setNavigationTitleWhiteColor];
     appDelegate.window = [[self class] newWindow];
+    UINavigationController * nav = [[self class] navWithRootVC:[[self class] viewControllerWithName:@"ChooseModeViewController"]];
+    appDelegate.navigationController = nav;
+    appDelegate.window.rootViewController = appDelegate.navigationController;
     [appDelegate.window makeKeyAndVisible];
+    nav = nil;
 }
 
 
@@ -49,6 +54,16 @@
 + (void)pushToRegisterVC
 {
     [[self class] showVC:@"RegisterViewController"];
+}
+
++ (void)pushToPostValidateVC
+{
+    [[self class] showVC:@"PostValidateViewController"];
+}
+
++ (void)pushToFinishRegisterVC
+{
+    [[self class] showVC:@"FinishRegisterViewController"];
 }
 
 + (void)showVC:(NSString *)vcName

@@ -16,7 +16,14 @@
 + (UIWindow *)newWindow;
 + (void)makeKeyAndVisible;
 + (void)setNavigationTitleWhiteColor;
+//push到登陆页面方法
 + (void)pushToLoginVC;
+//push到注册页面方法
++ (void)pushToRegisterVC;
+//push到提交验证码页面方法
++ (void)pushToPostValidateVC;
+//push到完成注册页面方法
++ (void)pushToFinishRegisterVC;
 + (void)showVC:(NSString *)vcName;
 + (UIViewController *)viewControllerWithName:(NSString *)vcName;
 + (UINavigationController *)navWithRootVC:(UIViewController *)vc;

@@ -8,6 +8,10 @@
 
 #import "CommonViewController.h"
 
-@interface LoginViewController : CommonViewController
+@interface LoginViewController : CommonViewController<UITextFieldDelegate>
+@property (strong, nonatomic) IBOutlet UITextField *phoneField;
+@property (strong, nonatomic) IBOutlet UITextField *pwdField;
+@property (strong, nonatomic) IBOutlet UILabel *hoverRegisterLabel;
+- (IBAction)showRegisterVC:(id)sender;
 
 @end

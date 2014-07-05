@@ -1,19 +1,19 @@
 //
-//  LoginViewController.m
+//  RegisterViewController.m
 //  ShaiWaWa
 //
-//  Created by Carl on 14-7-5.
+//  Created by 祥 on 14-7-5.
 //  Copyright (c) 2014年 helloworld. All rights reserved.
 //
 
-#import "LoginViewController.h"
+#import "RegisterViewController.h"
 #import "ControlCenter.h"
 
-@interface LoginViewController ()
+@interface RegisterViewController ()
 
 @end
 
-@implementation LoginViewController
+@implementation RegisterViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,41 +36,34 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-- (void)dealloc
-{
-    _hoverRegisterLabel = nil;
-    _phoneField = nil;
-    _pwdField = nil;
-}
     
 #pragma mark - Private Methods
 - (void)initUI
 {
-    self.title = @"登陆";
-    NSMutableAttributedString * attrString = [[NSMutableAttributedString alloc] initWithString:_hoverRegisterLabel.text];
+    self.title = @"注册";
+    [self.navigationItem setHidesBackButton:YES];
+    NSMutableAttributedString * attrString = [[NSMutableAttributedString alloc] initWithString:_hoverLoginLabel.text];
     [attrString addAttributes:@{NSUnderlineStyleAttributeName:[NSNumber numberWithInt:NSUnderlineStyleSingle]} range:NSMakeRange(0, attrString.length)];
-    _hoverRegisterLabel.attributedText = attrString;
-    _hoverRegisterLabel.textColor = [UIColor lightGrayColor];
+    _hoverLoginLabel.attributedText = attrString;
+    _hoverLoginLabel.textColor = [UIColor lightGrayColor];
     
 }
 
-- (IBAction)showRegisterVC:(id)sender
+- (IBAction)showLoginVC:(id)sender
 {
-    [ControlCenter pushToRegisterVC];
+    [self popVIewController];
 }
+    
+- (IBAction)showPostValidateVC:(id)sender
+{
+    [ControlCenter pushToPostValidateVC];
+}
+    
     
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    if (textField == _phoneField) {
-        [_pwdField becomeFirstResponder];
-        return NO;
-    }
     [textField resignFirstResponder];
     return YES;
 }
-    
-    
-
 @end

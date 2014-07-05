@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		0E618755031544B1B81E652C /* libPods-ShaiWaWa.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9066DBF5432D412091E6A49A /* libPods-ShaiWaWa.a */; };
+		171DC0061967D839005F7D28 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 171DC0041967D839005F7D28 /* RegisterViewController.m */; };
+		171DC0071967D839005F7D28 /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 171DC0051967D839005F7D28 /* RegisterViewController.xib */; };
+		171DC00B1967E23C005F7D28 /* PostValidateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 171DC0091967E23C005F7D28 /* PostValidateViewController.m */; };
+		171DC00C1967E23C005F7D28 /* PostValidateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 171DC00A1967E23C005F7D28 /* PostValidateViewController.xib */; };
+		171DC0101967E81E005F7D28 /* FinishRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 171DC00E1967E81E005F7D28 /* FinishRegisterViewController.m */; };
+		171DC0111967E81E005F7D28 /* FinishRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 171DC00F1967E81E005F7D28 /* FinishRegisterViewController.xib */; };
+		171DC0151967EECC005F7D28 /* ChooseModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 171DC0131967EECC005F7D28 /* ChooseModeViewController.m */; };
+		171DC0161967EECC005F7D28 /* ChooseModeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 171DC0141967EECC005F7D28 /* ChooseModeViewController.xib */; };
+		171DC01A1967EF04005F7D28 /* ForgetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 171DC0181967EF04005F7D28 /* ForgetPwdViewController.m */; };
+		171DC01B1967EF04005F7D28 /* ForgetPwdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 171DC0191967EF04005F7D28 /* ForgetPwdViewController.xib */; };
 		C32B41831965B5B8003979EE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C32B41821965B5B8003979EE /* Foundation.framework */; };
 		C32B41851965B5B8003979EE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C32B41841965B5B8003979EE /* CoreGraphics.framework */; };
 		C32B41871965B5B8003979EE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C32B41861965B5B8003979EE /* UIKit.framework */; };
@@ -59,7 +69,7 @@
 		C32CE4B61967AAA900DB84DC /* baby_weixinyaoqing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C32CE42A1967AAA900DB84DC /* baby_weixinyaoqing@2x.png */; };
 		C32CE4B71967AAA900DB84DC /* login_box-1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C32CE42C1967AAA900DB84DC /* login_box-1@2x.png */; };
 		C32CE4B81967AAA900DB84DC /* login_box-2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C32CE42D1967AAA900DB84DC /* login_box-2@2x.png */; };
-		C32CE4B91967AAA900DB84DC /* login_box-3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C32CE42E1967AAA900DB84DC /* login_box-3@2x.png */; };
+		C32CE4B91967AAA900DB84DC /* login_box3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C32CE42E1967AAA900DB84DC /* login_box3@2x.png */; };
 		C32CE4BA1967AAA900DB84DC /* login_box-4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C32CE42F1967AAA900DB84DC /* login_box-4@2x.png */; };
 		C32CE4BB1967AAA900DB84DC /* login_box-5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C32CE4301967AAA900DB84DC /* login_box-5@2x.png */; };
 		C32CE4BC1967AAA900DB84DC /* login_box-6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C32CE4311967AAA900DB84DC /* login_box-6@2x.png */; };
@@ -191,6 +201,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		171DC0031967D839005F7D28 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		171DC0041967D839005F7D28 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		171DC0051967D839005F7D28 /* RegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
+		171DC0081967E23B005F7D28 /* PostValidateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostValidateViewController.h; sourceTree = "<group>"; };
+		171DC0091967E23C005F7D28 /* PostValidateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostValidateViewController.m; sourceTree = "<group>"; };
+		171DC00A1967E23C005F7D28 /* PostValidateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostValidateViewController.xib; sourceTree = "<group>"; };
+		171DC00D1967E81E005F7D28 /* FinishRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinishRegisterViewController.h; sourceTree = "<group>"; };
+		171DC00E1967E81E005F7D28 /* FinishRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinishRegisterViewController.m; sourceTree = "<group>"; };
+		171DC00F1967E81E005F7D28 /* FinishRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FinishRegisterViewController.xib; sourceTree = "<group>"; };
+		171DC0121967EECC005F7D28 /* ChooseModeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseModeViewController.h; sourceTree = "<group>"; };
+		171DC0131967EECC005F7D28 /* ChooseModeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseModeViewController.m; sourceTree = "<group>"; };
+		171DC0141967EECC005F7D28 /* ChooseModeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseModeViewController.xib; sourceTree = "<group>"; };
+		171DC0171967EF04005F7D28 /* ForgetPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPwdViewController.h; sourceTree = "<group>"; };
+		171DC0181967EF04005F7D28 /* ForgetPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPwdViewController.m; sourceTree = "<group>"; };
+		171DC0191967EF04005F7D28 /* ForgetPwdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetPwdViewController.xib; sourceTree = "<group>"; };
 		9066DBF5432D412091E6A49A /* libPods-ShaiWaWa.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ShaiWaWa.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C32B417F1965B5B8003979EE /* ShaiWaWa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShaiWaWa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C32B41821965B5B8003979EE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -269,7 +294,7 @@
 		C32CE42A1967AAA900DB84DC /* baby_weixinyaoqing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "baby_weixinyaoqing@2x.png"; sourceTree = "<group>"; };
 		C32CE42C1967AAA900DB84DC /* login_box-1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_box-1@2x.png"; sourceTree = "<group>"; };
 		C32CE42D1967AAA900DB84DC /* login_box-2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_box-2@2x.png"; sourceTree = "<group>"; };
-		C32CE42E1967AAA900DB84DC /* login_box-3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_box-3@2x.png"; sourceTree = "<group>"; };
+		C32CE42E1967AAA900DB84DC /* login_box3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_box3@2x.png"; sourceTree = "<group>"; };
 		C32CE42F1967AAA900DB84DC /* login_box-4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_box-4@2x.png"; sourceTree = "<group>"; };
 		C32CE4301967AAA900DB84DC /* login_box-5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_box-5@2x.png"; sourceTree = "<group>"; };
 		C32CE4311967AAA900DB84DC /* login_box-6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_box-6@2x.png"; sourceTree = "<group>"; };
@@ -686,7 +711,7 @@
 			children = (
 				C32CE42C1967AAA900DB84DC /* login_box-1@2x.png */,
 				C32CE42D1967AAA900DB84DC /* login_box-2@2x.png */,
-				C32CE42E1967AAA900DB84DC /* login_box-3@2x.png */,
+				C32CE42E1967AAA900DB84DC /* login_box3@2x.png */,
 				C32CE42F1967AAA900DB84DC /* login_box-4@2x.png */,
 				C32CE4301967AAA900DB84DC /* login_box-5@2x.png */,
 				C32CE4311967AAA900DB84DC /* login_box-6@2x.png */,
@@ -848,6 +873,21 @@
 				C32CE5361967AB0900DB84DC /* LoginViewController.h */,
 				C32CE5371967AB0900DB84DC /* LoginViewController.m */,
 				C32CE5381967AB0900DB84DC /* LoginViewController.xib */,
+				171DC0031967D839005F7D28 /* RegisterViewController.h */,
+				171DC0041967D839005F7D28 /* RegisterViewController.m */,
+				171DC0051967D839005F7D28 /* RegisterViewController.xib */,
+				171DC0081967E23B005F7D28 /* PostValidateViewController.h */,
+				171DC0091967E23C005F7D28 /* PostValidateViewController.m */,
+				171DC00A1967E23C005F7D28 /* PostValidateViewController.xib */,
+				171DC00D1967E81E005F7D28 /* FinishRegisterViewController.h */,
+				171DC00E1967E81E005F7D28 /* FinishRegisterViewController.m */,
+				171DC00F1967E81E005F7D28 /* FinishRegisterViewController.xib */,
+				171DC0121967EECC005F7D28 /* ChooseModeViewController.h */,
+				171DC0131967EECC005F7D28 /* ChooseModeViewController.m */,
+				171DC0141967EECC005F7D28 /* ChooseModeViewController.xib */,
+				171DC0171967EF04005F7D28 /* ForgetPwdViewController.h */,
+				171DC0181967EF04005F7D28 /* ForgetPwdViewController.m */,
+				171DC0191967EF04005F7D28 /* ForgetPwdViewController.xib */,
 			);
 			path = UserCenter;
 			sourceTree = "<group>";
@@ -952,13 +992,16 @@
 				C32CE4C91967AAA900DB84DC /* main_baobaotouxiang@2x.png in Resources */,
 				C32CE4D61967AAA900DB84DC /* main_sousuokuang-@2x.png in Resources */,
 				C32CE5091967AAA900DB84DC /* square_name@2x.png in Resources */,
+				171DC01B1967EF04005F7D28 /* ForgetPwdViewController.xib in Resources */,
 				C32CE5111967AAA900DB84DC /* square_pic-8@2x.png in Resources */,
 				C32CE4F51967AAA900DB84DC /* pd_huatong@2x.png in Resources */,
+				171DC0071967D839005F7D28 /* RegisterViewController.xib in Resources */,
 				C32CE5101967AAA900DB84DC /* square_pic-7@2x.png in Resources */,
 				C32CE4D21967AAA900DB84DC /* main_quanbudongtai2x.png in Resources */,
 				C32CE4D51967AAA900DB84DC /* main_sousuodongftai@2x.png in Resources */,
 				C32CE4E71967AAA900DB84DC /* pb_logo-4@2x.png in Resources */,
 				C32CE51C1967AAA900DB84DC /* square_shoucang@2x.png in Resources */,
+				171DC0161967EECC005F7D28 /* ChooseModeViewController.xib in Resources */,
 				C32CE4B61967AAA900DB84DC /* baby_weixinyaoqing@2x.png in Resources */,
 				C32CE4D81967AAA900DB84DC /* main_sousuokuang@2x.png in Resources */,
 				C32CE4D11967AAA900DB84DC /* main_line@2x.png in Resources */,
@@ -970,6 +1013,7 @@
 				C32CE4CD1967AAA900DB84DC /* main_dian@2x.png in Resources */,
 				C32CE5041967AAA900DB84DC /* square_fenxiang-3@2x.png in Resources */,
 				C32CE4AE1967AAA900DB84DC /* baby_dongtai-@2x.png in Resources */,
+				171DC0111967E81E005F7D28 /* FinishRegisterViewController.xib in Resources */,
 				C32CE4D41967AAA900DB84DC /* main_shezhi@2x.png in Resources */,
 				C32CE5051967AAA900DB84DC /* square_fenxiang-4@2x.png in Resources */,
 				C32CE4B01967AAA900DB84DC /* baby_duanxinyaoqing@2x.png in Resources */,
@@ -1020,7 +1064,7 @@
 				C32CE5081967AAA900DB84DC /* square_jubao@2x.png in Resources */,
 				C32CE4BF1967AAA900DB84DC /* login_qq@2x.png in Resources */,
 				C32CE4E21967AAA900DB84DC /* pb_bofang@2x.png in Resources */,
-				C32CE4B91967AAA900DB84DC /* login_box-3@2x.png in Resources */,
+				C32CE4B91967AAA900DB84DC /* login_box3@2x.png in Resources */,
 				C32CE5001967AAA900DB84DC /* square_chengzhangzuji]@2x.png in Resources */,
 				C32B419A1965B5B8003979EE /* Images.xcassets in Resources */,
 				C32CE4F81967AAA900DB84DC /* pd_xiala@2x.png in Resources */,
@@ -1076,6 +1120,7 @@
 				C32CE50A1967AAA900DB84DC /* square_pic-1@2x.png in Resources */,
 				C32CE5211967AAA900DB84DC /* square_zan@2x.png in Resources */,
 				C32CE51F1967AAA900DB84DC /* square_yanjing@2x.png in Resources */,
+				171DC00C1967E23C005F7D28 /* PostValidateViewController.xib in Resources */,
 				C32CE5291967AAA900DB84DC /* user_3-weibo@2x.png in Resources */,
 				C32CE4DD1967AAA900DB84DC /* main_weixin@2x.png in Resources */,
 				C32CE5171967AAA900DB84DC /* square_pinglun-big@2x.png in Resources */,
@@ -1131,18 +1176,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				171DC0101967E81E005F7D28 /* FinishRegisterViewController.m in Sources */,
 				C32CE41A1967A5E100DB84DC /* AppDelegate.m in Sources */,
 				C32CE5391967AB0900DB84DC /* LoginViewController.m in Sources */,
 				C32CE4061967A25800DB84DC /* VersionManager.m in Sources */,
+				171DC00B1967E23C005F7D28 /* PostValidateViewController.m in Sources */,
 				C32CE3FD1967A25800DB84DC /* IO.m in Sources */,
 				C32CE40D1967A2CA00DB84DC /* User.m in Sources */,
 				C32CE40C1967A2CA00DB84DC /* BaseModel.m in Sources */,
 				C32CE3FB1967A25800DB84DC /* CommonViewController.m in Sources */,
+				171DC01A1967EF04005F7D28 /* ForgetPwdViewController.m in Sources */,
+				171DC0061967D839005F7D28 /* RegisterViewController.m in Sources */,
 				C32CE4131967A33700DB84DC /* HttpService.m in Sources */,
 				C32CE4041967A25800DB84DC /* UIImage+Util.m in Sources */,
 				C32CE3FA1967A25800DB84DC /* UITextView+Placeholder.m in Sources */,
 				C32CE3FE1967A25800DB84DC /* NSDate+Utils.m in Sources */,
 				C32CE4171967A52F00DB84DC /* ControlCenter.m in Sources */,
+				171DC0151967EECC005F7D28 /* ChooseModeViewController.m in Sources */,
 				C32CE4001967A25800DB84DC /* NSString+MD5_32.m in Sources */,
 				C32CE3F91967A25800DB84DC /* UITableView+Addition.m in Sources */,
 				C32CE3FF1967A25800DB84DC /* NSString+IP.m in Sources */,
@@ -1311,6 +1361,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ShaiWaWaTests/Supporting Files/ShaiWaWaTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -1329,6 +1380,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ShaiWaWa/Supporting Files/ShaiWaWa-Prefix.pch";
 				INFOPLIST_FILE = "ShaiWaWaTests/Supporting Files/ShaiWaWaTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;

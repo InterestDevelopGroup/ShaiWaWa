@@ -18,6 +18,7 @@
 {
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     [ControlCenter makeKeyAndVisible];
+    [self customUI];
     return YES;
 }
 
@@ -144,4 +145,18 @@
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
+#pragma mark - Private Methods
+- (void)customUI
+    {
+        [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+        [[UINavigationBar appearance] setBarStyle:UIBarStyleBlackTranslucent];
+        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"square_biaotilan"] forBarMetrics:UIBarMetricsDefault];
+        [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeTextColor:[UIColor whiteColor]}];
+#ifdef iOS7_SDK
+        if([OSHelper iOS7])
+        {
+            //[[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"black_顶栏"] forBarMetrics:UIBarMetricsDefault];
+        }
+#endif
+    }
 @end
