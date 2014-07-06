@@ -39,7 +39,6 @@
 - (void)initUI
 {
     self.title = @"老李";
-//    [self setLeftCustomBarItem:@"square_back" action:nil imageEdgeInsets:UIEdgeInsetsMake(0, -70, 0, 0)];
     [self setLeftCusBarItem:@"square_back" action:nil];
     UIButton *addFriendButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [addFriendButton setTitle:@"加为好友" forState:UIControlStateNormal];

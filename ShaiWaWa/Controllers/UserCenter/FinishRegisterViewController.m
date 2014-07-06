@@ -7,6 +7,7 @@
 //
 
 #import "FinishRegisterViewController.h"
+#import "UIViewController+BarItemAdapt.h"
 
 @interface FinishRegisterViewController ()
 
@@ -39,7 +40,7 @@
 - (void)initUI
 {
     self.title = @"完成注册";
-    [self setLeftCustomBarItem:@"square_back" action:nil imageEdgeInsets:UIEdgeInsetsMake(0, -70, 0, 0)];
+    [self setLeftCusBarItem:@"square_back" action:nil];
     
 }
 - (IBAction)disableSecure:(id)sender

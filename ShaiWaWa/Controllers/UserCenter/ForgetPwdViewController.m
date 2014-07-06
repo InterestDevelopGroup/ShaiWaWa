@@ -7,6 +7,7 @@
 //
 
 #import "ForgetPwdViewController.h"
+#import "UIViewController+BarItemAdapt.h"
 
 @interface ForgetPwdViewController ()
 
@@ -39,7 +40,7 @@
 - (void)initUI
 {
     self.title = @"找回密码";
-    [self setLeftCustomBarItem:@"square_back" action:nil imageEdgeInsets:UIEdgeInsetsMake(0, -70, 0, 0)];
+    [self setLeftCusBarItem:@"square_back" action:nil];
     
 }
     

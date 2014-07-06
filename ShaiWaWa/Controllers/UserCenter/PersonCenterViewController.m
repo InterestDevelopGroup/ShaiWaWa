@@ -7,6 +7,7 @@
 //
 
 #import "PersonCenterViewController.h"
+#import "UIViewController+BarItemAdapt.h"
 
 @interface PersonCenterViewController ()
 
@@ -39,7 +40,7 @@
 - (void)initUI
 {
     self.title = @"老李";
-    [self setLeftCustomBarItem:@"square_back" action:nil imageEdgeInsets:UIEdgeInsetsMake(0, -70, 0, 0)];
+    [self setLeftCusBarItem:@"square_back" action:nil];
     [self babyCell];
     [self dynamicCell];
     [self goodFriendCell];

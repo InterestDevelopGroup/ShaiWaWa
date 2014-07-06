@@ -8,6 +8,7 @@
 
 #import "PostValidateViewController.h"
 #import "ControlCenter.h"
+#import "UIViewController+BarItemAdapt.h"
 
 @interface PostValidateViewController ()
 
@@ -40,7 +41,7 @@
 - (void)initUI
 {
     self.title = @"提交验证码";
-    [self setLeftCustomBarItem:@"square_back" action:nil imageEdgeInsets:UIEdgeInsetsMake(0, -70, 0, 0)];
+    [self setLeftCusBarItem:@"square_back" action:nil];
     
 }
     
