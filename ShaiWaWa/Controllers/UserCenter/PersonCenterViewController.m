@@ -1,0 +1,137 @@
+//
+//  PersonCenterViewController.m
+//  ShaiWaWa
+//
+//  Created by 祥 on 14-7-6.
+//  Copyright (c) 2014年 helloworld. All rights reserved.
+//
+
+#import "PersonCenterViewController.h"
+
+@interface PersonCenterViewController ()
+
+@end
+
+@implementation PersonCenterViewController
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Private Methods
+- (void)initUI
+{
+    self.title = @"老李";
+    [self setLeftCustomBarItem:@"square_back" action:nil imageEdgeInsets:UIEdgeInsetsMake(0, -70, 0, 0)];
+    [self babyCell];
+    [self dynamicCell];
+    [self goodFriendCell];
+    [self twoDimensionCodeCell];
+    [self myCollectionCell];
+    [self socialPlatformBindCell];
+    
+}
+
+- (void)babyCell
+{
+    UILabel *babyLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 120, _babyButton.bounds.size.height-10)];
+    babyLabel.backgroundColor = [UIColor clearColor];
+    babyLabel.text = [NSString stringWithFormat:@"宝宝 (%i)",2];
+    babyLabel.font = [UIFont systemFontOfSize:15];
+    babyLabel.textColor = [UIColor darkGrayColor];
+    [_babyButton addSubview:babyLabel];
+    
+    UIImage *imageJianTou = [UIImage imageNamed:@"main_jiantou.png"];
+    UIImageView *jianTou = [[UIImageView alloc] initWithImage:imageJianTou];
+    jianTou.frame = CGRectMake(_babyButton.bounds.size.width-18, 15, 7, 11);
+    [_babyButton addSubview:jianTou];
+}
+
+- (void)dynamicCell
+{
+    UILabel *dynamicLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 120, _dynamicButton.bounds.size.height-10)];
+    dynamicLabel.backgroundColor = [UIColor clearColor];
+    dynamicLabel.text = [NSString stringWithFormat:@"动态 (%i)",28];
+    dynamicLabel.font = [UIFont systemFontOfSize:15];
+    dynamicLabel.textColor = [UIColor darkGrayColor];
+    [_dynamicButton addSubview:dynamicLabel];
+    
+    UIImage *imageJianTou = [UIImage imageNamed:@"main_jiantou.png"];
+    UIImageView *jianTou = [[UIImageView alloc] initWithImage:imageJianTou];
+    jianTou.frame = CGRectMake(_dynamicButton.bounds.size.width-18, 15, 7, 11);
+    [_dynamicButton addSubview:jianTou];
+}
+
+- (void)goodFriendCell
+{
+    UILabel *goodFriendLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 120, _goodFriendButton.bounds.size.height-10)];
+    goodFriendLabel.backgroundColor = [UIColor clearColor];
+    goodFriendLabel.text = [NSString stringWithFormat:@"好友 (%i)",32];
+    goodFriendLabel.font = [UIFont systemFontOfSize:15];
+    goodFriendLabel.textColor = [UIColor darkGrayColor];
+    [_goodFriendButton addSubview:goodFriendLabel];
+    
+    UIImage *imageJianTou = [UIImage imageNamed:@"main_jiantou.png"];
+    UIImageView *jianTou = [[UIImageView alloc] initWithImage:imageJianTou];
+    jianTou.frame = CGRectMake(_goodFriendButton.bounds.size.width-18, 15, 7, 11);
+    [_goodFriendButton addSubview:jianTou];
+}
+
+- (void)twoDimensionCodeCell
+{
+    UILabel *twoDimensionCodeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 120, _twoDimensionCodeButton.bounds.size.height-10)];
+    twoDimensionCodeLabel.backgroundColor = [UIColor clearColor];
+    twoDimensionCodeLabel.text = [NSString stringWithFormat:@"二维码名片"];
+    twoDimensionCodeLabel.font = [UIFont systemFontOfSize:15];
+    twoDimensionCodeLabel.textColor = [UIColor darkGrayColor];
+    [_twoDimensionCodeButton addSubview:twoDimensionCodeLabel];
+    
+    UIImage *imageJianTou = [UIImage imageNamed:@"main_jiantou.png"];
+    UIImageView *jianTou = [[UIImageView alloc] initWithImage:imageJianTou];
+    jianTou.frame = CGRectMake(_twoDimensionCodeButton.bounds.size.width-18, 15, 7, 11);
+    [_twoDimensionCodeButton addSubview:jianTou];
+}
+
+- (void)myCollectionCell
+{
+    UILabel *myCollectionLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 120, _myCollectionButton.bounds.size.height-10)];
+    myCollectionLabel.backgroundColor = [UIColor clearColor];
+    myCollectionLabel.text = [NSString stringWithFormat:@"我的收藏 (%i)",21];
+    myCollectionLabel.font = [UIFont systemFontOfSize:15];
+    myCollectionLabel.textColor = [UIColor darkGrayColor];
+    [_myCollectionButton addSubview:myCollectionLabel];
+    
+    UIImage *imageJianTou = [UIImage imageNamed:@"main_jiantou.png"];
+    UIImageView *jianTou = [[UIImageView alloc] initWithImage:imageJianTou];
+    jianTou.frame = CGRectMake(_myCollectionButton.bounds.size.width-18, 15, 7, 11);
+    [_myCollectionButton addSubview:jianTou];
+}
+
+- (void)socialPlatformBindCell
+{
+    UILabel *socialPlatformBindLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 120, _sheJianBar.bounds.size.height-10)];
+    socialPlatformBindLabel.backgroundColor = [UIColor clearColor];
+    socialPlatformBindLabel.text = [NSString stringWithFormat:@"社交平台绑定"];
+    socialPlatformBindLabel.font = [UIFont systemFontOfSize:15];
+    socialPlatformBindLabel.textColor = [UIColor darkGrayColor];
+    [_sheJianBar addSubview:socialPlatformBindLabel];
+}
+
+@end

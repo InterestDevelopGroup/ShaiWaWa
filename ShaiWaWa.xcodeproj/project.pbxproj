@@ -18,6 +18,15 @@
 		171DC0161967EECC005F7D28 /* ChooseModeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 171DC0141967EECC005F7D28 /* ChooseModeViewController.xib */; };
 		171DC01A1967EF04005F7D28 /* ForgetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 171DC0181967EF04005F7D28 /* ForgetPwdViewController.m */; };
 		171DC01B1967EF04005F7D28 /* ForgetPwdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 171DC0191967EF04005F7D28 /* ForgetPwdViewController.xib */; };
+		17A4440C1968F6E20051627C /* PersonCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A4440A1968F6E20051627C /* PersonCenterViewController.m */; };
+		17A4440D1968F6E20051627C /* PersonCenterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17A4440B1968F6E20051627C /* PersonCenterViewController.xib */; };
+		17A4441019690B970051627C /* user_1-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17A4440E19690B970051627C /* user_1-bg@2x.png */; };
+		17A4441119690B970051627C /* user_2-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17A4440F19690B970051627C /* user_2-bg@2x.png */; };
+		17A44415196916AA0051627C /* OtherInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A44413196916AA0051627C /* OtherInformationViewController.m */; };
+		17A44416196916AA0051627C /* OtherInformationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17A44414196916AA0051627C /* OtherInformationViewController.xib */; };
+		17A4441A19691ECF0051627C /* FriendHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A4441819691ECF0051627C /* FriendHomeViewController.m */; };
+		17A4441B19691ECF0051627C /* FriendHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17A4441919691ECF0051627C /* FriendHomeViewController.xib */; };
+		17CD3CC119692A08006938CA /* UIViewController+BarItemAdapt.m in Sources */ = {isa = PBXBuildFile; fileRef = 17CD3CC019692A08006938CA /* UIViewController+BarItemAdapt.m */; };
 		C32B41831965B5B8003979EE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C32B41821965B5B8003979EE /* Foundation.framework */; };
 		C32B41851965B5B8003979EE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C32B41841965B5B8003979EE /* CoreGraphics.framework */; };
 		C32B41871965B5B8003979EE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C32B41861965B5B8003979EE /* UIKit.framework */; };
@@ -216,6 +225,19 @@
 		171DC0171967EF04005F7D28 /* ForgetPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPwdViewController.h; sourceTree = "<group>"; };
 		171DC0181967EF04005F7D28 /* ForgetPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPwdViewController.m; sourceTree = "<group>"; };
 		171DC0191967EF04005F7D28 /* ForgetPwdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetPwdViewController.xib; sourceTree = "<group>"; };
+		17A444091968F6E20051627C /* PersonCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonCenterViewController.h; sourceTree = "<group>"; };
+		17A4440A1968F6E20051627C /* PersonCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonCenterViewController.m; sourceTree = "<group>"; };
+		17A4440B1968F6E20051627C /* PersonCenterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonCenterViewController.xib; sourceTree = "<group>"; };
+		17A4440E19690B970051627C /* user_1-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "user_1-bg@2x.png"; path = "../../../../../新项目素材/sww效果图及切图/切图/user/user_1-bg@2x.png"; sourceTree = "<group>"; };
+		17A4440F19690B970051627C /* user_2-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "user_2-bg@2x.png"; path = "../../../../../新项目素材/sww效果图及切图/切图/user/user_2-bg@2x.png"; sourceTree = "<group>"; };
+		17A44412196916AA0051627C /* OtherInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherInformationViewController.h; sourceTree = "<group>"; };
+		17A44413196916AA0051627C /* OtherInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherInformationViewController.m; sourceTree = "<group>"; };
+		17A44414196916AA0051627C /* OtherInformationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OtherInformationViewController.xib; sourceTree = "<group>"; };
+		17A4441719691ECF0051627C /* FriendHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendHomeViewController.h; sourceTree = "<group>"; };
+		17A4441819691ECF0051627C /* FriendHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendHomeViewController.m; sourceTree = "<group>"; };
+		17A4441919691ECF0051627C /* FriendHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendHomeViewController.xib; sourceTree = "<group>"; };
+		17CD3CBF19692A08006938CA /* UIViewController+BarItemAdapt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+BarItemAdapt.h"; path = "ShaiWaWa/General/UIViewController+BarItemAdapt.h"; sourceTree = SOURCE_ROOT; };
+		17CD3CC019692A08006938CA /* UIViewController+BarItemAdapt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+BarItemAdapt.m"; path = "ShaiWaWa/General/UIViewController+BarItemAdapt.m"; sourceTree = SOURCE_ROOT; };
 		9066DBF5432D412091E6A49A /* libPods-ShaiWaWa.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ShaiWaWa.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C32B417F1965B5B8003979EE /* ShaiWaWa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShaiWaWa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C32B41821965B5B8003979EE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -620,6 +642,8 @@
 		C32B41C11965B6AE003979EE /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				17CD3CBF19692A08006938CA /* UIViewController+BarItemAdapt.h */,
+				17CD3CC019692A08006938CA /* UIViewController+BarItemAdapt.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -856,6 +880,8 @@
 		C32CE4A01967AAA900DB84DC /* user */ = {
 			isa = PBXGroup;
 			children = (
+				17A4440E19690B970051627C /* user_1-bg@2x.png */,
+				17A4440F19690B970051627C /* user_2-bg@2x.png */,
 				C32CE4A11967AAA900DB84DC /* user_3-bg@2x.png */,
 				C32CE4A21967AAA900DB84DC /* user_3-kongjian@2x.png */,
 				C32CE4A31967AAA900DB84DC /* user_3-weibo@2x.png */,
@@ -888,6 +914,15 @@
 				171DC0171967EF04005F7D28 /* ForgetPwdViewController.h */,
 				171DC0181967EF04005F7D28 /* ForgetPwdViewController.m */,
 				171DC0191967EF04005F7D28 /* ForgetPwdViewController.xib */,
+				17A444091968F6E20051627C /* PersonCenterViewController.h */,
+				17A4440A1968F6E20051627C /* PersonCenterViewController.m */,
+				17A4440B1968F6E20051627C /* PersonCenterViewController.xib */,
+				17A44412196916AA0051627C /* OtherInformationViewController.h */,
+				17A44413196916AA0051627C /* OtherInformationViewController.m */,
+				17A44414196916AA0051627C /* OtherInformationViewController.xib */,
+				17A4441719691ECF0051627C /* FriendHomeViewController.h */,
+				17A4441819691ECF0051627C /* FriendHomeViewController.m */,
+				17A4441919691ECF0051627C /* FriendHomeViewController.xib */,
 			);
 			path = UserCenter;
 			sourceTree = "<group>";
@@ -1000,6 +1035,7 @@
 				C32CE4D21967AAA900DB84DC /* main_quanbudongtai2x.png in Resources */,
 				C32CE4D51967AAA900DB84DC /* main_sousuodongftai@2x.png in Resources */,
 				C32CE4E71967AAA900DB84DC /* pb_logo-4@2x.png in Resources */,
+				17A4441B19691ECF0051627C /* FriendHomeViewController.xib in Resources */,
 				C32CE51C1967AAA900DB84DC /* square_shoucang@2x.png in Resources */,
 				171DC0161967EECC005F7D28 /* ChooseModeViewController.xib in Resources */,
 				C32CE4B61967AAA900DB84DC /* baby_weixinyaoqing@2x.png in Resources */,
@@ -1017,6 +1053,7 @@
 				C32CE4D41967AAA900DB84DC /* main_shezhi@2x.png in Resources */,
 				C32CE5051967AAA900DB84DC /* square_fenxiang-4@2x.png in Resources */,
 				C32CE4B01967AAA900DB84DC /* baby_duanxinyaoqing@2x.png in Resources */,
+				17A4441019690B970051627C /* user_1-bg@2x.png in Resources */,
 				C32CE5261967AAA900DB84DC /* square_zuixin@2x.png in Resources */,
 				C32CE4FA1967AAA900DB84DC /* pd_xiaokuang@2x.png in Resources */,
 				C32CE51A1967AAA900DB84DC /* square_shaiwawa@2x.png in Resources */,
@@ -1072,6 +1109,7 @@
 				C32CE4AF1967AAA900DB84DC /* baby_dongtai@2x.png in Resources */,
 				C32CE50E1967AAA900DB84DC /* square_pic-5@2x.png in Resources */,
 				C32CE4CC1967AAA900DB84DC /* main_dian-@2x.png in Resources */,
+				17A44416196916AA0051627C /* OtherInformationViewController.xib in Resources */,
 				C32CE50D1967AAA900DB84DC /* square_pic-4@2x.png in Resources */,
 				C32CE4E51967AAA900DB84DC /* pb_logo-2@2x.png in Resources */,
 				C32CE4FD1967AAA900DB84DC /* square_bofang-bg@2x.png in Resources */,
@@ -1092,6 +1130,7 @@
 				C32CE4B41967AAA900DB84DC /* baby_shengaotizhong-@2x.png in Resources */,
 				C32CE52D1967AAA900DB84DC /* user_touxiang@2x.png in Resources */,
 				C32CE51B1967AAA900DB84DC /* square_shanchu@2x.png in Resources */,
+				17A4441119690B970051627C /* user_2-bg@2x.png in Resources */,
 				C32CE4FE1967AAA900DB84DC /* square_bofang@2x.png in Resources */,
 				C32CE5021967AAA900DB84DC /* square_fenxiang-1@2x.png in Resources */,
 				C32CE5031967AAA900DB84DC /* square_fenxiang-2@2x.png in Resources */,
@@ -1116,6 +1155,7 @@
 				C32CE5121967AAA900DB84DC /* square_pic-9@2x.png in Resources */,
 				C32CE5201967AAA900DB84DC /* square_zan-@2x.png in Resources */,
 				C32CE4C21967AAA900DB84DC /* login_xinlang@2x.png in Resources */,
+				17A4440D1968F6E20051627C /* PersonCenterViewController.xib in Resources */,
 				C32CE4E91967AAA900DB84DC /* pb_shanchu@2x.png in Resources */,
 				C32CE50A1967AAA900DB84DC /* square_pic-1@2x.png in Resources */,
 				C32CE5211967AAA900DB84DC /* square_zan@2x.png in Resources */,
@@ -1182,17 +1222,21 @@
 				C32CE4061967A25800DB84DC /* VersionManager.m in Sources */,
 				171DC00B1967E23C005F7D28 /* PostValidateViewController.m in Sources */,
 				C32CE3FD1967A25800DB84DC /* IO.m in Sources */,
+				17A4441A19691ECF0051627C /* FriendHomeViewController.m in Sources */,
 				C32CE40D1967A2CA00DB84DC /* User.m in Sources */,
 				C32CE40C1967A2CA00DB84DC /* BaseModel.m in Sources */,
 				C32CE3FB1967A25800DB84DC /* CommonViewController.m in Sources */,
+				17A4440C1968F6E20051627C /* PersonCenterViewController.m in Sources */,
 				171DC01A1967EF04005F7D28 /* ForgetPwdViewController.m in Sources */,
 				171DC0061967D839005F7D28 /* RegisterViewController.m in Sources */,
 				C32CE4131967A33700DB84DC /* HttpService.m in Sources */,
 				C32CE4041967A25800DB84DC /* UIImage+Util.m in Sources */,
 				C32CE3FA1967A25800DB84DC /* UITextView+Placeholder.m in Sources */,
+				17CD3CC119692A08006938CA /* UIViewController+BarItemAdapt.m in Sources */,
 				C32CE3FE1967A25800DB84DC /* NSDate+Utils.m in Sources */,
 				C32CE4171967A52F00DB84DC /* ControlCenter.m in Sources */,
 				171DC0151967EECC005F7D28 /* ChooseModeViewController.m in Sources */,
+				17A44415196916AA0051627C /* OtherInformationViewController.m in Sources */,
 				C32CE4001967A25800DB84DC /* NSString+MD5_32.m in Sources */,
 				C32CE3F91967A25800DB84DC /* UITableView+Addition.m in Sources */,
 				C32CE3FF1967A25800DB84DC /* NSString+IP.m in Sources */,
@@ -1261,7 +1305,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: xiaoqi Huang (PNQK998G6W)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: xiaoqi Huang (PNQK998G6W)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1277,9 +1322,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
+				PROVISIONING_PROFILE = "6C88A5FD-3848-41D1-8108-F95195D9B8F5";
+				SDKROOT = iphoneos6.1;
 			};
 			name = Debug;
 		};
@@ -1299,7 +1345,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: xiaoqi Huang (PNQK998G6W)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: xiaoqi Huang (PNQK998G6W)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1309,8 +1356,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				SDKROOT = iphoneos;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PROVISIONING_PROFILE = "6C88A5FD-3848-41D1-8108-F95195D9B8F5";
+				SDKROOT = iphoneos6.1;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1326,6 +1374,7 @@
 				INFOPLIST_FILE = "ShaiWaWa/Supporting Files/ShaiWaWa-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1341,6 +1390,7 @@
 				INFOPLIST_FILE = "ShaiWaWa/Supporting Files/ShaiWaWa-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
