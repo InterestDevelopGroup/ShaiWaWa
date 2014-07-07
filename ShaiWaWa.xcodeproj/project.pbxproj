@@ -16,6 +16,8 @@
 		171731F8196A383500B3DBE2 /* ResetPwdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 171731F6196A383500B3DBE2 /* ResetPwdViewController.xib */; };
 		171731FC196A387500B3DBE2 /* ResetPwdNextStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 171731FA196A387400B3DBE2 /* ResetPwdNextStepViewController.m */; };
 		171731FD196A387500B3DBE2 /* ResetPwdNextStepViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 171731FB196A387400B3DBE2 /* ResetPwdNextStepViewController.xib */; };
+		1717320D196A420F00B3DBE2 /* ShaiWaSquareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1717320B196A420F00B3DBE2 /* ShaiWaSquareViewController.m */; };
+		1717320E196A420F00B3DBE2 /* ShaiWaSquareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1717320C196A420F00B3DBE2 /* ShaiWaSquareViewController.xib */; };
 		171DC0061967D839005F7D28 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 171DC0041967D839005F7D28 /* RegisterViewController.m */; };
 		171DC0071967D839005F7D28 /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 171DC0051967D839005F7D28 /* RegisterViewController.xib */; };
 		171DC00B1967E23C005F7D28 /* PostValidateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 171DC0091967E23C005F7D28 /* PostValidateViewController.m */; };
@@ -27,6 +29,10 @@
 		171DC01A1967EF04005F7D28 /* ForgetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 171DC0181967EF04005F7D28 /* ForgetPwdViewController.m */; };
 		171DC01B1967EF04005F7D28 /* ForgetPwdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 171DC0191967EF04005F7D28 /* ForgetPwdViewController.xib */; };
 		179B9AE3196A2D3700C4C9FF /* UIViewController+BarItemAdapt.m in Sources */ = {isa = PBXBuildFile; fileRef = 179B9AE1196A2D3700C4C9FF /* UIViewController+BarItemAdapt.m */; };
+		17A08957196A65E1007691A4 /* AddBabyInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A08955196A65E1007691A4 /* AddBabyInfoViewController.m */; };
+		17A08958196A65E1007691A4 /* AddBabyInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17A08956196A65E1007691A4 /* AddBabyInfoViewController.xib */; };
+		17A0895C196A9154007691A4 /* MyGoodFriendsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A0895A196A9154007691A4 /* MyGoodFriendsListViewController.m */; };
+		17A0895D196A9154007691A4 /* MyGoodFriendsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17A0895B196A9154007691A4 /* MyGoodFriendsListViewController.xib */; };
 		17A4440C1968F6E20051627C /* PersonCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A4440A1968F6E20051627C /* PersonCenterViewController.m */; };
 		17A4440D1968F6E20051627C /* PersonCenterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17A4440B1968F6E20051627C /* PersonCenterViewController.xib */; };
 		17A4441019690B970051627C /* user_1-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17A4440E19690B970051627C /* user_1-bg@2x.png */; };
@@ -230,6 +236,9 @@
 		171731F9196A387400B3DBE2 /* ResetPwdNextStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetPwdNextStepViewController.h; sourceTree = "<group>"; };
 		171731FA196A387400B3DBE2 /* ResetPwdNextStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetPwdNextStepViewController.m; sourceTree = "<group>"; };
 		171731FB196A387400B3DBE2 /* ResetPwdNextStepViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResetPwdNextStepViewController.xib; sourceTree = "<group>"; };
+		1717320A196A420F00B3DBE2 /* ShaiWaSquareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaiWaSquareViewController.h; sourceTree = "<group>"; };
+		1717320B196A420F00B3DBE2 /* ShaiWaSquareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShaiWaSquareViewController.m; sourceTree = "<group>"; };
+		1717320C196A420F00B3DBE2 /* ShaiWaSquareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShaiWaSquareViewController.xib; sourceTree = "<group>"; };
 		171DC0031967D839005F7D28 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		171DC0041967D839005F7D28 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		171DC0051967D839005F7D28 /* RegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
@@ -247,6 +256,12 @@
 		171DC0191967EF04005F7D28 /* ForgetPwdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetPwdViewController.xib; sourceTree = "<group>"; };
 		179B9AE0196A2D3700C4C9FF /* UIViewController+BarItemAdapt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BarItemAdapt.h"; sourceTree = "<group>"; };
 		179B9AE1196A2D3700C4C9FF /* UIViewController+BarItemAdapt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+BarItemAdapt.m"; sourceTree = "<group>"; };
+		17A08954196A65E1007691A4 /* AddBabyInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddBabyInfoViewController.h; sourceTree = "<group>"; };
+		17A08955196A65E1007691A4 /* AddBabyInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddBabyInfoViewController.m; sourceTree = "<group>"; };
+		17A08956196A65E1007691A4 /* AddBabyInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddBabyInfoViewController.xib; sourceTree = "<group>"; };
+		17A08959196A9154007691A4 /* MyGoodFriendsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyGoodFriendsListViewController.h; sourceTree = "<group>"; };
+		17A0895A196A9154007691A4 /* MyGoodFriendsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyGoodFriendsListViewController.m; sourceTree = "<group>"; };
+		17A0895B196A9154007691A4 /* MyGoodFriendsListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyGoodFriendsListViewController.xib; sourceTree = "<group>"; };
 		17A444091968F6E20051627C /* PersonCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonCenterViewController.h; sourceTree = "<group>"; };
 		17A4440A1968F6E20051627C /* PersonCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonCenterViewController.m; sourceTree = "<group>"; };
 		17A4440B1968F6E20051627C /* PersonCenterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonCenterViewController.xib; sourceTree = "<group>"; };
@@ -497,6 +512,23 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		17173203196A3FCF00B3DBE2 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		17173209196A419000B3DBE2 /* Square */ = {
+			isa = PBXGroup;
+			children = (
+				1717320A196A420F00B3DBE2 /* ShaiWaSquareViewController.h */,
+				1717320B196A420F00B3DBE2 /* ShaiWaSquareViewController.m */,
+				1717320C196A420F00B3DBE2 /* ShaiWaSquareViewController.xib */,
+			);
+			path = Square;
+			sourceTree = "<group>";
+		};
 		179B9ADF196A2D3700C4C9FF /* Category */ = {
 			isa = PBXGroup;
 			children = (
@@ -504,6 +536,16 @@
 				179B9AE1196A2D3700C4C9FF /* UIViewController+BarItemAdapt.m */,
 			);
 			path = Category;
+			sourceTree = "<group>";
+		};
+		17A08953196A65E1007691A4 /* Baby */ = {
+			isa = PBXGroup;
+			children = (
+				17A08954196A65E1007691A4 /* AddBabyInfoViewController.h */,
+				17A08955196A65E1007691A4 /* AddBabyInfoViewController.m */,
+				17A08956196A65E1007691A4 /* AddBabyInfoViewController.xib */,
+			);
+			path = Baby;
 			sourceTree = "<group>";
 		};
 		C32B41761965B5B8003979EE = {
@@ -588,8 +630,9 @@
 		C32B41B71965B5DD003979EE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				C32CE5301967AAC400DB84DC /* Main */,
-				C32CE52F1967AABC00DB84DC /* Square */,
+				17A08953196A65E1007691A4 /* Baby */,
+				17173209196A419000B3DBE2 /* Square */,
+				17173203196A3FCF00B3DBE2 /* Main */,
 				C32CE52E1967AAAE00DB84DC /* UserCenter */,
 			);
 			path = Controllers;
@@ -955,22 +998,11 @@
 				171731F9196A387400B3DBE2 /* ResetPwdNextStepViewController.h */,
 				171731FA196A387400B3DBE2 /* ResetPwdNextStepViewController.m */,
 				171731FB196A387400B3DBE2 /* ResetPwdNextStepViewController.xib */,
+				17A08959196A9154007691A4 /* MyGoodFriendsListViewController.h */,
+				17A0895A196A9154007691A4 /* MyGoodFriendsListViewController.m */,
+				17A0895B196A9154007691A4 /* MyGoodFriendsListViewController.xib */,
 			);
 			path = UserCenter;
-			sourceTree = "<group>";
-		};
-		C32CE52F1967AABC00DB84DC /* Square */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Square;
-			sourceTree = "<group>";
-		};
-		C32CE5301967AAC400DB84DC /* Main */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Main;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1091,9 +1123,11 @@
 				C32CE4FA1967AAA900DB84DC /* pd_xiaokuang@2x.png in Resources */,
 				C32CE51A1967AAA900DB84DC /* square_shaiwawa@2x.png in Resources */,
 				C32CE4BD1967AAA900DB84DC /* login_box-7@2x.png in Resources */,
+				17A08958196A65E1007691A4 /* AddBabyInfoViewController.xib in Resources */,
 				C32CE5221967AAA900DB84DC /* square_zizhi@2x.png in Resources */,
 				C32CE4DE1967AAA900DB84DC /* main_wodebaobao@2x.png in Resources */,
 				C32CE5131967AAA900DB84DC /* square_pinglun-2@2x.png in Resources */,
+				17A0895D196A9154007691A4 /* MyGoodFriendsListViewController.xib in Resources */,
 				C32CE4C61967AAA900DB84DC /* main_2-pic@2x.png in Resources */,
 				C32CE4AA1967AAA900DB84DC /* baby_4-bg@2x.png in Resources */,
 				C32CE4CF1967AAA900DB84DC /* main_girl@2x.png in Resources */,
@@ -1200,6 +1234,7 @@
 				C32CE5291967AAA900DB84DC /* user_3-weibo@2x.png in Resources */,
 				C32CE4DD1967AAA900DB84DC /* main_weixin@2x.png in Resources */,
 				C32CE5171967AAA900DB84DC /* square_pinglun-big@2x.png in Resources */,
+				1717320E196A420F00B3DBE2 /* ShaiWaSquareViewController.xib in Resources */,
 				C32CE4DF1967AAA900DB84DC /* main_wodehaoyou@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1260,6 +1295,7 @@
 				C32CE4061967A25800DB84DC /* VersionManager.m in Sources */,
 				171DC00B1967E23C005F7D28 /* PostValidateViewController.m in Sources */,
 				C32CE3FD1967A25800DB84DC /* IO.m in Sources */,
+				17A08957196A65E1007691A4 /* AddBabyInfoViewController.m in Sources */,
 				17A4441A19691ECF0051627C /* FriendHomeViewController.m in Sources */,
 				C32CE40D1967A2CA00DB84DC /* User.m in Sources */,
 				C32CE40C1967A2CA00DB84DC /* BaseModel.m in Sources */,
@@ -1273,8 +1309,10 @@
 				171731FC196A387500B3DBE2 /* ResetPwdNextStepViewController.m in Sources */,
 				C32CE3FA1967A25800DB84DC /* UITextView+Placeholder.m in Sources */,
 				C32CE3FE1967A25800DB84DC /* NSDate+Utils.m in Sources */,
+				1717320D196A420F00B3DBE2 /* ShaiWaSquareViewController.m in Sources */,
 				C32CE4171967A52F00DB84DC /* ControlCenter.m in Sources */,
 				171DC0151967EECC005F7D28 /* ChooseModeViewController.m in Sources */,
+				17A0895C196A9154007691A4 /* MyGoodFriendsListViewController.m in Sources */,
 				17A44415196916AA0051627C /* OtherInformationViewController.m in Sources */,
 				C32CE4001967A25800DB84DC /* NSString+MD5_32.m in Sources */,
 				C32CE3F91967A25800DB84DC /* UITableView+Addition.m in Sources */,

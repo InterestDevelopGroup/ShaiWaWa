@@ -7,6 +7,7 @@
 //
 
 #import "ChooseModeViewController.h"
+#import "ControlCenter.h"
 
 @interface ChooseModeViewController ()
 
@@ -48,5 +49,9 @@
     UIBarButtonItem * rightItem_2 = [self customBarItem:@"square_pinglun-4" action:nil];
     self.navigationItem.rightBarButtonItems = @[rightItem_2,rightItem_1];
     
+}
+- (IBAction)showAddBabyVC:(id)sender
+{
+    [ControlCenter pushToAddBabyVC];
 }
 @end

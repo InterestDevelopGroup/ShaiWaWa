@@ -26,6 +26,8 @@
 + (void)pushToFinishRegisterVC;
 //push到完成重置页面方法
 + (void)pushToFinishResetPwdVC;
+//push到添加宝宝页面方法
++ (void)pushToAddBabyVC;
 + (void)showVC:(NSString *)vcName;
 + (UIViewController *)viewControllerWithName:(NSString *)vcName;
 + (UINavigationController *)navWithRootVC:(UIViewController *)vc;

@@ -10,4 +10,5 @@
 
 @interface ChooseModeViewController : CommonViewController
 
+- (IBAction)showAddBabyVC:(id)sender;
 @end

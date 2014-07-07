@@ -33,7 +33,7 @@
     AppDelegate * appDelegate = [[self class] appDelegate];
     //[[self class] setNavigationTitleWhiteColor];
     appDelegate.window = [[self class] newWindow];
-    UINavigationController * nav = [[self class] navWithRootVC:[[self class] viewControllerWithName:@"ResetPwdViewController"]];
+    UINavigationController * nav = [[self class] navWithRootVC:[[self class] viewControllerWithName:@"MyGoodFriendsListViewController"]];
     appDelegate.navigationController = nav;
     appDelegate.window.rootViewController = appDelegate.navigationController;
     [appDelegate.window makeKeyAndVisible];
@@ -69,6 +69,11 @@
 + (void)pushToFinishResetPwdVC
 {
      [[self class] showVC:@"ResetPwdNextStepViewController"];
+}
+
++ (void)pushToAddBabyVC
+{
+    [[self class] showVC:@"AddBabyInfoViewController"];
 }
 
 + (void)showVC:(NSString *)vcName
