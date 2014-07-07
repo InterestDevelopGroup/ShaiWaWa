@@ -33,7 +33,7 @@
     AppDelegate * appDelegate = [[self class] appDelegate];
     //[[self class] setNavigationTitleWhiteColor];
     appDelegate.window = [[self class] newWindow];
-    UINavigationController * nav = [[self class] navWithRootVC:[[self class] viewControllerWithName:@"LoginViewController"]];
+    UINavigationController * nav = [[self class] navWithRootVC:[[self class] viewControllerWithName:@"ResetPwdViewController"]];
     appDelegate.navigationController = nav;
     appDelegate.window.rootViewController = appDelegate.navigationController;
     [appDelegate.window makeKeyAndVisible];
@@ -64,6 +64,11 @@
 + (void)pushToFinishRegisterVC
 {
     [[self class] showVC:@"FinishRegisterViewController"];
+}
+
++ (void)pushToFinishResetPwdVC
+{
+     [[self class] showVC:@"ResetPwdNextStepViewController"];
 }
 
 + (void)showVC:(NSString *)vcName

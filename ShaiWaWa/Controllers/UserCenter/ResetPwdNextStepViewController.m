@@ -1,19 +1,19 @@
 //
-//  FinishRegisterViewController.m
+//  ResetPwdNextStepViewController.m
 //  ShaiWaWa
 //
-//  Created by 祥 on 14-7-5.
+//  Created by 祥 on 14-7-7.
 //  Copyright (c) 2014年 helloworld. All rights reserved.
 //
 
-#import "FinishRegisterViewController.h"
+#import "ResetPwdNextStepViewController.h"
 #import "UIViewController+BarItemAdapt.h"
 
-@interface FinishRegisterViewController ()
+@interface ResetPwdNextStepViewController ()
 
 @end
 
-@implementation FinishRegisterViewController
+@implementation ResetPwdNextStepViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,11 +35,10 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-    
 #pragma mark - Private Methods
 - (void)initUI
 {
-    self.title = @"完成注册";
+    self.title = @"重置密码";
     [self setLeftCusBarItem:@"square_back" action:nil];
     
 }
@@ -47,10 +46,9 @@
 {
     [_pwdField setSecureTextEntry:NO];
 }
-    
-- (IBAction)finishRegisterAndLogin:(id)sender {
+
+- (IBAction)FinishResetAndShowLoginVC:(id)sender {
 }
-    
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {

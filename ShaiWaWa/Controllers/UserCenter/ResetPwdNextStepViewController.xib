@@ -5,60 +5,48 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FinishRegisterViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ResetPwdNextStepViewController">
             <connections>
-                <outlet property="pwdField" destination="afh-WA-M41" id="vtg-OF-XnZ"/>
-                <outlet property="userNameField" destination="Jzh-FI-FNa" id="7Si-h6-8al"/>
-                <outlet property="view" destination="1" id="3"/>
+                <outlet property="pwdField" destination="YN5-tW-36e" id="HXl-gJ-R5p"/>
+                <outlet property="userNameField" destination="GuH-xE-Mn9" id="VYt-RN-4bJ"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="1">
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="64" width="320" height="504"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_box-2.png" id="4XM-zE-aq1">
-                    <rect key="frame" x="20" y="33" width="267" height="30"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_box-2.png" id="ua6-5K-fFg">
+                    <rect key="frame" x="27" y="30" width="267" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="设置用户名" minimumFontSize="17" id="Jzh-FI-FNa">
-                    <rect key="frame" x="33" y="33" width="242" height="30"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="设置用户名" minimumFontSize="17" id="GuH-xE-Mn9">
+                    <rect key="frame" x="40" y="30" width="242" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" returnKeyType="next"/>
                     <connections>
-                        <outlet property="delegate" destination="-1" id="wKv-K0-rEf"/>
+                        <outlet property="delegate" destination="-1" id="3r6-Px-H1E"/>
                     </connections>
                 </textField>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_box-2.png" id="npd-pF-rxx">
-                    <rect key="frame" x="20" y="78" width="267" height="30"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_box-2.png" id="1hG-kn-gpO">
+                    <rect key="frame" x="27" y="68" width="267" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="设置密码，6-10位，仅限数字" minimumFontSize="17" id="afh-WA-M41">
-                    <rect key="frame" x="33" y="78" width="242" height="30"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="设置密码，6-10位，仅限数字" minimumFontSize="17" id="YN5-tW-36e">
+                    <rect key="frame" x="40" y="68" width="242" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
                     <connections>
-                        <outlet property="delegate" destination="-1" id="0sM-Ul-qQf"/>
+                        <outlet property="delegate" destination="-1" id="KNx-IA-PPR"/>
                     </connections>
                 </textField>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="z1H-xF-kF5">
-                    <rect key="frame" x="20" y="154" width="267" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" title="完成注册并登陆" backgroundImage="login_box3.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="finishRegisterAndLogin:" destination="-1" eventType="touchUpInside" id="X4k-UD-Dvo"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="KQH-72-dLw">
-                    <rect key="frame" x="20" y="120" width="67" height="22"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="SKt-fp-4Qw">
+                    <rect key="frame" x="27" y="106" width="67" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
                     <state key="normal" title="  显示密码" image="login_box-7.png">
@@ -66,7 +54,19 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="disableSecure:" destination="-1" eventType="touchUpInside" id="9Os-Or-hPG"/>
+                        <action selector="disableSecure:" destination="-1" eventType="touchUpInside" id="Deg-4j-hJY"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="e9b-bX-3Yg">
+                    <rect key="frame" x="27" y="136" width="267" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="重置密码并登陆" backgroundImage="login_box3.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="FinishResetAndShowLoginVC:" destination="-1" eventType="touchUpInside" id="taj-es-ZUa"/>
                     </connections>
                 </button>
             </subviews>

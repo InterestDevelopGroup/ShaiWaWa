@@ -24,6 +24,8 @@
 + (void)pushToPostValidateVC;
 //push到完成注册页面方法
 + (void)pushToFinishRegisterVC;
+//push到完成重置页面方法
++ (void)pushToFinishResetPwdVC;
 + (void)showVC:(NSString *)vcName;
 + (UIViewController *)viewControllerWithName:(NSString *)vcName;
 + (UINavigationController *)navWithRootVC:(UIViewController *)vc;
