@@ -8,6 +8,7 @@
 
 #import "MyGoodFriendsListViewController.h"
 #import "UIViewController+BarItemAdapt.h"
+#import "MyGoodFriendsListCell.h"
 
 @interface MyGoodFriendsListViewController ()
 
@@ -43,29 +44,35 @@
     UIImage *img = [[UIImage imageNamed:@"main_2-bg2.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(15, 15, 15, 15)];
     UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
     _goodFriendListTableView.backgroundView = imgView;
-    
-    if (11*80 < _goodFriendListTableView.bounds.size.height) {
-        _goodFriendListTableView.frame = CGRectMake(20, 60, 285,11*80);
+    [_goodFriendListTableView registerNibWithName:@"MyGoodFriendsListCell" reuseIdentifier:@"Cell"];
+    if (4*80 < _goodFriendListTableView.bounds.size.height) {
+        _goodFriendListTableView.frame = CGRectMake(20, 60, 285,4*80);
     }
 }
 
 #pragma mark - UITableView DataSources and Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
-    return  11;
+    return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *identify = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identify];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
-    }
+    MyGoodFriendsListCell *cell = (MyGoodFriendsListCell *)[tableView dequeueReusableCellWithIdentifier:identify];
 
-    cell.textLabel.text = [[UIFont familyNames] objectAtIndex:indexPath.row];
+//    cell.headPicView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"baby_mama.png"]];
+//    cell.nickNameLabel.text = @"张氏";
+//    cell.countOfBabyLabel.text = @"1个宝宝";
+//    cell.remarksLabel.text = @"孩子他妈";
     cell.backgroundColor = [UIColor clearColor];
     return cell;
+}
+
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 @end

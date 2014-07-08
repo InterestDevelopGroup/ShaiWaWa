@@ -8,7 +8,7 @@
 
 #import "CommonViewController.h"
 
-@interface MyGoodFriendsListViewController : CommonViewController<UITableViewDataSource, UITableViewDelegate>
+@interface MyGoodFriendsListViewController : CommonViewController<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {
     NSMutableArray *friendsArr;
 }

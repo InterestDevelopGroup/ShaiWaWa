@@ -29,6 +29,14 @@
 		171DC01A1967EF04005F7D28 /* ForgetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 171DC0181967EF04005F7D28 /* ForgetPwdViewController.m */; };
 		171DC01B1967EF04005F7D28 /* ForgetPwdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 171DC0191967EF04005F7D28 /* ForgetPwdViewController.xib */; };
 		179B9AE3196A2D3700C4C9FF /* UIViewController+BarItemAdapt.m in Sources */ = {isa = PBXBuildFile; fileRef = 179B9AE1196A2D3700C4C9FF /* UIViewController+BarItemAdapt.m */; };
+		179DDA72196B872C00DF6CA2 /* MyGoodFriendsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 179DDA70196B872C00DF6CA2 /* MyGoodFriendsListCell.m */; };
+		179DDA73196B872C00DF6CA2 /* MyGoodFriendsListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 179DDA71196B872C00DF6CA2 /* MyGoodFriendsListCell.xib */; };
+		179DDA77196B921300DF6CA2 /* BabyListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 179DDA75196B921300DF6CA2 /* BabyListViewController.m */; };
+		179DDA78196B921300DF6CA2 /* BabyListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 179DDA76196B921300DF6CA2 /* BabyListViewController.xib */; };
+		179DDA7C196B9C7E00DF6CA2 /* ChooseFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 179DDA7A196B9C7E00DF6CA2 /* ChooseFriendViewController.m */; };
+		179DDA7D196B9C7E00DF6CA2 /* ChooseFriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 179DDA7B196B9C7E00DF6CA2 /* ChooseFriendViewController.xib */; };
+		179DDA81196B9DF900DF6CA2 /* FriendSelectedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 179DDA7F196B9DF900DF6CA2 /* FriendSelectedCell.m */; };
+		179DDA82196B9DF900DF6CA2 /* FriendSelectedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 179DDA80196B9DF900DF6CA2 /* FriendSelectedCell.xib */; };
 		17A08957196A65E1007691A4 /* AddBabyInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A08955196A65E1007691A4 /* AddBabyInfoViewController.m */; };
 		17A08958196A65E1007691A4 /* AddBabyInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17A08956196A65E1007691A4 /* AddBabyInfoViewController.xib */; };
 		17A0895C196A9154007691A4 /* MyGoodFriendsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A0895A196A9154007691A4 /* MyGoodFriendsListViewController.m */; };
@@ -256,6 +264,18 @@
 		171DC0191967EF04005F7D28 /* ForgetPwdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetPwdViewController.xib; sourceTree = "<group>"; };
 		179B9AE0196A2D3700C4C9FF /* UIViewController+BarItemAdapt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BarItemAdapt.h"; sourceTree = "<group>"; };
 		179B9AE1196A2D3700C4C9FF /* UIViewController+BarItemAdapt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+BarItemAdapt.m"; sourceTree = "<group>"; };
+		179DDA6F196B872C00DF6CA2 /* MyGoodFriendsListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyGoodFriendsListCell.h; sourceTree = "<group>"; };
+		179DDA70196B872C00DF6CA2 /* MyGoodFriendsListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyGoodFriendsListCell.m; sourceTree = "<group>"; };
+		179DDA71196B872C00DF6CA2 /* MyGoodFriendsListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyGoodFriendsListCell.xib; sourceTree = "<group>"; };
+		179DDA74196B921300DF6CA2 /* BabyListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BabyListViewController.h; sourceTree = "<group>"; };
+		179DDA75196B921300DF6CA2 /* BabyListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BabyListViewController.m; sourceTree = "<group>"; };
+		179DDA76196B921300DF6CA2 /* BabyListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BabyListViewController.xib; sourceTree = "<group>"; };
+		179DDA79196B9C7E00DF6CA2 /* ChooseFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseFriendViewController.h; sourceTree = "<group>"; };
+		179DDA7A196B9C7E00DF6CA2 /* ChooseFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseFriendViewController.m; sourceTree = "<group>"; };
+		179DDA7B196B9C7E00DF6CA2 /* ChooseFriendViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseFriendViewController.xib; sourceTree = "<group>"; };
+		179DDA7E196B9DF900DF6CA2 /* FriendSelectedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendSelectedCell.h; sourceTree = "<group>"; };
+		179DDA7F196B9DF900DF6CA2 /* FriendSelectedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendSelectedCell.m; sourceTree = "<group>"; };
+		179DDA80196B9DF900DF6CA2 /* FriendSelectedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendSelectedCell.xib; sourceTree = "<group>"; };
 		17A08954196A65E1007691A4 /* AddBabyInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddBabyInfoViewController.h; sourceTree = "<group>"; };
 		17A08955196A65E1007691A4 /* AddBabyInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddBabyInfoViewController.m; sourceTree = "<group>"; };
 		17A08956196A65E1007691A4 /* AddBabyInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddBabyInfoViewController.xib; sourceTree = "<group>"; };
@@ -508,6 +528,12 @@
 				171731EF196A2DDF00B3DBE2 /* BabyListCell.h */,
 				171731F0196A2DDF00B3DBE2 /* BabyListCell.m */,
 				171731F1196A2DDF00B3DBE2 /* BabyListCell.xib */,
+				179DDA6F196B872C00DF6CA2 /* MyGoodFriendsListCell.h */,
+				179DDA70196B872C00DF6CA2 /* MyGoodFriendsListCell.m */,
+				179DDA71196B872C00DF6CA2 /* MyGoodFriendsListCell.xib */,
+				179DDA7E196B9DF900DF6CA2 /* FriendSelectedCell.h */,
+				179DDA7F196B9DF900DF6CA2 /* FriendSelectedCell.m */,
+				179DDA80196B9DF900DF6CA2 /* FriendSelectedCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -544,6 +570,9 @@
 				17A08954196A65E1007691A4 /* AddBabyInfoViewController.h */,
 				17A08955196A65E1007691A4 /* AddBabyInfoViewController.m */,
 				17A08956196A65E1007691A4 /* AddBabyInfoViewController.xib */,
+				179DDA74196B921300DF6CA2 /* BabyListViewController.h */,
+				179DDA75196B921300DF6CA2 /* BabyListViewController.m */,
+				179DDA76196B921300DF6CA2 /* BabyListViewController.xib */,
 			);
 			path = Baby;
 			sourceTree = "<group>";
@@ -1001,6 +1030,9 @@
 				17A08959196A9154007691A4 /* MyGoodFriendsListViewController.h */,
 				17A0895A196A9154007691A4 /* MyGoodFriendsListViewController.m */,
 				17A0895B196A9154007691A4 /* MyGoodFriendsListViewController.xib */,
+				179DDA79196B9C7E00DF6CA2 /* ChooseFriendViewController.h */,
+				179DDA7A196B9C7E00DF6CA2 /* ChooseFriendViewController.m */,
+				179DDA7B196B9C7E00DF6CA2 /* ChooseFriendViewController.xib */,
 			);
 			path = UserCenter;
 			sourceTree = "<group>";
@@ -1088,6 +1120,7 @@
 				C32CE4C51967AAA900DB84DC /* main_2-pic2@2x.png in Resources */,
 				C32CE4B31967AAA900DB84DC /* baby_mama@2x.png in Resources */,
 				C32CE4D01967AAA900DB84DC /* main_jiantou@2x.png in Resources */,
+				179DDA82196B9DF900DF6CA2 /* FriendSelectedCell.xib in Resources */,
 				C32CE4C91967AAA900DB84DC /* main_baobaotouxiang@2x.png in Resources */,
 				C32CE4D61967AAA900DB84DC /* main_sousuokuang-@2x.png in Resources */,
 				C32CE5091967AAA900DB84DC /* square_name@2x.png in Resources */,
@@ -1102,6 +1135,7 @@
 				17A4441B19691ECF0051627C /* FriendHomeViewController.xib in Resources */,
 				C32CE51C1967AAA900DB84DC /* square_shoucang@2x.png in Resources */,
 				171DC0161967EECC005F7D28 /* ChooseModeViewController.xib in Resources */,
+				179DDA7D196B9C7E00DF6CA2 /* ChooseFriendViewController.xib in Resources */,
 				C32CE4B61967AAA900DB84DC /* baby_weixinyaoqing@2x.png in Resources */,
 				C32CE4D81967AAA900DB84DC /* main_sousuokuang@2x.png in Resources */,
 				C32CE4D11967AAA900DB84DC /* main_line@2x.png in Resources */,
@@ -1117,6 +1151,7 @@
 				C32CE4D41967AAA900DB84DC /* main_shezhi@2x.png in Resources */,
 				C32CE5051967AAA900DB84DC /* square_fenxiang-4@2x.png in Resources */,
 				171731F8196A383500B3DBE2 /* ResetPwdViewController.xib in Resources */,
+				179DDA73196B872C00DF6CA2 /* MyGoodFriendsListCell.xib in Resources */,
 				C32CE4B01967AAA900DB84DC /* baby_duanxinyaoqing@2x.png in Resources */,
 				17A4441019690B970051627C /* user_1-bg@2x.png in Resources */,
 				C32CE5261967AAA900DB84DC /* square_zuixin@2x.png in Resources */,
@@ -1201,6 +1236,7 @@
 				C32CE51B1967AAA900DB84DC /* square_shanchu@2x.png in Resources */,
 				17A4441119690B970051627C /* user_2-bg@2x.png in Resources */,
 				C32CE4FE1967AAA900DB84DC /* square_bofang@2x.png in Resources */,
+				179DDA78196B921300DF6CA2 /* BabyListViewController.xib in Resources */,
 				C32CE5021967AAA900DB84DC /* square_fenxiang-1@2x.png in Resources */,
 				C32CE5031967AAA900DB84DC /* square_fenxiang-2@2x.png in Resources */,
 				C32CE4BE1967AAA900DB84DC /* login_chazhao@2x.png in Resources */,
@@ -1290,13 +1326,16 @@
 				171DC0101967E81E005F7D28 /* FinishRegisterViewController.m in Sources */,
 				C32CE41A1967A5E100DB84DC /* AppDelegate.m in Sources */,
 				179B9AE3196A2D3700C4C9FF /* UIViewController+BarItemAdapt.m in Sources */,
+				179DDA77196B921300DF6CA2 /* BabyListViewController.m in Sources */,
 				171731F2196A2DDF00B3DBE2 /* BabyListCell.m in Sources */,
 				C32CE5391967AB0900DB84DC /* LoginViewController.m in Sources */,
 				C32CE4061967A25800DB84DC /* VersionManager.m in Sources */,
+				179DDA81196B9DF900DF6CA2 /* FriendSelectedCell.m in Sources */,
 				171DC00B1967E23C005F7D28 /* PostValidateViewController.m in Sources */,
 				C32CE3FD1967A25800DB84DC /* IO.m in Sources */,
 				17A08957196A65E1007691A4 /* AddBabyInfoViewController.m in Sources */,
 				17A4441A19691ECF0051627C /* FriendHomeViewController.m in Sources */,
+				179DDA7C196B9C7E00DF6CA2 /* ChooseFriendViewController.m in Sources */,
 				C32CE40D1967A2CA00DB84DC /* User.m in Sources */,
 				C32CE40C1967A2CA00DB84DC /* BaseModel.m in Sources */,
 				C32CE3FB1967A25800DB84DC /* CommonViewController.m in Sources */,
@@ -1319,6 +1358,7 @@
 				C32CE3FF1967A25800DB84DC /* NSString+IP.m in Sources */,
 				C32CE4021967A25800DB84DC /* OSHelper.m in Sources */,
 				171731F7196A383500B3DBE2 /* ResetPwdViewController.m in Sources */,
+				179DDA72196B872C00DF6CA2 /* MyGoodFriendsListCell.m in Sources */,
 				C32CE4031967A25800DB84DC /* UIColor+Utils.m in Sources */,
 				C32B41981965B5B8003979EE /* ShaiWaWa.xcdatamodeld in Sources */,
 				C32B41911965B5B8003979EE /* main.m in Sources */,

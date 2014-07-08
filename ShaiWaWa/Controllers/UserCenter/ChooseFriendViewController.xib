@@ -5,9 +5,9 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyGoodFriendsListViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChooseFriendViewController">
             <connections>
-                <outlet property="goodFriendListTableView" destination="pzw-1y-VNP" id="dcR-By-nJp"/>
+                <outlet property="friendSelectListTableView" destination="lI5-oA-6kM" id="mAU-He-wHC"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -16,35 +16,35 @@
             <rect key="frame" x="0.0" y="64" width="320" height="504"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Yob-uA-uhW">
-                    <rect key="frame" x="13" y="15" width="23" height="22"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="DbW-En-GFU">
+                    <rect key="frame" x="13" y="17" width="23" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" image="main_search.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main_sousuokuang.png" id="lKe-3h-ftQ">
-                    <rect key="frame" x="47" y="11" width="258" height="30"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main_sousuokuang.png" id="gUn-E5-yiL">
+                    <rect key="frame" x="49" y="13" width="258" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="搜索好友" minimumFontSize="14" id="Uev-te-Qem">
-                    <rect key="frame" x="58" y="11" width="234" height="30"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="搜索好友" minimumFontSize="14" id="daf-8M-547">
+                    <rect key="frame" x="56" y="14" width="234" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" returnKeyType="search"/>
                     <connections>
-                        <outlet property="delegate" destination="-1" id="Chd-LI-DSK"/>
+                        <outlet property="delegate" destination="-1" id="WRc-zY-X7O"/>
                     </connections>
                 </textField>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="1" sectionFooterHeight="1" id="pzw-1y-VNP">
-                    <rect key="frame" x="18" y="56" width="285" height="445"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="80" sectionHeaderHeight="1" sectionFooterHeight="1" id="lI5-oA-6kM">
+                    <rect key="frame" x="0.0" y="69" width="320" height="435"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                     <connections>
-                        <outlet property="dataSource" destination="-1" id="MjI-xY-5tj"/>
-                        <outlet property="delegate" destination="-1" id="qAz-tW-RTr"/>
+                        <outlet property="dataSource" destination="-1" id="JCZ-hs-EvE"/>
+                        <outlet property="delegate" destination="-1" id="4xS-SN-FHi"/>
                     </connections>
                 </tableView>
             </subviews>
