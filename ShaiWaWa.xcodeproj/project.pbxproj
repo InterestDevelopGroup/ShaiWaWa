@@ -37,6 +37,17 @@
 		179DDA7D196B9C7E00DF6CA2 /* ChooseFriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 179DDA7B196B9C7E00DF6CA2 /* ChooseFriendViewController.xib */; };
 		179DDA81196B9DF900DF6CA2 /* FriendSelectedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 179DDA7F196B9DF900DF6CA2 /* FriendSelectedCell.m */; };
 		179DDA82196B9DF900DF6CA2 /* FriendSelectedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 179DDA80196B9DF900DF6CA2 /* FriendSelectedCell.xib */; };
+		179DDA86196BA45A00DF6CA2 /* SearchGoodFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 179DDA84196BA45A00DF6CA2 /* SearchGoodFriendsViewController.m */; };
+		179DDA87196BA45A00DF6CA2 /* SearchGoodFriendsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 179DDA85196BA45A00DF6CA2 /* SearchGoodFriendsViewController.xib */; };
+		179DDA8B196BBB9100DF6CA2 /* SearchRSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 179DDA89196BBB9100DF6CA2 /* SearchRSViewController.m */; };
+		179DDA8C196BBB9100DF6CA2 /* SearchRSViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 179DDA8A196BBB9100DF6CA2 /* SearchRSViewController.xib */; };
+		179DDA90196BC16600DF6CA2 /* SearchRSCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 179DDA8E196BC16600DF6CA2 /* SearchRSCell.m */; };
+		179DDA91196BC16600DF6CA2 /* SearchRSCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 179DDA8F196BC16600DF6CA2 /* SearchRSCell.xib */; };
+		179DDA95196BCEA000DF6CA2 /* TopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 179DDA93196BCEA000DF6CA2 /* TopicViewController.m */; };
+		179DDA96196BCEA000DF6CA2 /* TopicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 179DDA94196BCEA000DF6CA2 /* TopicViewController.xib */; };
+		179DDA9A196BD7E900DF6CA2 /* LocationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 179DDA98196BD7E900DF6CA2 /* LocationsViewController.m */; };
+		179DDA9B196BD7E900DF6CA2 /* LocationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 179DDA99196BD7E900DF6CA2 /* LocationsViewController.xib */; };
+		179DDA9E196BE0EE00DF6CA2 /* UIView+CutLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 179DDA9D196BE0EE00DF6CA2 /* UIView+CutLayer.m */; };
 		17A08957196A65E1007691A4 /* AddBabyInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A08955196A65E1007691A4 /* AddBabyInfoViewController.m */; };
 		17A08958196A65E1007691A4 /* AddBabyInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17A08956196A65E1007691A4 /* AddBabyInfoViewController.xib */; };
 		17A0895C196A9154007691A4 /* MyGoodFriendsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A0895A196A9154007691A4 /* MyGoodFriendsListViewController.m */; };
@@ -276,6 +287,23 @@
 		179DDA7E196B9DF900DF6CA2 /* FriendSelectedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendSelectedCell.h; sourceTree = "<group>"; };
 		179DDA7F196B9DF900DF6CA2 /* FriendSelectedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendSelectedCell.m; sourceTree = "<group>"; };
 		179DDA80196B9DF900DF6CA2 /* FriendSelectedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendSelectedCell.xib; sourceTree = "<group>"; };
+		179DDA83196BA45A00DF6CA2 /* SearchGoodFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchGoodFriendsViewController.h; sourceTree = "<group>"; };
+		179DDA84196BA45A00DF6CA2 /* SearchGoodFriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchGoodFriendsViewController.m; sourceTree = "<group>"; };
+		179DDA85196BA45A00DF6CA2 /* SearchGoodFriendsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchGoodFriendsViewController.xib; sourceTree = "<group>"; };
+		179DDA88196BBB9100DF6CA2 /* SearchRSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchRSViewController.h; sourceTree = "<group>"; };
+		179DDA89196BBB9100DF6CA2 /* SearchRSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchRSViewController.m; sourceTree = "<group>"; };
+		179DDA8A196BBB9100DF6CA2 /* SearchRSViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchRSViewController.xib; sourceTree = "<group>"; };
+		179DDA8D196BC16600DF6CA2 /* SearchRSCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchRSCell.h; sourceTree = "<group>"; };
+		179DDA8E196BC16600DF6CA2 /* SearchRSCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchRSCell.m; sourceTree = "<group>"; };
+		179DDA8F196BC16600DF6CA2 /* SearchRSCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchRSCell.xib; sourceTree = "<group>"; };
+		179DDA92196BCEA000DF6CA2 /* TopicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopicViewController.h; sourceTree = "<group>"; };
+		179DDA93196BCEA000DF6CA2 /* TopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopicViewController.m; sourceTree = "<group>"; };
+		179DDA94196BCEA000DF6CA2 /* TopicViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopicViewController.xib; sourceTree = "<group>"; };
+		179DDA97196BD7E900DF6CA2 /* LocationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationsViewController.h; sourceTree = "<group>"; };
+		179DDA98196BD7E900DF6CA2 /* LocationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationsViewController.m; sourceTree = "<group>"; };
+		179DDA99196BD7E900DF6CA2 /* LocationsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationsViewController.xib; sourceTree = "<group>"; };
+		179DDA9C196BE0EE00DF6CA2 /* UIView+CutLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CutLayer.h"; sourceTree = "<group>"; };
+		179DDA9D196BE0EE00DF6CA2 /* UIView+CutLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CutLayer.m"; sourceTree = "<group>"; };
 		17A08954196A65E1007691A4 /* AddBabyInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddBabyInfoViewController.h; sourceTree = "<group>"; };
 		17A08955196A65E1007691A4 /* AddBabyInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddBabyInfoViewController.m; sourceTree = "<group>"; };
 		17A08956196A65E1007691A4 /* AddBabyInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddBabyInfoViewController.xib; sourceTree = "<group>"; };
@@ -534,6 +562,9 @@
 				179DDA7E196B9DF900DF6CA2 /* FriendSelectedCell.h */,
 				179DDA7F196B9DF900DF6CA2 /* FriendSelectedCell.m */,
 				179DDA80196B9DF900DF6CA2 /* FriendSelectedCell.xib */,
+				179DDA8D196BC16600DF6CA2 /* SearchRSCell.h */,
+				179DDA8E196BC16600DF6CA2 /* SearchRSCell.m */,
+				179DDA8F196BC16600DF6CA2 /* SearchRSCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -558,6 +589,8 @@
 		179B9ADF196A2D3700C4C9FF /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				179DDA9C196BE0EE00DF6CA2 /* UIView+CutLayer.h */,
+				179DDA9D196BE0EE00DF6CA2 /* UIView+CutLayer.m */,
 				179B9AE0196A2D3700C4C9FF /* UIViewController+BarItemAdapt.h */,
 				179B9AE1196A2D3700C4C9FF /* UIViewController+BarItemAdapt.m */,
 			);
@@ -1033,6 +1066,18 @@
 				179DDA79196B9C7E00DF6CA2 /* ChooseFriendViewController.h */,
 				179DDA7A196B9C7E00DF6CA2 /* ChooseFriendViewController.m */,
 				179DDA7B196B9C7E00DF6CA2 /* ChooseFriendViewController.xib */,
+				179DDA83196BA45A00DF6CA2 /* SearchGoodFriendsViewController.h */,
+				179DDA84196BA45A00DF6CA2 /* SearchGoodFriendsViewController.m */,
+				179DDA85196BA45A00DF6CA2 /* SearchGoodFriendsViewController.xib */,
+				179DDA88196BBB9100DF6CA2 /* SearchRSViewController.h */,
+				179DDA89196BBB9100DF6CA2 /* SearchRSViewController.m */,
+				179DDA8A196BBB9100DF6CA2 /* SearchRSViewController.xib */,
+				179DDA92196BCEA000DF6CA2 /* TopicViewController.h */,
+				179DDA93196BCEA000DF6CA2 /* TopicViewController.m */,
+				179DDA94196BCEA000DF6CA2 /* TopicViewController.xib */,
+				179DDA97196BD7E900DF6CA2 /* LocationsViewController.h */,
+				179DDA98196BD7E900DF6CA2 /* LocationsViewController.m */,
+				179DDA99196BD7E900DF6CA2 /* LocationsViewController.xib */,
 			);
 			path = UserCenter;
 			sourceTree = "<group>";
@@ -1119,6 +1164,7 @@
 				C32CE4EF1967AAA900DB84DC /* pd_anzhushuohua@2x.png in Resources */,
 				C32CE4C51967AAA900DB84DC /* main_2-pic2@2x.png in Resources */,
 				C32CE4B31967AAA900DB84DC /* baby_mama@2x.png in Resources */,
+				179DDA8C196BBB9100DF6CA2 /* SearchRSViewController.xib in Resources */,
 				C32CE4D01967AAA900DB84DC /* main_jiantou@2x.png in Resources */,
 				179DDA82196B9DF900DF6CA2 /* FriendSelectedCell.xib in Resources */,
 				C32CE4C91967AAA900DB84DC /* main_baobaotouxiang@2x.png in Resources */,
@@ -1192,6 +1238,7 @@
 				C32CE4DA1967AAA900DB84DC /* main_tianjia@2x.png in Resources */,
 				C32CE4CA1967AAA900DB84DC /* main_boy@2x.png in Resources */,
 				C32CE5271967AAA900DB84DC /* user_3-bg@2x.png in Resources */,
+				179DDA87196BA45A00DF6CA2 /* SearchGoodFriendsViewController.xib in Resources */,
 				C32CE4C11967AAA900DB84DC /* login_tianjia@2x.png in Resources */,
 				C32CE4E01967AAA900DB84DC /* main_xinlang@2x.png in Resources */,
 				C32CE4E31967AAA900DB84DC /* pb_fabu@2x.png in Resources */,
@@ -1216,6 +1263,7 @@
 				17A44416196916AA0051627C /* OtherInformationViewController.xib in Resources */,
 				C32CE50D1967AAA900DB84DC /* square_pic-4@2x.png in Resources */,
 				C32CE4E51967AAA900DB84DC /* pb_logo-2@2x.png in Resources */,
+				179DDA96196BCEA000DF6CA2 /* TopicViewController.xib in Resources */,
 				C32CE4FD1967AAA900DB84DC /* square_bofang-bg@2x.png in Resources */,
 				C32CE5231967AAA900DB84DC /* square_zuire-@2x.png in Resources */,
 				C32CE4B51967AAA900DB84DC /* baby_shengaotizhong@2x.png in Resources */,
@@ -1226,6 +1274,7 @@
 				C32CE4BB1967AAA900DB84DC /* login_box-5@2x.png in Resources */,
 				C32CE4F31967AAA900DB84DC /* pd_fenxiang-@2x.png in Resources */,
 				C32CE4B71967AAA900DB84DC /* login_box-1@2x.png in Resources */,
+				179DDA91196BC16600DF6CA2 /* SearchRSCell.xib in Resources */,
 				C32CE4AD1967AAA900DB84DC /* baby_baobei@2x.png in Resources */,
 				C32CE4C01967AAA900DB84DC /* login_suibian@2x.png in Resources */,
 				C32CE4DB1967AAA900DB84DC /* main_tianjiabaobei@2x.png in Resources */,
@@ -1263,6 +1312,7 @@
 				C32CE4C21967AAA900DB84DC /* login_xinlang@2x.png in Resources */,
 				17A4440D1968F6E20051627C /* PersonCenterViewController.xib in Resources */,
 				C32CE4E91967AAA900DB84DC /* pb_shanchu@2x.png in Resources */,
+				179DDA9B196BD7E900DF6CA2 /* LocationsViewController.xib in Resources */,
 				C32CE50A1967AAA900DB84DC /* square_pic-1@2x.png in Resources */,
 				C32CE5211967AAA900DB84DC /* square_zan@2x.png in Resources */,
 				C32CE51F1967AAA900DB84DC /* square_yanjing@2x.png in Resources */,
@@ -1341,6 +1391,8 @@
 				C32CE3FB1967A25800DB84DC /* CommonViewController.m in Sources */,
 				17A4440C1968F6E20051627C /* PersonCenterViewController.m in Sources */,
 				17139CB1196A116300BFDA4A /* MybabyListViewController.m in Sources */,
+				179DDA90196BC16600DF6CA2 /* SearchRSCell.m in Sources */,
+				179DDA9E196BE0EE00DF6CA2 /* UIView+CutLayer.m in Sources */,
 				171DC01A1967EF04005F7D28 /* ForgetPwdViewController.m in Sources */,
 				171DC0061967D839005F7D28 /* RegisterViewController.m in Sources */,
 				C32CE4131967A33700DB84DC /* HttpService.m in Sources */,
@@ -1350,6 +1402,7 @@
 				C32CE3FE1967A25800DB84DC /* NSDate+Utils.m in Sources */,
 				1717320D196A420F00B3DBE2 /* ShaiWaSquareViewController.m in Sources */,
 				C32CE4171967A52F00DB84DC /* ControlCenter.m in Sources */,
+				179DDA8B196BBB9100DF6CA2 /* SearchRSViewController.m in Sources */,
 				171DC0151967EECC005F7D28 /* ChooseModeViewController.m in Sources */,
 				17A0895C196A9154007691A4 /* MyGoodFriendsListViewController.m in Sources */,
 				17A44415196916AA0051627C /* OtherInformationViewController.m in Sources */,
@@ -1362,10 +1415,13 @@
 				C32CE4031967A25800DB84DC /* UIColor+Utils.m in Sources */,
 				C32B41981965B5B8003979EE /* ShaiWaWa.xcdatamodeld in Sources */,
 				C32B41911965B5B8003979EE /* main.m in Sources */,
+				179DDA86196BA45A00DF6CA2 /* SearchGoodFriendsViewController.m in Sources */,
 				C32CE4011967A25800DB84DC /* NSString+Utils.m in Sources */,
 				C32CE3FC1967A25800DB84DC /* HWConnect.m in Sources */,
 				C32CE4051967A25800DB84DC /* UIViewController+BarItem.m in Sources */,
 				C32CE4121967A33700DB84DC /* AFHttp.m in Sources */,
+				179DDA95196BCEA000DF6CA2 /* TopicViewController.m in Sources */,
+				179DDA9A196BD7E900DF6CA2 /* LocationsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

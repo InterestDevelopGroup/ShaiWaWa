@@ -28,6 +28,10 @@
 + (void)pushToFinishResetPwdVC;
 //push到添加宝宝页面方法
 + (void)pushToAddBabyVC;
+//push到查询好友页面方法
++ (void)pushToSearchFriendVC;
+//push到查询好友结果页面
++ (void)pushToSearchRSVC;
 + (void)showVC:(NSString *)vcName;
 + (UIViewController *)viewControllerWithName:(NSString *)vcName;
 + (UINavigationController *)navWithRootVC:(UIViewController *)vc;

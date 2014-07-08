@@ -35,6 +35,9 @@
                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="showSearchFriendsVC:" destination="-1" eventType="touchUpInside" id="8td-fU-Kja"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="J5Y-aR-mQ4">
                     <rect key="frame" x="212" y="195" width="57" height="62"/>

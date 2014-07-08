@@ -9,6 +9,7 @@
 #import "CommonViewController.h"
 
 @interface ChooseModeViewController : CommonViewController
+- (IBAction)showSearchFriendsVC:(id)sender;
 
 - (IBAction)showAddBabyVC:(id)sender;
 @end

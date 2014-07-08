@@ -33,7 +33,7 @@
     AppDelegate * appDelegate = [[self class] appDelegate];
     //[[self class] setNavigationTitleWhiteColor];
     appDelegate.window = [[self class] newWindow];
-    UINavigationController * nav = [[self class] navWithRootVC:[[self class] viewControllerWithName:@"ChooseFriendViewController"]];
+    UINavigationController * nav = [[self class] navWithRootVC:[[self class] viewControllerWithName:@"LocationsViewController"]];
     appDelegate.navigationController = nav;
     appDelegate.window.rootViewController = appDelegate.navigationController;
     [appDelegate.window makeKeyAndVisible];
@@ -75,7 +75,14 @@
 {
     [[self class] showVC:@"AddBabyInfoViewController"];
 }
-
++ (void)pushToSearchFriendVC
+{
+    [[self class] showVC:@"SearchGoodFriendsViewController"];
+}
++ (void)pushToSearchRSVC
+{
+    [[self class] showVC:@"SearchRSViewController"];
+}
 + (void)showVC:(NSString *)vcName
 {
     UIViewController * vc = [[self class] viewControllerWithName:vcName];

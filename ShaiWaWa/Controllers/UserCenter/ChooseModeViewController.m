@@ -50,6 +50,11 @@
     self.navigationItem.rightBarButtonItems = @[rightItem_2,rightItem_1];
     
 }
+- (IBAction)showSearchFriendsVC:(id)sender
+{
+    [ControlCenter pushToSearchFriendVC];
+}
+
 - (IBAction)showAddBabyVC:(id)sender
 {
     [ControlCenter pushToAddBabyVC];
