@@ -4,6 +4,7 @@
 target "ShaiWaWa" do
 pod 'AFNetworking', '~> 2.2.3'
 pod 'CocoaLumberjack', '~> 1.8.1'
+pod 'HMSegmentedControl', '~> 1.3.0'
 end
 
 target "ShaiWaWaTests" do

@@ -48,10 +48,20 @@
 		179DDA9A196BD7E900DF6CA2 /* LocationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 179DDA98196BD7E900DF6CA2 /* LocationsViewController.m */; };
 		179DDA9B196BD7E900DF6CA2 /* LocationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 179DDA99196BD7E900DF6CA2 /* LocationsViewController.xib */; };
 		179DDA9E196BE0EE00DF6CA2 /* UIView+CutLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 179DDA9D196BE0EE00DF6CA2 /* UIView+CutLayer.m */; };
+		179DDAA2196BE6F100DF6CA2 /* SendValidateMsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 179DDAA0196BE6F100DF6CA2 /* SendValidateMsgViewController.m */; };
+		179DDAA3196BE6F100DF6CA2 /* SendValidateMsgViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 179DDAA1196BE6F100DF6CA2 /* SendValidateMsgViewController.xib */; };
+		179DDAAC196BEE9400DF6CA2 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 179DDAAA196BEE9400DF6CA2 /* SettingViewController.m */; };
+		179DDAAD196BEE9400DF6CA2 /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 179DDAAB196BEE9400DF6CA2 /* SettingViewController.xib */; };
+		179DDAB1196BEECD00DF6CA2 /* FeebackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 179DDAAF196BEECD00DF6CA2 /* FeebackViewController.m */; };
+		179DDAB2196BEECD00DF6CA2 /* FeebackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 179DDAB0196BEECD00DF6CA2 /* FeebackViewController.xib */; };
 		17A08957196A65E1007691A4 /* AddBabyInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A08955196A65E1007691A4 /* AddBabyInfoViewController.m */; };
 		17A08958196A65E1007691A4 /* AddBabyInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17A08956196A65E1007691A4 /* AddBabyInfoViewController.xib */; };
 		17A0895C196A9154007691A4 /* MyGoodFriendsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A0895A196A9154007691A4 /* MyGoodFriendsListViewController.m */; };
 		17A0895D196A9154007691A4 /* MyGoodFriendsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17A0895B196A9154007691A4 /* MyGoodFriendsListViewController.xib */; };
+		17A2B940196CF525009123FA /* BabyHomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A2B93E196CF525009123FA /* BabyHomePageViewController.m */; };
+		17A2B941196CF525009123FA /* BabyHomePageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17A2B93F196CF525009123FA /* BabyHomePageViewController.xib */; };
+		17A2B945196D1E01009123FA /* SummaryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A2B943196D1E01009123FA /* SummaryCell.m */; };
+		17A2B946196D1E01009123FA /* SummaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17A2B944196D1E01009123FA /* SummaryCell.xib */; };
 		17A4440C1968F6E20051627C /* PersonCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A4440A1968F6E20051627C /* PersonCenterViewController.m */; };
 		17A4440D1968F6E20051627C /* PersonCenterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17A4440B1968F6E20051627C /* PersonCenterViewController.xib */; };
 		17A4441019690B970051627C /* user_1-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17A4440E19690B970051627C /* user_1-bg@2x.png */; };
@@ -304,12 +314,27 @@
 		179DDA99196BD7E900DF6CA2 /* LocationsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationsViewController.xib; sourceTree = "<group>"; };
 		179DDA9C196BE0EE00DF6CA2 /* UIView+CutLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CutLayer.h"; sourceTree = "<group>"; };
 		179DDA9D196BE0EE00DF6CA2 /* UIView+CutLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CutLayer.m"; sourceTree = "<group>"; };
+		179DDA9F196BE6F100DF6CA2 /* SendValidateMsgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendValidateMsgViewController.h; sourceTree = "<group>"; };
+		179DDAA0196BE6F100DF6CA2 /* SendValidateMsgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendValidateMsgViewController.m; sourceTree = "<group>"; };
+		179DDAA1196BE6F100DF6CA2 /* SendValidateMsgViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SendValidateMsgViewController.xib; sourceTree = "<group>"; };
+		179DDAA9196BEE9400DF6CA2 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		179DDAAA196BEE9400DF6CA2 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		179DDAAB196BEE9400DF6CA2 /* SettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
+		179DDAAE196BEECD00DF6CA2 /* FeebackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeebackViewController.h; sourceTree = "<group>"; };
+		179DDAAF196BEECD00DF6CA2 /* FeebackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeebackViewController.m; sourceTree = "<group>"; };
+		179DDAB0196BEECD00DF6CA2 /* FeebackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeebackViewController.xib; sourceTree = "<group>"; };
 		17A08954196A65E1007691A4 /* AddBabyInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddBabyInfoViewController.h; sourceTree = "<group>"; };
 		17A08955196A65E1007691A4 /* AddBabyInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddBabyInfoViewController.m; sourceTree = "<group>"; };
 		17A08956196A65E1007691A4 /* AddBabyInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddBabyInfoViewController.xib; sourceTree = "<group>"; };
 		17A08959196A9154007691A4 /* MyGoodFriendsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyGoodFriendsListViewController.h; sourceTree = "<group>"; };
 		17A0895A196A9154007691A4 /* MyGoodFriendsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyGoodFriendsListViewController.m; sourceTree = "<group>"; };
 		17A0895B196A9154007691A4 /* MyGoodFriendsListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyGoodFriendsListViewController.xib; sourceTree = "<group>"; };
+		17A2B93D196CF525009123FA /* BabyHomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BabyHomePageViewController.h; sourceTree = "<group>"; };
+		17A2B93E196CF525009123FA /* BabyHomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BabyHomePageViewController.m; sourceTree = "<group>"; };
+		17A2B93F196CF525009123FA /* BabyHomePageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BabyHomePageViewController.xib; sourceTree = "<group>"; };
+		17A2B942196D1E01009123FA /* SummaryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SummaryCell.h; sourceTree = "<group>"; };
+		17A2B943196D1E01009123FA /* SummaryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SummaryCell.m; sourceTree = "<group>"; };
+		17A2B944196D1E01009123FA /* SummaryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SummaryCell.xib; sourceTree = "<group>"; };
 		17A444091968F6E20051627C /* PersonCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonCenterViewController.h; sourceTree = "<group>"; };
 		17A4440A1968F6E20051627C /* PersonCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonCenterViewController.m; sourceTree = "<group>"; };
 		17A4440B1968F6E20051627C /* PersonCenterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonCenterViewController.xib; sourceTree = "<group>"; };
@@ -565,6 +590,9 @@
 				179DDA8D196BC16600DF6CA2 /* SearchRSCell.h */,
 				179DDA8E196BC16600DF6CA2 /* SearchRSCell.m */,
 				179DDA8F196BC16600DF6CA2 /* SearchRSCell.xib */,
+				17A2B942196D1E01009123FA /* SummaryCell.h */,
+				17A2B943196D1E01009123FA /* SummaryCell.m */,
+				17A2B944196D1E01009123FA /* SummaryCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -597,6 +625,19 @@
 			path = Category;
 			sourceTree = "<group>";
 		};
+		179DDAA8196BEE7F00DF6CA2 /* setting */ = {
+			isa = PBXGroup;
+			children = (
+				179DDAA9196BEE9400DF6CA2 /* SettingViewController.h */,
+				179DDAAA196BEE9400DF6CA2 /* SettingViewController.m */,
+				179DDAAB196BEE9400DF6CA2 /* SettingViewController.xib */,
+				179DDAAE196BEECD00DF6CA2 /* FeebackViewController.h */,
+				179DDAAF196BEECD00DF6CA2 /* FeebackViewController.m */,
+				179DDAB0196BEECD00DF6CA2 /* FeebackViewController.xib */,
+			);
+			path = setting;
+			sourceTree = "<group>";
+		};
 		17A08953196A65E1007691A4 /* Baby */ = {
 			isa = PBXGroup;
 			children = (
@@ -606,6 +647,9 @@
 				179DDA74196B921300DF6CA2 /* BabyListViewController.h */,
 				179DDA75196B921300DF6CA2 /* BabyListViewController.m */,
 				179DDA76196B921300DF6CA2 /* BabyListViewController.xib */,
+				17A2B93D196CF525009123FA /* BabyHomePageViewController.h */,
+				17A2B93E196CF525009123FA /* BabyHomePageViewController.m */,
+				17A2B93F196CF525009123FA /* BabyHomePageViewController.xib */,
 			);
 			path = Baby;
 			sourceTree = "<group>";
@@ -692,6 +736,7 @@
 		C32B41B71965B5DD003979EE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				179DDAA8196BEE7F00DF6CA2 /* setting */,
 				17A08953196A65E1007691A4 /* Baby */,
 				17173209196A419000B3DBE2 /* Square */,
 				17173203196A3FCF00B3DBE2 /* Main */,
@@ -1078,6 +1123,9 @@
 				179DDA97196BD7E900DF6CA2 /* LocationsViewController.h */,
 				179DDA98196BD7E900DF6CA2 /* LocationsViewController.m */,
 				179DDA99196BD7E900DF6CA2 /* LocationsViewController.xib */,
+				179DDA9F196BE6F100DF6CA2 /* SendValidateMsgViewController.h */,
+				179DDAA0196BE6F100DF6CA2 /* SendValidateMsgViewController.m */,
+				179DDAA1196BE6F100DF6CA2 /* SendValidateMsgViewController.xib */,
 			);
 			path = UserCenter;
 			sourceTree = "<group>";
@@ -1159,6 +1207,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				179DDAA3196BE6F100DF6CA2 /* SendValidateMsgViewController.xib in Resources */,
 				C32CE4D91967AAA900DB84DC /* main_tebieguanxin@2x.png in Resources */,
 				C32CE4FF1967AAA900DB84DC /* square_cebinlan@2x.png in Resources */,
 				C32CE4EF1967AAA900DB84DC /* pd_anzhushuohua@2x.png in Resources */,
@@ -1180,6 +1229,7 @@
 				C32CE4E71967AAA900DB84DC /* pb_logo-4@2x.png in Resources */,
 				17A4441B19691ECF0051627C /* FriendHomeViewController.xib in Resources */,
 				C32CE51C1967AAA900DB84DC /* square_shoucang@2x.png in Resources */,
+				17A2B946196D1E01009123FA /* SummaryCell.xib in Resources */,
 				171DC0161967EECC005F7D28 /* ChooseModeViewController.xib in Resources */,
 				179DDA7D196B9C7E00DF6CA2 /* ChooseFriendViewController.xib in Resources */,
 				C32CE4B61967AAA900DB84DC /* baby_weixinyaoqing@2x.png in Resources */,
@@ -1255,6 +1305,7 @@
 				C32CE5001967AAA900DB84DC /* square_chengzhangzuji]@2x.png in Resources */,
 				C32B419A1965B5B8003979EE /* Images.xcassets in Resources */,
 				171731F3196A2DDF00B3DBE2 /* BabyListCell.xib in Resources */,
+				17A2B941196CF525009123FA /* BabyHomePageViewController.xib in Resources */,
 				C32CE4F81967AAA900DB84DC /* pd_xiala@2x.png in Resources */,
 				C32CE4CB1967AAA900DB84DC /* main_cha@2x.png in Resources */,
 				C32CE4AF1967AAA900DB84DC /* baby_dongtai@2x.png in Resources */,
@@ -1264,6 +1315,7 @@
 				C32CE50D1967AAA900DB84DC /* square_pic-4@2x.png in Resources */,
 				C32CE4E51967AAA900DB84DC /* pb_logo-2@2x.png in Resources */,
 				179DDA96196BCEA000DF6CA2 /* TopicViewController.xib in Resources */,
+				179DDAAD196BEE9400DF6CA2 /* SettingViewController.xib in Resources */,
 				C32CE4FD1967AAA900DB84DC /* square_bofang-bg@2x.png in Resources */,
 				C32CE5231967AAA900DB84DC /* square_zuire-@2x.png in Resources */,
 				C32CE4B51967AAA900DB84DC /* baby_shengaotizhong@2x.png in Resources */,
@@ -1291,6 +1343,7 @@
 				C32CE4BE1967AAA900DB84DC /* login_chazhao@2x.png in Resources */,
 				C32CE50F1967AAA900DB84DC /* square_pic-6@2x.png in Resources */,
 				171731FD196A387500B3DBE2 /* ResetPwdNextStepViewController.xib in Resources */,
+				179DDAB2196BEECD00DF6CA2 /* FeebackViewController.xib in Resources */,
 				C32CE50C1967AAA900DB84DC /* square_pic-3@2x.png in Resources */,
 				C32CE51D1967AAA900DB84DC /* square_tianxie@2x.png in Resources */,
 				C32CE4F11967AAA900DB84DC /* pd_fenxiang-2@2x.png in Resources */,
@@ -1375,12 +1428,14 @@
 			files = (
 				171DC0101967E81E005F7D28 /* FinishRegisterViewController.m in Sources */,
 				C32CE41A1967A5E100DB84DC /* AppDelegate.m in Sources */,
+				179DDAAC196BEE9400DF6CA2 /* SettingViewController.m in Sources */,
 				179B9AE3196A2D3700C4C9FF /* UIViewController+BarItemAdapt.m in Sources */,
 				179DDA77196B921300DF6CA2 /* BabyListViewController.m in Sources */,
 				171731F2196A2DDF00B3DBE2 /* BabyListCell.m in Sources */,
 				C32CE5391967AB0900DB84DC /* LoginViewController.m in Sources */,
 				C32CE4061967A25800DB84DC /* VersionManager.m in Sources */,
 				179DDA81196B9DF900DF6CA2 /* FriendSelectedCell.m in Sources */,
+				17A2B940196CF525009123FA /* BabyHomePageViewController.m in Sources */,
 				171DC00B1967E23C005F7D28 /* PostValidateViewController.m in Sources */,
 				C32CE3FD1967A25800DB84DC /* IO.m in Sources */,
 				17A08957196A65E1007691A4 /* AddBabyInfoViewController.m in Sources */,
@@ -1406,10 +1461,12 @@
 				171DC0151967EECC005F7D28 /* ChooseModeViewController.m in Sources */,
 				17A0895C196A9154007691A4 /* MyGoodFriendsListViewController.m in Sources */,
 				17A44415196916AA0051627C /* OtherInformationViewController.m in Sources */,
+				179DDAB1196BEECD00DF6CA2 /* FeebackViewController.m in Sources */,
 				C32CE4001967A25800DB84DC /* NSString+MD5_32.m in Sources */,
 				C32CE3F91967A25800DB84DC /* UITableView+Addition.m in Sources */,
 				C32CE3FF1967A25800DB84DC /* NSString+IP.m in Sources */,
 				C32CE4021967A25800DB84DC /* OSHelper.m in Sources */,
+				17A2B945196D1E01009123FA /* SummaryCell.m in Sources */,
 				171731F7196A383500B3DBE2 /* ResetPwdViewController.m in Sources */,
 				179DDA72196B872C00DF6CA2 /* MyGoodFriendsListCell.m in Sources */,
 				C32CE4031967A25800DB84DC /* UIColor+Utils.m in Sources */,
@@ -1421,6 +1478,7 @@
 				C32CE4051967A25800DB84DC /* UIViewController+BarItem.m in Sources */,
 				C32CE4121967A33700DB84DC /* AFHttp.m in Sources */,
 				179DDA95196BCEA000DF6CA2 /* TopicViewController.m in Sources */,
+				179DDAA2196BE6F100DF6CA2 /* SendValidateMsgViewController.m in Sources */,
 				179DDA9A196BD7E900DF6CA2 /* LocationsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
