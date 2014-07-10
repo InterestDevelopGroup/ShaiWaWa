@@ -17,4 +17,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *myCollectionButton;
 
 @property (strong, nonatomic) IBOutlet UIImageView *sheJianBar;
+- (IBAction)showUserInfoPageVC:(id)sender;
+- (IBAction)showPlatformBind:(id)sender;
+
 @end

@@ -8,6 +8,8 @@
 
 #import "PersonCenterViewController.h"
 #import "UIViewController+BarItemAdapt.h"
+#import "ControlCenter.h"
+#import "PlatformBindViewController.h"
 
 @interface PersonCenterViewController ()
 
@@ -133,6 +135,21 @@
     socialPlatformBindLabel.font = [UIFont systemFontOfSize:15];
     socialPlatformBindLabel.textColor = [UIColor darkGrayColor];
     [_sheJianBar addSubview:socialPlatformBindLabel];
+    
+    UIImage *imageJianTou = [UIImage imageNamed:@"main_jiantou.png"];
+    UIImageView *jianTou = [[UIImageView alloc] initWithImage:imageJianTou];
+    jianTou.frame = CGRectMake(_sheJianBar.bounds.size.width-18, 15, 7, 11);
+    [_sheJianBar addSubview:jianTou];
 }
 
+- (IBAction)showUserInfoPageVC:(id)sender
+{
+    [ControlCenter pushToUserInfoPageVC];
+}
+
+- (IBAction)showPlatformBind:(id)sender
+{
+    PlatformBindViewController *platformVC = [[PlatformBindViewController alloc] init];
+    [self.navigationController pushViewController:platformVC animated:YES];
+}
 @end

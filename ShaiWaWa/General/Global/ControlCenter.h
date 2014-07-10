@@ -32,6 +32,9 @@
 + (void)pushToSearchFriendVC;
 //push到查询好友结果页面
 + (void)pushToSearchRSVC;
+//push到用户信息页面
++ (void)pushToUserInfoPageVC;
+
 + (void)showVC:(NSString *)vcName;
 + (UIViewController *)viewControllerWithName:(NSString *)vcName;
 + (UINavigationController *)navWithRootVC:(UIViewController *)vc;

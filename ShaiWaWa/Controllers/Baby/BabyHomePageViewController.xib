@@ -7,11 +7,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BabyHomePageViewController">
             <connections>
+                <outlet property="dadButton" destination="w3O-Ne-G3w" id="ll6-TW-9ab"/>
+                <outlet property="monButton" destination="wgj-WL-Y1h" id="vO0-jR-YPn"/>
                 <outlet property="segScrollView" destination="DHI-LH-dcT" id="xuw-GR-7Wi"/>
                 <outlet property="summaryTableView" destination="nDz-jc-Tl5" id="WCL-HH-7zZ"/>
                 <outlet property="summaryView" destination="l1y-d5-dFD" id="BTG-B4-EhI"/>
                 <outlet property="tabSelectionBar" destination="JAJ-a9-ZOT" id="tVw-bW-S1A"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="yaoQingbgView" destination="2Fu-ff-pnB" id="tqw-7P-IzL"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -36,6 +39,9 @@
                     <state key="normal" title="爸 爸" image="baby_baba.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="isYaoQing:" destination="-1" eventType="touchUpInside" id="gWZ-6y-b6Y"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wgj-WL-Y1h">
                     <rect key="frame" x="185" y="18" width="65" height="60"/>
@@ -46,6 +52,9 @@
                     <state key="normal" title="妈 妈" image="baby_mama.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="isYaoQing:" destination="-1" eventType="touchUpInside" id="s0o-02-p5A"/>
+                    </connections>
                 </button>
                 <view contentMode="scaleToFill" id="JAJ-a9-ZOT">
                     <rect key="frame" x="0.0" y="164" width="320" height="35"/>
@@ -85,11 +94,55 @@
             <color key="backgroundColor" red="0.86274516582489014" green="0.87058830261230469" blue="0.86666673421859741" alpha="1" colorSpace="deviceRGB"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
+        <view hidden="YES" alpha="0.49999999999999961" contentMode="scaleToFill" id="2Fu-ff-pnB">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="baby_4-bg-1.png" id="6Dn-FM-Whp">
+                    <rect key="frame" x="0.0" y="202" width="320" height="100"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9rU-tZ-FXJ">
+                    <rect key="frame" x="32" y="212" width="95" height="80"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="baby_duanxinyaoqing.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="msgYaoQingButton:" destination="-1" eventType="touchUpInside" id="mCA-ga-Tsy"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Rzo-RR-8ke">
+                    <rect key="frame" x="190" y="212" width="95" height="80"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="baby_weixinyaoqing.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="weiXinYaoQingButton:" destination="-1" eventType="touchUpInside" id="biU-3q-ILF"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+            <gestureRecognizers/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="qZA-0U-HeO" appends="YES" id="qhg-Hv-k0w"/>
+            </connections>
+        </view>
+        <tapGestureRecognizer id="qZA-0U-HeO">
+            <connections>
+                <action selector="hideCurView:" destination="-1" id="WFi-0h-abV"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
+        <image name="baby_4-bg-1.png" width="320" height="100"/>
         <image name="baby_4-bg.png" width="320" height="165"/>
         <image name="baby_baba.png" width="41" height="41"/>
         <image name="baby_baobei.png" width="69" height="68"/>
+        <image name="baby_duanxinyaoqing.png" width="95" height="80"/>
         <image name="baby_mama.png" width="41" height="41"/>
+        <image name="baby_weixinyaoqing.png" width="95" height="80"/>
     </resources>
 </document>

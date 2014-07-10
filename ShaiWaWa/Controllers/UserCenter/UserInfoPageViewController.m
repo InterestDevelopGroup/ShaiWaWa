@@ -1,0 +1,88 @@
+//
+//  UserInfoPageViewController.m
+//  ShaiWaWa
+//
+//  Created by 祥 on 14-7-10.
+//  Copyright (c) 2014年 helloworld. All rights reserved.
+//
+
+#import "UserInfoPageViewController.h"
+#import "UIViewController+BarItemAdapt.h"
+#import "UpdateUserNameViewController.h"
+
+@interface UserInfoPageViewController ()
+
+@end
+
+@implementation UserInfoPageViewController
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+#pragma mark - Private Methods
+- (void)initUI
+{
+    self.title = @"老李";
+    [self setLeftCusBarItem:@"square_back" action:nil];
+    key = [[NSMutableArray alloc] initWithObjects:@"用户名",@"性别",@"修改密码", nil];
+    [_userInfoTableView clearSeperateLine];
+}
+
+#pragma mark - UITableView DataSources and Delegate
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 3;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *identify = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identify];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
+        UILabel *lblValue = [[UILabel alloc] initWithFrame:CGRectMake(cell.bounds.size.width-130, 5, 80, 30)];
+        lblValue.tag = 777;
+        lblValue.backgroundColor = [UIColor clearColor];
+        lblValue.font = [UIFont systemFontOfSize:15.0];
+        lblValue.textColor = [UIColor darkGrayColor];
+        lblValue.textAlignment = NSTextAlignmentRight;
+        [cell addSubview:lblValue];
+    }
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.textLabel.text = [key objectAtIndex:indexPath.row];
+    cell.textLabel.font = [UIFont systemFontOfSize:15.0];
+    cell.textLabel.textColor = [UIColor darkGrayColor];
+    UILabel *val = (UILabel *)[cell viewWithTag:777];
+    val.text = [key objectAtIndex:indexPath.row];
+    //    cell.headPicView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"baby_mama.png"]];
+    //    cell.nickNameLabel.text = @"张氏";
+    //    cell.countOfBabyLabel.text = @"1个宝宝";
+    //    cell.remarksLabel.text = @"孩子他妈";
+    cell.backgroundColor = [UIColor clearColor];
+    return cell;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    UpdateUserNameViewController *updateUser = [[UpdateUserNameViewController alloc] init];
+    updateUser.userName = [key objectAtIndex:indexPath.row];
+    [self.navigationController pushViewController:updateUser animated:YES];
+}
+@end

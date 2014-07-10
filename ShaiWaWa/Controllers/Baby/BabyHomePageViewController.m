@@ -44,6 +44,7 @@
     [self setLeftCusBarItem:@"square_back" action:nil];
     UIBarButtonItem *rightBtn = [self customBarItem:@"baby_4-gengduo" action:@selector(showList:)];
     self.navigationItem.rightBarButtonItem =rightBtn;
+    [self.view addSubview:_yaoQingbgView];
     isRightBtnSelected = NO;
     [self HMSegmentedControlInitMethod];
     summaryKey = [NSArray arrayWithObjects:@"昵称",@"姓名",@"出生日期",@"性别",@"所在城市",@"出生身高",@"出生体重", nil];
@@ -130,5 +131,50 @@
   
     return cell;
     
+}
+- (IBAction)isYaoQing:(id)sender
+{
+    _yaoQingbgView.hidden = NO;
+    if (sender == _monButton)
+    {
+        
+    }
+    if (sender == _dadButton)
+    {
+    
+    }
+//    if ([_monButton])
+//    {
+//        _yaoQingbgView.hidden = NO;
+//        if (sender == _monButton)
+//        {
+//            
+//        }
+//       
+//    }
+//    if ([_dadButton.titleLabel.text isEqualToString:@"邀请爸爸"])
+//    {
+//        _yaoQingbgView.hidden = NO;
+//        if (sender == _dadButton)
+//        {
+//            
+//        }
+//        
+//    }
+    
+}
+- (IBAction)msgYaoQingButton:(id)sender
+{
+    
+}
+
+- (IBAction)weiXinYaoQingButton:(id)sender
+{
+    
+}
+
+- (IBAction)hideCurView:(id)sender
+{
+    _yaoQingbgView.hidden = YES;
 }
 @end

@@ -55,7 +55,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="346281" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qFb-dW-ygq">
-                            <rect key="frame" x="162" y="62" width="63" height="21"/>
+                            <rect key="frame" x="162" y="59" width="63" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -72,6 +72,10 @@
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <gestureRecognizers/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="bvQ-kw-dwo" appends="YES" id="tXR-oj-0O3"/>
+                    </connections>
                 </view>
                 <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_3-bg.png" id="oEo-Wg-ibz">
                     <rect key="frame" x="28" y="107" width="266" height="120"/>
@@ -105,12 +109,13 @@
                     </state>
                 </button>
                 <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_2-bg.png" id="88s-Je-hWo">
-                    <rect key="frame" x="27" y="235" width="266" height="80"/>
+                    <rect key="frame" x="28" y="235" width="266" height="80"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yAr-kQ-RgN">
-                    <rect key="frame" x="27" y="235" width="266" height="40"/>
+                    <rect key="frame" x="28" y="234" width="266" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <state key="normal">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -118,8 +123,9 @@
                     </state>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="fii-hu-W98">
-                    <rect key="frame" x="27" y="276" width="266" height="40"/>
+                    <rect key="frame" x="28" y="275" width="266" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <state key="normal">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -127,11 +133,15 @@
                     </state>
                 </button>
                 <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_1-bg.png" id="NI4-Qt-KiH">
-                    <rect key="frame" x="27" y="324" width="266" height="40"/>
+                    <rect key="frame" x="28" y="324" width="266" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <gestureRecognizers/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="P5Q-ZU-E5R" appends="YES" id="HPN-WG-e7T"/>
+                    </connections>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0mC-69-gNj">
-                    <rect key="frame" x="191" y="333" width="25" height="22"/>
+                    <rect key="frame" x="183" y="333" width="25" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <state key="normal" image="user_3-weibo.png">
@@ -140,7 +150,7 @@
                     </state>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mYO-nm-NdM">
-                    <rect key="frame" x="223" y="333" width="25" height="22"/>
+                    <rect key="frame" x="215" y="333" width="25" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <state key="normal" image="user_3-kongjian.png">
@@ -149,7 +159,7 @@
                     </state>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cbl-nh-XIu">
-                    <rect key="frame" x="255" y="333" width="25" height="22"/>
+                    <rect key="frame" x="247" y="333" width="25" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <state key="normal" image="user_3-weixin.png">
@@ -163,6 +173,16 @@
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
+        <tapGestureRecognizer id="bvQ-kw-dwo">
+            <connections>
+                <action selector="showUserInfoPageVC:" destination="-1" id="mws-Ff-pNJ"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="P5Q-ZU-E5R">
+            <connections>
+                <action selector="showPlatformBind:" destination="-1" id="AtR-mi-pnO"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="main_jiantou.png" width="7" height="11"/>

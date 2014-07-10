@@ -22,4 +22,14 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *segScrollView;
 @property (strong, nonatomic) IBOutlet UIView *summaryView;
 @property (strong, nonatomic) IBOutlet UITableView *summaryTableView;
+@property (strong, nonatomic) IBOutlet UIButton *monButton;
+@property (strong, nonatomic) IBOutlet UIButton *dadButton;
+- (IBAction)isYaoQing:(id)sender;
+
+@property (strong, nonatomic) IBOutlet UIView *yaoQingbgView;
+- (IBAction)msgYaoQingButton:(id)sender;
+
+- (IBAction)weiXinYaoQingButton:(id)sender;
+- (IBAction)hideCurView:(id)sender;
+
 @end

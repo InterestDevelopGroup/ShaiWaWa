@@ -28,6 +28,28 @@
 		171DC0161967EECC005F7D28 /* ChooseModeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 171DC0141967EECC005F7D28 /* ChooseModeViewController.xib */; };
 		171DC01A1967EF04005F7D28 /* ForgetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 171DC0181967EF04005F7D28 /* ForgetPwdViewController.m */; };
 		171DC01B1967EF04005F7D28 /* ForgetPwdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 171DC0191967EF04005F7D28 /* ForgetPwdViewController.xib */; };
+		176DDA70196E32C10092DC1B /* DynamicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 176DDA6E196E32C10092DC1B /* DynamicCell.m */; };
+		176DDA71196E32C10092DC1B /* DynamicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 176DDA6F196E32C10092DC1B /* DynamicCell.xib */; };
+		176DDA75196E362A0092DC1B /* RemarksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 176DDA73196E362A0092DC1B /* RemarksViewController.m */; };
+		176DDA76196E362A0092DC1B /* RemarksViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 176DDA74196E362A0092DC1B /* RemarksViewController.xib */; };
+		176DDA7A196E3AC20092DC1B /* AddHeightAndWeightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 176DDA78196E3AC20092DC1B /* AddHeightAndWeightViewController.m */; };
+		176DDA7B196E3AC20092DC1B /* AddHeightAndWeightViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 176DDA79196E3AC20092DC1B /* AddHeightAndWeightViewController.xib */; };
+		176DDA7F196E3F860092DC1B /* UserInfoPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 176DDA7D196E3F860092DC1B /* UserInfoPageViewController.m */; };
+		176DDA80196E3F860092DC1B /* UserInfoPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 176DDA7E196E3F860092DC1B /* UserInfoPageViewController.xib */; };
+		176DDA84196E450B0092DC1B /* UpdateUserNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 176DDA82196E450B0092DC1B /* UpdateUserNameViewController.m */; };
+		176DDA85196E450B0092DC1B /* UpdateUserNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 176DDA83196E450B0092DC1B /* UpdateUserNameViewController.xib */; };
+		176DDA89196E487F0092DC1B /* PlatformBindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 176DDA87196E487F0092DC1B /* PlatformBindViewController.m */; };
+		176DDA8A196E487F0092DC1B /* PlatformBindViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 176DDA88196E487F0092DC1B /* PlatformBindViewController.xib */; };
+		176DDA8E196E491B0092DC1B /* PlatformCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 176DDA8C196E491B0092DC1B /* PlatformCell.m */; };
+		176DDA8F196E491B0092DC1B /* PlatformCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 176DDA8D196E491B0092DC1B /* PlatformCell.xib */; };
+		176DDA93196E4F390092DC1B /* ScannerQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 176DDA91196E4F390092DC1B /* ScannerQRCodeViewController.m */; };
+		176DDA94196E4F390092DC1B /* ScannerQRCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 176DDA92196E4F390092DC1B /* ScannerQRCodeViewController.xib */; };
+		176DDA98196E50C70092DC1B /* QRCodeCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 176DDA96196E50C70092DC1B /* QRCodeCardViewController.m */; };
+		176DDA99196E50C70092DC1B /* QRCodeCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 176DDA97196E50C70092DC1B /* QRCodeCardViewController.xib */; };
+		176DDA9D196E60080092DC1B /* SearchWeiboFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 176DDA9B196E60080092DC1B /* SearchWeiboFriendViewController.m */; };
+		176DDA9E196E60080092DC1B /* SearchWeiboFriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 176DDA9C196E60080092DC1B /* SearchWeiboFriendViewController.xib */; };
+		176DDAA2196E62900092DC1B /* SearchAddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 176DDAA0196E62900092DC1B /* SearchAddressBookViewController.m */; };
+		176DDAA3196E62900092DC1B /* SearchAddressBookViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 176DDAA1196E62900092DC1B /* SearchAddressBookViewController.xib */; };
 		179B9AE3196A2D3700C4C9FF /* UIViewController+BarItemAdapt.m in Sources */ = {isa = PBXBuildFile; fileRef = 179B9AE1196A2D3700C4C9FF /* UIViewController+BarItemAdapt.m */; };
 		179DDA72196B872C00DF6CA2 /* MyGoodFriendsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 179DDA70196B872C00DF6CA2 /* MyGoodFriendsListCell.m */; };
 		179DDA73196B872C00DF6CA2 /* MyGoodFriendsListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 179DDA71196B872C00DF6CA2 /* MyGoodFriendsListCell.xib */; };
@@ -283,6 +305,39 @@
 		171DC0171967EF04005F7D28 /* ForgetPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPwdViewController.h; sourceTree = "<group>"; };
 		171DC0181967EF04005F7D28 /* ForgetPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPwdViewController.m; sourceTree = "<group>"; };
 		171DC0191967EF04005F7D28 /* ForgetPwdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetPwdViewController.xib; sourceTree = "<group>"; };
+		176DDA6D196E32C10092DC1B /* DynamicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicCell.h; sourceTree = "<group>"; };
+		176DDA6E196E32C10092DC1B /* DynamicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicCell.m; sourceTree = "<group>"; };
+		176DDA6F196E32C10092DC1B /* DynamicCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DynamicCell.xib; sourceTree = "<group>"; };
+		176DDA72196E362A0092DC1B /* RemarksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemarksViewController.h; sourceTree = "<group>"; };
+		176DDA73196E362A0092DC1B /* RemarksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemarksViewController.m; sourceTree = "<group>"; };
+		176DDA74196E362A0092DC1B /* RemarksViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RemarksViewController.xib; sourceTree = "<group>"; };
+		176DDA77196E3AC20092DC1B /* AddHeightAndWeightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddHeightAndWeightViewController.h; sourceTree = "<group>"; };
+		176DDA78196E3AC20092DC1B /* AddHeightAndWeightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddHeightAndWeightViewController.m; sourceTree = "<group>"; };
+		176DDA79196E3AC20092DC1B /* AddHeightAndWeightViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddHeightAndWeightViewController.xib; sourceTree = "<group>"; };
+		176DDA7C196E3F860092DC1B /* UserInfoPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoPageViewController.h; sourceTree = "<group>"; };
+		176DDA7D196E3F860092DC1B /* UserInfoPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoPageViewController.m; sourceTree = "<group>"; };
+		176DDA7E196E3F860092DC1B /* UserInfoPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserInfoPageViewController.xib; sourceTree = "<group>"; };
+		176DDA81196E450B0092DC1B /* UpdateUserNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateUserNameViewController.h; sourceTree = "<group>"; };
+		176DDA82196E450B0092DC1B /* UpdateUserNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateUserNameViewController.m; sourceTree = "<group>"; };
+		176DDA83196E450B0092DC1B /* UpdateUserNameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpdateUserNameViewController.xib; sourceTree = "<group>"; };
+		176DDA86196E487F0092DC1B /* PlatformBindViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlatformBindViewController.h; sourceTree = "<group>"; };
+		176DDA87196E487F0092DC1B /* PlatformBindViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlatformBindViewController.m; sourceTree = "<group>"; };
+		176DDA88196E487F0092DC1B /* PlatformBindViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlatformBindViewController.xib; sourceTree = "<group>"; };
+		176DDA8B196E491B0092DC1B /* PlatformCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlatformCell.h; sourceTree = "<group>"; };
+		176DDA8C196E491B0092DC1B /* PlatformCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlatformCell.m; sourceTree = "<group>"; };
+		176DDA8D196E491B0092DC1B /* PlatformCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlatformCell.xib; sourceTree = "<group>"; };
+		176DDA90196E4F390092DC1B /* ScannerQRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScannerQRCodeViewController.h; sourceTree = "<group>"; };
+		176DDA91196E4F390092DC1B /* ScannerQRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScannerQRCodeViewController.m; sourceTree = "<group>"; };
+		176DDA92196E4F390092DC1B /* ScannerQRCodeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScannerQRCodeViewController.xib; sourceTree = "<group>"; };
+		176DDA95196E50C70092DC1B /* QRCodeCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeCardViewController.h; sourceTree = "<group>"; };
+		176DDA96196E50C70092DC1B /* QRCodeCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeCardViewController.m; sourceTree = "<group>"; };
+		176DDA97196E50C70092DC1B /* QRCodeCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QRCodeCardViewController.xib; sourceTree = "<group>"; };
+		176DDA9A196E60080092DC1B /* SearchWeiboFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchWeiboFriendViewController.h; sourceTree = "<group>"; };
+		176DDA9B196E60080092DC1B /* SearchWeiboFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchWeiboFriendViewController.m; sourceTree = "<group>"; };
+		176DDA9C196E60080092DC1B /* SearchWeiboFriendViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchWeiboFriendViewController.xib; sourceTree = "<group>"; };
+		176DDA9F196E62900092DC1B /* SearchAddressBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchAddressBookViewController.h; sourceTree = "<group>"; };
+		176DDAA0196E62900092DC1B /* SearchAddressBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchAddressBookViewController.m; sourceTree = "<group>"; };
+		176DDAA1196E62900092DC1B /* SearchAddressBookViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchAddressBookViewController.xib; sourceTree = "<group>"; };
 		179B9AE0196A2D3700C4C9FF /* UIViewController+BarItemAdapt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BarItemAdapt.h"; sourceTree = "<group>"; };
 		179B9AE1196A2D3700C4C9FF /* UIViewController+BarItemAdapt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+BarItemAdapt.m"; sourceTree = "<group>"; };
 		179DDA6F196B872C00DF6CA2 /* MyGoodFriendsListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyGoodFriendsListCell.h; sourceTree = "<group>"; };
@@ -593,6 +648,12 @@
 				17A2B942196D1E01009123FA /* SummaryCell.h */,
 				17A2B943196D1E01009123FA /* SummaryCell.m */,
 				17A2B944196D1E01009123FA /* SummaryCell.xib */,
+				176DDA6D196E32C10092DC1B /* DynamicCell.h */,
+				176DDA6E196E32C10092DC1B /* DynamicCell.m */,
+				176DDA6F196E32C10092DC1B /* DynamicCell.xib */,
+				176DDA8B196E491B0092DC1B /* PlatformCell.h */,
+				176DDA8C196E491B0092DC1B /* PlatformCell.m */,
+				176DDA8D196E491B0092DC1B /* PlatformCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -650,6 +711,12 @@
 				17A2B93D196CF525009123FA /* BabyHomePageViewController.h */,
 				17A2B93E196CF525009123FA /* BabyHomePageViewController.m */,
 				17A2B93F196CF525009123FA /* BabyHomePageViewController.xib */,
+				176DDA72196E362A0092DC1B /* RemarksViewController.h */,
+				176DDA73196E362A0092DC1B /* RemarksViewController.m */,
+				176DDA74196E362A0092DC1B /* RemarksViewController.xib */,
+				176DDA77196E3AC20092DC1B /* AddHeightAndWeightViewController.h */,
+				176DDA78196E3AC20092DC1B /* AddHeightAndWeightViewController.m */,
+				176DDA79196E3AC20092DC1B /* AddHeightAndWeightViewController.xib */,
 			);
 			path = Baby;
 			sourceTree = "<group>";
@@ -1126,6 +1193,27 @@
 				179DDA9F196BE6F100DF6CA2 /* SendValidateMsgViewController.h */,
 				179DDAA0196BE6F100DF6CA2 /* SendValidateMsgViewController.m */,
 				179DDAA1196BE6F100DF6CA2 /* SendValidateMsgViewController.xib */,
+				176DDA7C196E3F860092DC1B /* UserInfoPageViewController.h */,
+				176DDA7D196E3F860092DC1B /* UserInfoPageViewController.m */,
+				176DDA7E196E3F860092DC1B /* UserInfoPageViewController.xib */,
+				176DDA81196E450B0092DC1B /* UpdateUserNameViewController.h */,
+				176DDA82196E450B0092DC1B /* UpdateUserNameViewController.m */,
+				176DDA83196E450B0092DC1B /* UpdateUserNameViewController.xib */,
+				176DDA86196E487F0092DC1B /* PlatformBindViewController.h */,
+				176DDA87196E487F0092DC1B /* PlatformBindViewController.m */,
+				176DDA88196E487F0092DC1B /* PlatformBindViewController.xib */,
+				176DDA90196E4F390092DC1B /* ScannerQRCodeViewController.h */,
+				176DDA91196E4F390092DC1B /* ScannerQRCodeViewController.m */,
+				176DDA92196E4F390092DC1B /* ScannerQRCodeViewController.xib */,
+				176DDA95196E50C70092DC1B /* QRCodeCardViewController.h */,
+				176DDA96196E50C70092DC1B /* QRCodeCardViewController.m */,
+				176DDA97196E50C70092DC1B /* QRCodeCardViewController.xib */,
+				176DDA9A196E60080092DC1B /* SearchWeiboFriendViewController.h */,
+				176DDA9B196E60080092DC1B /* SearchWeiboFriendViewController.m */,
+				176DDA9C196E60080092DC1B /* SearchWeiboFriendViewController.xib */,
+				176DDA9F196E62900092DC1B /* SearchAddressBookViewController.h */,
+				176DDAA0196E62900092DC1B /* SearchAddressBookViewController.m */,
+				176DDAA1196E62900092DC1B /* SearchAddressBookViewController.xib */,
 			);
 			path = UserCenter;
 			sourceTree = "<group>";
@@ -1212,6 +1300,7 @@
 				C32CE4FF1967AAA900DB84DC /* square_cebinlan@2x.png in Resources */,
 				C32CE4EF1967AAA900DB84DC /* pd_anzhushuohua@2x.png in Resources */,
 				C32CE4C51967AAA900DB84DC /* main_2-pic2@2x.png in Resources */,
+				176DDAA3196E62900092DC1B /* SearchAddressBookViewController.xib in Resources */,
 				C32CE4B31967AAA900DB84DC /* baby_mama@2x.png in Resources */,
 				179DDA8C196BBB9100DF6CA2 /* SearchRSViewController.xib in Resources */,
 				C32CE4D01967AAA900DB84DC /* main_jiantou@2x.png in Resources */,
@@ -1227,6 +1316,7 @@
 				C32CE4D21967AAA900DB84DC /* main_quanbudongtai2x.png in Resources */,
 				C32CE4D51967AAA900DB84DC /* main_sousuodongftai@2x.png in Resources */,
 				C32CE4E71967AAA900DB84DC /* pb_logo-4@2x.png in Resources */,
+				176DDA85196E450B0092DC1B /* UpdateUserNameViewController.xib in Resources */,
 				17A4441B19691ECF0051627C /* FriendHomeViewController.xib in Resources */,
 				C32CE51C1967AAA900DB84DC /* square_shoucang@2x.png in Resources */,
 				17A2B946196D1E01009123FA /* SummaryCell.xib in Resources */,
@@ -1239,6 +1329,7 @@
 				C32CE4C71967AAA900DB84DC /* main_baobaoliebiao@2x.png in Resources */,
 				C32CE5141967AAA900DB84DC /* square_pinglun-3@2x.png in Resources */,
 				C32CE53A1967AB0900DB84DC /* LoginViewController.xib in Resources */,
+				176DDA9E196E60080092DC1B /* SearchWeiboFriendViewController.xib in Resources */,
 				C32CE4F01967AAA900DB84DC /* pd_fenxiang-1@2x.png in Resources */,
 				C32CE4CD1967AAA900DB84DC /* main_dian@2x.png in Resources */,
 				C32CE5041967AAA900DB84DC /* square_fenxiang-3@2x.png in Resources */,
@@ -1266,7 +1357,9 @@
 				C32CE4F61967AAA900DB84DC /* pd_kuang-@2x.png in Resources */,
 				17139CB2196A116300BFDA4A /* MybabyListViewController.xib in Resources */,
 				C32CE4DC1967AAA900DB84DC /* main_tuichu@2x.png in Resources */,
+				176DDA8A196E487F0092DC1B /* PlatformBindViewController.xib in Resources */,
 				C32B418F1965B5B8003979EE /* InfoPlist.strings in Resources */,
+				176DDA99196E50C70092DC1B /* QRCodeCardViewController.xib in Resources */,
 				C32CE4A91967AAA900DB84DC /* baby_4-bg-2@2x.png in Resources */,
 				C32CE4B81967AAA900DB84DC /* login_box-2@2x.png in Resources */,
 				C32CE5191967AAA900DB84DC /* square_sanjiaoxing@2x.png in Resources */,
@@ -1301,6 +1394,7 @@
 				C32CE5081967AAA900DB84DC /* square_jubao@2x.png in Resources */,
 				C32CE4BF1967AAA900DB84DC /* login_qq@2x.png in Resources */,
 				C32CE4E21967AAA900DB84DC /* pb_bofang@2x.png in Resources */,
+				176DDA80196E3F860092DC1B /* UserInfoPageViewController.xib in Resources */,
 				C32CE4B91967AAA900DB84DC /* login_box3@2x.png in Resources */,
 				C32CE5001967AAA900DB84DC /* square_chengzhangzuji]@2x.png in Resources */,
 				C32B419A1965B5B8003979EE /* Images.xcassets in Resources */,
@@ -1309,6 +1403,7 @@
 				C32CE4F81967AAA900DB84DC /* pd_xiala@2x.png in Resources */,
 				C32CE4CB1967AAA900DB84DC /* main_cha@2x.png in Resources */,
 				C32CE4AF1967AAA900DB84DC /* baby_dongtai@2x.png in Resources */,
+				176DDA8F196E491B0092DC1B /* PlatformCell.xib in Resources */,
 				C32CE50E1967AAA900DB84DC /* square_pic-5@2x.png in Resources */,
 				C32CE4CC1967AAA900DB84DC /* main_dian-@2x.png in Resources */,
 				17A44416196916AA0051627C /* OtherInformationViewController.xib in Resources */,
@@ -1331,6 +1426,7 @@
 				C32CE4C01967AAA900DB84DC /* login_suibian@2x.png in Resources */,
 				C32CE4DB1967AAA900DB84DC /* main_tianjiabaobei@2x.png in Resources */,
 				C32CE4C41967AAA900DB84DC /* main_2-bg@2x.png in Resources */,
+				176DDA7B196E3AC20092DC1B /* AddHeightAndWeightViewController.xib in Resources */,
 				C32CE5011967AAA900DB84DC /* square_detail@2x.png in Resources */,
 				C32CE4B41967AAA900DB84DC /* baby_shengaotizhong-@2x.png in Resources */,
 				C32CE52D1967AAA900DB84DC /* user_touxiang@2x.png in Resources */,
@@ -1351,12 +1447,14 @@
 				C32CE51E1967AAA900DB84DC /* square_xihuan@2x.png in Resources */,
 				C32CE4F21967AAA900DB84DC /* pd_fenxiang-3@2x.png in Resources */,
 				C32CE5151967AAA900DB84DC /* square_pinglun-4@2x.png in Resources */,
+				176DDA76196E362A0092DC1B /* RemarksViewController.xib in Resources */,
 				C32CE4F41967AAA900DB84DC /* pd_gou@2x.png in Resources */,
 				C32CE52B1967AAA900DB84DC /* user_gengduo@2x.png in Resources */,
 				C32CE5061967AAA900DB84DC /* square_fenxiang-bg@2x.png in Resources */,
 				C32CE4F91967AAA900DB84DC /* pd_xiaohuatong@2x.png in Resources */,
 				C32CE4AC1967AAA900DB84DC /* baby_baba@2x.png in Resources */,
 				C32CE4EA1967AAA900DB84DC /* pb_shipin@2x.png in Resources */,
+				176DDA71196E32C10092DC1B /* DynamicCell.xib in Resources */,
 				C32CE4BA1967AAA900DB84DC /* login_box-4@2x.png in Resources */,
 				C32CE5071967AAA900DB84DC /* square_huabian-bg@2x.png in Resources */,
 				C32CE5161967AAA900DB84DC /* square_pinglun-@2x.png in Resources */,
@@ -1367,6 +1465,7 @@
 				C32CE4E91967AAA900DB84DC /* pb_shanchu@2x.png in Resources */,
 				179DDA9B196BD7E900DF6CA2 /* LocationsViewController.xib in Resources */,
 				C32CE50A1967AAA900DB84DC /* square_pic-1@2x.png in Resources */,
+				176DDA94196E4F390092DC1B /* ScannerQRCodeViewController.xib in Resources */,
 				C32CE5211967AAA900DB84DC /* square_zan@2x.png in Resources */,
 				C32CE51F1967AAA900DB84DC /* square_yanjing@2x.png in Resources */,
 				171DC00C1967E23C005F7D28 /* PostValidateViewController.xib in Resources */,
@@ -1431,10 +1530,12 @@
 				179DDAAC196BEE9400DF6CA2 /* SettingViewController.m in Sources */,
 				179B9AE3196A2D3700C4C9FF /* UIViewController+BarItemAdapt.m in Sources */,
 				179DDA77196B921300DF6CA2 /* BabyListViewController.m in Sources */,
+				176DDA84196E450B0092DC1B /* UpdateUserNameViewController.m in Sources */,
 				171731F2196A2DDF00B3DBE2 /* BabyListCell.m in Sources */,
 				C32CE5391967AB0900DB84DC /* LoginViewController.m in Sources */,
 				C32CE4061967A25800DB84DC /* VersionManager.m in Sources */,
 				179DDA81196B9DF900DF6CA2 /* FriendSelectedCell.m in Sources */,
+				176DDA70196E32C10092DC1B /* DynamicCell.m in Sources */,
 				17A2B940196CF525009123FA /* BabyHomePageViewController.m in Sources */,
 				171DC00B1967E23C005F7D28 /* PostValidateViewController.m in Sources */,
 				C32CE3FD1967A25800DB84DC /* IO.m in Sources */,
@@ -1449,14 +1550,19 @@
 				179DDA90196BC16600DF6CA2 /* SearchRSCell.m in Sources */,
 				179DDA9E196BE0EE00DF6CA2 /* UIView+CutLayer.m in Sources */,
 				171DC01A1967EF04005F7D28 /* ForgetPwdViewController.m in Sources */,
+				176DDAA2196E62900092DC1B /* SearchAddressBookViewController.m in Sources */,
 				171DC0061967D839005F7D28 /* RegisterViewController.m in Sources */,
 				C32CE4131967A33700DB84DC /* HttpService.m in Sources */,
+				176DDA98196E50C70092DC1B /* QRCodeCardViewController.m in Sources */,
 				C32CE4041967A25800DB84DC /* UIImage+Util.m in Sources */,
+				176DDA9D196E60080092DC1B /* SearchWeiboFriendViewController.m in Sources */,
 				171731FC196A387500B3DBE2 /* ResetPwdNextStepViewController.m in Sources */,
 				C32CE3FA1967A25800DB84DC /* UITextView+Placeholder.m in Sources */,
 				C32CE3FE1967A25800DB84DC /* NSDate+Utils.m in Sources */,
 				1717320D196A420F00B3DBE2 /* ShaiWaSquareViewController.m in Sources */,
+				176DDA89196E487F0092DC1B /* PlatformBindViewController.m in Sources */,
 				C32CE4171967A52F00DB84DC /* ControlCenter.m in Sources */,
+				176DDA7F196E3F860092DC1B /* UserInfoPageViewController.m in Sources */,
 				179DDA8B196BBB9100DF6CA2 /* SearchRSViewController.m in Sources */,
 				171DC0151967EECC005F7D28 /* ChooseModeViewController.m in Sources */,
 				17A0895C196A9154007691A4 /* MyGoodFriendsListViewController.m in Sources */,
@@ -1477,8 +1583,12 @@
 				C32CE3FC1967A25800DB84DC /* HWConnect.m in Sources */,
 				C32CE4051967A25800DB84DC /* UIViewController+BarItem.m in Sources */,
 				C32CE4121967A33700DB84DC /* AFHttp.m in Sources */,
+				176DDA93196E4F390092DC1B /* ScannerQRCodeViewController.m in Sources */,
+				176DDA8E196E491B0092DC1B /* PlatformCell.m in Sources */,
 				179DDA95196BCEA000DF6CA2 /* TopicViewController.m in Sources */,
 				179DDAA2196BE6F100DF6CA2 /* SendValidateMsgViewController.m in Sources */,
+				176DDA75196E362A0092DC1B /* RemarksViewController.m in Sources */,
+				176DDA7A196E3AC20092DC1B /* AddHeightAndWeightViewController.m in Sources */,
 				179DDA9A196BD7E900DF6CA2 /* LocationsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

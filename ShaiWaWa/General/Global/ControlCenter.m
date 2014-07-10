@@ -33,7 +33,7 @@
     AppDelegate * appDelegate = [[self class] appDelegate];
     //[[self class] setNavigationTitleWhiteColor];
     appDelegate.window = [[self class] newWindow];
-    UINavigationController * nav = [[self class] navWithRootVC:[[self class] viewControllerWithName:@"BabyHomePageViewController"]];
+    UINavigationController * nav = [[self class] navWithRootVC:[[self class] viewControllerWithName:@"ScannerQRCodeViewController"]];
     appDelegate.navigationController = nav;
     appDelegate.window.rootViewController = appDelegate.navigationController;
     [appDelegate.window makeKeyAndVisible];
@@ -83,6 +83,11 @@
 {
     [[self class] showVC:@"SearchRSViewController"];
 }
++ (void)pushToUserInfoPageVC
+{
+    [[self class] showVC:@"UserInfoPageViewController"];
+}
+
 + (void)showVC:(NSString *)vcName
 {
     UIViewController * vc = [[self class] viewControllerWithName:vcName];
