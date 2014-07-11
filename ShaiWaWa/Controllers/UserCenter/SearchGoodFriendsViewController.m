@@ -10,6 +10,10 @@
 #import "UIViewController+BarItemAdapt.h"
 #import "ControlCenter.h"
 #import "SearchRSViewController.h"
+#import "SearchWeiboFriendViewController.h"
+#import "SearchQQFriendViewController.h"
+#import "SearchAddressBookViewController.h"
+#import "ScannerQRCodeViewController.h"
 
 @interface SearchGoodFriendsViewController ()
 
@@ -90,7 +94,34 @@
     return cell;
     
 }
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    SearchWeiboFriendViewController *weiBoVC = [[SearchWeiboFriendViewController alloc] init];
+    SearchQQFriendViewController *qqFriendVC= [[SearchQQFriendViewController alloc] init];
+    SearchAddressBookViewController *addressBookVC =[[SearchAddressBookViewController alloc] init];
+    ScannerQRCodeViewController *scannCodeCardVC = [[ScannerQRCodeViewController alloc] init];
+    
+    int num = indexPath.row;
+    switch (num) {
+        case 0:
+            [self.navigationController pushViewController:weiBoVC animated:YES];
+            break;
+        case 1:
+            [self.navigationController pushViewController:qqFriendVC animated:YES];
+            break;
+        case 2:
+            [self.navigationController pushViewController:addressBookVC animated:YES];
+            break;
+        case 3:
+//            [self.navigationController pushViewController:<#(UIViewController *)#> animated:YES];
+            break;
+        case 4:
+           [self.navigationController pushViewController:scannCodeCardVC animated:YES];
+            break;
+        default:
+            break;
+    }
+}
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {

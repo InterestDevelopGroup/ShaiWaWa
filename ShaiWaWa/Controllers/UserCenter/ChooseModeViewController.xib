@@ -7,6 +7,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChooseModeViewController">
             <connections>
+                <outlet property="menuGray" destination="Tnt-u6-ewy" id="s7C-eN-DBu"/>
+                <outlet property="userViewTap" destination="bp7-Th-Lpa" id="kN2-Ej-TF1"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -48,12 +50,31 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
+                <view hidden="YES" contentMode="scaleToFill" id="Tnt-u6-ewy">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <gestureRecognizers/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="9L6-SU-ZSl" appends="YES" id="dSn-So-12V"/>
+                    </connections>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
+        <tapGestureRecognizer id="bp7-Th-Lpa">
+            <connections>
+                <action selector="userViewTouchEvent:" destination="-1" id="4Ln-NJ-a4b"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="9L6-SU-ZSl">
+            <connections>
+                <action selector="hideMenuGray:" destination="-1" id="yeX-cj-o5L"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="login_chazhao.png" width="57" height="62"/>

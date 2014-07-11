@@ -9,7 +9,14 @@
 #import "CommonViewController.h"
 
 @interface ChooseModeViewController : CommonViewController
+{
+    BOOL isMenuShown;
+}
 - (IBAction)showSearchFriendsVC:(id)sender;
 
 - (IBAction)showAddBabyVC:(id)sender;
+@property (strong, nonatomic) IBOutlet UIView *menuGray;
+- (IBAction)hideMenuGray:(id)sender;
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *userViewTap;
+- (IBAction)userViewTouchEvent:(id)sender;
 @end

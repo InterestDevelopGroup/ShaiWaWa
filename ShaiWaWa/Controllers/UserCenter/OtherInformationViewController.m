@@ -8,6 +8,8 @@
 
 #import "OtherInformationViewController.h"
 #import "UIViewController+BarItemAdapt.h"
+#import "SendValidateMsgViewController.h"
+
 @interface OtherInformationViewController ()
 
 @end
@@ -44,6 +46,7 @@
     [addFriendButton setTitle:@"加为好友" forState:UIControlStateNormal];
     addFriendButton.frame = CGRectMake(0, 0, 60, 30);
     [addFriendButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
+    [addFriendButton addTarget:self action:@selector(sendValidateMsg) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *right_addFriend = [[UIBarButtonItem alloc] initWithCustomView:addFriendButton];
     self.navigationItem.rightBarButtonItem = right_addFriend;
     
@@ -98,4 +101,9 @@
     [_goodFriendButton addSubview:jianTou];
 }
 
+- (void)sendValidateMsg
+{
+    SendValidateMsgViewController *validateMsg = [[SendValidateMsgViewController alloc] init];
+    [self.navigationController pushViewController:validateMsg animated:YES];
+}
 @end

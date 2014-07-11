@@ -152,4 +152,6 @@
     PlatformBindViewController *platformVC = [[PlatformBindViewController alloc] init];
     [self.navigationController pushViewController:platformVC animated:YES];
 }
+- (IBAction)changeImg:(id)sender {
+}
 @end

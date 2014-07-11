@@ -12,6 +12,7 @@
                 <outlet property="goodFriendButton" destination="k66-nm-o7A" id="Pd0-VY-X0k"/>
                 <outlet property="myCollectionButton" destination="fii-hu-W98" id="Hss-Jh-Fa0"/>
                 <outlet property="sheJianBar" destination="NI4-Qt-KiH" id="6GJ-Rr-eKc"/>
+                <outlet property="touXiangView" destination="Xsi-Gb-ZAC" id="ukU-xd-2Qw"/>
                 <outlet property="twoDimensionCodeButton" destination="yAr-kQ-RgN" id="rRt-Qt-gVU"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
@@ -29,6 +30,10 @@
                             <rect key="frame" x="1" y="12" width="73" height="70"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <gestureRecognizers/>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="wBq-bb-0Fl" appends="YES" id="IQf-us-1eg"/>
+                            </connections>
                         </imageView>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="账户名：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="E1e-ZZ-oH7">
                             <rect key="frame" x="85" y="32" width="71" height="21"/>
@@ -181,6 +186,11 @@
         <tapGestureRecognizer id="P5Q-ZU-E5R">
             <connections>
                 <action selector="showPlatformBind:" destination="-1" id="AtR-mi-pnO"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="wBq-bb-0Fl">
+            <connections>
+                <action selector="changeImg:" destination="-1" id="rea-X2-8Fq"/>
             </connections>
         </tapGestureRecognizer>
     </objects>

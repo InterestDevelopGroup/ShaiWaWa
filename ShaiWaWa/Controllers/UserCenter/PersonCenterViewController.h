@@ -19,5 +19,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *sheJianBar;
 - (IBAction)showUserInfoPageVC:(id)sender;
 - (IBAction)showPlatformBind:(id)sender;
+@property (strong, nonatomic) IBOutlet UIImageView *touXiangView;
+- (IBAction)changeImg:(id)sender;
 
 @end

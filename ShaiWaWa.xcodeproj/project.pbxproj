@@ -50,6 +50,15 @@
 		176DDA9E196E60080092DC1B /* SearchWeiboFriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 176DDA9C196E60080092DC1B /* SearchWeiboFriendViewController.xib */; };
 		176DDAA2196E62900092DC1B /* SearchAddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 176DDAA0196E62900092DC1B /* SearchAddressBookViewController.m */; };
 		176DDAA3196E62900092DC1B /* SearchAddressBookViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 176DDAA1196E62900092DC1B /* SearchAddressBookViewController.xib */; };
+		176DDAA7196E6DD80092DC1B /* SearchAddressListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 176DDAA5196E6DD80092DC1B /* SearchAddressListViewController.m */; };
+		176DDAA8196E6DD80092DC1B /* SearchAddressListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 176DDAA6196E6DD80092DC1B /* SearchAddressListViewController.xib */; };
+		176DDAAC196E71120092DC1B /* SearchQQFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 176DDAAA196E71120092DC1B /* SearchQQFriendViewController.m */; };
+		176DDAAD196E71120092DC1B /* SearchQQFriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 176DDAAB196E71120092DC1B /* SearchQQFriendViewController.xib */; };
+		176DDAB1196E76D40092DC1B /* UserGenderUpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 176DDAAF196E76D40092DC1B /* UserGenderUpdateViewController.m */; };
+		176DDAB2196E76D40092DC1B /* UserGenderUpdateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 176DDAB0196E76D40092DC1B /* UserGenderUpdateViewController.xib */; };
+		176DDAB6196E78E90092DC1B /* UpdatePwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 176DDAB4196E78E90092DC1B /* UpdatePwdViewController.m */; };
+		176DDAB7196E78E90092DC1B /* UpdatePwdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 176DDAB5196E78E90092DC1B /* UpdatePwdViewController.xib */; };
+		176DDABB196E8B420092DC1B /* MainMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 176DDABA196E8B420092DC1B /* MainMenu.m */; };
 		179B9AE3196A2D3700C4C9FF /* UIViewController+BarItemAdapt.m in Sources */ = {isa = PBXBuildFile; fileRef = 179B9AE1196A2D3700C4C9FF /* UIViewController+BarItemAdapt.m */; };
 		179DDA72196B872C00DF6CA2 /* MyGoodFriendsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 179DDA70196B872C00DF6CA2 /* MyGoodFriendsListCell.m */; };
 		179DDA73196B872C00DF6CA2 /* MyGoodFriendsListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 179DDA71196B872C00DF6CA2 /* MyGoodFriendsListCell.xib */; };
@@ -338,6 +347,20 @@
 		176DDA9F196E62900092DC1B /* SearchAddressBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchAddressBookViewController.h; sourceTree = "<group>"; };
 		176DDAA0196E62900092DC1B /* SearchAddressBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchAddressBookViewController.m; sourceTree = "<group>"; };
 		176DDAA1196E62900092DC1B /* SearchAddressBookViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchAddressBookViewController.xib; sourceTree = "<group>"; };
+		176DDAA4196E6DD80092DC1B /* SearchAddressListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchAddressListViewController.h; sourceTree = "<group>"; };
+		176DDAA5196E6DD80092DC1B /* SearchAddressListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchAddressListViewController.m; sourceTree = "<group>"; };
+		176DDAA6196E6DD80092DC1B /* SearchAddressListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchAddressListViewController.xib; sourceTree = "<group>"; };
+		176DDAA9196E71120092DC1B /* SearchQQFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchQQFriendViewController.h; sourceTree = "<group>"; };
+		176DDAAA196E71120092DC1B /* SearchQQFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchQQFriendViewController.m; sourceTree = "<group>"; };
+		176DDAAB196E71120092DC1B /* SearchQQFriendViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchQQFriendViewController.xib; sourceTree = "<group>"; };
+		176DDAAE196E76D40092DC1B /* UserGenderUpdateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserGenderUpdateViewController.h; sourceTree = "<group>"; };
+		176DDAAF196E76D40092DC1B /* UserGenderUpdateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserGenderUpdateViewController.m; sourceTree = "<group>"; };
+		176DDAB0196E76D40092DC1B /* UserGenderUpdateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserGenderUpdateViewController.xib; sourceTree = "<group>"; };
+		176DDAB3196E78E90092DC1B /* UpdatePwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdatePwdViewController.h; sourceTree = "<group>"; };
+		176DDAB4196E78E90092DC1B /* UpdatePwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdatePwdViewController.m; sourceTree = "<group>"; };
+		176DDAB5196E78E90092DC1B /* UpdatePwdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpdatePwdViewController.xib; sourceTree = "<group>"; };
+		176DDAB9196E8B420092DC1B /* MainMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenu.h; sourceTree = "<group>"; };
+		176DDABA196E8B420092DC1B /* MainMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenu.m; sourceTree = "<group>"; };
 		179B9AE0196A2D3700C4C9FF /* UIViewController+BarItemAdapt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BarItemAdapt.h"; sourceTree = "<group>"; };
 		179B9AE1196A2D3700C4C9FF /* UIViewController+BarItemAdapt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+BarItemAdapt.m"; sourceTree = "<group>"; };
 		179DDA6F196B872C00DF6CA2 /* MyGoodFriendsListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyGoodFriendsListCell.h; sourceTree = "<group>"; };
@@ -675,6 +698,15 @@
 			path = Square;
 			sourceTree = "<group>";
 		};
+		176DDAB8196E8AD20092DC1B /* CustomerView */ = {
+			isa = PBXGroup;
+			children = (
+				176DDAB9196E8B420092DC1B /* MainMenu.h */,
+				176DDABA196E8B420092DC1B /* MainMenu.m */,
+			);
+			path = CustomerView;
+			sourceTree = "<group>";
+		};
 		179B9ADF196A2D3700C4C9FF /* Category */ = {
 			isa = PBXGroup;
 			children = (
@@ -848,6 +880,7 @@
 		C32B41BC1965B645003979EE /* General */ = {
 			isa = PBXGroup;
 			children = (
+				176DDAB8196E8AD20092DC1B /* CustomerView */,
 				171731EE196A2DCD00B3DBE2 /* Views */,
 				179B9ADF196A2D3700C4C9FF /* Category */,
 				C32B41BE1965B66B003979EE /* Http */,
@@ -1196,9 +1229,6 @@
 				176DDA7C196E3F860092DC1B /* UserInfoPageViewController.h */,
 				176DDA7D196E3F860092DC1B /* UserInfoPageViewController.m */,
 				176DDA7E196E3F860092DC1B /* UserInfoPageViewController.xib */,
-				176DDA81196E450B0092DC1B /* UpdateUserNameViewController.h */,
-				176DDA82196E450B0092DC1B /* UpdateUserNameViewController.m */,
-				176DDA83196E450B0092DC1B /* UpdateUserNameViewController.xib */,
 				176DDA86196E487F0092DC1B /* PlatformBindViewController.h */,
 				176DDA87196E487F0092DC1B /* PlatformBindViewController.m */,
 				176DDA88196E487F0092DC1B /* PlatformBindViewController.xib */,
@@ -1214,6 +1244,21 @@
 				176DDA9F196E62900092DC1B /* SearchAddressBookViewController.h */,
 				176DDAA0196E62900092DC1B /* SearchAddressBookViewController.m */,
 				176DDAA1196E62900092DC1B /* SearchAddressBookViewController.xib */,
+				176DDAA4196E6DD80092DC1B /* SearchAddressListViewController.h */,
+				176DDAA5196E6DD80092DC1B /* SearchAddressListViewController.m */,
+				176DDAA6196E6DD80092DC1B /* SearchAddressListViewController.xib */,
+				176DDAA9196E71120092DC1B /* SearchQQFriendViewController.h */,
+				176DDAAA196E71120092DC1B /* SearchQQFriendViewController.m */,
+				176DDAAB196E71120092DC1B /* SearchQQFriendViewController.xib */,
+				176DDAAE196E76D40092DC1B /* UserGenderUpdateViewController.h */,
+				176DDAAF196E76D40092DC1B /* UserGenderUpdateViewController.m */,
+				176DDAB0196E76D40092DC1B /* UserGenderUpdateViewController.xib */,
+				176DDA81196E450B0092DC1B /* UpdateUserNameViewController.h */,
+				176DDA82196E450B0092DC1B /* UpdateUserNameViewController.m */,
+				176DDA83196E450B0092DC1B /* UpdateUserNameViewController.xib */,
+				176DDAB3196E78E90092DC1B /* UpdatePwdViewController.h */,
+				176DDAB4196E78E90092DC1B /* UpdatePwdViewController.m */,
+				176DDAB5196E78E90092DC1B /* UpdatePwdViewController.xib */,
 			);
 			path = UserCenter;
 			sourceTree = "<group>";
@@ -1319,12 +1364,14 @@
 				176DDA85196E450B0092DC1B /* UpdateUserNameViewController.xib in Resources */,
 				17A4441B19691ECF0051627C /* FriendHomeViewController.xib in Resources */,
 				C32CE51C1967AAA900DB84DC /* square_shoucang@2x.png in Resources */,
+				176DDAB7196E78E90092DC1B /* UpdatePwdViewController.xib in Resources */,
 				17A2B946196D1E01009123FA /* SummaryCell.xib in Resources */,
 				171DC0161967EECC005F7D28 /* ChooseModeViewController.xib in Resources */,
 				179DDA7D196B9C7E00DF6CA2 /* ChooseFriendViewController.xib in Resources */,
 				C32CE4B61967AAA900DB84DC /* baby_weixinyaoqing@2x.png in Resources */,
 				C32CE4D81967AAA900DB84DC /* main_sousuokuang@2x.png in Resources */,
 				C32CE4D11967AAA900DB84DC /* main_line@2x.png in Resources */,
+				176DDAAD196E71120092DC1B /* SearchQQFriendViewController.xib in Resources */,
 				C32CE4EC1967AAA900DB84DC /* pb_wanchwng@2x.png in Resources */,
 				C32CE4C71967AAA900DB84DC /* main_baobaoliebiao@2x.png in Resources */,
 				C32CE5141967AAA900DB84DC /* square_pinglun-3@2x.png in Resources */,
@@ -1351,6 +1398,7 @@
 				C32CE5131967AAA900DB84DC /* square_pinglun-2@2x.png in Resources */,
 				17A0895D196A9154007691A4 /* MyGoodFriendsListViewController.xib in Resources */,
 				C32CE4C61967AAA900DB84DC /* main_2-pic@2x.png in Resources */,
+				176DDAB2196E76D40092DC1B /* UserGenderUpdateViewController.xib in Resources */,
 				C32CE4AA1967AAA900DB84DC /* baby_4-bg@2x.png in Resources */,
 				C32CE4CF1967AAA900DB84DC /* main_girl@2x.png in Resources */,
 				C32CE4C31967AAA900DB84DC /* main_2-bg2@2x.png in Resources */,
@@ -1454,6 +1502,7 @@
 				C32CE4F91967AAA900DB84DC /* pd_xiaohuatong@2x.png in Resources */,
 				C32CE4AC1967AAA900DB84DC /* baby_baba@2x.png in Resources */,
 				C32CE4EA1967AAA900DB84DC /* pb_shipin@2x.png in Resources */,
+				176DDAA8196E6DD80092DC1B /* SearchAddressListViewController.xib in Resources */,
 				176DDA71196E32C10092DC1B /* DynamicCell.xib in Resources */,
 				C32CE4BA1967AAA900DB84DC /* login_box-4@2x.png in Resources */,
 				C32CE5071967AAA900DB84DC /* square_huabian-bg@2x.png in Resources */,
@@ -1528,6 +1577,7 @@
 				171DC0101967E81E005F7D28 /* FinishRegisterViewController.m in Sources */,
 				C32CE41A1967A5E100DB84DC /* AppDelegate.m in Sources */,
 				179DDAAC196BEE9400DF6CA2 /* SettingViewController.m in Sources */,
+				176DDAAC196E71120092DC1B /* SearchQQFriendViewController.m in Sources */,
 				179B9AE3196A2D3700C4C9FF /* UIViewController+BarItemAdapt.m in Sources */,
 				179DDA77196B921300DF6CA2 /* BabyListViewController.m in Sources */,
 				176DDA84196E450B0092DC1B /* UpdateUserNameViewController.m in Sources */,
@@ -1548,6 +1598,7 @@
 				17A4440C1968F6E20051627C /* PersonCenterViewController.m in Sources */,
 				17139CB1196A116300BFDA4A /* MybabyListViewController.m in Sources */,
 				179DDA90196BC16600DF6CA2 /* SearchRSCell.m in Sources */,
+				176DDAA7196E6DD80092DC1B /* SearchAddressListViewController.m in Sources */,
 				179DDA9E196BE0EE00DF6CA2 /* UIView+CutLayer.m in Sources */,
 				171DC01A1967EF04005F7D28 /* ForgetPwdViewController.m in Sources */,
 				176DDAA2196E62900092DC1B /* SearchAddressBookViewController.m in Sources */,
@@ -1558,6 +1609,7 @@
 				176DDA9D196E60080092DC1B /* SearchWeiboFriendViewController.m in Sources */,
 				171731FC196A387500B3DBE2 /* ResetPwdNextStepViewController.m in Sources */,
 				C32CE3FA1967A25800DB84DC /* UITextView+Placeholder.m in Sources */,
+				176DDABB196E8B420092DC1B /* MainMenu.m in Sources */,
 				C32CE3FE1967A25800DB84DC /* NSDate+Utils.m in Sources */,
 				1717320D196A420F00B3DBE2 /* ShaiWaSquareViewController.m in Sources */,
 				176DDA89196E487F0092DC1B /* PlatformBindViewController.m in Sources */,
@@ -1577,6 +1629,7 @@
 				179DDA72196B872C00DF6CA2 /* MyGoodFriendsListCell.m in Sources */,
 				C32CE4031967A25800DB84DC /* UIColor+Utils.m in Sources */,
 				C32B41981965B5B8003979EE /* ShaiWaWa.xcdatamodeld in Sources */,
+				176DDAB1196E76D40092DC1B /* UserGenderUpdateViewController.m in Sources */,
 				C32B41911965B5B8003979EE /* main.m in Sources */,
 				179DDA86196BA45A00DF6CA2 /* SearchGoodFriendsViewController.m in Sources */,
 				C32CE4011967A25800DB84DC /* NSString+Utils.m in Sources */,
@@ -1586,6 +1639,7 @@
 				176DDA93196E4F390092DC1B /* ScannerQRCodeViewController.m in Sources */,
 				176DDA8E196E491B0092DC1B /* PlatformCell.m in Sources */,
 				179DDA95196BCEA000DF6CA2 /* TopicViewController.m in Sources */,
+				176DDAB6196E78E90092DC1B /* UpdatePwdViewController.m in Sources */,
 				179DDAA2196BE6F100DF6CA2 /* SendValidateMsgViewController.m in Sources */,
 				176DDA75196E362A0092DC1B /* RemarksViewController.m in Sources */,
 				176DDA7A196E3AC20092DC1B /* AddHeightAndWeightViewController.m in Sources */,

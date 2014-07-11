@@ -9,6 +9,8 @@
 #import "UserInfoPageViewController.h"
 #import "UIViewController+BarItemAdapt.h"
 #import "UpdateUserNameViewController.h"
+#import "UserGenderUpdateViewController.h"
+#import "UpdatePwdViewController.h"
 
 @interface UserInfoPageViewController ()
 
@@ -81,8 +83,18 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    UpdateUserNameViewController *updateUser = [[UpdateUserNameViewController alloc] init];
-    updateUser.userName = [key objectAtIndex:indexPath.row];
-    [self.navigationController pushViewController:updateUser animated:YES];
+    if (indexPath.row == 0) {
+        UpdateUserNameViewController *updateUser = [[UpdateUserNameViewController alloc] init];
+        updateUser.userName = [key objectAtIndex:indexPath.row];
+        [self.navigationController pushViewController:updateUser animated:YES];
+    }
+    if (indexPath.row == 1) {
+        UserGenderUpdateViewController * genderVC = [[UserGenderUpdateViewController alloc] init];
+        [self.navigationController pushViewController:genderVC animated:YES];
+    }
+    if (indexPath.row == 2) {
+        UpdatePwdViewController * pwdVC = [[UpdatePwdViewController alloc] init];
+        [self.navigationController pushViewController:pwdVC animated:YES];
+    }
 }
 @end

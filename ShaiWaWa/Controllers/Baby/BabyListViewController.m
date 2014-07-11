@@ -9,6 +9,7 @@
 #import "BabyListViewController.h"
 #import "UIViewController+BarItemAdapt.h"
 #import "BabyListCell.h"
+#import "BabyHomePageViewController.h"
 
 @interface BabyListViewController ()
 
@@ -105,6 +106,12 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 30.0f;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    BabyHomePageViewController *babyHomePageVC = [[BabyHomePageViewController alloc] init];
+    [self.navigationController pushViewController:babyHomePageVC animated:YES];
 }
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
