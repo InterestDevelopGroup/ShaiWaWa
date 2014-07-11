@@ -9,11 +9,14 @@
 #import "ChooseModeViewController.h"
 #import "ControlCenter.h"
 #import "MainMenu.h"
-#import "UserInfoPageViewController.h"
+#import "MainDropMenu.h"
+#import "PersonCenterViewController.h"
 #import "SettingViewController.h"
 #import "FeeBackViewController.h"
 #import "BabyListViewController.h"
 #import "MyGoodFriendsListViewController.h"
+#import "SearchDynamicViewController.h"
+
 @interface ChooseModeViewController ()
 
 @end
@@ -56,10 +59,13 @@
     
     self.navigationItem.leftBarButtonItem = leftItem;
     UIImageView *titileImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"square_shaiwawa"]];
+    [titileImage setUserInteractionEnabled:YES];
+    [titileImage addGestureRecognizer:_guoLVTap];
     self.navigationItem.titleView = titileImage;
     UIBarButtonItem * rightItem_1 = [self customBarItem:@"square_yanjing" action:nil];
     UIBarButtonItem * rightItem_2 = [self customBarItem:@"square_pinglun-4" action:nil];
     self.navigationItem.rightBarButtonItems = @[rightItem_2,rightItem_1];
+    
     isMenuShown = NO;
     MainMenu *mainMenu = [[MainMenu alloc] initWithFrame:CGRectMake(0, 0, 220, 300)];
     mainMenu.userInteractionEnabled = YES;
@@ -73,6 +79,17 @@
     [mainMenu.myGoodFriendButton addTarget:self action:@selector(showMyGoodFriendListVC) forControlEvents:UIControlEventTouchUpInside];
     [_menuGray addSubview:mainMenu];
     
+    isDropMenuShown = NO;
+    MainDropMenu *dropMenu =[[MainDropMenu alloc] initWithFrame:CGRectMake(0, 0, _grayDropView.bounds.size.width, 80)];
+    
+    //[dropMenu.allButton  addTarget:self action:@selector() forControlEvents:UIControlEventTouchUpInside];
+    
+    //[dropMenu.onlyMineButton addTarget:self action:@selector() forControlEvents:UIControlEventTouchUpInside];
+    
+    //[dropMenu.specialCareButton addTarget:self action:@selector() forControlEvents:UIControlEventTouchUpInside];
+    
+    [dropMenu.searchDyButton addTarget:self action:@selector(showSearchDyVC) forControlEvents:UIControlEventTouchUpInside];
+    [_grayDropView addSubview:dropMenu];
 }
 - (void)showSettingVC
 {
@@ -115,7 +132,7 @@
      isMenuShown = NO;
 }
 - (void)showMenu
-{
+{   [self hideGrayDropView:nil];
     if (!isMenuShown) {
         _menuGray.hidden = NO;
         isMenuShown = YES;
@@ -128,8 +145,32 @@
 }
 - (IBAction)userViewTouchEvent:(id)sender
 {
-    UserInfoPageViewController *userInfoVC = [[UserInfoPageViewController alloc] init];
-    
-    [self.navigationController pushViewController:userInfoVC animated:YES];
+    [self hideMenuGray:nil];
+    PersonCenterViewController *personCenterVC = [[PersonCenterViewController alloc] init];
+    [self.navigationController pushViewController:personCenterVC animated:YES];
+}
+- (IBAction)hideGrayDropView:(id)sender
+{
+    _grayDropView.hidden = YES;
+    isDropMenuShown = NO;
+}
+- (IBAction)showGrayDropV:(id)sender
+{
+    [self hideMenuGray:nil];
+    if (!isDropMenuShown) {
+        _grayDropView.hidden = NO;
+        isDropMenuShown = YES;
+    }
+    else
+    {
+        _grayDropView.hidden = YES;
+        isDropMenuShown = NO;
+    }
+}
+- (void)showSearchDyVC
+{
+    [self hideGrayDropView:nil];
+    SearchDynamicViewController *searchDyVC = [[SearchDynamicViewController alloc] init];
+    [self.navigationController pushViewController:searchDyVC animated:YES];
 }
 @end

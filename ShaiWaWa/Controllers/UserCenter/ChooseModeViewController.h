@@ -10,7 +10,7 @@
 
 @interface ChooseModeViewController : CommonViewController
 {
-    BOOL isMenuShown;
+    BOOL isMenuShown,isDropMenuShown;
 }
 - (IBAction)showSearchFriendsVC:(id)sender;
 
@@ -19,4 +19,9 @@
 - (IBAction)hideMenuGray:(id)sender;
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *userViewTap;
 - (IBAction)userViewTouchEvent:(id)sender;
+@property (strong, nonatomic) IBOutlet UIView *grayDropView;
+- (IBAction)hideGrayDropView:(id)sender;
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *guoLVTap;
+- (IBAction)showGrayDropV:(id)sender;
+
 @end

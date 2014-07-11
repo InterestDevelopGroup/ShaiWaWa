@@ -7,6 +7,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChooseModeViewController">
             <connections>
+                <outlet property="grayDropView" destination="kKp-LA-VcK" id="qdz-S9-wAL"/>
+                <outlet property="guoLVTap" destination="D3U-dV-bbN" id="9KC-gN-paj"/>
                 <outlet property="menuGray" destination="Tnt-u6-ewy" id="s7C-eN-DBu"/>
                 <outlet property="userViewTap" destination="bp7-Th-Lpa" id="kN2-Ej-TF1"/>
                 <outlet property="view" destination="1" id="3"/>
@@ -59,12 +61,33 @@
                         <outletCollection property="gestureRecognizers" destination="9L6-SU-ZSl" appends="YES" id="dSn-So-12V"/>
                     </connections>
                 </view>
+                <view hidden="YES" contentMode="scaleToFill" id="kKp-LA-VcK">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" id="EFS-T5-ssw">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <color key="backgroundColor" red="0.82685391865079372" green="0.82223462301587302" blue="0.8314732142857143" alpha="1" colorSpace="calibratedRGB"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <gestureRecognizers/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="t25-mv-PTD" appends="YES" id="7UD-YS-V3o"/>
+                    </connections>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
+        <tapGestureRecognizer id="D3U-dV-bbN">
+            <connections>
+                <action selector="showGrayDropV:" destination="-1" id="c42-ka-5m2"/>
+            </connections>
+        </tapGestureRecognizer>
         <tapGestureRecognizer id="bp7-Th-Lpa">
             <connections>
                 <action selector="userViewTouchEvent:" destination="-1" id="4Ln-NJ-a4b"/>
@@ -73,6 +96,11 @@
         <tapGestureRecognizer id="9L6-SU-ZSl">
             <connections>
                 <action selector="hideMenuGray:" destination="-1" id="yeX-cj-o5L"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="t25-mv-PTD">
+            <connections>
+                <action selector="hideGrayDropView:" destination="-1" id="mhs-s8-76P"/>
             </connections>
         </tapGestureRecognizer>
     </objects>
