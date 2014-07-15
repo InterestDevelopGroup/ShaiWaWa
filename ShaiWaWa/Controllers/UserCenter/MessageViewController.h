@@ -15,6 +15,5 @@
 //    BOOL isRightBtnSelected;
 }
 @property (strong, nonatomic) IBOutlet UIView *tabSelectionBar;
-
 @property (strong, nonatomic) IBOutlet UIScrollView *segScrollView;
 @end

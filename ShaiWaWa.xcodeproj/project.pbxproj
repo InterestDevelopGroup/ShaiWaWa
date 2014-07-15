@@ -391,9 +391,9 @@
 		F43386B51974C28500464D43 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		F43386B61974C28500464D43 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		F43386B71974C28500464D43 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
-		F43386B81974C28500464D43 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
-		F43386B91974C28500464D43 /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
-		F43386BA1974C28500464D43 /* MessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageViewController.xib; sourceTree = "<group>"; };
+		F43386B81974C28500464D43 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageViewController.h; path = ../UserCenter/MessageViewController.h; sourceTree = "<group>"; };
+		F43386B91974C28500464D43 /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageViewController.m; path = ../UserCenter/MessageViewController.m; sourceTree = "<group>"; };
+		F43386BA1974C28500464D43 /* MessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MessageViewController.xib; path = ../UserCenter/MessageViewController.xib; sourceTree = "<group>"; };
 		F43386BB1974C28500464D43 /* MybabyListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MybabyListViewController.h; sourceTree = "<group>"; };
 		F43386BC1974C28500464D43 /* MybabyListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MybabyListViewController.m; sourceTree = "<group>"; };
 		F43386BD1974C28500464D43 /* MybabyListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MybabyListViewController.xib; sourceTree = "<group>"; };
@@ -870,6 +870,9 @@
 				F433869F1974C28500464D43 /* ShaiWaSquareViewController.h */,
 				F43386A01974C28500464D43 /* ShaiWaSquareViewController.m */,
 				F43386A11974C28500464D43 /* ShaiWaSquareViewController.xib */,
+				F43386B81974C28500464D43 /* MessageViewController.h */,
+				F43386B91974C28500464D43 /* MessageViewController.m */,
+				F43386BA1974C28500464D43 /* MessageViewController.xib */,
 			);
 			path = Square;
 			sourceTree = "<group>";
@@ -898,9 +901,6 @@
 				F43386B51974C28500464D43 /* LoginViewController.h */,
 				F43386B61974C28500464D43 /* LoginViewController.m */,
 				F43386B71974C28500464D43 /* LoginViewController.xib */,
-				F43386B81974C28500464D43 /* MessageViewController.h */,
-				F43386B91974C28500464D43 /* MessageViewController.m */,
-				F43386BA1974C28500464D43 /* MessageViewController.xib */,
 				F43386BB1974C28500464D43 /* MybabyListViewController.h */,
 				F43386BC1974C28500464D43 /* MybabyListViewController.m */,
 				F43386BD1974C28500464D43 /* MybabyListViewController.xib */,

@@ -7,15 +7,15 @@
 //
 
 #import "CommonViewController.h"
+#import "HMSegmentedControl.h"
 
-@interface ShaiWaSquareViewController : CommonViewController
+@interface ShaiWaSquareViewController : CommonViewController<UIScrollViewDelegate>
 {
-    BOOL isHot, isNew;
+    HMSegmentedControl *segMentedControl;
+    //    BOOL isRightBtnSelected;
 }
-@property (strong, nonatomic) IBOutlet UIButton *theHotButton;
-@property (strong, nonatomic) IBOutlet UIButton *theNewButton;
-- (IBAction)hotSelected:(id)sender;
-- (IBAction)newSelected:(id)sender;
+@property (strong, nonatomic) IBOutlet UIView *tabSelectionBar;
+@property (strong, nonatomic) IBOutlet UIScrollView *segScrollView;
 
 
 @end
