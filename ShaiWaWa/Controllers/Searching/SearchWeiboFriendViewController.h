@@ -7,7 +7,17 @@
 //
 
 #import "CommonViewController.h"
+#import "WeiBoCell.h"
+@interface SearchWeiboFriendViewController : CommonViewController<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+{
+    NSArray *sectionArr;
+    NSArray *friendsAll;
+    NSDictionary *freindsList;
+    int numOfYaoQing;
+    WeiBoCell *weiBoCell;
 
-@interface SearchWeiboFriendViewController : CommonViewController
+}
+@property (strong, nonatomic) IBOutlet UITableView *weiBoListTableView;
+
 
 @end

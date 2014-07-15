@@ -8,7 +8,7 @@
 
 #import "SearchAddressBookViewController.h"
 #import "UIViewController+BarItemAdapt.h"
-
+#import "PostValidateViewController.h"
 @interface SearchAddressBookViewController ()
 
 @end
@@ -40,5 +40,12 @@
 {
     self.title = @"查找通讯录好友";
     [self setLeftCusBarItem:@"square_back" action:nil];
+    myDelegate = [[UIApplication sharedApplication] delegate];
+}
+- (IBAction)addrBookNext:(id)sender
+{
+    PostValidateViewController *postValidate = [[PostValidateViewController alloc] init];
+    myDelegate.postValidateType = @"addrBook";
+    [self.navigationController pushViewController:postValidate animated:YES];
 }
 @end

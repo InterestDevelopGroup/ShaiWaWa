@@ -21,5 +21,8 @@
 - (IBAction)showPlatformBind:(id)sender;
 @property (strong, nonatomic) IBOutlet UIImageView *touXiangView;
 - (IBAction)changeImg:(id)sender;
+- (IBAction)showGoodFriendListVC:(id)sender;
+- (IBAction)showMyBabyListVC:(id)sender;
+- (IBAction)showMyQRCardVC:(id)sender;
 
 @end

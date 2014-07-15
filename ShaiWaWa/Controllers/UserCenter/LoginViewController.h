@@ -13,5 +13,6 @@
 @property (strong, nonatomic) IBOutlet UITextField *pwdField;
 @property (strong, nonatomic) IBOutlet UILabel *hoverRegisterLabel;
 - (IBAction)showRegisterVC:(id)sender;
+- (IBAction)showMainVC:(id)sender;
 
 @end

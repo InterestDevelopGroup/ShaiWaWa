@@ -33,7 +33,7 @@
     AppDelegate * appDelegate = [[self class] appDelegate];
     //[[self class] setNavigationTitleWhiteColor];
     appDelegate.window = [[self class] newWindow];
-    UINavigationController * nav = [[self class] navWithRootVC:[[self class] viewControllerWithName:@"ChooseModeViewController"]];
+    UINavigationController * nav = [[self class] navWithRootVC:[[self class] viewControllerWithName:@"LoginViewController"]];
     appDelegate.navigationController = nav;
     appDelegate.window.rootViewController = appDelegate.navigationController;
     [appDelegate.window makeKeyAndVisible];

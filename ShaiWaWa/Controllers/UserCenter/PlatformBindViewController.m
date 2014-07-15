@@ -41,8 +41,14 @@
 {
     self.title = @"社交平台绑定";
     [self setLeftCusBarItem:@"square_back" action:nil];
+    UIImage *img = [[UIImage imageNamed:@"main_2-bg2.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(15, 15, 15, 15)];
+    UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
+    _platformListTableView.backgroundView = imgView;
     [_platformListTableView registerNibWithName:@"PlatformCell" reuseIdentifier:@"Cell"];
     [_platformListTableView clearSeperateLine];
+    if (3*80 < _platformListTableView.bounds.size.height) {
+        _platformListTableView.frame = CGRectMake(11, 10, 299,3*40);
+    }
 }
 
 #pragma mark - UITableView DataSources and Delegate

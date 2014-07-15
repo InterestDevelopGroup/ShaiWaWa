@@ -23,5 +23,6 @@
 - (IBAction)hideGrayDropView:(id)sender;
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *guoLVTap;
 - (IBAction)showGrayDropV:(id)sender;
+- (IBAction)showSquaresVC:(id)sender;
 
 @end

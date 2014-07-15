@@ -45,6 +45,12 @@
     [self setLeftCusBarItem:@"square_back" action:nil];
     key = [[NSMutableArray alloc] initWithObjects:@"用户名",@"性别",@"修改密码", nil];
     [_userInfoTableView clearSeperateLine];
+    UIImage *img = [[UIImage imageNamed:@"main_2-bg2.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(15, 15, 15, 15)];
+    UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
+    _userInfoTableView.backgroundView = imgView;
+    if (3*80 < _userInfoTableView.bounds.size.height) {
+        _userInfoTableView.frame = CGRectMake(12, 12, 299,3*40);
+    }
 }
 
 #pragma mark - UITableView DataSources and Delegate

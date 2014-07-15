@@ -9,6 +9,7 @@
 #import "PostValidateViewController.h"
 #import "ControlCenter.h"
 #import "UIViewController+BarItemAdapt.h"
+#import "SearchAddressListViewController.h"
 
 @interface PostValidateViewController ()
 
@@ -42,6 +43,7 @@
 {
     self.title = @"提交验证码";
     [self setLeftCusBarItem:@"square_back" action:nil];
+    myDelegate = [[UIApplication sharedApplication] delegate];
     
 }
     
@@ -54,6 +56,18 @@
 
 - (IBAction)showFinishRegisterVC:(id)sender
 {
-    [ControlCenter pushToFinishRegisterVC];
+    if ([myDelegate.postValidateType isEqualToString:@"reg"]) {
+         [ControlCenter pushToFinishRegisterVC];
+    }
+    else if ([myDelegate.postValidateType isEqualToString:@"addrBook"])
+    {
+        SearchAddressListViewController *addressListVC = [[SearchAddressListViewController alloc] init];
+        [self.navigationController pushViewController:addressListVC animated:YES];
+    }
+    else
+    {
+    
+    }
+   
 }
 @end

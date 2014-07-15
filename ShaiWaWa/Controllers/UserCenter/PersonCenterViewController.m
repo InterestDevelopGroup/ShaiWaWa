@@ -10,6 +10,9 @@
 #import "UIViewController+BarItemAdapt.h"
 #import "ControlCenter.h"
 #import "PlatformBindViewController.h"
+#import "MyGoodFriendsListViewController.h"
+#import "MybabyListViewController.h"
+#import "QRCodeCardViewController.h"
 
 @interface PersonCenterViewController ()
 
@@ -153,5 +156,23 @@
     [self.navigationController pushViewController:platformVC animated:YES];
 }
 - (IBAction)changeImg:(id)sender {
+}
+
+- (IBAction)showGoodFriendListVC:(id)sender
+{
+    MyGoodFriendsListViewController *myGoodFriendListVC = [[MyGoodFriendsListViewController alloc] init];
+    [self.navigationController pushViewController:myGoodFriendListVC animated:YES];
+}
+
+- (IBAction)showMyBabyListVC:(id)sender
+{
+    MybabyListViewController *myBabyListVC = [[MybabyListViewController alloc] init];
+    [self.navigationController pushViewController:myBabyListVC animated:YES];
+}
+
+- (IBAction)showMyQRCardVC:(id)sender
+{
+    QRCodeCardViewController *qrCodeCardVC = [[QRCodeCardViewController alloc] init];
+    [self.navigationController pushViewController:qrCodeCardVC animated:YES];
 }
 @end

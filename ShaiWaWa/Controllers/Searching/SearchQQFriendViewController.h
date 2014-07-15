@@ -7,7 +7,18 @@
 //
 
 #import "CommonViewController.h"
+#import "QQCell.h"
 
-@interface SearchQQFriendViewController : CommonViewController
+@interface SearchQQFriendViewController : CommonViewController<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+{
+    NSArray *sectionArr;
+    NSArray *friendsAll;
+    NSDictionary *freindsList;
+    int numOfYaoQing;
+    QQCell *qqCell;
+    
+}
+@property (strong, nonatomic) IBOutlet UITableView *qqListTableView;
+
 
 @end

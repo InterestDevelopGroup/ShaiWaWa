@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "ControlCenter.h"
+#import "ChooseModeViewController.h"
 
 @interface LoginViewController ()
 
@@ -59,7 +60,31 @@
 {
     [ControlCenter pushToRegisterVC];
 }
-    
+
+- (IBAction)showMainVC:(id)sender
+{
+    if (_phoneField.text.length > 0) {
+        if ([_phoneField.text isEqualToString:@"x"]) {
+            if ([_pwdField.text isEqualToString:@"123"]) {
+                ChooseModeViewController *chooseModeVC = [[ChooseModeViewController alloc] init];
+                [self.navigationController pushViewController:chooseModeVC animated:YES];
+            }
+            else
+            {
+                DDLogInfo(@"密码错误");
+            }
+        }
+        else
+        {
+            DDLogInfo(@"用户不存在");
+        }
+    }
+    else
+    {
+        DDLogInfo(@"文本框不能为空");
+    }
+}
+
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {

@@ -7,8 +7,12 @@
 //
 
 #import "CommonViewController.h"
+#import "AppDelegate.h"
 
 @interface PostValidateViewController : CommonViewController
+{
+    AppDelegate *myDelegate;
+}
 - (IBAction)showFinishRegisterVC:(id)sender;
 
 @end

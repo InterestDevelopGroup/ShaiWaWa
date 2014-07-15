@@ -16,6 +16,8 @@
 #import "BabyListViewController.h"
 #import "MyGoodFriendsListViewController.h"
 #import "SearchDynamicViewController.h"
+#import "MessageViewController.h"
+#import "ShaiWaSquareViewController.h"
 
 @interface ChooseModeViewController ()
 
@@ -62,8 +64,8 @@
     [titileImage setUserInteractionEnabled:YES];
     [titileImage addGestureRecognizer:_guoLVTap];
     self.navigationItem.titleView = titileImage;
-    UIBarButtonItem * rightItem_1 = [self customBarItem:@"square_yanjing" action:nil];
-    UIBarButtonItem * rightItem_2 = [self customBarItem:@"square_pinglun-4" action:nil];
+    UIBarButtonItem * rightItem_1 = [self customBarItem:@"square_yanjing" action:@selector(showSquareVC)];
+    UIBarButtonItem * rightItem_2 = [self customBarItem:@"square_pinglun-4" action:@selector(showMsgVC)];
     self.navigationItem.rightBarButtonItems = @[rightItem_2,rightItem_1];
     
     isMenuShown = NO;
@@ -167,10 +169,25 @@
         isDropMenuShown = NO;
     }
 }
+
+- (IBAction)showSquaresVC:(id)sender
+{
+    [self showSquareVC];
+}
 - (void)showSearchDyVC
 {
     [self hideGrayDropView:nil];
     SearchDynamicViewController *searchDyVC = [[SearchDynamicViewController alloc] init];
     [self.navigationController pushViewController:searchDyVC animated:YES];
+}
+- (void)showMsgVC
+{
+    MessageViewController *messageVC = [[MessageViewController alloc] init];
+    [self.navigationController pushViewController:messageVC animated:YES];
+}
+- (void)showSquareVC
+{
+    ShaiWaSquareViewController *squareVC = [[ShaiWaSquareViewController alloc] init];
+    [self.navigationController pushViewController:squareVC animated:YES];
 }
 @end

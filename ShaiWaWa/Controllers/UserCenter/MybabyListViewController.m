@@ -9,6 +9,7 @@
 #import "MybabyListViewController.h"
 #import "UIViewController+BarItemAdapt.h"
 #import "BabyListCell.h"
+#import "BabyHomePageViewController.h"
 
 @interface MybabyListViewController ()
 
@@ -68,5 +69,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [_babyListTableView deselectRowAtIndexPath:indexPath animated:YES];
+    BabyHomePageViewController *babyHomePageVC = [[BabyHomePageViewController alloc] init];
+    [self.navigationController pushViewController:babyHomePageVC animated:YES];
+    
 }
 @end

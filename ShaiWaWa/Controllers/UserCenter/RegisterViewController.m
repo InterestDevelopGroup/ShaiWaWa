@@ -9,6 +9,7 @@
 #import "RegisterViewController.h"
 #import "ControlCenter.h"
 
+
 @interface RegisterViewController ()
 
 @end
@@ -42,6 +43,7 @@
 {
     self.title = @"注册";
     [self.navigationItem setHidesBackButton:YES];
+    myDelegate = [[UIApplication sharedApplication] delegate];
     NSMutableAttributedString * attrString = [[NSMutableAttributedString alloc] initWithString:_hoverLoginLabel.text];
     [attrString addAttributes:@{NSUnderlineStyleAttributeName:[NSNumber numberWithInt:NSUnderlineStyleSingle]} range:NSMakeRange(0, attrString.length)];
     _hoverLoginLabel.attributedText = attrString;
@@ -56,6 +58,7 @@
     
 - (IBAction)showPostValidateVC:(id)sender
 {
+    myDelegate.postValidateType = @"reg";
     [ControlCenter pushToPostValidateVC];
 }
     

@@ -9,6 +9,7 @@
 #import "MyGoodFriendsListViewController.h"
 #import "UIViewController+BarItemAdapt.h"
 #import "MyGoodFriendsListCell.h"
+#import "FriendHomeViewController.h"
 
 @interface MyGoodFriendsListViewController ()
 
@@ -69,6 +70,11 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    FriendHomeViewController *friendHomeVC = [[FriendHomeViewController alloc] init];
+    [self.navigationController pushViewController:friendHomeVC animated:YES];
+}
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {

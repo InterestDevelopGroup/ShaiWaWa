@@ -48,7 +48,7 @@
     self.title = @"查找好友";
     [self setLeftCusBarItem:@"square_back" action:nil];
     typeOfFriendsArry = [[NSMutableArray alloc] initWithObjects:@"新浪微博上的好友",@"QQ好友",@"手机通讯录好友",@"微信邀请好友",@"扫描二维码", nil];
-    typeIconArry = [[NSMutableArray alloc] initWithObjects:@"main_xinlang.png",@"",@"",@"main_weixin.png",@"", nil];
+    typeIconArry = [[NSMutableArray alloc] initWithObjects:@"main_xinlang.png",@"qq.png",@"dianhua2.png",@"main_weixin.png",@"qrcode.png", nil];
     [_typeOfFriendsTableView clearSeperateLine];
     [_typeOfFriendsTableView setBounces:NO];
     [_typeOfFriendsTableView setScrollEnabled:NO];

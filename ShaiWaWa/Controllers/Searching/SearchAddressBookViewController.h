@@ -7,7 +7,12 @@
 //
 
 #import "CommonViewController.h"
+#import "AppDelegate.h"
 
 @interface SearchAddressBookViewController : CommonViewController
+{
+    AppDelegate *myDelegate;
+}
+- (IBAction)addrBookNext:(id)sender;
 
 @end

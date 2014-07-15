@@ -7,8 +7,12 @@
 //
 
 #import "CommonViewController.h"
+#import "AppDelegate.h"
 
 @interface RegisterViewController : CommonViewController
+{
+    AppDelegate *myDelegate;
+}
 @property (strong, nonatomic) IBOutlet UITextField *phoneField;
 @property (strong, nonatomic) IBOutlet UILabel *hoverLoginLabel;
 - (IBAction)showLoginVC:(id)sender;
