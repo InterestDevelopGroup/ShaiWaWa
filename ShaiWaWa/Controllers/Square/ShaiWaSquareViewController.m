@@ -8,13 +8,15 @@
 
 #import "ShaiWaSquareViewController.h"
 #import "UIViewController+BarItemAdapt.h"
+//#import "UICollectionViewWaterfallCell.h"
+
 
 @interface ShaiWaSquareViewController ()
 
 @end
 
 @implementation ShaiWaSquareViewController
-
+@synthesize collectionView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -35,6 +37,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 #pragma mark - Private Methods
 - (void)initUI
 {
@@ -49,6 +52,13 @@
     }
     [self HMSegmentedControlInitMethod];
     
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
+    collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,0,self.view.bounds.size.width, self.view.frame.size.height - segMentedControl.bounds.size.height) collectionViewLayout:layout];
+    collectionView.dataSource = self;
+    collectionView.delegate = self;
+    collectionView.backgroundColor = [UIColor clearColor];
+    [collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"GradientCell"];
+    [_segScrollView addSubview:collectionView];
 }
 
 - (void)HMSegmentedControlInitMethod
@@ -81,6 +91,98 @@
     int curPage = scrollView.bounds.origin.x/320;
     [segMentedControl setSelectedSegmentIndex:curPage animated:YES];
 }
-#pragma mark - UICollection Delegate and DataSources
 
+#pragma mark - UICollectionViewDataSource
+//定义展示的UICollectionViewCell的个数
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return 10;
+}
+//定义展示的Section的个数
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
+
+//每个UICollectionView展示的内容
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString * CellIdentifier = @"GradientCell";
+    UICollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
+    
+    //    UICollectionViewWaterfallCell *cell =
+    //    (UICollectionViewWaterfallCell *)[collectionView dequeueReusableCellWithReuseIdentifier:CELL_IDENTIFIER forIndexPath:indexPath];
+    //
+    //    cell.displayString = [NSString stringWithFormat:@"%d", indexPath.row];
+    //    cell.explainString = [NSString stringWithFormat:@"这是第%d张", indexPath.row+1];
+    //    cell.releaseNameString = @"张三";
+    //    cell.releaseTimeString = @"1分钟前";
+    //    cell.contentView.backgroundColor = [UIColor orangeColor];
+    UIImageView *babyImgView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, cell.bounds.size.width-10, 116)];
+    babyImgView.userInteractionEnabled = YES;
+    babyImgView.image = [UIImage imageNamed:@"square_pic-1.png"];
+    UIButton *praiseButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton *discussButton  = [UIButton buttonWithType:UIButtonTypeCustom];
+    praiseButton.frame = CGRectMake(cell.bounds.size.width-50, 1, 24, 24);
+    [praiseButton setImage:[UIImage imageNamed:@"square_zan.png"] forState:UIControlStateNormal];
+    discussButton.frame = CGRectMake(cell.bounds.size.width-30, 1, 24, 24);
+    [discussButton setImage:[UIImage imageNamed:@"square_pinglun.png"] forState:UIControlStateNormal];
+    [babyImgView addSubview:praiseButton];
+    [babyImgView addSubview:discussButton];
+    [cell.contentView addSubview:babyImgView];
+    UITextView *explainTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, cell.contentView.bounds.size.height-75, cell.contentView.bounds.size.width, 30)];
+    explainTextView.font = [UIFont systemFontOfSize:14];
+    explainTextView.text =@"天使一般的宝宝。。。。。。";
+    explainTextView.scrollEnabled = NO;
+    explainTextView.editable = NO;
+    explainTextView.showsHorizontalScrollIndicator = NO;
+    explainTextView.showsVerticalScrollIndicator = NO;
+    explainTextView.backgroundColor = [UIColor lightGrayColor];
+    explainTextView.textColor = [UIColor whiteColor];
+    //    explainTextView.textAlignment = NSTextAlignmentCenter;
+    [cell.contentView addSubview:explainTextView];
+    cell.contentView.backgroundColor = [UIColor orangeColor];
+    UIView *releaseView = [[UIView alloc] initWithFrame:CGRectMake(0, cell.contentView.bounds.size.height-45, cell.contentView.bounds.size.width, 45)];
+    
+    UIImageView *releaseTouXiangImgView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 40, 40)];
+    releaseTouXiangImgView.image = [UIImage imageNamed:@"square_pic-2.png"];
+    UILabel *releaseNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 6, 80, 20)];
+    UILabel *releaseTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 24, 80, 20)];
+    releaseNameLabel.text = @"张三";
+    releaseNameLabel.font = [UIFont systemFontOfSize:15];
+    releaseTimeLabel.text = @"1分钟前";
+    releaseTimeLabel.font = [UIFont systemFontOfSize:12];
+    [releaseView addSubview:releaseTouXiangImgView];
+    [releaseView addSubview:releaseNameLabel];
+    [releaseView addSubview:releaseTimeLabel];
+    [cell.contentView addSubview:releaseView];
+    return cell;
+}
+
+////定义每个UICollectionView 的大小
+//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout heightForItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return 200;
+//}
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake(146, 200);
+}
+//定义每个UICollectionView 的 margin
+-(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsMake(9, 9, 9, 9);
+}
+#pragma mark --UICollectionViewDelegate
+//UICollectionView被选中时调用的方法
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell * cell = (UICollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    cell.backgroundColor = [UIColor whiteColor];
+}
+//返回这个UICollectionView是否可以被选择
+-(BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
 @end

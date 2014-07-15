@@ -8,14 +8,15 @@
 
 #import "CommonViewController.h"
 #import "HMSegmentedControl.h"
+#import "UICollectionViewWaterfallLayout.h"
 
-@interface ShaiWaSquareViewController : CommonViewController<UIScrollViewDelegate>
+@interface ShaiWaSquareViewController : CommonViewController<UIScrollViewDelegate,UICollectionViewDataSource, UICollectionViewDelegate>
 {
     HMSegmentedControl *segMentedControl;
     //    BOOL isRightBtnSelected;
 }
 @property (strong, nonatomic) IBOutlet UIView *tabSelectionBar;
 @property (strong, nonatomic) IBOutlet UIScrollView *segScrollView;
-
+@property (nonatomic, strong) UICollectionView *collectionView;
 
 @end

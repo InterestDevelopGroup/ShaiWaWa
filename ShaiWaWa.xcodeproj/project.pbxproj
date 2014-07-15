@@ -18,6 +18,8 @@
 		C32B41A41965B5B8003979EE /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C32B41881965B5B8003979EE /* CoreData.framework */; };
 		C32B41AC1965B5B8003979EE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C32B41AA1965B5B8003979EE /* InfoPlist.strings */; };
 		C32B41AE1965B5B8003979EE /* ShaiWaWaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C32B41AD1965B5B8003979EE /* ShaiWaWaTests.m */; };
+		F42434621974FC97008E70C6 /* UICollectionViewWaterfallCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F424345F1974FC97008E70C6 /* UICollectionViewWaterfallCell.m */; };
+		F42434631974FC97008E70C6 /* UICollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = F42434611974FC97008E70C6 /* UICollectionViewWaterfallLayout.m */; };
 		F43387EF1974C28600464D43 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F433866C1974C28500464D43 /* AppDelegate.m */; };
 		F43387F01974C28600464D43 /* AddBabyInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F43386701974C28500464D43 /* AddBabyInfoViewController.m */; };
 		F43387F11974C28600464D43 /* AddBabyInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F43386711974C28500464D43 /* AddBabyInfoViewController.xib */; };
@@ -320,6 +322,10 @@
 		C32B41A91965B5B8003979EE /* ShaiWaWaTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ShaiWaWaTests-Info.plist"; sourceTree = "<group>"; };
 		C32B41AB1965B5B8003979EE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C32B41AD1965B5B8003979EE /* ShaiWaWaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShaiWaWaTests.m; sourceTree = "<group>"; };
+		F424345E1974FC97008E70C6 /* UICollectionViewWaterfallCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewWaterfallCell.h; sourceTree = "<group>"; };
+		F424345F1974FC97008E70C6 /* UICollectionViewWaterfallCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewWaterfallCell.m; sourceTree = "<group>"; };
+		F42434601974FC97008E70C6 /* UICollectionViewWaterfallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewWaterfallLayout.h; sourceTree = "<group>"; };
+		F42434611974FC97008E70C6 /* UICollectionViewWaterfallLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewWaterfallLayout.m; sourceTree = "<group>"; };
 		F433866B1974C28500464D43 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F433866C1974C28500464D43 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		F433866F1974C28500464D43 /* AddBabyInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddBabyInfoViewController.h; sourceTree = "<group>"; };
@@ -760,6 +766,17 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		F424345D1974FC58008E70C6 /* UCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				F424345E1974FC97008E70C6 /* UICollectionViewWaterfallCell.h */,
+				F424345F1974FC97008E70C6 /* UICollectionViewWaterfallCell.m */,
+				F42434601974FC97008E70C6 /* UICollectionViewWaterfallLayout.h */,
+				F42434611974FC97008E70C6 /* UICollectionViewWaterfallLayout.m */,
+			);
+			path = UCollectionView;
+			sourceTree = "<group>";
+		};
 		F43386691974C28500464D43 /* ShaiWaWa */ = {
 			isa = PBXGroup;
 			children = (
@@ -789,6 +806,7 @@
 		F433866D1974C28500464D43 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				F424345D1974FC58008E70C6 /* UCollectionView */,
 				F433866E1974C28500464D43 /* Baby */,
 				F433867E1974C28500464D43 /* Searching */,
 				F43386971974C28500464D43 /* setting */,
@@ -1688,6 +1706,7 @@
 				F43388571974C28600464D43 /* SearchRSCell.m in Sources */,
 				F43388201974C28600464D43 /* MybabyListViewController.m in Sources */,
 				F43388121974C28600464D43 /* ChooseModeViewController.m in Sources */,
+				F42434621974FC97008E70C6 /* UICollectionViewWaterfallCell.m in Sources */,
 				F43387F01974C28600464D43 /* AddBabyInfoViewController.m in Sources */,
 				F43388FC1974C28600464D43 /* NSDate+Utils.m in Sources */,
 				F43389011974C28600464D43 /* UIColor+Utils.m in Sources */,
@@ -1705,6 +1724,7 @@
 				F43388261974C28600464D43 /* PersonCenterViewController.m in Sources */,
 				F433881C1974C28600464D43 /* LoginViewController.m in Sources */,
 				F43388221974C28600464D43 /* MyGoodFriendsListViewController.m in Sources */,
+				F42434631974FC97008E70C6 /* UICollectionViewWaterfallLayout.m in Sources */,
 				F433880A1974C28600464D43 /* FeebackViewController.m in Sources */,
 				F433881A1974C28600464D43 /* LocationsViewController.m in Sources */,
 				F43388491974C28600464D43 /* AddrBookCell.m in Sources */,
