@@ -8,9 +8,9 @@
 
 #import "CommonViewController.h"
 
-@interface ChooseModeViewController : CommonViewController
+@interface ChooseModeViewController : CommonViewController<UITableViewDataSource, UITableViewDelegate>
 {
-    BOOL isMenuShown,isDropMenuShown;
+    BOOL isMenuShown,isDropMenuShown,isShareViewShown;
 }
 - (IBAction)showSearchFriendsVC:(id)sender;
 
@@ -24,5 +24,11 @@
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *guoLVTap;
 - (IBAction)showGrayDropV:(id)sender;
 - (IBAction)showSquaresVC:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *btnAdd;
+@property (weak, nonatomic) IBOutlet UIButton *btnSearch;
+@property (weak, nonatomic) IBOutlet UIButton *btnView;
+@property (weak, nonatomic) IBOutlet UITableView *dynamicPageTableView;
+@property (weak, nonatomic) IBOutlet UIView *grayShareView;
+- (IBAction)hideGayShareV:(id)sender;
 
 @end

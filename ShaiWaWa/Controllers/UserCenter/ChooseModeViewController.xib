@@ -7,7 +7,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChooseModeViewController">
             <connections>
+                <outlet property="btnAdd" destination="SG2-GH-Xeq" id="lbD-f6-kmV"/>
+                <outlet property="btnSearch" destination="gXk-85-B1d" id="dcg-KT-hde"/>
+                <outlet property="btnView" destination="J5Y-aR-mQ4" id="de3-lO-rjE"/>
+                <outlet property="dynamicPageTableView" destination="kSz-vl-5Sv" id="JXN-Wy-fLc"/>
                 <outlet property="grayDropView" destination="kKp-LA-VcK" id="qdz-S9-wAL"/>
+                <outlet property="grayShareView" destination="vva-64-Wub" id="8u5-nC-qbx"/>
                 <outlet property="guoLVTap" destination="D3U-dV-bbN" id="9KC-gN-paj"/>
                 <outlet property="menuGray" destination="Tnt-u6-ewy" id="s7C-eN-DBu"/>
                 <outlet property="userViewTap" destination="bp7-Th-Lpa" id="kN2-Ej-TF1"/>
@@ -19,7 +24,19 @@
             <rect key="frame" x="0.0" y="64" width="320" height="504"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="SG2-GH-Xeq">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="340" sectionHeaderHeight="1" sectionFooterHeight="1" id="kSz-vl-5Sv">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="dY2-3Z-fES"/>
+                        <outlet property="delegate" destination="-1" id="4fN-Au-t9o"/>
+                    </connections>
+                </tableView>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="SG2-GH-Xeq">
                     <rect key="frame" x="136" y="105" width="57" height="62"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -31,7 +48,7 @@
                         <action selector="showAddBabyVC:" destination="-1" eventType="touchUpInside" id="5wY-Fy-6yv"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gXk-85-B1d">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gXk-85-B1d">
                     <rect key="frame" x="63" y="195" width="57" height="62"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -43,7 +60,7 @@
                         <action selector="showSearchFriendsVC:" destination="-1" eventType="touchUpInside" id="8td-fU-Kja"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="J5Y-aR-mQ4">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="J5Y-aR-mQ4">
                     <rect key="frame" x="212" y="195" width="57" height="62"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -80,6 +97,98 @@
                         <outletCollection property="gestureRecognizers" destination="t25-mv-PTD" appends="YES" id="7UD-YS-V3o"/>
                     </connections>
                 </view>
+                <view hidden="YES" contentMode="scaleToFill" id="vva-64-Wub">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" id="Dgc-yD-IGp">
+                            <rect key="frame" x="0.0" y="344" width="320" height="162"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                            <subviews>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="分享到" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cOe-Si-Bd0">
+                                    <rect key="frame" x="14" y="10" width="58" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RYW-C5-50y">
+                                    <rect key="frame" x="20" y="39" width="64" height="64"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <state key="normal" image="square_fenxiang-1.png">
+                                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="buS-77-ZKc">
+                                    <rect key="frame" x="92" y="39" width="64" height="64"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <state key="normal" image="square_fenxiang-2.png">
+                                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gbc-Tb-W9D">
+                                    <rect key="frame" x="164" y="39" width="64" height="64"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <state key="normal" image="square_fenxiang-3.png">
+                                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RKO-2w-H83">
+                                    <rect key="frame" x="236" y="39" width="64" height="64"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <state key="normal" image="square_fenxiang-4.png">
+                                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="TIA-mB-J62">
+                                    <rect key="frame" x="13" y="119" width="93" height="28"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <state key="normal" image="square_shoucang.png">
+                                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="fkB-jy-NRX">
+                                    <rect key="frame" x="114" y="119" width="93" height="28"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <state key="normal" image="square_jubao.png">
+                                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xhP-rU-pBD">
+                                    <rect key="frame" x="215" y="119" width="93" height="28"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <state key="normal" image="square_shanchu.png">
+                                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" red="0.82685391870000002" green="0.82223462300000005" blue="0.83147321429999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <gestureRecognizers/>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="NJl-CZ-BcI" appends="YES" id="DRU-3p-hbg"/>
+                            </connections>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <gestureRecognizers/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="r4m-Xi-iTr" appends="YES" id="3kE-Gj-AJf"/>
+                    </connections>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
@@ -106,10 +215,23 @@
                 <action selector="hideGrayDropView:" destination="-1" id="mhs-s8-76P"/>
             </connections>
         </tapGestureRecognizer>
+        <tapGestureRecognizer id="r4m-Xi-iTr">
+            <connections>
+                <action selector="hideGayShareV:" destination="-1" id="n6r-F1-YMu"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="NJl-CZ-BcI"/>
     </objects>
     <resources>
         <image name="login_chazhao.png" width="57" height="62"/>
         <image name="login_suibian.png" width="57" height="62"/>
         <image name="login_tianjia.png" width="57" height="62"/>
+        <image name="square_fenxiang-1.png" width="64" height="64"/>
+        <image name="square_fenxiang-2.png" width="64" height="64"/>
+        <image name="square_fenxiang-3.png" width="64" height="64"/>
+        <image name="square_fenxiang-4.png" width="64" height="64"/>
+        <image name="square_jubao.png" width="93" height="28"/>
+        <image name="square_shanchu.png" width="93" height="28"/>
+        <image name="square_shoucang.png" width="93" height="28"/>
     </resources>
 </document>

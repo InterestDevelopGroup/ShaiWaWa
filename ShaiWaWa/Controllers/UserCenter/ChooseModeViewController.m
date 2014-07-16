@@ -18,6 +18,8 @@
 #import "SearchDynamicViewController.h"
 #import "MessageViewController.h"
 #import "ShaiWaSquareViewController.h"
+#import "DynamicCell.h"
+#import "PraiseViewController.h"
 
 @interface ChooseModeViewController ()
 
@@ -92,6 +94,57 @@
     
     [dropMenu.searchDyButton addTarget:self action:@selector(showSearchDyVC) forControlEvents:UIControlEventTouchUpInside];
     [_grayDropView addSubview:dropMenu];
+    
+    isShareViewShown = NO;
+    
+    [_dynamicPageTableView clearSeperateLine];
+    [_dynamicPageTableView registerNibWithName:@"DynamicCell" reuseIdentifier:@"Cell"];
+    
+}
+
+
+
+#pragma mark - UITableView DataSources and Delegate
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 10;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    DynamicCell * dynamicCell = (DynamicCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    
+    [dynamicCell.praiseUserFirstBtn addTarget:self action:@selector(showPraiseListVC) forControlEvents:UIControlEventTouchUpInside];
+    [dynamicCell.praiseUserSecondBtn addTarget:self action:@selector(showPraiseListVC) forControlEvents:UIControlEventTouchUpInside];
+    [dynamicCell.praiseUserThirdBtn addTarget:self action:@selector(showPraiseListVC) forControlEvents:UIControlEventTouchUpInside];
+    [dynamicCell.moreBtn addTarget:self action:@selector(showShareGrayView) forControlEvents:UIControlEventTouchUpInside];
+    /*
+     // 取当前section，设置单元格显示内容。
+     NSInteger section = indexPath.section;
+     // 获取这个分组的省份名称，再根据省份名称获得这个省份的城市列表。
+     NSString *sectionType = [sectionArr objectAtIndex:section];
+     NSArray *list = [babyList objectForKey:sectionType];
+     [list objectAtIndex:indexPath.row];
+     */
+    //babyListCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    //    babyListCell.babyImage.image = [UIImage imageNamed:@""];
+    //    babyListCell.babyNameLabel.text = [NSString stringWithFormat:@""];
+    //    babyListCell.babyOldLabel.text = [NSString stringWithFormat:@""];
+    //    babyListCell.babySexImage.image = [UIImage imageNamed:@""];
+    
+    return dynamicCell;
+    
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+//    BabyHomePageViewController *babyHomePageVC = [[BabyHomePageViewController alloc] init];
+//    [self.navigationController pushViewController:babyHomePageVC animated:YES];
 }
 - (void)showSettingVC
 {
@@ -189,5 +242,29 @@
 {
     ShaiWaSquareViewController *squareVC = [[ShaiWaSquareViewController alloc] init];
     [self.navigationController pushViewController:squareVC animated:YES];
+}
+
+- (void)showPraiseListVC
+{
+    PraiseViewController *praiseListVC = [[PraiseViewController alloc] init];
+    [self.navigationController pushViewController:praiseListVC animated:YES];
+}
+
+- (void)showShareGrayView
+{
+    if (!isShareViewShown) {
+        _grayShareView.hidden = NO;
+        isShareViewShown = YES;
+    }
+    else
+    {
+        _grayShareView.hidden = YES;
+        isShareViewShown = NO;
+    }
+}
+- (IBAction)hideGayShareV:(id)sender
+{
+    _grayShareView.hidden = YES;
+    isShareViewShown = NO;
 }
 @end

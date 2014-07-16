@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface DynamicCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIButton *praiseUserThirdBtn;
+@property (weak, nonatomic) IBOutlet UIButton *praiseUserSecondBtn;
+@property (weak, nonatomic) IBOutlet UIButton *praiseUserFirstBtn;
+@property (weak, nonatomic) IBOutlet UIButton *moreBtn;
 
 @end
