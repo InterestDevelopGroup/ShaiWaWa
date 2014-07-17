@@ -16,8 +16,12 @@
     NSArray *summaryKey;
     NSArray *summaryValue;
     BOOL isRightBtnSelected;
+    BOOL isShareViewShown;
+    BOOL isFullList;
+    HMSegmentedControl *segMentedControlFull;
 }
 @property (strong, nonatomic) IBOutlet UIView *tabSelectionBar;
+@property (weak, nonatomic) IBOutlet UIView *tabSelectionFullBar;
 
 @property (strong, nonatomic) IBOutlet UIScrollView *segScrollView;
 @property (strong, nonatomic) IBOutlet UIView *summaryView;
@@ -31,5 +35,15 @@
 
 - (IBAction)weiXinYaoQingButton:(id)sender;
 - (IBAction)hideCurView:(id)sender;
-
+@property (strong, nonatomic) IBOutlet UIView *dynamicListView;
+@property (weak, nonatomic) IBOutlet UITableView *dynamicListTableView;
+@property (weak, nonatomic) IBOutlet UIView *grayShareView;
+- (IBAction)hideGayShareV:(id)sender;
+@property (strong, nonatomic) IBOutlet UIView *fullView;
+@property (strong, nonatomic) IBOutlet UIView *inStatusView;
+@property (weak, nonatomic) IBOutlet UIScrollView *segFullScrollView;
+@property (weak, nonatomic) IBOutlet UIView *grayShareFullView;
+- (IBAction)hideGayShareFullV:(id)sender;
+@property (weak, nonatomic) IBOutlet UITableView *dynamicFullListTableView;
+@property (strong, nonatomic) IBOutlet UIView *dynamicListFullView;
 @end

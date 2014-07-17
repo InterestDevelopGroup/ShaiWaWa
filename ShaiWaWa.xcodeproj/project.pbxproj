@@ -298,6 +298,13 @@
 		F43389021974C28600464D43 /* UIImage+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = F43387EA1974C28600464D43 /* UIImage+Util.m */; };
 		F43389031974C28600464D43 /* UIViewController+BarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F43387EC1974C28600464D43 /* UIViewController+BarItem.m */; };
 		F43389041974C28600464D43 /* VersionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F43387EE1974C28600464D43 /* VersionManager.m */; };
+		F4348FED19778D2A00347195 /* DynamicDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4348FEB19778D2900347195 /* DynamicDetailCell.m */; };
+		F4348FEE19778D2A00347195 /* DynamicDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4348FEC19778D2A00347195 /* DynamicDetailCell.xib */; };
+		F4348FF219779C4600347195 /* DynamicDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4348FF019779C4600347195 /* DynamicDetailViewController.m */; };
+		F4348FF319779C4600347195 /* DynamicDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4348FF119779C4600347195 /* DynamicDetailViewController.xib */; };
+		F4348FF71977A54A00347195 /* PinLunCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4348FF51977A54A00347195 /* PinLunCell.m */; };
+		F4348FF81977A54A00347195 /* PinLunCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4348FF61977A54A00347195 /* PinLunCell.xib */; };
+		F4348FFB1977B5F600347195 /* DynamicHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4348FFA1977B5F600347195 /* DynamicHeadView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -685,6 +692,17 @@
 		F43387EC1974C28600464D43 /* UIViewController+BarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+BarItem.m"; sourceTree = "<group>"; };
 		F43387ED1974C28600464D43 /* VersionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionManager.h; sourceTree = "<group>"; };
 		F43387EE1974C28600464D43 /* VersionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VersionManager.m; sourceTree = "<group>"; };
+		F4348FEA19778D2900347195 /* DynamicDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicDetailCell.h; sourceTree = "<group>"; };
+		F4348FEB19778D2900347195 /* DynamicDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicDetailCell.m; sourceTree = "<group>"; };
+		F4348FEC19778D2A00347195 /* DynamicDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DynamicDetailCell.xib; sourceTree = "<group>"; };
+		F4348FEF19779C4600347195 /* DynamicDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicDetailViewController.h; sourceTree = "<group>"; };
+		F4348FF019779C4600347195 /* DynamicDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicDetailViewController.m; sourceTree = "<group>"; };
+		F4348FF119779C4600347195 /* DynamicDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DynamicDetailViewController.xib; sourceTree = "<group>"; };
+		F4348FF41977A54A00347195 /* PinLunCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinLunCell.h; sourceTree = "<group>"; };
+		F4348FF51977A54A00347195 /* PinLunCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinLunCell.m; sourceTree = "<group>"; };
+		F4348FF61977A54A00347195 /* PinLunCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PinLunCell.xib; sourceTree = "<group>"; };
+		F4348FF91977B5F600347195 /* DynamicHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicHeadView.h; sourceTree = "<group>"; };
+		F4348FFA1977B5F600347195 /* DynamicHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicHeadView.m; sourceTree = "<group>"; };
 		F53FC3B786794DCFBE049CA1 /* Pods-ShaiWaWa.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShaiWaWa.xcconfig"; path = "Pods/Pods-ShaiWaWa.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -789,6 +807,12 @@
 				F432BD0D197627E20086BBE9 /* DynamicCell.h */,
 				F432BD0E197627E20086BBE9 /* DynamicCell.m */,
 				F432BD0F197627E20086BBE9 /* DynamicCell.xib */,
+				F4348FF41977A54A00347195 /* PinLunCell.h */,
+				F4348FF51977A54A00347195 /* PinLunCell.m */,
+				F4348FF61977A54A00347195 /* PinLunCell.xib */,
+				F4348FEA19778D2900347195 /* DynamicDetailCell.h */,
+				F4348FEB19778D2900347195 /* DynamicDetailCell.m */,
+				F4348FEC19778D2A00347195 /* DynamicDetailCell.xib */,
 				F432BD10197627E20086BBE9 /* FriendSelectedCell.h */,
 				F432BD11197627E20086BBE9 /* FriendSelectedCell.m */,
 				F432BD12197627E20086BBE9 /* FriendSelectedCell.xib */,
@@ -1075,6 +1099,9 @@
 				F43386751974C28500464D43 /* BabyHomePageViewController.h */,
 				F43386761974C28500464D43 /* BabyHomePageViewController.m */,
 				F43386771974C28500464D43 /* BabyHomePageViewController.xib */,
+				F4348FEF19779C4600347195 /* DynamicDetailViewController.h */,
+				F4348FF019779C4600347195 /* DynamicDetailViewController.m */,
+				F4348FF119779C4600347195 /* DynamicDetailViewController.xib */,
 				F43386781974C28500464D43 /* BabyListViewController.h */,
 				F43386791974C28500464D43 /* BabyListViewController.m */,
 				F433867A1974C28500464D43 /* BabyListViewController.xib */,
@@ -1251,6 +1278,8 @@
 				F43386F61974C28500464D43 /* MainDropMenu.m */,
 				F43386F71974C28500464D43 /* MainMenu.h */,
 				F43386F81974C28500464D43 /* MainMenu.m */,
+				F4348FF91977B5F600347195 /* DynamicHeadView.h */,
+				F4348FFA1977B5F600347195 /* DynamicHeadView.m */,
 			);
 			path = CustomerView;
 			sourceTree = "<group>";
@@ -1486,6 +1515,7 @@
 				F432BE4519762AC80086BBE9 /* square_sanjiaoxing@2x.png in Resources */,
 				F432BDD619762AC80086BBE9 /* baby_4-bg@2x.png in Resources */,
 				F43388F61974C28600464D43 /* ShaiWaWa-Info.plist in Resources */,
+				F4348FF81977A54A00347195 /* PinLunCell.xib in Resources */,
 				F432BE1419762AC80086BBE9 /* pb_paizhao@2x.png in Resources */,
 				F43388251974C28600464D43 /* OtherInformationViewController.xib in Resources */,
 				F432BE6019762AC80086BBE9 /* user_3-weibo@2x.png in Resources */,
@@ -1533,6 +1563,7 @@
 				F432BE1719762AC80086BBE9 /* pb_tianjia@2x.png in Resources */,
 				F432BD34197627E20086BBE9 /* SearchRSCell.xib in Resources */,
 				F432BDEB19762AC80086BBE9 /* login_qq@2x.png in Resources */,
+				F4348FF319779C4600347195 /* DynamicDetailViewController.xib in Resources */,
 				F433881F1974C28600464D43 /* MessageViewController.xib in Resources */,
 				F432BE4419762AC80086BBE9 /* square_pinglun@2x.png in Resources */,
 				F432BDFA19762AC80086BBE9 /* main_fankui@2x.png in Resources */,
@@ -1621,6 +1652,7 @@
 				F432BDE719762AC80086BBE9 /* login_box-6@2x.png in Resources */,
 				F432BE0E19762AC80086BBE9 /* pb_bofang@2x.png in Resources */,
 				F432BE3719762AC80086BBE9 /* square_pic-2.png in Resources */,
+				F4348FEE19778D2A00347195 /* DynamicDetailCell.xib in Resources */,
 				F432BE3619762AC80086BBE9 /* square_pic-1@2x.png in Resources */,
 				F432BE0B19762AC80086BBE9 /* main_wodehaoyou@2x.png in Resources */,
 				F432BDFB19762AC80086BBE9 /* main_girl@2x.png in Resources */,
@@ -1712,6 +1744,7 @@
 				F43388FA1974C28600464D43 /* HWConnect.m in Sources */,
 				F43388481974C28600464D43 /* HttpService.m in Sources */,
 				F433883E1974C28600464D43 /* UserGenderUpdateViewController.m in Sources */,
+				F4348FFB1977B5F600347195 /* DynamicHeadView.m in Sources */,
 				F43388081974C28600464D43 /* SearchWeiboFriendViewController.m in Sources */,
 				F43389021974C28600464D43 /* UIImage+Util.m in Sources */,
 				F432BD31197627E20086BBE9 /* QQCell.m in Sources */,
@@ -1735,6 +1768,7 @@
 				F43389031974C28600464D43 /* UIViewController+BarItem.m in Sources */,
 				F43388FF1974C28600464D43 /* NSString+Utils.m in Sources */,
 				F43388161974C28600464D43 /* ForgetPwdViewController.m in Sources */,
+				F4348FED19778D2A00347195 /* DynamicDetailCell.m in Sources */,
 				F432BD2F197627E20086BBE9 /* PlatformCell.m in Sources */,
 				F433883A1974C28600464D43 /* UpdatePwdViewController.m in Sources */,
 				F43388321974C28600464D43 /* ResetPwdNextStepViewController.m in Sources */,
@@ -1747,6 +1781,7 @@
 				F43387F41974C28600464D43 /* BabyHomePageViewController.m in Sources */,
 				F433882C1974C28600464D43 /* PraiseViewController.m in Sources */,
 				F43388451974C28600464D43 /* MainMenu.m in Sources */,
+				F4348FF219779C4600347195 /* DynamicDetailViewController.m in Sources */,
 				F43388F71974C28600464D43 /* UITableView+Addition.m in Sources */,
 				F43387EF1974C28600464D43 /* AppDelegate.m in Sources */,
 				F433885F1974C28600464D43 /* User.m in Sources */,
@@ -1772,6 +1807,7 @@
 				F43389041974C28600464D43 /* VersionManager.m in Sources */,
 				F43388001974C28600464D43 /* SearchDynamicViewController.m in Sources */,
 				F43387FE1974C28600464D43 /* SearchAddressListViewController.m in Sources */,
+				F4348FF71977A54A00347195 /* PinLunCell.m in Sources */,
 				F432BD29197627E20086BBE9 /* DynamicCell.m in Sources */,
 				F432BD2B197627E20086BBE9 /* FriendSelectedCell.m in Sources */,
 				F43388F51974C28600464D43 /* main.m in Sources */,
