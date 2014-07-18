@@ -70,6 +70,7 @@
 {
     _topicValue.text = [topicList objectAtIndex:indexPath.row];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    tableView.hidden = YES;
 }
 
 #pragma mark - UITextFieldDelegate
@@ -78,4 +79,13 @@
     [textField resignFirstResponder];
     return YES;
 }
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if (textField.text.length < 1) {
+        _topicListTableView.hidden = NO;
+    }
+    else
+        _topicListTableView.hidden = YES;
+}
+
 @end

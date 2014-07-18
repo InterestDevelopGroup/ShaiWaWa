@@ -18,6 +18,10 @@
 		C32B41A41965B5B8003979EE /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C32B41881965B5B8003979EE /* CoreData.framework */; };
 		C32B41AC1965B5B8003979EE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C32B41AA1965B5B8003979EE /* InfoPlist.strings */; };
 		C32B41AE1965B5B8003979EE /* ShaiWaWaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C32B41AD1965B5B8003979EE /* ShaiWaWaTests.m */; };
+		F41AE21F1978DB3F00214634 /* ReleaseDynamicsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F41AE21D1978DB3F00214634 /* ReleaseDynamicsCell.m */; };
+		F41AE2201978DB3F00214634 /* ReleaseDynamicsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F41AE21E1978DB3F00214634 /* ReleaseDynamicsCell.xib */; };
+		F41AE2241978FED100214634 /* ReleaseDynamicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F41AE2221978FED100214634 /* ReleaseDynamicViewController.m */; };
+		F41AE2251978FED100214634 /* ReleaseDynamicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F41AE2231978FED100214634 /* ReleaseDynamicViewController.xib */; };
 		F42434621974FC97008E70C6 /* UICollectionViewWaterfallCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F424345F1974FC97008E70C6 /* UICollectionViewWaterfallCell.m */; };
 		F42434631974FC97008E70C6 /* UICollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = F42434611974FC97008E70C6 /* UICollectionViewWaterfallLayout.m */; };
 		F432BD25197627E20086BBE9 /* AddrBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F432BD08197627E20086BBE9 /* AddrBookCell.m */; };
@@ -329,6 +333,12 @@
 		C32B41A91965B5B8003979EE /* ShaiWaWaTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ShaiWaWaTests-Info.plist"; sourceTree = "<group>"; };
 		C32B41AB1965B5B8003979EE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C32B41AD1965B5B8003979EE /* ShaiWaWaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShaiWaWaTests.m; sourceTree = "<group>"; };
+		F41AE21C1978DB3F00214634 /* ReleaseDynamicsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReleaseDynamicsCell.h; sourceTree = "<group>"; };
+		F41AE21D1978DB3F00214634 /* ReleaseDynamicsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReleaseDynamicsCell.m; sourceTree = "<group>"; };
+		F41AE21E1978DB3F00214634 /* ReleaseDynamicsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReleaseDynamicsCell.xib; sourceTree = "<group>"; };
+		F41AE2211978FED100214634 /* ReleaseDynamicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReleaseDynamicViewController.h; sourceTree = "<group>"; };
+		F41AE2221978FED100214634 /* ReleaseDynamicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReleaseDynamicViewController.m; sourceTree = "<group>"; };
+		F41AE2231978FED100214634 /* ReleaseDynamicViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReleaseDynamicViewController.xib; sourceTree = "<group>"; };
 		F424345E1974FC97008E70C6 /* UICollectionViewWaterfallCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewWaterfallCell.h; sourceTree = "<group>"; };
 		F424345F1974FC97008E70C6 /* UICollectionViewWaterfallCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewWaterfallCell.m; sourceTree = "<group>"; };
 		F42434601974FC97008E70C6 /* UICollectionViewWaterfallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewWaterfallLayout.h; sourceTree = "<group>"; };
@@ -813,6 +823,9 @@
 				F4348FEA19778D2900347195 /* DynamicDetailCell.h */,
 				F4348FEB19778D2900347195 /* DynamicDetailCell.m */,
 				F4348FEC19778D2A00347195 /* DynamicDetailCell.xib */,
+				F41AE21C1978DB3F00214634 /* ReleaseDynamicsCell.h */,
+				F41AE21D1978DB3F00214634 /* ReleaseDynamicsCell.m */,
+				F41AE21E1978DB3F00214634 /* ReleaseDynamicsCell.xib */,
 				F432BD10197627E20086BBE9 /* FriendSelectedCell.h */,
 				F432BD11197627E20086BBE9 /* FriendSelectedCell.m */,
 				F432BD12197627E20086BBE9 /* FriendSelectedCell.xib */,
@@ -1102,6 +1115,9 @@
 				F4348FEF19779C4600347195 /* DynamicDetailViewController.h */,
 				F4348FF019779C4600347195 /* DynamicDetailViewController.m */,
 				F4348FF119779C4600347195 /* DynamicDetailViewController.xib */,
+				F41AE2211978FED100214634 /* ReleaseDynamicViewController.h */,
+				F41AE2221978FED100214634 /* ReleaseDynamicViewController.m */,
+				F41AE2231978FED100214634 /* ReleaseDynamicViewController.xib */,
 				F43386781974C28500464D43 /* BabyListViewController.h */,
 				F43386791974C28500464D43 /* BabyListViewController.m */,
 				F433867A1974C28500464D43 /* BabyListViewController.xib */,
@@ -1580,6 +1596,7 @@
 				F432BE6119762AC80086BBE9 /* user_3-weixin@2x.png in Resources */,
 				F433885D1974C28600464D43 /* Images.xcassets in Resources */,
 				F432BDF819762AC80086BBE9 /* main_dian-@2x.png in Resources */,
+				F41AE2201978DB3F00214634 /* ReleaseDynamicsCell.xib in Resources */,
 				F433881D1974C28600464D43 /* LoginViewController.xib in Resources */,
 				F432BE5919762AC80086BBE9 /* phone@2x.png in Resources */,
 				F432BE3119762AC80086BBE9 /* square_fenxiang-4@2x.png in Resources */,
@@ -1629,6 +1646,7 @@
 				F432BE4619762AC80086BBE9 /* square_shaiwawa@2x.png in Resources */,
 				F432BE4C19762AC80086BBE9 /* square_zan-@2x.png in Resources */,
 				F432BE5119762AC80086BBE9 /* square_zuixin-@2x.png in Resources */,
+				F41AE2251978FED100214634 /* ReleaseDynamicViewController.xib in Resources */,
 				F433880B1974C28600464D43 /* FeebackViewController.xib in Resources */,
 				F432BDD719762AC80086BBE9 /* baby_4-gengduo@2x.png in Resources */,
 				F432BE6619762AC80086BBE9 /* xinlang@2x.png in Resources */,
@@ -1734,6 +1752,7 @@
 				F43388301974C28600464D43 /* RegisterViewController.m in Sources */,
 				F43387F81974C28600464D43 /* RemarksViewController.m in Sources */,
 				F433883C1974C28600464D43 /* UpdateUserNameViewController.m in Sources */,
+				F41AE2241978FED100214634 /* ReleaseDynamicViewController.m in Sources */,
 				F43388281974C28600464D43 /* PlatformBindViewController.m in Sources */,
 				F43388201974C28600464D43 /* MybabyListViewController.m in Sources */,
 				F43388121974C28600464D43 /* ChooseModeViewController.m in Sources */,
@@ -1782,6 +1801,7 @@
 				F433882C1974C28600464D43 /* PraiseViewController.m in Sources */,
 				F43388451974C28600464D43 /* MainMenu.m in Sources */,
 				F4348FF219779C4600347195 /* DynamicDetailViewController.m in Sources */,
+				F41AE21F1978DB3F00214634 /* ReleaseDynamicsCell.m in Sources */,
 				F43388F71974C28600464D43 /* UITableView+Addition.m in Sources */,
 				F43387EF1974C28600464D43 /* AppDelegate.m in Sources */,
 				F433885F1974C28600464D43 /* User.m in Sources */,

@@ -20,6 +20,8 @@
 #import "ShaiWaSquareViewController.h"
 #import "DynamicCell.h"
 #import "PraiseViewController.h"
+#import "DynamicDetailViewController.h"
+#import "ReleaseDynamicViewController.h"
 
 @interface ChooseModeViewController ()
 
@@ -81,6 +83,7 @@
     [mainMenu.addBabyButton addTarget:self action:@selector(showAddBabyVC:) forControlEvents:UIControlEventTouchUpInside];
     [mainMenu.searchFriendButton addTarget:self action:@selector(showSearchFriendsVC:) forControlEvents:UIControlEventTouchUpInside];
     [mainMenu.myGoodFriendButton addTarget:self action:@selector(showMyGoodFriendListVC) forControlEvents:UIControlEventTouchUpInside];
+    [mainMenu.exitButton addTarget:self action:@selector(quitCurUser) forControlEvents:UIControlEventTouchUpInside];
     [_menuGray addSubview:mainMenu];
     
     isDropMenuShown = NO;
@@ -100,6 +103,13 @@
     [_dynamicPageTableView clearSeperateLine];
     [_dynamicPageTableView registerNibWithName:@"DynamicCell" reuseIdentifier:@"Cell"];
     
+    if ([OSHelper iOS7]) {
+        _releaseBtn.frame = CGRectMake(_dynamicPageTableView.bounds.size.width-60, _dynamicPageTableView.bounds.size.height-50 , 44, 46);
+    }
+    else
+    {
+    _releaseBtn.frame = CGRectMake(_dynamicPageTableView.bounds.size.width-60, [UIScreen mainScreen].bounds.size.height-50 , 44, 46);
+    }
 }
 
 
@@ -143,8 +153,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    BabyHomePageViewController *babyHomePageVC = [[BabyHomePageViewController alloc] init];
-//    [self.navigationController pushViewController:babyHomePageVC animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    DynamicDetailViewController *dynamicDetailVC = [[DynamicDetailViewController alloc] init];
+    [self.navigationController pushViewController:dynamicDetailVC animated:YES];
 }
 - (void)showSettingVC
 {
@@ -170,6 +181,12 @@
     MyGoodFriendsListViewController *myFriendListVC = [[MyGoodFriendsListViewController alloc] init];
     [self.navigationController pushViewController:myFriendListVC animated:YES];
 }
+- (void)quitCurUser
+{
+    [self hideMenuGray:nil];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 - (IBAction)showSearchFriendsVC:(id)sender
 {
     [self hideMenuGray:nil];
@@ -266,5 +283,10 @@
 {
     _grayShareView.hidden = YES;
     isShareViewShown = NO;
+}
+- (IBAction)showReleaseVC:(id)sender
+{
+    ReleaseDynamicViewController *releaseVC = [[ReleaseDynamicViewController alloc] init];
+    [self.navigationController pushViewController:releaseVC animated:YES];
 }
 @end

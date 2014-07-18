@@ -9,6 +9,7 @@
 #import "DynamicDetailViewController.h"
 #import "UIViewController+BarItemAdapt.h"
 #import "PinLunCell.h"
+#import "DynamicHeadView.h"
 
 @interface DynamicDetailViewController ()
 
@@ -43,12 +44,26 @@
     [self setLeftCusBarItem:@"square_back" action:nil];
     [_pinLunListTableView clearSeperateLine];
     [_pinLunListTableView registerNibWithName:@"PinLunCell" reuseIdentifier:@"Cell"];
+    UIImageView *scollBgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 299, 145)];
+    scollBgView.image = [UIImage imageNamed:@"square_pic-3.png"];
+    
+    UIImageView *bgImgView = [[UIImageView alloc] init];
+    bgImgView.image = [UIImage imageNamed:@"baby_4-bg-2.png"];
+    [_pinLunListTableView setBackgroundView:bgImgView];
+    DynamicHeadView *dynamicHeadView = [[DynamicHeadView alloc] initWithFrame:CGRectMake(0, 0, _pinLunListTableView.bounds.size.width, 360)];
+    [dynamicHeadView.imgOrVideoScrollView addSubview:scollBgView];
+    [_pinLunListTableView setTableHeaderView:dynamicHeadView];
 }
 
 
 
 #pragma mark - UITableView DataSources and Delegate
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 10;
 }
@@ -73,7 +88,6 @@
     return pinLunListCell;
     
 }
-
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {

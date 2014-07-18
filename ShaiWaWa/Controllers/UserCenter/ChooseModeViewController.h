@@ -30,5 +30,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *dynamicPageTableView;
 @property (weak, nonatomic) IBOutlet UIView *grayShareView;
 - (IBAction)hideGayShareV:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *releaseBtn;
+- (IBAction)showReleaseVC:(id)sender;
 
 @end

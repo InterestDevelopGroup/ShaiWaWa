@@ -15,6 +15,7 @@
                 <outlet property="grayShareView" destination="vva-64-Wub" id="8u5-nC-qbx"/>
                 <outlet property="guoLVTap" destination="D3U-dV-bbN" id="9KC-gN-paj"/>
                 <outlet property="menuGray" destination="Tnt-u6-ewy" id="s7C-eN-DBu"/>
+                <outlet property="releaseBtn" destination="eoj-p0-rPJ" id="82s-SM-8ND"/>
                 <outlet property="userViewTap" destination="bp7-Th-Lpa" id="kN2-Ej-TF1"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
@@ -36,6 +37,16 @@
                         <outlet property="delegate" destination="-1" id="4fN-Au-t9o"/>
                     </connections>
                 </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="eoj-p0-rPJ">
+                    <rect key="frame" x="240" y="237" width="44" height="46"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <state key="normal" image="square_tianxie.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="showReleaseVC:" destination="-1" eventType="touchUpInside" id="yzT-eu-t7s"/>
+                    </connections>
+                </button>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="SG2-GH-Xeq">
                     <rect key="frame" x="136" y="105" width="57" height="62"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -190,7 +201,7 @@
                     </connections>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -233,5 +244,6 @@
         <image name="square_jubao.png" width="93" height="28"/>
         <image name="square_shanchu.png" width="93" height="28"/>
         <image name="square_shoucang.png" width="93" height="28"/>
+        <image name="square_tianxie.png" width="44" height="46"/>
     </resources>
 </document>

@@ -8,6 +8,6 @@
 
 #import "CommonViewController.h"
 
-@interface DynamicDetailViewController : CommonViewController<UITableViewDataSource,UITableViewDelegate>
+@interface DynamicDetailViewController : CommonViewController<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *pinLunListTableView;
 @end
