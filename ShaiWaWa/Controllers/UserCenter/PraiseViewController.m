@@ -9,6 +9,7 @@
 #import "PraiseViewController.h"
 #import "UIViewController+BarItemAdapt.h"
 #import "MyGoodFriendsListCell.h"
+#import "OtherInformationViewController.h"
 @interface PraiseViewController ()
 
 @end
@@ -59,5 +60,11 @@
     cell.remarksLabel.hidden = YES;
     cell.backgroundColor = [UIColor clearColor];
     return cell;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    OtherInformationViewController *otherUserInfoVC = [[OtherInformationViewController alloc] init];
+    [self.navigationController pushViewController:otherUserInfoVC animated:YES];
 }
 @end

@@ -100,6 +100,30 @@
 }
 - (IBAction)hideGrayTwoView:(id)sender {
 }
-- (IBAction)hideCanSeeView:(id)sender {
+- (IBAction)hideCanSeeView:(id)sender
+{
+    _canSeeView.hidden = YES;
+    _canSeeView_4s.hidden = YES;
+}
+
+- (IBAction)showCanSeeView:(id)sender
+{
+    _canSeeView.hidden = NO;
+    _canSeeView_4s.hidden = NO;
+}
+
+- (IBAction)onlyParentClick:(id)sender
+{
+    [self hideCanSeeView:nil];
+}
+
+- (IBAction)onlyFriendClick:(id)sender
+{
+    [self hideCanSeeView:nil];
+}
+
+- (IBAction)allPublicClick:(id)sender
+{
+    [self hideCanSeeView:nil];
 }
 @end
