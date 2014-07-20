@@ -141,7 +141,7 @@
     explainTextView.textColor = [UIColor whiteColor];
     //    explainTextView.textAlignment = NSTextAlignmentCenter;
     [cell.contentView addSubview:explainTextView];
-    cell.contentView.backgroundColor = [UIColor orangeColor];
+    cell.contentView.backgroundColor = [UIColor clearColor];
     UIView *releaseView = [[UIView alloc] initWithFrame:CGRectMake(0, cell.contentView.bounds.size.height-45, cell.contentView.bounds.size.width, 45)];
     
     UIImageView *releaseTouXiangImgView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 40, 40)];
@@ -149,8 +149,10 @@
     UILabel *releaseNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 6, 80, 20)];
     UILabel *releaseTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 24, 80, 20)];
     releaseNameLabel.text = @"张三";
+    releaseNameLabel.backgroundColor = [UIColor clearColor];
     releaseNameLabel.font = [UIFont systemFontOfSize:15];
     releaseTimeLabel.text = @"1分钟前";
+    releaseTimeLabel.backgroundColor = [UIColor clearColor];
     releaseTimeLabel.font = [UIFont systemFontOfSize:12];
     [releaseView addSubview:releaseTouXiangImgView];
     [releaseView addSubview:releaseNameLabel];

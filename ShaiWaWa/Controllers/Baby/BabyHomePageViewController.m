@@ -12,6 +12,9 @@
 #import "DynamicCell.h"
 #import "PraiseViewController.h"
 #import "DynamicDetailViewController.h"
+#import "NALLabelsMatrix.h"
+#import "AddHeightAndWeightViewController.h"
+#import "RemarksViewController.h"
 
 @interface BabyHomePageViewController ()
 
@@ -60,9 +63,34 @@
 {
     self.title = @"小龙";
     [self setLeftCusBarItem:@"square_back" action:nil];
-    UIBarButtonItem *rightBtn = [self customBarItem:@"baby_4-gengduo" action:@selector(showList:)];
-    self.navigationItem.rightBarButtonItem =rightBtn;
+    UIBarButtonItem *right_doWith= nil;
+    if ([OSHelper iOS7])
+    {
+        right_doWith = [self customBarItem:@"user_gengduo" action:@selector(showList:) size:CGSizeMake(38, 30) imageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, -25)];
+        
+    }
+    else
+    {
+        right_doWith = [self customBarItem:@"user_gengduo" action:@selector(showList:)];
+    }
+    self.navigationItem.rightBarButtonItem = right_doWith;
+    remarksBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [remarksBtn setBackgroundColor:[UIColor whiteColor]];
+    [remarksBtn setTitle:@"备注信息" forState:UIControlStateNormal];
+    [remarksBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+    remarksBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    remarksBtn.frame = CGRectMake(self.navigationController.navigationBar.bounds.size.width-90, self.navigationController.navigationBar.bounds.size.height+10, 84, 41);
+    [remarksBtn addTarget:self action:@selector(showRemarkVC) forControlEvents:UIControlEventTouchUpInside];
+    
+    specialCareBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [specialCareBtn setBackgroundColor:[UIColor whiteColor]];
+    [specialCareBtn setTitle:@"特别关注" forState:UIControlStateNormal];
+    [specialCareBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+    specialCareBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    specialCareBtn.frame = CGRectMake(self.navigationController.navigationBar.bounds.size.width-90, self.navigationController.navigationBar.bounds.size.height+51, 84, 41);
+    [specialCareBtn addTarget:self action:@selector(specialCare) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_yaoQingbgView];
+    isRemarksBtnShown = NO;
     isRightBtnSelected = NO;
     isShareViewShown = NO;
     isFullList = NO;
@@ -93,6 +121,32 @@
     [_dynamicFullListTableView registerNibWithName:@"DynamicCell" reuseIdentifier:@"Celler"];
     _dynamicListFullView.frame = CGRectMake(320, 0, 320, _segFullScrollView.bounds.size.height);
     [_segFullScrollView addSubview:_dynamicListFullView];
+    
+    
+    _heightAndWeightTableView.frame = CGRectMake(320*2, 0, 320, _segScrollView.bounds.size.height);
+    NALLabelsMatrix *naLabelsMatrix = [[NALLabelsMatrix alloc] initWithFrame:CGRectMake(10, 50, 300, 100) andColumnsWidths:[[NSArray alloc] initWithObjects:@90,@72,@72,@72, nil]];
+    naLabelsMatrix.backgroundColor = [UIColor whiteColor];
+    [naLabelsMatrix addRecord:[[NSArray alloc] initWithObjects:@"日期", @"身高(cm)", @"体重(kg)",@"体型", nil]];
+    [naLabelsMatrix addRecord:[[NSArray alloc] initWithObjects:@"2014-06-02", @"86", @"86",@"完美体型", nil]];
+    [naLabelsMatrix addRecord:[[NSArray alloc] initWithObjects:@"2014-06-02", @"86", @"86",@"完美体型", nil]];
+    [naLabelsMatrix addRecord:[[NSArray alloc] initWithObjects:@"2014-06-02", @"86", @"86",@"完美体型", nil]];
+    [naLabelsMatrix addRecord:[[NSArray alloc] initWithObjects:@"2014-06-02", @"86", @"86",@"完美体型", nil]];
+    [naLabelsMatrix addRecord:[[NSArray alloc] initWithObjects:@"2014-06-02", @"86", @"86",@"完美体型", nil]];
+    [naLabelsMatrix addRecord:[[NSArray alloc] initWithObjects:@"2014-06-02", @"86", @"86",@"完美体型", nil]];
+    [naLabelsMatrix addRecord:[[NSArray alloc] initWithObjects:@"2014-06-02", @"86", @"86",@"完美体型", nil]];
+    [naLabelsMatrix addRecord:[[NSArray alloc] initWithObjects:@"2014-06-02", @"86", @"86",@"完美体型", nil]];
+    [naLabelsMatrix addRecord:[[NSArray alloc] initWithObjects:@"2014-06-02", @"86", @"86",@"完美体型", nil]];
+    [naLabelsMatrix addRecord:[[NSArray alloc] initWithObjects:@"2014-06-02", @"86", @"86",@"完美体型", nil]];
+    [naLabelsMatrix addRecord:[[NSArray alloc] initWithObjects:@"2014-06-02", @"86", @"86",@"完美体型", nil]];
+    [naLabelsMatrix addRecord:[[NSArray alloc] initWithObjects:@"2014-06-02", @"86", @"86",@"完美体型", nil]];
+    [naLabelsMatrix addRecord:[[NSArray alloc] initWithObjects:@"2014-06-02", @"86", @"86",@"完美体型", nil]];
+    [naLabelsMatrix addRecord:[[NSArray alloc] initWithObjects:@"2014-06-02", @"86", @"86",@"完美体型", nil]];
+    [naLabelsMatrix addRecord:[[NSArray alloc] initWithObjects:@"2014-06-02", @"86", @"86",@"完美体型", nil]];
+    [naLabelsMatrix addRecord:[[NSArray alloc] initWithObjects:@"2014-06-02", @"86", @"86",@"完美体型", nil]];
+    [_heightAndWeight addSubview:naLabelsMatrix];
+    
+    [_hAndwTableView setTableHeaderView:_heightAndWeight];
+    [_segScrollView addSubview:_heightAndWeightTableView];
 }
 
 - (void)HMSegmentedControlInitMethod
@@ -146,7 +200,17 @@
 
 - (void)showList:(UIBarButtonItem *)Btn
 {
-    
+    if (!isRemarksBtnShown) {
+        [self.navigationController.view addSubview:remarksBtn];
+        [self.navigationController.view addSubview:specialCareBtn];
+        isRemarksBtnShown = YES;
+    }
+    else
+    {
+        [remarksBtn removeFromSuperview];
+        [specialCareBtn removeFromSuperview];
+        isRemarksBtnShown = NO;
+    }
 }
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
@@ -350,5 +414,22 @@
 {
     _grayShareFullView.hidden = YES;
     isShareViewShown = NO;
+}
+
+- (IBAction)showAddHAndWPageVC:(id)sender
+{
+    AddHeightAndWeightViewController *addHeightAndWeightVC =[[AddHeightAndWeightViewController alloc] init];
+    [self.navigationController pushViewController:addHeightAndWeightVC animated:YES];
+}
+
+- (void)showRemarkVC
+{
+    [self showList:nil];
+    RemarksViewController *remarksVC = [[RemarksViewController alloc] init];
+    [self.navigationController pushViewController:remarksVC animated:YES];
+}
+- (void)specialCare
+{
+    [self showList:nil];
 }
 @end

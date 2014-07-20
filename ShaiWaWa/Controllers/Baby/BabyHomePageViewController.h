@@ -19,6 +19,8 @@
     BOOL isShareViewShown;
     BOOL isFullList;
     HMSegmentedControl *segMentedControlFull;
+    UIButton *remarksBtn, *specialCareBtn;
+    BOOL isRemarksBtnShown;
 }
 @property (strong, nonatomic) IBOutlet UIView *tabSelectionBar;
 @property (weak, nonatomic) IBOutlet UIView *tabSelectionFullBar;
@@ -46,4 +48,8 @@
 - (IBAction)hideGayShareFullV:(id)sender;
 @property (weak, nonatomic) IBOutlet UITableView *dynamicFullListTableView;
 @property (strong, nonatomic) IBOutlet UIView *dynamicListFullView;
+@property (strong, nonatomic) IBOutlet UIView *heightAndWeight;
+@property (strong, nonatomic) IBOutlet UIView *heightAndWeightTableView;
+@property (weak, nonatomic) IBOutlet UITableView *hAndwTableView;
+- (IBAction)showAddHAndWPageVC:(id)sender;
 @end

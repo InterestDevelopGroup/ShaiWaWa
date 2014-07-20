@@ -13,6 +13,9 @@
 		24A3230C197AD076005CFEA4 /* ReleaseDynamic.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24A3230B197AD076005CFEA4 /* ReleaseDynamic.xib */; };
 		24A32310197AEFF8005CFEA4 /* TopicListOfDynamic.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A3230E197AEFF8005CFEA4 /* TopicListOfDynamic.m */; };
 		24A32311197AEFF8005CFEA4 /* TopicListOfDynamic.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24A3230F197AEFF8005CFEA4 /* TopicListOfDynamic.xib */; };
+		24A32315197B6036005CFEA4 /* NALLabelsMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A32314197B6036005CFEA4 /* NALLabelsMatrix.m */; };
+		24A32319197B7545005CFEA4 /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A32317197B7545005CFEA4 /* MessageCell.m */; };
+		24A3231A197B7545005CFEA4 /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24A32318197B7545005CFEA4 /* MessageCell.xib */; };
 		C32B41831965B5B8003979EE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C32B41821965B5B8003979EE /* Foundation.framework */; };
 		C32B41851965B5B8003979EE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C32B41841965B5B8003979EE /* CoreGraphics.framework */; };
 		C32B41871965B5B8003979EE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C32B41861965B5B8003979EE /* UIKit.framework */; };
@@ -332,6 +335,11 @@
 		24A3230D197AEFF8005CFEA4 /* TopicListOfDynamic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopicListOfDynamic.h; sourceTree = "<group>"; };
 		24A3230E197AEFF8005CFEA4 /* TopicListOfDynamic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopicListOfDynamic.m; sourceTree = "<group>"; };
 		24A3230F197AEFF8005CFEA4 /* TopicListOfDynamic.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopicListOfDynamic.xib; sourceTree = "<group>"; };
+		24A32313197B6036005CFEA4 /* NALLabelsMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NALLabelsMatrix.h; sourceTree = "<group>"; };
+		24A32314197B6036005CFEA4 /* NALLabelsMatrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NALLabelsMatrix.m; sourceTree = "<group>"; };
+		24A32316197B7545005CFEA4 /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
+		24A32317197B7545005CFEA4 /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
+		24A32318197B7545005CFEA4 /* MessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCell.xib; sourceTree = "<group>"; };
 		9066DBF5432D412091E6A49A /* libPods-ShaiWaWa.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ShaiWaWa.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C32B417F1965B5B8003979EE /* ShaiWaWa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShaiWaWa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C32B41821965B5B8003979EE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -750,6 +758,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		24A32312197B6036005CFEA4 /* NALLabelsMatrix */ = {
+			isa = PBXGroup;
+			children = (
+				24A32313197B6036005CFEA4 /* NALLabelsMatrix.h */,
+				24A32314197B6036005CFEA4 /* NALLabelsMatrix.m */,
+			);
+			path = NALLabelsMatrix;
+			sourceTree = "<group>";
+		};
 		C32B41761965B5B8003979EE = {
 			isa = PBXGroup;
 			children = (
@@ -854,6 +871,9 @@
 				F432BD22197627E20086BBE9 /* WeiBoCell.h */,
 				F432BD23197627E20086BBE9 /* WeiBoCell.m */,
 				F432BD24197627E20086BBE9 /* WeiBoCell.xib */,
+				24A32316197B7545005CFEA4 /* MessageCell.h */,
+				24A32317197B7545005CFEA4 /* MessageCell.m */,
+				24A32318197B7545005CFEA4 /* MessageCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1278,6 +1298,7 @@
 		F43386EE1974C28500464D43 /* General */ = {
 			isa = PBXGroup;
 			children = (
+				24A32312197B6036005CFEA4 /* NALLabelsMatrix */,
 				F432BD06197627E20086BBE9 /* Views */,
 				F43386EF1974C28500464D43 /* Category */,
 				F43386F41974C28500464D43 /* CustomerView */,
@@ -1527,6 +1548,7 @@
 				F432BE4119762AC80086BBE9 /* square_pinglun-4@2x.png in Resources */,
 				F432BDD819762AC80086BBE9 /* baby_baba@2x.png in Resources */,
 				F432BD2A197627E20086BBE9 /* DynamicCell.xib in Resources */,
+				24A3231A197B7545005CFEA4 /* MessageCell.xib in Resources */,
 				F432BDF919762AC80086BBE9 /* main_dian@2x.png in Resources */,
 				F433881B1974C28600464D43 /* LocationsViewController.xib in Resources */,
 				F432BE2D19762AC80086BBE9 /* square_detail@2x.png in Resources */,
@@ -1764,6 +1786,7 @@
 				F43388041974C28600464D43 /* SearchQQFriendViewController.m in Sources */,
 				F43388301974C28600464D43 /* RegisterViewController.m in Sources */,
 				F43387F81974C28600464D43 /* RemarksViewController.m in Sources */,
+				24A32315197B6036005CFEA4 /* NALLabelsMatrix.m in Sources */,
 				F433883C1974C28600464D43 /* UpdateUserNameViewController.m in Sources */,
 				F43388281974C28600464D43 /* PlatformBindViewController.m in Sources */,
 				F43388201974C28600464D43 /* MybabyListViewController.m in Sources */,
@@ -1844,6 +1867,7 @@
 				F4348FF71977A54A00347195 /* PinLunCell.m in Sources */,
 				F432BD29197627E20086BBE9 /* DynamicCell.m in Sources */,
 				F432BD2B197627E20086BBE9 /* FriendSelectedCell.m in Sources */,
+				24A32319197B7545005CFEA4 /* MessageCell.m in Sources */,
 				F43388F51974C28600464D43 /* main.m in Sources */,
 				F433880C1974C28600464D43 /* SettingViewController.m in Sources */,
 			);
