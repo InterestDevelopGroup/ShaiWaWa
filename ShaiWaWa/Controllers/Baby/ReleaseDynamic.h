@@ -33,4 +33,19 @@
 @property (weak, nonatomic) IBOutlet UIView *canSeeView;
 @property (weak, nonatomic) IBOutlet UIView *canSeeView_4s;
 - (IBAction)hideCanSeeView:(id)sender;
+- (IBAction)showCanSeeView:(id)sender;
+
+- (IBAction)onlyParentClick:(id)sender;
+- (IBAction)onlyFriendClick:(id)sender;
+- (IBAction)allPublicClick:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIButton *onlyParentBtn_4s;
+@property (weak, nonatomic) IBOutlet UIButton *onlyFriendBtn_4s;
+@property (weak, nonatomic) IBOutlet UIButton *allPublicBtn_4s;
+
+@property (weak, nonatomic) IBOutlet UIButton *onlyParentBtn;
+@property (weak, nonatomic) IBOutlet UIButton *onlyFriendBtn;
+@property (weak, nonatomic) IBOutlet UIButton *allPublicBtn;
+
+
 @end

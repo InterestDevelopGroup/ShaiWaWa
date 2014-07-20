@@ -8,6 +8,7 @@
 
 #import "MessageViewController.h"
 #import "UIViewController+BarItemAdapt.h"
+#import "MessageCell.h"
 
 @interface MessageViewController ()
 
@@ -49,8 +50,45 @@
     }
     [self HMSegmentedControlInitMethod];
     
+    [_msgTableView clearSeperateLine];
+    [_msgTableView registerNibWithName:@"MessageCell" reuseIdentifier:@"Cell"];
+    
+    [_segScrollView addSubview:_msgView];
 }
 
+
+
+#pragma mark - UITableView DataSources and Delegate
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 10;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MessageCell * msgCell = (MessageCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    
+    /*
+     // 取当前section，设置单元格显示内容。
+     NSInteger section = indexPath.section;
+     // 获取这个分组的省份名称，再根据省份名称获得这个省份的城市列表。
+     NSString *sectionType = [sectionArr objectAtIndex:section];
+     NSArray *list = [babyList objectForKey:sectionType];
+     [list objectAtIndex:indexPath.row];
+     */
+    //babyListCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    //    babyListCell.babyImage.image = [UIImage imageNamed:@""];
+    //    babyListCell.babyNameLabel.text = [NSString stringWithFormat:@""];
+    //    babyListCell.babyOldLabel.text = [NSString stringWithFormat:@""];
+    //    babyListCell.babySexImage.image = [UIImage imageNamed:@""];
+    
+    return msgCell;
+    
+}
 - (void)HMSegmentedControlInitMethod
 {
     segMentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"新消息",@"已读消息"]];

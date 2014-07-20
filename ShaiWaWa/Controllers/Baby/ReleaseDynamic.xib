@@ -9,9 +9,12 @@
             <connections>
                 <outlet property="addMore" destination="OXK-n0-uNz" id="jmK-Dy-YhL"/>
                 <outlet property="addr_Label" destination="3TB-YH-8Sp" id="IeF-SP-mkn"/>
+                <outlet property="allPublicBtn" destination="IVr-VC-ZTl" id="25R-ML-E9B"/>
                 <outlet property="canSeeView" destination="2eP-Sw-o28" id="qZx-dw-pMD"/>
                 <outlet property="grayTwoView" destination="xvm-8S-4MG" id="38j-z9-hs0"/>
                 <outlet property="letPersonSawLabel" destination="dMd-DA-dZF" id="b08-Op-c1k"/>
+                <outlet property="onlyFriendBtn" destination="Xt7-Mp-fCd" id="1yb-Fh-nJ8"/>
+                <outlet property="onlyParentBtn" destination="2EK-U8-zgI" id="GJG-nY-W4X"/>
                 <outlet property="picOrvideoSelectBar" destination="pne-R6-pTz" id="GZ1-td-x0Q"/>
                 <outlet property="view" destination="jK8-rc-A5Y" id="YVV-Te-qrC"/>
             </connections>
@@ -168,7 +171,7 @@
                         <outletCollection property="gestureRecognizers" destination="hag-3a-CAF" appends="YES" id="noZ-Qp-uBI"/>
                     </connections>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="仅亲友可见" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dMd-DA-dZF">
+                <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="仅亲友可见" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dMd-DA-dZF">
                     <rect key="frame" x="240" y="444" width="60" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -184,7 +187,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="blb-kP-jhH">
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="blb-kP-jhH">
                             <rect key="frame" x="206" y="404" width="106" height="64"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <subviews>
@@ -200,6 +203,9 @@
                                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="onlyParentClick:" destination="-1" eventType="touchUpInside" id="K9d-27-CVj"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xt7-Mp-fCd">
                                     <rect key="frame" x="0.0" y="23" width="106" height="19"/>
@@ -209,6 +215,9 @@
                                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="onlyFriendClick:" destination="-1" eventType="touchUpInside" id="Nhg-CK-Z0Y"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IVr-VC-ZTl">
                                     <rect key="frame" x="0.0" y="42" width="106" height="19"/>
@@ -218,12 +227,15 @@
                                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="allPublicClick:" destination="-1" eventType="touchUpInside" id="dJo-t6-iYJ"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" red="0.86374830160000005" green="0.86374830160000005" blue="0.86374830160000005" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <gestureRecognizers/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
@@ -324,7 +336,11 @@
                 <action selector="showLocationVC:" destination="-1" id="Jzd-3q-7Jx"/>
             </connections>
         </tapGestureRecognizer>
-        <tapGestureRecognizer id="CUc-Ga-iGd"/>
+        <tapGestureRecognizer id="CUc-Ga-iGd">
+            <connections>
+                <action selector="showCanSeeView:" destination="-1" id="Dxp-Df-Fwb"/>
+            </connections>
+        </tapGestureRecognizer>
         <tapGestureRecognizer id="9Cb-vx-hwU">
             <connections>
                 <action selector="hideGrayTwoView:" destination="-1" id="xOZ-bs-w3l"/>
