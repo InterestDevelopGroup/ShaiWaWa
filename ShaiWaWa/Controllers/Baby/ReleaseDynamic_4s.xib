@@ -9,9 +9,12 @@
             <connections>
                 <outlet property="addMore_4s" destination="IVG-rj-Viv" id="SPY-de-l7s"/>
                 <outlet property="addr_4s_Label" destination="ITx-hL-AkO" id="9aj-IK-aF3"/>
+                <outlet property="allPublicBtn_4s" destination="jxs-42-Cxu" id="QA6-Hv-DWX"/>
                 <outlet property="canSeeView_4s" destination="Zyd-9e-HD6" id="VKL-2v-q1f"/>
                 <outlet property="grayTwoView_4s" destination="3F8-YE-R5Q" id="qwN-yK-tJ9"/>
                 <outlet property="letPersonSawLabel" destination="7dx-RN-y44" id="H3N-Lz-kJZ"/>
+                <outlet property="onlyFriendBtn_4s" destination="zXi-Ad-qQe" id="ub9-sT-cLn"/>
+                <outlet property="onlyParentBtn_4s" destination="gxN-1I-sgS" id="we6-kN-Kqg"/>
                 <outlet property="picOrvideoSelectBar_4s" destination="udc-89-ei8" id="dtv-DF-s99"/>
                 <outlet property="view" destination="I3d-H2-xoV" id="zmW-Pm-1kE"/>
             </connections>
@@ -168,7 +171,7 @@
                         <outletCollection property="gestureRecognizers" destination="lTa-Gv-oD2" appends="YES" id="K24-X8-uAg"/>
                     </connections>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="仅亲友可见" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7dx-RN-y44">
+                <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="仅亲友可见" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7dx-RN-y44">
                     <rect key="frame" x="240" y="356" width="60" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -184,7 +187,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="417"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <view hidden="YES" contentMode="scaleToFill" id="WUR-Z8-9ON">
+                        <view contentMode="scaleToFill" id="WUR-Z8-9ON">
                             <rect key="frame" x="206" y="316" width="106" height="64"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <subviews>
@@ -201,7 +204,7 @@
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <action selector="showSynShareBar:" destination="-1" eventType="touchUpInside" id="UqC-gF-Fc0"/>
+                                        <action selector="onlyParentClick:" destination="-1" eventType="touchUpInside" id="kp9-38-h4h"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zXi-Ad-qQe">
@@ -213,7 +216,7 @@
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <action selector="showSynShareBar:" destination="-1" eventType="touchUpInside" id="w9P-bR-evE"/>
+                                        <action selector="onlyFriendClick:" destination="-1" eventType="touchUpInside" id="Tsd-9K-PWm"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jxs-42-Cxu">
@@ -225,14 +228,14 @@
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <action selector="showSynShareBar:" destination="-1" eventType="touchUpInside" id="vAv-uf-vTx"/>
+                                        <action selector="allPublicClick:" destination="-1" eventType="touchUpInside" id="jJK-0I-rk4"/>
                                     </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" red="0.86374830160000005" green="0.86374830160000005" blue="0.86374830160000005" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <gestureRecognizers/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
@@ -335,7 +338,11 @@
                 <action selector="showLocationVC:" destination="-1" id="EAo-zx-1PR"/>
             </connections>
         </tapGestureRecognizer>
-        <tapGestureRecognizer id="1gP-ld-XL7"/>
+        <tapGestureRecognizer id="1gP-ld-XL7">
+            <connections>
+                <action selector="showCanSeeView:" destination="-1" id="Lwp-tz-Ver"/>
+            </connections>
+        </tapGestureRecognizer>
         <tapGestureRecognizer id="M7r-4f-vDi">
             <connections>
                 <action selector="hideGrayTwoView:" destination="-1" id="wYY-ZO-als"/>
