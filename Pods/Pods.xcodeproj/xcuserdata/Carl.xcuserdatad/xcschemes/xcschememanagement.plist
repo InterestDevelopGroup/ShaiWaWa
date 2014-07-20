@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-ShaiWaWa-HMSegmentedControl.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-ShaiWaWa.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -22,17 +27,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>05416A205A914BDA821E5069</key>
+		<key>34F2A1B483EF47728D94BAF8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AC654B58C20D45D9BF828E60</key>
+		<key>60F63BA786FD42EEB547D48A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E28DCE65101243B983F067D9</key>
+		<key>AA9E89C23075432AA8F6F261</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F1C58564D81A40CBA7BEB779</key>
 		<dict>
 			<key>primary</key>
 			<true/>
