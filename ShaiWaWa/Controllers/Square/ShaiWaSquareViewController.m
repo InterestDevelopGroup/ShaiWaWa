@@ -9,7 +9,7 @@
 #import "ShaiWaSquareViewController.h"
 #import "UIViewController+BarItemAdapt.h"
 //#import "UICollectionViewWaterfallCell.h"
-
+#import "DynamicDetailViewController.h"
 
 @interface ShaiWaSquareViewController ()
 
@@ -177,8 +177,11 @@
 //UICollectionView被选中时调用的方法
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell * cell = (UICollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    cell.backgroundColor = [UIColor whiteColor];
+//    UICollectionViewCell * cell = (UICollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+//    cell.backgroundColor = [UIColor whiteColor];
+    DynamicDetailViewController *dynamicDetailVC = [[DynamicDetailViewController alloc] init];
+    [self.navigationController pushViewController:dynamicDetailVC animated:YES];
+    
 }
 //返回这个UICollectionView是否可以被选择
 -(BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath

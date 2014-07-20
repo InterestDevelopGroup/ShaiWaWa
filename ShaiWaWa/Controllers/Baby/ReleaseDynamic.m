@@ -6,17 +6,17 @@
 //  Copyright (c) 2014年 helloworld. All rights reserved.
 //
 
-#import "ReleaseDynamicViewController.h"
+#import "ReleaseDynamic.h"
 #import "UIViewController+BarItemAdapt.h"
 #import "TopicViewController.h"
 #import "LocationsViewController.h"
 #import "ChooseFriendViewController.h"
 
-@interface ReleaseDynamicViewController ()
+@interface ReleaseDynamic ()
 
 @end
 
-@implementation ReleaseDynamicViewController
+@implementation ReleaseDynamic
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,11 +42,16 @@
 #pragma mark - Private Methods
 - (void)initUI
 {
+    
+    
     self.title = @"发表动态";
     [self setLeftCusBarItem:@"square_back" action:nil];
+    self.navigationItem.rightBarButtonItem = [self customBarItem:@"pb_fabu" action:@selector(releaseDy) size:CGSizeMake(57, 27)];
+    
     NSMutableAttributedString * attrString = [[NSMutableAttributedString alloc] initWithString:_letPersonSawLabel.text];
     [attrString addAttributes:@{NSUnderlineStyleAttributeName:[NSNumber numberWithInt:NSUnderlineStyleSingle]} range:NSMakeRange(0, attrString.length)];
     _letPersonSawLabel.attributedText = attrString;
+    
     
     
 }
@@ -76,5 +81,25 @@
 {
     LocationsViewController *locationVC = [[LocationsViewController alloc] init];
     [self.navigationController pushViewController:locationVC animated:YES];
+}
+
+- (void)releaseDy
+{
+
+}
+- (IBAction)showLocalPhoto:(id)sender {
+}
+
+- (IBAction)showLocalCamer:(id)sender {
+}
+
+- (IBAction)showLocalFilm:(id)sender {
+}
+
+- (IBAction)showGrayTwoBtnView:(id)sender {
+}
+- (IBAction)hideGrayTwoView:(id)sender {
+}
+- (IBAction)hideCanSeeView:(id)sender {
 }
 @end

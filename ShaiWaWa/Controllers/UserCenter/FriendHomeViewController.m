@@ -70,10 +70,10 @@
     babyLabel.textColor = [UIColor darkGrayColor];
     [_babyButton addSubview:babyLabel];
     
-    UIImage *imageJianTou = [UIImage imageNamed:@"main_jiantou.png"];
-    UIImageView *jianTou = [[UIImageView alloc] initWithImage:imageJianTou];
-    jianTou.frame = CGRectMake(_babyButton.bounds.size.width-18, 15, 7, 11);
-    [_babyButton addSubview:jianTou];
+//    UIImage *imageJianTou = [UIImage imageNamed:@"main_jiantou.png"];
+//    UIImageView *jianTou = [[UIImageView alloc] initWithImage:imageJianTou];
+//    jianTou.frame = CGRectMake(_babyButton.bounds.size.width-18, 15, 7, 11);
+//    [_babyButton addSubview:jianTou];
 }
 
 - (void)dynamicCell
@@ -85,10 +85,10 @@
     dynamicLabel.textColor = [UIColor darkGrayColor];
     [_dynamicButton addSubview:dynamicLabel];
     
-    UIImage *imageJianTou = [UIImage imageNamed:@"main_jiantou.png"];
-    UIImageView *jianTou = [[UIImageView alloc] initWithImage:imageJianTou];
-    jianTou.frame = CGRectMake(_dynamicButton.bounds.size.width-18, 15, 7, 11);
-    [_dynamicButton addSubview:jianTou];
+//    UIImage *imageJianTou = [UIImage imageNamed:@"main_jiantou.png"];
+//    UIImageView *jianTou = [[UIImageView alloc] initWithImage:imageJianTou];
+//    jianTou.frame = CGRectMake(_dynamicButton.bounds.size.width-18, 15, 7, 11);
+//    [_dynamicButton addSubview:jianTou];
 }
 
 - (void)goodFriendCell
@@ -100,10 +100,10 @@
     goodFriendLabel.textColor = [UIColor darkGrayColor];
     [_goodFriendButton addSubview:goodFriendLabel];
     
-    UIImage *imageJianTou = [UIImage imageNamed:@"main_jiantou.png"];
-    UIImageView *jianTou = [[UIImageView alloc] initWithImage:imageJianTou];
-    jianTou.frame = CGRectMake(_goodFriendButton.bounds.size.width-18, 15, 7, 11);
-    [_goodFriendButton addSubview:jianTou];
+//    UIImage *imageJianTou = [UIImage imageNamed:@"main_jiantou.png"];
+//    UIImageView *jianTou = [[UIImageView alloc] initWithImage:imageJianTou];
+//    jianTou.frame = CGRectMake(_goodFriendButton.bounds.size.width-18, 15, 7, 11);
+//    [_goodFriendButton addSubview:jianTou];
 }
 - (void)showDelButton
 {

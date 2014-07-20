@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		0E618755031544B1B81E652C /* libPods-ShaiWaWa.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9066DBF5432D412091E6A49A /* libPods-ShaiWaWa.a */; };
+		24A32308197AD03A005CFEA4 /* ReleaseDynamic.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A32307197AD03A005CFEA4 /* ReleaseDynamic.m */; };
+		24A3230A197AD065005CFEA4 /* ReleaseDynamic_4s.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24A32309197AD065005CFEA4 /* ReleaseDynamic_4s.xib */; };
+		24A3230C197AD076005CFEA4 /* ReleaseDynamic.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24A3230B197AD076005CFEA4 /* ReleaseDynamic.xib */; };
+		24A32310197AEFF8005CFEA4 /* TopicListOfDynamic.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A3230E197AEFF8005CFEA4 /* TopicListOfDynamic.m */; };
+		24A32311197AEFF8005CFEA4 /* TopicListOfDynamic.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24A3230F197AEFF8005CFEA4 /* TopicListOfDynamic.xib */; };
 		C32B41831965B5B8003979EE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C32B41821965B5B8003979EE /* Foundation.framework */; };
 		C32B41851965B5B8003979EE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C32B41841965B5B8003979EE /* CoreGraphics.framework */; };
 		C32B41871965B5B8003979EE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C32B41861965B5B8003979EE /* UIKit.framework */; };
@@ -20,8 +25,6 @@
 		C32B41AE1965B5B8003979EE /* ShaiWaWaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C32B41AD1965B5B8003979EE /* ShaiWaWaTests.m */; };
 		F41AE21F1978DB3F00214634 /* ReleaseDynamicsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F41AE21D1978DB3F00214634 /* ReleaseDynamicsCell.m */; };
 		F41AE2201978DB3F00214634 /* ReleaseDynamicsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F41AE21E1978DB3F00214634 /* ReleaseDynamicsCell.xib */; };
-		F41AE2241978FED100214634 /* ReleaseDynamicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F41AE2221978FED100214634 /* ReleaseDynamicViewController.m */; };
-		F41AE2251978FED100214634 /* ReleaseDynamicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F41AE2231978FED100214634 /* ReleaseDynamicViewController.xib */; };
 		F42434621974FC97008E70C6 /* UICollectionViewWaterfallCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F424345F1974FC97008E70C6 /* UICollectionViewWaterfallCell.m */; };
 		F42434631974FC97008E70C6 /* UICollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = F42434611974FC97008E70C6 /* UICollectionViewWaterfallLayout.m */; };
 		F432BD25197627E20086BBE9 /* AddrBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F432BD08197627E20086BBE9 /* AddrBookCell.m */; };
@@ -322,6 +325,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		24A32306197AD03A005CFEA4 /* ReleaseDynamic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReleaseDynamic.h; sourceTree = "<group>"; };
+		24A32307197AD03A005CFEA4 /* ReleaseDynamic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReleaseDynamic.m; sourceTree = "<group>"; };
+		24A32309197AD065005CFEA4 /* ReleaseDynamic_4s.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReleaseDynamic_4s.xib; sourceTree = "<group>"; };
+		24A3230B197AD076005CFEA4 /* ReleaseDynamic.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReleaseDynamic.xib; sourceTree = "<group>"; };
+		24A3230D197AEFF8005CFEA4 /* TopicListOfDynamic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopicListOfDynamic.h; sourceTree = "<group>"; };
+		24A3230E197AEFF8005CFEA4 /* TopicListOfDynamic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopicListOfDynamic.m; sourceTree = "<group>"; };
+		24A3230F197AEFF8005CFEA4 /* TopicListOfDynamic.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopicListOfDynamic.xib; sourceTree = "<group>"; };
 		9066DBF5432D412091E6A49A /* libPods-ShaiWaWa.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ShaiWaWa.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C32B417F1965B5B8003979EE /* ShaiWaWa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShaiWaWa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C32B41821965B5B8003979EE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -336,9 +346,6 @@
 		F41AE21C1978DB3F00214634 /* ReleaseDynamicsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReleaseDynamicsCell.h; sourceTree = "<group>"; };
 		F41AE21D1978DB3F00214634 /* ReleaseDynamicsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReleaseDynamicsCell.m; sourceTree = "<group>"; };
 		F41AE21E1978DB3F00214634 /* ReleaseDynamicsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReleaseDynamicsCell.xib; sourceTree = "<group>"; };
-		F41AE2211978FED100214634 /* ReleaseDynamicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReleaseDynamicViewController.h; sourceTree = "<group>"; };
-		F41AE2221978FED100214634 /* ReleaseDynamicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReleaseDynamicViewController.m; sourceTree = "<group>"; };
-		F41AE2231978FED100214634 /* ReleaseDynamicViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReleaseDynamicViewController.xib; sourceTree = "<group>"; };
 		F424345E1974FC97008E70C6 /* UICollectionViewWaterfallCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewWaterfallCell.h; sourceTree = "<group>"; };
 		F424345F1974FC97008E70C6 /* UICollectionViewWaterfallCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewWaterfallCell.m; sourceTree = "<group>"; };
 		F42434601974FC97008E70C6 /* UICollectionViewWaterfallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewWaterfallLayout.h; sourceTree = "<group>"; };
@@ -1115,9 +1122,13 @@
 				F4348FEF19779C4600347195 /* DynamicDetailViewController.h */,
 				F4348FF019779C4600347195 /* DynamicDetailViewController.m */,
 				F4348FF119779C4600347195 /* DynamicDetailViewController.xib */,
-				F41AE2211978FED100214634 /* ReleaseDynamicViewController.h */,
-				F41AE2221978FED100214634 /* ReleaseDynamicViewController.m */,
-				F41AE2231978FED100214634 /* ReleaseDynamicViewController.xib */,
+				24A32306197AD03A005CFEA4 /* ReleaseDynamic.h */,
+				24A32307197AD03A005CFEA4 /* ReleaseDynamic.m */,
+				24A3230B197AD076005CFEA4 /* ReleaseDynamic.xib */,
+				24A32309197AD065005CFEA4 /* ReleaseDynamic_4s.xib */,
+				24A3230D197AEFF8005CFEA4 /* TopicListOfDynamic.h */,
+				24A3230E197AEFF8005CFEA4 /* TopicListOfDynamic.m */,
+				24A3230F197AEFF8005CFEA4 /* TopicListOfDynamic.xib */,
 				F43386781974C28500464D43 /* BabyListViewController.h */,
 				F43386791974C28500464D43 /* BabyListViewController.m */,
 				F433867A1974C28500464D43 /* BabyListViewController.xib */,
@@ -1508,6 +1519,7 @@
 				F432BE2E19762AC80086BBE9 /* square_fenxiang-1@2x.png in Resources */,
 				F432BE5E19762AC80086BBE9 /* user_3-bg@2x.png in Resources */,
 				F432BDE819762AC80086BBE9 /* login_box-7@2x.png in Resources */,
+				24A3230A197AD065005CFEA4 /* ReleaseDynamic_4s.xib in Resources */,
 				F432BDEF19762AC80086BBE9 /* main_2-bg2@2x.png in Resources */,
 				F432BDE019762AC80086BBE9 /* baby_shengaotizhong-@2x.png in Resources */,
 				F432BE3919762AC80086BBE9 /* square_pic-4@2x.png in Resources */,
@@ -1597,6 +1609,7 @@
 				F433885D1974C28600464D43 /* Images.xcassets in Resources */,
 				F432BDF819762AC80086BBE9 /* main_dian-@2x.png in Resources */,
 				F41AE2201978DB3F00214634 /* ReleaseDynamicsCell.xib in Resources */,
+				24A32311197AEFF8005CFEA4 /* TopicListOfDynamic.xib in Resources */,
 				F433881D1974C28600464D43 /* LoginViewController.xib in Resources */,
 				F432BE5919762AC80086BBE9 /* phone@2x.png in Resources */,
 				F432BE3119762AC80086BBE9 /* square_fenxiang-4@2x.png in Resources */,
@@ -1627,6 +1640,7 @@
 				F43388F41974C28600464D43 /* InfoPlist.strings in Resources */,
 				F432BE0D19762AC80086BBE9 /* main_zhaohaoyou@2x.png in Resources */,
 				F432BE5219762AC80086BBE9 /* square_zuixin@2x.png in Resources */,
+				24A3230C197AD076005CFEA4 /* ReleaseDynamic.xib in Resources */,
 				F432BE4F19762AC80086BBE9 /* square_zuire-@2x.png in Resources */,
 				F432BE2219762AC80086BBE9 /* pd_kuang-@2x.png in Resources */,
 				F43388371974C28600464D43 /* SendValidateMsgViewController.xib in Resources */,
@@ -1646,7 +1660,6 @@
 				F432BE4619762AC80086BBE9 /* square_shaiwawa@2x.png in Resources */,
 				F432BE4C19762AC80086BBE9 /* square_zan-@2x.png in Resources */,
 				F432BE5119762AC80086BBE9 /* square_zuixin-@2x.png in Resources */,
-				F41AE2251978FED100214634 /* ReleaseDynamicViewController.xib in Resources */,
 				F433880B1974C28600464D43 /* FeebackViewController.xib in Resources */,
 				F432BDD719762AC80086BBE9 /* baby_4-gengduo@2x.png in Resources */,
 				F432BE6619762AC80086BBE9 /* xinlang@2x.png in Resources */,
@@ -1752,7 +1765,6 @@
 				F43388301974C28600464D43 /* RegisterViewController.m in Sources */,
 				F43387F81974C28600464D43 /* RemarksViewController.m in Sources */,
 				F433883C1974C28600464D43 /* UpdateUserNameViewController.m in Sources */,
-				F41AE2241978FED100214634 /* ReleaseDynamicViewController.m in Sources */,
 				F43388281974C28600464D43 /* PlatformBindViewController.m in Sources */,
 				F43388201974C28600464D43 /* MybabyListViewController.m in Sources */,
 				F43388121974C28600464D43 /* ChooseModeViewController.m in Sources */,
@@ -1766,6 +1778,7 @@
 				F4348FFB1977B5F600347195 /* DynamicHeadView.m in Sources */,
 				F43388081974C28600464D43 /* SearchWeiboFriendViewController.m in Sources */,
 				F43389021974C28600464D43 /* UIImage+Util.m in Sources */,
+				24A32310197AEFF8005CFEA4 /* TopicListOfDynamic.m in Sources */,
 				F432BD31197627E20086BBE9 /* QQCell.m in Sources */,
 				F433880E1974C28600464D43 /* ShaiWaSquareViewController.m in Sources */,
 				F43388101974C28600464D43 /* ChooseFriendViewController.m in Sources */,
@@ -1798,6 +1811,7 @@
 				F43387F21974C28600464D43 /* AddHeightAndWeightViewController.m in Sources */,
 				F43388441974C28600464D43 /* MainDropMenu.m in Sources */,
 				F43387F41974C28600464D43 /* BabyHomePageViewController.m in Sources */,
+				24A32308197AD03A005CFEA4 /* ReleaseDynamic.m in Sources */,
 				F433882C1974C28600464D43 /* PraiseViewController.m in Sources */,
 				F43388451974C28600464D43 /* MainMenu.m in Sources */,
 				F4348FF219779C4600347195 /* DynamicDetailViewController.m in Sources */,

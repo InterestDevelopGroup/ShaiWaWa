@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *praiseUserSecondBtn;
 @property (weak, nonatomic) IBOutlet UIButton *praiseUserFirstBtn;
 @property (weak, nonatomic) IBOutlet UIButton *moreBtn;
+@property (weak, nonatomic) IBOutlet UIButton *topicBtn;
 
 @end

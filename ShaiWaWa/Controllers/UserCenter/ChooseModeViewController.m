@@ -21,7 +21,8 @@
 #import "DynamicCell.h"
 #import "PraiseViewController.h"
 #import "DynamicDetailViewController.h"
-#import "ReleaseDynamicViewController.h"
+#import "ReleaseDynamic.h"
+#import "TopicListOfDynamic.h"
 
 @interface ChooseModeViewController ()
 
@@ -132,6 +133,7 @@
     [dynamicCell.praiseUserSecondBtn addTarget:self action:@selector(showPraiseListVC) forControlEvents:UIControlEventTouchUpInside];
     [dynamicCell.praiseUserThirdBtn addTarget:self action:@selector(showPraiseListVC) forControlEvents:UIControlEventTouchUpInside];
     [dynamicCell.moreBtn addTarget:self action:@selector(showShareGrayView) forControlEvents:UIControlEventTouchUpInside];
+    [dynamicCell.topicBtn addTarget:self action:@selector(showTopicOfDyVC) forControlEvents:UIControlEventTouchUpInside];
     /*
      // 取当前section，设置单元格显示内容。
      NSInteger section = indexPath.section;
@@ -286,7 +288,20 @@
 }
 - (IBAction)showReleaseVC:(id)sender
 {
-    ReleaseDynamicViewController *releaseVC = [[ReleaseDynamicViewController alloc] init];
-    [self.navigationController pushViewController:releaseVC animated:YES];
+    ReleaseDynamic *releaseVC;
+    if ([UIScreen mainScreen].bounds.size.height < 490.0) {
+         releaseVC = [[ReleaseDynamic alloc] initWithNibName:@"ReleaseDynamic_4s" bundle:[NSBundle mainBundle]];
+    }
+    else
+    {
+         releaseVC = [[ReleaseDynamic alloc] initWithNibName:@"ReleaseDynamic" bundle:[NSBundle mainBundle]];
+    }
+         [self.navigationController pushViewController:releaseVC animated:YES];
+    
+}
+- (void)showTopicOfDyVC
+{
+    TopicListOfDynamic *topicListOfDyVC = [[TopicListOfDynamic alloc] init];
+    [self.navigationController pushViewController:topicListOfDyVC animated:YES];
 }
 @end
