@@ -42,6 +42,10 @@
         jianTou.frame = CGRectMake(user.bounds.size.width-28, 34, 7, 11);
         [user addSubview:jianTou];
         
+        UITapGestureRecognizer *userTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userViewTouchEvent)];
+        
+        [user addGestureRecognizer:userTap];
+        
         //添加宝宝按钮
         addBabyButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [addBabyButton setFrame:CGRectMake(0, 65, (self.bounds.size.width-6)/2, 57)];
@@ -78,10 +82,57 @@
         [exitButton setImage:[UIImage imageNamed:@"main_tuichu.png"] forState:UIControlStateNormal];
         [self addSubview:exitButton];
         
+        
+        [settingButton addTarget:self action:@selector(showSettingVC:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [feeBackButton addTarget:self action:@selector(showFeeBackVC:) forControlEvents:UIControlEventTouchUpInside];
+        [babyListButton addTarget:self action:@selector(showBabyListVC:) forControlEvents:UIControlEventTouchUpInside];
+        [addBabyButton addTarget:self action:@selector(showAddBabyVC:) forControlEvents:UIControlEventTouchUpInside];
+        [searchFriendButton addTarget:self action:@selector(showSearchFriendsVC:) forControlEvents:UIControlEventTouchUpInside];
+        [myGoodFriendButton addTarget:self action:@selector(showMyGoodFriendListVC:) forControlEvents:UIControlEventTouchUpInside];
+        [exitButton addTarget:self action:@selector(quitCurUser:) forControlEvents:UIControlEventTouchUpInside];
+        
+        
+
+        
     }
     return self;
 }
 
+
+- (void)showSettingVC:(UIButton *)butn
+{
+    _setBtnBlock(butn);
+}
+- (void)showFeeBackVC:(UIButton *)butn
+{
+    _feeBackBtnBlock(butn);
+}
+- (void)showBabyListVC:(UIButton *)butn
+{
+    _babyListBtnBlock(butn);
+}
+- (void)showAddBabyVC:(UIButton *)butn
+{
+    _addBabyBtnBlock(butn);
+}
+- (void)showSearchFriendsVC:(UIButton *)butn
+{
+    _searchFriendBtnBlock(butn);
+}
+- (void)showMyGoodFriendListVC:(UIButton *)butn
+{
+    _myGoodFriendBtnBlock(butn);
+}
+- (void)quitCurUser:(UIButton *)butn
+{
+    _exitBtnBlock(butn);
+}
+
+- (void)userViewTouchEvent
+{
+    _userVBlock(user);
+}
 /*
  main_2-pic@2x.png 71*71
  main_tianjiabaobei@2x.png 107*114
