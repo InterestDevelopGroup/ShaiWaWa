@@ -77,14 +77,48 @@
     MainMenu *mainMenu = [[MainMenu alloc] initWithFrame:CGRectMake(0, 0, 220, 300)];
     mainMenu.userInteractionEnabled = YES;
     //[mainMenu.btn addTarget:self action:@selector(printString) forControlEvents:UIControlEventTouchUpInside];
-    [mainMenu.settingButton addTarget:self action:@selector(showSettingVC) forControlEvents:UIControlEventTouchUpInside];
-    [mainMenu.user addGestureRecognizer:_userViewTap];
-    [mainMenu.feeBackButton addTarget:self action:@selector(showFeeBackVC) forControlEvents:UIControlEventTouchUpInside];
-    [mainMenu.babyListButton addTarget:self action:@selector(showBabyListVC) forControlEvents:UIControlEventTouchUpInside];
-    [mainMenu.addBabyButton addTarget:self action:@selector(showAddBabyVC:) forControlEvents:UIControlEventTouchUpInside];
-    [mainMenu.searchFriendButton addTarget:self action:@selector(showSearchFriendsVC:) forControlEvents:UIControlEventTouchUpInside];
-    [mainMenu.myGoodFriendButton addTarget:self action:@selector(showMyGoodFriendListVC) forControlEvents:UIControlEventTouchUpInside];
-    [mainMenu.exitButton addTarget:self action:@selector(quitCurUser) forControlEvents:UIControlEventTouchUpInside];
+    [mainMenu setSetBtnBlock:^(UIButton * btn)
+     {
+         [self showSettingVC];
+         
+     }];
+    [mainMenu setSearchFriendBtnBlock:^(UIButton * btn)
+     {
+         [self showSearchFriendsVC:btn];
+         
+     }];
+    [mainMenu setExitBtnBlock:^(UIButton * btn)
+     {
+         [self quitCurUser];
+         
+     }];
+    [mainMenu setFeeBackBtnBlock:^(UIButton * btn)
+     {
+         [self showFeeBackVC];
+         
+     }];
+    [mainMenu setBabyListBtnBlock:^(UIButton * btn)
+     {
+         [self showBabyListVC];
+         
+     }];
+    [mainMenu setAddBabyBtnBlock:^(UIButton * btn)
+     {
+         [self showAddBabyVC:btn];
+         
+     }];
+    [mainMenu setMyGoodFriendBtnBlock:^(UIButton * btn)
+     {
+         [self showMyGoodFriendListVC];
+         
+     }];
+    
+    [mainMenu setUserVBlock:^(UIView * viewer)
+    {
+        [viewer addGestureRecognizer:_userViewTap];
+    }];
+    
+    //[mainMenu.user addGestureRecognizer:_userViewTap];
     [_menuGray addSubview:mainMenu];
     
     isDropMenuShown = NO;

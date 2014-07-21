@@ -8,7 +8,7 @@
 =======
 ShaiWaWa.xcworkspace/*
 ShaiWaWa.xcworkspace/xcuserdata/Carl.xcuserdatad/UserInterfaceState.xcuserstate
-Pods/
+#Pods/
 .DS_Store
 */build/*
 *.pbxuser
