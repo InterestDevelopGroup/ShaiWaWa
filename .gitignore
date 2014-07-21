@@ -43,4 +43,5 @@ DerivedData
 .idea/
 *.hmap
 *.xccheckout
+*xcuserstate
 ShaiWaWa/ShaiWaWa.xcodeproj/project.xcworkspace
