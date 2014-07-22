@@ -8,7 +8,13 @@
 
 #import "CommonViewController.h"
 
-@interface ScannerQRCodeViewController : CommonViewController
+#import "ZBarSDK.h"
+
+@interface ScannerQRCodeViewController : CommonViewController<ZBarReaderViewDelegate>
+{
+    ZBarReaderView *zbarReaderView;
+}
+
 - (IBAction)showMyQRCodeVC:(id)sender;
 
 @end
