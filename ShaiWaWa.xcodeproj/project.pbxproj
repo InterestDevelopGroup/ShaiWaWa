@@ -31,6 +31,7 @@
 		C32B41A41965B5B8003979EE /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C32B41881965B5B8003979EE /* CoreData.framework */; };
 		C32B41AC1965B5B8003979EE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C32B41AA1965B5B8003979EE /* InfoPlist.strings */; };
 		C32B41AE1965B5B8003979EE /* ShaiWaWaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C32B41AD1965B5B8003979EE /* ShaiWaWaTests.m */; };
+		F41389C5197F48D000ABC8AE /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F41389C4197F48D000ABC8AE /* UserInfo.m */; };
 		F41AE21F1978DB3F00214634 /* ReleaseDynamicsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F41AE21D1978DB3F00214634 /* ReleaseDynamicsCell.m */; };
 		F41AE2201978DB3F00214634 /* ReleaseDynamicsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F41AE21E1978DB3F00214634 /* ReleaseDynamicsCell.xib */; };
 		F42434621974FC97008E70C6 /* UICollectionViewWaterfallCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F424345F1974FC97008E70C6 /* UICollectionViewWaterfallCell.m */; };
@@ -362,6 +363,8 @@
 		C32B41A91965B5B8003979EE /* ShaiWaWaTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ShaiWaWaTests-Info.plist"; sourceTree = "<group>"; };
 		C32B41AB1965B5B8003979EE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C32B41AD1965B5B8003979EE /* ShaiWaWaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShaiWaWaTests.m; sourceTree = "<group>"; };
+		F41389C3197F48D000ABC8AE /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
+		F41389C4197F48D000ABC8AE /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
 		F41AE21C1978DB3F00214634 /* ReleaseDynamicsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReleaseDynamicsCell.h; sourceTree = "<group>"; };
 		F41AE21D1978DB3F00214634 /* ReleaseDynamicsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReleaseDynamicsCell.m; sourceTree = "<group>"; };
 		F41AE21E1978DB3F00214634 /* ReleaseDynamicsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReleaseDynamicsCell.xib; sourceTree = "<group>"; };
@@ -1387,6 +1390,8 @@
 				F43387261974C28600464D43 /* BaseModel.m */,
 				F43387271974C28600464D43 /* User.h */,
 				F43387281974C28600464D43 /* User.m */,
+				F41389C3197F48D000ABC8AE /* UserInfo.h */,
+				F41389C4197F48D000ABC8AE /* UserInfo.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1843,6 +1848,7 @@
 				F432BD35197627E20086BBE9 /* SummaryCell.m in Sources */,
 				F433885E1974C28600464D43 /* BaseModel.m in Sources */,
 				F43388261974C28600464D43 /* PersonCenterViewController.m in Sources */,
+				F41389C5197F48D000ABC8AE /* UserInfo.m in Sources */,
 				F433881C1974C28600464D43 /* LoginViewController.m in Sources */,
 				F432BD37197627E20086BBE9 /* WeiBoCell.m in Sources */,
 				F43388221974C28600464D43 /* MyGoodFriendsListViewController.m in Sources */,
