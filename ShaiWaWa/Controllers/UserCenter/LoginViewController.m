@@ -56,17 +56,13 @@
     [attrString addAttributes:@{NSUnderlineStyleAttributeName:[NSNumber numberWithInt:NSUnderlineStyleSingle]} range:NSMakeRange(0, attrString.length)];
     _hoverRegisterLabel.attributedText = attrString;
     _hoverRegisterLabel.textColor = [UIColor lightGrayColor];
-//    if ([UserDefault sharedInstance].user != nil)
-//    {
-//        _phoneField.text = [UserDefault sharedInstance].user.username;
-//        _pwdField.text = [UserDefault sharedInstance].user.password;
-//        [self showMainVC:nil];
-//    }
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"tips" message:[UserDefault sharedInstance].userInfo.username delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
-    [alert show];
-    
-    
+    UserInfo *users = [[UserDefault sharedInstance] userInfo];
+    if (users != nil)
+    {
+        _phoneField.text = users.username;
+        _pwdField.text = users.password;
+        [self showMainVC:nil];
+    }
     
 }
 
@@ -85,7 +81,10 @@
                 UserInfo *curUser = [[UserInfo alloc] init];
                 curUser.username = _phoneField.text;
                 curUser.password = _pwdField.text;
-                [UserDefault sharedInstance].userInfo = curUser;
+                
+                [[UserDefault sharedInstance] setUserInfo:curUser];
+                _phoneField.text = nil;
+                _pwdField.text = nil;
                 
             }
             else

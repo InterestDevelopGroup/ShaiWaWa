@@ -23,6 +23,7 @@
 #import "DynamicDetailViewController.h"
 #import "ReleaseDynamic.h"
 #import "TopicListOfDynamic.h"
+#import "UserDefault.h"
 
 @interface ChooseModeViewController ()
 
@@ -54,6 +55,7 @@
 #pragma mark - Private Methods
 - (void)initUI
 {
+    users = [[UserDefault sharedInstance] userInfo];
     UIBarButtonItem * leftItem;
     if ([OSHelper iOS7])
     {
@@ -117,7 +119,12 @@
     {
 //        [viewer addGestureRecognizer:_userViewTap];
         [self userViewTouchEvent:viewer];
+        
     }];
+   
+    
+         mainMenu.nameLabel.text = users.username;
+     
     
     //[mainMenu.user addGestureRecognizer:_userViewTap];
     [_menuGray addSubview:mainMenu];
@@ -222,6 +229,7 @@
 {
     [self hideMenuGray:nil];
     [self.navigationController popToRootViewControllerAnimated:YES];
+     [[UserDefault sharedInstance] setUserInfo:nil];
 }
 
 - (IBAction)showSearchFriendsVC:(id)sender

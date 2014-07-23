@@ -7,10 +7,12 @@
 //
 
 #import "CommonViewController.h"
+#import "UserInfo.h"
 
 @interface ChooseModeViewController : CommonViewController<UITableViewDataSource, UITableViewDelegate>
 {
     BOOL isMenuShown,isDropMenuShown,isShareViewShown;
+    UserInfo *users;
 }
 - (IBAction)showSearchFriendsVC:(id)sender;
 

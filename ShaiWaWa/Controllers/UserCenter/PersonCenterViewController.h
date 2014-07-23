@@ -7,8 +7,12 @@
 //
 
 #import "CommonViewController.h"
+#import "UserInfo.h"
 
 @interface PersonCenterViewController : CommonViewController
+{
+    UserInfo *users;
+}
 @property (strong, nonatomic) IBOutlet UIButton *babyButton;
 
 @property (strong, nonatomic) IBOutlet UIButton *dynamicButton;

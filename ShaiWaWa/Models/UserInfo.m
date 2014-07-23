@@ -19,4 +19,28 @@
 	userInfo.password = [[self password] copy];
 	return userInfo;
 }
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:username forKey:@"username"];
+    [aCoder encodeObject:password forKey:@"pwd"];
+}
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super init]) {
+        username = [aDecoder decodeObjectForKey:@"username"];
+        password = [aDecoder decodeObjectForKey:@"pwd"];
+    }
+    return self;
+}
+
+- (UserInfo *)initWithName:(NSString *)_username and:(NSString *)_password
+{
+    self = [super init];
+    if (self) {
+        username = _username;
+        password = _password;
+    }
+    return self;
+}
 @end

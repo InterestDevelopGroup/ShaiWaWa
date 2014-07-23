@@ -16,4 +16,7 @@
 //strong = copy + retain
 @property (nonatomic, strong) UserInfo *userInfo;
 
+//-(UserInfo *)userInfo;
+//
+//-(void)setUser : (UserInfo *) userInfo;
 @end

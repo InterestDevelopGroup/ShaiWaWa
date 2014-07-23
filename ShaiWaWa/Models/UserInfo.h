@@ -8,11 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@interface UserInfo : NSObject<NSCopying> {
+@interface UserInfo : NSObject<NSCopying, NSCoding> {
     
 	NSString *username;
 	NSString *password;
 }
 @property (nonatomic,retain)NSString *username;
 @property (nonatomic,retain)NSString *password;
+
+- (UserInfo *)initWithName :(NSString*)_username
+                     and : (NSString *)_password;
 @end
