@@ -11,7 +11,7 @@
 #import "ChooseModeViewController.h"
 
 #import "UserDefault.h"
-#import "User.h"
+#import "UserInfo.h"
 
 @interface LoginViewController ()
 
@@ -56,17 +56,13 @@
     [attrString addAttributes:@{NSUnderlineStyleAttributeName:[NSNumber numberWithInt:NSUnderlineStyleSingle]} range:NSMakeRange(0, attrString.length)];
     _hoverRegisterLabel.attributedText = attrString;
     _hoverRegisterLabel.textColor = [UIColor lightGrayColor];
-//    if ([UserDefault sharedInstance].user != nil)
-//    {
-//        _phoneField.text = [UserDefault sharedInstance].user.username;
-//        _pwdField.text = [UserDefault sharedInstance].user.password;
-//        [self showMainVC:nil];
-//    }
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"tips" message:[UserDefault sharedInstance].user.username delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
-    [alert show];
-    
-    
+    UserInfo *users = [[UserDefault sharedInstance] userInfo];
+    if (users != nil)
+    {
+        _phoneField.text = users.username;
+        _pwdField.text = users.password;
+        [self showMainVC:nil];
+    }
     
 }
 
@@ -82,11 +78,13 @@
             if ([_pwdField.text isEqualToString:@"123"]) {
                 ChooseModeViewController *chooseModeVC = [[ChooseModeViewController alloc] init];
                 [self.navigationController pushViewController:chooseModeVC animated:YES];
-                User *curUser = [[User alloc] init];
+                UserInfo *curUser = [[UserInfo alloc] init];
                 curUser.username = _phoneField.text;
                 curUser.password = _pwdField.text;
-                [User saveToLocal:curUser];
-                [UserDefault sharedInstance].user = [User userFromLocal];
+                
+                [[UserDefault sharedInstance] setUserInfo:curUser];
+                _phoneField.text = nil;
+                _pwdField.text = nil;
                 
             }
             else

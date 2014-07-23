@@ -14,6 +14,9 @@
 #import "MybabyListViewController.h"
 #import "QRCodeCardViewController.h"
 
+#import "UserDefault.h"
+
+
 @interface PersonCenterViewController ()
 
 @end
@@ -44,7 +47,8 @@
 #pragma mark - Private Methods
 - (void)initUI
 {
-    self.title = @"老李";
+    users = [[UserDefault sharedInstance] userInfo];
+    self.title = users.username;
     [self setLeftCusBarItem:@"square_back" action:nil];
     [self babyCell];
     [self dynamicCell];
