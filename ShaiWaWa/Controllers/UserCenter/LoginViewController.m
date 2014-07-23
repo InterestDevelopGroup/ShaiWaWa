@@ -85,7 +85,8 @@
                 User *curUser = [[User alloc] init];
                 curUser.username = _phoneField.text;
                 curUser.password = _pwdField.text;
-                [UserDefault sharedInstance].user = curUser;
+                [User saveToLocal:curUser];
+                [UserDefault sharedInstance].user = [User userFromLocal];
                 
             }
             else
