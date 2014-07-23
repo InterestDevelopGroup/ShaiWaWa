@@ -38,6 +38,14 @@
     // Do any additional setup after loading the view from its nib.
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:YES];
+    users = [[UserDefault sharedInstance] userInfo];
+    self.title = users.username;
+    [self topViewData];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -56,7 +64,12 @@
     [self twoDimensionCodeCell];
     [self myCollectionCell];
     [self socialPlatformBindCell];
-    
+    [self topViewData];
+}
+
+- (void)topViewData
+{
+    _acountName.text = users.username;
 }
 
 - (void)babyCell

@@ -44,6 +44,14 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:YES];
+    users = [[UserDefault sharedInstance] userInfo];
+    [self initUI];
 }
 
 - (void)didReceiveMemoryWarning

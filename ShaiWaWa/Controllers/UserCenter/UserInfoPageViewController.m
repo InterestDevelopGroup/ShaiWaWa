@@ -8,9 +8,10 @@
 
 #import "UserInfoPageViewController.h"
 #import "UIViewController+BarItemAdapt.h"
-#import "UpdateUserNameViewController.h"
+
 #import "UserGenderUpdateViewController.h"
 #import "UpdatePwdViewController.h"
+#import "UserDefault.h"
 
 @interface UserInfoPageViewController ()
 
@@ -30,9 +31,30 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view from its nib.
 }
-
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:YES];
+    
+    updateUserVC = [[UpdateUserNameViewController alloc] init];
+    [updateUserVC setUsernameTextBlock:^(NSString *name)
+    {
+        UserInfo *curUser = [[UserInfo alloc] init];
+        curUser.username = name;
+        curUser.password = @"123";
+        [[UserDefault sharedInstance] setUserInfo:curUser];
+    }];
+    
+    users = [[UserDefault sharedInstance] userInfo];
+    self.title = users.username;
+    userNameVal = users.username;
+    sexVal = @"男";
+    pwdVal = @"";
+     keyOfvalue = [[NSMutableArray alloc] initWithObjects:userNameVal,sexVal,pwdVal, nil];
+    [_userInfoTableView reloadData];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -41,9 +63,16 @@
 #pragma mark - Private Methods
 - (void)initUI
 {
-    self.title = @"老李";
+    users = [[UserDefault sharedInstance] userInfo];
+    
+    self.title = users.username;
     [self setLeftCusBarItem:@"square_back" action:nil];
     key = [[NSMutableArray alloc] initWithObjects:@"用户名",@"性别",@"修改密码", nil];
+    userNameVal = users.username;
+    sexVal = @"男";
+    pwdVal = @"";
+    
+    keyOfvalue = [[NSMutableArray alloc] initWithObjects:userNameVal,sexVal,pwdVal, nil];
     [_userInfoTableView clearSeperateLine];
     UIImage *img = [[UIImage imageNamed:@"main_2-bg2.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(15, 15, 15, 15)];
     UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
@@ -78,7 +107,7 @@
     cell.textLabel.font = [UIFont systemFontOfSize:15.0];
     cell.textLabel.textColor = [UIColor darkGrayColor];
     UILabel *val = (UILabel *)[cell viewWithTag:777];
-    val.text = [key objectAtIndex:indexPath.row];
+    val.text = [keyOfvalue objectAtIndex:indexPath.row];
     //    cell.headPicView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"baby_mama.png"]];
     //    cell.nickNameLabel.text = @"张氏";
     //    cell.countOfBabyLabel.text = @"1个宝宝";
@@ -90,9 +119,9 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 0) {
-        UpdateUserNameViewController *updateUser = [[UpdateUserNameViewController alloc] init];
-        updateUser.userName = [key objectAtIndex:indexPath.row];
-        [self.navigationController pushViewController:updateUser animated:YES];
+        //UpdateUserNameViewController *updateUser = [[UpdateUserNameViewController alloc] init];
+        updateUserVC.userName = [keyOfvalue objectAtIndex:indexPath.row];
+        [self.navigationController pushViewController:updateUserVC animated:YES];
     }
     if (indexPath.row == 1) {
         UserGenderUpdateViewController * genderVC = [[UserGenderUpdateViewController alloc] init];
