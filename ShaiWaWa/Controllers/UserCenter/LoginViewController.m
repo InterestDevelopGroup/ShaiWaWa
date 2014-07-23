@@ -11,7 +11,7 @@
 #import "ChooseModeViewController.h"
 
 #import "UserDefault.h"
-#import "User.h"
+#import "UserInfo.h"
 
 @interface LoginViewController ()
 
@@ -63,7 +63,7 @@
 //        [self showMainVC:nil];
 //    }
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"tips" message:[UserDefault sharedInstance].user.username delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"tips" message:[UserDefault sharedInstance].userInfo.username delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
     [alert show];
     
     
@@ -82,11 +82,10 @@
             if ([_pwdField.text isEqualToString:@"123"]) {
                 ChooseModeViewController *chooseModeVC = [[ChooseModeViewController alloc] init];
                 [self.navigationController pushViewController:chooseModeVC animated:YES];
-                User *curUser = [[User alloc] init];
+                UserInfo *curUser = [[UserInfo alloc] init];
                 curUser.username = _phoneField.text;
                 curUser.password = _pwdField.text;
-                [User saveToLocal:curUser];
-                [UserDefault sharedInstance].user = [User userFromLocal];
+                [UserDefault sharedInstance].userInfo = curUser;
                 
             }
             else

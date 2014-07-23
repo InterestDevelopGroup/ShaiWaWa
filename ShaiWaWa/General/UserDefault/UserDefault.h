@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-#import "User.h"
+#import "UserInfo.h"
 
 @interface UserDefault : NSObject
 
 +(UserDefault *)sharedInstance ;//单例模式
 //strong = copy + retain
-@property (nonatomic, strong) User *user;
+@property (nonatomic, strong) UserInfo *userInfo;
 
 @end
