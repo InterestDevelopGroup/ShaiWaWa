@@ -8,6 +8,7 @@
 
 #import "FinishRegisterViewController.h"
 #import "UIViewController+BarItemAdapt.h"
+#import "ControlCenter.h"
 
 @interface FinishRegisterViewController ()
 
@@ -48,7 +49,9 @@
     [_pwdField setSecureTextEntry:NO];
 }
     
-- (IBAction)finishRegisterAndLogin:(id)sender {
+- (IBAction)finishRegisterAndLogin:(id)sender
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
     
 #pragma mark - UITextFieldDelegate

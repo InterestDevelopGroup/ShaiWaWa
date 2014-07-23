@@ -115,7 +115,8 @@
     
     [mainMenu setUserVBlock:^(UIView * viewer)
     {
-        [viewer addGestureRecognizer:_userViewTap];
+//        [viewer addGestureRecognizer:_userViewTap];
+        [self userViewTouchEvent:viewer];
     }];
     
     //[mainMenu.user addGestureRecognizer:_userViewTap];
