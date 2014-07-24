@@ -46,39 +46,68 @@
         
         [user addGestureRecognizer:userTap];
         
+        UIImageView *line0 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"main_line.png"]];
+        
+        line0.frame = CGRectMake(0,64, self.bounds.size.width-7, 1);
+        
+        [self addSubview:line0];
+        
         //添加宝宝按钮
         addBabyButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [addBabyButton setFrame:CGRectMake(0, 65, (self.bounds.size.width-6)/2, 57)];
+        [addBabyButton setFrame:CGRectMake(0, 79, (self.bounds.size.width-6)/2, 57)];
         [addBabyButton setImage:[UIImage imageNamed:@"main_tianjiabaobei.png"] forState:UIControlStateNormal];
         [self addSubview:addBabyButton];
         
+        UILabel *lineLabel1 = [[UILabel alloc] initWithFrame:CGRectMake((self.bounds.size.width-6)/2+1, 64, 1, 270)];
+        lineLabel1.alpha = 0.5;
+        lineLabel1.backgroundColor = [UIColor lightGrayColor];
+        [self addSubview:lineLabel1];
+        
         babyListButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [babyListButton setFrame:CGRectMake((self.bounds.size.width-6)/2, 65, (self.bounds.size.width-6)/2, 57)];
+        [babyListButton setFrame:CGRectMake((self.bounds.size.width-6)/2, 79, (self.bounds.size.width-6)/2, 57)];
         [babyListButton setImage:[UIImage imageNamed:@"main_baobaoliebiao.png"] forState:UIControlStateNormal];
         [self addSubview:babyListButton];
         
+        UIImageView *line1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"main_line.png"]];
+        
+        line1.frame = CGRectMake(0,154, self.bounds.size.width-7, 1);
+        
+        [self addSubview:line1];
+        
         myGoodFriendButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [myGoodFriendButton setFrame:CGRectMake(0, 125, (self.bounds.size.width-6)/2, 57)];
+        [myGoodFriendButton setFrame:CGRectMake(0, 169, (self.bounds.size.width-6)/2, 57)];
         [myGoodFriendButton setImage:[UIImage imageNamed:@"main_wodehaoyou.png"] forState:UIControlStateNormal];
         [self addSubview:myGoodFriendButton];
         
         searchFriendButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [searchFriendButton setFrame:CGRectMake((self.bounds.size.width-6)/2, 125, (self.bounds.size.width-6)/2, 57)];
+        [searchFriendButton setFrame:CGRectMake((self.bounds.size.width-6)/2, 169, (self.bounds.size.width-6)/2, 57)];
         [searchFriendButton setImage:[UIImage imageNamed:@"main_zhaohaoyou.png"] forState:UIControlStateNormal];
         [self addSubview:searchFriendButton];
         
+        UIImageView *line2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"main_line.png"]];
+        
+        line2.frame = CGRectMake(0, 244, self.bounds.size.width-7, 1);
+        
+        [self addSubview:line2];
+        
         settingButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [settingButton setFrame:CGRectMake(0, 185, (self.bounds.size.width-6)/2, 57)];
+        [settingButton setFrame:CGRectMake(0, 259, (self.bounds.size.width-6)/2, 57)];
         [settingButton setImage:[UIImage imageNamed:@"main_shezhi.png"] forState:UIControlStateNormal];
         [self addSubview:settingButton];
         
         feeBackButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [feeBackButton setFrame:CGRectMake((self.bounds.size.width-6)/2, 185, (self.bounds.size.width-6)/2, 57)];
+        [feeBackButton setFrame:CGRectMake((self.bounds.size.width-6)/2, 259, (self.bounds.size.width-6)/2, 57)];
         [feeBackButton setImage:[UIImage imageNamed:@"main_fankui.png"] forState:UIControlStateNormal];
         [self addSubview:feeBackButton];
         
+        UIImageView *line3 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"main_line.png"]];
+        
+        line3.frame = CGRectMake(0, 334, self.bounds.size.width-7, 1);
+        
+        [self addSubview:line3];
+        
         exitButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [exitButton setFrame:CGRectMake((self.bounds.size.width-6)/2-77, 240, 154, 57)];
+        [exitButton setFrame:CGRectMake((self.bounds.size.width-6)/2-77, 345, 154, 27)];
         [exitButton setImage:[UIImage imageNamed:@"main_tuichu.png"] forState:UIControlStateNormal];
         [self addSubview:exitButton];
         

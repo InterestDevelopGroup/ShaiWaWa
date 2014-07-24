@@ -47,5 +47,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *onlyFriendBtn;
 @property (weak, nonatomic) IBOutlet UIButton *allPublicBtn;
 
+@property (weak, nonatomic) IBOutlet UIView *soundXiaView;
 
+@property (weak, nonatomic) IBOutlet UIView *shareXiaView;
 @end

@@ -34,5 +34,6 @@
 - (IBAction)hideGayShareV:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *releaseBtn;
 - (IBAction)showReleaseVC:(id)sender;
+@property (weak, nonatomic) IBOutlet UIView *mainAddView;
 
 @end

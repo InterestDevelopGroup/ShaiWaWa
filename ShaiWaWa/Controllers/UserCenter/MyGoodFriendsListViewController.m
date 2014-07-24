@@ -72,6 +72,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     FriendHomeViewController *friendHomeVC = [[FriendHomeViewController alloc] init];
     [self.navigationController pushViewController:friendHomeVC animated:YES];
 }

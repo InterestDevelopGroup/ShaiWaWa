@@ -67,7 +67,8 @@
     UIBarButtonItem * leftItem;
     if ([OSHelper iOS7])
     {
-        leftItem = [self customBarItem:@"square_cebinlan" action:@selector(showMenu) size:CGSizeMake(40, 30) imageEdgeInsets:UIEdgeInsetsMake(0, -60, 0, 0)];
+        leftItem = [self customBarItem:@"square_cebinlan" action:@selector(showMenu) size:CGSizeMake(40, 30) imageEdgeInsets:UIEdgeInsetsMake(0, -40, 0, 0)];
+
     }
     else
     {
@@ -84,7 +85,7 @@
     self.navigationItem.rightBarButtonItems = @[rightItem_2,rightItem_1];
     
     isMenuShown = NO;
-    MainMenu *mainMenu = [[MainMenu alloc] initWithFrame:CGRectMake(0, 0, 220, 300)];
+    MainMenu *mainMenu = [[MainMenu alloc] initWithFrame:CGRectMake(0, 0, 240, 390)];
     mainMenu.userInteractionEnabled = YES;
     //[mainMenu.btn addTarget:self action:@selector(printString) forControlEvents:UIControlEventTouchUpInside];
     [mainMenu setSetBtnBlock:^(UIButton * btn)
@@ -135,7 +136,7 @@
      
     
     //[mainMenu.user addGestureRecognizer:_userViewTap];
-    [_menuGray addSubview:mainMenu];
+    [_mainAddView addSubview:mainMenu];
     
     isDropMenuShown = NO;
     MainDropMenu *dropMenu =[[MainDropMenu alloc] initWithFrame:CGRectMake(0, 0, _grayDropView.bounds.size.width, 80)];
@@ -159,7 +160,13 @@
     }
     else
     {
+        if ([UIScreen mainScreen].bounds.size.height < 490) {
+              _releaseBtn.frame = CGRectMake(_dynamicPageTableView.bounds.size.width-60, [UIScreen mainScreen].bounds.size.height-120 , 44, 46);
+        }
+        else
+        {
     _releaseBtn.frame = CGRectMake(_dynamicPageTableView.bounds.size.width-60, [UIScreen mainScreen].bounds.size.height-50 , 44, 46);
+        }
     }
 }
 
@@ -341,7 +348,7 @@
 {
     ReleaseDynamic *releaseVC;
     if ([UIScreen mainScreen].bounds.size.height < 490.0) {
-         releaseVC = [[ReleaseDynamic alloc] initWithNibName:@"ReleaseDynamic_4s" bundle:[NSBundle mainBundle]];
+         releaseVC = [[ReleaseDynamic alloc] initWithNibName:@"ReleaseDynamic" bundle:[NSBundle mainBundle]];
     }
     else
     {

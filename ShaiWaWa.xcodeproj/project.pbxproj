@@ -29,6 +29,7 @@
 		C32B41AC1965B5B8003979EE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C32B41AA1965B5B8003979EE /* InfoPlist.strings */; };
 		C32B41AE1965B5B8003979EE /* ShaiWaWaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C32B41AD1965B5B8003979EE /* ShaiWaWaTests.m */; };
 		F41389C5197F48D000ABC8AE /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F41389C4197F48D000ABC8AE /* UserInfo.m */; };
+		F41FEAE91980C3CB0095DB36 /* tuichu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F41FEAE81980C3CB0095DB36 /* tuichu@2x.png */; };
 		F42434621974FC97008E70C6 /* UICollectionViewWaterfallCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F424345F1974FC97008E70C6 /* UICollectionViewWaterfallCell.m */; };
 		F42434631974FC97008E70C6 /* UICollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = F42434611974FC97008E70C6 /* UICollectionViewWaterfallLayout.m */; };
 		F432BDD419762AC80086BBE9 /* baby_4-bg-1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F432BD3B19762AC80086BBE9 /* baby_4-bg-1@2x.png */; };
@@ -360,6 +361,7 @@
 		C32B41AD1965B5B8003979EE /* ShaiWaWaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShaiWaWaTests.m; sourceTree = "<group>"; };
 		F41389C3197F48D000ABC8AE /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
 		F41389C4197F48D000ABC8AE /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
+		F41FEAE81980C3CB0095DB36 /* tuichu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tuichu@2x.png"; sourceTree = "<group>"; };
 		F424345E1974FC97008E70C6 /* UICollectionViewWaterfallCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewWaterfallCell.h; sourceTree = "<group>"; };
 		F424345F1974FC97008E70C6 /* UICollectionViewWaterfallCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewWaterfallCell.m; sourceTree = "<group>"; };
 		F42434601974FC97008E70C6 /* UICollectionViewWaterfallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewWaterfallLayout.h; sourceTree = "<group>"; };
@@ -1027,6 +1029,7 @@
 		F432BDBF19762AC80086BBE9 /* user */ = {
 			isa = PBXGroup;
 			children = (
+				F41FEAE81980C3CB0095DB36 /* tuichu@2x.png */,
 				F432BDC019762AC80086BBE9 /* bangding@2x.png */,
 				F432BDC119762AC80086BBE9 /* dianhua2@2x.png */,
 				F432BDC219762AC80086BBE9 /* erweima@2x.png */,
@@ -1649,6 +1652,7 @@
 				F432BE0F19762AC80086BBE9 /* pb_fabu@2x.png in Resources */,
 				F432BE0C19762AC80086BBE9 /* main_xinlang@2x.png in Resources */,
 				F432BE5A19762AC80086BBE9 /* qq@2x.png in Resources */,
+				F41FEAE91980C3CB0095DB36 /* tuichu@2x.png in Resources */,
 				F432BDD419762AC80086BBE9 /* baby_4-bg-1@2x.png in Resources */,
 				F432BE6119762AC80086BBE9 /* user_3-weixin@2x.png in Resources */,
 				F433885D1974C28600464D43 /* Images.xcassets in Resources */,

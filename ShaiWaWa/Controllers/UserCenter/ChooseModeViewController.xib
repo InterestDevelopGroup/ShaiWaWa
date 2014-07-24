@@ -14,6 +14,7 @@
                 <outlet property="grayDropView" destination="kKp-LA-VcK" id="qdz-S9-wAL"/>
                 <outlet property="grayShareView" destination="vva-64-Wub" id="8u5-nC-qbx"/>
                 <outlet property="guoLVTap" destination="D3U-dV-bbN" id="9KC-gN-paj"/>
+                <outlet property="mainAddView" destination="wG9-vy-acb" id="ePO-Re-KFR"/>
                 <outlet property="menuGray" destination="Tnt-u6-ewy" id="s7C-eN-DBu"/>
                 <outlet property="releaseBtn" destination="eoj-p0-rPJ" id="82s-SM-8ND"/>
                 <outlet property="userViewTap" destination="bp7-Th-Lpa" id="kN2-Ej-TF1"/>
@@ -86,13 +87,21 @@
                 <view hidden="YES" contentMode="scaleToFill" id="Tnt-u6-ewy">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" id="wG9-vy-acb">
+                            <rect key="frame" x="0.0" y="-10" width="240" height="390"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <gestureRecognizers/>
+                        </view>
+                    </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <gestureRecognizers/>
                     <connections>
                         <outletCollection property="gestureRecognizers" destination="9L6-SU-ZSl" appends="YES" id="dSn-So-12V"/>
                     </connections>
                 </view>
-                <view hidden="YES" contentMode="scaleToFill" id="kKp-LA-VcK">
+                <view hidden="YES" alpha="0.80000000000000004" contentMode="scaleToFill" id="kKp-LA-VcK">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
@@ -102,7 +111,7 @@
                             <color key="backgroundColor" red="0.82685391865079372" green="0.82223462301587302" blue="0.8314732142857143" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.87434188179347827" green="0.87434188179347827" blue="0.87434188179347827" alpha="1" colorSpace="calibratedRGB"/>
                     <gestureRecognizers/>
                     <connections>
                         <outletCollection property="gestureRecognizers" destination="t25-mv-PTD" appends="YES" id="7UD-YS-V3o"/>
