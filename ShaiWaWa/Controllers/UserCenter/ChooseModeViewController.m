@@ -24,6 +24,7 @@
 #import "ReleaseDynamic.h"
 #import "TopicListOfDynamic.h"
 #import "UserDefault.h"
+#import "ShareManager.h"
 
 @interface ChooseModeViewController ()
 
@@ -361,5 +362,24 @@
 {
     TopicListOfDynamic *topicListOfDyVC = [[TopicListOfDynamic alloc] init];
     [self.navigationController pushViewController:topicListOfDyVC animated:YES];
+}
+- (IBAction)shareToWx:(id)sender
+{
+    [[ShareManager sharePlatform] shareToWeiXin];
+}
+
+- (IBAction)shareToWxCycle:(id)sender
+{
+     [[ShareManager sharePlatform] shareToWeiXinCycle];
+}
+
+- (IBAction)shareToWeibo:(id)sender
+{
+     [[ShareManager sharePlatform] shareToSinaWeiBo];
+}
+
+- (IBAction)shareToQzone:(id)sender
+{
+     [[ShareManager sharePlatform] shareToQzone];
 }
 @end

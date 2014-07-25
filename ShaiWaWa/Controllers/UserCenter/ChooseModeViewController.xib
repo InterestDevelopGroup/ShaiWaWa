@@ -140,6 +140,9 @@
                                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="shareToWx:" destination="-1" eventType="touchUpInside" id="yuO-CK-HGV"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="buS-77-ZKc">
                                     <rect key="frame" x="92" y="39" width="64" height="64"/>
@@ -149,6 +152,9 @@
                                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="shareToWxCycle:" destination="-1" eventType="touchUpInside" id="IIU-4n-DmN"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gbc-Tb-W9D">
                                     <rect key="frame" x="164" y="39" width="64" height="64"/>
@@ -158,6 +164,9 @@
                                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="shareToWeibo:" destination="-1" eventType="touchUpInside" id="mcR-YD-vO8"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RKO-2w-H83">
                                     <rect key="frame" x="236" y="39" width="64" height="64"/>
@@ -167,6 +176,9 @@
                                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="shareToQzone:" destination="-1" eventType="touchUpInside" id="AEF-wj-rUl"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="TIA-mB-J62">
                                     <rect key="frame" x="13" y="119" width="93" height="28"/>

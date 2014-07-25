@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "ControlCenter.h"
+#import "ShareManager.h"
+#import <ShareSDK/ShareSDK.h>
 @implementation AppDelegate
 
 @synthesize managedObjectContext = _managedObjectContext;
@@ -16,10 +18,22 @@
 @synthesize postValidateType= _postValidateType;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[ShareManager sharePlatform] configShare];
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     [ControlCenter makeKeyAndVisible];
     [self customUI];
     return YES;
+}
+
+//添加的
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    return [ShareSDK handleOpenURL:url wxDelegate:nil];
+}
+ 
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    return [ShareSDK handleOpenURL:url sourceApplication:sourceApplication annotation:annotation wxDelegate:nil];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
