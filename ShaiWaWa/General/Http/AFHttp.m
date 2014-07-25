@@ -15,6 +15,7 @@
     if((self = [super init]))
     {
         _manager = [AFHTTPRequestOperationManager manager];
+        _manager.securityPolicy.allowInvalidCertificates = YES;
         _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", nil];
     }
     return self;
@@ -147,6 +148,29 @@
         if(success)
             success(responseObject);
 
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@,%@",error,operation.responseString);
+        if(failure)
+            failure(error,operation.responseString);
+    }];
+    [_manager.operationQueue addOperation:operation];
+}
+
+- (void)postJSON:(NSString *)url withParams:(NSDictionary *)params completionBlock:(void (^)(id obj))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    NSData * json = [NSJSONSerialization dataWithJSONObject:params options:NSJSONWritingPrettyPrinted error:nil];
+    NSMutableURLRequest * request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[[self class] urlEncode:url]]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:[NSString stringWithFormat:@"%d",[json length]] forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:json];
+    
+    NSOperation * operation = [_manager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"%@",responseObject);
+        if(success)
+            success(responseObject);
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@,%@",error,operation.responseString);
         if(failure)

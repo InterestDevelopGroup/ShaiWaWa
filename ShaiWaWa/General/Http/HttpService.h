@@ -7,9 +7,9 @@
 //
 
 #import "AFHttp.h"
-#define URL_PREFIX @"http://61.145.163.218/api.aspx?"
-#define User_Login                                  @"Msgid=20704"
-#define User_Register                               @"Msgid=20703"
+#define URL_PREFIX @"https://115.29.248.57/api/"
+#define User_Login                                  @"login"
+#define User_Register                               @"register"
 @interface HttpService : AFHttp
 
 + (HttpService *)sharedInstance;
