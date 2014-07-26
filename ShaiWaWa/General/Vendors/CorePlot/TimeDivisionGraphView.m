@@ -8,15 +8,15 @@
 
 #import "TimeDivisionGraphView.h"
 #import "CorePlot-CocoaTouch.h"
-#import "Min1QuoteData.h"
+//#import "Min1QuoteData.h"
 //#import "AppThemeManager.h"
-#import "TimeDivisionGraphTouchLayer.h"
-@interface TimeDivisionGraphView()<CPTPlotDataSource,TimeDivisionGraphTouchLayerDelegate>
+//#import "TimeDivisionGraphTouchLayer.h"
+@interface TimeDivisionGraphView()<CPTPlotDataSource>//,TimeDivisionGraphTouchLayerDelegate>
 @property (nonatomic,strong) CPTXYGraph * graph;
 @property (nonatomic,strong) NSArray * allDatas;
 @property (nonatomic,strong) NSMutableArray * dataSource;
 @property (nonatomic,strong) UILabel * startTimeLabel , * endTimeLabel;
-@property (nonatomic,strong) TimeDivisionGraphTouchLayer * touchLayer;
+//@property (nonatomic,strong) TimeDivisionGraphTouchLayer * touchLayer;
 @property (nonatomic,strong) CPTScatterPlot *dataSourceLinePlot;
 @property (nonatomic,assign) int showLocation;
 @property (nonatomic,assign) int showCount;
