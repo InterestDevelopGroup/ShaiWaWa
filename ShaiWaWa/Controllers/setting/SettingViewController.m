@@ -52,6 +52,13 @@
     setAllList = [[NSMutableArray alloc] initWithObjects:basicSetList,autoShareSetList,onlyUploadInWifiSetList,otherSetList, nil];
     setList = [[NSDictionary alloc] initWithObjects:setAllList forKeys:sectionArr];
     
+    if (![OSHelper iOS7])
+    {
+        _quitCurBtn.frame = CGRectMake(10, 0, 253, 41);
+    }
+   
+    
+    [_setListTableView setTableFooterView:_customFootView];
 }
 
 #pragma mark - UITableView DataSources and Delegate
@@ -79,20 +86,24 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
        
         UISwitch *switchButton = [[UISwitch alloc] init];
+        UILabel *txtLabel = [[UILabel alloc] init];
         if ([OSHelper iOS7])
         {
-            switchButton.frame = CGRectMake(cell.bounds.size.width-80, 5, 60, 30);
+            switchButton.frame = CGRectMake(tableView.bounds.size.width-60, 5, 60, 30);
+            txtLabel.frame = CGRectMake(cell.bounds.size.width-136, 7, 100, 30);
         }
         else
         {
-            switchButton.frame = CGRectMake(cell.bounds.size.width-100, 5, 60, 30);
+            switchButton.frame = CGRectMake(tableView.bounds.size.width-106, 5, 60, 30);
+            txtLabel.frame = CGRectMake(cell.bounds.size.width-154, 6, 100, 30);
         }
         switchButton.tag = 8888;
         [cell.contentView addSubview:switchButton];
         
-        UILabel *txtLabel = [[UILabel alloc] initWithFrame:CGRectMake(cell.bounds.size.width-120, 7, 100, 30)];
+        
         txtLabel.tag = 6666;
         txtLabel.backgroundColor = [UIColor clearColor];
+        //txtLabel.font = [UIFont systemFontOfSize:12];
         [cell.contentView addSubview:txtLabel];
         
         
@@ -102,7 +113,7 @@
     NSString *sectionType = [sectionArr objectAtIndex:section];
     NSArray *list = [setList objectForKey:sectionType];
     cell.textLabel.text = [list objectAtIndex:indexPath.row];
-    cell.textLabel.font = [UIFont systemFontOfSize:15];
+    cell.textLabel.font = [UIFont systemFontOfSize:12];
     cell.textLabel.textColor = [UIColor darkGrayColor];
     cell.textLabel.backgroundColor = [UIColor clearColor];
     cell.backgroundView.backgroundColor = [UIColor clearColor];
@@ -121,7 +132,7 @@
 //            [switchBtn removeFromSuperview];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 label.text = @"仅好友可见";
-            label.font = [UIFont systemFontOfSize:15];
+            label.font = [UIFont systemFontOfSize:12];
             label.textColor = [UIColor darkGrayColor];
 //            [cell.contentView addSubview:label];
             switchBtn.hidden = YES;
@@ -169,8 +180,11 @@
 {
     
     NSString *sectionType = [sectionArr objectAtIndex:section];
-    [sectionType sizeWithFont:[UIFont systemFontOfSize:15]];
+    [sectionType sizeWithFont:[UIFont systemFontOfSize:13]];
     if (section == 3) {
+        sectionType = nil;
+    }
+    if (section == 0) {
         sectionType = nil;
     }
     return sectionType;
@@ -192,5 +206,7 @@
     }
     else
     return 30.0f;
+}
+- (IBAction)quitCurAccountEvent:(id)sender {
 }
 @end

@@ -105,11 +105,12 @@
 // 设置section标题高度
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 30.0f;
+    return 20.0f;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     BabyHomePageViewController *babyHomePageVC = [[BabyHomePageViewController alloc] init];
     [self.navigationController pushViewController:babyHomePageVC animated:YES];
 }

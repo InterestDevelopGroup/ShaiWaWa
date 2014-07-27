@@ -53,7 +53,7 @@
     [self HMSegmentedControlInitMethod];
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
-    collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,0,self.view.bounds.size.width, self.view.frame.size.height - segMentedControl.bounds.size.height) collectionViewLayout:layout];
+    collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,0,self.view.bounds.size.width, _segScrollView.bounds.size.height - 3*segMentedControl.bounds.size.height) collectionViewLayout:layout];
     collectionView.dataSource = self;
     collectionView.delegate = self;
     collectionView.backgroundColor = [UIColor clearColor];
@@ -143,17 +143,17 @@
     [cell.contentView addSubview:explainTextView];
     cell.contentView.backgroundColor = [UIColor clearColor];
     UIView *releaseView = [[UIView alloc] initWithFrame:CGRectMake(0, cell.contentView.bounds.size.height-45, cell.contentView.bounds.size.width, 45)];
-    
+    //releaseView.backgroundColor = [UIColor orangeColor];
     UIImageView *releaseTouXiangImgView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 40, 40)];
     releaseTouXiangImgView.image = [UIImage imageNamed:@"square_pic-2.png"];
     UILabel *releaseNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 6, 80, 20)];
     UILabel *releaseTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 24, 80, 20)];
     releaseNameLabel.text = @"张三";
     releaseNameLabel.backgroundColor = [UIColor clearColor];
-    releaseNameLabel.font = [UIFont systemFontOfSize:15];
+    releaseNameLabel.font = [UIFont systemFontOfSize:12];
     releaseTimeLabel.text = @"1分钟前";
     releaseTimeLabel.backgroundColor = [UIColor clearColor];
-    releaseTimeLabel.font = [UIFont systemFontOfSize:12];
+    releaseTimeLabel.font = [UIFont systemFontOfSize:10];
     [releaseView addSubview:releaseTouXiangImgView];
     [releaseView addSubview:releaseNameLabel];
     [releaseView addSubview:releaseTimeLabel];
@@ -161,11 +161,12 @@
     return cell;
 }
 
-////定义每个UICollectionView 的大小
+//定义每个UICollectionView 的大小
 //- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout heightForItemAtIndexPath:(NSIndexPath *)indexPath
 //{
-//    return 200;
+//    return 180;
 //}
+
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return CGSizeMake(146, 200);
@@ -173,7 +174,7 @@
 //定义每个UICollectionView 的 margin
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(9, 9, 9, 9);
+    return UIEdgeInsetsMake(0, 9, 0, 9);
 }
 #pragma mark --UICollectionViewDelegate
 //UICollectionView被选中时调用的方法

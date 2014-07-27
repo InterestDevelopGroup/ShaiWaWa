@@ -13,6 +13,9 @@
 #import "UserDefault.h"
 #import "UserInfo.h"
 
+#import <ShareSDK/ShareSDK.h>
+
+
 @interface LoginViewController ()
 
 @end
@@ -106,8 +109,88 @@
     
 }
 
+- (IBAction)sinaLoginEvent:(id)sender
+{
+    [ShareSDK getUserInfoWithType:ShareTypeSinaWeibo authOptions:nil
+                result:^(BOOL result, id<ISSPlatformUser> userInfo, id<ICMErrorInfo> error)
+                {
+                    if (result)
+                    {
+                        
+                        NSLog(@"哈哈哈Sina!");
+//                        PFQuery *query = [PFQuery queryWithClassName:@"UserInfo"];
+//                        [query whereKey:@"uid" equalTo:[userInfo uid]];
+//                        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+//                        {
+//                            if ([objects count] == 0)
+//                            {
+//                                 PFObject *newUser = [PFObject objectWithClassName:@"UserInfo"];
+//                                 [newUser setObject:[userInfo uid] forKey:@"uid"];
+//                                 [newUser setObject:[userInfo nickname] forKey:@"name"];
+//                                 [newUser setObject:[userInfo icon] forKey:@"icon"];
+//                                 [newUser saveInBackground];
+//                                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Hello" message:@"欢迎注册" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles: nil];
+//                                 [alertView show];
+//                                 [alertView release];
+//                            }
+//                            else
+//                            {
+//                                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Hello" message:@"欢迎回来" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles: nil];
+//                                 [alertView show];
+//                                 [alertView release];
+//                            }
+//                        }];
+                     }
+//            MainViewController *mainVC = [[[MainViewController alloc] init] autorelease];
+//            [self.navigationController pushViewController:mainVC animated:YES];
+             }];
+}
+
+- (IBAction)qqLoginEvent:(id)sender
+{
+    
+    [ShareSDK getUserInfoWithType:ShareTypeQQSpace authOptions:nil
+                           result:^(BOOL result, id<ISSPlatformUser> userInfo, id<ICMErrorInfo> error)
+     {
+         if (result)
+         {
+             
+             NSLog(@"哈哈哈QQ!");
+             //                        PFQuery *query = [PFQuery queryWithClassName:@"UserInfo"];
+             //                        [query whereKey:@"uid" equalTo:[userInfo uid]];
+             //                        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+             //                        {
+             //                            if ([objects count] == 0)
+             //                            {
+             //                                 PFObject *newUser = [PFObject objectWithClassName:@"UserInfo"];
+             //                                 [newUser setObject:[userInfo uid] forKey:@"uid"];
+             //                                 [newUser setObject:[userInfo nickname] forKey:@"name"];
+             //                                 [newUser setObject:[userInfo icon] forKey:@"icon"];
+             //                                 [newUser saveInBackground];
+             //                                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Hello" message:@"欢迎注册" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles: nil];
+             //                                 [alertView show];
+             //                                 [alertView release];
+             //                            }
+             //                            else
+             //                            {
+             //                                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Hello" message:@"欢迎回来" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles: nil];
+             //                                 [alertView show];
+             //                                 [alertView release];
+             //                            }
+             //                        }];
+         }
+         //            MainViewController *mainVC = [[[MainViewController alloc] init] autorelease];
+         //            [self.navigationController pushViewController:mainVC animated:YES];
+     }];
+    
+}
 
 
+//取消登陆
+/*
+ [ShareSDK cancelAuthWithType:ShareTypeSinaWeibo];
+ 
+ */
 
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

@@ -8,6 +8,8 @@
 
 #import "UpdateUserNameViewController.h"
 #import "UIViewController+BarItemAdapt.h"
+#import "UserInfoPageViewController.h"
+#import "UserInfo.h"
 
 @interface UpdateUserNameViewController ()
 
@@ -15,6 +17,7 @@
 
 @implementation UpdateUserNameViewController
 @synthesize userName;
+@synthesize usernameTextBlock;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -42,8 +45,12 @@
     self.title = @"用户名";
     [self setLeftCusBarItem:@"square_back" action:nil];
     _userNameField.text = userName;
+   
 }
 
-- (IBAction)update_OK:(id)sender {
+- (IBAction)update_OK:(id)sender
+{
+     usernameTextBlock(_userNameField.text);
+     [self.navigationController popViewControllerAnimated:YES];
 }
 @end

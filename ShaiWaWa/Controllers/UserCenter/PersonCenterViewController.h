@@ -28,5 +28,8 @@
 - (IBAction)showGoodFriendListVC:(id)sender;
 - (IBAction)showMyBabyListVC:(id)sender;
 - (IBAction)showMyQRCardVC:(id)sender;
+@property (weak, nonatomic) IBOutlet UIImageView *personalTouXiangImgView;
+@property (weak, nonatomic) IBOutlet UILabel *acountName;
+@property (weak, nonatomic) IBOutlet UILabel *wawaNum;
 
 @end
