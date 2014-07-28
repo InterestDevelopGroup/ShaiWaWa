@@ -18,6 +18,8 @@
 		24A32322197BB168005CFEA4 /* tizhong@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A3231D197BB168005CFEA4 /* tizhong@2x.png */; };
 		24A32323197BB168005CFEA4 /* yuanquan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A3231E197BB168005CFEA4 /* yuanquan@2x.png */; };
 		24A32324197BB168005CFEA4 /* yuanquan2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A3231F197BB168005CFEA4 /* yuanquan2@2x.png */; };
+		24FAD0BC1986935F00FFE11E /* ShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 24FAD0B81986935F00FFE11E /* ShareManager.m */; };
+		24FAD0BD1986935F00FFE11E /* UserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 24FAD0BB1986935F00FFE11E /* UserDefault.m */; };
 		C32B41831965B5B8003979EE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C32B41821965B5B8003979EE /* Foundation.framework */; };
 		C32B41851965B5B8003979EE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C32B41841965B5B8003979EE /* CoreGraphics.framework */; };
 		C32B41871965B5B8003979EE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C32B41861965B5B8003979EE /* UIKit.framework */; };
@@ -87,8 +89,6 @@
 		F41F691219820B6F00089E42 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F41F691119820B6F00089E42 /* CoreText.framework */; };
 		F41F691419820B7800089E42 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F41F691319820B7800089E42 /* AssetsLibrary.framework */; };
 		F41F691619820B8100089E42 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F41F691519820B8100089E42 /* AddressBook.framework */; };
-		F41F691C19820C6300089E42 /* UserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = F41F691B19820C6300089E42 /* UserDefault.m */; };
-		F41F691F19820C7F00089E42 /* ShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F41F691E19820C7F00089E42 /* ShareManager.m */; };
 		F41F6921198228A600089E42 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F41F6920198228A600089E42 /* StoreKit.framework */; };
 		F41F6923198228C000089E42 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F41F6922198228C000089E42 /* MobileCoreServices.framework */; };
 		F41F6925198228CD00089E42 /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F41F6924198228CD00089E42 /* libz.1.1.3.dylib */; };
@@ -399,6 +399,10 @@
 		24A3231D197BB168005CFEA4 /* tizhong@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tizhong@2x.png"; sourceTree = "<group>"; };
 		24A3231E197BB168005CFEA4 /* yuanquan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yuanquan@2x.png"; sourceTree = "<group>"; };
 		24A3231F197BB168005CFEA4 /* yuanquan2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yuanquan2@2x.png"; sourceTree = "<group>"; };
+		24FAD0B71986935F00FFE11E /* ShareManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareManager.h; sourceTree = "<group>"; };
+		24FAD0B81986935F00FFE11E /* ShareManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareManager.m; sourceTree = "<group>"; };
+		24FAD0BA1986935F00FFE11E /* UserDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefault.h; sourceTree = "<group>"; };
+		24FAD0BB1986935F00FFE11E /* UserDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefault.m; sourceTree = "<group>"; };
 		9066DBF5432D412091E6A49A /* libPods-ShaiWaWa.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ShaiWaWa.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C32B417F1965B5B8003979EE /* ShaiWaWa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShaiWaWa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C32B41821965B5B8003979EE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -493,10 +497,6 @@
 		F41F691119820B6F00089E42 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		F41F691319820B7800089E42 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		F41F691519820B8100089E42 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
-		F41F691A19820C6300089E42 /* UserDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefault.h; sourceTree = "<group>"; };
-		F41F691B19820C6300089E42 /* UserDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefault.m; sourceTree = "<group>"; };
-		F41F691D19820C7F00089E42 /* ShareManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareManager.h; sourceTree = "<group>"; };
-		F41F691E19820C7F00089E42 /* ShareManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareManager.m; sourceTree = "<group>"; };
 		F41F6920198228A600089E42 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		F41F6922198228C000089E42 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		F41F6924198228CD00089E42 /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
@@ -925,6 +925,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		24FAD0B51986935F00FFE11E /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				24FAD0B61986935F00FFE11E /* ShareManager */,
+				24FAD0B91986935F00FFE11E /* UserDefault */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		24FAD0B61986935F00FFE11E /* ShareManager */ = {
+			isa = PBXGroup;
+			children = (
+				24FAD0B71986935F00FFE11E /* ShareManager.h */,
+				24FAD0B81986935F00FFE11E /* ShareManager.m */,
+			);
+			path = ShareManager;
+			sourceTree = "<group>";
+		};
+		24FAD0B91986935F00FFE11E /* UserDefault */ = {
+			isa = PBXGroup;
+			children = (
+				24FAD0BA1986935F00FFE11E /* UserDefault.h */,
+				24FAD0BB1986935F00FFE11E /* UserDefault.m */,
+			);
+			path = UserDefault;
+			sourceTree = "<group>";
+		};
 		C32B41761965B5B8003979EE = {
 			isa = PBXGroup;
 			children = (
@@ -1162,33 +1189,6 @@
 				F41F68D51982081E00089E42 /* ShareSDKShareActionSheet.framework */,
 			);
 			path = UI;
-			sourceTree = "<group>";
-		};
-		F41F691719820C6300089E42 /* Class */ = {
-			isa = PBXGroup;
-			children = (
-				F41F691819820C6300089E42 /* ShareManager */,
-				F41F691919820C6300089E42 /* UserDefault */,
-			);
-			path = Class;
-			sourceTree = "<group>";
-		};
-		F41F691819820C6300089E42 /* ShareManager */ = {
-			isa = PBXGroup;
-			children = (
-				F41F691D19820C7F00089E42 /* ShareManager.h */,
-				F41F691E19820C7F00089E42 /* ShareManager.m */,
-			);
-			path = ShareManager;
-			sourceTree = "<group>";
-		};
-		F41F691919820C6300089E42 /* UserDefault */ = {
-			isa = PBXGroup;
-			children = (
-				F41F691A19820C6300089E42 /* UserDefault.h */,
-				F41F691B19820C6300089E42 /* UserDefault.m */,
-			);
-			path = UserDefault;
 			sourceTree = "<group>";
 		};
 		F424345D1974FC58008E70C6 /* UCollectionView */ = {
@@ -1627,7 +1627,7 @@
 		F43386EE1974C28500464D43 /* General */ = {
 			isa = PBXGroup;
 			children = (
-				F41F691719820C6300089E42 /* Class */,
+				24FAD0B51986935F00FFE11E /* Helper */,
 				F41F68861982081E00089E42 /* Vendors */,
 				F47F54B1197FACE6006DCA75 /* Category */,
 				F47F54B6197FACE6006DCA75 /* Global */,
@@ -2157,7 +2157,6 @@
 				F41389C5197F48D000ABC8AE /* UserInfo.m in Sources */,
 				F433881C1974C28600464D43 /* LoginViewController.m in Sources */,
 				F43388221974C28600464D43 /* MyGoodFriendsListViewController.m in Sources */,
-				F41F691C19820C6300089E42 /* UserDefault.m in Sources */,
 				F47F5501197FACE7006DCA75 /* FriendSelectedCell.m in Sources */,
 				F41F68E41982081E00089E42 /* NALLabelsMatrix.m in Sources */,
 				F42434631974FC97008E70C6 /* UICollectionViewWaterfallLayout.m in Sources */,
@@ -2181,6 +2180,7 @@
 				F41F68DB1982081E00089E42 /* NSDate+Utils.m in Sources */,
 				F43387F61974C28600464D43 /* BabyListViewController.m in Sources */,
 				F43388341974C28600464D43 /* ResetPwdViewController.m in Sources */,
+				24FAD0BC1986935F00FFE11E /* ShareManager.m in Sources */,
 				F43387F21974C28600464D43 /* AddHeightAndWeightViewController.m in Sources */,
 				F43387F41974C28600464D43 /* BabyHomePageViewController.m in Sources */,
 				F41F68DE1982081E00089E42 /* NSString+Utils.m in Sources */,
@@ -2190,10 +2190,10 @@
 				F43387EF1974C28600464D43 /* AppDelegate.m in Sources */,
 				F433885F1974C28600464D43 /* User.m in Sources */,
 				F43388021974C28600464D43 /* SearchGoodFriendsViewController.m in Sources */,
+				24FAD0BD1986935F00FFE11E /* UserDefault.m in Sources */,
 				F43388F31974C28600464D43 /* ShaiWaWa.xcdatamodeld in Sources */,
 				F47F54F8197FACE7006DCA75 /* AddrBookCell.m in Sources */,
 				F41F68DC1982081E00089E42 /* NSString+IP.m in Sources */,
-				F41F691F19820C7F00089E42 /* ShareManager.m in Sources */,
 				F41F68D91982081E00089E42 /* HWConnect.m in Sources */,
 				F43388141974C28600464D43 /* FinishRegisterViewController.m in Sources */,
 				F433882E1974C28600464D43 /* QRCodeCardViewController.m in Sources */,
