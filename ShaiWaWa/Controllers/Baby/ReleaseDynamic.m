@@ -96,9 +96,15 @@
 - (IBAction)showLocalFilm:(id)sender {
 }
 
-- (IBAction)showGrayTwoBtnView:(id)sender {
+- (IBAction)showGrayTwoBtnView:(id)sender
+{
+    NSLog(@"呵呵");
+    _grayTwoView.hidden = NO;
 }
-- (IBAction)hideGrayTwoView:(id)sender {
+- (IBAction)hideGrayTwoView:(id)sender
+{
+    _grayTwoView.hidden = YES;
+     NSLog(@"呵呵1");
 }
 - (IBAction)hideCanSeeView:(id)sender
 {

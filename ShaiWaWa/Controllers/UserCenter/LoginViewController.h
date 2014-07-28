@@ -14,5 +14,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *hoverRegisterLabel;
 - (IBAction)showRegisterVC:(id)sender;
 - (IBAction)showMainVC:(id)sender;
+- (IBAction)sinaLoginEvent:(id)sender;
+
+- (IBAction)qqLoginEvent:(id)sender;
 
 @end
