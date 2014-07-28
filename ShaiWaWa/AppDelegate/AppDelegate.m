@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "ControlCenter.h"
 #import "ShareManager.h"
+#import "HttpService.h"
 #import <ShareSDK/ShareSDK.h>
 @implementation AppDelegate
 
@@ -22,6 +23,7 @@
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     [ControlCenter makeKeyAndVisible];
     [self customUI];
+    [self testAPI];
     return YES;
 }
 
@@ -173,4 +175,21 @@
         }
 #endif
     }
+
+
+- (void)testAPI
+{
+    [[HttpService sharedInstance] userRegister:@{@"username":@"cara",@"password":@"123456",@"phone":@"15018755275",@"validate_code":@"123456"} completionBlock:^(id object) {
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        
+    }];
+    
+    [[HttpService sharedInstance] userLogin:@{@"phone":@"15018755275",@"password":@"123456"} completionBlock:^(id object) {
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        
+    }];
+}
+
 @end
