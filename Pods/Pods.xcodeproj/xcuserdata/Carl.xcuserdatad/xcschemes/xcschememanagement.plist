@@ -18,12 +18,22 @@
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
+		<key>Pods-ShaiWaWa-CorePlot.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
 		<key>Pods-ShaiWaWa-HMSegmentedControl.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>4</integer>
+		</dict>
+		<key>Pods-ShaiWaWa-Reachability.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>7</integer>
 		</dict>
 		<key>Pods-ShaiWaWa-ZBarSDK.xcscheme</key>
 		<dict>
@@ -40,6 +50,21 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>02D1CB9DF0C74FBFB6EF0FD1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>272889A7ED79456DA49AADD6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2FFAA32469A648198DD75ADC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>35E52AE4298342A2B3EF59DD</key>
 		<dict>
 			<key>primary</key>
@@ -56,6 +81,11 @@
 			<true/>
 		</dict>
 		<key>A1E563FE160E4189B3392A6A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A5A3B34A09C849E7A81C9E36</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -81,6 +111,21 @@
 			<true/>
 		</dict>
 		<key>D64E36A0276841ECAF1980CB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DBA8879F947F4CB18806B73F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E0740F9F88EF4CF49CD2AF35</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F13E83FAF42E4C7BBD03260E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
