@@ -9,6 +9,9 @@
 #import "CommonViewController.h"
 
 @interface ReleaseDynamic : CommonViewController
+{
+    BOOL isSoundBar, isShareBar;
+}
 - (IBAction)showTopicVC:(id)sender;
 - (IBAction)showChooseFriendVC:(id)sender;
 
@@ -50,4 +53,8 @@
 @property (weak, nonatomic) IBOutlet UIView *soundXiaView;
 
 @property (weak, nonatomic) IBOutlet UIView *shareXiaView;
+@property (weak, nonatomic) IBOutlet UIView *topView;
+- (IBAction)hideXialaView:(id)sender;
+@property (weak, nonatomic) IBOutlet UIView *xialaGrayV;
+
 @end

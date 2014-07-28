@@ -18,4 +18,5 @@
 - (IBAction)showLoginVC:(id)sender;
 
 - (IBAction)showPostValidateVC:(id)sender;
+@property (weak, nonatomic) IBOutlet UIView *thirdSuperView;
 @end

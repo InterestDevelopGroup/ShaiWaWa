@@ -11,6 +11,8 @@
 #import "PinLunCell.h"
 #import "DynamicHeadView.h"
 
+#import "ShareView.h"
+
 @interface DynamicDetailViewController ()
 
 @end
@@ -40,6 +42,7 @@
 #pragma mark - Private Methods
 - (void)initUI
 {
+    isShareViewShown = NO;
     self.title = @"动态详情";
     [self setLeftCusBarItem:@"square_back" action:nil];
     [_pinLunListTableView clearSeperateLine];
@@ -52,7 +55,17 @@
     [_pinLunListTableView setBackgroundView:bgImgView];
     DynamicHeadView *dynamicHeadView = [[DynamicHeadView alloc] initWithFrame:CGRectMake(0, 0, _pinLunListTableView.bounds.size.width, 360)];
     [dynamicHeadView.imgOrVideoScrollView addSubview:scollBgView];
+    [dynamicHeadView.moreButton addTarget:self action:@selector(showShareGrayView) forControlEvents:UIControlEventTouchUpInside];
     [_pinLunListTableView setTableHeaderView:dynamicHeadView];
+    
+    ShareView *sv = [[ShareView alloc] initWithFrame:CGRectMake(0, 0, 320, 162)];
+    
+    sv.deleteButton.hidden = YES;
+    
+    [sv setDeleteBlock:^(NSString *name){
+        
+    }];
+    [_shareView addSubview:sv];
 }
 
 
@@ -93,5 +106,24 @@
 {
     [textField resignFirstResponder];
     return YES;
+}
+
+
+- (void)showShareGrayView
+{
+    if (!isShareViewShown) {
+        _grayShareView.hidden = NO;
+        isShareViewShown = YES;
+    }
+    else
+    {
+        _grayShareView.hidden = YES;
+        isShareViewShown = NO;
+    }
+}
+- (IBAction)hideGrayShareV:(id)sender
+{
+    _grayShareView.hidden = YES;
+    isShareViewShown = NO;
 }
 @end

@@ -54,6 +54,7 @@ typedef enum {
     Illegal_Request_Error_Code,
     Username_Existed_Error_Code
 }API_Error_Code;
+
 @interface HttpService : AFHttp
 
 + (HttpService *)sharedInstance;
