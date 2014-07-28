@@ -51,9 +51,9 @@
     NSMutableAttributedString * attrString = [[NSMutableAttributedString alloc] initWithString:_letPersonSawLabel.text];
     [attrString addAttributes:@{NSUnderlineStyleAttributeName:[NSNumber numberWithInt:NSUnderlineStyleSingle]} range:NSMakeRange(0, attrString.length)];
     _letPersonSawLabel.attributedText = attrString;
-    
-    
-    
+    isSoundBar = NO;
+    isShareBar = NO;
+   
 }
 
 
@@ -71,10 +71,73 @@
     ChooseFriendViewController *chooseFriendsVC = [[ChooseFriendViewController alloc] init];
     [self.navigationController pushViewController:chooseFriendsVC animated:YES];
 }
-- (IBAction)showDroSoundBar:(id)sender {
+- (IBAction)showDroSoundBar:(id)sender
+{
+    if (!isSoundBar) {
+        
+        if (isShareBar) {
+            _topView.frame = CGRectMake(0, 0, 320, self.view.bounds.size.height - 26);
+            _xialaGrayV.frame = CGRectMake(0, 0, 320, _topView.bounds.size.height - 36);
+            _xialaGrayV.hidden = NO;
+            _soundXiaView.hidden = NO;
+            _shareXiaView.hidden = YES;
+            isShareBar = NO;
+            isSoundBar = YES;
+        }
+        else
+        {
+            _topView.frame =CGRectMake(0, 0, 320, self.view.bounds.size.height - 26);
+            _xialaGrayV.frame = CGRectMake(0, 0, 320, _topView.bounds.size.height - 36);
+            _xialaGrayV.hidden = NO;
+            _soundXiaView.hidden = NO;
+            isSoundBar = YES;
+        }
+       
+    }
+    else
+    {
+        _topView.frame =CGRectMake(0, 0, 320, self.view.bounds.size.height);
+        _xialaGrayV.frame = CGRectMake(0, 0, 320, _topView.bounds.size.height - 36);
+        _xialaGrayV.hidden = YES;
+        _soundXiaView.hidden = YES;
+        isSoundBar = NO;
+    }
 }
 
-- (IBAction)showSynShareBar:(id)sender {
+- (IBAction)showSynShareBar:(id)sender
+{
+    
+    if (!isShareBar) {
+        
+        if (isSoundBar) {
+            _topView.frame =CGRectMake(0, 0, 320, self.view.bounds.size.height - 26);
+            _xialaGrayV.frame = CGRectMake(0, 0, 320, _topView.bounds.size.height - 36);
+            _xialaGrayV.hidden = NO;
+            _soundXiaView.hidden = YES;
+            _shareXiaView.hidden = NO;
+            isShareBar = YES;
+            isSoundBar = NO;
+        }
+        else
+        {
+            _topView.frame =CGRectMake(0, 0, 320, self.view.bounds.size.height - 26);
+            _xialaGrayV.frame = CGRectMake(0, 0, 320, _topView.bounds.size.height - 36);
+            _xialaGrayV.hidden = NO;
+            _shareXiaView.hidden = NO;
+            isShareBar = YES;
+        }
+        
+    }
+    else
+    {
+        _topView.frame =CGRectMake(0, 0, 320, self.view.bounds.size.height);
+        _xialaGrayV.frame = CGRectMake(0, 0, 320, _topView.bounds.size.height - 36);
+        _xialaGrayV.hidden = YES;
+        _shareXiaView.hidden = YES;
+        isShareBar = NO;
+    }
+    
+   
 }
 
 - (IBAction)showLocationVC:(id)sender
@@ -131,5 +194,22 @@
 - (IBAction)allPublicClick:(id)sender
 {
     [self hideCanSeeView:nil];
+}
+- (IBAction)hideXialaView:(id)sender
+{
+    if (isSoundBar) {
+        _topView.frame =CGRectMake(0, 0, 320, self.view.bounds.size.height);
+        _xialaGrayV.frame = CGRectMake(0, 0, 320, _topView.bounds.size.height - 36);
+        _xialaGrayV.hidden = YES;
+        _soundXiaView.hidden = YES;
+        isSoundBar = NO;
+    }
+    if (isShareBar) {
+        _topView.frame =CGRectMake(0, 0, 320, self.view.bounds.size.height);
+        _xialaGrayV.frame = CGRectMake(0, 0, 320, _topView.bounds.size.height - 36);
+        _xialaGrayV.hidden = YES;
+        _shareXiaView.hidden = YES;
+        isShareBar = NO;
+    }
 }
 @end
