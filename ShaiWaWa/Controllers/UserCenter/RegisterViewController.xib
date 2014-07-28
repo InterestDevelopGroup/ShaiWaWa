@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="hoverLoginLabel" destination="xCI-nF-jXv" id="jqh-nI-cT6"/>
                 <outlet property="phoneField" destination="IvD-3b-m7W" id="nRp-LK-Urc"/>
+                <outlet property="thirdSuperView" destination="Pa8-mD-b37" id="eg4-vM-YAI"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -64,34 +65,11 @@
                         <outletCollection property="gestureRecognizers" destination="OXW-9B-jPW" appends="YES" id="LRW-El-JGO"/>
                     </connections>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="第三方帐号登陆" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gyY-Ya-GP0">
-                    <rect key="frame" x="94" y="193" width="119" height="21"/>
+                <view contentMode="scaleToFill" id="Pa8-mD-b37">
+                    <rect key="frame" x="39" y="194" width="242" height="116"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="k7V-5a-Fka">
-                    <rect key="frame" x="83" y="241" width="40" height="43"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                    <inset key="titleEdgeInsets" minX="-45" minY="60" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="新浪微博" image="login_xinlang.png">
-                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Y9g-pC-f25">
-                    <rect key="frame" x="184" y="241" width="40" height="43"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                    <inset key="titleEdgeInsets" minX="-40" minY="60" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="腾讯QQ" image="login_qq.png">
-                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.93725496530532837" green="0.93725496530532837" blue="0.93725496530532837" alpha="1" colorSpace="deviceRGB"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
@@ -108,7 +86,5 @@
         <image name="login_box-1.png" width="48" height="24"/>
         <image name="login_box-2.png" width="213" height="24"/>
         <image name="login_box3.png" width="267" height="30"/>
-        <image name="login_qq.png" width="40" height="42"/>
-        <image name="login_xinlang.png" width="40" height="42"/>
     </resources>
 </document>

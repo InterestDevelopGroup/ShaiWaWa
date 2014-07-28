@@ -9,6 +9,7 @@
 #import "RegisterViewController.h"
 #import "ControlCenter.h"
 
+#import "TheThirdPartyLoginView.h"
 
 @interface RegisterViewController ()
 
@@ -48,6 +49,17 @@
     [attrString addAttributes:@{NSUnderlineStyleAttributeName:[NSNumber numberWithInt:NSUnderlineStyleSingle]} range:NSMakeRange(0, attrString.length)];
     _hoverLoginLabel.attributedText = attrString;
     _hoverLoginLabel.textColor = [UIColor lightGrayColor];
+    
+    TheThirdPartyLoginView *thirdLoginView = [[TheThirdPartyLoginView alloc] initWithFrame:CGRectMake(0, 0, 242, 116)];
+    
+    [thirdLoginView setXinlanBlock:^(void){
+        NSLog(@"sina");
+    }];
+    [thirdLoginView setQqBlock:^(void){
+       NSLog(@"qq");
+    }];
+    
+    [_thirdSuperView addSubview:thirdLoginView];
     
 }
 

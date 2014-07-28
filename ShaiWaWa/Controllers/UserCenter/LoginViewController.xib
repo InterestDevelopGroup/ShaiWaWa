@@ -10,6 +10,7 @@
                 <outlet property="hoverRegisterLabel" destination="Nlp-Da-gaz" id="hgY-Ns-Nd2"/>
                 <outlet property="phoneField" destination="DTO-T2-KFF" id="BJf-sJ-fBY"/>
                 <outlet property="pwdField" destination="maC-Rm-A3X" id="1jL-ga-TsH"/>
+                <outlet property="thirdSuperView" destination="iBp-jn-2qD" id="a68-S1-NOE"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -70,40 +71,11 @@
                         <outletCollection property="gestureRecognizers" destination="c1g-J9-39Q" appends="YES" id="kDz-bl-STv"/>
                     </connections>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="第三方帐号登陆" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2mc-C3-AO1">
-                    <rect key="frame" x="101" y="246" width="119" height="21"/>
+                <view contentMode="scaleToFill" id="iBp-jn-2qD">
+                    <rect key="frame" x="40" y="224" width="242" height="116"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zn9-By-O8p">
-                    <rect key="frame" x="89" y="286" width="40" height="43"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                    <inset key="titleEdgeInsets" minX="-45" minY="60" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="新浪微博" image="login_xinlang.png">
-                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="sinaLoginEvent:" destination="-1" eventType="touchUpInside" id="rr5-wI-TC7"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ekG-lb-agM">
-                    <rect key="frame" x="190" y="286" width="40" height="43"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                    <inset key="titleEdgeInsets" minX="-40" minY="60" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="腾讯QQ" image="login_qq.png">
-                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="qqLoginEvent:" destination="-1" eventType="touchUpInside" id="6CS-t7-VYh"/>
-                    </connections>
-                </button>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.93725496530532837" green="0.93725496530532837" blue="0.93725496530532837" alpha="1" colorSpace="deviceRGB"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
@@ -119,7 +91,5 @@
     <resources>
         <image name="login_box-2.png" width="213" height="24"/>
         <image name="login_box3.png" width="267" height="30"/>
-        <image name="login_qq.png" width="40" height="42"/>
-        <image name="login_xinlang.png" width="40" height="42"/>
     </resources>
 </document>
