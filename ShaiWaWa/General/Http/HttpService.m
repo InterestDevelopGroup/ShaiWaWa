@@ -122,22 +122,8 @@
  */
 - (void)userLogin:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
 {
-
-    [self post:[self mergeURL:User_Login] withParams:params completionBlock:^(id obj) {
-        if((obj == nil || [obj[@"error"] isEqualToString:@"1"]) && failure)
-        {
-            failure(nil,obj[@"msg"]);
-            return ;
-        }
-        if(success)
-        {
-            NSMutableDictionary * data = [obj[@"data"] mutableCopy];
-            data[@"password"] = params[@"psw"];
-            User * user  = [self mapModel:data withClass:[User class]];
-            success(user);
-            data = nil;
-            
-        }
+    [self postJSON:[self mergeURL:User_Login] withParams:params completionBlock:^(id obj) {
+        
     } failureBlock:failure];
 }
 
@@ -146,33 +132,7 @@
  */
 - (void)userRegister:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * reponseString))failure
 {
-    [self post:[self mergeURL:User_Register] withParams:params completionBlock:^(id obj) {
-        if((obj == nil || [obj count] == 0) && failure)
-        {
-            failure(nil,@"注册失败.");
-            return ;
-        }
-        
-        if(!success)
-            return ;
-        NSString * state = obj[0][@"state"];
-        if([state isEqualToString:@"Y"])
-        {
-            NSString * userID ;
-            if ([obj count] == 2)
-            {
-                userID = obj[1][@"id"];
-            }
-            success(userID);
-        }
-        else
-        {
-            NSString * message = @"注册失败.";
-            if([obj count] == 2)
-                message = obj[1][@"msg"];
-            if(failure) failure(nil,message);
-        }
-    } failureBlock:failure];
+    
 }
 
 

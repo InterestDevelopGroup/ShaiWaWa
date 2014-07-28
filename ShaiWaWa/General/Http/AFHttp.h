@@ -21,6 +21,8 @@
 
 - (void)postJSON:(NSString *)url withParams:(NSDictionary *)params withJSON:(NSData *)json completionBlock:(void (^)(id obj))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
 
+- (void)postJSON:(NSString *)url withParams:(NSDictionary *)params completionBlock:(void (^)(id obj))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
+
 - (void)cancelAllOperations;
 - (BOOL)isReachableViaWiFi;
 - (BOOL)isReachableViaWWAN;
