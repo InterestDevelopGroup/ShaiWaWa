@@ -373,6 +373,7 @@
 		F47F5515197FACE7006DCA75 /* WeiBoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F47F54F0197FACE7006DCA75 /* WeiBoCell.m */; };
 		F47F5516197FACE7006DCA75 /* WeiBoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F47F54F1197FACE7006DCA75 /* WeiBoCell.xib */; };
 		F4E363B91985ECC100A018A5 /* TheThirdPartyLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4E363B81985ECC100A018A5 /* TheThirdPartyLoginView.m */; };
+		F4E363BC1986009900A018A5 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4E363BB1986009900A018A5 /* ShareView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -853,6 +854,8 @@
 		F47F54F1197FACE7006DCA75 /* WeiBoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeiBoCell.xib; sourceTree = "<group>"; };
 		F4E363B71985ECC100A018A5 /* TheThirdPartyLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheThirdPartyLoginView.h; sourceTree = "<group>"; };
 		F4E363B81985ECC100A018A5 /* TheThirdPartyLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheThirdPartyLoginView.m; sourceTree = "<group>"; };
+		F4E363BA1986009900A018A5 /* ShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareView.h; sourceTree = "<group>"; };
+		F4E363BB1986009900A018A5 /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
 		F53FC3B786794DCFBE049CA1 /* Pods-ShaiWaWa.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShaiWaWa.xcconfig"; path = "Pods/Pods-ShaiWaWa.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1759,6 +1762,8 @@
 				F47F54F1197FACE7006DCA75 /* WeiBoCell.xib */,
 				F4E363B71985ECC100A018A5 /* TheThirdPartyLoginView.h */,
 				F4E363B81985ECC100A018A5 /* TheThirdPartyLoginView.m */,
+				F4E363BA1986009900A018A5 /* ShareView.h */,
+				F4E363BB1986009900A018A5 /* ShareView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2165,6 +2170,7 @@
 				F41F68DF1982081E00089E42 /* OSHelper.m in Sources */,
 				F43388161974C28600464D43 /* ForgetPwdViewController.m in Sources */,
 				F433883A1974C28600464D43 /* UpdatePwdViewController.m in Sources */,
+				F4E363BC1986009900A018A5 /* ShareView.m in Sources */,
 				F43388321974C28600464D43 /* ResetPwdNextStepViewController.m in Sources */,
 				F47F54FC197FACE7006DCA75 /* DynamicCell.m in Sources */,
 				F47F54F4197FACE7006DCA75 /* ControlCenter.m in Sources */,

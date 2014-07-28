@@ -17,6 +17,7 @@
                 <outlet property="mainAddView" destination="wG9-vy-acb" id="ePO-Re-KFR"/>
                 <outlet property="menuGray" destination="Tnt-u6-ewy" id="s7C-eN-DBu"/>
                 <outlet property="releaseBtn" destination="eoj-p0-rPJ" id="82s-SM-8ND"/>
+                <outlet property="shareView" destination="Dgc-yD-IGp" id="9HV-GW-b1m"/>
                 <outlet property="userViewTap" destination="bp7-Th-Lpa" id="kN2-Ej-TF1"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
@@ -124,90 +125,6 @@
                         <view contentMode="scaleToFill" id="Dgc-yD-IGp">
                             <rect key="frame" x="0.0" y="344" width="320" height="162"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
-                            <subviews>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="分享到" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cOe-Si-Bd0">
-                                    <rect key="frame" x="14" y="10" width="58" height="21"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RYW-C5-50y">
-                                    <rect key="frame" x="20" y="39" width="64" height="64"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <state key="normal" image="square_fenxiang-1.png">
-                                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="shareToWx:" destination="-1" eventType="touchUpInside" id="yuO-CK-HGV"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="buS-77-ZKc">
-                                    <rect key="frame" x="92" y="39" width="64" height="64"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <state key="normal" image="square_fenxiang-2.png">
-                                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="shareToWxCycle:" destination="-1" eventType="touchUpInside" id="IIU-4n-DmN"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gbc-Tb-W9D">
-                                    <rect key="frame" x="164" y="39" width="64" height="64"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <state key="normal" image="square_fenxiang-3.png">
-                                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="shareToWeibo:" destination="-1" eventType="touchUpInside" id="mcR-YD-vO8"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RKO-2w-H83">
-                                    <rect key="frame" x="236" y="39" width="64" height="64"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <state key="normal" image="square_fenxiang-4.png">
-                                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="shareToQzone:" destination="-1" eventType="touchUpInside" id="AEF-wj-rUl"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="TIA-mB-J62">
-                                    <rect key="frame" x="13" y="119" width="93" height="28"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <state key="normal" image="square_shoucang.png">
-                                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="fkB-jy-NRX">
-                                    <rect key="frame" x="114" y="119" width="93" height="28"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <state key="normal" image="square_jubao.png">
-                                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xhP-rU-pBD">
-                                    <rect key="frame" x="215" y="119" width="93" height="28"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <state key="normal" image="square_shanchu.png">
-                                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                </button>
-                            </subviews>
                             <color key="backgroundColor" red="0.82685391870000002" green="0.82223462300000005" blue="0.83147321429999999" alpha="1" colorSpace="calibratedRGB"/>
                             <gestureRecognizers/>
                             <connections>
@@ -258,13 +175,6 @@
         <image name="login_chazhao.png" width="57" height="62"/>
         <image name="login_suibian.png" width="57" height="62"/>
         <image name="login_tianjia.png" width="57" height="62"/>
-        <image name="square_fenxiang-1.png" width="64" height="64"/>
-        <image name="square_fenxiang-2.png" width="64" height="64"/>
-        <image name="square_fenxiang-3.png" width="64" height="64"/>
-        <image name="square_fenxiang-4.png" width="64" height="64"/>
-        <image name="square_jubao.png" width="93" height="28"/>
-        <image name="square_shanchu.png" width="93" height="28"/>
-        <image name="square_shoucang.png" width="93" height="28"/>
         <image name="square_tianxie.png" width="44" height="46"/>
     </resources>
 </document>

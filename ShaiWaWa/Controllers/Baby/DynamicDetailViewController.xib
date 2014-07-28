@@ -7,7 +7,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DynamicDetailViewController">
             <connections>
+                <outlet property="grayShareView" destination="ehi-Jx-ZLD" id="nRA-rp-Cx0"/>
                 <outlet property="pinLunListTableView" destination="BdH-zM-VrH" id="RGu-M5-Vvc"/>
+                <outlet property="shareView" destination="hVb-Sp-2Uu" id="V5G-Y8-iYe"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -17,7 +19,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="68" sectionHeaderHeight="1" sectionFooterHeight="1" id="BdH-zM-VrH">
-                    <rect key="frame" x="11" y="8.9999996743550863" width="299" height="451"/>
+                    <rect key="frame" x="11" y="8.9999993175615902" width="299" height="451"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -49,12 +51,38 @@
                         <outlet property="delegate" destination="-1" id="oKJ-iS-dWX"/>
                     </connections>
                 </textField>
+                <view hidden="YES" contentMode="scaleToFill" id="ehi-Jx-ZLD">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" id="hVb-Sp-2Uu">
+                            <rect key="frame" x="0.0" y="344" width="320" height="162"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                            <color key="backgroundColor" red="0.82685391870000002" green="0.82223462300000005" blue="0.83147321429999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <gestureRecognizers/>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="cEy-yJ-QHm" appends="YES" id="8yA-Zp-voh"/>
+                            </connections>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <gestureRecognizers/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="UY7-x1-kIF" appends="YES" id="OoP-ip-ehy"/>
+                    </connections>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.79749065896739135" green="0.79749065896739135" blue="0.79749065896739135" alpha="1" colorSpace="calibratedRGB"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
+        <tapGestureRecognizer id="UY7-x1-kIF">
+            <connections>
+                <action selector="hideGrayShareV:" destination="-1" id="2hM-RC-iXs"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="cEy-yJ-QHm"/>
     </objects>
     <resources>
         <image name="baby_4-bg-2.png" width="305" height="277"/>

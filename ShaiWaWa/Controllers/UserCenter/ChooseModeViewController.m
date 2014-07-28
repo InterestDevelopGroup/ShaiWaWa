@@ -24,7 +24,7 @@
 #import "ReleaseDynamic.h"
 #import "TopicListOfDynamic.h"
 #import "UserDefault.h"
-#import "ShareManager.h"
+#import "ShareView.h"
 
 @interface ChooseModeViewController ()
 
@@ -169,6 +169,15 @@
     _releaseBtn.frame = CGRectMake(_dynamicPageTableView.bounds.size.width-60, [UIScreen mainScreen].bounds.size.height-50 , 44, 46);
         }
     }
+    
+    ShareView *sv = [[ShareView alloc] initWithFrame:CGRectMake(0, 0, 320, 162)];
+    
+    sv.deleteButton.hidden = YES;
+    
+    [sv setDeleteBlock:^(NSString *name){
+        
+    }];
+    [_shareView addSubview:sv];
 }
 
 
@@ -363,23 +372,5 @@
     TopicListOfDynamic *topicListOfDyVC = [[TopicListOfDynamic alloc] init];
     [self.navigationController pushViewController:topicListOfDyVC animated:YES];
 }
-- (IBAction)shareToWx:(id)sender
-{
-    [[ShareManager sharePlatform] shareToWeiXin];
-}
 
-- (IBAction)shareToWxCycle:(id)sender
-{
-     [[ShareManager sharePlatform] shareToWeiXinCycle];
-}
-
-- (IBAction)shareToWeibo:(id)sender
-{
-     [[ShareManager sharePlatform] shareToSinaWeiBo];
-}
-
-- (IBAction)shareToQzone:(id)sender
-{
-     [[ShareManager sharePlatform] shareToQzone];
-}
 @end

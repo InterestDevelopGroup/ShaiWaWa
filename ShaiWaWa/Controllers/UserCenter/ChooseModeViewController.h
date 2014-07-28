@@ -35,9 +35,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *releaseBtn;
 - (IBAction)showReleaseVC:(id)sender;
 @property (weak, nonatomic) IBOutlet UIView *mainAddView;
-- (IBAction)shareToWx:(id)sender;
-- (IBAction)shareToWxCycle:(id)sender;
-- (IBAction)shareToWeibo:(id)sender;
-- (IBAction)shareToQzone:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIView *shareView;
 
 @end
