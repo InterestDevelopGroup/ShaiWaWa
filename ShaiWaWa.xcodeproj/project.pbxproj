@@ -30,6 +30,7 @@
 		C32B41A41965B5B8003979EE /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C32B41881965B5B8003979EE /* CoreData.framework */; };
 		C32B41AC1965B5B8003979EE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C32B41AA1965B5B8003979EE /* InfoPlist.strings */; };
 		C32B41AE1965B5B8003979EE /* ShaiWaWaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C32B41AD1965B5B8003979EE /* ShaiWaWaTests.m */; };
+		F4063F7D19879E080026B2CF /* GraphyByCheung.m in Sources */ = {isa = PBXBuildFile; fileRef = F4063F7819879E080026B2CF /* GraphyByCheung.m */; };
 		F41389C5197F48D000ABC8AE /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F41389C4197F48D000ABC8AE /* UserInfo.m */; };
 		F41F654A1981F01400089E42 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F41F65491981F01400089E42 /* SystemConfiguration.framework */; };
 		F41F654C1981F01D00089E42 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F41F654B1981F01D00089E42 /* QuartzCore.framework */; };
@@ -414,6 +415,8 @@
 		C32B41A91965B5B8003979EE /* ShaiWaWaTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ShaiWaWaTests-Info.plist"; sourceTree = "<group>"; };
 		C32B41AB1965B5B8003979EE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C32B41AD1965B5B8003979EE /* ShaiWaWaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShaiWaWaTests.m; sourceTree = "<group>"; };
+		F4063F7719879E080026B2CF /* GraphyByCheung.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphyByCheung.h; sourceTree = "<group>"; };
+		F4063F7819879E080026B2CF /* GraphyByCheung.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphyByCheung.m; sourceTree = "<group>"; };
 		F41389C3197F48D000ABC8AE /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
 		F41389C4197F48D000ABC8AE /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
 		F41F65491981F01400089E42 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -1021,6 +1024,15 @@
 				C32B41AA1965B5B8003979EE /* InfoPlist.strings */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F4063F7619879E080026B2CF /* CorePlot */ = {
+			isa = PBXGroup;
+			children = (
+				F4063F7719879E080026B2CF /* GraphyByCheung.h */,
+				F4063F7819879E080026B2CF /* GraphyByCheung.m */,
+			);
+			path = CorePlot;
 			sourceTree = "<group>";
 		};
 		F41F68861982081E00089E42 /* Vendors */ = {
@@ -1712,6 +1724,7 @@
 		F47F54C1197FACE6006DCA75 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F4063F7619879E080026B2CF /* CorePlot */,
 				F47F54C2197FACE6006DCA75 /* AddrBookCell.h */,
 				F47F54C3197FACE6006DCA75 /* AddrBookCell.m */,
 				F47F54C4197FACE6006DCA75 /* AddrBookCell.xib */,
@@ -2144,6 +2157,7 @@
 				F41F68D71982081E00089E42 /* UITextView+Placeholder.m in Sources */,
 				F43388081974C28600464D43 /* SearchWeiboFriendViewController.m in Sources */,
 				24A32310197AEFF8005CFEA4 /* TopicListOfDynamic.m in Sources */,
+				F4063F7D19879E080026B2CF /* GraphyByCheung.m in Sources */,
 				F433880E1974C28600464D43 /* ShaiWaSquareViewController.m in Sources */,
 				F43388101974C28600464D43 /* ChooseFriendViewController.m in Sources */,
 				F47F54F6197FACE7006DCA75 /* HttpService.m in Sources */,
