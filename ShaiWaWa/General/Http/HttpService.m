@@ -12,6 +12,9 @@
 #define HW @"hw_"       //关键字属性前缀
 #define Public_Key  @"5df39a7723b31e8abc5a826d"
 #define Private_Key @"1ee947ee71d3f4d214796750"
+
+#import "UserInfo.h"
+#import "UserDefault.h"
 @implementation HttpService
 
 #pragma mark Life Cycle
@@ -214,9 +217,17 @@
         if (isError) {
             return ;
         }
+       
+        UserInfo *curUser = [[UserInfo alloc] init];
+        curUser.username = [[obj objectForKey:@"result"] objectForKey:@"phone"];
+        curUser.password = [[obj objectForKey:@"result"] objectForKey:@"password"];
         
-        
-        
+        [[UserDefault sharedInstance] setUserInfo:curUser];
+        if(success)
+        {
+            success(curUser);
+        }
+         // NSLog(@"%@",[[obj objectForKey:@"result"] objectForKey:@"username"]);
     } failureBlock:failure];
 }
 
@@ -233,6 +244,15 @@
             return ;
         }
         
+        UserInfo * userInfo = [[UserInfo alloc] init];
+        userInfo.uid = [[obj objectForKey:@"result"] objectForKey:@"id"];
+        userInfo.username = [[obj objectForKey:@"result"] objectForKey:@"username"];
+        
+        if(success)
+        {
+            success(userInfo);
+        }
+        // NSLog(@"%@",[[obj objectForKey:@"result"] objectForKey:@"username"]);
     } failureBlock:failure];
 }
 
