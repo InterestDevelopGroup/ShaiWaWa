@@ -179,6 +179,7 @@
 
 - (void)testAPI
 {
+    /*
     [[HttpService sharedInstance] userRegister:@{@"username":@"cara",@"password":@"123456",@"phone":@"15018755275",@"validate_code":@"123456"} completionBlock:^(id object) {
         
     } failureBlock:^(NSError *error, NSString *responseString) {
@@ -190,6 +191,7 @@
     } failureBlock:^(NSError *error, NSString *responseString) {
         
     }];
+     */
 }
 
 @end

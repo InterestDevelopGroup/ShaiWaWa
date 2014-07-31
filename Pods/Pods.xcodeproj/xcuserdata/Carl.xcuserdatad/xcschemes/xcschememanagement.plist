@@ -2,9 +2,57 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>Pods-ShaiWaWa-AFNetworking.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>Pods-ShaiWaWa-CocoaLumberjack.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>Pods-ShaiWaWa-CorePlot.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+		<key>Pods-ShaiWaWa-HMSegmentedControl.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
+		<key>Pods-ShaiWaWa-Reachability.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>8</integer>
+		</dict>
+		<key>Pods-ShaiWaWa-SVProgressHUD.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
+		<key>Pods-ShaiWaWa-ZBarSDK.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>7</integer>
+		</dict>
+		<key>Pods-ShaiWaWa.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>02D1CB9DF0C74FBFB6EF0FD1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0FB04A74982447FDAFE6DBE5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -19,7 +67,37 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>50B7A9ED62794FE79DB536AF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>88ECA3FEF72D4F5C81B163C0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8F4485A9AE7A40C9885E244E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>A5A3B34A09C849E7A81C9E36</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A8D82F890DAB4F51B7726266</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CF6C00FB04764930A4BE9DF4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D18DFBE8FFF54E15A598B760</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -15,7 +15,7 @@
 
 #import "TheThirdPartyLoginView.h"
 
-
+#import "HttpService.h"
 
 
 @interface LoginViewController ()
@@ -83,7 +83,6 @@
     
     afHttp = [AFHttp shareInstanced];
     isRec = afHttp.isReachableViaWiFi;
-    NSLog(@"%hhd",isRec);
     
 }
 
@@ -95,28 +94,21 @@
 - (IBAction)showMainVC:(id)sender
 {
     if (_phoneField.text.length > 0) {
-        if ([_phoneField.text isEqualToString:@"x"]) {
-            if ([_pwdField.text isEqualToString:@"123"]) {
-                ChooseModeViewController *chooseModeVC = [[ChooseModeViewController alloc] init];
-                [self.navigationController pushViewController:chooseModeVC animated:YES];
-                UserInfo *curUser = [[UserInfo alloc] init];
-                curUser.username = _phoneField.text;
-                curUser.password = _pwdField.text;
-                
-                [[UserDefault sharedInstance] setUserInfo:curUser];
-                _phoneField.text = nil;
-                _pwdField.text = nil;
-                
-            }
-            else
-            {
-                DDLogInfo(@"密码错误");
-            }
-        }
-        else
-        {
-            DDLogInfo(@"用户不存在");
-        }
+        
+        [[HttpService sharedInstance] userLogin:@{@"phone":_phoneField.text,@"password":_pwdField.text}
+                    completionBlock:^(id object){
+                        
+//                        ChooseModeViewController *chooseModeVC = [[ChooseModeViewController alloc] init];
+//                        [self.navigationController pushViewController:chooseModeVC animated:YES];
+//                       
+//                        _phoneField.text = nil;
+//                        _pwdField.text = nil;
+                        
+                    } failureBlock:^(NSError *error, NSString *responseString){
+                        
+//                        SVProgressHUD
+//                        MBProgressHUD
+        }];
     }
     else
     {
