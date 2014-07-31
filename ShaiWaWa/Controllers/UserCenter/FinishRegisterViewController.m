@@ -10,6 +10,8 @@
 #import "UIViewController+BarItemAdapt.h"
 #import "ControlCenter.h"
 
+#import "HttpService.h"
+
 @interface FinishRegisterViewController ()
 
 @end
@@ -51,7 +53,13 @@
     
 - (IBAction)finishRegisterAndLogin:(id)sender
 {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [[HttpService sharedInstance] userRegister:@{@"username":@"xiang",@"password":@"123456",@"phone":@"13680985223",@"sww_number":@"88888887",@"validate_code":@"123456"} completionBlock:^(id object) {
+        
+         [self.navigationController popToRootViewControllerAnimated:YES];       
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        
+    }];
+    
 }
     
 #pragma mark - UITextFieldDelegate

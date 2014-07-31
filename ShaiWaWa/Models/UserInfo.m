@@ -11,12 +11,16 @@
 @implementation UserInfo
 @synthesize username;
 @synthesize password;
-
+@synthesize uid,phone,sex,sww_number;
 - (id)copyWithZone:(NSZone *)zone
 {
 	UserInfo *userInfo = [[[self class] allocWithZone:zone] init];
 	userInfo.username = [[self username] copy];
 	userInfo.password = [[self password] copy];
+    userInfo.uid = [[self uid] copy];
+	userInfo.phone = [[self phone] copy];
+    userInfo.sex = [[self sex] copy];
+	userInfo.sww_number = [[self sww_number] copy];
 	return userInfo;
 }
 
