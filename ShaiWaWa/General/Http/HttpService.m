@@ -166,9 +166,15 @@
 
 - (BOOL)filterError:(NSDictionary *)obj failureBlock:(void (^)(NSError *, NSString *))failure
 {
-    if(obj == nil || obj[@"err_code"])
+    if(obj == nil || obj[@"err_code"] == nil)
     {
-        if(failure && [obj[@"err_code"] isKindOfClass:[NSString class]])
+        
+        if(failure == NULL)
+        {
+            return YES;
+        }
+        
+        if([obj[@"err_code"] isKindOfClass:[NSString class]])
         {
             failure(nil,[self getErrorMsgByCode:[obj[@"err_code"] intValue]]);
         }
@@ -178,6 +184,22 @@
         }
         return YES;
     }
+    
+    if([obj[@"err_code"] isKindOfClass:[NSString class]] && [obj[@"err_code"] intValue] != No_Error_Code)
+    {
+        if(failure){
+            failure(nil,[self getErrorMsgByCode:[obj[@"err_code"] intValue]]);
+        }
+        return YES;
+    }
+    else
+    {
+        if (failure) {
+            failure(nil,[self getErrorMsgByCode:0]);
+        }
+        return YES;
+    }
+    
     return NO;
 }
 
