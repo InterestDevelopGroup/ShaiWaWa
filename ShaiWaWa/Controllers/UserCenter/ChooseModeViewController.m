@@ -51,7 +51,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:YES];
-    users = [[UserDefault sharedInstance] userInfo];
+
     [self initUI];
 }
 
@@ -128,13 +128,23 @@
     [mainMenu setUserVBlock:^(UIView * viewer)
     {
 //        [viewer addGestureRecognizer:_userViewTap];
+        
         [self userViewTouchEvent:viewer];
         
     }];
    
     
-         mainMenu.nameLabel.text = users.username;
-     
+    mainMenu.nameLabel.text = users.username;
+    if (users.avatar!=nil) {
+        mainMenu.touXiangImgView.image =  [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:users.avatar]]];
+    }
+    else
+    {
+        NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Cheung"] stringByAppendingPathComponent:@"currentImage.png"];
+        UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
+        mainMenu.touXiangImgView.image = savedImage;
+    }
+    
     
     //[mainMenu.user addGestureRecognizer:_userViewTap];
     [_mainAddView addSubview:mainMenu];

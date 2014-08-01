@@ -9,7 +9,7 @@
 #import "CommonViewController.h"
 #import "UserInfo.h"
 
-@interface PersonCenterViewController : CommonViewController
+@interface PersonCenterViewController : CommonViewController<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate>
 {
     UserInfo *users;
 }

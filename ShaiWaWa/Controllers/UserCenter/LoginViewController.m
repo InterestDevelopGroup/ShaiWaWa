@@ -17,6 +17,8 @@
 
 #import "HttpService.h"
 
+#import "MBProgressHUD.h"
+#import "SVProgressHUD.h"
 
 @interface LoginViewController ()
 
@@ -32,7 +34,19 @@
     }
     return self;
 }
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    UserInfo *users = [[UserDefault sharedInstance] userInfo];
+    if (users != nil)
+    {
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+        [SVProgressHUD setStatus:@"加载中..."];
+        _phoneField.text = users.phone;
+        _pwdField.text = users.password;
+        [self showMainVC:nil];
+    }
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -52,7 +66,8 @@
     _phoneField = nil;
     _pwdField = nil;
 }
-    
+
+
 #pragma mark - Private Methods
 - (void)initUI
 {
@@ -61,13 +76,7 @@
     [attrString addAttributes:@{NSUnderlineStyleAttributeName:[NSNumber numberWithInt:NSUnderlineStyleSingle]} range:NSMakeRange(0, attrString.length)];
     _hoverRegisterLabel.attributedText = attrString;
     _hoverRegisterLabel.textColor = [UIColor lightGrayColor];
-    UserInfo *users = [[UserDefault sharedInstance] userInfo];
-    if (users != nil)
-    {
-        _phoneField.text = users.username;
-        _pwdField.text = users.password;
-        [self showMainVC:nil];
-    }
+    
     
     
     TheThirdPartyLoginView *thirdLoginView = [[TheThirdPartyLoginView alloc] initWithFrame:CGRectMake(0, 0, 242, 116)];
@@ -93,26 +102,33 @@
 
 - (IBAction)showMainVC:(id)sender
 {
+    [_phoneField resignFirstResponder];
+    [_pwdField resignFirstResponder];
     if (_phoneField.text.length > 0) {
-        
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+        [SVProgressHUD setStatus:@"登陆中..."];
         [[HttpService sharedInstance] userLogin:@{@"phone":_phoneField.text,@"password":_pwdField.text}
                     completionBlock:^(id object){
                         
-//                        ChooseModeViewController *chooseModeVC = [[ChooseModeViewController alloc] init];
-//                        [self.navigationController pushViewController:chooseModeVC animated:YES];
-//                       
-//                        _phoneField.text = nil;
-//                        _pwdField.text = nil;
                         
+                        [SVProgressHUD dismiss];
+                        [SVProgressHUD showSuccessWithStatus:@"成功登陆"];
+                        ChooseModeViewController *chooseModeVC = [[ChooseModeViewController alloc] init];
+                        [self.navigationController pushViewController:chooseModeVC animated:YES];
+                        
+                        _phoneField.text = nil;
+                        _pwdField.text = nil;
                     } failureBlock:^(NSError *error, NSString *responseString){
-                        
-//                        SVProgressHUD
-//                        MBProgressHUD
+                        [SVProgressHUD showErrorWithStatus:responseString];
         }];
     }
     else
     {
+          [SVProgressHUD showErrorWithStatus:@"文本框不能为空哦"];
         
+        
+//        [[MBProgressHUD showHUDAddedTo:self.view animated:YES] setLabelText:@"文本框不能为空"];
+       
         DDLogInfo(@"文本框不能为空");
         
     }

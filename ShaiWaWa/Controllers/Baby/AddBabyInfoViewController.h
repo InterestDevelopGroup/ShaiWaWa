@@ -8,7 +8,7 @@
 
 #import "CommonViewController.h"
 
-@interface AddBabyInfoViewController : CommonViewController<UITextFieldDelegate, UIScrollViewDelegate>
+@interface AddBabyInfoViewController : CommonViewController<UITextFieldDelegate, UIScrollViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 {
     BOOL isBoy, isGirl, isDad, isMon;
 }
@@ -31,5 +31,7 @@
 - (IBAction)monSelected:(id)sender;
 - (IBAction)dadSelected:(id)sender;
 - (IBAction)openCitiesSelectView:(id)sender;
+- (IBAction)touXiangSelectEvent:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *touXiangButton;
 
 @end

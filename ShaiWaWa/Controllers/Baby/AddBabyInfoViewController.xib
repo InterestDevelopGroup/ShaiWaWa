@@ -20,6 +20,7 @@
                 <outlet property="monRadioButton" destination="UE3-rs-1tP" id="Pwk-hf-ojq"/>
                 <outlet property="scrollView" destination="ZMm-kx-29z" id="BYp-hX-f4r"/>
                 <outlet property="showSelectCityVC" destination="trh-mK-1ab" id="yNY-6h-krD"/>
+                <outlet property="touXiangButton" destination="l6r-Fu-95H" id="Bod-at-8Zx"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -52,6 +53,9 @@
                     <state key="normal" image="main_baobaotouxiang.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="touXiangSelectEvent:" destination="-1" eventType="touchUpInside" id="FGe-HC-5RU"/>
+                    </connections>
                 </button>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="必填" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="g6b-5e-SyT">
                     <rect key="frame" x="38" y="161" width="34" height="21"/>
