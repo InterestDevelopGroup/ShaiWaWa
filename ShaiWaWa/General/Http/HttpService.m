@@ -15,6 +15,8 @@
 
 #import "UserInfo.h"
 #import "UserDefault.h"
+#import "SVProgressHUD.h"
+
 @implementation HttpService
 
 #pragma mark Life Cycle
@@ -211,16 +213,24 @@
 //TODO:用户登录
 - (void)userLogin:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
 {
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+    [SVProgressHUD setStatus:@"登陆中..."];
+    
     [self postJSON:[self mergeURL:User_Login] withParams:params completionBlock:^(id obj) {
+        
         
         BOOL isError = [self filterError:obj failureBlock:failure];
         if (isError) {
             return ;
         }
-       
+        
+        
         UserInfo *curUser = [[UserInfo alloc] init];
-        curUser.username = [[obj objectForKey:@"result"] objectForKey:@"phone"];
+        curUser.username = [[obj objectForKey:@"result"] objectForKey:@"username"];
         curUser.password = [[obj objectForKey:@"result"] objectForKey:@"password"];
+        curUser.phone = [[obj objectForKey:@"result"] objectForKey:@"phone"];;
+        curUser.sww_number = [[obj objectForKey:@"result"] objectForKey:@"sww_number"];;
+        curUser.sex = [[obj objectForKey:@"result"] objectForKey:@"sex"];;
         
         [[UserDefault sharedInstance] setUserInfo:curUser];
         if(success)

@@ -17,6 +17,8 @@
 
 #import "HttpService.h"
 
+#import "MBProgressHUD.h"
+#import "SVProgressHUD.h"
 
 @interface LoginViewController ()
 
@@ -64,7 +66,7 @@
     UserInfo *users = [[UserDefault sharedInstance] userInfo];
     if (users != nil)
     {
-        _phoneField.text = users.username;
+        _phoneField.text = users.phone;
         _pwdField.text = users.password;
         [self showMainVC:nil];
     }
@@ -93,6 +95,8 @@
 
 - (IBAction)showMainVC:(id)sender
 {
+    [_phoneField resignFirstResponder];
+    [_pwdField resignFirstResponder];
     if (_phoneField.text.length > 0) {
         
         [[HttpService sharedInstance] userLogin:@{@"phone":_phoneField.text,@"password":_pwdField.text}
@@ -100,19 +104,23 @@
                         
 //                        ChooseModeViewController *chooseModeVC = [[ChooseModeViewController alloc] init];
 //                        [self.navigationController pushViewController:chooseModeVC animated:YES];
-//                       
+//
 //                        _phoneField.text = nil;
 //                        _pwdField.text = nil;
-                        
+                        [SVProgressHUD dismiss];
+                        [SVProgressHUD showSuccessWithStatus:@"成功登陆"];
+                        NSLog(@"跳转主页面");
                     } failureBlock:^(NSError *error, NSString *responseString){
-                        
-//                        SVProgressHUD
-//                        MBProgressHUD
+                        [SVProgressHUD showErrorWithStatus:responseString];
         }];
     }
     else
     {
+          [SVProgressHUD showErrorWithStatus:@"文本框不能为空哦"];
         
+        
+//        [[MBProgressHUD showHUDAddedTo:self.view animated:YES] setLabelText:@"文本框不能为空"];
+       
         DDLogInfo(@"文本框不能为空");
         
     }
