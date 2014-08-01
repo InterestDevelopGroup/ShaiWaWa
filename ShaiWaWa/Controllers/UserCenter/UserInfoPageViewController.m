@@ -39,18 +39,25 @@
     [super viewDidAppear:YES];
     
     updateUserVC = [[UpdateUserNameViewController alloc] init];
-    [updateUserVC setUsernameTextBlock:^(NSString *name)
-    {
-        UserInfo *curUser = [[UserInfo alloc] init];
-        curUser.username = name;
-        curUser.password = @"123";
-        [[UserDefault sharedInstance] setUserInfo:curUser];
-    }];
+//    [updateUserVC setUsernameTextBlock:^(NSString *name)
+//    {
+//        
+//    }];
     
     users = [[UserDefault sharedInstance] userInfo];
     self.title = users.username;
     userNameVal = users.username;
-    sexVal = @"男";
+    if ([users.sex isEqual:[NSNull null]]) {
+        sexVal = @"保密";
+    }
+    else if([users.sex isEqualToString:@"1"])
+    {
+        sexVal = @"男";
+    }
+    else if([users.sex isEqualToString:@"2"])
+    {
+        sexVal = @"女";
+    }
     pwdVal = @"";
      keyOfvalue = [[NSMutableArray alloc] initWithObjects:userNameVal,sexVal,pwdVal, nil];
     [_userInfoTableView reloadData];
@@ -69,7 +76,17 @@
     [self setLeftCusBarItem:@"square_back" action:nil];
     key = [[NSMutableArray alloc] initWithObjects:@"用户名",@"性别",@"修改密码", nil];
     userNameVal = users.username;
-    sexVal = @"男";
+    if ([users.sex isEqualToString:@"0"]) {
+        sexVal = @"保密";
+    }
+    else if([users.sex isEqualToString:@"1"])
+    {
+        sexVal = @"男";
+    }
+    else if([users.sex isEqualToString:@"2"])
+    {
+        sexVal = @"女";
+    }
     pwdVal = @"";
     
     keyOfvalue = [[NSMutableArray alloc] initWithObjects:userNameVal,sexVal,pwdVal, nil];

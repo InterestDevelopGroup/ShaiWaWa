@@ -59,6 +59,8 @@
     UIImageView *jianTou = [[UIImageView alloc] initWithImage:imageJianTou];
     jianTou.frame = CGRectMake(_cityButton.bounds.size.width-18, 15, 7, 11);
     [_cityButton addSubview:jianTou];
+    
+    [self createFolder];
 }
 
 - (IBAction)boySelected:(id)sender
@@ -96,6 +98,87 @@
 - (IBAction)openCitiesSelectView:(id)sender
 {
 }
+
+- (IBAction)touXiangSelectEvent:(id)sender
+{
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"拍照" otherButtonTitles:@"相册", nil];
+    [actionSheet showFromRect:CGRectMake(0, 0, 320, 100) inView:self.view animated:YES];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    // 判断是否支持相机
+    //先设定sourceType为相机，然后判断相机是否可用（ipod）没相机，不可用将sourceType设定为相片库
+    UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
+    
+    switch (buttonIndex) {
+        case 0:
+            // 相机
+            sourceType = UIImagePickerControllerSourceTypeCamera;
+            break;
+        case 1:
+            // 相册
+            sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            break;
+        case 2:
+            // 取消
+            return;
+    }
+    UIImagePickerController *imagePickerController =[[UIImagePickerController alloc] init];
+    
+    imagePickerController.delegate = self;
+    
+    imagePickerController.allowsEditing = YES;
+    
+    imagePickerController.sourceType = sourceType;
+    
+    [self presentViewController:imagePickerController animated:YES completion:^{}];
+}
+
+//点击相册中的图片 货照相机照完后点击use  后触发的方法
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    [picker dismissViewControllerAnimated:YES completion:^{}];
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    // 保存图片至本地，方法见下文
+    [self saveImage:image withName:@"currentImage.png"];
+    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Cheung"] stringByAppendingPathComponent:@"currentImage.png"];
+    UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
+    [_touXiangButton setImage:savedImage forState:UIControlStateNormal];
+}
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissViewControllerAnimated:YES completion:^{}];
+}
+
+#pragma mark - 保存图片至沙盒
+- (void) saveImage:(UIImage *)currentImage withName:(NSString *)imageName
+{
+    NSData *imageData = UIImageJPEGRepresentation(currentImage, 0.5);
+    // 获取沙盒目录
+    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Cheung"] stringByAppendingPathComponent:imageName];
+    // 将图片写入文件
+    [imageData writeToFile:fullPath atomically:NO];
+}
+//NSData * UIImageJPEGRepresentation ( UIImage *image, CGFloat compressionQuality
+//创建沙盒下文件夹
+- (void)createFolder
+{
+    NSString *dirName = @"Cheung";
+    NSString *fullPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    NSString *imageDir = [NSString stringWithFormat:@"%@/%@", fullPath,dirName];
+    BOOL isDir = NO;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL existed = [fileManager fileExistsAtPath:imageDir isDirectory:&isDir];
+    if ( !(isDir == YES && existed == YES) )
+    {
+        [fileManager createDirectoryAtPath:imageDir withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+}
+//删除文件夹及文件级内的文件：
+//NSString *imageDir = [NSString stringWithFormat:@"%@/Caches/%@", NSHomeDirectory(), dirName];
+//NSFileManager *fileManager = [NSFileManager defaultManager];
+//[fileManager removeItemAtPath:imageDir error:nil];
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {

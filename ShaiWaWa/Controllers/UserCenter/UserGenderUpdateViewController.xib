@@ -22,7 +22,7 @@
                     <rect key="frame" x="117" y="38" width="52" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" title=" 男孩" image="main_dian.png">
+                    <state key="normal" title=" 男孩" image="main_dian-.png">
                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -85,7 +85,6 @@
         <image name="login_box3.png" width="267" height="30"/>
         <image name="main_boy.png" width="11" height="13"/>
         <image name="main_dian-.png" width="11" height="10"/>
-        <image name="main_dian.png" width="11" height="10"/>
         <image name="main_girl.png" width="11" height="13"/>
     </resources>
 </document>

@@ -187,21 +187,22 @@
         return YES;
     }
     
-    if([obj[@"err_code"] isKindOfClass:[NSString class]] && [obj[@"err_code"] intValue] != No_Error_Code)
+    if(![obj[@"err_code"] isKindOfClass:[NSString class]])
     {
         if(failure){
-            failure(nil,[self getErrorMsgByCode:[obj[@"err_code"] intValue]]);
-        }
-        return YES;
-    }
-    else
-    {
-        if (failure) {
             failure(nil,[self getErrorMsgByCode:0]);
         }
         return YES;
     }
-    
+
+    if([obj[@"err_code"] intValue] != No_Error_Code)
+    {
+        if(failure)
+        {
+            failure(nil,[self getErrorMsgByCode:[obj[@"err_code"] intValue]]);
+        }
+        return YES;
+    }
     return NO;
 }
 
@@ -235,8 +236,7 @@
 //TODO:用户登录
 - (void)userLogin:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
 {
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
-    [SVProgressHUD setStatus:@"登陆中..."];
+    
     
     [self postJSON:[self mergeURL:User_Login] withParams:params completionBlock:^(id obj) {
         
@@ -245,21 +245,15 @@
         if (isError) {
             return ;
         }
-        
-        
-        UserInfo *curUser = [[UserInfo alloc] init];
-        curUser.username = [[obj objectForKey:@"result"] objectForKey:@"username"];
-        curUser.password = [[obj objectForKey:@"result"] objectForKey:@"password"];
-        curUser.phone = [[obj objectForKey:@"result"] objectForKey:@"phone"];;
-        curUser.sww_number = [[obj objectForKey:@"result"] objectForKey:@"sww_number"];;
-        curUser.sex = [[obj objectForKey:@"result"] objectForKey:@"sex"];;
+        UserInfo *curUser = [self mapModel:[[obj objectForKey:@"result"] objectAtIndex:0] withClass:[UserInfo class]];
         
         [[UserDefault sharedInstance] setUserInfo:curUser];
         if(success)
         {
+            
             success(curUser);
         }
-         // NSLog(@"%@",[[obj objectForKey:@"result"] objectForKey:@"username"]);
+        
     } failureBlock:failure];
 }
 
@@ -335,6 +329,13 @@
         if (isError) {
             return ;
         }
+        UserInfo *curUser = [self mapModel:[[obj objectForKey:@"result"] objectAtIndex:0] withClass:[UserInfo class]];
+        [[UserDefault sharedInstance] setUserInfo:curUser];
+        if(success)
+        {
+            
+            success(curUser);
+        }
         
     } failureBlock:failure];
 
@@ -352,7 +353,14 @@
         if (isError) {
             return ;
         }
-        
+
+        UserInfo *curUser = [self mapModel:[[obj objectForKey:@"result"] objectAtIndex:0] withClass:[UserInfo class]];
+        [[UserDefault sharedInstance] setUserInfo:curUser];
+        if(success)
+        {
+            
+            success(curUser);
+        }
     } failureBlock:failure];
 }
 
