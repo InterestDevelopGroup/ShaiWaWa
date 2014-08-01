@@ -41,6 +41,7 @@ install_resource()
       ;;
   esac
 }
+install_resource "SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle"
 install_resource "ZBarSDK/iphone/res/zbar-back.png"
 install_resource "ZBarSDK/iphone/res/zbar-help.html"
 install_resource "ZBarSDK/iphone/res/zbar-helpicons.png"
