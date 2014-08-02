@@ -337,6 +337,7 @@
 		F43388F61974C28600464D43 /* ShaiWaWa-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F43387CB1974C28600464D43 /* ShaiWaWa-Info.plist */; };
 		F4348FF219779C4600347195 /* DynamicDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4348FF019779C4600347195 /* DynamicDetailViewController.m */; };
 		F4348FF319779C4600347195 /* DynamicDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4348FF119779C4600347195 /* DynamicDetailViewController.xib */; };
+		F473B20F198C80A0009DD8DF /* BabyInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F473B20E198C80A0009DD8DF /* BabyInfo.m */; };
 		F47F54F2197FACE7006DCA75 /* UIView+CutLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F47F54B3197FACE6006DCA75 /* UIView+CutLayer.m */; };
 		F47F54F3197FACE7006DCA75 /* UIViewController+BarItemAdapt.m in Sources */ = {isa = PBXBuildFile; fileRef = F47F54B5197FACE6006DCA75 /* UIViewController+BarItemAdapt.m */; };
 		F47F54F4197FACE7006DCA75 /* ControlCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = F47F54B8197FACE6006DCA75 /* ControlCenter.m */; };
@@ -797,6 +798,8 @@
 		F4348FEF19779C4600347195 /* DynamicDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicDetailViewController.h; sourceTree = "<group>"; };
 		F4348FF019779C4600347195 /* DynamicDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicDetailViewController.m; sourceTree = "<group>"; };
 		F4348FF119779C4600347195 /* DynamicDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DynamicDetailViewController.xib; sourceTree = "<group>"; };
+		F473B20D198C80A0009DD8DF /* BabyInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BabyInfo.h; sourceTree = "<group>"; };
+		F473B20E198C80A0009DD8DF /* BabyInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BabyInfo.m; sourceTree = "<group>"; };
 		F47F54B2197FACE6006DCA75 /* UIView+CutLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CutLayer.h"; sourceTree = "<group>"; };
 		F47F54B3197FACE6006DCA75 /* UIView+CutLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CutLayer.m"; sourceTree = "<group>"; };
 		F47F54B4197FACE6006DCA75 /* UIViewController+BarItemAdapt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BarItemAdapt.h"; sourceTree = "<group>"; };
@@ -1667,6 +1670,8 @@
 				F43387281974C28600464D43 /* User.m */,
 				F41389C3197F48D000ABC8AE /* UserInfo.h */,
 				F41389C4197F48D000ABC8AE /* UserInfo.m */,
+				F473B20D198C80A0009DD8DF /* BabyInfo.h */,
+				F473B20E198C80A0009DD8DF /* BabyInfo.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2147,6 +2152,7 @@
 				F43388121974C28600464D43 /* ChooseModeViewController.m in Sources */,
 				F42434621974FC97008E70C6 /* UICollectionViewWaterfallCell.m in Sources */,
 				F43387F01974C28600464D43 /* AddBabyInfoViewController.m in Sources */,
+				F473B20F198C80A0009DD8DF /* BabyInfo.m in Sources */,
 				F47F5509197FACE7006DCA75 /* PinLunCell.m in Sources */,
 				F41F68DD1982081E00089E42 /* NSString+MD5_32.m in Sources */,
 				F433883E1974C28600464D43 /* UserGenderUpdateViewController.m in Sources */,

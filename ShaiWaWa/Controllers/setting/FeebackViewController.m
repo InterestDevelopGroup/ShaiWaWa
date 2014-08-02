@@ -9,6 +9,8 @@
 #import "FeebackViewController.h"
 #import "UIViewController+BarItemAdapt.h"
 
+#import "HttpService.h"
+
 @interface FeebackViewController ()
 
 @end
@@ -45,9 +47,12 @@
     [btn setTitle:@"发送" forState:UIControlStateNormal];
     [btn setFrame:CGRectMake(0, 10, 40, 30)];
     btn.titleLabel.font = [UIFont systemFontOfSize:15];
-    //[btn addTarget:self action:@selector(<#(id)#>) forControlEvents:UIControlEventTouchUpInside];
+    [btn addTarget:self action:@selector(sendFeeBack) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
     self.navigationItem.rightBarButtonItem = rightItem;
 }
-
+- (void)sendFeeBack
+{
+//    [[HttpService sharedInstance] ]
+}
 @end
