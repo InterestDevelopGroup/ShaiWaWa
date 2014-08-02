@@ -65,6 +65,7 @@
 - (void)initUI
 {
     users = [[UserDefault sharedInstance] userInfo];
+    NSLog(@"%@",users.avatar);
     UIBarButtonItem * leftItem;
     if ([OSHelper iOS7])
     {
@@ -135,12 +136,15 @@
    
     
     mainMenu.nameLabel.text = users.username;
-    if (users.avatar!=nil) {
-        mainMenu.touXiangImgView.image =  [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:users.avatar]]];
+    if (users.avatar.length > 0) {
+        mainMenu.touXiangImgView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL fileURLWithPath:users.avatar]]];
+//        [UIImage imageWithContentsOfFile:users.avatar];
+        //[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:users.avatar]]];
+        
     }
     else
     {
-        NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Cheung"] stringByAppendingPathComponent:@"currentImage.png"];
+        NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Avatar"] stringByAppendingPathComponent:@"avatar_DefaultPic.png"];
         UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
         mainMenu.touXiangImgView.image = savedImage;
     }
@@ -337,6 +341,8 @@
 }
 - (void)showSquareVC
 {
+    
+    
     ShaiWaSquareViewController *squareVC = [[ShaiWaSquareViewController alloc] init];
     [self.navigationController pushViewController:squareVC animated:YES];
 }

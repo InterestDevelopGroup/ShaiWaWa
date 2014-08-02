@@ -42,11 +42,11 @@
     self.title = [NSString stringWithFormat:@"消息"];
     [self setLeftCusBarItem:@"square_back" action:nil];
     if ([[UIScreen mainScreen] bounds].size.height < 500) {
-        _segScrollView.contentSize = CGSizeMake(320*3, _segScrollView.bounds.size.height-100);
+        _segScrollView.contentSize = CGSizeMake(320*2, _segScrollView.bounds.size.height-100);
     }
     else
     {
-        _segScrollView.contentSize = CGSizeMake(320*3, _segScrollView.bounds.size.height);
+        _segScrollView.contentSize = CGSizeMake(320*2, _segScrollView.bounds.size.height);
     }
     [self HMSegmentedControlInitMethod];
     

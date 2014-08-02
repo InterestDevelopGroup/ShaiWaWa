@@ -329,7 +329,15 @@
         if (isError) {
             return ;
         }
-        UserInfo *curUser = [self mapModel:[[obj objectForKey:@"result"] objectAtIndex:0] withClass:[UserInfo class]];
+        UserInfo *curUser = [[UserInfo alloc] init];
+        curUser.phone = [[[UserDefault sharedInstance] userInfo] phone];
+        curUser.username = [[[UserDefault sharedInstance] userInfo] username];
+        curUser.password = [params objectForKey:@"password"];
+        curUser.uid = [[[UserDefault sharedInstance] userInfo] uid];
+        curUser.sex = [[[UserDefault sharedInstance] userInfo] sex];
+        curUser.sww_number = [[[UserDefault sharedInstance] userInfo] sww_number];
+        curUser.avatar = [[[UserDefault sharedInstance] userInfo] avatar];
+        
         [[UserDefault sharedInstance] setUserInfo:curUser];
         if(success)
         {
@@ -355,7 +363,9 @@
         }
 
         UserInfo *curUser = [self mapModel:[[obj objectForKey:@"result"] objectAtIndex:0] withClass:[UserInfo class]];
+        NSLog(@"%@",curUser.avatar);
         [[UserDefault sharedInstance] setUserInfo:curUser];
+        
         if(success)
         {
             

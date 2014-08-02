@@ -141,10 +141,8 @@
     [picker dismissViewControllerAnimated:YES completion:^{}];
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
     // 保存图片至本地，方法见下文
-    [self saveImage:image withName:@"currentImage.png"];
-    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Cheung"] stringByAppendingPathComponent:@"currentImage.png"];
-    UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
-    [_touXiangButton setImage:savedImage forState:UIControlStateNormal];
+    [self saveImage:image withName:@"Baby_avatar_NumPic.png"];
+    [_touXiangButton setImage:image forState:UIControlStateNormal];
 }
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
@@ -156,7 +154,7 @@
 {
     NSData *imageData = UIImageJPEGRepresentation(currentImage, 0.5);
     // 获取沙盒目录
-    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Cheung"] stringByAppendingPathComponent:imageName];
+    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Avatar"] stringByAppendingPathComponent:imageName];
     // 将图片写入文件
     [imageData writeToFile:fullPath atomically:NO];
 }
@@ -164,7 +162,7 @@
 //创建沙盒下文件夹
 - (void)createFolder
 {
-    NSString *dirName = @"Cheung";
+    NSString *dirName = @"Avatar";
     NSString *fullPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
     NSString *imageDir = [NSString stringWithFormat:@"%@/%@", fullPath,dirName];
     BOOL isDir = NO;

@@ -10,6 +10,7 @@
                 <outlet property="addr_Label" destination="3TB-YH-8Sp" id="IeF-SP-mkn"/>
                 <outlet property="allPublicBtn" destination="IVr-VC-ZTl" id="25R-ML-E9B"/>
                 <outlet property="canSeeView" destination="2eP-Sw-o28" id="qZx-dw-pMD"/>
+                <outlet property="dy_contextTextField" destination="9Zp-O3-1X7" id="fwB-YH-hN0"/>
                 <outlet property="grayTwoView" destination="xvm-8S-4MG" id="38j-z9-hs0"/>
                 <outlet property="letPersonSawLabel" destination="dMd-DA-dZF" id="b08-Op-c1k"/>
                 <outlet property="onlyFriendBtn" destination="Xt7-Mp-fCd" id="1yb-Fh-nJ8"/>
@@ -318,16 +319,16 @@
                     </connections>
                 </view>
                 <view hidden="YES" alpha="0.80000001192092896" contentMode="scaleToFill" id="xLk-p7-50v">
-                    <rect key="frame" x="0.0" y="469" width="320" height="36"/>
+                    <rect key="frame" x="0.0" y="459" width="320" height="46"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pd_xiala.png" id="Q6T-bX-Mbs">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="36"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="aHL-pH-11b">
-                            <rect key="frame" x="77" y="7" width="166" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <rect key="frame" x="77" y="15" width="166" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <state key="normal" image="pd_anzhushuohua.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -338,32 +339,32 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                 </view>
                 <view hidden="YES" alpha="0.80000001192092896" contentMode="scaleToFill" id="Ab7-SY-uCj">
-                    <rect key="frame" x="0.0" y="469" width="320" height="36"/>
+                    <rect key="frame" x="0.0" y="459" width="320" height="46"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pd_xiala.png" id="yLb-0N-YLY">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="36"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ekp-6E-mcO">
-                            <rect key="frame" x="66" y="5" width="32" height="26"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <rect key="frame" x="66" y="10" width="32" height="36"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <state key="normal" image="pd_fenxiang-.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="iVH-bi-c6r">
-                            <rect key="frame" x="142" y="5" width="32" height="26"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <rect key="frame" x="142" y="10" width="32" height="36"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <state key="normal" image="pd_fenxiang-2.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ow6-B1-SJc">
-                            <rect key="frame" x="218" y="5" width="32" height="26"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <rect key="frame" x="218" y="10" width="32" height="36"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <state key="normal" image="pd_fenxiang-3.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
