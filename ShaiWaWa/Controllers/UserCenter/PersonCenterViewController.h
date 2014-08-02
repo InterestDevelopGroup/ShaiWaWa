@@ -12,6 +12,7 @@
 @interface PersonCenterViewController : CommonViewController<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate>
 {
     UserInfo *users;
+    int randNum;
 }
 @property (strong, nonatomic) IBOutlet UIButton *babyButton;
 

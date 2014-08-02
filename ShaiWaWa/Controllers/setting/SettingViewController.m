@@ -9,6 +9,7 @@
 #import "SettingViewController.h"
 #import "UIViewController+BarItemAdapt.h"
 #import "OSHelper.h"
+#import "HttpService.h"
 
 @interface SettingViewController ()
 
@@ -43,6 +44,11 @@
 {
     self.title = @"设置";
     [self setLeftCusBarItem:@"square_back" action:nil];
+    
+//    [HttpService]
+    
+    
+    
     sectionArr = [[NSArray alloc] initWithObjects:@"1",@"自动分享设置",@"仅在WIFI环境下上传",@"2", nil];
     basicSetList = [[NSMutableArray alloc] initWithObjects:@"新消息提醒",@"记录默认可见范围",@"记录默认附加位置信息", nil];
     autoShareSetList = [[NSMutableArray alloc] initWithObjects:@"自动分享到绑定社交平台", nil];

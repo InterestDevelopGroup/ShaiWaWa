@@ -62,7 +62,7 @@
             }
             [[HttpService sharedInstance] changePassword:@{@"user_id":curUser.uid,@"origin_password":orgin_pwd,@"password":curUser.password} completionBlock:^(id object) {
                 [SVProgressHUD showSuccessWithStatus:@"更新成功"];
-                [self.navigationController popToRootViewControllerAnimated:YES];
+                [self.navigationController popViewControllerAnimated:YES];
             } failureBlock:^(NSError *error, NSString *responseString) {
                 [SVProgressHUD showErrorWithStatus:responseString];
             }];

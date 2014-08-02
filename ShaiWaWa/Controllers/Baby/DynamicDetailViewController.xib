@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DynamicDetailViewController">
             <connections>
                 <outlet property="grayShareView" destination="ehi-Jx-ZLD" id="nRA-rp-Cx0"/>
+                <outlet property="pinLunContextTextField" destination="CnE-5h-367" id="QGh-z8-F44"/>
                 <outlet property="pinLunListTableView" destination="BdH-zM-VrH" id="RGu-M5-Vvc"/>
                 <outlet property="shareView" destination="hVb-Sp-2Uu" id="V5G-Y8-iYe"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -19,7 +20,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="68" sectionHeaderHeight="1" sectionFooterHeight="1" id="BdH-zM-VrH">
-                    <rect key="frame" x="11" y="8.9999993175615902" width="299" height="451"/>
+                    <rect key="frame" x="11" y="8.9999989266400036" width="299" height="451"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -46,9 +47,9 @@
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" returnKeyType="send"/>
                     <connections>
-                        <outlet property="delegate" destination="-1" id="oKJ-iS-dWX"/>
+                        <outlet property="delegate" destination="-1" id="Qqm-gW-0sh"/>
                     </connections>
                 </textField>
                 <view hidden="YES" contentMode="scaleToFill" id="ehi-Jx-ZLD">
