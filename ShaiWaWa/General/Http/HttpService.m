@@ -16,6 +16,7 @@
 #import "UserInfo.h"
 #import "UserDefault.h"
 #import "SVProgressHUD.h"
+#import "Setting.h"
 
 @implementation HttpService
 
@@ -475,5 +476,147 @@
 {
     
 }
+
+/**
+ @desc 获取用户设置
+ */
+//TODO:获取用户设置
+
+- (void)getUserSetting:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    
+    [self postJSON:[self mergeURL:Get_User_Setting] withParams:params completionBlock:^(id obj) {
+        
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+  
+        //NSLog(@"%@",[obj objectForKey:@"id"]);
+        Setting *user_set = [self mapModel:[obj objectForKey:@"result"] withClass:[Setting class]];
+//        Setting *user_set = [[Setting alloc] init];
+//        user_set.set_id = [[obj objectForKey:@"result"] objectForKey:@"id"];
+//        user_set.userInfo.uid = [[obj objectForKey:@"result"] objectForKey:@"uid"];
+//        user_set.is_remind = [[obj objectForKey:@"result"] objectForKey:@"is_remind"];
+//        user_set.visibility = [[obj objectForKey:@"result"] objectForKey:@"visible"];
+//        user_set.show_position = [[obj objectForKey:@"result"] objectForKey:@"show_position"];
+//        user_set.is_share = [[obj objectForKey:@"result"] objectForKey:@"is_share"];
+//        user_set.upload_video_only_wifi = [[obj objectForKey:@"result"] objectForKey:@"upload_video_only_wifi"];
+//        user_set.upload_audio_only_wifi = [[obj objectForKey:@"result"] objectForKey:@"upload_audio_only_wifi"];
+//        user_set.upload_image_only_wifi = [[obj objectForKey:@"result"] objectForKey:@"upload_image_only_wifir"];
+        user_set.is_remind = @"1";
+        [[UserDefault sharedInstance] setSet:user_set];
+        if(success)
+        {
+            
+            success(user_set);
+        }
+    } failureBlock:failure];
+}
+
+/**
+ @desc 意见反馈
+ */
+//TODO:意见反馈
+
+- (void)feedBack:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self postJSON:[self mergeURL:Add_Feedback] withParams:params completionBlock:^(id obj) {
+        
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+        if (success) {
+            success(obj);
+        }
+    
+    } failureBlock:failure];
+}
+
+/**
+ @desc 更新用户设置
+ */
+//TODO:更新用户设置
+
+- (void)updateUserSetting:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self postJSON:[self mergeURL:Add_Feedback] withParams:params completionBlock:^(id obj) {
+        
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+        if (success) {
+            success(obj);
+        }
+        
+    } failureBlock:failure];
+}
+
+/**
+ @desc 获取全部动态
+ */
+//TODO:获取全部动态
+
+- (void)getRecrodList:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self postJSON:[self mergeURL:Get_Record_List] withParams:params completionBlock:^(id obj) {
+        
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+        if (success) {
+            success(obj);
+        }
+        
+    } failureBlock:failure];
+
+}
+
+
+/**
+ @desc 获取特别关注宝宝动态
+ */
+//TODO:获取特别关注宝宝动态
+
+- (void)getRecrodByFollow:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self postJSON:[self mergeURL:Get_Recrod_By_Follow] withParams:params completionBlock:^(id obj) {
+        
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+        if (success) {
+            success(obj);
+        }
+        
+    } failureBlock:failure];
+
+}
+
+
+/**
+ @desc 根据关键字搜索宝宝动态
+ */
+//TODO:根据关键字搜索宝宝动态
+
+- (void)searchRecrod:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self postJSON:[self mergeURL:Search_Recrod] withParams:params completionBlock:^(id obj) {
+        
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+        if (success) {
+            success(obj);
+        }
+        
+    } failureBlock:failure];
+}
+
 
 @end

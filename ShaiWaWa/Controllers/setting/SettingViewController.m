@@ -10,7 +10,10 @@
 #import "UIViewController+BarItemAdapt.h"
 #import "OSHelper.h"
 #import "HttpService.h"
+#import "UserDefault.h"
+#import "SVProgressHUD.h"
 
+#import "Setting.h"
 @interface SettingViewController ()
 
 @end
@@ -44,8 +47,12 @@
 {
     self.title = @"设置";
     [self setLeftCusBarItem:@"square_back" action:nil];
-    
-//    [HttpService]
+    UserInfo *user = [[UserDefault sharedInstance] userInfo];
+    [[HttpService sharedInstance] getUserSetting:@{@"uid":user.uid} completionBlock:^(id object) {
+        [SVProgressHUD showSuccessWithStatus:@"获取成功"];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
     
     
     
@@ -85,6 +92,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    Setting *setInfo = [[UserDefault sharedInstance] set];
     static NSString *identify = @"Cell";
     
     UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:identify];
@@ -112,57 +121,114 @@
         //txtLabel.font = [UIFont systemFontOfSize:12];
         [cell.contentView addSubview:txtLabel];
         
-        
+       
     }
+    
     NSInteger section = indexPath.section;
-    // 获取这个分组的省份名称，再根据省份名称获得这个省份的城市列表。
+    // 获取这个分组的名称，再根据名称获得这个列表。
     NSString *sectionType = [sectionArr objectAtIndex:section];
     NSArray *list = [setList objectForKey:sectionType];
+    
     cell.textLabel.text = [list objectAtIndex:indexPath.row];
     cell.textLabel.font = [UIFont systemFontOfSize:12];
     cell.textLabel.textColor = [UIColor darkGrayColor];
     cell.textLabel.backgroundColor = [UIColor clearColor];
     cell.backgroundView.backgroundColor = [UIColor clearColor];
     cell.contentView.backgroundColor = [UIColor clearColor];
-//    cell.backgroundColor = [UIColor clearColor];
+    //    cell.backgroundColor = [UIColor clearColor];
     UISwitch * switchBtn = (UISwitch * )[cell viewWithTag:8888];
     UILabel *label = (UILabel *)[cell viewWithTag:6666];
-        //[cell.contentView addSubview:switchBtn];
-    if (section == 0) {
-//        [cell.contentView addSubview:switchBtn];
-//        [label removeFromSuperview];
-        label.hidden = YES;
-        switchBtn.hidden = NO;
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        if (indexPath.row == 1) {
-//            [switchBtn removeFromSuperview];
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                label.text = @"仅好友可见";
-            label.font = [UIFont systemFontOfSize:12];
-            label.textColor = [UIColor darkGrayColor];
-//            [cell.contentView addSubview:label];
+    //[cell.contentView addSubview:switchBtn];
+    [switchBtn addTarget:self action:@selector(changeCurrentStatus:) forControlEvents:UIControlEventValueChanged];
+    
+//    Setting *set = [self setBlockObj:^(id obj){
+//        
+//            return set_obj;
+//        }];
+    
+        if (section == 0) {
+            //        [cell.contentView addSubview:switchBtn];
+            //        [label removeFromSuperview];
+            label.hidden = YES;
+            switchBtn.hidden = NO;
+            
+//            switchBtn.on = [set.is_remind isEqualToString:@"1"] ?: !switchBtn.on;
+            if (indexPath.row == 0) {
+                switchBtn.on = [setInfo.is_remind isEqualToString:@"1"];
+                switchBtn.tag = 4000;
+            }
+            
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            if (indexPath.row == 1) {
+                //            [switchBtn removeFromSuperview];
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                switch ([setInfo.visibility intValue]) {
+                    case 1:
+                       label.text = @"所有都可见";
+                        break;
+                    case 2:
+                        label.text = @"仅好友可见";
+                        break;
+                    case 3:
+                        label.text = @"仅父母可见";
+                        break;
+                    default:
+                        break;
+                }
+                
+                label.font = [UIFont systemFontOfSize:12];
+                label.textColor = [UIColor darkGrayColor];
+                //            [cell.contentView addSubview:label];
+                switchBtn.hidden = YES;
+                label.hidden = NO;
+            }
+            if (indexPath.row == 2) {
+                switchBtn.on = [setInfo.show_position isEqualToString:@"1"];
+                switchBtn.tag = 4002;
+            }
+            
+        }
+        if (section == 1) {
+            switchBtn.on = [setInfo.is_share isEqualToString:@"1"];
+            switchBtn.tag = 4100;
+        }
+        if (section == 2) {
+            switch (indexPath.row) {
+                case 0:
+                    switchBtn.on = [setInfo.upload_video_only_wifi isEqualToString:@"1"];
+                    switchBtn.tag = 4200;
+                    break;
+                case 1:
+                    switchBtn.on = [setInfo.upload_audio_only_wifi isEqualToString:@"1"];
+                    switchBtn.tag = 4201;
+                    break;
+                case 2:
+                    switchBtn.on = [setInfo.upload_image_only_wifi isEqualToString:@"1"];
+                    switchBtn.tag = 4202;
+                    break;
+                default:
+                    break;
+            }
+        }
+        if (section == 3) {
+            //        [switchBtn removeFromSuperview];
+            //        [label removeFromSuperview];
+            cell.accessoryType = UITableViewCellAccessoryNone;
             switchBtn.hidden = YES;
-            label.hidden = NO;
+            label.hidden = YES;
+            if (indexPath.row == 1) {
+                label.text = @"已经是最新版本";
+                label.font = [UIFont systemFontOfSize:12];
+                label.textColor = [UIColor lightGrayColor];
+                //            [cell.contentView addSubview:label];
+                label.hidden = NO;
+            }
         }
-        
-    }
-    if (section == 3) {
-//        [switchBtn removeFromSuperview];
-//        [label removeFromSuperview];
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        switchBtn.hidden = YES;
-        label.hidden = YES;
-        if (indexPath.row == 1) {
-            label.text = @"已经是最新版本";
-            label.font = [UIFont systemFontOfSize:12];
-            label.textColor = [UIColor lightGrayColor];
-//            [cell.contentView addSubview:label];
-            label.hidden = NO;
-        }
-    }
-    
-    
 
+    
+    
+    
+    
     return cell;
     /*
      // 取当前section，设置单元格显示内容。
@@ -179,6 +245,160 @@
     //    babyListCell.babySexImage.image = [UIImage imageNamed:@""];
     
     
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Setting *set = [[UserDefault sharedInstance] set];
+    NSString *strOne;
+    NSString *strTwo;
+    if ([set.visibility isEqualToString:@"1"]) {
+        strOne = @"仅好友可见";
+        strTwo = @"仅父母可见";
+    }
+    if ([set.visibility isEqualToString:@"2"]) {
+        strOne = @"所有都可见";
+        strTwo = @"仅父母可见";
+    }
+    if ([set.visibility isEqualToString:@"3"]) {
+        strOne = @"所有都可见";
+        strTwo = @"仅好友可见";
+    }
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"请选择:" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:strOne,strTwo,nil];
+    
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+     NSInteger section = indexPath.section;
+     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    switch (section) {
+        case 0:
+            switch (indexPath.row) {
+                case 0:
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    break;
+                case 1:
+                    [actionSheet showFromRect:CGRectMake(0, 0, 320, 200) inView:self.view animated:YES];
+                    break;
+                case 2:
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    break;
+                default:
+                    break;
+            }
+            break;
+        case 1:
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            break;
+        case 2:
+             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            break;
+        case 3:
+            
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    Setting *set = [[UserDefault sharedInstance] set];
+    switch (buttonIndex) {
+        case 0:
+            set.visibility = @"1";
+            break;
+        case 1:
+            set.visibility = @"2";
+            break;
+        case 2:
+            set.visibility = @"3";
+            break;
+        default:
+            break;
+    }
+    [[UserDefault sharedInstance] setSet:set];
+    
+    
+    [self getRefreshData];
+}
+- (void)changeCurrentStatus:(UISwitch *)swithBtn
+{
+    UserInfo *user = [[UserDefault sharedInstance] userInfo];
+    Setting *set = [[UserDefault sharedInstance] set];
+    switch (swithBtn.tag) {
+        case 4000:
+            if (swithBtn.on) {
+                set.is_remind = @"0";
+            }
+            else
+            {
+                set.is_remind = @"1";
+            }
+            break;
+        case 4002:
+            if (swithBtn.on) {
+                set.show_position = @"0";
+            }
+            else
+            {
+                set.show_position = @"1";
+            }
+            break;
+        case 4100:
+            if (swithBtn.on) {
+                set.is_share = @"0";
+            }
+            else
+            {
+                set.is_share = @"1";
+            }
+            break;
+        case 4200:
+            if (swithBtn.on) {
+                set.upload_video_only_wifi = @"0";
+            }
+            else
+            {
+                set.upload_video_only_wifi = @"1";
+            }
+            break;
+        case 4201:
+            if (swithBtn.on) {
+                set.upload_audio_only_wifi = @"0";
+            }
+            else
+            {
+                set.upload_audio_only_wifi = @"1";
+            }
+            break;
+        case 4202:
+            if (swithBtn.on) {
+                set.upload_image_only_wifi = @"0";
+            }
+            else
+            {
+                set.upload_image_only_wifi = @"1";
+            }
+            break;
+        default:
+            break;
+    }
+    [[UserDefault sharedInstance] setSet:set];
+    
+    
+    [self getRefreshData];
+//    [[HttpService sharedInstance] updateUserSetting:@{@"uid":user.uid,  @"is_remind":set.is_remind,@"visible":set.visibility,@"show_position":set.show_position,@"is_share":set.is_share,@"upload_video_only_wifi":set.upload_video_only_wifi,@"upload_audio_only_wifi":set.upload_audio_only_wifi,@"upload_image_only_wifi":set.upload_image_only_wifi}completionBlock:^(id object) {
+//        
+//    } failureBlock:^(NSError *error, NSString *responseString) {
+//        [SVProgressHUD showErrorWithStatus:responseString];
+//    }];
+    
+}
+
+#pragma mark -- refresh List
+- (void)getRefreshData
+{
+    [[UserDefault sharedInstance] set];
+    [_setListTableView reloadData];
 }
 
 // 这个方法用来告诉表格第section分组的名称

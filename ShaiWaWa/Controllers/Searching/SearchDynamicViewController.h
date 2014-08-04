@@ -9,5 +9,6 @@
 #import "CommonViewController.h"
 
 @interface SearchDynamicViewController : CommonViewController<UITextFieldDelegate>
+@property (weak, nonatomic) IBOutlet UITextField *keywordTextField;
 
 @end

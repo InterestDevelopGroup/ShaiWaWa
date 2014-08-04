@@ -55,4 +55,38 @@
 
     
 }
+
+-(Setting *)set
+{
+    Setting *setDefault;
+    NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
+    NSData * data = [userDefaults objectForKey:@"setInfo"];
+    setDefault = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    return setDefault;
+    
+}
+
+-(void)setSet:(Setting *)set
+{
+    
+    //    Student *stu1 = [[Student alloc]initWithName:@"124" and:@"111"];//学生对象stu1
+    //    Student *stu2 = [[Student alloc]initWithName:@"223" and:@"222"];//学生对象stu2
+    //    NSArray *stuArray =[NSArray arrayWithObjects:stu1,stu2, nil];//学生对象数组，里面包含stu1和stu2
+    //
+    //    NSData *stuData = [NSKeyedArchiver archivedDataWithRootObject:stuArray];//归档
+    //    NSLog(@"data = %@",stuData);
+    //    NSArray *stuArray2 =[NSKeyedUnarchiver unarchiveObjectWithData:stuData];//逆归档
+    //    NSLog(@"array2 = %@",stuArray2);
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSData * data = [NSKeyedArchiver archivedDataWithRootObject:set];
+    [userDefaults setObject:data forKey:@"setInfo"];
+    [userDefaults synchronize];
+    
+    //[userDefaults setObject:[NSString stringWithFormat:@"%@",userInfo] forKey:@"userInfomation"];
+    //    [userDefaults setValue:[NSString stringWithFormat:@"%@",userInfo] forKey:@"userInfomation"];
+    
+    
+}
+
 @end

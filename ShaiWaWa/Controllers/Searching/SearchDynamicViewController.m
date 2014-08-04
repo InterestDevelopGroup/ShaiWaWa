@@ -8,6 +8,8 @@
 
 #import "SearchDynamicViewController.h"
 #import "UIViewController+BarItemAdapt.h"
+#import "HttpService.h"
+#import "SVProgressHUD.h"
 
 @interface SearchDynamicViewController ()
 
@@ -51,7 +53,12 @@
 }
 - (void)finishDone
 {
-    
+    [[HttpService sharedInstance] searchRecrod:@{@"keyword":_keywordTextField.text, @"offset":@"1", @"pagesize":@"10" } completionBlock:^(id object) {
+        
+        [SVProgressHUD showSuccessWithStatus:@"已更新"];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
 }
 
 #pragma mark - UITextFieldDelegate

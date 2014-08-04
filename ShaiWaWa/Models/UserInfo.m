@@ -18,6 +18,7 @@
 @synthesize avatar;
 //@synthesize qq,weibo,wechat;
 //@synthesize sina_openId,tecent_openId;
+//@synthesize login_time,register_time;
 - (id)copyWithZone:(NSZone *)zone
 {
 	UserInfo *userInfo = [[[self class] allocWithZone:zone] init];
@@ -27,13 +28,15 @@
 	userInfo.phone = [[self phone] copy];
     userInfo.sex = [[self sex] copy];
 	userInfo.sww_number = [[self sww_number] copy];
+    userInfo.avatar = [[self avatar] copy];
     
-//    userInfo.avatar = [[self avatar] copy];
 //	userInfo.qq = [[self qq] copy];
 //    userInfo.weibo = [[self weibo] copy];
 //	userInfo.wechat = [[self wechat] copy];
 //    userInfo.sina_openId = [[self sina_openId] copy];
 //	userInfo.tecent_openId = [[self tecent_openId] copy];
+//    userInfo.login_time = [[self login_time] copy];
+//	userInfo.register_time = [[self register_time] copy];
 	return userInfo;
 }
 
@@ -51,7 +54,8 @@
 //    [aCoder encodeObject:wechat forKey:@"wechat"];
 //    [aCoder encodeObject:sina_openId forKey:@"sina_openId"];
 //    [aCoder encodeObject:tecent_openId forKey:@"tecent_openId"];
-
+//    [aCoder encodeObject:login_time forKey:@"login_time"];
+//    [aCoder encodeObject:register_time forKey:@"register_time"];
 }
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -68,6 +72,8 @@
 //        wechat = [aDecoder decodeObjectForKey:@"wechat"];
 //        sina_openId = [aDecoder decodeObjectForKey:@"sina_openId"];
 //        tecent_openId = [aDecoder decodeObjectForKey:@"tecent_openId"];
+//        login_time = [aDecoder decodeObjectForKey:@"login_time"];
+//        register_time = [aDecoder decodeObjectForKey:@"register_time"];
     }
     return self;
 }

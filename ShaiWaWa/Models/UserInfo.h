@@ -22,6 +22,8 @@
 //    NSString *wechat;       //wechat
 //    NSString *sina_openId;  //sina_openId
 //    NSString *tecent_openId;//tencentQQ_openId
+    NSString *login_time;  //登陆时间
+    NSString *register_time;//注册时间
     
 }
 @property (nonatomic,retain)NSString *uid;
@@ -36,6 +38,9 @@
 //@property (nonatomic,retain)NSString *wechat;
 //@property (nonatomic,retain)NSString *sina_openId;
 //@property (nonatomic,retain)NSString *tecent_openId;
+//@property (nonatomic,retain)NSString *login_time;
+//@property (nonatomic,retain)NSString *register_time;
+
 - (UserInfo *)initWithName :(NSString*)_username
                      and : (NSString *)_password;
 @end

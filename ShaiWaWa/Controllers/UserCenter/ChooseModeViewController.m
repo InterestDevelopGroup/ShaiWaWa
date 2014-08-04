@@ -85,6 +85,7 @@
     UIBarButtonItem * rightItem_1 = [self customBarItem:@"square_yanjing" action:@selector(showSquareVC)];
     UIBarButtonItem * rightItem_2 = [self customBarItem:@"square_pinglun-4" action:@selector(showMsgVC)];
     self.navigationItem.rightBarButtonItems = @[rightItem_2,rightItem_1];
+
     
     isMenuShown = NO;
     MainMenu *mainMenu = [[MainMenu alloc] initWithFrame:CGRectMake(0, 0, 240, 390)];
