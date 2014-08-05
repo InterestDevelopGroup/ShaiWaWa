@@ -26,7 +26,7 @@
                 </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="oAx-De-qy3">
                     <rect key="frame" x="0.0" y="38" width="320" height="466"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="qcr-Dd-XZn"/>
@@ -39,11 +39,11 @@
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
         <view contentMode="scaleToFill" id="cE0-Js-HEX">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="380"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="466"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="100" sectionHeaderHeight="1" sectionFooterHeight="1" id="H4l-WT-37L">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="380"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="466"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>

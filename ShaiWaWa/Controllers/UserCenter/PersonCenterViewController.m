@@ -74,11 +74,12 @@
     _acountName.text = users.username;
     _wawaNum.text = users.sww_number;
     if (users.avatar!=nil) {
-        _touXiangView.image =  [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:users.avatar]]];
+        _touXiangView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL fileURLWithPath:users.avatar]]];
+//        [UIImage imageWithContentsOfFile:users.avatar];
     }
     else
     {
-        NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Cheung"] stringByAppendingPathComponent:@"currentImage.png"];
+        NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Avatar"] stringByAppendingPathComponent:@"avatar_DefaultPic.png"];
         UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
         _touXiangView.image = savedImage;
     }
@@ -127,16 +128,17 @@
     [picker dismissViewControllerAnimated:YES completion:^{}];
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
     // 保存图片至本地，方法见下文
-    [self saveImage:image withName:@"currentImage.png"];
-    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Cheung"] stringByAppendingPathComponent:@"currentImage.png"];
-    UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
-    [_touXiangView setImage:savedImage];
     
-     users.avatar = fullPath;
+    [self getRandPictureName];
     
+    [self saveImage:image withName:[NSString stringWithFormat:@"User_avatar_NumPic%i.png",randNum]];
+     [_touXiangView setImage:image];
+    NSString *fullPath = [[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"/Avatar"] stringByAppendingPathComponent:[NSString stringWithFormat:@"User_avatar_NumPic%i.png",randNum]];
+    users.avatar = fullPath;
     [[HttpService sharedInstance] updateUserInfo:@{@"user_id":users.uid,@"username":users.username,@"avatar":users.avatar,@"sex":users.sex,@"qq":[NSNull null],@"weibo":[NSNull null],@"wechat":[NSNull null]} completionBlock:^(id object) {
 //        [SVProgressHUD showSuccessWithStatus:@"更新成功"];
-        [self.navigationController popViewControllerAnimated:YES];
+        //[self.navigationController popViewControllerAnimated:YES];
+        
     } failureBlock:^(NSError *error, NSString *responseString) {
         [SVProgressHUD showErrorWithStatus:responseString];
     }];
@@ -152,7 +154,7 @@
 {
     NSData *imageData = UIImageJPEGRepresentation(currentImage, 0.5);
     // 获取沙盒目录
-    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Cheung"] stringByAppendingPathComponent:imageName];
+    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Avatar"] stringByAppendingPathComponent:imageName];
     // 将图片写入文件
     [imageData writeToFile:fullPath atomically:NO];
 }
@@ -160,7 +162,7 @@
 //创建沙盒下文件夹
 - (void)createFolder
 {
-    NSString *dirName = @"Cheung";
+    NSString *dirName = @"Avatar";
     NSString *fullPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
     NSString *imageDir = [NSString stringWithFormat:@"%@/%@", fullPath,dirName];
     BOOL isDir = NO;
@@ -169,6 +171,25 @@
     if ( !(isDir == YES && existed == YES) )
     {
         [fileManager createDirectoryAtPath:imageDir withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+}
+//判断图片文件名字是否存在，是再随机，否直接跳出
+- (void)getRandPictureName
+{
+    randNum = rand()/10000;
+    NSString *dirName = @"Avatar";
+    NSString *fullPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    NSString *imageDir ;
+    imageDir = [[NSString stringWithFormat:@"%@/%@", fullPath,dirName]stringByAppendingPathComponent:[NSString stringWithFormat:@"User_avatar_NumPic%i.png",randNum]];
+    BOOL isDir = NO;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL existed;
+    existed = [fileManager fileExistsAtPath:imageDir isDirectory:&isDir];
+    while (existed == YES && !isDir)
+    {
+        randNum = rand()/10000;
+        imageDir = [[NSString stringWithFormat:@"%@/%@", fullPath,dirName]stringByAppendingPathComponent:[NSString stringWithFormat:@"User_avatar_NumPic%i.png",randNum]];
+        existed = [fileManager fileExistsAtPath:imageDir isDirectory:&isDir];
     }
 }
 - (void)babyCell

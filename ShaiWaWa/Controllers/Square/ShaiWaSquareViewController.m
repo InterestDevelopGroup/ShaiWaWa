@@ -43,17 +43,20 @@
 {
     self.title = @"晒娃广场";
     [self setLeftCusBarItem:@"square_back" action:nil];
+      UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
     if ([[UIScreen mainScreen] bounds].size.height < 500) {
-        _segScrollView.contentSize = CGSizeMake(320*3, _segScrollView.bounds.size.height-100);
+        _segScrollView.contentSize = CGSizeMake(320*2, _segScrollView.bounds.size.height-90);
+        collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,0,self.view.bounds.size.width, _segScrollView.bounds.size.height-90) collectionViewLayout:layout];
     }
     else
     {
-        _segScrollView.contentSize = CGSizeMake(320*3, _segScrollView.bounds.size.height);
+        _segScrollView.contentSize = CGSizeMake(320*2, _segScrollView.bounds.size.height);
+        collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,0,self.view.bounds.size.width, _segScrollView.bounds.size.height) collectionViewLayout:layout];
     }
     [self HMSegmentedControlInitMethod];
     
-    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
-    collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,0,self.view.bounds.size.width, _segScrollView.bounds.size.height - 3*segMentedControl.bounds.size.height) collectionViewLayout:layout];
+  
+    
     collectionView.dataSource = self;
     collectionView.delegate = self;
     collectionView.backgroundColor = [UIColor clearColor];
@@ -117,8 +120,8 @@
     //    cell.explainString = [NSString stringWithFormat:@"这是第%d张", indexPath.row+1];
     //    cell.releaseNameString = @"张三";
     //    cell.releaseTimeString = @"1分钟前";
-    //    cell.contentView.backgroundColor = [UIColor orangeColor];
-    UIImageView *babyImgView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, cell.bounds.size.width-10, 116)];
+    cell.contentView.backgroundColor = [UIColor clearColor];
+    UIImageView *babyImgView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, cell.bounds.size.width-10, 121)];
     babyImgView.userInteractionEnabled = YES;
     babyImgView.image = [UIImage imageNamed:@"square_pic-1.png"];
     UIButton *praiseButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -130,6 +133,7 @@
     [babyImgView addSubview:praiseButton];
     [babyImgView addSubview:discussButton];
     [cell.contentView addSubview:babyImgView];
+    
     UITextView *explainTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, cell.contentView.bounds.size.height-75, cell.contentView.bounds.size.width, 30)];
     explainTextView.font = [UIFont systemFontOfSize:14];
     explainTextView.text =@"天使一般的宝宝。。。。。。";
@@ -141,13 +145,14 @@
     explainTextView.textColor = [UIColor whiteColor];
     //    explainTextView.textAlignment = NSTextAlignmentCenter;
     [cell.contentView addSubview:explainTextView];
-    cell.contentView.backgroundColor = [UIColor clearColor];
-    UIView *releaseView = [[UIView alloc] initWithFrame:CGRectMake(0, cell.contentView.bounds.size.height-45, cell.contentView.bounds.size.width, 45)];
-    //releaseView.backgroundColor = [UIColor orangeColor];
+    //cell.contentView.backgroundColor = [UIColor clearColor];
+    
+    UIView *releaseView = [[UIView alloc] initWithFrame:CGRectMake(0, cell.contentView.bounds.size.height-45, cell.contentView.bounds.size.width, 47)];
+//    releaseView.backgroundColor = [UIColor orangeColor];
     UIImageView *releaseTouXiangImgView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 40, 40)];
     releaseTouXiangImgView.image = [UIImage imageNamed:@"square_pic-2.png"];
-    UILabel *releaseNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 6, 80, 20)];
-    UILabel *releaseTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 24, 80, 20)];
+    UILabel *releaseNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 11, 80, 20)];
+    UILabel *releaseTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 29, 80, 20)];
     releaseNameLabel.text = @"张三";
     releaseNameLabel.backgroundColor = [UIColor clearColor];
     releaseNameLabel.font = [UIFont systemFontOfSize:12];
@@ -161,10 +166,10 @@
     return cell;
 }
 
-//定义每个UICollectionView 的大小
+////定义每个UICollectionView 的大小
 //- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout heightForItemAtIndexPath:(NSIndexPath *)indexPath
 //{
-//    return 180;
+//    return 210;
 //}
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -174,7 +179,8 @@
 //定义每个UICollectionView 的 margin
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(0, 9, 0, 9);
+   
+    return UIEdgeInsetsMake(1, 9, 1, 9);
 }
 #pragma mark --UICollectionViewDelegate
 //UICollectionView被选中时调用的方法

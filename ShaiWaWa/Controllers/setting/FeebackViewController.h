@@ -10,4 +10,5 @@
 
 @interface FeebackViewController : CommonViewController
 
+@property (weak, nonatomic) IBOutlet UITextView *feedBackContentTextView;
 @end

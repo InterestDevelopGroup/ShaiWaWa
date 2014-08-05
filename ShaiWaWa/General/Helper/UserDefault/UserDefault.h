@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import "UserInfo.h"
+#import "Setting.h"
 
 @interface UserDefault : NSObject
 
@@ -16,6 +17,7 @@
 //strong = copy + retain
 @property (nonatomic, strong) UserInfo *userInfo;
 
+@property (nonatomic,strong) Setting *set;
 //-(UserInfo *)userInfo;
 //
 //-(void)setUser : (UserInfo *) userInfo;

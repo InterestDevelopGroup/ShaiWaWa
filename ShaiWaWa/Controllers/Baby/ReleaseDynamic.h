@@ -8,9 +8,10 @@
 
 #import "CommonViewController.h"
 
-@interface ReleaseDynamic : CommonViewController
+@interface ReleaseDynamic : CommonViewController<UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
     BOOL isSoundBar, isShareBar;
+    
 }
 - (IBAction)showTopicVC:(id)sender;
 - (IBAction)showChooseFriendVC:(id)sender;
@@ -56,5 +57,6 @@
 @property (weak, nonatomic) IBOutlet UIView *topView;
 - (IBAction)hideXialaView:(id)sender;
 @property (weak, nonatomic) IBOutlet UIView *xialaGrayV;
+@property (weak, nonatomic) IBOutlet UITextView *dy_contextTextField;
 
 @end

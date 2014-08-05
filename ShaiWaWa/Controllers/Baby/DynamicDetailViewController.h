@@ -11,9 +11,11 @@
 @interface DynamicDetailViewController : CommonViewController<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 {
     BOOL isShareViewShown;
+    UITextField *temp_txt;
 }
 @property (strong, nonatomic) IBOutlet UITableView *pinLunListTableView;
 @property (weak, nonatomic) IBOutlet UIView *grayShareView;
 @property (weak, nonatomic) IBOutlet UIView *shareView;
 - (IBAction)hideGrayShareV:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextField *pinLunContextTextField;
 @end

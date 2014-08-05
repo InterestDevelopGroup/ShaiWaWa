@@ -24,6 +24,11 @@
 			<key>orderHint</key>
 			<integer>5</integer>
 		</dict>
+		<key>Pods-ShaiWaWa-MBProgressHUD.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>9</integer>
+		</dict>
 		<key>Pods-ShaiWaWa-Reachability.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -52,7 +57,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>07401583640E4F41970B4A4A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>0FB04A74982447FDAFE6DBE5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>17C5C7C596AC4F0EA635B0BE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>19A0441F5B734E0E82F92CFC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -62,12 +82,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>2794A5FB7736417F9BA3549A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>2FFAA32469A648198DD75ADC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>4AF851484C50490E8CD921E0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>50B7A9ED62794FE79DB536AF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>58933CD2498A4DD5BE784900</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7874EB4BEED64E1AA5B7C8CD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -88,6 +128,16 @@
 			<true/>
 		</dict>
 		<key>A8D82F890DAB4F51B7726266</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BF1E4C9608F04EB6AA81273B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CBEAA7A120814207BF37A296</key>
 		<dict>
 			<key>primary</key>
 			<true/>

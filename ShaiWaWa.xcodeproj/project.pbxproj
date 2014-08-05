@@ -337,6 +337,24 @@
 		F43388F61974C28600464D43 /* ShaiWaWa-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F43387CB1974C28600464D43 /* ShaiWaWa-Info.plist */; };
 		F4348FF219779C4600347195 /* DynamicDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4348FF019779C4600347195 /* DynamicDetailViewController.m */; };
 		F4348FF319779C4600347195 /* DynamicDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4348FF119779C4600347195 /* DynamicDetailViewController.xib */; };
+		F44F1CA7198F15B5004E37CF /* Setting.m in Sources */ = {isa = PBXBuildFile; fileRef = F44F1CA6198F15B5004E37CF /* Setting.m */; };
+		F44F1CAA198F7954004E37CF /* Grow.m in Sources */ = {isa = PBXBuildFile; fileRef = F44F1CA9198F7954004E37CF /* Grow.m */; };
+		F44F1CAD198F79F7004E37CF /* DynamicRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = F44F1CAC198F79F7004E37CF /* DynamicRecord.m */; };
+		F44F1CB0198F7B53004E37CF /* Topic.m in Sources */ = {isa = PBXBuildFile; fileRef = F44F1CAF198F7B53004E37CF /* Topic.m */; };
+		F44F1CB3198F7BF5004E37CF /* RecordVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = F44F1CB2198F7BF5004E37CF /* RecordVideo.m */; };
+		F44F1CB6198F7C66004E37CF /* RecordAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = F44F1CB5198F7C66004E37CF /* RecordAudio.m */; };
+		F44F1CB9198F7CA7004E37CF /* RecordImage.m in Sources */ = {isa = PBXBuildFile; fileRef = F44F1CB8198F7CA7004E37CF /* RecordImage.m */; };
+		F44F1CBC198F7D62004E37CF /* RecordLike.m in Sources */ = {isa = PBXBuildFile; fileRef = F44F1CBB198F7D62004E37CF /* RecordLike.m */; };
+		F44F1CBF198F7E01004E37CF /* RecordReport.m in Sources */ = {isa = PBXBuildFile; fileRef = F44F1CBE198F7E01004E37CF /* RecordReport.m */; };
+		F44F1CC2198F7EB0004E37CF /* VailidateCode.m in Sources */ = {isa = PBXBuildFile; fileRef = F44F1CC1198F7EB0004E37CF /* VailidateCode.m */; };
+		F44F1CC5198F7F5A004E37CF /* FeedBack.m in Sources */ = {isa = PBXBuildFile; fileRef = F44F1CC4198F7F5A004E37CF /* FeedBack.m */; };
+		F44F1CC8198F7FE7004E37CF /* NotificationMsg.m in Sources */ = {isa = PBXBuildFile; fileRef = F44F1CC7198F7FE7004E37CF /* NotificationMsg.m */; };
+		F44F1CCB198F81C6004E37CF /* RecordFavorite.m in Sources */ = {isa = PBXBuildFile; fileRef = F44F1CCA198F81C6004E37CF /* RecordFavorite.m */; };
+		F44F1CCE198F823E004E37CF /* RecordComment.m in Sources */ = {isa = PBXBuildFile; fileRef = F44F1CCD198F823E004E37CF /* RecordComment.m */; };
+		F44F1CD1198F82E9004E37CF /* Friend.m in Sources */ = {isa = PBXBuildFile; fileRef = F44F1CD0198F82E9004E37CF /* Friend.m */; };
+		F44F1CD4198F8585004E37CF /* Follow.m in Sources */ = {isa = PBXBuildFile; fileRef = F44F1CD3198F8585004E37CF /* Follow.m */; };
+		F44F1CD7198F860E004E37CF /* BabyRemark.m in Sources */ = {isa = PBXBuildFile; fileRef = F44F1CD6198F860E004E37CF /* BabyRemark.m */; };
+		F473B20F198C80A0009DD8DF /* BabyInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F473B20E198C80A0009DD8DF /* BabyInfo.m */; };
 		F47F54F2197FACE7006DCA75 /* UIView+CutLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F47F54B3197FACE6006DCA75 /* UIView+CutLayer.m */; };
 		F47F54F3197FACE7006DCA75 /* UIViewController+BarItemAdapt.m in Sources */ = {isa = PBXBuildFile; fileRef = F47F54B5197FACE6006DCA75 /* UIViewController+BarItemAdapt.m */; };
 		F47F54F4197FACE7006DCA75 /* ControlCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = F47F54B8197FACE6006DCA75 /* ControlCenter.m */; };
@@ -797,6 +815,42 @@
 		F4348FEF19779C4600347195 /* DynamicDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicDetailViewController.h; sourceTree = "<group>"; };
 		F4348FF019779C4600347195 /* DynamicDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicDetailViewController.m; sourceTree = "<group>"; };
 		F4348FF119779C4600347195 /* DynamicDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DynamicDetailViewController.xib; sourceTree = "<group>"; };
+		F44F1CA5198F15B5004E37CF /* Setting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Setting.h; sourceTree = "<group>"; };
+		F44F1CA6198F15B5004E37CF /* Setting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Setting.m; sourceTree = "<group>"; };
+		F44F1CA8198F7954004E37CF /* Grow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Grow.h; sourceTree = "<group>"; };
+		F44F1CA9198F7954004E37CF /* Grow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Grow.m; sourceTree = "<group>"; };
+		F44F1CAB198F79F7004E37CF /* DynamicRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicRecord.h; sourceTree = "<group>"; };
+		F44F1CAC198F79F7004E37CF /* DynamicRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicRecord.m; sourceTree = "<group>"; };
+		F44F1CAE198F7B53004E37CF /* Topic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Topic.h; sourceTree = "<group>"; };
+		F44F1CAF198F7B53004E37CF /* Topic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Topic.m; sourceTree = "<group>"; };
+		F44F1CB1198F7BF5004E37CF /* RecordVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordVideo.h; sourceTree = "<group>"; };
+		F44F1CB2198F7BF5004E37CF /* RecordVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordVideo.m; sourceTree = "<group>"; };
+		F44F1CB4198F7C66004E37CF /* RecordAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordAudio.h; sourceTree = "<group>"; };
+		F44F1CB5198F7C66004E37CF /* RecordAudio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordAudio.m; sourceTree = "<group>"; };
+		F44F1CB7198F7CA7004E37CF /* RecordImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordImage.h; sourceTree = "<group>"; };
+		F44F1CB8198F7CA7004E37CF /* RecordImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordImage.m; sourceTree = "<group>"; };
+		F44F1CBA198F7D62004E37CF /* RecordLike.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordLike.h; sourceTree = "<group>"; };
+		F44F1CBB198F7D62004E37CF /* RecordLike.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordLike.m; sourceTree = "<group>"; };
+		F44F1CBD198F7E01004E37CF /* RecordReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordReport.h; sourceTree = "<group>"; };
+		F44F1CBE198F7E01004E37CF /* RecordReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordReport.m; sourceTree = "<group>"; };
+		F44F1CC0198F7EB0004E37CF /* VailidateCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VailidateCode.h; sourceTree = "<group>"; };
+		F44F1CC1198F7EB0004E37CF /* VailidateCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VailidateCode.m; sourceTree = "<group>"; };
+		F44F1CC3198F7F5A004E37CF /* FeedBack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBack.h; sourceTree = "<group>"; };
+		F44F1CC4198F7F5A004E37CF /* FeedBack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBack.m; sourceTree = "<group>"; };
+		F44F1CC6198F7FE7004E37CF /* NotificationMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationMsg.h; sourceTree = "<group>"; };
+		F44F1CC7198F7FE7004E37CF /* NotificationMsg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationMsg.m; sourceTree = "<group>"; };
+		F44F1CC9198F81C6004E37CF /* RecordFavorite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordFavorite.h; sourceTree = "<group>"; };
+		F44F1CCA198F81C6004E37CF /* RecordFavorite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordFavorite.m; sourceTree = "<group>"; };
+		F44F1CCC198F823E004E37CF /* RecordComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordComment.h; sourceTree = "<group>"; };
+		F44F1CCD198F823E004E37CF /* RecordComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordComment.m; sourceTree = "<group>"; };
+		F44F1CCF198F82E9004E37CF /* Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Friend.h; sourceTree = "<group>"; };
+		F44F1CD0198F82E9004E37CF /* Friend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Friend.m; sourceTree = "<group>"; };
+		F44F1CD2198F8585004E37CF /* Follow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Follow.h; sourceTree = "<group>"; };
+		F44F1CD3198F8585004E37CF /* Follow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Follow.m; sourceTree = "<group>"; };
+		F44F1CD5198F860E004E37CF /* BabyRemark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BabyRemark.h; sourceTree = "<group>"; };
+		F44F1CD6198F860E004E37CF /* BabyRemark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BabyRemark.m; sourceTree = "<group>"; };
+		F473B20D198C80A0009DD8DF /* BabyInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BabyInfo.h; sourceTree = "<group>"; };
+		F473B20E198C80A0009DD8DF /* BabyInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BabyInfo.m; sourceTree = "<group>"; };
 		F47F54B2197FACE6006DCA75 /* UIView+CutLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CutLayer.h"; sourceTree = "<group>"; };
 		F47F54B3197FACE6006DCA75 /* UIView+CutLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CutLayer.m"; sourceTree = "<group>"; };
 		F47F54B4197FACE6006DCA75 /* UIViewController+BarItemAdapt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BarItemAdapt.h"; sourceTree = "<group>"; };
@@ -1667,6 +1721,42 @@
 				F43387281974C28600464D43 /* User.m */,
 				F41389C3197F48D000ABC8AE /* UserInfo.h */,
 				F41389C4197F48D000ABC8AE /* UserInfo.m */,
+				F473B20D198C80A0009DD8DF /* BabyInfo.h */,
+				F473B20E198C80A0009DD8DF /* BabyInfo.m */,
+				F44F1CA8198F7954004E37CF /* Grow.h */,
+				F44F1CA9198F7954004E37CF /* Grow.m */,
+				F44F1CAB198F79F7004E37CF /* DynamicRecord.h */,
+				F44F1CAC198F79F7004E37CF /* DynamicRecord.m */,
+				F44F1CAE198F7B53004E37CF /* Topic.h */,
+				F44F1CAF198F7B53004E37CF /* Topic.m */,
+				F44F1CB1198F7BF5004E37CF /* RecordVideo.h */,
+				F44F1CB2198F7BF5004E37CF /* RecordVideo.m */,
+				F44F1CB4198F7C66004E37CF /* RecordAudio.h */,
+				F44F1CB5198F7C66004E37CF /* RecordAudio.m */,
+				F44F1CB7198F7CA7004E37CF /* RecordImage.h */,
+				F44F1CB8198F7CA7004E37CF /* RecordImage.m */,
+				F44F1CBA198F7D62004E37CF /* RecordLike.h */,
+				F44F1CBB198F7D62004E37CF /* RecordLike.m */,
+				F44F1CBD198F7E01004E37CF /* RecordReport.h */,
+				F44F1CBE198F7E01004E37CF /* RecordReport.m */,
+				F44F1CC9198F81C6004E37CF /* RecordFavorite.h */,
+				F44F1CCA198F81C6004E37CF /* RecordFavorite.m */,
+				F44F1CCC198F823E004E37CF /* RecordComment.h */,
+				F44F1CCD198F823E004E37CF /* RecordComment.m */,
+				F44F1CCF198F82E9004E37CF /* Friend.h */,
+				F44F1CD0198F82E9004E37CF /* Friend.m */,
+				F44F1CD2198F8585004E37CF /* Follow.h */,
+				F44F1CD3198F8585004E37CF /* Follow.m */,
+				F44F1CD5198F860E004E37CF /* BabyRemark.h */,
+				F44F1CD6198F860E004E37CF /* BabyRemark.m */,
+				F44F1CC6198F7FE7004E37CF /* NotificationMsg.h */,
+				F44F1CC7198F7FE7004E37CF /* NotificationMsg.m */,
+				F44F1CC3198F7F5A004E37CF /* FeedBack.h */,
+				F44F1CC4198F7F5A004E37CF /* FeedBack.m */,
+				F44F1CA5198F15B5004E37CF /* Setting.h */,
+				F44F1CA6198F15B5004E37CF /* Setting.m */,
+				F44F1CC0198F7EB0004E37CF /* VailidateCode.h */,
+				F44F1CC1198F7EB0004E37CF /* VailidateCode.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2136,6 +2226,7 @@
 			files = (
 				F43388041974C28600464D43 /* SearchQQFriendViewController.m in Sources */,
 				F43388301974C28600464D43 /* RegisterViewController.m in Sources */,
+				F44F1CA7198F15B5004E37CF /* Setting.m in Sources */,
 				F43387F81974C28600464D43 /* RemarksViewController.m in Sources */,
 				F47F5503197FACE7006DCA75 /* MainDropMenu.m in Sources */,
 				F433883C1974C28600464D43 /* UpdateUserNameViewController.m in Sources */,
@@ -2144,13 +2235,18 @@
 				F43388201974C28600464D43 /* MybabyListViewController.m in Sources */,
 				F41F68DA1982081E00089E42 /* IO.m in Sources */,
 				F41F68E31982081E00089E42 /* VersionManager.m in Sources */,
+				F44F1CD1198F82E9004E37CF /* Friend.m in Sources */,
 				F43388121974C28600464D43 /* ChooseModeViewController.m in Sources */,
+				F44F1CB9198F7CA7004E37CF /* RecordImage.m in Sources */,
 				F42434621974FC97008E70C6 /* UICollectionViewWaterfallCell.m in Sources */,
+				F44F1CC5198F7F5A004E37CF /* FeedBack.m in Sources */,
 				F43387F01974C28600464D43 /* AddBabyInfoViewController.m in Sources */,
+				F473B20F198C80A0009DD8DF /* BabyInfo.m in Sources */,
 				F47F5509197FACE7006DCA75 /* PinLunCell.m in Sources */,
 				F41F68DD1982081E00089E42 /* NSString+MD5_32.m in Sources */,
 				F433883E1974C28600464D43 /* UserGenderUpdateViewController.m in Sources */,
 				F47F54F2197FACE7006DCA75 /* UIView+CutLayer.m in Sources */,
+				F44F1CBF198F7E01004E37CF /* RecordReport.m in Sources */,
 				F41F68E01982081E00089E42 /* UIColor+Utils.m in Sources */,
 				F47F5505197FACE7006DCA75 /* MessageCell.m in Sources */,
 				F47F5504197FACE7006DCA75 /* MainMenu.m in Sources */,
@@ -2164,11 +2260,13 @@
 				F41F68E21982081E00089E42 /* UIViewController+BarItem.m in Sources */,
 				F43388181974C28600464D43 /* FriendHomeViewController.m in Sources */,
 				F47F5515197FACE7006DCA75 /* WeiBoCell.m in Sources */,
+				F44F1CD4198F8585004E37CF /* Follow.m in Sources */,
 				F43388361974C28600464D43 /* SendValidateMsgViewController.m in Sources */,
 				F433885E1974C28600464D43 /* BaseModel.m in Sources */,
 				F47F54FA197FACE7006DCA75 /* BabyListCell.m in Sources */,
 				F43388261974C28600464D43 /* PersonCenterViewController.m in Sources */,
 				F41389C5197F48D000ABC8AE /* UserInfo.m in Sources */,
+				F44F1CB6198F7C66004E37CF /* RecordAudio.m in Sources */,
 				F433881C1974C28600464D43 /* LoginViewController.m in Sources */,
 				F43388221974C28600464D43 /* MyGoodFriendsListViewController.m in Sources */,
 				F47F5501197FACE7006DCA75 /* FriendSelectedCell.m in Sources */,
@@ -2178,7 +2276,9 @@
 				F433881A1974C28600464D43 /* LocationsViewController.m in Sources */,
 				F43388061974C28600464D43 /* SearchRSViewController.m in Sources */,
 				F47F5513197FACE7006DCA75 /* SummaryCell.m in Sources */,
+				F44F1CB3198F7BF5004E37CF /* RecordVideo.m in Sources */,
 				F47F550B197FACE7006DCA75 /* PlatformCell.m in Sources */,
+				F44F1CC2198F7EB0004E37CF /* VailidateCode.m in Sources */,
 				F47F5500197FACE7006DCA75 /* DynamicHeadView.m in Sources */,
 				F41F68DF1982081E00089E42 /* OSHelper.m in Sources */,
 				F43388161974C28600464D43 /* ForgetPwdViewController.m in Sources */,
@@ -2190,14 +2290,19 @@
 				F47F5511197FACE7006DCA75 /* SearchRSCell.m in Sources */,
 				F47F550D197FACE7006DCA75 /* QQCell.m in Sources */,
 				F47F550F197FACE7006DCA75 /* ReleaseDynamicsCell.m in Sources */,
+				F44F1CC8198F7FE7004E37CF /* NotificationMsg.m in Sources */,
 				F47F5507197FACE7006DCA75 /* MyGoodFriendsListCell.m in Sources */,
+				F44F1CCB198F81C6004E37CF /* RecordFavorite.m in Sources */,
 				F41F68DB1982081E00089E42 /* NSDate+Utils.m in Sources */,
 				F43387F61974C28600464D43 /* BabyListViewController.m in Sources */,
 				F43388341974C28600464D43 /* ResetPwdViewController.m in Sources */,
 				24FAD0BC1986935F00FFE11E /* ShareManager.m in Sources */,
 				F43387F21974C28600464D43 /* AddHeightAndWeightViewController.m in Sources */,
 				F43387F41974C28600464D43 /* BabyHomePageViewController.m in Sources */,
+				F44F1CCE198F823E004E37CF /* RecordComment.m in Sources */,
 				F41F68DE1982081E00089E42 /* NSString+Utils.m in Sources */,
+				F44F1CB0198F7B53004E37CF /* Topic.m in Sources */,
+				F44F1CAD198F79F7004E37CF /* DynamicRecord.m in Sources */,
 				24A32308197AD03A005CFEA4 /* ReleaseDynamic.m in Sources */,
 				F433882C1974C28600464D43 /* PraiseViewController.m in Sources */,
 				F4348FF219779C4600347195 /* DynamicDetailViewController.m in Sources */,
@@ -2206,6 +2311,7 @@
 				F43388021974C28600464D43 /* SearchGoodFriendsViewController.m in Sources */,
 				24FAD0BD1986935F00FFE11E /* UserDefault.m in Sources */,
 				F43388F31974C28600464D43 /* ShaiWaWa.xcdatamodeld in Sources */,
+				F44F1CD7198F860E004E37CF /* BabyRemark.m in Sources */,
 				F47F54F8197FACE7006DCA75 /* AddrBookCell.m in Sources */,
 				F41F68DC1982081E00089E42 /* NSString+IP.m in Sources */,
 				F41F68D91982081E00089E42 /* HWConnect.m in Sources */,
@@ -2215,10 +2321,12 @@
 				F43387FC1974C28600464D43 /* SearchAddressBookViewController.m in Sources */,
 				F43387FA1974C28600464D43 /* ScannerQRCodeViewController.m in Sources */,
 				F433881E1974C28600464D43 /* MessageViewController.m in Sources */,
+				F44F1CAA198F7954004E37CF /* Grow.m in Sources */,
 				F41F68D81982081E00089E42 /* CommonViewController.m in Sources */,
 				F47F54FE197FACE7006DCA75 /* DynamicDetailCell.m in Sources */,
 				F43388241974C28600464D43 /* OtherInformationViewController.m in Sources */,
 				F433882A1974C28600464D43 /* PostValidateViewController.m in Sources */,
+				F44F1CBC198F7D62004E37CF /* RecordLike.m in Sources */,
 				F43388381974C28600464D43 /* TopicViewController.m in Sources */,
 				F43388401974C28600464D43 /* UserInfoPageViewController.m in Sources */,
 				F43388001974C28600464D43 /* SearchDynamicViewController.m in Sources */,

@@ -8,15 +8,17 @@
 
 #import "CommonViewController.h"
 
-@interface SettingViewController : CommonViewController<UITableViewDataSource, UITableViewDelegate>
+@interface SettingViewController : CommonViewController<UITableViewDataSource, UITableViewDelegate,UIActionSheetDelegate>
 {
     NSArray *sectionArr;
     NSMutableArray *setAllList;
     NSMutableArray *basicSetList, *autoShareSetList, *onlyUploadInWifiSetList, *otherSetList;
     NSDictionary *setList;
+    
 }
 @property (strong, nonatomic) IBOutlet UITableView *setListTableView;
 @property (strong, nonatomic) IBOutlet UIView *customFootView;
 - (IBAction)quitCurAccountEvent:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *quitCurBtn;
+
 @end
