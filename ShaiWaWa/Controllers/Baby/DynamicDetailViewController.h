@@ -18,4 +18,6 @@
 @property (weak, nonatomic) IBOutlet UIView *shareView;
 - (IBAction)hideGrayShareV:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *pinLunContextTextField;
+- (IBAction)pinLunEvent:(id)sender;
+
 @end

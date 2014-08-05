@@ -12,6 +12,14 @@
 #import "LocationsViewController.h"
 #import "ChooseFriendViewController.h"
 
+#import "HttpService.h"
+#import "SVProgressHUD.h"
+#import "UserDefault.h"
+#import "UserInfo.h"
+#import "Friend.h"
+#import "BabyInfo.h"
+#import "DynamicRecord.h"
+
 @interface ReleaseDynamic ()
 
 @end
@@ -149,7 +157,21 @@
 
 - (void)releaseDy
 {
-
+    DynamicRecord *dy = [[DynamicRecord alloc] init];
+    [[HttpService sharedInstance] publishRecord:@{@"baby_id":dy.babyInfo.baby_ID,
+                                                  @"uid":dy.userInfo.uid,
+                                                  @"visibility":dy.visibility,
+                                                  @"content":dy.content,
+                                                  @"address":dy.address,
+                                                  @"longitude":dy.longitude,
+                                                  @"latitude":dy.latitude,
+                                                  @"video":@"",
+                                                  @"audio":@"",
+                                                  @"image": @[@{@"img1":@"1",@"img2":@"2",@"img3":@"3"}]} completionBlock:^(id object) {
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
 }
 - (IBAction)showLocalPhoto:(id)sender
 {

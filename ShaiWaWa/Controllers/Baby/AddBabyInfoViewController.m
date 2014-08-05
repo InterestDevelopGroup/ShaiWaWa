@@ -9,8 +9,18 @@
 #import "AddBabyInfoViewController.h"
 #import "UIViewController+BarItemAdapt.h"
 
+#import "HttpService.h"
+#import "SVProgressHUD.h"
+#import "UserDefault.h"
+#import "UserInfo.h"
+#import "Friend.h"
+#import "BabyInfo.h"
 @interface AddBabyInfoViewController ()
-
+{
+    BabyInfo *baby;
+    TSLocateView *locateView;
+    TSLocation *location;
+}
 @end
 
 @implementation AddBabyInfoViewController
@@ -52,6 +62,7 @@
     [addButton setTitle:@"添加" forState:UIControlStateNormal];
     addButton.frame = CGRectMake(0, 0, 40, 30);
     [addButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
+    [addButton addTarget:self action:@selector(addBaby) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *right_add = [[UIBarButtonItem alloc] initWithCustomView:addButton];
     self.navigationItem.rightBarButtonItem = right_add;
     
@@ -61,7 +72,50 @@
     [_cityButton addSubview:jianTou];
     
     [self createFolder];
+    
+    baby = [[BabyInfo alloc] init];
+    
+
 }
+
+- (void)addBaby
+{
+    UserInfo *user = [[UserDefault sharedInstance] userInfo];
+    NSLog(@"addBaby:%@",@{@"fid":user.uid,
+                  @"mid":@"3",
+                  @"baby_name":_babyNameField.text,
+                  @"avatar":@"32",
+                  @"sex":isBoy ? @"1" : @"0",
+                  @"birthday":_birthDayField.text,
+                  @"nickname":_babyNicknameField.text,
+                  @"birth_height":_birthStatureField.text,
+                  @"birth_weight":_birthWeightField.text,
+                  @"country":@"中国",
+                  @"province":location.state,
+                  @"city":location.city});
+    if (_babyNameField.text.length > 0 && _birthDayField.text.length > 0 && _babyNicknameField.text.length > 0 && _birthStatureField.text.length > 0 &&_birthWeightField.text.length > 0 ) {
+      
+        [[HttpService sharedInstance] addBaby:@{@"fid":user.uid,
+                                                @"mid":@"3",
+                                                @"baby_name":_babyNameField.text,
+                                                @"avatar":@"32",
+                                                @"sex":isBoy ? @"1" : @"0",
+                                                @"birthday":_birthDayField.text,
+                                                @"nickname":_babyNicknameField.text,
+                                                @"birth_height":_birthStatureField.text,
+                                                @"birth_weight":_birthWeightField.text,
+                                                @"country":@"中国",
+                                                @"province":location.state,
+                                                @"city":location.city} completionBlock:^(id object) {
+                                                    [SVProgressHUD showSuccessWithStatus:@"添加成功"];
+                                                } failureBlock:^(NSError *error, NSString *responseString) {
+                                                    [SVProgressHUD showErrorWithStatus:responseString];
+                                                }];
+
+    }
+    else
+    [SVProgressHUD showErrorWithStatus:@"不允许为空"];
+   }
 
 - (IBAction)boySelected:(id)sender
 {
@@ -97,6 +151,10 @@
 
 - (IBAction)openCitiesSelectView:(id)sender
 {
+    
+    locateView = [[TSLocateView alloc] initWithTitle:@"定位城市" delegate:self];
+    locateView.tag = 11111;
+    [locateView showInView:self.view];
 }
 
 - (IBAction)touXiangSelectEvent:(id)sender
@@ -107,6 +165,23 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    if (actionSheet.tag == 11111)
+    {
+       locateView  = (TSLocateView *)actionSheet;
+        location = locateView.locate;
+        
+        _cityValueTextField.text = [[location.state stringByAppendingString:@" "] stringByAppendingString:location.city];
+        NSLog(@"city:%@ lat:%f lon:%f", location.city, location.latitude, location.longitude);
+        
+        //You can uses location to your application.
+        if(buttonIndex == 0) {
+            NSLog(@"Cancel");
+        }else {
+            NSLog(@"Select");
+        }
+    }
+    else
+    {
     // 判断是否支持相机
     //先设定sourceType为相机，然后判断相机是否可用（ipod）没相机，不可用将sourceType设定为相片库
     UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
@@ -133,6 +208,7 @@
     imagePickerController.sourceType = sourceType;
     
     [self presentViewController:imagePickerController animated:YES completion:^{}];
+    }
 }
 
 //点击相册中的图片 货照相机照完后点击use  后触发的方法

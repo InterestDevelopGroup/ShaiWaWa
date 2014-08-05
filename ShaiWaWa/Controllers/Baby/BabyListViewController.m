@@ -11,6 +11,12 @@
 #import "BabyListCell.h"
 #import "BabyHomePageViewController.h"
 
+#import "HttpService.h"
+#import "SVProgressHUD.h"
+#import "UserDefault.h"
+#import "UserInfo.h"
+#import "Friend.h"
+
 @interface BabyListViewController ()
 
 @end
@@ -54,6 +60,17 @@
     //[_babyListTableView registerNibWithName:@"BabyListCell" reuseIdentifier:@"Cell"];
     [_babyListTableView clearSeperateLine];
     [_babyListTableView registerNibWithName:@"BabyListCell" reuseIdentifier:@"Cell"];
+    
+    
+    UserInfo *user = [[UserDefault sharedInstance] userInfo];
+    [[HttpService sharedInstance] getBabyList:@{@"offset":@"1",
+                                                @"pagesize":@"10",
+                                                @"uid":user.uid}
+                              completionBlock:^(id object) {
+                                  [SVProgressHUD showSuccessWithStatus:@"获取成功"];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
 }
 
 

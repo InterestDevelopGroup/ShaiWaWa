@@ -8,6 +8,12 @@
 
 #import "FriendHomeViewController.h"
 #import "UIViewController+BarItemAdapt.h"
+
+#import "HttpService.h"
+#import "SVProgressHUD.h"
+#import "UserDefault.h"
+#import "UserInfo.h"
+#import "Friend.h"
 @interface FriendHomeViewController ()
 
 @end
@@ -55,10 +61,22 @@
     delBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [delBtn setImage:[UIImage imageNamed:@"user_shanchu"] forState:UIControlStateNormal];
     delBtn.frame = CGRectMake(self.navigationController.navigationBar.bounds.size.width-90, self.navigationController.navigationBar.bounds.size.height+10, 84, 41);
+    [delBtn addTarget:self action:@selector(deleteFriend) forControlEvents:UIControlEventTouchUpInside];
     
     [self babyCell];
     [self dynamicCell];
     [self goodFriendCell];
+    
+    UserInfo * user = [[UserDefault sharedInstance] userInfo];
+    [[HttpService sharedInstance] getUserInfo:@{@"uid":user.uid} completionBlock:^(id object) {
+        _friendAvatarImgView.image = [UIImage imageWithContentsOfFile:[object objectForKey:@"avatar"]];
+        _friendUserNameTextField.text = [object objectForKey:@"username"];
+        _friendSwwNumTextField.text = [object objectForKey:@"sww_number"];
+        [SVProgressHUD showSuccessWithStatus:@"加载成功"];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
+    
 }
 
 - (void)babyCell
@@ -117,4 +135,17 @@
         isDelBtnShown = NO;
     }
 }
+- (void)deleteFriend
+{
+    UserInfo * user = [[UserDefault sharedInstance] userInfo];
+    Friend *friend = [[Friend alloc] init];
+    [[HttpService sharedInstance] deleteFriend:@{@"uid":user.uid,@"friend_id":friend.friend_id} completionBlock:^(id object) {
+        
+        [SVProgressHUD showSuccessWithStatus:@"删除成功"];
+        [self.navigationController popViewControllerAnimated:YES];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
+}
+
 @end

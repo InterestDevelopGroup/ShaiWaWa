@@ -60,7 +60,7 @@
 }
 - (void)sendFeeBack
 {
-    [[HttpService sharedInstance] feedBack:@{@"uid":user.uid,@"content":_feedBackContentTextView.text} completionBlock:^(id object) {
+    [[HttpService sharedInstance] addFeedback:@{@"uid":user.uid,@"content":_feedBackContentTextView.text} completionBlock:^(id object) {
         [SVProgressHUD showSuccessWithStatus:@"感谢您的反馈"];
         
     } failureBlock:^(NSError *error, NSString *responseString) {

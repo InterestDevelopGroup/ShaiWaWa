@@ -16,4 +16,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *babyButton;
 @property (strong, nonatomic) IBOutlet UIButton *dynamicButton;
 @property (strong, nonatomic) IBOutlet UIButton *goodFriendButton;
+@property (weak, nonatomic) IBOutlet UIImageView *friendAvatarImgView;
+@property (weak, nonatomic) IBOutlet UILabel *friendUserNameTextField;
+@property (weak, nonatomic) IBOutlet UILabel *friendSwwNumTextField;
 @end

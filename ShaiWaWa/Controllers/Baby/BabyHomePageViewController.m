@@ -16,6 +16,13 @@
 #import "AddHeightAndWeightViewController.h"
 #import "RemarksViewController.h"
 
+
+#import "HttpService.h"
+#import "SVProgressHUD.h"
+#import "UserDefault.h"
+#import "UserInfo.h"
+#import "Friend.h"
+#import "BabyInfo.h"
 @interface BabyHomePageViewController ()
 
 @end
@@ -97,8 +104,29 @@
     self.view = _inStatusView;
     [self HMSegmentedControlInitMethod];
     [self HMSegmentedControlInitMethodFull];
+    /*
+    BabyInfo *baby = [[BabyInfo alloc] init];
+    [[HttpService sharedInstance] getBabyInfo:@{@"baby_id":baby.baby_ID} completionBlock:^(id object) {
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
+    */
+    /*
+    [[HttpService sharedInstance] getBabyGrowRecord:@{@"baby_id":baby.baby_ID,
+                                                      @"offset":@"1",
+                                                      @"pagesize":@"10",
+                                                      @"uid":baby.userInfo.uid}
+                                    completionBlock:^(id object) {
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
+    */
     summaryKey = [NSArray arrayWithObjects:@"昵称",@"姓名",@"出生日期",@"性别",@"所在城市",@"出生身高",@"出生体重", nil];
     summaryValue = [NSArray arrayWithObjects:@"小龙",@"李小龙",@"2012-01-02",@"男",@"上海",@"51cm",@"3.456kg", nil];
+    
+    
     
     //    summaryDic = [[NSMutableDictionary alloc] initWithObjects:summaryValue forKeys:summaryKey];
     if ([[UIScreen mainScreen] bounds].size.height < 500) {

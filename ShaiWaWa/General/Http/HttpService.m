@@ -17,6 +17,8 @@
 #import "UserDefault.h"
 #import "SVProgressHUD.h"
 #import "Setting.h"
+#import "Friend.h"
+
 
 @implementation HttpService
 
@@ -315,7 +317,9 @@
         if (isError) {
             return ;
         }
-        
+        if (success) {
+            success(obj);
+        }
         
         
     } failureBlock:failure];
@@ -390,6 +394,14 @@
         if (isError) {
             return ;
         }
+        
+        if (success) {
+            if ([[obj objectForKey:@"result"] count] > 0) {
+                success([obj objectForKey:@"result"]);
+            }
+            else
+                success([[obj objectForKey:@"result"] objectAtIndexPath:0]);
+        }
     } failureBlock:failure];
 }
 
@@ -418,6 +430,9 @@
         if (isError) {
             return ;
         }
+        if (success) {
+            success(obj);
+        }
     } failureBlock:failure];
 }
 
@@ -432,6 +447,13 @@
         if (isError) {
             return ;
         }
+        if (success) {
+            if ([[obj objectForKey:@"result"] count] > 0) {
+                success([obj objectForKey:@"result"]);
+            }
+            else
+                success([[obj objectForKey:@"result"] objectAtIndexPath:0]);
+        }
     } failureBlock:failure];
 }
 
@@ -445,6 +467,13 @@
         BOOL isError = [self filterError:obj failureBlock:failure];
         if (isError) {
             return ;
+        }
+        if (success) {
+            if ([[obj objectForKey:@"result"] count] > 0) {
+                success([obj objectForKey:@"result"]);
+            }
+            else
+            success([[obj objectForKey:@"result"] objectAtIndexPath:0]);
         }
     } failureBlock:failure];
 }
@@ -461,6 +490,9 @@
         if (isError) {
             return ;
         }
+        if (success) {
+            success(obj);
+        }
     } failureBlock:failure];
 }
 
@@ -476,6 +508,13 @@
         if (isError) {
             return ;
         }
+        if (success) {
+            if ([[obj objectForKey:@"result"] count] > 0) {
+                success([obj objectForKey:@"result"]);
+            }
+            else
+                success([[obj objectForKey:@"result"] objectAtIndexPath:0]);
+        }
     } failureBlock:failure];
 }
 
@@ -490,6 +529,7 @@
         if (isError) {
             return ;
         }
+        
     } failureBlock:failure];
 }
 
@@ -503,6 +543,9 @@
         BOOL isError = [self filterError:obj failureBlock:failure];
         if (isError) {
             return ;
+        }
+        if (success) {
+            success(obj);
         }
     } failureBlock:failure];
 }
@@ -546,6 +589,9 @@
         if (isError) {
             return ;
         }
+        if (success) {
+            success(obj);
+        }
     } failureBlock:failure];
 }
 
@@ -575,6 +621,13 @@
         if (isError) {
             return ;
         }
+        if (success) {
+            if ([[obj objectForKey:@"result"] count] > 0) {
+                success([obj objectForKey:@"result"]);
+            }
+            else
+                success([[obj objectForKey:@"result"] objectAtIndexPath:0]);
+        }
     } failureBlock:failure];
 }
 
@@ -588,6 +641,14 @@
         BOOL isError = [self filterError:obj failureBlock:failure];
         if (isError) {
             return ;
+        }
+        
+        if (success) {
+            if ([[obj objectForKey:@"result"] count] > 0) {
+                success([obj objectForKey:@"result"]);
+            }
+            else
+                success([[obj objectForKey:@"result"] objectAtIndexPath:0]);
         }
     } failureBlock:failure];
 }
@@ -604,6 +665,13 @@
         if (isError) {
             return ;
         }
+        if (success) {
+            if ([[obj objectForKey:@"result"] count] > 0) {
+                success([obj objectForKey:@"result"]);
+            }
+            else
+                success([[obj objectForKey:@"result"] objectAtIndexPath:0]);
+        }
     } failureBlock:failure];
 }
 
@@ -618,6 +686,13 @@
         BOOL isError = [self filterError:obj failureBlock:failure];
         if (isError) {
             return ;
+        }
+        if (success) {
+            if ([[obj objectForKey:@"result"] count] > 0) {
+                success([obj objectForKey:@"result"]);
+            }
+            else
+                success([[obj objectForKey:@"result"] objectAtIndexPath:0]);
         }
     } failureBlock:failure];
 }
@@ -634,6 +709,13 @@
         if (isError) {
             return ;
         }
+        if (success) {
+            if ([[obj objectForKey:@"result"] count] > 0) {
+                success([obj objectForKey:@"result"]);
+            }
+            else
+                success([[obj objectForKey:@"result"] objectAtIndexPath:0]);
+        }
     } failureBlock:failure];
 }
 
@@ -647,6 +729,14 @@
         BOOL isError = [self filterError:obj failureBlock:failure];
         if (isError) {
             return ;
+        }
+        
+        if (success) {
+            if ([[obj objectForKey:@"result"] count] > 0) {
+                success([obj objectForKey:@"result"]);
+            }
+            else
+                success([[obj objectForKey:@"result"] objectAtIndexPath:0]);
         }
     } failureBlock:failure];
 }
@@ -662,6 +752,13 @@
         BOOL isError = [self filterError:obj failureBlock:failure];
         if (isError) {
             return ;
+        }
+        if (success) {
+            if ([[obj objectForKey:@"result"] count] > 0) {
+                success([obj objectForKey:@"result"]);
+            }
+            else
+                success([[obj objectForKey:@"result"] objectAtIndexPath:0]);
         }
     } failureBlock:failure];
 }
@@ -704,6 +801,15 @@
         BOOL isError = [self filterError:obj failureBlock:failure];
         if (isError) {
             return ;
+        }
+//        Friend *friend = [self mapModel:[[obj objectForKey:@"result"] objectAtIndex:0] withClass:[Friend class]];
+        
+        if (success) {
+            if ([[obj objectForKey:@"result"] count] > 0) {
+                success([obj objectForKey:@"result"]);
+            }
+            else
+                success([[obj objectForKey:@"result"] objectAtIndexPath:0]);
         }
     } failureBlock:failure];
 }
@@ -789,6 +895,11 @@
         if (isError) {
             return ;
         }
+        UserInfo *user = [self mapModel:[[obj objectForKey:@"result"] objectAtIndexPath:0] withClass:[UserInfo class]];
+        if (success) {
+            success(user);
+        }
+        
     } failureBlock:failure];
 }
 
@@ -873,36 +984,13 @@
         if (isError) {
             return ;
         }
-    } failureBlock:failure];
-}
-
-/**
- @desc 获取用户设置
- */
-//TODO:获取用户设置
-- (void)getUserSetting:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
-{
-    [self post:[self mergeURL:Get_User_Setting] withParams:params completionBlock:^(id obj) {
-        BOOL isError = [self filterError:obj failureBlock:failure];
-        if (isError) {
-            return ;
+        if (success) {
+            success(obj);
         }
     } failureBlock:failure];
 }
 
-/**
- @desc 更新用户配置
- */
-//TODO:更新用户配置
-- (void)updateUserSetting:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
-{
-    [self post:[self mergeURL:Update_User_Setting] withParams:params completionBlock:^(id obj) {
-        BOOL isError = [self filterError:obj failureBlock:failure];
-        if (isError) {
-            return ;
-        }
-    } failureBlock:failure];
-}
+
 
 /**
  @desc 获取用户设置
@@ -941,25 +1029,7 @@
     } failureBlock:failure];
 }
 
-/**
- @desc 意见反馈
- */
-//TODO:意见反馈
 
-- (void)feedBack:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
-{
-    [self postJSON:[self mergeURL:Add_Feedback] withParams:params completionBlock:^(id obj) {
-        
-        BOOL isError = [self filterError:obj failureBlock:failure];
-        if (isError) {
-            return ;
-        }
-        if (success) {
-            success(obj);
-        }
-    
-    } failureBlock:failure];
-}
 
 /**
  @desc 更新用户设置
@@ -1001,49 +1071,5 @@
     } failureBlock:failure];
 
 }
-
-
-/**
- @desc 获取特别关注宝宝动态
- */
-//TODO:获取特别关注宝宝动态
-
-- (void)getRecrodByFollow:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
-{
-    [self postJSON:[self mergeURL:Get_Recrod_By_Follow] withParams:params completionBlock:^(id obj) {
-        
-        BOOL isError = [self filterError:obj failureBlock:failure];
-        if (isError) {
-            return ;
-        }
-        if (success) {
-            success(obj);
-        }
-        
-    } failureBlock:failure];
-
-}
-
-
-/**
- @desc 根据关键字搜索宝宝动态
- */
-//TODO:根据关键字搜索宝宝动态
-
-- (void)searchRecrod:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
-{
-    [self postJSON:[self mergeURL:Search_Recrod] withParams:params completionBlock:^(id obj) {
-        
-        BOOL isError = [self filterError:obj failureBlock:failure];
-        if (isError) {
-            return ;
-        }
-        if (success) {
-            success(obj);
-        }
-        
-    } failureBlock:failure];
-}
-
 
 @end

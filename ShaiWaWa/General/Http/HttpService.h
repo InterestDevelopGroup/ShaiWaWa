@@ -44,17 +44,12 @@
 #define Get_Addressbook_Friend                      @"get_addressbook_friend"
 #define Get_User_Info                               @"get_user_info"
 #define Follow_Baby                                 @"follow"
-<<<<<<< HEAD
 #define Get_User_Setting                            @"get_user_setting"
 #define Add_Feedback                                @"add_feedback"
-=======
 #define Get_Baby_Remark                             @"get_baby_remark"
 #define Add_Baby_Remark                             @"add_remark"
 #define Update_Baby_Remark                          @"update_remark"
 #define Delete_Baby_Remark                          @"delete_remark"
-#define Add_Feedback                                @"add_feedback"
-#define Get_User_Setting                            @"get_user_setting"
->>>>>>> working-1
 #define Update_User_Setting                         @"update_user_setting"
 typedef enum {
     No_Error_Code = 10000,
@@ -89,6 +84,12 @@ typedef enum {
  */
 //TODO:第三方登陆
 - (void)openLogin:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
+
+/**
+ @desc 发送验证码
+ */
+//TODO:发送验证码
+- (void)sendValidateCode:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
 
 
 /**
@@ -178,52 +179,6 @@ typedef enum {
  */
 //TODO:添加评论
 - (void)addComment:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
-/**
- @desc 获取用户设置
- */
-//TODO:获取用户设置
-
-- (void)getUserSetting:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
-/**
- @desc 意见反馈
- */
-//TODO:意见反馈
-
-- (void)feedBack:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
-
-/**
- @desc 更新用户设置
- */
-//TODO:更新用户设置
-
-- (void)updateUserSetting:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
-
-
-
-/**
- @desc 获取全部动态
- */
-//TODO:获取全部动态
-
-- (void)getRecrodList:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
-
-
-
-
-/**
- @desc 获取特别关注宝宝动态
- */
-//TODO:获取特别关注宝宝动态
-
-- (void)getRecrodByFollow:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
-
-
-/**
- @desc 根据关键字搜索宝宝动态
- */
-//TODO:根据关键字搜索宝宝动态
-
-- (void)searchRecrod:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
 
 /**
  @desc 添加收藏

@@ -10,6 +10,13 @@
 #import "UIViewController+BarItemAdapt.h"
 #import "MessageCell.h"
 
+#import "HttpService.h"
+#import "SVProgressHUD.h"
+#import "UserDefault.h"
+#import "UserInfo.h"
+#import "Friend.h"
+#import "BabyInfo.h"
+
 @interface MessageViewController ()
 
 @end
@@ -54,6 +61,15 @@
     [_msgTableView registerNibWithName:@"MessageCell" reuseIdentifier:@"Cell"];
     
     [_segScrollView addSubview:_msgView];
+    
+    
+    UserInfo *user = [[UserDefault sharedInstance] userInfo];
+    [[HttpService sharedInstance] getSystemNotification:@{@"Receive_uid":user.uid,@"offset":@"1", @"pagesize":@"10"} completionBlock:^(id object)
+    {
+        [SVProgressHUD showSuccessWithStatus:@"获取消息列表完成"];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
 }
 
 

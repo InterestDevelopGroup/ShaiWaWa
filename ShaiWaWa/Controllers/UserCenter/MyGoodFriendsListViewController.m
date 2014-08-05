@@ -10,7 +10,11 @@
 #import "UIViewController+BarItemAdapt.h"
 #import "MyGoodFriendsListCell.h"
 #import "FriendHomeViewController.h"
-
+#import "MyGoodFriendsListViewController.h"
+#import "HttpService.h"
+#import "SVProgressHUD.h"
+#import "UserDefault.h"
+#import "UserInfo.h"
 @interface MyGoodFriendsListViewController ()
 
 @end
@@ -40,8 +44,11 @@
 #pragma mark - Private Methods
 - (void)initUI
 {
+    
+    
     self.title = @"我的好友";
     [self setLeftCusBarItem:@"square_back" action:nil];
+    UserInfo *user = [[UserDefault sharedInstance] userInfo];
     UIImage *img = [[UIImage imageNamed:@"main_2-bg2.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(15, 15, 15, 15)];
     UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
     _goodFriendListTableView.backgroundView = imgView;
@@ -49,6 +56,14 @@
     if (4*80 < _goodFriendListTableView.bounds.size.height) {
         _goodFriendListTableView.frame = CGRectMake(20, 60, 285,4*80);
     }
+    [[HttpService sharedInstance] getFriendList:@{@"uid":user.uid,@"offset":@"1", @"pagesize": @"10"} completionBlock:^(id object) {
+        
+        
+        [SVProgressHUD showSuccessWithStatus:@"获取成功"];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
+    
 }
 
 #pragma mark - UITableView DataSources and Delegate
@@ -61,7 +76,7 @@
 {
     static NSString *identify = @"Cell";
     MyGoodFriendsListCell *cell = (MyGoodFriendsListCell *)[tableView dequeueReusableCellWithIdentifier:identify];
-
+    
 //    cell.headPicView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"baby_mama.png"]];
 //    cell.nickNameLabel.text = @"张氏";
 //    cell.countOfBabyLabel.text = @"1个宝宝";

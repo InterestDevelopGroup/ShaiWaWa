@@ -48,6 +48,7 @@
     self.title = @"设置";
     [self setLeftCusBarItem:@"square_back" action:nil];
     UserInfo *user = [[UserDefault sharedInstance] userInfo];
+    NSLog(@"%@",@{@"uid":user.uid});
     [[HttpService sharedInstance] getUserSetting:@{@"uid":user.uid} completionBlock:^(id object) {
         [SVProgressHUD showSuccessWithStatus:@"获取成功"];
     } failureBlock:^(NSError *error, NSString *responseString) {

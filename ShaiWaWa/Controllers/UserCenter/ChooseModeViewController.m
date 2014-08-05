@@ -26,6 +26,14 @@
 #import "UserDefault.h"
 #import "ShareView.h"
 
+
+
+#import "HttpService.h"
+#import "SVProgressHUD.h"
+#import "UserDefault.h"
+#import "UserInfo.h"
+#import "Friend.h"
+#import "BabyInfo.h"
 @interface ChooseModeViewController ()
 
 @end
@@ -157,11 +165,11 @@
     isDropMenuShown = NO;
     MainDropMenu *dropMenu =[[MainDropMenu alloc] initWithFrame:CGRectMake(0, 0, _grayDropView.bounds.size.width, 80)];
     
-    //[dropMenu.allButton  addTarget:self action:@selector() forControlEvents:UIControlEventTouchUpInside];
+    [dropMenu.allButton  addTarget:self action:@selector(showAllDyList) forControlEvents:UIControlEventTouchUpInside];
     
-    //[dropMenu.onlyMineButton addTarget:self action:@selector() forControlEvents:UIControlEventTouchUpInside];
+    [dropMenu.onlyMineButton addTarget:self action:@selector(showOnlyMyBabyDyList) forControlEvents:UIControlEventTouchUpInside];
     
-    //[dropMenu.specialCareButton addTarget:self action:@selector() forControlEvents:UIControlEventTouchUpInside];
+    [dropMenu.specialCareButton addTarget:self action:@selector(showSpecialCareDyList) forControlEvents:UIControlEventTouchUpInside];
     
     [dropMenu.searchDyButton addTarget:self action:@selector(showSearchDyVC) forControlEvents:UIControlEventTouchUpInside];
     [_grayDropView addSubview:dropMenu];
@@ -328,6 +336,43 @@
 - (IBAction)showSquaresVC:(id)sender
 {
     [self showSquareVC];
+}
+- (void)showAllDyList
+{
+     [self hideGrayDropView:nil];
+    UserInfo *user = [[UserDefault sharedInstance] userInfo];
+    [[HttpService sharedInstance] getRecordList:@{@"offset":@"1", @"pagesize":@"10",@"uid":user.uid} completionBlock:^(id object) {
+        
+        [SVProgressHUD showSuccessWithStatus:@"加载完成"];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
+}
+- (void)showOnlyMyBabyDyList
+{
+     [self hideGrayDropView:nil];
+    
+    UserInfo *user = [[UserDefault sharedInstance] userInfo];
+    BabyInfo *baby = [[BabyInfo alloc] init];
+    [[HttpService sharedInstance] getRecordByUserID:@{@"baby_id":baby.baby_ID,@"offset":@"1",  @"pagesize":@"10",@"uid":user.uid} completionBlock:^(id object) {
+        
+        [SVProgressHUD showSuccessWithStatus:@"加载完成"];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
+    
+}
+- (void)showSpecialCareDyList
+{
+     [self hideGrayDropView:nil];
+    UserInfo *user = [[UserDefault sharedInstance] userInfo];
+    [[HttpService sharedInstance] getRecordByFollow:@{@"uid":user.uid,@"offset":@"1", @"pagesize":@"10"} completionBlock:^(id object) {
+        
+        [SVProgressHUD showSuccessWithStatus:@"加载完成"];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
+    
 }
 - (void)showSearchDyVC
 {

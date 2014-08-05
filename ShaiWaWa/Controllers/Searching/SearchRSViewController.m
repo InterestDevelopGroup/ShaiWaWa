@@ -10,6 +10,12 @@
 #import "UIViewController+BarItemAdapt.h"
 #import "SearchRSCell.h"
 
+#import "HttpService.h"
+#import "SVProgressHUD.h"
+#import "UserDefault.h"
+#import "UserInfo.h"
+#import "Friend.h"
+
 @interface SearchRSViewController ()
 
 @end
@@ -45,6 +51,15 @@
     [_searchRSListTableView clearSeperateLine];
     [_searchRSListTableView registerNibWithName:@"SearchRSCell" reuseIdentifier:@"Cell"];
     _searchRSField.text = searchValue;
+    UserInfo *user = [[UserDefault sharedInstance] userInfo];
+    [[HttpService sharedInstance] searchFriend:@{@"uid":user.uid,
+                                                 @"keyword":_searchRSField.text,
+                                                 @"offset":@"1",
+                                                 @"pagesize":@"10"} completionBlock:^(id object) {
+                                                     [SVProgressHUD showSuccessWithStatus:@"搜索完成"];
+                                                 } failureBlock:^(NSError *error, NSString *responseString) {
+                                                     [SVProgressHUD showErrorWithStatus:responseString];
+                                                 }];
 }
 
 #pragma mark - UITableView DataSources and Delegate

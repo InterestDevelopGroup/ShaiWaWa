@@ -11,6 +11,13 @@
 
 #import "TheThirdPartyLoginView.h"
 
+#import "HttpService.h"
+#import "SVProgressHUD.h"
+#import "UserDefault.h"
+#import "UserInfo.h"
+#import "Friend.h"
+#import "BabyInfo.h"
+
 @interface RegisterViewController ()
 
 @end
@@ -71,6 +78,12 @@
 - (IBAction)showPostValidateVC:(id)sender
 {
     myDelegate.postValidateType = @"reg";
+    
+    [[HttpService sharedInstance] sendValidateCode:@{@"phone":_phoneField.text} completionBlock:^(id object) {
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
     [ControlCenter pushToPostValidateVC];
 }
     

@@ -13,6 +13,15 @@
 
 #import "ShareView.h"
 
+#import "HttpService.h"
+#import "SVProgressHUD.h"
+#import "UserDefault.h"
+#import "UserInfo.h"
+#import "Friend.h"
+#import "BabyInfo.h"
+#import "DynamicRecord.h"
+#import "RecordComment.h"
+
 @interface DynamicDetailViewController ()
 
 @end
@@ -184,5 +193,19 @@
 {
     _grayShareView.hidden = YES;
     isShareViewShown = NO;
+}
+- (IBAction)pinLunEvent:(id)sender
+{
+    DynamicRecord *dynamicRecord = [[DynamicRecord alloc] init];
+    RecordComment *comment = [[RecordComment alloc] init];
+    [[HttpService sharedInstance] addComment:@{@"rid":dynamicRecord.rid,
+                                               @"uid":dynamicRecord.userInfo.uid,
+                                               @"reply_id":comment.reply_id,
+                                               @"content":dynamicRecord.content}
+                             completionBlock:^(id object) {
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
 }
 @end

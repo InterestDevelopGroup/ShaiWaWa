@@ -53,7 +53,7 @@
 }
 - (void)finishDone
 {
-    [[HttpService sharedInstance] searchRecrod:@{@"keyword":_keywordTextField.text, @"offset":@"1", @"pagesize":@"10" } completionBlock:^(id object) {
+    [[HttpService sharedInstance] searchRecord:@{@"keyword":_keywordTextField.text, @"offset":@"1", @"pagesize":@"10" } completionBlock:^(id object) {
         
         [SVProgressHUD showSuccessWithStatus:@"已更新"];
     } failureBlock:^(NSError *error, NSString *responseString) {

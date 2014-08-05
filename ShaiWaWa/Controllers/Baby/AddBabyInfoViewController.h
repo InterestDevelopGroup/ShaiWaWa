@@ -7,7 +7,7 @@
 //
 
 #import "CommonViewController.h"
-
+#import "TSLocateView.h"
 @interface AddBabyInfoViewController : CommonViewController<UITextFieldDelegate, UIScrollViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 {
     BOOL isBoy, isGirl, isDad, isMon;
@@ -33,5 +33,6 @@
 - (IBAction)openCitiesSelectView:(id)sender;
 - (IBAction)touXiangSelectEvent:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *touXiangButton;
+@property (weak, nonatomic) IBOutlet UITextField *cityValueTextField;
 
 @end

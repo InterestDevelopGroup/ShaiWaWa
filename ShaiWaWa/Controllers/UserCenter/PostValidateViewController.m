@@ -11,6 +11,13 @@
 #import "UIViewController+BarItemAdapt.h"
 #import "SearchAddressListViewController.h"
 
+#import "HttpService.h"
+#import "SVProgressHUD.h"
+#import "UserDefault.h"
+#import "UserInfo.h"
+#import "Friend.h"
+#import "BabyInfo.h"
+
 @interface PostValidateViewController ()
 
 @end

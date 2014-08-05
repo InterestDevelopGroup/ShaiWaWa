@@ -8,6 +8,13 @@
 
 #import "AddHeightAndWeightViewController.h"
 #import "UIViewController+BarItemAdapt.h"
+
+#import "HttpService.h"
+#import "SVProgressHUD.h"
+#import "UserDefault.h"
+#import "UserInfo.h"
+#import "Friend.h"
+#import "BabyInfo.h"
 @interface AddHeightAndWeightViewController ()
 
 @end
@@ -56,6 +63,17 @@
 - (IBAction)timeSelected:(id)sender {
 }
 
-- (IBAction)add_OK:(id)sender {
+- (IBAction)add_OK:(id)sender
+{
+    UserInfo *user = [[UserDefault sharedInstance] userInfo];
+    BabyInfo *baby = [[BabyInfo alloc] init];
+    [[HttpService sharedInstance] addBabyGrowRecord:@{@"baby_id":baby.baby_ID,
+                                                      @"height":_heightField.text,
+                                                      @"weight":_weightField.text,
+                                                      @"uid":user.uid} completionBlock:^(id object) {
+        [SVProgressHUD showSuccessWithStatus:@"添加成功"];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
 }
 @end

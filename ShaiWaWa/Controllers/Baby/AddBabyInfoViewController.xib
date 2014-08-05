@@ -15,6 +15,7 @@
                 <outlet property="birthWeightField" destination="jQu-3C-x1G" id="80h-mi-iuE"/>
                 <outlet property="boyRadioButton" destination="NoN-1r-8XL" id="2Nr-7g-c4t"/>
                 <outlet property="cityButton" destination="trh-mK-1ab" id="bae-ET-rpM"/>
+                <outlet property="cityValueTextField" destination="m8C-dl-RhM" id="n2Q-Q0-EYa"/>
                 <outlet property="dadRadioButton" destination="fmO-Ef-HFT" id="AgN-JZ-kJP"/>
                 <outlet property="girlRadioButton" destination="IuC-dv-D0P" id="Ff1-hj-IW5"/>
                 <outlet property="monRadioButton" destination="UE3-rs-1tP" id="Pwk-hf-ojq"/>
@@ -123,8 +124,9 @@
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="EEX-lQ-nBX">
                     <rect key="frame" x="171" y="473" width="108" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                    <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="lUc-g2-ga8"/>
                     </connections>
@@ -143,8 +145,9 @@
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="jQu-3C-x1G">
                     <rect key="frame" x="171" y="518" width="108" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                    <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="done"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="sDO-jU-R0x"/>
                     </connections>
@@ -247,6 +250,15 @@
                         <action selector="dadSelected:" destination="-1" eventType="touchUpInside" id="MeN-ll-ViV"/>
                     </connections>
                 </button>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="m8C-dl-RhM">
+                    <rect key="frame" x="113" y="433" width="138" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="GOX-cc-4fw"/>
+                    </connections>
+                </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="trh-mK-1ab">
                     <rect key="frame" x="50" y="429" width="226" height="36"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

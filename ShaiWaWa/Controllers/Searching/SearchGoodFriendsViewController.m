@@ -15,6 +15,12 @@
 #import "SearchAddressBookViewController.h"
 #import "ScannerQRCodeViewController.h"
 
+#import "HttpService.h"
+#import "SVProgressHUD.h"
+#import "UserDefault.h"
+#import "UserInfo.h"
+#import "Friend.h"
+
 @interface SearchGoodFriendsViewController ()
 
 @end
@@ -129,6 +135,7 @@
         [textField resignFirstResponder];
         SearchRSViewController *searchRS = [[SearchRSViewController alloc] init];
         searchRS.searchValue = _searchField.text;
+        _searchField.text = nil;
         [self.navigationController pushViewController:searchRS animated:YES];
         
     }

@@ -9,6 +9,9 @@
             <connections>
                 <outlet property="babyButton" destination="MBV-53-k8P" id="BKC-eC-bho"/>
                 <outlet property="dynamicButton" destination="Rsf-5m-LAh" id="iII-ie-nyT"/>
+                <outlet property="friendAvatarImgView" destination="OzO-8K-s7w" id="HFr-uu-jOU"/>
+                <outlet property="friendSwwNumTextField" destination="F91-LM-jql" id="3mE-bR-d4p"/>
+                <outlet property="friendUserNameTextField" destination="Zze-ZU-0SD" id="BF0-uy-Nvd"/>
                 <outlet property="goodFriendButton" destination="AQ1-47-ueN" id="XiY-wg-LHH"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>

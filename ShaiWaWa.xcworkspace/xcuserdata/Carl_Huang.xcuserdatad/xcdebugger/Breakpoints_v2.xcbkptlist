@@ -6,16 +6,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ShaiWaWa/General/Http/HttpService.m"
-            timestampString = "428825489.350313"
+            filePath = "ShaiWaWa/Controllers/Baby/AddBabyInfoViewController.m"
+            timestampString = "428920304.140032"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "496"
-            endingLineNumber = "496"
-            landmarkName = "-getUserSetting:completionBlock:failureBlock:"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "-addBaby"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

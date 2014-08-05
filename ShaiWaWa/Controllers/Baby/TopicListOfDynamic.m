@@ -10,6 +10,13 @@
 #import "UIViewController+BarItemAdapt.h"
 #import "DynamicCell.h"
 #import "DynamicDetailViewController.h"
+
+
+#import "HttpService.h"
+#import "SVProgressHUD.h"
+#import "UserDefault.h"
+#import "UserInfo.h"
+#import "Friend.h"
 @interface TopicListOfDynamic ()
 
 @end
@@ -45,6 +52,12 @@
     [_dynamicPageTableView clearSeperateLine];
     [_dynamicPageTableView registerNibWithName:@"DynamicCell" reuseIdentifier:@"Cell"];
     
+    [[HttpService sharedInstance] getRecordByTopic:@{@"topic":self.title,@"offset":@"1",@"pagesize":@"10"} completionBlock:^(id object) {
+        
+        [SVProgressHUD showSuccessWithStatus:@"加载完成"];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
 }
 
 

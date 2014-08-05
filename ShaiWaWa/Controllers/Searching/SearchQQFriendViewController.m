@@ -9,6 +9,12 @@
 #import "SearchQQFriendViewController.h"
 #import "UIViewController+BarItemAdapt.h"
 
+
+#import "HttpService.h"
+#import "SVProgressHUD.h"
+#import "UserDefault.h"
+#import "UserInfo.h"
+#import "Friend.h"
 @interface SearchQQFriendViewController ()
 
 @end
@@ -49,6 +55,14 @@
     
     [_qqListTableView clearSeperateLine];
     [_qqListTableView registerNibWithName:@"QQCell" reuseIdentifier:@"Cell"];
+    
+    UserInfo *user = [[UserDefault sharedInstance] userInfo];
+    [[HttpService sharedInstance] getQQFriend:@{@"uid":user.uid} completionBlock:^(id object) {
+        
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
 }
 
 #pragma mark - UITableView DataSources and Delegate
