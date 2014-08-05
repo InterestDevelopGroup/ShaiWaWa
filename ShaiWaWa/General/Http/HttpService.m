@@ -160,6 +160,9 @@
         case Username_Existed_Error_Code:
             msg = @"用户名已经存在.";
             break;
+        case ShaiWaWa_Num_Existed_Error_Code:
+            msg = @"晒娃娃号已经存在.";
+            break;
         default:
             msg = @"请求失败.";
             break;
@@ -382,7 +385,12 @@
 //TODO:获取系统短消息
 - (void)getSystemNotification:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
 {
-    
+    [self post:[self mergeURL:Get_System_Notification] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
 }
 
 /**
@@ -391,7 +399,12 @@
 //TODO:更新系统短消息
 - (void)updateSystemNotification:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
 {
-    
+    [self post:[self mergeURL:Update_System_Notification] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
 }
 
 /**
@@ -400,7 +413,12 @@
 //TODO:添加宝宝
 - (void)addBaby:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
 {
-    
+    [self post:[self mergeURL:Add_Baby] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
 }
 
 /**
@@ -409,7 +427,12 @@
 //TODO:获取宝宝列表
 - (void)getBabyList:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
 {
-    
+    [self post:[self mergeURL:Get_Baby_List] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
 }
 
 /**
@@ -418,7 +441,12 @@
 //TODO:获取宝宝信息
 - (void)getBabyInfo:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
 {
-    
+    [self post:[self mergeURL:Get_Baby_Info] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
 }
 
 
@@ -428,7 +456,12 @@
 //TODO:添加宝宝成长记录
 - (void)addBabyGrowRecord:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
 {
-    
+    [self post:[self mergeURL:Add_Baby_Grow_Record] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
 }
 
 
@@ -438,7 +471,12 @@
 //TODO:获取宝宝成长记录
 - (void)getBabyGrowRecord:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
 {
-    
+    [self post:[self mergeURL:Get_Baby_Grow_Record] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
 }
 
 /**
@@ -447,7 +485,12 @@
 //TODO:更新宝宝信息
 - (void)updateBabyInfo:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
 {
-    
+    [self post:[self mergeURL:Update_Baby_Info] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
 }
 
 /**
@@ -456,7 +499,26 @@
 //TODO:发布动态
 - (void)publishRecord:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
 {
-    
+    [self post:[self mergeURL:Publish_Record] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
+}
+
+/**
+ @desc 删除动态
+ */
+//TODO 删除动态
+- (void)deleteRecord:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self post:[self mergeURL:Delete_Record] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
 }
 
 /**
@@ -465,7 +527,12 @@
 //TODO:更新赞状态
 - (void)updatePraiseStatus:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
 {
-    
+    [self post:[self mergeURL:Update_Praise_Status] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
 }
 
 /**
@@ -474,7 +541,367 @@
 //TODO:添加评论
 - (void)addComment:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
 {
-    
+    [self post:[self mergeURL:Add_Comment] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
+}
+
+/**
+ @desc 添加收藏
+ */
+//TODO:添加收藏
+- (void)addFavorite:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self post:[self mergeURL:Add_Favorite] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
+
+}
+
+/**
+ @desc 获取收藏列表
+ */
+//TODO:获取收藏列表
+- (void)getFavorite:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self post:[self mergeURL:Get_Favorite_List] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
+}
+
+/**
+ @desc 获取动态列表
+ */
+//TODO 获取动态列表
+- (void)getRecordList:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self post:[self mergeURL:Get_Record_List] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
+}
+
+
+/**
+ @desc 根据用户id获取宝宝动态接口
+ */
+//TODO:根据用户id获取宝宝动态接口
+- (void)getRecordByUserID:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self post:[self mergeURL:Get_Record_By_User_ID] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
+}
+
+
+/**
+ @desc 获取好友宝宝动态
+ */
+//TODO: 获取好友宝宝动态
+- (void)getRecordByFriend:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self post:[self mergeURL:Get_Record_By_Friend] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
+}
+
+
+/**
+ @desc 获取特别关注宝宝动态接口
+ */
+//TODO:获取特别关注宝宝动态接口
+- (void)getRecordByFollow:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self post:[self mergeURL:Get_Recrod_By_Follow] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
+}
+
+/**
+ @desc 根据话题获取宝宝动态接口
+ */
+//TODO:根据话题获取宝宝动态接口
+- (void)getRecordByTopic:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self post:[self mergeURL:Get_Recrod_By_Follow] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
+}
+
+
+/**
+ @desc 搜索动态接口
+ */
+//TODO:搜索动态接口
+- (void)searchRecord:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self post:[self mergeURL:Search_Recrod] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
+}
+
+/**
+ @desc 申请好友
+ */
+//TODO:申请好友
+- (void)applyFriend:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self post:[self mergeURL:Apply_Friend] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
+}
+
+/**
+ @desc 通过好友
+ */
+//TODO:通过好友
+- (void)passFriend:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self post:[self mergeURL:Pass_Friend] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
+}
+
+/**
+ @desc 获取好友列表
+ */
+//TODO:获取好友列表
+- (void)getFriendList:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self post:[self mergeURL:Get_Friend_List] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
+}
+
+/**
+ @desc 删除好友
+ */
+//TODO:删除好友
+- (void)deleteFriend:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self post:[self mergeURL:Delete_Friend] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
+}
+
+/**
+ @desc 搜索好友
+ */
+//TODO:搜索好友
+- (void)searchFriend:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self post:[self mergeURL:Search_Friend] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
+}
+
+/**
+ @desc 获取新浪好友
+ */
+//TODO:获取新浪好友
+- (void)getSinaFriend:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self post:[self mergeURL:Get_Sina_Friend] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
+}
+
+/**
+ @desc 获取QQ好友
+ */
+//TODO:获取QQ好友
+- (void)getQQFriend:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self post:[self mergeURL:Get_QQ_Friend] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
+}
+
+/**
+ @desc 获取通讯录好友
+ */
+//TODO:获取通讯录好友
+- (void)getAddressBookFriend:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self post:[self mergeURL:Get_Addressbook_Friend] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
+}
+
+/**
+ @desc 根据用户id获取用户信息接口
+ */
+//TODO:根据用户id获取用户信息接口
+- (void)getUserInfo:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self post:[self mergeURL:Get_User_Info] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
+}
+
+/**
+ @desc 特别关注宝宝接口
+ */
+//TODO:特别关注宝宝接口
+- (void)followBaby:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self post:[self mergeURL:Follow_Baby] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
+}
+
+/**
+ @desc 获取宝宝备注
+ */
+//TODO:获取宝宝备注
+- (void)getBabyRemark:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self post:[self mergeURL:Get_Baby_Remark] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
+}
+
+/**
+ @desc 添加宝宝备注
+ */
+//TODO:添加宝宝备注
+- (void)addBabyRemark:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self post:[self mergeURL:Add_Baby_Remark] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
+}
+
+/**
+ @desc 更新宝宝备注
+ */
+//TODO:更新宝宝备注
+- (void)updateBabyRemark:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self post:[self mergeURL:Update_Baby_Remark] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
+}
+
+/**
+ @desc 删除宝宝备注
+ */
+//TODO:删除宝宝备注
+- (void)deleteBabyRemark:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self post:[self mergeURL:Delete_Baby_Remark] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
+}
+
+/**
+ @desc 添加意见反馈
+ */
+//TODO:添加意见反馈
+- (void)addFeedback:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self post:[self mergeURL:Add_Feedback] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
+}
+
+/**
+ @desc 获取用户设置
+ */
+//TODO:获取用户设置
+- (void)getUserSetting:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self post:[self mergeURL:Get_User_Setting] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
+}
+
+/**
+ @desc 更新用户配置
+ */
+//TODO:更新用户配置
+- (void)updateUserSetting:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self post:[self mergeURL:Update_User_Setting] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+    } failureBlock:failure];
 }
 
 /**
