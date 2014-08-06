@@ -62,14 +62,22 @@
     
     [_segScrollView addSubview:_msgView];
     
+    msgArry = [[NSMutableArray alloc] init];
     
     UserInfo *user = [[UserDefault sharedInstance] userInfo];
-    [[HttpService sharedInstance] getSystemNotification:@{@"Receive_uid":user.uid,@"offset":@"1", @"pagesize":@"10"} completionBlock:^(id object)
-    {
-        [SVProgressHUD showSuccessWithStatus:@"获取消息列表完成"];
-    } failureBlock:^(NSError *error, NSString *responseString) {
-        [SVProgressHUD showErrorWithStatus:responseString];
-    }];
+    
+    
+    
+    NSLog(@"%@",@{@"receive_uid":user.uid,@"offset":@"0", @"pagesize":@"10"});
+    [[HttpService sharedInstance] getSystemNotification:@{@"receive_uid":user.uid,@"offset":@"0", @"pagesize":@"10"} completionBlock:^(id object)
+     {
+         msgArry = [object objectForKey:@"result"];
+         [_msgTableView reloadData];
+         [SVProgressHUD showSuccessWithStatus:@"获取消息列表完成"];
+     } failureBlock:^(NSError *error, NSString *responseString) {
+         [SVProgressHUD showErrorWithStatus:responseString];
+     }];
+   
 }
 
 
@@ -81,7 +89,7 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return [msgArry count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

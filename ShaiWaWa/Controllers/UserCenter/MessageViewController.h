@@ -12,6 +12,7 @@
 @interface MessageViewController : CommonViewController<UIScrollViewDelegate>
 {
     HMSegmentedControl *segMentedControl;
+    NSMutableArray *msgArry;
 //    BOOL isRightBtnSelected;
 }
 @property (strong, nonatomic) IBOutlet UIView *tabSelectionBar;

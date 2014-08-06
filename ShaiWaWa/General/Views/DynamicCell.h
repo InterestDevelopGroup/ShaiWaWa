@@ -15,4 +15,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *moreBtn;
 @property (weak, nonatomic) IBOutlet UIButton *topicBtn;
 
+@property (weak, nonatomic) IBOutlet UILabel *addressLabel;
+@property (weak, nonatomic) IBOutlet UILabel *whoLabel;
+@property (weak, nonatomic) IBOutlet UILabel *releaseTimeLabel;
+@property (weak, nonatomic) IBOutlet UITextView *dyContentTextView;
+@property (weak, nonatomic) IBOutlet UILabel *babyNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *babyBirthdayLabel;
+
+
 @end

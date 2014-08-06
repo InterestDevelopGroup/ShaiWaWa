@@ -93,12 +93,13 @@
                   @"country":@"中国",
                   @"province":location.state,
                   @"city":location.city});
+    
     if (_babyNameField.text.length > 0 && _birthDayField.text.length > 0 && _babyNicknameField.text.length > 0 && _birthStatureField.text.length > 0 &&_birthWeightField.text.length > 0 ) {
       
-        [[HttpService sharedInstance] addBaby:@{@"fid":user.uid,
-                                                @"mid":@"3",
+        [[HttpService sharedInstance] addBaby:@{@"uid":user.uid,@"fid":user.uid,
+                                                @"mid":@"",
                                                 @"baby_name":_babyNameField.text,
-                                                @"avatar":@"32",
+                                                @"avatar":@"32333",
                                                 @"sex":isBoy ? @"1" : @"0",
                                                 @"birthday":_birthDayField.text,
                                                 @"nickname":_babyNicknameField.text,
@@ -108,6 +109,7 @@
                                                 @"province":location.state,
                                                 @"city":location.city} completionBlock:^(id object) {
                                                     [SVProgressHUD showSuccessWithStatus:@"添加成功"];
+                                                    [self clearTextField];
                                                 } failureBlock:^(NSError *error, NSString *responseString) {
                                                     [SVProgressHUD showErrorWithStatus:responseString];
                                                 }];
@@ -303,5 +305,19 @@
     [_babyNameField resignFirstResponder];
     [_birthStatureField resignFirstResponder];
     [_birthWeightField resignFirstResponder];
+}
+
+- (void)clearTextField
+{
+    _babyNameField.text = nil;
+    _birthDayField.text = nil;
+    _babyNicknameField.text = nil;
+    _birthStatureField.text = nil;
+    _birthWeightField.text = nil;
+}
+
+- (void)resetStatus
+{
+    
 }
 @end

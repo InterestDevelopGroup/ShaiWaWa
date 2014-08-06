@@ -10,6 +10,7 @@
 #import "UIViewController+BarItemAdapt.h"
 #import "HttpService.h"
 #import "SVProgressHUD.h"
+#import "ChooseModeViewController.h"
 
 @interface SearchDynamicViewController ()
 
@@ -55,6 +56,10 @@
 {
     [[HttpService sharedInstance] searchRecord:@{@"keyword":_keywordTextField.text, @"offset":@"1", @"pagesize":@"10" } completionBlock:^(id object) {
         
+        ChooseModeViewController *choose = [[ChooseModeViewController alloc] init];
+        NSMutableArray *arr = [NSMutableArray arrayWithObjects:object, nil];
+//        choose.specialBlock(arr);
+        [self.navigationController popViewControllerAnimated:YES];
         [SVProgressHUD showSuccessWithStatus:@"已更新"];
     } failureBlock:^(NSError *error, NSString *responseString) {
         [SVProgressHUD showErrorWithStatus:responseString];

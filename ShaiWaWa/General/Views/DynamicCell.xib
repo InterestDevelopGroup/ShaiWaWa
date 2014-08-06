@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -180,11 +180,17 @@
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.8772335017103432" green="0.88731664540816324" blue="0.88731664540816324" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
+                <outlet property="addressLabel" destination="iJI-EJ-c99" id="dsg-i5-bj5"/>
+                <outlet property="babyBirthdayLabel" destination="Txg-c2-wzn" id="scK-4u-ewy"/>
+                <outlet property="babyNameLabel" destination="zaO-M2-dW6" id="ijb-6Y-cPH"/>
+                <outlet property="dyContentTextView" destination="rg2-QV-IuH" id="jS0-AC-yH5"/>
                 <outlet property="moreBtn" destination="Oxb-Fu-Ull" id="zBY-g2-9kt"/>
                 <outlet property="praiseUserFirstBtn" destination="xbc-H6-b6Q" id="3Tj-PJ-Z1Q"/>
                 <outlet property="praiseUserSecondBtn" destination="lpM-gC-JPE" id="MfH-gc-H07"/>
                 <outlet property="praiseUserThirdBtn" destination="1x4-2T-8QK" id="cyw-Sp-xj2"/>
+                <outlet property="releaseTimeLabel" destination="TTI-s9-o57" id="mPg-ez-ofZ"/>
                 <outlet property="topicBtn" destination="jNp-Q1-2jL" id="6ej-Jz-MGg"/>
+                <outlet property="whoLabel" destination="3ci-zv-cJx" id="4Hw-Pi-kf6"/>
             </connections>
         </tableViewCell>
     </objects>

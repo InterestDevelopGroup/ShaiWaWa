@@ -50,8 +50,8 @@
     self.title = @"宝宝列表";
     [self setLeftCusBarItem:@"square_back" action:nil];
     sectionArr = [[NSArray alloc] initWithObjects:@"我的宝宝",@"好友的宝宝", nil];
-    myBabyList = [[NSArray alloc] initWithObjects:@"1",@"3",@"5",@"7", nil];
-    friendsBabyList =  [[NSArray alloc] initWithObjects:@"2",@"4",@"6",@"8", nil];
+    myBabyList = [[NSArray alloc] init];
+    friendsBabyList =  [[NSArray alloc] init];
     babyAll = [NSArray arrayWithObjects:myBabyList,friendsBabyList, nil];
     //以段名数组，段数据为参数创建数据资源用的字典实例
     babyList = [[NSDictionary alloc] initWithObjects:babyAll forKeys:sectionArr];
@@ -63,10 +63,22 @@
     
     
     UserInfo *user = [[UserDefault sharedInstance] userInfo];
-    [[HttpService sharedInstance] getBabyList:@{@"offset":@"1",
+    NSLog(@"%@",@{@"offset":@"0",
+                  @"pagesize":@"10",
+                  @"uid":user.uid});
+    
+    
+    [[HttpService sharedInstance] getBabyList:@{@"offset":@"0",
                                                 @"pagesize":@"10",
                                                 @"uid":user.uid}
                               completionBlock:^(id object) {
+                                  
+                                 
+                                  myBabyList = [object objectForKey:@"result"];
+                                  babyAll = [NSArray arrayWithObjects:myBabyList,friendsBabyList, nil];
+                                  //以段名数组，段数据为参数创建数据资源用的字典实例
+                                  babyList = [[NSDictionary alloc] initWithObjects:babyAll forKeys:sectionArr];
+                                  [_babyListTableView reloadData];
                                   [SVProgressHUD showSuccessWithStatus:@"获取成功"];
     } failureBlock:^(NSError *error, NSString *responseString) {
         [SVProgressHUD showErrorWithStatus:responseString];
@@ -93,20 +105,36 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    //NSString *sectionType = [sectionArr objectAtIndex:indexPath.section];
+    //NSArray *list = [babyList objectForKey:sectionType];
+    
     BabyListCell * babyListCell = (BabyListCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
-    /*
+   
     // 取当前section，设置单元格显示内容。
     NSInteger section = indexPath.section;
-    // 获取这个分组的省份名称，再根据省份名称获得这个省份的城市列表。
+    // 获取这个分组的名称，再根据名称获得这个列表。
     NSString *sectionType = [sectionArr objectAtIndex:section];
     NSArray *list = [babyList objectForKey:sectionType];
-   [list objectAtIndex:indexPath.row];
-    */
+//   [list objectAtIndex:indexPath.row];
+    
+    
     //babyListCell.selectionStyle = UITableViewCellSelectionStyleNone;
-    //    babyListCell.babyImage.image = [UIImage imageNamed:@""];
-    //    babyListCell.babyNameLabel.text = [NSString stringWithFormat:@""];
-    //    babyListCell.babyOldLabel.text = [NSString stringWithFormat:@""];
-    //    babyListCell.babySexImage.image = [UIImage imageNamed:@""];
+    
+//        [[[list objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"baby_name"]
+//    [[list objectAtIndex:indexPath.row] objectForKey:@"baby_name"]
+
+//    babyListCell.babyImage.image = [UIImage imageNamed:@""];
+        babyListCell.babyNameLabel.text = [NSString stringWithFormat:@"%@",[[list objectAtIndex:indexPath.row] objectForKey:@"baby_name"]];
+        babyListCell.babyOldLabel.text = [NSString stringWithFormat:@"%@",[[list objectAtIndex:indexPath.row] objectForKey:@"birthday"]];
+    if ([[[list objectAtIndex:indexPath.row] objectForKey:@"sex"] intValue] == 0) {
+        babyListCell.babySexImage.image = [UIImage imageNamed:@"main_girl.png"];
+    }
+    else
+    {
+         babyListCell.babySexImage.image = [UIImage imageNamed:@"main_boy.png"];
+    }
+
     
     return babyListCell;
     

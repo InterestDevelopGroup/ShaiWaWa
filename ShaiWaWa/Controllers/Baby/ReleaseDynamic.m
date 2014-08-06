@@ -21,7 +21,12 @@
 #import "DynamicRecord.h"
 
 @interface ReleaseDynamic ()
-
+{
+    UIImageView *record_iconImgView;
+    UILabel *timerLabel;
+    NSTimer *timer;
+    int times;
+}
 @end
 
 @implementation ReleaseDynamic
@@ -63,6 +68,8 @@
     isShareBar = NO;
     _dy_contextTextField.delegate = self;
     [self copyOfWeb];
+    times = 1;
+    
 }
 
 
@@ -402,4 +409,43 @@
     [_dy_contextTextField resignFirstResponder];
 }
 
+- (IBAction)recordBtnDownEvent:(id)sender
+{
+
+    record_iconImgView = [[UIImageView alloc] initWithFrame:CGRectMake(90, 90, 151, 150)];
+    [record_iconImgView setImage:[UIImage imageNamed:@"pd_huatong.png"]];
+    timerLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 100, 50, 30)];
+    timerLabel.text = [NSString stringWithFormat:@"%d 秒",times];
+    timerLabel.textColor = [UIColor colorWithRed:104/255.0 green:192/255.0 blue:15/255.0 alpha:1.0];
+    timerLabel.backgroundColor = [UIColor clearColor];
+    [record_iconImgView addSubview:timerLabel];
+    //设置定时检测
+    timer = [NSTimer scheduledTimerWithTimeInterval:times target:self selector:@selector(timerSecondAdd) userInfo:nil repeats:YES];
+    [_xialaGrayV addSubview:record_iconImgView];
+}
+
+- (IBAction)recordBtnUpEvent:(id)sender
+{
+    NSLog(@"松开了");
+    [self hideXialaView:nil];
+    [_huaTongButton setImage:[UIImage imageNamed:@"pd_xiaohuatong.png"] forState:UIControlStateNormal];
+    [_huaTongButton setEnabled:NO];
+    [record_iconImgView removeFromSuperview];
+    [timer invalidate];
+    NSLog(@"stopAtTime:%d",times);
+    
+    //pb_shanchu@2x.png
+}
+
+- (void)timerSecondAdd
+{
+   
+    times ++;
+    timerLabel.text = [NSString stringWithFormat:@"%d 秒",times];
+    if (times == 16) {
+        [timer invalidate];
+        [self recordBtnUpEvent:nil];
+    }
+    
+}
 @end

@@ -15,7 +15,10 @@
 
 #import "Setting.h"
 @interface SettingViewController ()
-
+{
+    Setting *setInfo;
+    __block NSString *isRemind;
+}
 @end
 
 @implementation SettingViewController
@@ -50,12 +53,14 @@
     UserInfo *user = [[UserDefault sharedInstance] userInfo];
     NSLog(@"%@",@{@"uid":user.uid});
     [[HttpService sharedInstance] getUserSetting:@{@"uid":user.uid} completionBlock:^(id object) {
+        setInfo = [object copy];
+        [_setListTableView reloadData];
         [SVProgressHUD showSuccessWithStatus:@"获取成功"];
     } failureBlock:^(NSError *error, NSString *responseString) {
         [SVProgressHUD showErrorWithStatus:responseString];
     }];
     
-    
+    //NSLog(@"%@",isRemind);
     
     sectionArr = [[NSArray alloc] initWithObjects:@"1",@"自动分享设置",@"仅在WIFI环境下上传",@"2", nil];
     basicSetList = [[NSMutableArray alloc] initWithObjects:@"新消息提醒",@"记录默认可见范围",@"记录默认附加位置信息", nil];
@@ -94,7 +99,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    Setting *setInfo = [[UserDefault sharedInstance] set];
+
+    
+    
     static NSString *identify = @"Cell";
     
     UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:identify];
@@ -146,7 +153,7 @@
 //        
 //            return set_obj;
 //        }];
-    
+        Setting *setIn = [[UserDefault sharedInstance] set];
         if (section == 0) {
             //        [cell.contentView addSubview:switchBtn];
             //        [label removeFromSuperview];
@@ -155,7 +162,7 @@
             
 //            switchBtn.on = [set.is_remind isEqualToString:@"1"] ?: !switchBtn.on;
             if (indexPath.row == 0) {
-                switchBtn.on = [setInfo.is_remind isEqualToString:@"1"];
+                switchBtn.on = [setIn.is_remind isEqualToString:@"1"];
                 switchBtn.tag = 4000;
             }
             
@@ -163,7 +170,7 @@
             if (indexPath.row == 1) {
                 //            [switchBtn removeFromSuperview];
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                switch ([setInfo.visibility intValue]) {
+                switch ([setIn.visibility intValue]) {
                     case 1:
                        label.text = @"所有都可见";
                         break;
@@ -184,27 +191,27 @@
                 label.hidden = NO;
             }
             if (indexPath.row == 2) {
-                switchBtn.on = [setInfo.show_position isEqualToString:@"1"];
+                switchBtn.on = [setIn.show_position isEqualToString:@"1"];
                 switchBtn.tag = 4002;
             }
             
         }
         if (section == 1) {
-            switchBtn.on = [setInfo.is_share isEqualToString:@"1"];
+            switchBtn.on = [setIn.is_share isEqualToString:@"1"];
             switchBtn.tag = 4100;
         }
         if (section == 2) {
             switch (indexPath.row) {
                 case 0:
-                    switchBtn.on = [setInfo.upload_video_only_wifi isEqualToString:@"1"];
+                    switchBtn.on = [setIn.upload_video_only_wifi isEqualToString:@"1"];
                     switchBtn.tag = 4200;
                     break;
                 case 1:
-                    switchBtn.on = [setInfo.upload_audio_only_wifi isEqualToString:@"1"];
+                    switchBtn.on = [setIn.upload_audio_only_wifi isEqualToString:@"1"];
                     switchBtn.tag = 4201;
                     break;
                 case 2:
-                    switchBtn.on = [setInfo.upload_image_only_wifi isEqualToString:@"1"];
+                    switchBtn.on = [setIn.upload_image_only_wifi isEqualToString:@"1"];
                     switchBtn.tag = 4202;
                     break;
                 default:
@@ -264,7 +271,7 @@
         strOne = @"所有都可见";
         strTwo = @"仅好友可见";
     }
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"请选择:" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:strOne,strTwo,nil];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"请选择:" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:strOne,strTwo,@"取消",nil];
     
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -302,24 +309,66 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    
     Setting *set = [[UserDefault sharedInstance] set];
-    switch (buttonIndex) {
-        case 0:
-            set.visibility = @"1";
-            break;
-        case 1:
-            set.visibility = @"2";
-            break;
-        case 2:
-            set.visibility = @"3";
-            break;
-        default:
-            break;
+    
+    if ([set.visibility isEqualToString:@"1"]) {
+        switch (buttonIndex) {
+            case 0:
+                set.visibility = @"2";
+                break;
+            case 1:
+                set.visibility = @"3";
+                break;
+            
+            default:
+                break;
+        }
     }
+    else
+    {
+    if ([set.visibility isEqualToString:@"2"]) {
+        switch (buttonIndex) {
+            case 0:
+                set.visibility = @"1";
+                break;
+            case 1:
+                set.visibility = @"3";
+                break;
+                
+            default:
+                break;
+        }
+    }
+    else
+    {
+    if ([set.visibility isEqualToString:@"3"]) {
+        switch (buttonIndex) {
+            case 0:
+                set.visibility = @"1";
+                break;
+            case 1:
+                set.visibility = @"2";
+                break;
+                
+            default:
+                break;
+        }
+    }
+    }
+    }
+    
+    
+    set.userInfo = [[UserDefault sharedInstance] userInfo];
+    set.is_remind = [[UserDefault sharedInstance] set].is_remind;
+    set.show_position = [[UserDefault sharedInstance] set].show_position;
+    set.is_share = [[UserDefault sharedInstance] set].is_share;
+    set.upload_audio_only_wifi = [[UserDefault sharedInstance] set].upload_audio_only_wifi;
+    set.upload_video_only_wifi = [[UserDefault sharedInstance] set].upload_video_only_wifi;
+    set.upload_image_only_wifi = [[UserDefault sharedInstance] set].upload_image_only_wifi;
     [[UserDefault sharedInstance] setSet:set];
-    
-    
     [self getRefreshData];
+    [self updateSetting];
 }
 - (void)changeCurrentStatus:(UISwitch *)swithBtn
 {
@@ -328,70 +377,69 @@
     switch (swithBtn.tag) {
         case 4000:
             if (swithBtn.on) {
-                set.is_remind = @"0";
+                set.is_remind = @"1";
             }
             else
             {
-                set.is_remind = @"1";
+                set.is_remind = @"0";
             }
             break;
         case 4002:
             if (swithBtn.on) {
-                set.show_position = @"0";
+                set.show_position = @"1";
             }
             else
             {
-                set.show_position = @"1";
+                set.show_position = @"0";
             }
             break;
         case 4100:
             if (swithBtn.on) {
-                set.is_share = @"0";
+                set.is_share = @"1";
             }
             else
             {
-                set.is_share = @"1";
+                set.is_share = @"0";
             }
             break;
         case 4200:
             if (swithBtn.on) {
-                set.upload_video_only_wifi = @"0";
+                set.upload_video_only_wifi = @"1";
             }
             else
             {
-                set.upload_video_only_wifi = @"1";
+                set.upload_video_only_wifi = @"0";
             }
             break;
         case 4201:
             if (swithBtn.on) {
-                set.upload_audio_only_wifi = @"0";
+                set.upload_image_only_wifi = @"1";
             }
             else
             {
-                set.upload_audio_only_wifi = @"1";
+                set.upload_image_only_wifi = @"0";
             }
             break;
         case 4202:
+
             if (swithBtn.on) {
-                set.upload_image_only_wifi = @"0";
+                set.upload_audio_only_wifi = @"1";
             }
             else
             {
-                set.upload_image_only_wifi = @"1";
+                set.upload_audio_only_wifi = @"0";
             }
             break;
         default:
             break;
     }
+    set.userInfo = user;
     [[UserDefault sharedInstance] setSet:set];
-    
-    
     [self getRefreshData];
-//    [[HttpService sharedInstance] updateUserSetting:@{@"uid":user.uid,  @"is_remind":set.is_remind,@"visible":set.visibility,@"show_position":set.show_position,@"is_share":set.is_share,@"upload_video_only_wifi":set.upload_video_only_wifi,@"upload_audio_only_wifi":set.upload_audio_only_wifi,@"upload_image_only_wifi":set.upload_image_only_wifi}completionBlock:^(id object) {
-//        
-//    } failureBlock:^(NSError *error, NSString *responseString) {
-//        [SVProgressHUD showErrorWithStatus:responseString];
-//    }];
+    
+    [self updateSetting];
+    
+    
     
 }
 
@@ -435,5 +483,19 @@
     return 30.0f;
 }
 - (IBAction)quitCurAccountEvent:(id)sender {
+}
+
+
+- (void)updateSetting
+{
+    Setting *setting = [[UserDefault sharedInstance] set];
+    
+    NSLog(@"%@",@{@"uid":[[UserDefault sharedInstance] userInfo].uid,@"is_remind":setting.is_remind,@"visibility":setting.visibility,@"show_position":setting.show_position,@"is_share":setting.is_share,@"upload_video_only_wifi":setting.upload_video_only_wifi,@"upload_audio_only_wifi":setting.upload_audio_only_wifi,@"upload_image_only_wifi":setting.upload_image_only_wifi});
+    
+    [[HttpService sharedInstance] updateUserSetting:@{@"uid":[[UserDefault sharedInstance] userInfo].uid,  @"is_remind":setting.is_remind,@"visibility":setting.visibility,@"show_position":setting.show_position,@"is_share":setting.is_share,@"upload_video_only_wifi":setting.upload_video_only_wifi,@"upload_audio_only_wifi":setting.upload_audio_only_wifi,@"upload_image_only_wifi":setting.upload_image_only_wifi}completionBlock:^(id object) {
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
 }
 @end

@@ -9,10 +9,13 @@
 #import "CommonViewController.h"
 #import "UserInfo.h"
 
+typedef void(^SpecialBlock)(NSMutableArray *);
+
 @interface ChooseModeViewController : CommonViewController<UITableViewDataSource, UITableViewDelegate>
 {
     BOOL isMenuShown,isDropMenuShown,isShareViewShown;
     UserInfo *users;
+    NSMutableArray *dyArray;
 }
 - (IBAction)showSearchFriendsVC:(id)sender;
 
@@ -38,4 +41,6 @@
 
 @property (weak, nonatomic) IBOutlet UIView *shareView;
 
+
+@property (nonatomic, strong) SpecialBlock specialBlock;
 @end

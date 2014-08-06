@@ -12,6 +12,7 @@
                 <outlet property="canSeeView" destination="2eP-Sw-o28" id="qZx-dw-pMD"/>
                 <outlet property="dy_contextTextField" destination="9Zp-O3-1X7" id="fwB-YH-hN0"/>
                 <outlet property="grayTwoView" destination="xvm-8S-4MG" id="38j-z9-hs0"/>
+                <outlet property="huaTongButton" destination="Ptq-nd-W6y" id="H13-hK-ZwT"/>
                 <outlet property="letPersonSawLabel" destination="dMd-DA-dZF" id="b08-Op-c1k"/>
                 <outlet property="onlyFriendBtn" destination="Xt7-Mp-fCd" id="1yb-Fh-nJ8"/>
                 <outlet property="onlyParentBtn" destination="2EK-U8-zgI" id="GJG-nY-W4X"/>
@@ -308,10 +309,10 @@
                     <gestureRecognizers/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                 </view>
-                <view hidden="YES" contentMode="scaleToFill" id="qu5-rO-upw">
+                <view hidden="YES" alpha="0.79999999999999982" contentMode="scaleToFill" id="qu5-rO-upw">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="470"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.80054772418478259" green="0.80054772418478259" blue="0.80054772418478259" alpha="1" colorSpace="calibratedRGB"/>
                     <gestureRecognizers/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
@@ -332,6 +333,10 @@
                             <state key="normal" image="pd_anzhushuohua.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="recordBtnDownEvent:" destination="-1" eventType="touchDown" id="E9r-UB-DUU"/>
+                                <action selector="recordBtnUpEvent:" destination="-1" eventType="touchUpInside" id="eci-Jq-6Bu"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

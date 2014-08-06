@@ -58,5 +58,8 @@
 - (IBAction)hideXialaView:(id)sender;
 @property (weak, nonatomic) IBOutlet UIView *xialaGrayV;
 @property (weak, nonatomic) IBOutlet UITextView *dy_contextTextField;
+- (IBAction)recordBtnDownEvent:(id)sender;
+- (IBAction)recordBtnUpEvent:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *huaTongButton;
 
 @end

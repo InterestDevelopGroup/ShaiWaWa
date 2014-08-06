@@ -61,6 +61,14 @@
     [super viewDidAppear:YES];
 
     [self initUI];
+    [self setSpecialBlock:^(NSMutableArray *arr)
+     {
+         if (!arr) {
+             dyArray = [arr copy];
+             NSLog(@"-=-%@",dyArray);
+             [_dynamicPageTableView reloadData];
+         }
+     }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -201,6 +209,18 @@
         
     }];
     [_shareView addSubview:sv];
+    
+    dyArray = [[NSMutableArray alloc] init];
+    
+    [[HttpService sharedInstance] getRecordList:@{@"offset":@"0", @"pagesize":@"10",@"uid":users.uid} completionBlock:^(id object) {
+        dyArray = [object copy];
+        [_dynamicPageTableView reloadData];
+        [SVProgressHUD showSuccessWithStatus:@"加载完成"];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
+    
+  
 }
 
 
@@ -212,12 +232,18 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return [dyArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DynamicCell * dynamicCell = (DynamicCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    
+//    dynamicCell.babyNameLabel.text = [[dyArray objectAtIndex:indexPath.row] objectForKey:@""];
+    dynamicCell.releaseTimeLabel.text = [[dyArray objectAtIndex:indexPath.row] objectForKey:@"add_time"];
+    dynamicCell.addressLabel.text = [[dyArray objectAtIndex:indexPath.row] objectForKey:@"address"];
+    dynamicCell.dyContentTextView.text = [[dyArray objectAtIndex:indexPath.row] objectForKey:@"content"];
+    
     
     [dynamicCell.praiseUserFirstBtn addTarget:self action:@selector(showPraiseListVC) forControlEvents:UIControlEventTouchUpInside];
     [dynamicCell.praiseUserSecondBtn addTarget:self action:@selector(showPraiseListVC) forControlEvents:UIControlEventTouchUpInside];
@@ -341,7 +367,7 @@
 {
      [self hideGrayDropView:nil];
     UserInfo *user = [[UserDefault sharedInstance] userInfo];
-    [[HttpService sharedInstance] getRecordList:@{@"offset":@"1", @"pagesize":@"10",@"uid":user.uid} completionBlock:^(id object) {
+    [[HttpService sharedInstance] getRecordList:@{@"offset":@"0", @"pagesize":@"10",@"uid":user.uid} completionBlock:^(id object) {
         
         [SVProgressHUD showSuccessWithStatus:@"加载完成"];
     } failureBlock:^(NSError *error, NSString *responseString) {
@@ -354,7 +380,7 @@
     
     UserInfo *user = [[UserDefault sharedInstance] userInfo];
     BabyInfo *baby = [[BabyInfo alloc] init];
-    [[HttpService sharedInstance] getRecordByUserID:@{@"baby_id":baby.baby_ID,@"offset":@"1",  @"pagesize":@"10",@"uid":user.uid} completionBlock:^(id object) {
+    [[HttpService sharedInstance] getRecordByUserID:@{@"baby_id":@"1",@"offset":@"0",  @"pagesize":@"10",@"uid":user.uid} completionBlock:^(id object) {
         
         [SVProgressHUD showSuccessWithStatus:@"加载完成"];
     } failureBlock:^(NSError *error, NSString *responseString) {
@@ -366,7 +392,7 @@
 {
      [self hideGrayDropView:nil];
     UserInfo *user = [[UserDefault sharedInstance] userInfo];
-    [[HttpService sharedInstance] getRecordByFollow:@{@"uid":user.uid,@"offset":@"1", @"pagesize":@"10"} completionBlock:^(id object) {
+    [[HttpService sharedInstance] getRecordByFollow:@{@"uid":user.uid,@"offset":@"0", @"pagesize":@"10"} completionBlock:^(id object) {
         
         [SVProgressHUD showSuccessWithStatus:@"加载完成"];
     } failureBlock:^(NSError *error, NSString *responseString) {
