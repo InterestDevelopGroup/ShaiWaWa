@@ -17,6 +17,9 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 @synthesize postValidateType= _postValidateType;
+@synthesize postValidatePhoneNum = _postValidatePhoneNum;
+@synthesize postValidateCore = _postValidateCore;
+@synthesize postValidateCoreTime = _postValidateCoreTime;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [[ShareManager sharePlatform] configShare];

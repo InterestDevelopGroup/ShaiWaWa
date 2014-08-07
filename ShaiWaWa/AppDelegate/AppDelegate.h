@@ -19,7 +19,9 @@
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 @property (strong, nonatomic) NSString *postValidateType;
-
+@property (strong, nonatomic) NSString *postValidatePhoneNum;
+@property (strong, nonatomic) NSString *postValidateCore;
+@property (strong, nonatomic) NSString *postValidateCoreTime;
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 

@@ -19,7 +19,9 @@
 #import "SVProgressHUD.h"
 
 @interface PersonCenterViewController ()
-
+{
+    NSMutableArray *myBabyList;
+}
 @end
 
 @implementation PersonCenterViewController
@@ -196,10 +198,23 @@
 {
     UILabel *babyLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 120, _babyButton.bounds.size.height-10)];
     babyLabel.backgroundColor = [UIColor clearColor];
-    babyLabel.text = [NSString stringWithFormat:@"宝宝 (%i)",2];
     babyLabel.font = [UIFont systemFontOfSize:15];
     babyLabel.textColor = [UIColor darkGrayColor];
     [_babyButton addSubview:babyLabel];
+    
+    [[HttpService sharedInstance] getBabyList:@{@"offset":@"0",
+                                                @"pagesize":@"10",
+                                                @"uid":users.uid}
+                              completionBlock:^(id object) {
+                                  
+                                  myBabyList = [object objectForKey:@"result"];
+                                babyLabel.text = [NSString stringWithFormat:@"宝宝 (%i)",[myBabyList count]];
+                                  [SVProgressHUD showSuccessWithStatus:@"获取成功"];
+                              } failureBlock:^(NSError *error, NSString *responseString) {
+                                  [SVProgressHUD showErrorWithStatus:responseString];
+                              }];
+    
+    
     
     UIImage *imageJianTou = [UIImage imageNamed:@"main_jiantou.png"];
     UIImageView *jianTou = [[UIImageView alloc] initWithImage:imageJianTou];
@@ -211,10 +226,19 @@
 {
     UILabel *dynamicLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 120, _dynamicButton.bounds.size.height-10)];
     dynamicLabel.backgroundColor = [UIColor clearColor];
-    dynamicLabel.text = [NSString stringWithFormat:@"动态 (%i)",28];
+    
     dynamicLabel.font = [UIFont systemFontOfSize:15];
     dynamicLabel.textColor = [UIColor darkGrayColor];
     [_dynamicButton addSubview:dynamicLabel];
+    
+    
+    [[HttpService sharedInstance] getRecordList:@{@"offset":@"0", @"pagesize":@"10",@"uid":users.uid} completionBlock:^(id object) {
+        
+        dynamicLabel.text = [NSString stringWithFormat:@"动态 (%i)",[object count]];
+        [SVProgressHUD showSuccessWithStatus:@"加载完成"];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
     
     UIImage *imageJianTou = [UIImage imageNamed:@"main_jiantou.png"];
     UIImageView *jianTou = [[UIImageView alloc] initWithImage:imageJianTou];
@@ -230,6 +254,7 @@
     goodFriendLabel.font = [UIFont systemFontOfSize:15];
     goodFriendLabel.textColor = [UIColor darkGrayColor];
     [_goodFriendButton addSubview:goodFriendLabel];
+    
     
     UIImage *imageJianTou = [UIImage imageNamed:@"main_jiantou.png"];
     UIImageView *jianTou = [[UIImageView alloc] initWithImage:imageJianTou];

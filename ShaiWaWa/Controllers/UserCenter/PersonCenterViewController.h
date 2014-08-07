@@ -32,5 +32,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *personalTouXiangImgView;
 @property (weak, nonatomic) IBOutlet UILabel *acountName;
 @property (weak, nonatomic) IBOutlet UILabel *wawaNum;
+@property (weak, nonatomic) IBOutlet UIButton *xinlanButton;
+@property (weak, nonatomic) IBOutlet UIButton *qqButton;
+@property (weak, nonatomic) IBOutlet UIButton *addressbookButton;
 
 @end

@@ -9,7 +9,7 @@
 #import "CommonViewController.h"
 #import "HMSegmentedControl.h"
 
-@interface MessageViewController : CommonViewController<UIScrollViewDelegate>
+@interface MessageViewController : CommonViewController<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate>
 {
     HMSegmentedControl *segMentedControl;
     NSMutableArray *msgArry;

@@ -8,16 +8,19 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PersonCenterViewController">
             <connections>
                 <outlet property="acountName" destination="DG9-BS-6Z3" id="i14-PQ-sFU"/>
+                <outlet property="addressbookButton" destination="cbl-nh-XIu" id="3Pd-an-MO6"/>
                 <outlet property="babyButton" destination="vqd-lk-Uez" id="8Hr-Dz-w9T"/>
                 <outlet property="dynamicButton" destination="vtt-SK-DaS" id="Etm-gx-p8o"/>
                 <outlet property="goodFriendButton" destination="k66-nm-o7A" id="Pd0-VY-X0k"/>
                 <outlet property="myCollectionButton" destination="fii-hu-W98" id="Hss-Jh-Fa0"/>
                 <outlet property="personalTouXiangImgView" destination="Xsi-Gb-ZAC" id="sGW-tZ-G9p"/>
+                <outlet property="qqButton" destination="mYO-nm-NdM" id="6Gb-ZL-17B"/>
                 <outlet property="sheJianBar" destination="NI4-Qt-KiH" id="6GJ-Rr-eKc"/>
                 <outlet property="touXiangView" destination="Xsi-Gb-ZAC" id="ukU-xd-2Qw"/>
                 <outlet property="twoDimensionCodeButton" destination="yAr-kQ-RgN" id="rRt-Qt-gVU"/>
                 <outlet property="view" destination="1" id="3"/>
                 <outlet property="wawaNum" destination="qFb-dW-ygq" id="q2f-Xq-Ama"/>
+                <outlet property="xinlanButton" destination="0mC-69-gNj" id="Fvj-hf-i5K"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

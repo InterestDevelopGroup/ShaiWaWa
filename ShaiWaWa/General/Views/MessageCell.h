@@ -10,4 +10,14 @@
 
 @interface MessageCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *sendImgView;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *sendNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *actionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *contentLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *receiveImgView;
+@property (weak, nonatomic) IBOutlet UIButton *agreeButton;
+@property (weak, nonatomic) IBOutlet UIButton *ignoreButton;
+@property (weak, nonatomic) IBOutlet UIButton *refuseButton;
+
 @end

@@ -273,6 +273,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     DynamicDetailViewController *dynamicDetailVC = [[DynamicDetailViewController alloc] init];
+    dynamicDetailVC.r_id = [[dyArray objectAtIndex:indexPath.row] objectForKey:@"rid"];
     [self.navigationController pushViewController:dynamicDetailVC animated:YES];
 }
 - (void)showSettingVC

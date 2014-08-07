@@ -482,7 +482,10 @@
     else
     return 30.0f;
 }
-- (IBAction)quitCurAccountEvent:(id)sender {
+- (IBAction)quitCurAccountEvent:(id)sender
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    [[UserDefault sharedInstance] setUserInfo:nil];
 }
 
 

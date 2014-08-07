@@ -276,13 +276,9 @@
             return ;
         }
         
-        UserInfo * userInfo = [[UserInfo alloc] init];
-        userInfo.uid = [[obj objectForKey:@"result"] objectForKey:@"id"];
-        userInfo.username = [[obj objectForKey:@"result"] objectForKey:@"username"];
-        
         if(success)
         {
-            success(userInfo);
+            success(obj);
         }
         // NSLog(@"%@",[[obj objectForKey:@"result"] objectForKey:@"username"]);
     } failureBlock:failure];
@@ -312,6 +308,23 @@
 - (void)sendValidateCode:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
 {
     [self postJSON:[self mergeURL:ValidateCode] withParams:params completionBlock:^(id obj) {
+        
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+        if (success) {
+            success(obj);
+        }
+        
+        
+    } failureBlock:failure];
+}
+
+
+- (void)isExists:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self postJSON:[self mergeURL:Is_Exists] withParams:params completionBlock:^(id obj) {
         
         BOOL isError = [self filterError:obj failureBlock:failure];
         if (isError) {

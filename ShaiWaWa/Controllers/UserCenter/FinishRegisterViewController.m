@@ -11,7 +11,7 @@
 #import "ControlCenter.h"
 
 #import "HttpService.h"
-
+#import "SVProgressHUD.h"
 @interface FinishRegisterViewController ()
 
 @end
@@ -44,7 +44,22 @@
 {
     self.title = @"完成注册";
     [self setLeftCusBarItem:@"square_back" action:nil];
+    mydelegate = [[UIApplication sharedApplication] delegate];
     
+    __weak NSString *username = _userNameField.text;
+    __weak NSString *pwd = _pwdField.text;
+    __weak NSString *phone = mydelegate.postValidatePhoneNum;
+    __weak NSString *validateCore = mydelegate.postValidateCore;
+    __weak FinishRegisterViewController *finishVC = self;
+    
+    [self setStrBlock:^(NSString *str){
+        [[HttpService sharedInstance] userRegister:@{@"username":username,@"password":pwd,@"phone":phone,@"sww_number":str,@"validate_code":validateCore} completionBlock:^(id object) {
+            [SVProgressHUD showSuccessWithStatus:@"注册成功"];
+            [finishVC.navigationController popToRootViewControllerAnimated:YES];
+        } failureBlock:^(NSError *error, NSString *responseString) {
+            [SVProgressHUD showErrorWithStatus:responseString];
+        }];
+    }];
 }
 - (IBAction)disableSecure:(id)sender
 {
@@ -53,12 +68,14 @@
     
 - (IBAction)finishRegisterAndLogin:(id)sender
 {
-    [[HttpService sharedInstance] userRegister:@{@"username":@"xiang",@"password":@"123456",@"phone":@"13680985223",@"sww_number":@"88888887",@"validate_code":@"123456"} completionBlock:^(id object) {
-        
-         [self.navigationController popToRootViewControllerAnimated:YES];       
+    NSString *sww_Num = [self fitSwwNum];
+    [[HttpService sharedInstance] isExists:@{@"sww_number":sww_Num} completionBlock:^(id object) {
+        _strBlock(sww_Num);
     } failureBlock:^(NSError *error, NSString *responseString) {
-        
+        [SVProgressHUD showErrorWithStatus:responseString];
     }];
+    
+ 
     
 }
     
@@ -71,5 +88,34 @@
     }
     [textField resignFirstResponder];
     return YES;
+}
+
+
+#pragma mark -- 随机生成一个八位数
+- (NSString *)randomNum{
+    //自动生成8位随机密码
+    NSTimeInterval random=[NSDate timeIntervalSinceReferenceDate];
+    NSString *randomString = [NSString stringWithFormat:@"%.8f",random];
+    NSString *randomSww_num = [[randomString componentsSeparatedByString:@"."]objectAtIndex:1];
+    return randomSww_num;
+}
+#pragma mark -- 是否符合晒娃娃号需求
+- (NSString *)fitSwwNum
+{
+    NSString *number = [self randomNum];                      //获取随机数
+    int count = 0;
+    for (int i = 0; i < 8; i++) {
+        char num = [number characterAtIndex:i];
+        if (num == '4') {
+            count ++;
+            if (count > 3) {
+                [self fitSwwNum];
+            }
+            if (i == 7) {
+                [self fitSwwNum];
+            }
+        }
+    }
+    return number;
 }
 @end

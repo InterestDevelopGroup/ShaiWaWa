@@ -83,6 +83,17 @@
                 </subviews>
                 <color key="backgroundColor" red="0.84099014949999995" green="0.84099014949999995" blue="0.84099014949999995" alpha="1" colorSpace="calibratedRGB"/>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="actionLabel" destination="Y3A-Pe-BUz" id="U3T-oQ-tF0"/>
+                <outlet property="agreeButton" destination="p9Z-21-fkz" id="yeL-fE-8He"/>
+                <outlet property="contentLabel" destination="7w6-KI-uRF" id="eEi-y4-TPa"/>
+                <outlet property="ignoreButton" destination="jCn-3f-Z0j" id="Nkq-eT-AP9"/>
+                <outlet property="receiveImgView" destination="S6d-k6-1L1" id="LHl-V6-3wK"/>
+                <outlet property="refuseButton" destination="epE-dZ-SYq" id="QHt-3h-0bf"/>
+                <outlet property="sendImgView" destination="Qic-lg-aB1" id="CF6-8h-f42"/>
+                <outlet property="sendNameLabel" destination="GzT-dV-Oxu" id="KrE-oh-tFf"/>
+                <outlet property="timeLabel" destination="lkJ-dm-KfZ" id="SMK-D0-8k0"/>
+            </connections>
         </tableViewCell>
     </objects>
     <resources>

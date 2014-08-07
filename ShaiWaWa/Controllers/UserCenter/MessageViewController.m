@@ -96,6 +96,63 @@
 {
     MessageCell * msgCell = (MessageCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
     
+    switch ([[[msgArry objectAtIndex:indexPath.row] objectForKey:@"type"] intValue]) {
+        case 1:     //动态被评论
+            msgCell.agreeButton.hidden = YES;
+            msgCell.ignoreButton.hidden = YES;
+            msgCell.refuseButton.hidden = YES;
+            break;
+        case 2:     //动态被赞
+            msgCell.agreeButton.hidden = YES;
+            msgCell.ignoreButton.hidden = YES;
+            msgCell.refuseButton.hidden = YES;
+            msgCell.contentLabel.hidden = YES;
+            break;
+        case 3:     //申请成为好友
+            msgCell.receiveImgView.hidden = YES;
+            msgCell.timeLabel.hidden = YES;
+            break;
+        case 4:     //好友申请被批准
+            msgCell.agreeButton.hidden = YES;
+            msgCell.ignoreButton.hidden = YES;
+            msgCell.refuseButton.hidden = YES;
+            msgCell.receiveImgView.hidden = YES;
+            msgCell.contentLabel.hidden = YES;
+            break;
+        case 5:     //好友申请被拒绝
+            msgCell.agreeButton.hidden = YES;
+            msgCell.ignoreButton.hidden = YES;
+            msgCell.refuseButton.hidden = YES;
+            msgCell.receiveImgView.hidden = YES;
+            msgCell.contentLabel.hidden = YES;
+
+            break;
+        case 6:     //自己的宝宝有新动态
+            msgCell.agreeButton.hidden = YES;
+            msgCell.ignoreButton.hidden = YES;
+            msgCell.refuseButton.hidden = YES;
+            msgCell.receiveImgView.hidden = YES;
+            msgCell.actionLabel.hidden = YES;
+            msgCell.timeLabel.hidden = YES;
+            break;
+        case 7:     //特别关注的宝宝有新动态
+            msgCell.agreeButton.hidden = YES;
+            msgCell.ignoreButton.hidden = YES;
+            msgCell.refuseButton.hidden = YES;
+            msgCell.receiveImgView.hidden = YES;
+            msgCell.actionLabel.hidden = YES;
+            msgCell.timeLabel.hidden = YES;
+            break;
+        case 8:     //被@了
+            msgCell.agreeButton.hidden = YES;
+            msgCell.ignoreButton.hidden = YES;
+            msgCell.refuseButton.hidden = YES;
+            msgCell.contentLabel.hidden = YES;
+            break;
+        default:
+            break;
+    }
+    
     /*
      // 取当前section，设置单元格显示内容。
      NSInteger section = indexPath.section;
@@ -112,6 +169,18 @@
     
     return msgCell;
     
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [[HttpService sharedInstance] updateSystemNotification:
+            @{@"notification_id":[[msgArry objectAtIndex:indexPath.row] objectForKey:@"notification_id"],@"status":@"1"} completionBlock:^(id object)
+            {
+                    [_msgTableView reloadData];
+                    [SVProgressHUD showSuccessWithStatus:@"消息已更新"];
+            } failureBlock:^(NSError *error, NSString *responseString) {
+                    [SVProgressHUD showErrorWithStatus:responseString];
+     }];
 }
 - (void)HMSegmentedControlInitMethod
 {

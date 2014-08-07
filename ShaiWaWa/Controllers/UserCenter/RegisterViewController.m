@@ -78,13 +78,30 @@
 - (IBAction)showPostValidateVC:(id)sender
 {
     myDelegate.postValidateType = @"reg";
-    
-    [[HttpService sharedInstance] sendValidateCode:@{@"phone":_phoneField.text} completionBlock:^(id object) {
+    [_phoneField resignFirstResponder];
+    if (_phoneField.text.length > 0) {
+        if (_phoneField.text.length == 11) {
+            [[HttpService sharedInstance] sendValidateCode:@{@"phone":_phoneField.text} completionBlock:^(id object) {
+                myDelegate.postValidatePhoneNum = _phoneField.text;
+                
+                _phoneField.text = nil;
+                [ControlCenter pushToPostValidateVC];
+            } failureBlock:^(NSError *error, NSString *responseString) {
+                [SVProgressHUD showErrorWithStatus:responseString];
+            }];
+        }
+        else
+        {
+            [SVProgressHUD showErrorWithStatus:@"请输入正确手机号码"];
+        }
         
-    } failureBlock:^(NSError *error, NSString *responseString) {
-        [SVProgressHUD showErrorWithStatus:responseString];
-    }];
-    [ControlCenter pushToPostValidateVC];
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:@"不能为空"];
+    }
+   
+    
 }
     
     

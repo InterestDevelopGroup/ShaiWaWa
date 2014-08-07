@@ -10,8 +10,12 @@
 #import "UIViewController+BarItemAdapt.h"
 #import "PlatformCell.h"
 
+#import "UserDefault.h"
+#import "UserInfo.h"
 @interface PlatformBindViewController ()
-
+{
+    UserInfo *users;
+}
 @end
 
 @implementation PlatformBindViewController
@@ -42,6 +46,9 @@
 {
     self.title = @"社交平台绑定";
     [self setLeftCusBarItem:@"square_back" action:nil];
+    
+    users = [[UserDefault sharedInstance] userInfo];
+    
     UIImage *img = [[UIImage imageNamed:@"main_2-bg2.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(15, 15, 15, 15)];
     UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
     _platformListTableView.backgroundView = imgView;
@@ -62,7 +69,48 @@
 {
     static NSString *identify = @"Cell";
     PlatformCell *cell = (PlatformCell *)[tableView dequeueReusableCellWithIdentifier:identify];
-   
+    switch (indexPath.row) {
+        case 0:
+            if (users.weibo == nil) {
+                cell.platformCurBindButton.hidden = YES;
+                cell.platformNameLabel.text = @"新浪";
+            }
+            else
+            {
+                
+            }
+            
+            break;
+        case 1:
+            if (users.qq == nil) {
+                cell.platformIconView.image = [UIImage imageNamed:@"qq.png"];
+                cell.platformNameLabel.text = @"QQ";
+                [cell.platformCurBindButton setImage:[UIImage imageNamed:@"bangding.png"] forState:UIControlStateNormal];
+            }
+            else
+            {
+                cell.platformIconView.image = [UIImage imageNamed:@"qq.png"];
+                cell.platformNameLabel.text = @"";
+                [cell.platformCurBindButton setImage:[UIImage imageNamed:@"jiebaoding.png"] forState:UIControlStateNormal];
+            }
+            break;
+        case 2:
+            if (users.wechat == nil) {
+                cell.platformIconView.image = [UIImage imageNamed:@"dianhua2.png"];
+                cell.platformNameLabel.text = @"手机";
+               [cell.platformCurBindButton setImage:[UIImage imageNamed:@"bangding.png"] forState:UIControlStateNormal];
+            }
+            else
+            {
+                cell.platformIconView.image = [UIImage imageNamed:@"dianhua2.png"];
+                cell.platformNameLabel.text = @"";
+                [cell.platformCurBindButton setImage:[UIImage imageNamed:@"jiebaoding.png"] forState:UIControlStateNormal];
+            }
+            break;
+        default:
+            break;
+    }
+    
     cell.backgroundColor = [UIColor clearColor];
     return cell;
 }

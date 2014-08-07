@@ -27,7 +27,7 @@
 @end
 
 @implementation DynamicDetailViewController
-
+@synthesize r_id;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -75,6 +75,8 @@
         
     }];
     [_shareView addSubview:sv];
+    
+    pinLunArray = [[NSMutableArray alloc] init];
 
 }
 
@@ -88,7 +90,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return [pinLunArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -196,14 +198,13 @@
 }
 - (IBAction)pinLunEvent:(id)sender
 {
-    DynamicRecord *dynamicRecord = [[DynamicRecord alloc] init];
-    RecordComment *comment = [[RecordComment alloc] init];
-    [[HttpService sharedInstance] addComment:@{@"rid":dynamicRecord.rid,
-                                               @"uid":dynamicRecord.userInfo.uid,
-                                               @"reply_id":comment.reply_id,
-                                               @"content":dynamicRecord.content}
+    UserInfo *users = [[UserDefault sharedInstance] userInfo];
+    [[HttpService sharedInstance] addComment:@{@"rid":r_id,
+                                               @"uid":users.uid,
+                                               @"reply_id":@"",
+                                               @"content":_pinLunContextTextField.text}
                              completionBlock:^(id object) {
-        
+                                 NSLog(@"object:%@",object);
     } failureBlock:^(NSError *error, NSString *responseString) {
         [SVProgressHUD showErrorWithStatus:responseString];
     }];

@@ -12,12 +12,16 @@
 {
     BOOL isShareViewShown;
     UITextField *temp_txt;
+    NSMutableArray *pinLunArray;
 }
 @property (strong, nonatomic) IBOutlet UITableView *pinLunListTableView;
 @property (weak, nonatomic) IBOutlet UIView *grayShareView;
 @property (weak, nonatomic) IBOutlet UIView *shareView;
-- (IBAction)hideGrayShareV:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *pinLunContextTextField;
+@property (nonatomic,strong) NSString *r_id;
+
+
+- (IBAction)hideGrayShareV:(id)sender;
 - (IBAction)pinLunEvent:(id)sender;
 
 @end

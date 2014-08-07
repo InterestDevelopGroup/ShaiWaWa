@@ -12,6 +12,7 @@
 #define User_Register                               @"register"
 #define Open_Login                                  @"open_login"
 #define ValidateCode                                @"validatecode"
+#define Is_Exists                                   @"is_exists"
 #define Change_Password                             @"change_password"
 #define Update_User_Info                            @"update_user"
 #define Get_System_Notification                     @"get_system_notification"
@@ -90,6 +91,13 @@ typedef enum {
  */
 //TODO:发送验证码
 - (void)sendValidateCode:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
+
+/**
+ @desc 验证晒娃娃号是否存在
+ */
+//TODO:验证晒娃娃号是否存在
+- (void)isExists:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
+
 
 
 /**

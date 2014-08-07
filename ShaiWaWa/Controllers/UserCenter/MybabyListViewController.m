@@ -11,8 +11,15 @@
 #import "BabyListCell.h"
 #import "BabyHomePageViewController.h"
 
-@interface MybabyListViewController ()
+#import "HttpService.h"
+#import "SVProgressHUD.h"
+#import "UserDefault.h"
+#import "UserInfo.h"
 
+@interface MybabyListViewController ()
+{
+    NSMutableArray *myBabyList;
+}
 @end
 
 @implementation MybabyListViewController
@@ -45,22 +52,49 @@
     [self setLeftCusBarItem:@"square_back" action:nil];
     [_babyListTableView clearSeperateLine];
     [_babyListTableView registerNibWithName:@"BabyListCell" reuseIdentifier:@"Cell"];
+    
+    UserInfo *user = [[UserDefault sharedInstance] userInfo];
+    NSLog(@"%@",@{@"offset":@"0",
+                  @"pagesize":@"10",
+                  @"uid":user.uid});
+    
+    
+    [[HttpService sharedInstance] getBabyList:@{@"offset":@"0",
+                                                @"pagesize":@"10",
+                                                @"uid":user.uid}
+                              completionBlock:^(id object) {
+                                  
+                                  myBabyList = [object objectForKey:@"result"];
+                                  [_babyListTableView reloadData];
+                                  [SVProgressHUD showSuccessWithStatus:@"获取成功"];
+                              } failureBlock:^(NSError *error, NSString *responseString) {
+                                  [SVProgressHUD showErrorWithStatus:responseString];
+                              }];
 }
 
 #pragma mark - UITableView DataSources and Delegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    return [myBabyList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     BabyListCell * babyListCell = (BabyListCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    
+    babyListCell.babyNameLabel.text = [NSString stringWithFormat:@"%@",[[myBabyList objectAtIndex:indexPath.row] objectForKey:@"baby_name"]];
+    babyListCell.babyOldLabel.text = [NSString stringWithFormat:@"%@",[[myBabyList objectAtIndex:indexPath.row] objectForKey:@"birthday"]];
+    if ([[[myBabyList objectAtIndex:indexPath.row] objectForKey:@"sex"] intValue] == 0) {
+        babyListCell.babySexImage.image = [UIImage imageNamed:@"main_girl.png"];
+    }
+    else
+    {
+        babyListCell.babySexImage.image = [UIImage imageNamed:@"main_boy.png"];
+    }
+    
+    
     //babyListCell.selectionStyle = UITableViewCellSelectionStyleNone;
 //    babyListCell.babyImage.image = [UIImage imageNamed:@""];
-//    babyListCell.babyNameLabel.text = [NSString stringWithFormat:@""];
-//    babyListCell.babyOldLabel.text = [NSString stringWithFormat:@""];
-//    babyListCell.babySexImage.image = [UIImage imageNamed:@""];
     
     return babyListCell;
    

@@ -17,11 +17,11 @@
     NSString *sww_number;     //晒娃娃号
     NSString *sex;            //性别 1：man 2:woman 0: secury
     NSString *avatar;         //用户头像
-//    NSString *qq;           //qq
-//    NSString *weibo;        //sina
-//    NSString *wechat;       //wechat
-//    NSString *sina_openId;  //sina_openId
-//    NSString *tecent_openId;//tencentQQ_openId
+    NSString *qq;           //qq
+    NSString *weibo;        //sina
+    NSString *wechat;       //wechat
+    NSString *sina_openId;  //sina_openId
+    NSString *tecent_openId;//tencentQQ_openId
     NSString *login_time;  //登陆时间
     NSString *register_time;//注册时间
     
@@ -33,13 +33,13 @@
 @property (nonatomic,retain)NSString *sww_number;
 @property (nonatomic,retain)NSString *sex;
 @property (nonatomic,retain)NSString *avatar;
-//@property (nonatomic,retain)NSString *qq;
-//@property (nonatomic,retain)NSString *weibo;
-//@property (nonatomic,retain)NSString *wechat;
-//@property (nonatomic,retain)NSString *sina_openId;
-//@property (nonatomic,retain)NSString *tecent_openId;
-//@property (nonatomic,retain)NSString *login_time;
-//@property (nonatomic,retain)NSString *register_time;
+@property (nonatomic,retain)NSString *qq;
+@property (nonatomic,retain)NSString *weibo;
+@property (nonatomic,retain)NSString *wechat;
+@property (nonatomic,retain)NSString *sina_openId;
+@property (nonatomic,retain)NSString *tecent_openId;
+@property (nonatomic,retain)NSString *login_time;
+@property (nonatomic,retain)NSString *register_time;
 
 - (UserInfo *)initWithName :(NSString*)_username
                      and : (NSString *)_password;
