@@ -21,6 +21,7 @@
     HMSegmentedControl *segMentedControlFull;
     UIButton *remarksBtn, *specialCareBtn;
     BOOL isRemarksBtnShown;
+    NSString *curBaby_id;
 }
 @property (strong, nonatomic) IBOutlet UIView *tabSelectionBar;
 @property (weak, nonatomic) IBOutlet UIView *tabSelectionFullBar;
@@ -30,6 +31,8 @@
 @property (strong, nonatomic) IBOutlet UITableView *summaryTableView;
 @property (strong, nonatomic) IBOutlet UIButton *monButton;
 @property (strong, nonatomic) IBOutlet UIButton *dadButton;
+@property (strong, nonatomic) NSString *curBaby_id;
+
 - (IBAction)isYaoQing:(id)sender;
 
 @property (strong, nonatomic) IBOutlet UIView *yaoQingbgView;
@@ -52,4 +55,5 @@
 @property (strong, nonatomic) IBOutlet UIView *heightAndWeightTableView;
 @property (weak, nonatomic) IBOutlet UITableView *hAndwTableView;
 - (IBAction)showAddHAndWPageVC:(id)sender;
+@property (weak, nonatomic) IBOutlet UIImageView *babyBackgroundImgView;
 @end

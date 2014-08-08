@@ -14,7 +14,7 @@ typedef void(^XinLanWbBlock)(void);
 typedef void(^QzoneBlock)(void);
 typedef void(^CollectionBlock)(void);
 typedef void(^ReportBlock)(void);
-typedef void(^DeleteBlock)(NSString *);
+typedef void(^DeleteBlock)(void);
 
 
 @interface ShareView : UIView

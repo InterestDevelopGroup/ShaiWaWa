@@ -19,4 +19,6 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *segScrollView;
 @property (strong, nonatomic) IBOutlet UIView *msgView;
 @property (weak, nonatomic) IBOutlet UITableView *msgTableView;
+@property (strong, nonatomic) IBOutlet UIView *haveReadMsgView;
+@property (weak, nonatomic) IBOutlet UITableView *haveReadMsgTableView;
 @end

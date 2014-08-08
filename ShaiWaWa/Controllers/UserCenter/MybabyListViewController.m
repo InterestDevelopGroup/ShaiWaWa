@@ -103,7 +103,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [_babyListTableView deselectRowAtIndexPath:indexPath animated:YES];
-    BabyHomePageViewController *babyHomePageVC = [[BabyHomePageViewController alloc] init];
+    BabyHomePageViewController *babyHomePageVC = [[BabyHomePageViewController alloc] initWithNibName:nil bundle:nil];
+    babyHomePageVC.curBaby_id = [[myBabyList objectAtIndex:indexPath.row] objectForKey:@"baby_id"];
     [self.navigationController pushViewController:babyHomePageVC animated:YES];
     
 }

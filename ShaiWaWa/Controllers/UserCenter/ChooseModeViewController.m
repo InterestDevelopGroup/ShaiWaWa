@@ -58,7 +58,7 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidAppear:YES];
+    [super viewDidAppear:animated];
 
     [self initUI];
     [self setSpecialBlock:^(NSMutableArray *arr)
@@ -203,10 +203,13 @@
     
     ShareView *sv = [[ShareView alloc] initWithFrame:CGRectMake(0, 0, 320, 162)];
     
-    sv.deleteButton.hidden = YES;
+    //sv.deleteButton.hidden = YES;
     
-    [sv setDeleteBlock:^(NSString *name){
-        
+    [sv setDeleteBlock:^(){
+        [self deleteDyEvent];
+    }];
+    [sv setCollectionBlock:^(){
+        [self colloctionDyEvent];
     }];
     [_shareView addSubview:sv];
     
@@ -220,7 +223,20 @@
         [SVProgressHUD showErrorWithStatus:responseString];
     }];
     
-  
+    /*//获取好友宝宝动态请求失败
+    [[HttpService sharedInstance] getRecordByFriend:@{@"friend_id":@"8",@"offset":@"0",  @"pagesize":@"10"} completionBlock:^(id object) {
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
+     */
+    //获取收藏的宝宝动态
+     [[HttpService sharedInstance] getFavorite:@{@"uid":@"2",@"offset":@"0",@"pagesize":@"10"} completionBlock:^(id object) {
+          [SVProgressHUD showSuccessWithStatus:@"获取成功"];
+     } failureBlock:^(NSError *error, NSString *responseString) {
+         [SVProgressHUD showErrorWithStatus:responseString];
+     }];
+    
 }
 
 
@@ -244,7 +260,7 @@
     dynamicCell.addressLabel.text = [[dyArray objectAtIndex:indexPath.row] objectForKey:@"address"];
     dynamicCell.dyContentTextView.text = [[dyArray objectAtIndex:indexPath.row] objectForKey:@"content"];
     
-    
+    [dynamicCell.zanButton addTarget:self action:@selector(praiseDYEvent) forControlEvents:UIControlEventTouchUpInside];
     [dynamicCell.praiseUserFirstBtn addTarget:self action:@selector(showPraiseListVC) forControlEvents:UIControlEventTouchUpInside];
     [dynamicCell.praiseUserSecondBtn addTarget:self action:@selector(showPraiseListVC) forControlEvents:UIControlEventTouchUpInside];
     [dynamicCell.praiseUserThirdBtn addTarget:self action:@selector(showPraiseListVC) forControlEvents:UIControlEventTouchUpInside];
@@ -268,6 +284,37 @@
     
 }
 
+- (void)colloctionDyEvent
+{
+    [[HttpService sharedInstance] addFavorite:@{@"rid":@"16",@"uid":@"2"} completionBlock:^(id object) {
+        [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
+}
+- (void)deleteDyEvent
+{
+    [[HttpService sharedInstance] deleteRecord:@{@"rid":@"16",@"uid":users.uid} completionBlock:^(id object) {
+         [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+         [SVProgressHUD showErrorWithStatus:responseString];
+    }];
+}
+
+- (void)praiseDYEvent
+{
+    /*
+    [[HttpService sharedInstance] updatePraiseStatus:@{@"like_id":@"",
+                                                       @"rid":@"18",
+                                                       @"uid":users.uid,
+                                                       @"is_like":@"1"
+                                                       } completionBlock:^(id object) {
+                                                           [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
+     */
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -380,7 +427,6 @@
      [self hideGrayDropView:nil];
     
     UserInfo *user = [[UserDefault sharedInstance] userInfo];
-    BabyInfo *baby = [[BabyInfo alloc] init];
     [[HttpService sharedInstance] getRecordByUserID:@{@"baby_id":@"1",@"offset":@"0",  @"pagesize":@"10",@"uid":user.uid} completionBlock:^(id object) {
         
         [SVProgressHUD showSuccessWithStatus:@"加载完成"];

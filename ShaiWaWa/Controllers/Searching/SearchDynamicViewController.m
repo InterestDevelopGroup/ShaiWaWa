@@ -54,12 +54,13 @@
 }
 - (void)finishDone
 {
-    [[HttpService sharedInstance] searchRecord:@{@"keyword":_keywordTextField.text, @"offset":@"1", @"pagesize":@"10" } completionBlock:^(id object) {
+    [[HttpService sharedInstance] searchRecord:@{@"keyword":_keywordTextField.text, @"offset":@"0", @"pagesize":@"10" } completionBlock:^(id object) {
         
-        ChooseModeViewController *choose = [[ChooseModeViewController alloc] init];
-        NSMutableArray *arr = [NSMutableArray arrayWithObjects:object, nil];
+//        ChooseModeViewController *choose = [[ChooseModeViewController alloc] init];
+//        NSMutableArray *arr = [NSMutableArray arrayWithObjects:object, nil];
 //        choose.specialBlock(arr);
-        [self.navigationController popViewControllerAnimated:YES];
+        //[self.navigationController popViewControllerAnimated:YES];
+        
         [SVProgressHUD showSuccessWithStatus:@"已更新"];
     } failureBlock:^(NSError *error, NSString *responseString) {
         [SVProgressHUD showErrorWithStatus:responseString];

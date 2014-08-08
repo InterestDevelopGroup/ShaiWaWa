@@ -28,7 +28,7 @@
 @end
 
 @implementation BabyHomePageViewController
-
+@synthesize curBaby_id;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -104,27 +104,77 @@
     self.view = _inStatusView;
     [self HMSegmentedControlInitMethod];
     [self HMSegmentedControlInitMethodFull];
-    /*
-    BabyInfo *baby = [[BabyInfo alloc] init];
-    [[HttpService sharedInstance] getBabyInfo:@{@"baby_id":baby.baby_ID} completionBlock:^(id object) {
-        
-    } failureBlock:^(NSError *error, NSString *responseString) {
-        [SVProgressHUD showErrorWithStatus:responseString];
-    }];
-    */
-    /*
-    [[HttpService sharedInstance] getBabyGrowRecord:@{@"baby_id":baby.baby_ID,
-                                                      @"offset":@"1",
-                                                      @"pagesize":@"10",
-                                                      @"uid":baby.userInfo.uid}
-                                    completionBlock:^(id object) {
-        
-    } failureBlock:^(NSError *error, NSString *responseString) {
-        [SVProgressHUD showErrorWithStatus:responseString];
-    }];
-    */
+   
+    
     summaryKey = [NSArray arrayWithObjects:@"昵称",@"姓名",@"出生日期",@"性别",@"所在城市",@"出生身高",@"出生体重", nil];
-    summaryValue = [NSArray arrayWithObjects:@"小龙",@"李小龙",@"2012-01-02",@"男",@"上海",@"51cm",@"3.456kg", nil];
+    
+    UserInfo *users = [[UserDefault sharedInstance] userInfo];
+    //获取宝宝信息
+    [[HttpService sharedInstance] getBabyInfo:@{@"baby_id":curBaby_id} completionBlock:^(id object) {
+       
+        //summaryValue = [object objectForKey:@"result"];
+        //[_summaryTableView reloadData];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
+    
+    //删除宝宝备注
+    [[HttpService sharedInstance] deleteBabyRemark:@{@"uid":@"2",@"baby_id":@"2"} completionBlock:^(id object) {
+         [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
+     
+    /*
+    //获取宝宝备注
+    [[HttpService sharedInstance] getBabyRemark:@{@"uid":@"2",@"baby_id":@"2"} completionBlock:^(id object) {
+        [SVProgressHUD showSuccessWithStatus:@"获取备注成功"];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
+    */
+    /*
+    //修改宝宝备注
+    [[HttpService sharedInstance] updateBabyRemark:@{@"uid":@"2",@"baby_id":@"2",@"alias":@"1", @"remark":@"3"} completionBlock:^(id object) {
+         [SVProgressHUD showSuccessWithStatus:@"修改备注成功"];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
+    */
+    /*更新宝宝信息
+    [[HttpService sharedInstance] updateBabyInfo:@{@"baby_id":curBaby_id,
+                                                   @"uid":users.uid,
+                                                   @"fid":users.uid,
+                                                   @"mid":@"",
+                                                   @"baby_name":@"小龙",
+                                                   @"avatar":@"2",
+                                                   @"sex":@"1",
+                                                   @"birthday":@"12134433",
+                                                   @"nickname":@"sx",
+                                                   @"country":@"ss",
+                                                   @"province":@"ss",
+                                                   @"city":@"xxx",
+                                                   @"birth_height":@"45",
+                                                   @"birth_weight":@"2600"} completionBlock:^(id object) {
+        [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+         [SVProgressHUD showErrorWithStatus:responseString];
+    }];
+   */
+    /*//获取宝宝成长记录出错
+     
+     UserInfo *users = [[UserDefault sharedInstance] userInfo];
+     [[HttpService sharedInstance] getBabyGrowRecord:@{@"baby_id":curBaby_id
+     ,@"offset":@"0",
+     @"pagesize":@"10",
+     @"uid":users.uid}
+     completionBlock:^(id object) {
+     NSLog(@"record:%@",[object objectForKey:@"result"]);
+     } failureBlock:^(NSError *error, NSString *responseString) {
+     [SVProgressHUD showErrorWithStatus:responseString];
+     }];
+     
+     */
     
     
     
@@ -152,6 +202,10 @@
     
     
     _heightAndWeightTableView.frame = CGRectMake(320*2, 0, 320, _segScrollView.bounds.size.height);
+    
+    
+    
+    
     NALLabelsMatrix *naLabelsMatrix = [[NALLabelsMatrix alloc] initWithFrame:CGRectMake(10, 50, 300, 100) andColumnsWidths:[[NSArray alloc] initWithObjects:@90,@72,@72,@72, nil]];
     naLabelsMatrix.backgroundColor = [UIColor whiteColor];
     [naLabelsMatrix addRecord:[[NSArray alloc] initWithObjects:@"日期", @"身高(cm)", @"体重(kg)",@"体型", nil]];
@@ -274,22 +328,22 @@
         }
         
         cell.summaryKeyLabel.text = [summaryKey objectAtIndex:indexPath.row];
-        cell.summaryValueLabel.text = [summaryValue objectAtIndex:indexPath.row];
-        cell.contentView.backgroundColor = [UIColor clearColor];
-        if (indexPath.row == 3) {
-            
-            cell.summaryValueLabel.frame = CGRectMake(cell.bounds.size.width-120, 8, 81, 21);
-            UIImageView *sexImgView = [[UIImageView alloc] initWithFrame:CGRectMake(cell.summaryValueLabel.frame.origin.x+84, 13, 12, 14)];
-            if ([cell.summaryValueLabel.text isEqualToString:@"男"]) {
-                sexImgView.image = [UIImage imageNamed:@"main_boy.png"];
-            }
-            else
-            {
-                sexImgView.image = [UIImage imageNamed:@"main_girl.png"];
-            }
-            [cell.contentView addSubview:sexImgView];
-            
-        }
+        cell.summaryValueLabel.text = [[summaryValue objectAtIndex:0] objectForKey:@"baby_name"];
+//        cell.contentView.backgroundColor = [UIColor clearColor];
+//        if (indexPath.row == 3) {
+//            
+//            cell.summaryValueLabel.frame = CGRectMake(cell.bounds.size.width-120, 8, 81, 21);
+//            UIImageView *sexImgView = [[UIImageView alloc] initWithFrame:CGRectMake(cell.summaryValueLabel.frame.origin.x+84, 13, 12, 14)];
+//            if ([cell.summaryValueLabel.text isEqualToString:@"男"]) {
+//                sexImgView.image = [UIImage imageNamed:@"main_boy.png"];
+//            }
+//            else
+//            {
+//                sexImgView.image = [UIImage imageNamed:@"main_girl.png"];
+//            }
+//            [cell.contentView addSubview:sexImgView];
+//            
+//        }
         return cell;
     }
     else
@@ -447,6 +501,7 @@
 - (IBAction)showAddHAndWPageVC:(id)sender
 {
     AddHeightAndWeightViewController *addHeightAndWeightVC =[[AddHeightAndWeightViewController alloc] init];
+    addHeightAndWeightVC.addCurBabyId = curBaby_id;
     [self.navigationController pushViewController:addHeightAndWeightVC animated:YES];
 }
 
@@ -458,6 +513,11 @@
 }
 - (void)specialCare
 {
+    [[HttpService sharedInstance] followBaby:@{@"uid":@"2",@"baby_id":@"2"} completionBlock:^(id object) {
+        [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
     [self showList:nil];
 }
 @end

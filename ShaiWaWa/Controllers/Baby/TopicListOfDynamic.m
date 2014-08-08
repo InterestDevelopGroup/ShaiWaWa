@@ -52,7 +52,7 @@
     [_dynamicPageTableView clearSeperateLine];
     [_dynamicPageTableView registerNibWithName:@"DynamicCell" reuseIdentifier:@"Cell"];
     
-    [[HttpService sharedInstance] getRecordByTopic:@{@"topic":self.title,@"offset":@"1",@"pagesize":@"10"} completionBlock:^(id object) {
+    [[HttpService sharedInstance] getRecordByTopic:@{@"topic":@"#vedon#",@"offset":@"0",@"pagesize":@"10"} completionBlock:^(id object) {
         
         [SVProgressHUD showSuccessWithStatus:@"加载完成"];
     } failureBlock:^(NSError *error, NSString *responseString) {

@@ -7,6 +7,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MessageViewController">
             <connections>
+                <outlet property="haveReadMsgTableView" destination="z0w-kG-v4A" id="Ddm-I5-aly"/>
+                <outlet property="haveReadMsgView" destination="3n3-1E-faZ" id="LzP-ud-ii7"/>
                 <outlet property="msgTableView" destination="H4l-WT-37L" id="beA-Lz-mLz"/>
                 <outlet property="msgView" destination="cE0-Js-HEX" id="zoB-9s-EGD"/>
                 <outlet property="segScrollView" destination="oAx-De-qy3" id="GIH-ba-a9M"/>
@@ -54,6 +56,24 @@
                 </tableView>
             </subviews>
             <color key="backgroundColor" red="0.84801715353260865" green="0.84801715353260865" blue="0.84801715353260865" alpha="1" colorSpace="calibratedRGB"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        </view>
+        <view contentMode="scaleToFill" id="3n3-1E-faZ">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="466"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="1" sectionFooterHeight="1" id="z0w-kG-v4A">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="466"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="zC0-Hh-9UI"/>
+                        <outlet property="delegate" destination="-1" id="rEe-UN-z5Y"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="0.84801715349999995" green="0.84801715349999995" blue="0.84801715349999995" alpha="1" colorSpace="calibratedRGB"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>

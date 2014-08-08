@@ -20,7 +20,7 @@
 @end
 
 @implementation AddHeightAndWeightViewController
-
+@synthesize addCurBabyId = _addCurBabyId;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -66,12 +66,15 @@
 - (IBAction)add_OK:(id)sender
 {
     UserInfo *user = [[UserDefault sharedInstance] userInfo];
-    BabyInfo *baby = [[BabyInfo alloc] init];
-    [[HttpService sharedInstance] addBabyGrowRecord:@{@"baby_id":baby.baby_ID,
+    [[HttpService sharedInstance] addBabyGrowRecord:@{@"baby_id":_addCurBabyId,
                                                       @"height":_heightField.text,
                                                       @"weight":_weightField.text,
                                                       @"uid":user.uid} completionBlock:^(id object) {
-        [SVProgressHUD showSuccessWithStatus:@"添加成功"];
+        [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
+                    _heightField.text = nil;
+                    _weightField.text = nil;
+                    [_heightField resignFirstResponder];
+                    [_weightField resignFirstResponder];
     } failureBlock:^(NSError *error, NSString *responseString) {
         [SVProgressHUD showErrorWithStatus:responseString];
     }];

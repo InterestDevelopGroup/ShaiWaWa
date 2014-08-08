@@ -191,6 +191,7 @@
                 <outlet property="releaseTimeLabel" destination="TTI-s9-o57" id="mPg-ez-ofZ"/>
                 <outlet property="topicBtn" destination="jNp-Q1-2jL" id="6ej-Jz-MGg"/>
                 <outlet property="whoLabel" destination="3ci-zv-cJx" id="4Hw-Pi-kf6"/>
+                <outlet property="zanButton" destination="QJ0-US-ilI" id="LJf-tP-wzd"/>
             </connections>
         </tableViewCell>
     </objects>

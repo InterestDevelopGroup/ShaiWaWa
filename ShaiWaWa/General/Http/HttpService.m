@@ -491,11 +491,7 @@
             return ;
         }
         if (success) {
-            if ([[obj objectForKey:@"result"] count] > 0) {
-                success([obj objectForKey:@"result"]);
-            }
-            else
-            success([[obj objectForKey:@"result"] objectAtIndexPath:0]);
+            success(obj);
         }
     } failureBlock:failure];
 }
@@ -531,11 +527,7 @@
             return ;
         }
         if (success) {
-            if ([[obj objectForKey:@"result"] count] > 0) {
-                success([obj objectForKey:@"result"]);
-            }
-            else
-                success([[obj objectForKey:@"result"] objectAtIndexPath:0]);
+            success(obj);
         }
     } failureBlock:failure];
 }
@@ -655,11 +647,7 @@
             return ;
         }
         if (success) {
-            if ([[obj objectForKey:@"result"] count] > 0) {
-                success([obj objectForKey:@"result"]);
-            }
-            else
-                success([[obj objectForKey:@"result"] objectAtIndexPath:0]);
+            success(obj);
         }
     } failureBlock:failure];
 }
@@ -699,11 +687,9 @@
             return ;
         }
         if (success) {
-            if ([[obj objectForKey:@"result"] count] > 0) {
-                success([obj objectForKey:@"result"]);
-            }
-            else
-                success([[obj objectForKey:@"result"] objectAtIndexPath:0]);
+     
+                success(obj);
+            
         }
     } failureBlock:failure];
 }
@@ -721,11 +707,7 @@
             return ;
         }
         if (success) {
-            if ([[obj objectForKey:@"result"] count] > 0) {
-                success([obj objectForKey:@"result"]);
-            }
-            else
-                success([[obj objectForKey:@"result"] objectAtIndexPath:0]);
+            success(obj);
         }
     } failureBlock:failure];
 }
@@ -930,9 +912,9 @@
         if (isError) {
             return ;
         }
-        UserInfo *user = [self mapModel:[[obj objectForKey:@"result"] objectAtIndexPath:0] withClass:[UserInfo class]];
+//        UserInfo *user = [self mapModel:[[obj objectForKey:@"result"] objectAtIndexPath:0] withClass:[UserInfo class]];
         if (success) {
-            success(user);
+            success(obj);
         }
         
     } failureBlock:failure];
@@ -949,6 +931,9 @@
         if (isError) {
             return ;
         }
+        if (success) {
+            success(obj);
+        }
     } failureBlock:failure];
 }
 
@@ -962,6 +947,9 @@
         BOOL isError = [self filterError:obj failureBlock:failure];
         if (isError) {
             return ;
+        }
+        if (success) {
+            success(obj);
         }
     } failureBlock:failure];
 }
@@ -977,6 +965,9 @@
         if (isError) {
             return ;
         }
+        if (success) {
+            success(obj);
+        }
     } failureBlock:failure];
 }
 
@@ -991,6 +982,9 @@
         if (isError) {
             return ;
         }
+        if (success) {
+            success(obj);
+        }
     } failureBlock:failure];
 }
 
@@ -1004,6 +998,9 @@
         BOOL isError = [self filterError:obj failureBlock:failure];
         if (isError) {
             return ;
+        }
+        if (success) {
+            success(obj);
         }
     } failureBlock:failure];
 }

@@ -8,7 +8,7 @@
 
 #import "CommonViewController.h"
 
-@interface RemarksViewController : CommonViewController<UITextFieldDelegate>
+@interface RemarksViewController : CommonViewController<UITextFieldDelegate,UITextViewDelegate>
 @property (strong, nonatomic) IBOutlet UITextField *remarksField;
 @property (strong, nonatomic) IBOutlet UITextView *remarksTextField;
 - (IBAction)btn_OK:(id)sender;

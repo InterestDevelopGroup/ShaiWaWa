@@ -36,7 +36,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:YES];
+    [super viewWillAppear:animated];
     UserInfo *users = [[UserDefault sharedInstance] userInfo];
     if (users != nil)
     {

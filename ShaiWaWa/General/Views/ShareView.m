@@ -98,7 +98,7 @@
     }
     else if (sender == _collectionButton)
     {
-//        _collectionBlock();
+        _collectionBlock();
     }
     else if (sender == _reportButton)
     {
@@ -107,7 +107,7 @@
     else if (sender == _deleteButton)
     {
         
-        _deleteBlock(_name);
+        _deleteBlock();
     }
 }
 

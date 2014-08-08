@@ -11,6 +11,7 @@
 @interface AddHeightAndWeightViewController : CommonViewController<UITextFieldDelegate>
 @property (strong, nonatomic) IBOutlet UITextField *heightField;
 @property (strong, nonatomic) IBOutlet UITextField *weightField;
+@property (strong, nonatomic) NSString *addCurBabyId;
 - (IBAction)timeSelected:(id)sender;
 
 - (IBAction)add_OK:(id)sender;

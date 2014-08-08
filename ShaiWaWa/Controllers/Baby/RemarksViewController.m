@@ -10,6 +10,13 @@
 #import "UIViewController+BarItemAdapt.h"
 #import "UITextView+Placeholder.h"
 
+#import "HttpService.h"
+#import "SVProgressHUD.h"
+#import "UserDefault.h"
+#import "UserInfo.h"
+#import "Friend.h"
+#import "BabyInfo.h"
+
 @interface RemarksViewController ()
 
 @end
@@ -42,7 +49,8 @@
     self.title = @"备注信息";
     [self setLeftCusBarItem:@"square_back" action:nil];
     [_remarksTextField setPlaceholder:@" 描述"];
-    
+    _remarksTextField.delegate = self;
+    [self copyOfWeb];
 }
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -55,6 +63,49 @@
     return YES;
 }
 
-- (IBAction)btn_OK:(id)sender {
+- (IBAction)btn_OK:(id)sender
+{   //alias:标题
+    [[HttpService sharedInstance] addBabyRemark:@{@"uid":@"2",@"baby_id":@"2",@"alias":_remarksField.text, @"remark":_remarksTextField.text} completionBlock:^(id object) {
+        [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
+        _remarksField.text = nil;
+        _remarksTextField.text = nil;
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
 }
+- (void)copyOfWeb
+{
+    //定义一个toolBar
+    UIToolbar * topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
+    
+    //设置style
+    [topView setBarStyle:UIBarStyleBlack];
+    
+    //定义两个flexibleSpace的button，放在toolBar上，这样完成按钮就会在最右边
+    UITextField *temp_txt = [[UITextField alloc] initWithFrame:CGRectMake(10, 0, 120, 30)];
+    temp_txt.hidden = YES;
+    UIBarButtonItem * txtItem =[[UIBarButtonItem  alloc] initWithCustomView:temp_txt];
+    
+    UIBarButtonItem * button2 = [[UIBarButtonItem  alloc]initWithBarButtonSystemItem:                                        UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    
+    
+    //定义完成按钮
+    UIBarButtonItem * doneButton = [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStyleDone  target:self action:@selector(resignKeyboard)];
+    
+    //在toolBar上加上这些按钮
+    NSArray * buttonsArray = [NSArray arrayWithObjects:txtItem,button2,doneButton,nil];
+    [topView setItems:buttonsArray];
+    //    [textView setInputView:topView];
+    
+    [_remarksTextField setInputAccessoryView:topView];
+    //    topView.hidden = YES;
+}
+
+
+//隐藏键盘
+-(void)resignKeyboard
+{
+    [_remarksTextField resignFirstResponder];
+}
+
 @end

@@ -164,18 +164,18 @@
 
 - (void)releaseDy
 {
-    DynamicRecord *dy = [[DynamicRecord alloc] init];
-    [[HttpService sharedInstance] publishRecord:@{@"baby_id":dy.babyInfo.baby_ID,
-                                                  @"uid":dy.userInfo.uid,
-                                                  @"visibility":dy.visibility,
-                                                  @"content":dy.content,
-                                                  @"address":dy.address,
-                                                  @"longitude":dy.longitude,
-                                                  @"latitude":dy.latitude,
+    
+    [[HttpService sharedInstance] publishRecord:@{@"baby_id":@"2",
+                                                  @"uid":@"2",
+                                                  @"visibility":@"1",
+                                                  @"content":@"小猫小狗",
+                                                  @"address":@"北京",
+                                                  @"longitude":@"120",
+                                                  @"latitude":@"30",
                                                   @"video":@"",
                                                   @"audio":@"",
-                                                  @"image": @[@{@"img1":@"1",@"img2":@"2",@"img3":@"3"}]} completionBlock:^(id object) {
-        
+                                                  @"image":@""} completionBlock:^(id object) {
+                                                      [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
     } failureBlock:^(NSError *error, NSString *responseString) {
         [SVProgressHUD showErrorWithStatus:responseString];
     }];

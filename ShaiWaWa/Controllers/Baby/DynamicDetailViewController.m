@@ -71,7 +71,7 @@
     
     sv.deleteButton.hidden = YES;
     
-    [sv setDeleteBlock:^(NSString *name){
+    [sv setDeleteBlock:^(){
         
     }];
     [_shareView addSubview:sv];

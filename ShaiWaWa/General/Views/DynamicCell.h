@@ -22,5 +22,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *babyNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *babyBirthdayLabel;
 
+@property (weak, nonatomic) IBOutlet UIButton *zanButton;
 
 @end
