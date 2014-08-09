@@ -22,6 +22,9 @@
 @property (strong, nonatomic) NSString *postValidatePhoneNum;
 @property (strong, nonatomic) NSString *postValidateCore;
 @property (strong, nonatomic) NSString *postValidateCoreTime;
+
+
+@property (strong, nonatomic) NSString *deleteDyId;
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 

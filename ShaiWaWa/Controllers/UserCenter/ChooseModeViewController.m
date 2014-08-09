@@ -35,11 +35,14 @@
 #import "Friend.h"
 #import "BabyInfo.h"
 @interface ChooseModeViewController ()
-
+{
+    ShareView *sv;
+    AppDelegate *mydelegate;
+}
 @end
 
 @implementation ChooseModeViewController
-
+@synthesize dyArray;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -61,12 +64,12 @@
     [super viewDidAppear:animated];
 
     [self initUI];
+    __block __weak ChooseModeViewController *lchoose = self;
     [self setSpecialBlock:^(NSMutableArray *arr)
      {
          if (!arr) {
-             dyArray = [arr copy];
-             NSLog(@"-=-%@",dyArray);
-             [_dynamicPageTableView reloadData];
+             lchoose.dyArray = [arr copy];
+             [lchoose.dynamicPageTableView reloadData];
          }
      }];
 }
@@ -81,6 +84,7 @@
 - (void)initUI
 {
     users = [[UserDefault sharedInstance] userInfo];
+    mydelegate = [[UIApplication sharedApplication] delegate];
     NSLog(@"%@",users.avatar);
     UIBarButtonItem * leftItem;
     if ([OSHelper iOS7])
@@ -188,7 +192,7 @@
     [_dynamicPageTableView registerNibWithName:@"DynamicCell" reuseIdentifier:@"Cell"];
     
     if ([OSHelper iOS7]) {
-        _releaseBtn.frame = CGRectMake(_dynamicPageTableView.bounds.size.width-60, _dynamicPageTableView.bounds.size.height-50 , 44, 46);
+        _releaseBtn.frame = CGRectMake(_dynamicPageTableView.bounds.size.width-60, _dynamicPageTableView.bounds.size.height-100 , 44, 46);
     }
     else
     {
@@ -200,16 +204,16 @@
     _releaseBtn.frame = CGRectMake(_dynamicPageTableView.bounds.size.width-60, [UIScreen mainScreen].bounds.size.height-50 , 44, 46);
         }
     }
-    
-    ShareView *sv = [[ShareView alloc] initWithFrame:CGRectMake(0, 0, 320, 162)];
+    __block __weak ChooseModeViewController *lchoose = self;
+    sv = [[ShareView alloc] initWithFrame:CGRectMake(0, 0, 320, 162)];
     
     //sv.deleteButton.hidden = YES;
     
     [sv setDeleteBlock:^(){
-        [self deleteDyEvent];
+        [lchoose deleteDyEvent];
     }];
     [sv setCollectionBlock:^(){
-        [self colloctionDyEvent];
+        [lchoose colloctionDyEvent];
     }];
     [_shareView addSubview:sv];
     
@@ -256,15 +260,26 @@
     DynamicCell * dynamicCell = (DynamicCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
     
 //    dynamicCell.babyNameLabel.text = [[dyArray objectAtIndex:indexPath.row] objectForKey:@""];
-    dynamicCell.releaseTimeLabel.text = [[dyArray objectAtIndex:indexPath.row] objectForKey:@"add_time"];
-    dynamicCell.addressLabel.text = [[dyArray objectAtIndex:indexPath.row] objectForKey:@"address"];
-    dynamicCell.dyContentTextView.text = [[dyArray objectAtIndex:indexPath.row] objectForKey:@"content"];
+    
+    
+    if (![[[dyArray objectAtIndex:indexPath.row] objectForKey:@"add_time"] isEqual:[NSNull null]]) {
+         dynamicCell.releaseTimeLabel.text = [[dyArray objectAtIndex:indexPath.row] objectForKey:@"add_time"];
+    }
+    if (![[[dyArray objectAtIndex:indexPath.row] objectForKey:@"address"] isEqual:[NSNull null]]) {
+        dynamicCell.addressLabel.text = [[dyArray objectAtIndex:indexPath.row] objectForKey:@"address"];
+    }
+    if (![[[dyArray objectAtIndex:indexPath.row] objectForKey:@"content"] isEqual:[NSNull null]]) {
+         dynamicCell.dyContentTextView.text = [[dyArray objectAtIndex:indexPath.row] objectForKey:@"content"];
+    }
+    
+    dynamicCell.moreBtn.tag = indexPath.row + 2222;
     
     [dynamicCell.zanButton addTarget:self action:@selector(praiseDYEvent) forControlEvents:UIControlEventTouchUpInside];
     [dynamicCell.praiseUserFirstBtn addTarget:self action:@selector(showPraiseListVC) forControlEvents:UIControlEventTouchUpInside];
     [dynamicCell.praiseUserSecondBtn addTarget:self action:@selector(showPraiseListVC) forControlEvents:UIControlEventTouchUpInside];
     [dynamicCell.praiseUserThirdBtn addTarget:self action:@selector(showPraiseListVC) forControlEvents:UIControlEventTouchUpInside];
-    [dynamicCell.moreBtn addTarget:self action:@selector(showShareGrayView) forControlEvents:UIControlEventTouchUpInside];
+    [dynamicCell.moreBtn addTarget:self action:@selector(showShareGrayView:) forControlEvents:UIControlEventTouchUpInside];
+    
     [dynamicCell.topicBtn addTarget:self action:@selector(showTopicOfDyVC) forControlEvents:UIControlEventTouchUpInside];
     /*
      // 取当前section，设置单元格显示内容。
@@ -294,11 +309,21 @@
 }
 - (void)deleteDyEvent
 {
-    [[HttpService sharedInstance] deleteRecord:@{@"rid":@"16",@"uid":users.uid} completionBlock:^(id object) {
+//    __block __weak ChooseModeViewController *lchoose = self;
+    [self hideGayShareV:nil];
+    [[HttpService sharedInstance] deleteRecord:@{@"rid":[[dyArray objectAtIndex:([mydelegate.deleteDyId intValue]-2222)] objectForKey:@"rid"],@"uid":users.uid} completionBlock:^(id object) {
+        [[HttpService sharedInstance] getRecordList:@{@"offset":@"0", @"pagesize":@"10",@"uid":users.uid} completionBlock:^(id object) {
+            dyArray = [object copy];
+            [_dynamicPageTableView reloadData];
+            [SVProgressHUD showSuccessWithStatus:@"加载完成"];
+        } failureBlock:^(NSError *error, NSString *responseString) {
+            [SVProgressHUD showErrorWithStatus:responseString];
+        }];
          [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
     } failureBlock:^(NSError *error, NSString *responseString) {
          [SVProgressHUD showErrorWithStatus:responseString];
     }];
+    
 }
 
 - (void)praiseDYEvent
@@ -472,8 +497,9 @@
     [self.navigationController pushViewController:praiseListVC animated:YES];
 }
 
-- (void)showShareGrayView
+- (void)showShareGrayView:(UIButton *)button
 {
+    mydelegate.deleteDyId = [NSString stringWithFormat:@"%d",button.tag];
     if (!isShareViewShown) {
         _grayShareView.hidden = NO;
         isShareViewShown = YES;

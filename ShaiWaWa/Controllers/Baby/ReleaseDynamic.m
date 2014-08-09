@@ -20,17 +20,30 @@
 #import "BabyInfo.h"
 #import "DynamicRecord.h"
 
+#import "BabySelectListViewController.h"
+
+#import "VoiceConverter.h"
+
 @interface ReleaseDynamic ()
 {
     UIImageView *record_iconImgView;
     UILabel *timerLabel;
     NSTimer *timer;
     int times;
+    NSString *visible;
+    NSString *dyLatitude;
+    NSString *dyLongitude;
+    NSString *babyID;
+    
+    AVAudioRecorder *recorder;
+    NSURL *recordedFile;
+    AVAudioPlayer *player;
 }
+@property (nonatomic, strong) NSString *babyID;
 @end
 
 @implementation ReleaseDynamic
-
+@synthesize babyID;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -60,15 +73,31 @@
     self.title = @"发表动态";
     [self setLeftCusBarItem:@"square_back" action:nil];
     self.navigationItem.rightBarButtonItem = [self customBarItem:@"pb_fabu" action:@selector(releaseDy) size:CGSizeMake(57, 27)];
+     [self labelUnderLine];
     
-    NSMutableAttributedString * attrString = [[NSMutableAttributedString alloc] initWithString:_letPersonSawLabel.text];
-    [attrString addAttributes:@{NSUnderlineStyleAttributeName:[NSNumber numberWithInt:NSUnderlineStyleSingle]} range:NSMakeRange(0, attrString.length)];
-    _letPersonSawLabel.attributedText = attrString;
     isSoundBar = NO;
     isShareBar = NO;
     _dy_contextTextField.delegate = self;
     [self copyOfWeb];
     times = 1;
+    
+    [self getBabyView];
+    NSString *temp = [NSTemporaryDirectory() stringByAppendingString:@"RecordedFile.wav"];
+    
+    recordedFile = [NSURL fileURLWithPath:temp];
+    
+//    recordedFile = [NSURL fileURLWithPath:[VoiceConverter wavToAmr:temp]];
+    
+    
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    
+    NSError *sessionError;
+    [session setCategory:AVAudioSessionCategoryPlayAndRecord error:&sessionError];
+    
+    if(session == nil)
+        NSLog(@"Error creating session: %@", [sessionError description]);
+    else
+        [session setActive:YES error:nil];
     
 }
 
@@ -158,20 +187,46 @@
 
 - (IBAction)showLocationVC:(id)sender
 {
+    
+    __block __weak ReleaseDynamic *rself = self;
     LocationsViewController *locationVC = [[LocationsViewController alloc] init];
+    
+    [locationVC setAddressStrBlock:^(NSString *address)
+     {
+         [rself.addr_Label setText:address];
+     }];
+    
+    [locationVC setLatitudeStrBlock:^(NSString *latitude)
+     {
+         dyLatitude = latitude;
+     }];
+    [locationVC setLongitudeStrBlock:^(NSString *longitude)
+     {
+         dyLongitude = longitude;
+     }];
     [self.navigationController pushViewController:locationVC animated:YES];
 }
 
 - (void)releaseDy
 {
+//    __block __weak ReleaseDynamic *rself = self;
+     visible = [_letPersonSawLabel.text isEqualToString:@"仅父母可见"] ? @"1" : ([_letPersonSawLabel.text isEqualToString:@"仅朋友可见"] ? @"2" : @"3");
     
-    [[HttpService sharedInstance] publishRecord:@{@"baby_id":@"2",
+    __block NSString *dyAdress;
+    if ([_addr_Label.text isEqualToString:@"添加位置"]) {
+        dyAdress = @"";
+    }
+    else
+    {
+        dyAdress =_addr_Label.text;
+    }
+    [[HttpService sharedInstance] publishRecord:@{@"baby_id":babyID.length > 0 ? babyID : @"2",
                                                   @"uid":@"2",
-                                                  @"visibility":@"1",
-                                                  @"content":@"小猫小狗",
-                                                  @"address":@"北京",
-                                                  @"longitude":@"120",
-                                                  @"latitude":@"30",
+                                                  @"visibility":visible,
+                                                  @"content":_dyContextTextView.text,
+                                                  @"address":dyAdress,
+                                                  @"longitude":[_addr_Label.text isEqualToString:@"添加位置"] ? @"" : dyLongitude,
+                                                  @"latitude":[_addr_Label.text isEqualToString:@"添加位置"] ? @"" : dyLatitude,
                                                   @"video":@"",
                                                   @"audio":@"",
                                                   @"image":@""} completionBlock:^(id object) {
@@ -179,6 +234,7 @@
     } failureBlock:^(NSError *error, NSString *responseString) {
         [SVProgressHUD showErrorWithStatus:responseString];
     }];
+     
 }
 - (IBAction)showLocalPhoto:(id)sender
 {
@@ -288,16 +344,22 @@
 - (IBAction)onlyParentClick:(id)sender
 {
     [self hideCanSeeView:nil];
+    _letPersonSawLabel.text = @"仅父母可见";
+     [self labelUnderLine];
 }
 
 - (IBAction)onlyFriendClick:(id)sender
 {
     [self hideCanSeeView:nil];
+    _letPersonSawLabel.text = @"仅朋友可见";
+    [self labelUnderLine];
 }
 
 - (IBAction)allPublicClick:(id)sender
 {
     [self hideCanSeeView:nil];
+    _letPersonSawLabel.text = @"所有人公开";
+     [self labelUnderLine];
 }
 - (IBAction)hideXialaView:(id)sender
 {
@@ -422,6 +484,11 @@
     //设置定时检测
     timer = [NSTimer scheduledTimerWithTimeInterval:times target:self selector:@selector(timerSecondAdd) userInfo:nil repeats:YES];
     [_xialaGrayV addSubview:record_iconImgView];
+    
+    recorder = [[AVAudioRecorder alloc] initWithURL:recordedFile settings:nil error:nil];
+    [recorder prepareToRecord];
+    [recorder record];
+    
 }
 
 - (IBAction)recordBtnUpEvent:(id)sender
@@ -432,9 +499,24 @@
     [_huaTongButton setEnabled:NO];
     [record_iconImgView removeFromSuperview];
     [timer invalidate];
-    NSLog(@"stopAtTime:%d",times);
     
-    //pb_shanchu@2x.png
+    _playButton.hidden = NO;
+    [_playButton setTitle:[NSString stringWithFormat:@" %d''",times] forState:UIControlStateNormal];
+    _deleteVoiceButton.hidden = NO;
+    
+    [recorder stop];
+    recorder = nil;
+    
+    NSError *playerError;
+    
+    player = [[AVAudioPlayer alloc] initWithContentsOfURL:recordedFile error:&playerError];
+    
+    if (player == nil)
+    {
+        NSLog(@"ERror creating player: %@", [playerError description]);
+    }
+    player.delegate = self;
+    
 }
 
 - (void)timerSecondAdd
@@ -442,10 +524,82 @@
    
     times ++;
     timerLabel.text = [NSString stringWithFormat:@"%d 秒",times];
-    if (times == 16) {
+    if (times == 60) {
         [timer invalidate];
         [self recordBtnUpEvent:nil];
     }
     
 }
+
+- (IBAction)playVoiceEvent:(id)sender
+{
+    NSLog(@"点播放啦");
+    [player play];
+}
+
+- (IBAction)deleteVoiceEvent:(id)sender
+{
+    
+    _playButton.hidden = YES;
+    
+    _deleteVoiceButton.hidden = YES;
+    _huaTongButton.enabled = YES;
+    [_huaTongButton setImage:[UIImage imageNamed:@"pb_logo-3.png"] forState:UIControlStateNormal];
+    times = 1;
+}
+
+#pragma mark -- Label下划线
+- (void)labelUnderLine
+{
+    NSMutableAttributedString * attrString = [[NSMutableAttributedString alloc] initWithString:_letPersonSawLabel.text];
+    [attrString addAttributes:@{NSUnderlineStyleAttributeName:[NSNumber numberWithInt:NSUnderlineStyleSingle]} range:NSMakeRange(0, attrString.length)];
+    _letPersonSawLabel.attributedText = attrString;
+}
+- (IBAction)changeAnotherBaby:(id)sender
+{
+    if (_babySelectJianTouImgView.hidden) {
+        return;
+    }
+    else
+    {
+    __block __weak ReleaseDynamic *rself = self;
+    BabySelectListViewController *babySelectVC = [[BabySelectListViewController alloc] init];
+    [babySelectVC setBabyAvatarBlock:^(NSString *babyAvatar){
+        _babyAvatarImgView.image = [UIImage imageWithContentsOfFile:babyAvatar];
+    }];
+    [babySelectVC setBabyIdBlock:^(NSString *babyId){
+        rself.babyID = babyId;
+    }];
+    [babySelectVC setBabyNameBlock:^(NSString *babyName){
+        _babyNameLabel.text = babyName;
+    }];
+    [self.navigationController pushViewController:babySelectVC animated:NO];
+    }
+}
+
+#pragma mark -- 获取宝宝列表（如果宝宝个数为1时，不显示箭头,且点击视图手势没反应）
+- (void)getBabyView
+{
+    __block __weak ReleaseDynamic *rself = self;
+    UserInfo *user = [[UserDefault sharedInstance] userInfo];
+    [[HttpService sharedInstance] getBabyList:@{@"offset":@"0",
+                                                @"pagesize":@"10",
+                                                @"uid":user.uid}
+                              completionBlock:^(id object) {
+                                  if ([[object objectForKey:@"result"] count] > 1) {
+                                      _babySelectJianTouImgView.hidden = NO;
+                                      
+                                  }
+                                  else
+                                  {
+                                      _babySelectJianTouImgView.hidden = YES;
+                                  }
+                                  rself.babyID = [[[object objectForKey:@"result"] objectAtIndex:0] objectForKey:@"baby_id"];
+                                  rself.babyAvatarImgView.image = [UIImage imageWithContentsOfFile: [[[object objectForKey:@"result"] objectAtIndex:0] objectForKey:@"avatar"]];
+                                  rself.babyNameLabel.text = [[[object objectForKey:@"result"] objectAtIndex:0] objectForKey:@"baby_name"];
+                              } failureBlock:^(NSError *error, NSString *responseString) {
+                                  [SVProgressHUD showErrorWithStatus:responseString];
+                              }];
+}
+
 @end

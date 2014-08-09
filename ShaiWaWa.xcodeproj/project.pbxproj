@@ -337,6 +337,8 @@
 		F43388F61974C28600464D43 /* ShaiWaWa-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F43387CB1974C28600464D43 /* ShaiWaWa-Info.plist */; };
 		F4348FF219779C4600347195 /* DynamicDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4348FF019779C4600347195 /* DynamicDetailViewController.m */; };
 		F4348FF319779C4600347195 /* DynamicDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4348FF119779C4600347195 /* DynamicDetailViewController.xib */; };
+		F438295F1995B5A900A79F66 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F41F690D19820B5A00089E42 /* CoreLocation.framework */; };
+		F43829631995B7D900A79F66 /* MMLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F43829621995B7D900A79F66 /* MMLocationManager.m */; };
 		F43EA3731990A6980048081E /* bg_023@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F43EA3661990A6980048081E /* bg_023@2x.png */; };
 		F43EA3741990A6980048081E /* btn_020.disable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F43EA3671990A6980048081E /* btn_020.disable@2x.png */; };
 		F43EA3751990A6980048081E /* btn_020.press@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F43EA3681990A6980048081E /* btn_020.press@2x.png */; };
@@ -365,6 +367,14 @@
 		F44F1CD1198F82E9004E37CF /* Friend.m in Sources */ = {isa = PBXBuildFile; fileRef = F44F1CD0198F82E9004E37CF /* Friend.m */; };
 		F44F1CD4198F8585004E37CF /* Follow.m in Sources */ = {isa = PBXBuildFile; fileRef = F44F1CD3198F8585004E37CF /* Follow.m */; };
 		F44F1CD7198F860E004E37CF /* BabyRemark.m in Sources */ = {isa = PBXBuildFile; fileRef = F44F1CD6198F860E004E37CF /* BabyRemark.m */; };
+		F45375C51995E2290009274E /* BabySelectListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F45375C31995E2290009274E /* BabySelectListViewController.m */; };
+		F45375C61995E2290009274E /* BabySelectListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F45375C41995E2290009274E /* BabySelectListViewController.xib */; };
+		F45375C8199604350009274E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F45375C7199604350009274E /* AVFoundation.framework */; };
+		F45375F11996136F0009274E /* amrFileCodec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F45375E31996136F0009274E /* amrFileCodec.mm */; };
+		F45375F21996136F0009274E /* wav.mm in Sources */ = {isa = PBXBuildFile; fileRef = F45375E51996136F0009274E /* wav.mm */; };
+		F45375F31996136F0009274E /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F45375E71996136F0009274E /* libopencore-amrnb.a */; };
+		F45375F41996136F0009274E /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F45375E81996136F0009274E /* libopencore-amrwb.a */; };
+		F45375F51996136F0009274E /* VoiceConverter.mm in Sources */ = {isa = PBXBuildFile; fileRef = F45375F01996136F0009274E /* VoiceConverter.mm */; };
 		F473B20F198C80A0009DD8DF /* BabyInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F473B20E198C80A0009DD8DF /* BabyInfo.m */; };
 		F47F54F2197FACE7006DCA75 /* UIView+CutLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F47F54B3197FACE6006DCA75 /* UIView+CutLayer.m */; };
 		F47F54F3197FACE7006DCA75 /* UIViewController+BarItemAdapt.m in Sources */ = {isa = PBXBuildFile; fileRef = F47F54B5197FACE6006DCA75 /* UIViewController+BarItemAdapt.m */; };
@@ -826,6 +836,8 @@
 		F4348FEF19779C4600347195 /* DynamicDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicDetailViewController.h; sourceTree = "<group>"; };
 		F4348FF019779C4600347195 /* DynamicDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicDetailViewController.m; sourceTree = "<group>"; };
 		F4348FF119779C4600347195 /* DynamicDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DynamicDetailViewController.xib; sourceTree = "<group>"; };
+		F43829611995B7D900A79F66 /* MMLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMLocationManager.h; sourceTree = "<group>"; };
+		F43829621995B7D900A79F66 /* MMLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMLocationManager.m; sourceTree = "<group>"; };
 		F43EA3661990A6980048081E /* bg_023@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_023@2x.png"; sourceTree = "<group>"; };
 		F43EA3671990A6980048081E /* btn_020.disable@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_020.disable@2x.png"; sourceTree = "<group>"; };
 		F43EA3681990A6980048081E /* btn_020.press@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_020.press@2x.png"; sourceTree = "<group>"; };
@@ -873,6 +885,22 @@
 		F44F1CD3198F8585004E37CF /* Follow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Follow.m; sourceTree = "<group>"; };
 		F44F1CD5198F860E004E37CF /* BabyRemark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BabyRemark.h; sourceTree = "<group>"; };
 		F44F1CD6198F860E004E37CF /* BabyRemark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BabyRemark.m; sourceTree = "<group>"; };
+		F45375C21995E2290009274E /* BabySelectListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BabySelectListViewController.h; sourceTree = "<group>"; };
+		F45375C31995E2290009274E /* BabySelectListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BabySelectListViewController.m; sourceTree = "<group>"; };
+		F45375C41995E2290009274E /* BabySelectListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BabySelectListViewController.xib; sourceTree = "<group>"; };
+		F45375C7199604350009274E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		F45375E21996136F0009274E /* amrFileCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amrFileCodec.h; sourceTree = "<group>"; };
+		F45375E31996136F0009274E /* amrFileCodec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = amrFileCodec.mm; sourceTree = "<group>"; };
+		F45375E41996136F0009274E /* wav.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wav.h; sourceTree = "<group>"; };
+		F45375E51996136F0009274E /* wav.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = wav.mm; sourceTree = "<group>"; };
+		F45375E71996136F0009274E /* libopencore-amrnb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrnb.a"; sourceTree = "<group>"; };
+		F45375E81996136F0009274E /* libopencore-amrwb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrwb.a"; sourceTree = "<group>"; };
+		F45375EA1996136F0009274E /* interf_dec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_dec.h; sourceTree = "<group>"; };
+		F45375EB1996136F0009274E /* interf_enc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_enc.h; sourceTree = "<group>"; };
+		F45375ED1996136F0009274E /* dec_if.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dec_if.h; sourceTree = "<group>"; };
+		F45375EE1996136F0009274E /* if_rom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = if_rom.h; sourceTree = "<group>"; };
+		F45375EF1996136F0009274E /* VoiceConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceConverter.h; sourceTree = "<group>"; };
+		F45375F01996136F0009274E /* VoiceConverter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VoiceConverter.mm; sourceTree = "<group>"; };
 		F473B20D198C80A0009DD8DF /* BabyInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BabyInfo.h; sourceTree = "<group>"; };
 		F473B20E198C80A0009DD8DF /* BabyInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BabyInfo.m; sourceTree = "<group>"; };
 		F47F54B2197FACE6006DCA75 /* UIView+CutLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CutLayer.h"; sourceTree = "<group>"; };
@@ -945,10 +973,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F45375C8199604350009274E /* AVFoundation.framework in Frameworks */,
 				F41F65501981F03500089E42 /* libicucore.dylib in Frameworks */,
 				F41F6929198228FA00089E42 /* AudioToolbox.framework in Frameworks */,
 				F41F6927198228F000089E42 /* CFNetwork.framework in Frameworks */,
 				F41F690E19820B5A00089E42 /* CoreLocation.framework in Frameworks */,
+				F45375F41996136F0009274E /* libopencore-amrwb.a in Frameworks */,
 				F41F690619820ACC00089E42 /* Security.framework in Frameworks */,
 				F41F6925198228CD00089E42 /* libz.1.1.3.dylib in Frameworks */,
 				F41F6923198228C000089E42 /* MobileCoreServices.framework in Frameworks */,
@@ -979,6 +1009,7 @@
 				F41F68FB1982081F00089E42 /* ShareSDKiPhoneAppRecommendShareViewUI.framework in Frameworks */,
 				F41F68FF1982081F00089E42 /* ShareSDKiPhoneSimpleShareViewUI.framework in Frameworks */,
 				C32B41891965B5B8003979EE /* CoreData.framework in Frameworks */,
+				F45375F31996136F0009274E /* libopencore-amrnb.a in Frameworks */,
 				C32B41871965B5B8003979EE /* UIKit.framework in Frameworks */,
 				F41F68F31982081E00089E42 /* libWeChatSDK.a in Frameworks */,
 				F41F68E91982081E00089E42 /* WeChatConnection.framework in Frameworks */,
@@ -996,6 +1027,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F438295F1995B5A900A79F66 /* CoreLocation.framework in Frameworks */,
 				C32B41A11965B5B8003979EE /* XCTest.framework in Frameworks */,
 				C32B41A41965B5B8003979EE /* CoreData.framework in Frameworks */,
 				C32B41A31965B5B8003979EE /* UIKit.framework in Frameworks */,
@@ -1009,6 +1041,7 @@
 		24FAD0B51986935F00FFE11E /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				F45375DF1996136F0009274E /* AudioFormat */,
 				24FAD0B61986935F00FFE11E /* ShareManager */,
 				24FAD0B91986935F00FFE11E /* UserDefault */,
 			);
@@ -1056,6 +1089,7 @@
 		C32B41811965B5B8003979EE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F45375C7199604350009274E /* AVFoundation.framework */,
 				F41F6928198228FA00089E42 /* AudioToolbox.framework */,
 				F41F6926198228F000089E42 /* CFNetwork.framework */,
 				F41F6924198228CD00089E42 /* libz.1.1.3.dylib */,
@@ -1116,6 +1150,7 @@
 		F41F68861982081E00089E42 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				F43829601995B7D900A79F66 /* Location */,
 				F41F68871982081E00089E42 /* HWSDK */,
 				F41F68A81982081E00089E42 /* NALLabelsMatrix */,
 				F41F68AB1982081E00089E42 /* ShareSDK */,
@@ -1574,6 +1609,9 @@
 				F433867B1974C28500464D43 /* RemarksViewController.h */,
 				F433867C1974C28500464D43 /* RemarksViewController.m */,
 				F433867D1974C28500464D43 /* RemarksViewController.xib */,
+				F45375C21995E2290009274E /* BabySelectListViewController.h */,
+				F45375C31995E2290009274E /* BabySelectListViewController.m */,
+				F45375C41995E2290009274E /* BabySelectListViewController.xib */,
 			);
 			path = Baby;
 			sourceTree = "<group>";
@@ -1804,6 +1842,15 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		F43829601995B7D900A79F66 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				F43829611995B7D900A79F66 /* MMLocationManager.h */,
+				F43829621995B7D900A79F66 /* MMLocationManager.m */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
 		F43EA3631990A6980048081E /* ActionSheet */ = {
 			isa = PBXGroup;
 			children = (
@@ -1838,6 +1885,65 @@
 				F43EA36C1990A6980048081E /* btn_021@2x.png */,
 			);
 			path = img;
+			sourceTree = "<group>";
+		};
+		F45375DF1996136F0009274E /* AudioFormat */ = {
+			isa = PBXGroup;
+			children = (
+				F45375E01996136F0009274E /* VoiceConvert */,
+			);
+			path = AudioFormat;
+			sourceTree = "<group>";
+		};
+		F45375E01996136F0009274E /* VoiceConvert */ = {
+			isa = PBXGroup;
+			children = (
+				F45375E11996136F0009274E /* amrwapper */,
+				F45375E61996136F0009274E /* lib */,
+				F45375E91996136F0009274E /* opencore-amrnb */,
+				F45375EC1996136F0009274E /* opencore-amrwb */,
+				F45375EF1996136F0009274E /* VoiceConverter.h */,
+				F45375F01996136F0009274E /* VoiceConverter.mm */,
+			);
+			path = VoiceConvert;
+			sourceTree = "<group>";
+		};
+		F45375E11996136F0009274E /* amrwapper */ = {
+			isa = PBXGroup;
+			children = (
+				F45375E21996136F0009274E /* amrFileCodec.h */,
+				F45375E31996136F0009274E /* amrFileCodec.mm */,
+				F45375E41996136F0009274E /* wav.h */,
+				F45375E51996136F0009274E /* wav.mm */,
+			);
+			path = amrwapper;
+			sourceTree = "<group>";
+		};
+		F45375E61996136F0009274E /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				F45375E71996136F0009274E /* libopencore-amrnb.a */,
+				F45375E81996136F0009274E /* libopencore-amrwb.a */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		F45375E91996136F0009274E /* opencore-amrnb */ = {
+			isa = PBXGroup;
+			children = (
+				F45375EA1996136F0009274E /* interf_dec.h */,
+				F45375EB1996136F0009274E /* interf_enc.h */,
+			);
+			path = "opencore-amrnb";
+			sourceTree = "<group>";
+		};
+		F45375EC1996136F0009274E /* opencore-amrwb */ = {
+			isa = PBXGroup;
+			children = (
+				F45375ED1996136F0009274E /* dec_if.h */,
+				F45375EE1996136F0009274E /* if_rom.h */,
+			);
+			path = "opencore-amrwb";
 			sourceTree = "<group>";
 		};
 		F47F54B1197FACE6006DCA75 /* Category */ = {
@@ -2166,6 +2272,7 @@
 				F432BE4F19762AC80086BBE9 /* square_zuire-@2x.png in Resources */,
 				F47F54FD197FACE7006DCA75 /* DynamicCell.xib in Resources */,
 				F432BE2219762AC80086BBE9 /* pd_kuang-@2x.png in Resources */,
+				F45375C61995E2290009274E /* BabySelectListViewController.xib in Resources */,
 				F41F68EF1982081E00089E42 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				F43388371974C28600464D43 /* SendValidateMsgViewController.xib in Resources */,
 				F432BE6519762AC80086BBE9 /* xiaoxinlang@2x.png in Resources */,
@@ -2316,6 +2423,7 @@
 				F41F68DD1982081E00089E42 /* NSString+MD5_32.m in Sources */,
 				F433883E1974C28600464D43 /* UserGenderUpdateViewController.m in Sources */,
 				F47F54F2197FACE7006DCA75 /* UIView+CutLayer.m in Sources */,
+				F45375C51995E2290009274E /* BabySelectListViewController.m in Sources */,
 				F44F1CBF198F7E01004E37CF /* RecordReport.m in Sources */,
 				F41F68E01982081E00089E42 /* UIColor+Utils.m in Sources */,
 				F47F5505197FACE7006DCA75 /* MessageCell.m in Sources */,
@@ -2325,6 +2433,7 @@
 				24A32310197AEFF8005CFEA4 /* TopicListOfDynamic.m in Sources */,
 				F4063F7D19879E080026B2CF /* GraphyByCheung.m in Sources */,
 				F433880E1974C28600464D43 /* ShaiWaSquareViewController.m in Sources */,
+				F43829631995B7D900A79F66 /* MMLocationManager.m in Sources */,
 				F43388101974C28600464D43 /* ChooseFriendViewController.m in Sources */,
 				F47F54F6197FACE7006DCA75 /* HttpService.m in Sources */,
 				F41F68E21982081E00089E42 /* UIViewController+BarItem.m in Sources */,
@@ -2340,6 +2449,7 @@
 				F433881C1974C28600464D43 /* LoginViewController.m in Sources */,
 				F43388221974C28600464D43 /* MyGoodFriendsListViewController.m in Sources */,
 				F43EA37D1990A6980048081E /* TSLocation.m in Sources */,
+				F45375F51996136F0009274E /* VoiceConverter.mm in Sources */,
 				F47F5501197FACE7006DCA75 /* FriendSelectedCell.m in Sources */,
 				F41F68E41982081E00089E42 /* NALLabelsMatrix.m in Sources */,
 				F42434631974FC97008E70C6 /* UICollectionViewWaterfallLayout.m in Sources */,
@@ -2388,6 +2498,7 @@
 				F41F68DC1982081E00089E42 /* NSString+IP.m in Sources */,
 				F41F68D91982081E00089E42 /* HWConnect.m in Sources */,
 				F43388141974C28600464D43 /* FinishRegisterViewController.m in Sources */,
+				F45375F11996136F0009274E /* amrFileCodec.mm in Sources */,
 				F433882E1974C28600464D43 /* QRCodeCardViewController.m in Sources */,
 				F4E363B91985ECC100A018A5 /* TheThirdPartyLoginView.m in Sources */,
 				F43387FC1974C28600464D43 /* SearchAddressBookViewController.m in Sources */,
@@ -2407,6 +2518,7 @@
 				F43388F51974C28600464D43 /* main.m in Sources */,
 				F41F68D61982081E00089E42 /* UITableView+Addition.m in Sources */,
 				F47F54F5197FACE7006DCA75 /* AFHttp.m in Sources */,
+				F45375F21996136F0009274E /* wav.mm in Sources */,
 				F433880C1974C28600464D43 /* SettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2555,6 +2667,7 @@
 					"$(PROJECT_DIR)/ShaiWaWa/General/Vendors/ShareSDK/Extend/SinaWeiboSDK",
 					"$(PROJECT_DIR)/ShaiWaWa/General/Vendors/ShareSDK/Extend/TencentWeiboSDK",
 					"$(PROJECT_DIR)/ShaiWaWa/General/Vendors/ShareSDK/Extend/WeChatSDK",
+					"$(PROJECT_DIR)/ShaiWaWa/General/Helper/AudioFormat/VoiceConvert/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "76999BA8-6205-4386-881F-2D53549A5D0B";
@@ -2586,6 +2699,7 @@
 					"$(PROJECT_DIR)/ShaiWaWa/General/Vendors/ShareSDK/Extend/SinaWeiboSDK",
 					"$(PROJECT_DIR)/ShaiWaWa/General/Vendors/ShareSDK/Extend/TencentWeiboSDK",
 					"$(PROJECT_DIR)/ShaiWaWa/General/Vendors/ShareSDK/Extend/WeChatSDK",
+					"$(PROJECT_DIR)/ShaiWaWa/General/Helper/AudioFormat/VoiceConvert/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "76999BA8-6205-4386-881F-2D53549A5D0B";

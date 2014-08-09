@@ -7,8 +7,9 @@
 //
 
 #import "CommonViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
-@interface ReleaseDynamic : CommonViewController<UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface ReleaseDynamic : CommonViewController<UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,AVAudioPlayerDelegate>
 {
     BOOL isSoundBar, isShareBar;
     
@@ -61,5 +62,17 @@
 - (IBAction)recordBtnDownEvent:(id)sender;
 - (IBAction)recordBtnUpEvent:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *huaTongButton;
+@property (weak, nonatomic) IBOutlet UITextView *dyContextTextView;
+
+@property (weak, nonatomic) IBOutlet UIImageView *babyAvatarImgView;
+
+@property (weak, nonatomic) IBOutlet UILabel *babyNameLabel;
+
+@property (weak, nonatomic) IBOutlet UIImageView *babySelectJianTouImgView;
+- (IBAction)changeAnotherBaby:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *playButton;
+@property (weak, nonatomic) IBOutlet UIButton *deleteVoiceButton;
+- (IBAction)playVoiceEvent:(id)sender;
+- (IBAction)deleteVoiceEvent:(id)sender;
 
 @end

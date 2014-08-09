@@ -20,6 +20,7 @@
 @synthesize postValidatePhoneNum = _postValidatePhoneNum;
 @synthesize postValidateCore = _postValidateCore;
 @synthesize postValidateCoreTime = _postValidateCoreTime;
+@synthesize deleteDyId = _deleteDyId;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [[ShareManager sharePlatform] configShare];

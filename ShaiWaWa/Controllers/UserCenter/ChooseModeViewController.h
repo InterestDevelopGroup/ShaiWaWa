@@ -40,7 +40,7 @@ typedef void(^SpecialBlock)(NSMutableArray *);
 @property (weak, nonatomic) IBOutlet UIView *mainAddView;
 
 @property (weak, nonatomic) IBOutlet UIView *shareView;
-
+@property (nonatomic, strong) NSMutableArray *dyArray;
 
 @property (nonatomic, strong) SpecialBlock specialBlock;
 @end

@@ -9,7 +9,12 @@
             <connections>
                 <outlet property="addr_Label" destination="3TB-YH-8Sp" id="IeF-SP-mkn"/>
                 <outlet property="allPublicBtn" destination="IVr-VC-ZTl" id="25R-ML-E9B"/>
+                <outlet property="babyAvatarImgView" destination="j2i-89-LDI" id="q2T-cm-6U8"/>
+                <outlet property="babyNameLabel" destination="Lz4-GD-F1F" id="Nwk-s2-D9h"/>
+                <outlet property="babySelectJianTouImgView" destination="0KY-qW-Rdn" id="JGd-cl-T8L"/>
                 <outlet property="canSeeView" destination="2eP-Sw-o28" id="qZx-dw-pMD"/>
+                <outlet property="deleteVoiceButton" destination="cdC-N6-BnG" id="6Pe-jF-BYu"/>
+                <outlet property="dyContextTextView" destination="9Zp-O3-1X7" id="CwS-RR-ZqL"/>
                 <outlet property="dy_contextTextField" destination="9Zp-O3-1X7" id="fwB-YH-hN0"/>
                 <outlet property="grayTwoView" destination="xvm-8S-4MG" id="38j-z9-hs0"/>
                 <outlet property="huaTongButton" destination="Ptq-nd-W6y" id="H13-hK-ZwT"/>
@@ -17,6 +22,7 @@
                 <outlet property="onlyFriendBtn" destination="Xt7-Mp-fCd" id="1yb-Fh-nJ8"/>
                 <outlet property="onlyParentBtn" destination="2EK-U8-zgI" id="GJG-nY-W4X"/>
                 <outlet property="picOrvideoSelectBar" destination="pne-R6-pTz" id="GZ1-td-x0Q"/>
+                <outlet property="playButton" destination="gE8-j9-MqQ" id="9db-Ek-tBR"/>
                 <outlet property="shareXiaView" destination="Ab7-SY-uCj" id="I32-gY-BM2"/>
                 <outlet property="soundXiaView" destination="xLk-p7-50v" id="8L8-5x-7ZU"/>
                 <outlet property="topView" destination="M3w-nq-Sj7" id="cOH-6h-tQM"/>
@@ -63,6 +69,10 @@
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" red="0.97624798711755223" green="0.98845108695652173" blue="0.98845108695652173" alpha="1" colorSpace="calibratedRGB"/>
+                                    <gestureRecognizers/>
+                                    <connections>
+                                        <outletCollection property="gestureRecognizers" destination="tPJ-QB-uiS" appends="YES" id="QaV-ZX-mxx"/>
+                                    </connections>
                                 </view>
                                 <view contentMode="scaleToFill" id="u6i-jE-9vu">
                                     <rect key="frame" x="0.0" y="56" width="298" height="123"/>
@@ -139,6 +149,30 @@
                                                 <action selector="showGrayTwoBtnView:" destination="-1" eventType="touchUpInside" id="YUb-1e-Iki"/>
                                             </connections>
                                         </button>
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gE8-j9-MqQ">
+                                            <rect key="frame" x="122" y="92" width="62" height="29"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <state key="normal" image="square_bofang.png" backgroundImage="square_bofang-bg.png">
+                                                <color key="titleColor" red="0.46108314929999999" green="0.86744225539999997" blue="0.43640673330000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="playVoiceEvent:" destination="-1" eventType="touchUpInside" id="BxI-7C-xAg"/>
+                                            </connections>
+                                        </button>
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cdC-N6-BnG">
+                                            <rect key="frame" x="164" y="84" width="25" height="26"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <state key="normal" image="pb_shanchu.png">
+                                                <color key="titleColor" red="0.46108314929999999" green="0.86744225539999997" blue="0.43640673330000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="deleteVoiceEvent:" destination="-1" eventType="touchUpInside" id="14J-Uj-Jx2"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" red="0.85954274020397203" green="0.87028702445652173" blue="0.87028702445652173" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
@@ -180,7 +214,7 @@
                                 <outletCollection property="gestureRecognizers" destination="hag-3a-CAF" appends="YES" id="noZ-Qp-uBI"/>
                             </connections>
                         </label>
-                        <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="仅亲友可见" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dMd-DA-dZF">
+                        <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="仅朋友可见" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dMd-DA-dZF">
                             <rect key="frame" x="245" y="445" width="60" height="17"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -232,7 +266,7 @@
                                             <rect key="frame" x="0.0" y="42" width="106" height="19"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                            <state key="normal" title="公开" image="pd_gou.png">
+                                            <state key="normal" title="所有人公开" image="pd_gou.png">
                                                 <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -450,6 +484,11 @@
                 <action selector="hideXialaView:" destination="-1" id="cJK-96-33T"/>
             </connections>
         </tapGestureRecognizer>
+        <tapGestureRecognizer id="tPJ-QB-uiS">
+            <connections>
+                <action selector="changeAnotherBaby:" destination="-1" id="LV2-ux-nMF"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="baby_4-bg-1.png" width="320" height="100"/>
@@ -461,6 +500,7 @@
         <image name="pb_logo-3.png" width="23" height="22"/>
         <image name="pb_logo-4.png" width="23" height="22"/>
         <image name="pb_paizhao.png" width="54" height="61"/>
+        <image name="pb_shanchu.png" width="25" height="26"/>
         <image name="pb_shipin.png" width="54" height="61"/>
         <image name="pb_tianjia.png" width="25" height="26"/>
         <image name="pb_zhaopian.png" width="54" height="61"/>
@@ -471,6 +511,8 @@
         <image name="pd_gou.png" width="13" height="9"/>
         <image name="pd_kuang-.png" width="106" height="63"/>
         <image name="pd_xiala.png" width="320" height="49"/>
+        <image name="square_bofang-bg.png" width="62" height="29"/>
+        <image name="square_bofang.png" width="5" height="9"/>
         <image name="square_zizhi.png" width="7" height="8"/>
     </resources>
 </document>

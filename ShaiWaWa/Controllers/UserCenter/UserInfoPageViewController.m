@@ -36,7 +36,7 @@
 }
 - (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidAppear:YES];
+    [super viewDidAppear:animated];
     
     updateUserVC = [[UpdateUserNameViewController alloc] init];
 //    [updateUserVC setUsernameTextBlock:^(NSString *name)

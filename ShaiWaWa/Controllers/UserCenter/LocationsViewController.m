@@ -10,6 +10,7 @@
 #import "UIViewController+BarItemAdapt.h"
 #import "UIView+CutLayer.h"
 
+#import "MMLocationManager.h"
 @interface LocationsViewController ()
 
 @end
@@ -48,16 +49,36 @@
     btn.titleLabel.font = [UIFont systemFontOfSize:13];
     [btn setBackgroundColor:[UIColor whiteColor]];
     [btn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    //[btn addTarget:self action:@selector(<#(id)#>) forControlEvents:UIControlEventTouchUpInside];
+    [btn addTarget:self action:@selector(clearLocation) forControlEvents:UIControlEventTouchUpInside];
     [btn changeLayerToRoundWithCornerRadius:4.0 MasksToBounds:YES BorderWidth:0];
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
     self.navigationItem.rightBarButtonItem = rightItem;
    
+    [self getAddress];
+    [self getLat];
+    
     
     addrNames = [[NSMutableArray alloc] initWithObjects:@"建华酒店花木店",@"富春饭店",@"上海小南国",@"欧德咖啡", nil];
     addrDetails = [[NSMutableArray alloc] initWithObjects:@"上海市 浦东新区 梅花路591号",@"上海市 浦东新区 长柳路100号",@"上海市 浦东新区 花木路1378号",@"上海市 浦东新区 花木路999号", nil];
     [_addrTableView clearSeperateLine];
     
+}
+
+-(void)getAddress
+{
+    __block __weak LocationsViewController *lself = self;
+    [[MMLocationManager shareLocation] getAddress:^(NSString *addressString) {
+        _addressStrBlock(addressString);
+        [lself.addrField setText:addressString];
+    }];
+}
+
+-(void)getLat
+{
+    [[MMLocationManager shareLocation] getLocationCoordinate:^(CLLocationCoordinate2D locationCorrrdinate) {
+        _latitudeStrBlock([NSString stringWithFormat:@"%f",locationCorrrdinate.latitude]);
+        _longitudeStrBlock([NSString stringWithFormat:@"%f",locationCorrrdinate.longitude]);
+    }];
 }
 
 #pragma mark - UITableView DataSources and Delegate
@@ -95,5 +116,25 @@
 {
     [textField resignFirstResponder];
     return YES;
+}
+- (IBAction)finishEvent:(id)sender
+{
+    if (_addrField.text.length > 0) {
+        _addressStrBlock(_addrField.text);
+    }
+    else
+    {
+        _addressStrBlock(@"添加位置");
+    }
+    [_addrField resignFirstResponder];
+    [self.navigationController popViewControllerAnimated:YES];
+    [_addrField setText:nil];
+    
+}
+- (void)clearLocation
+{
+    _addrField.text = nil;
+    _addressStrBlock(@"添加位置");
+    [self.navigationController popViewControllerAnimated:YES];
 }
 @end

@@ -1,20 +1,13 @@
-//
-//  FomatHelper.m
-//  ShaiWaWa
-//
-//  Created by Carl_Huang on 14-8-6.
-//  Copyright (c) 2014年 helloworld. All rights reserved.
-//
 
-#import "FomatHelper.h"
 
+#import "VoiceConverter.h"
 #import "wav.h"
 #import "interf_dec.h"
 #import "dec_if.h"
 #import "interf_enc.h"
 #import "amrFileCodec.h"
 
-@implementation FomatHelper
+@implementation VoiceConverter
 
 + (NSString *)amrToWav:(NSString*)filePath{
     
@@ -49,4 +42,6 @@
     
     return nil;
 }
+
+    
 @end
