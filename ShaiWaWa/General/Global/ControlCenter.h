@@ -34,6 +34,8 @@
 + (void)pushToSearchRSVC;
 //push到用户信息页面
 + (void)pushToUserInfoPageVC;
+//push到我的收藏页面
++ (void)pushToMyCollectionVC;
 
 + (void)showVC:(NSString *)vcName;
 + (UIViewController *)viewControllerWithName:(NSString *)vcName;

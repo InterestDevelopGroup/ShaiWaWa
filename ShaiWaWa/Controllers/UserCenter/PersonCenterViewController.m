@@ -279,12 +279,23 @@
 
 - (void)myCollectionCell
 {
+ 
     UILabel *myCollectionLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 120, _myCollectionButton.bounds.size.height-10)];
     myCollectionLabel.backgroundColor = [UIColor clearColor];
     myCollectionLabel.text = [NSString stringWithFormat:@"我的收藏 (%i)",21];
     myCollectionLabel.font = [UIFont systemFontOfSize:15];
     myCollectionLabel.textColor = [UIColor darkGrayColor];
     [_myCollectionButton addSubview:myCollectionLabel];
+    
+    
+    //获取收藏的宝宝动态
+    [[HttpService sharedInstance] getFavorite:@{@"uid":users.uid,@"offset":@"0",@"pagesize":@"10"} completionBlock:^(id object) {
+        myCollectionLabel.text = [NSString stringWithFormat:@"我的收藏 (%i)",[[object objectForKey:@"result"] count]];
+        [SVProgressHUD showSuccessWithStatus:@"获取收藏成功"];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
+    
     
     UIImage *imageJianTou = [UIImage imageNamed:@"main_jiantou.png"];
     UIImageView *jianTou = [[UIImageView alloc] initWithImage:imageJianTou];
@@ -336,5 +347,10 @@
 {
     QRCodeCardViewController *qrCodeCardVC = [[QRCodeCardViewController alloc] init];
     [self.navigationController pushViewController:qrCodeCardVC animated:YES];
+}
+
+- (IBAction)showMyCollectionVC:(id)sender
+{
+    [ControlCenter pushToMyCollectionVC];
 }
 @end

@@ -90,6 +90,10 @@
 {
     [[self class] showVC:@"UserInfoPageViewController"];
 }
++ (void)pushToMyCollectionVC
+{
+    [[self class] showVC:@"MyCollectionViewController"];
+}
 
 + (void)showVC:(NSString *)vcName
 {

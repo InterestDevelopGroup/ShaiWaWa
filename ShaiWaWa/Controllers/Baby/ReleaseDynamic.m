@@ -250,7 +250,15 @@
     [self showLocalPhotoAndOther:sourceType];
 }
 
-- (IBAction)showLocalFilm:(id)sender {
+- (IBAction)showLocalFilm:(id)sender
+{
+    UIImagePickerController* pickerView = [[UIImagePickerController alloc] init];
+    pickerView.sourceType = UIImagePickerControllerSourceTypeCamera;
+    NSArray* availableMedia = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];
+    pickerView.mediaTypes = [NSArray arrayWithObject:availableMedia[1]];
+    [self presentViewController:pickerView animated:YES completion:^{}];
+    pickerView.videoMaximumDuration = 20;
+    pickerView.delegate = self;
 }
 
 - (void)showLocalPhotoAndOther:(UIImagePickerControllerSourceType)sourceType
@@ -269,13 +277,17 @@
     [self presentViewController:imagePickerController animated:YES completion:^{}];
 }
 
-//点击相册中的图片 货照相机照完后点击use  后触发的方法
+//点击相册中的图片 或照相机照完后点击use  后触发的方法
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [picker dismissViewControllerAnimated:YES completion:^{}];
+    NSURL *videoUrl = info[UIImagePickerControllerMediaURL];
+//    [info objectForKey:UIImagePickerControllerMediaURL] == info[UIImagePickerControllerMediaURL];
+//    [info valueForKey:UIImagePickerControllerMediaURL];
+    NSLog(@"%@",[videoUrl absoluteString]);
+    
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
     // 保存图片至本地，方法见下文
-    
 //    [self getRandPictureName];
     //获得系统时间
     NSDate *  senddate=[NSDate date];
@@ -284,6 +296,8 @@
 //    NSString *  locationString=[dateformatter stringFromDate:senddate];
     [dateformatter setDateFormat:@"YYYY-MM-dd-HH-mm-ss"];
     NSString *  morelocationString=[dateformatter stringFromDate:senddate];
+    
+    
     [self saveImage:image withName:[NSString stringWithFormat:@"User_avatar_NumPic_%@.png",morelocationString]];
     //[_touXiangView setImage:image];
 //    NSString *fullPath = [[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"/Avatar"] stringByAppendingPathComponent:[NSString stringWithFormat:@"User_avatar_NumPic_%@.png",morelocationString]];
@@ -318,6 +332,8 @@
         [fileManager createDirectoryAtPath:imageDir withIntermediateDirectories:YES attributes:nil error:nil];
     }
 }
+
+
 
 - (IBAction)showGrayTwoBtnView:(id)sender
 {

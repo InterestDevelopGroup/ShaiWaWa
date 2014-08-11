@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ShaiWaWa/Controllers/Baby/DynamicDetailViewController.m"
-            timestampString = "429069378.570357"
+            timestampString = "429441761.17827"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "202"
-            endingLineNumber = "202"
+            startingLineNumber = "206"
+            endingLineNumber = "206"
             landmarkName = "-pinLunEvent:"
             landmarkType = "5">
          </BreakpointContent>

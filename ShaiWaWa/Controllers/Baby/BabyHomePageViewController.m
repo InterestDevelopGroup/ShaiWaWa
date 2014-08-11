@@ -161,9 +161,15 @@
          [SVProgressHUD showErrorWithStatus:responseString];
     }];
    */
-    /*//获取宝宝成长记录出错
-     
-     UserInfo *users = [[UserDefault sharedInstance] userInfo];
+    //获取宝宝成长记录出错
+    
+    
+    NSLog(@"%@",@{@"baby_id":curBaby_id
+                  ,@"offset":@"0",
+                  @"pagesize":@"10",
+                  @"uid":users.uid});
+    
+//     UserInfo *users = [[UserDefault sharedInstance] userInfo];
      [[HttpService sharedInstance] getBabyGrowRecord:@{@"baby_id":curBaby_id
      ,@"offset":@"0",
      @"pagesize":@"10",
@@ -174,7 +180,7 @@
      [SVProgressHUD showErrorWithStatus:responseString];
      }];
      
-     */
+    
     
     
     

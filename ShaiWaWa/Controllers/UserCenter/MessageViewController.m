@@ -308,11 +308,34 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%@",@{@"notification_id":[[msgArry objectAtIndex:indexPath.row] objectForKey:@"notification_id"],@"status":@"1"});
+    NSLog(@"%@",@{@"notification_id":[[newMSGArray objectAtIndex:indexPath.row] objectForKey:@"notification_id"],@"status":@"1"});
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    UserInfo *user = [[UserDefault sharedInstance] userInfo];
     [[HttpService sharedInstance] updateSystemNotification:
-            @{@"notification_id":[[msgArry objectAtIndex:indexPath.row] objectForKey:@"notification_id"],@"status":@"1"} completionBlock:^(id object)
+            @{@"notification_id":[[newMSGArray objectAtIndex:indexPath.row] objectForKey:@"notification_id"],@"status":@"1"} completionBlock:^(id object)
             {
+                
+                [[HttpService sharedInstance] getSystemNotification:@{@"receive_uid":user.uid,@"offset":@"0", @"pagesize":@"10"} completionBlock:^(id object)
+                 {
+                     msgArry = [object objectForKey:@"result"];
+                     for (int i=0; i<[msgArry count]; i++) {
+                         if([[[msgArry objectAtIndex:i] objectForKey:@"status"] intValue] == 0)
+                         {
+                             newMSGArray = [newMSGArray arrayByAddingObject:[msgArry objectAtIndex:i]];
+                         }
+                         else
+                         {
+                             haveReadMSGArray =  [haveReadMSGArray arrayByAddingObject:[msgArry objectAtIndex:i]];
+                         }
+                     }
+                     
+                     [_msgTableView reloadData];
+                     [_haveReadMsgTableView reloadData];
+                     [SVProgressHUD showSuccessWithStatus:@"获取消息列表完成"];
+                 } failureBlock:^(NSError *error, NSString *responseString) {
+                     [SVProgressHUD showErrorWithStatus:responseString];
+                 }];
+                
                     [_msgTableView reloadData];
                     [_haveReadMsgTableView reloadData];
                     [SVProgressHUD showSuccessWithStatus:@"消息已更新"];

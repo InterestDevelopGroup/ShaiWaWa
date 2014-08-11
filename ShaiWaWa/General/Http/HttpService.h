@@ -21,15 +21,18 @@
 #define Get_Baby_List                               @"get_baby_list"
 #define Get_Baby_Info                               @"get_baby_info"
 #define Add_Baby_Grow_Record                        @"add_baby_grow_record"
-#define Get_Baby_Grow_Record                        @"get_baby_grow_record"
+#define Get_Baby_Grow_Record                        @"get_baby_grow_record_list"
 #define Update_Baby_Info                            @"update_baby_info"
 #define Publish_Record                              @"publish_record"
 #define Update_Praise_Status                        @"update_praise_status"
+#define Add_Like                                    @"add_like"
+#define Cancel_Like                                 @"cancel_like"
+#define Get_Likes_List                              @"get_likes_list"
 #define Add_Comment                                 @"add_comment"
 #define Add_Favorite                                @"add_favorite"
 #define Delete_Record                               @"delete_Record"
 #define Get_Record_List                             @"get_record_list"
-#define Get_Record_By_User_ID                       @"get_baby_record_list"
+#define Get_Record_By_User_ID                       @"get_baby_list"
 #define Get_Record_By_Friend                        @"get_record_by_friend"
 #define Get_Recrod_By_Follow                        @"get_record_by_follow"
 #define Search_Recrod                               @"search_record"
@@ -181,6 +184,26 @@ typedef enum {
  */
 //TODO:更新赞状态
 - (void)updatePraiseStatus:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
+
+/**
+ @desc 动态取消赞
+ */
+//TODO:动态取消赞
+- (void)cancelLike:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
+
+
+/**
+ @desc 动态添加赞
+ */
+//TODO:动态添加赞
+- (void)addLike:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
+
+/**
+ @desc 获取动态被赞用户列表
+ */
+//TODO:获取动态被赞用户列表
+
+- (void)getLikingList:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
 
 /**
  @desc 添加评论

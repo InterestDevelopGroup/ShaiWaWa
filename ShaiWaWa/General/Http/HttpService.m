@@ -601,6 +601,58 @@
 }
 
 /**
+ @desc 动态取消赞
+ */
+//TODO:动态取消赞
+- (void)cancelLike:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self postJSON:[self mergeURL:Cancel_Like] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+        if (success) {
+            success(obj);
+        }
+    } failureBlock:failure];
+}
+
+/**
+ @desc 动态添加赞
+ */
+//TODO:动态添加赞
+- (void)addLike:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self postJSON:[self mergeURL:Add_Like] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+        if (success) {
+            success(obj);
+        }
+    } failureBlock:failure];
+}
+
+/**
+ @desc 获取动态被赞用户列表
+ */
+//TODO:获取动态被赞用户列表
+
+- (void)getLikingList:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self postJSON:[self mergeURL:Get_Likes_List] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+        if (success) {
+            success(obj);
+        }
+    } failureBlock:failure];
+}
+
+/**
  @desc 添加评论
  */
 //TODO:添加评论

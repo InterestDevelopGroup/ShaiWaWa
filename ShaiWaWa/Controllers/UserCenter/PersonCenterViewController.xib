@@ -151,6 +151,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="showMyCollectionVC:" destination="-1" eventType="touchUpInside" id="Xfw-BE-jEa"/>
+                    </connections>
                 </button>
                 <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_1-bg.png" id="NI4-Qt-KiH">
                     <rect key="frame" x="28" y="324" width="266" height="40"/>

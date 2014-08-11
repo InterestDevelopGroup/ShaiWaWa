@@ -58,11 +58,15 @@
     [_pinLunListTableView registerNibWithName:@"PinLunCell" reuseIdentifier:@"Cell"];
     UIImageView *scollBgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 299, 145)];
     scollBgView.image = [UIImage imageNamed:@"square_pic-3.png"];
+   
+    
+//    [[HttpService sharedInstance] getr]
     
     UIImageView *bgImgView = [[UIImageView alloc] init];
     bgImgView.image = [UIImage imageNamed:@"baby_4-bg-2.png"];
     [_pinLunListTableView setBackgroundView:bgImgView];
     DynamicHeadView *dynamicHeadView = [[DynamicHeadView alloc] initWithFrame:CGRectMake(0, 0, _pinLunListTableView.bounds.size.width, 360)];
+//    dynamicHeadView.contentTextView.text =
     [dynamicHeadView.imgOrVideoScrollView addSubview:scollBgView];
     [dynamicHeadView.moreButton addTarget:self action:@selector(showShareGrayView) forControlEvents:UIControlEventTouchUpInside];
     [_pinLunListTableView setTableHeaderView:dynamicHeadView];

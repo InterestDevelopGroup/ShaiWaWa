@@ -226,20 +226,15 @@
     } failureBlock:^(NSError *error, NSString *responseString) {
         [SVProgressHUD showErrorWithStatus:responseString];
     }];
-    
-    /*//获取好友宝宝动态请求失败
+    /*
+    //获取好友宝宝动态请求失败
     [[HttpService sharedInstance] getRecordByFriend:@{@"friend_id":@"8",@"offset":@"0",  @"pagesize":@"10"} completionBlock:^(id object) {
         
     } failureBlock:^(NSError *error, NSString *responseString) {
         [SVProgressHUD showErrorWithStatus:responseString];
     }];
      */
-    //获取收藏的宝宝动态
-     [[HttpService sharedInstance] getFavorite:@{@"uid":@"2",@"offset":@"0",@"pagesize":@"10"} completionBlock:^(id object) {
-          [SVProgressHUD showSuccessWithStatus:@"获取成功"];
-     } failureBlock:^(NSError *error, NSString *responseString) {
-         [SVProgressHUD showErrorWithStatus:responseString];
-     }];
+
     
 }
 
@@ -273,8 +268,9 @@
     }
     
     dynamicCell.moreBtn.tag = indexPath.row + 2222;
+    dynamicCell.zanButton.tag = indexPath.row + 555;
+    [dynamicCell.zanButton addTarget:self action:@selector(praiseDYEvent:) forControlEvents:UIControlEventTouchUpInside];
     
-    [dynamicCell.zanButton addTarget:self action:@selector(praiseDYEvent) forControlEvents:UIControlEventTouchUpInside];
     [dynamicCell.praiseUserFirstBtn addTarget:self action:@selector(showPraiseListVC) forControlEvents:UIControlEventTouchUpInside];
     [dynamicCell.praiseUserSecondBtn addTarget:self action:@selector(showPraiseListVC) forControlEvents:UIControlEventTouchUpInside];
     [dynamicCell.praiseUserThirdBtn addTarget:self action:@selector(showPraiseListVC) forControlEvents:UIControlEventTouchUpInside];
@@ -301,7 +297,8 @@
 
 - (void)colloctionDyEvent
 {
-    [[HttpService sharedInstance] addFavorite:@{@"rid":@"16",@"uid":@"2"} completionBlock:^(id object) {
+     [self hideGayShareV:nil];
+    [[HttpService sharedInstance] addFavorite:@{@"rid":[[dyArray objectAtIndex:([mydelegate.deleteDyId intValue]-2222)] objectForKey:@"rid"],@"uid":users.uid} completionBlock:^(id object) {
         [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
     } failureBlock:^(NSError *error, NSString *responseString) {
         [SVProgressHUD showErrorWithStatus:responseString];
@@ -326,19 +323,53 @@
     
 }
 
-- (void)praiseDYEvent
+- (void)praiseDYEvent:(UIButton *)button
 {
-    /*
-    [[HttpService sharedInstance] updatePraiseStatus:@{@"like_id":@"",
-                                                       @"rid":@"18",
-                                                       @"uid":users.uid,
-                                                       @"is_like":@"1"
-                                                       } completionBlock:^(id object) {
-                                                           [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
+
+    __block NSArray *praiseUserList;
+    [[HttpService sharedInstance] getLikingList:@{@"rid":[[dyArray objectAtIndex:(button.tag-555)] objectForKey:@"rid"]} completionBlock:^(id object) {
+        praiseUserList = [[NSArray alloc] init];
+    if (![[object objectForKey:@"result"] isEqual:[NSNull null]]) {
+            
+        for (int i = 0; i < [[object objectForKey:@"result"] count]; i++) {
+            NSString *priaseUid = [[[object objectForKey:@"result"] objectAtIndex:i] objectForKey:@"uid"];
+            praiseUserList = [praiseUserList arrayByAddingObject:priaseUid];
+        }
+        
+            NSLog(@"动态赞1:%@",@{@"rid":[[dyArray objectAtIndex:(button.tag-555)] objectForKey:@"rid"],@"uid":users.uid});
+        if (![praiseUserList containsObject:users.uid]) {
+            [[HttpService sharedInstance] addLike:@{@"rid":[[dyArray objectAtIndex:(button.tag-555)] objectForKey:@"rid"],@"uid":users.uid} completionBlock:^(id object) {
+                [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
+            } failureBlock:^(NSError *error, NSString *responseString) {
+                [SVProgressHUD showErrorWithStatus:responseString];
+            }];
+        }else{
+            NSLog(@"动态赞:%@",@{@"like_id":[[[object objectForKey:@"result"] objectAtIndex:[praiseUserList indexOfObject:users.uid]] objectForKey:@"like_id"],
+                              @"rid":[[dyArray objectAtIndex:(button.tag-555)] objectForKey:@"rid"],@"uid":users.uid});
+            [[HttpService sharedInstance] cancelLike:@{@"like_id":[[[object objectForKey:@"result"] objectAtIndex:[praiseUserList indexOfObject:users.uid]] objectForKey:@"like_id"],
+                                                       @"rid":[[dyArray objectAtIndex:(button.tag-555)] objectForKey:@"rid"],@"uid":users.uid} completionBlock:^(id object) {
+                [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
+            } failureBlock:^(NSError *error, NSString *responseString) {
+                [SVProgressHUD showErrorWithStatus:responseString];
+            }];
+            }
+        }
+        else
+        {
+             NSLog(@"动态赞2:%@",@{@"rid":[[dyArray objectAtIndex:(button.tag-555)] objectForKey:@"rid"],@"uid":users.uid});
+            [[HttpService sharedInstance] addLike:@{@"rid":[[dyArray objectAtIndex:(button.tag-555)] objectForKey:@"rid"],@"uid":users.uid} completionBlock:^(id object) {
+                [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
+            } failureBlock:^(NSError *error, NSString *responseString) {
+                [SVProgressHUD showErrorWithStatus:responseString];
+            }];
+        }
     } failureBlock:^(NSError *error, NSString *responseString) {
-        [SVProgressHUD showErrorWithStatus:responseString];
+         [SVProgressHUD showErrorWithStatus:responseString];
     }];
-     */
+    
+    
+    
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -452,7 +483,7 @@
      [self hideGrayDropView:nil];
     
     UserInfo *user = [[UserDefault sharedInstance] userInfo];
-    [[HttpService sharedInstance] getRecordByUserID:@{@"baby_id":@"1",@"offset":@"0",  @"pagesize":@"10",@"uid":user.uid} completionBlock:^(id object) {
+    [[HttpService sharedInstance] getRecordByUserID:@{@"baby_id":@"2",@"offset":@"0",  @"pagesize":@"10",@"uid":user.uid} completionBlock:^(id object) {
         
         [SVProgressHUD showSuccessWithStatus:@"加载完成"];
     } failureBlock:^(NSError *error, NSString *responseString) {
