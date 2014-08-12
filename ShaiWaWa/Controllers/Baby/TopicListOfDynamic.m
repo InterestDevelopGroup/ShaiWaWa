@@ -56,7 +56,11 @@
         
         [SVProgressHUD showSuccessWithStatus:@"加载完成"];
     } failureBlock:^(NSError *error, NSString *responseString) {
-        [SVProgressHUD showErrorWithStatus:responseString];
+        NSString * msg = responseString;
+        if (error) {
+            msg = @"加载失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
     }];
 }
 

@@ -75,4 +75,8 @@
 - (IBAction)playVoiceEvent:(id)sender;
 - (IBAction)deleteVoiceEvent:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UIView *scrollSubView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollViewForMedia;
+@property (weak, nonatomic) IBOutlet UIButton *addMoreMediaButton;
+
 @end

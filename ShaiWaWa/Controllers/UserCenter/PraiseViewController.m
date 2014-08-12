@@ -10,12 +10,19 @@
 #import "UIViewController+BarItemAdapt.h"
 #import "MyGoodFriendsListCell.h"
 #import "OtherInformationViewController.h"
+
+#import "HttpService.h"
+#import "SVProgressHUD.h"
+#import "UserDefault.h"
+#import "UserInfo.h"
+#import "Friend.h"
+#import "BabyInfo.h"
 @interface PraiseViewController ()
 
 @end
 
 @implementation PraiseViewController
-
+@synthesize priaseRid;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -39,18 +46,32 @@
 #pragma mark - Private Methods
 - (void)initUI
 {
-    praisePersonArr = [NSMutableArray arrayWithObjects:@"1",@"2",@"3",@"4",@"5", nil];
+    praisePersonArr = [[NSMutableArray alloc] init];
     self.title = [NSString stringWithFormat:@"%i人觉得很赞",[praisePersonArr count]];
     [self setLeftCusBarItem:@"square_back" action:nil];
     [_praisePersonListTableView registerNibWithName:@"MyGoodFriendsListCell" reuseIdentifier:@"Cell"];
     [_praisePersonListTableView clearSeperateLine];
-
+    [[HttpService sharedInstance] getLikingList:@{@"rid":priaseRid} completionBlock:^(id object) {
+        praisePersonArr = [object objectForKey:@"result"];
+        if (![praisePersonArr isEqual:[NSNull null]]) {
+            self.title = [NSString stringWithFormat:@"%i人觉得很赞",[praisePersonArr count]];
+        }
+        [_praisePersonListTableView reloadData];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
 }
 
 #pragma mark - UITableView DataSources and Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [praisePersonArr count];
+    if ([praisePersonArr isEqual:[NSNull null]]) {
+        return 0;
+    }
+    else
+    {
+        return [praisePersonArr count];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

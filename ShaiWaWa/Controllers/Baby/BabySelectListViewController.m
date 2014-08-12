@@ -81,8 +81,16 @@
 {
     
     BabyListCell * babyListCell = (BabyListCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
-    babyListCell.babyNameLabel.text = [NSString stringWithFormat:@"%@",[[myBabyListArray objectAtIndex:indexPath.row] objectForKey:@"baby_name"]];
     
+    babyListCell.babyNameLabel.text = [NSString stringWithFormat:@"%@",[[myBabyListArray objectAtIndex:indexPath.row] objectForKey:@"baby_name"]];
+    babyListCell.babyOldLabel.text = [NSString stringWithFormat:@"%@",[[myBabyListArray objectAtIndex:indexPath.row] objectForKey:@"birthday"]];
+    if ([[[myBabyListArray objectAtIndex:indexPath.row] objectForKey:@"sex"] intValue] == 0) {
+        babyListCell.babySexImage.image = [UIImage imageNamed:@"main_girl.png"];
+    }
+    else
+    {
+        babyListCell.babySexImage.image = [UIImage imageNamed:@"main_boy.png"];
+    }
     return babyListCell;
     
 }

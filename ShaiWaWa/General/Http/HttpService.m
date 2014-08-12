@@ -717,11 +717,7 @@
         }
         
         if (success) {
-            if ([[obj objectForKey:@"result"] count] > 0) {
-                success([obj objectForKey:@"result"]);
-            }
-            else
-                success([[obj objectForKey:@"result"] objectAtIndexPath:0]);
+            success(obj);
         }
     } failureBlock:failure];
 }

@@ -27,7 +27,9 @@
 #import "ShareView.h"
 
 
-
+#import "MJRefreshHeaderView.h"
+#import "MJRefreshFooterView.h"
+#import "MJRefresh.h"
 #import "HttpService.h"
 #import "SVProgressHUD.h"
 #import "UserDefault.h"
@@ -39,6 +41,7 @@
     ShareView *sv;
     AppDelegate *mydelegate;
 }
+@property (nonatomic,strong) MJRefreshHeaderView * refreshHeaderView;
 @end
 
 @implementation ChooseModeViewController
@@ -219,13 +222,24 @@
     
     dyArray = [[NSMutableArray alloc] init];
     
-    [[HttpService sharedInstance] getRecordList:@{@"offset":@"0", @"pagesize":@"10",@"uid":users.uid} completionBlock:^(id object) {
-        dyArray = [object copy];
-        [_dynamicPageTableView reloadData];
-        [SVProgressHUD showSuccessWithStatus:@"加载完成"];
-    } failureBlock:^(NSError *error, NSString *responseString) {
-        [SVProgressHUD showErrorWithStatus:responseString];
-    }];
+    [_dynamicPageTableView addHeaderWithTarget:self action:@selector(refreshData:)];
+    [_dynamicPageTableView setHeaderRefreshingText:@"数据正在加载"];
+    [_dynamicPageTableView headerBeginRefreshing];
+    [_dynamicPageTableView addFooterWithTarget:self action:@selector(loadMoreData)];
+    [_dynamicPageTableView setFooterPullToRefreshText:@"上拉加载更多"];
+    [_dynamicPageTableView setFooterRefreshingText:@"数据正在加载"];
+    
+    //[_dynamicPageTableView footerBeginRefreshing];
+    
+    
+//    UIRefreshControl *tb_refresh=[[UIRefreshControl alloc] init];
+//    [tb_refresh addTarget:self action:@selector(refreshData:) forControlEvents:UIControlEventValueChanged];
+//    [tb_refresh setAttributedTitle:[[NSAttributedString alloc] initWithString:@"下拉刷新"] ];
+//    [_dynamicPageTableView addSubview:tb_refresh];
+//    _dynamicPageTableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, _dynamicPageTableView.bounds.size.width, 0.01)];
+//    
+//    [self refreshData:nil];
+  
     /*
     //获取好友宝宝动态请求失败
     [[HttpService sharedInstance] getRecordByFriend:@{@"friend_id":@"8",@"offset":@"0",  @"pagesize":@"10"} completionBlock:^(id object) {
@@ -238,7 +252,49 @@
     
 }
 
+- (void)refreshData:(UIRefreshControl *)refreshControl
+{
+    [refreshControl endRefreshing];
+    dyArray = nil;
+    //获取宝宝所有动态 
+    [[HttpService sharedInstance] getRecordList:@{@"offset":@"0", @"pagesize":@"10",@"uid":users.uid} completionBlock:^(id object) {
+        dyArray = [object objectForKey:@"result"];
+        [_dynamicPageTableView reloadData];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        NSString * msg = responseString;
+        if (error) {
+            msg = @"加载失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+    }];
+    
+   
+}
+- (void)loadMoreData
+{
+    [[HttpService sharedInstance] getRecordList:@{@"offset":[NSString stringWithFormat:@"%d",[dyArray count]], @"pagesize":@"10",@"uid":users.uid} completionBlock:^(id object) {
+        
+        if (![[object objectForKey:@"result"] isEqual:[NSNull null]]) {
+            if ( [[object objectForKey:@"result"] count] == 0) {
+                [SVProgressHUD showErrorWithStatus:@"暂时未有新动态"];
+            }
+            else
+            {
+                [dyArray addObjectsFromArray:[object objectForKey:@"result"]];
+                [_dynamicPageTableView reloadData];
+            }
+        }
+    
 
+         [_dynamicPageTableView footerEndRefreshing];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        NSString * msg = responseString;
+        if (error) {
+            msg = @"加载失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+    }];
+}
 
 #pragma mark - UITableView DataSources and Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -249,31 +305,39 @@
 {
     return [dyArray count];
 }
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DynamicCell * dynamicCell = (DynamicCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
     
 //    dynamicCell.babyNameLabel.text = [[dyArray objectAtIndex:indexPath.row] objectForKey:@""];
-    
-    
+  
     if (![[[dyArray objectAtIndex:indexPath.row] objectForKey:@"add_time"] isEqual:[NSNull null]]) {
-         dynamicCell.releaseTimeLabel.text = [[dyArray objectAtIndex:indexPath.row] objectForKey:@"add_time"];
+        if (dyArray != nil) {
+            dynamicCell.releaseTimeLabel.text = [[dyArray objectAtIndex:indexPath.row] objectForKey:@"add_time"];
+        }
+        
     }
     if (![[[dyArray objectAtIndex:indexPath.row] objectForKey:@"address"] isEqual:[NSNull null]]) {
+        if (dyArray != nil) {
         dynamicCell.addressLabel.text = [[dyArray objectAtIndex:indexPath.row] objectForKey:@"address"];
+        }
     }
     if (![[[dyArray objectAtIndex:indexPath.row] objectForKey:@"content"] isEqual:[NSNull null]]) {
+        if (dyArray != nil) {
          dynamicCell.dyContentTextView.text = [[dyArray objectAtIndex:indexPath.row] objectForKey:@"content"];
+        }
     }
     
     dynamicCell.moreBtn.tag = indexPath.row + 2222;
     dynamicCell.zanButton.tag = indexPath.row + 555;
     [dynamicCell.zanButton addTarget:self action:@selector(praiseDYEvent:) forControlEvents:UIControlEventTouchUpInside];
     
-    [dynamicCell.praiseUserFirstBtn addTarget:self action:@selector(showPraiseListVC) forControlEvents:UIControlEventTouchUpInside];
-    [dynamicCell.praiseUserSecondBtn addTarget:self action:@selector(showPraiseListVC) forControlEvents:UIControlEventTouchUpInside];
-    [dynamicCell.praiseUserThirdBtn addTarget:self action:@selector(showPraiseListVC) forControlEvents:UIControlEventTouchUpInside];
+    [dynamicCell.praiseUserFirstBtn addTarget:self action:@selector(showPraiseListVC:) forControlEvents:UIControlEventTouchUpInside];
+    dynamicCell.praiseUserFirstBtn.tag = [[[dyArray objectAtIndex:indexPath.row] objectForKey:@"rid"] intValue];
+    [dynamicCell.praiseUserSecondBtn addTarget:self action:@selector(showPraiseListVC:) forControlEvents:UIControlEventTouchUpInside];
+     dynamicCell.praiseUserSecondBtn.tag = [[[dyArray objectAtIndex:indexPath.row] objectForKey:@"rid"] intValue];
+    [dynamicCell.praiseUserThirdBtn addTarget:self action:@selector(showPraiseListVC:) forControlEvents:UIControlEventTouchUpInside];
+     dynamicCell.praiseUserThirdBtn.tag = [[[dyArray objectAtIndex:indexPath.row] objectForKey:@"rid"] intValue];
     [dynamicCell.moreBtn addTarget:self action:@selector(showShareGrayView:) forControlEvents:UIControlEventTouchUpInside];
     
     [dynamicCell.topicBtn addTarget:self action:@selector(showTopicOfDyVC) forControlEvents:UIControlEventTouchUpInside];
@@ -301,7 +365,11 @@
     [[HttpService sharedInstance] addFavorite:@{@"rid":[[dyArray objectAtIndex:([mydelegate.deleteDyId intValue]-2222)] objectForKey:@"rid"],@"uid":users.uid} completionBlock:^(id object) {
         [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
     } failureBlock:^(NSError *error, NSString *responseString) {
-        [SVProgressHUD showErrorWithStatus:responseString];
+        NSString * msg = responseString;
+        if (error) {
+            msg = @"加载失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
     }];
 }
 - (void)deleteDyEvent
@@ -318,7 +386,11 @@
         }];
          [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
     } failureBlock:^(NSError *error, NSString *responseString) {
-         [SVProgressHUD showErrorWithStatus:responseString];
+        NSString * msg = responseString;
+        if (error) {
+            msg = @"加载失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
     }];
     
 }
@@ -327,44 +399,63 @@
 {
 
     __block NSArray *praiseUserList;
+    NSLog(@"获取赞用户列表:%@",@{@"rid":[[dyArray objectAtIndex:(button.tag-555)] objectForKey:@"rid"]});
     [[HttpService sharedInstance] getLikingList:@{@"rid":[[dyArray objectAtIndex:(button.tag-555)] objectForKey:@"rid"]} completionBlock:^(id object) {
         praiseUserList = [[NSArray alloc] init];
     if (![[object objectForKey:@"result"] isEqual:[NSNull null]]) {
-            
+        [button setTitle:[NSString stringWithFormat:@"%d",[[object objectForKey:@"result"] count]] forState:UIControlStateNormal];
         for (int i = 0; i < [[object objectForKey:@"result"] count]; i++) {
             NSString *priaseUid = [[[object objectForKey:@"result"] objectAtIndex:i] objectForKey:@"uid"];
             praiseUserList = [praiseUserList arrayByAddingObject:priaseUid];
         }
         
-            NSLog(@"动态赞1:%@",@{@"rid":[[dyArray objectAtIndex:(button.tag-555)] objectForKey:@"rid"],@"uid":users.uid});
+        
         if (![praiseUserList containsObject:users.uid]) {
+            NSLog(@"添加赞:%@",@{@"rid":[[dyArray objectAtIndex:(button.tag-555)] objectForKey:@"rid"],@"uid":users.uid});
+            
             [[HttpService sharedInstance] addLike:@{@"rid":[[dyArray objectAtIndex:(button.tag-555)] objectForKey:@"rid"],@"uid":users.uid} completionBlock:^(id object) {
                 [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
             } failureBlock:^(NSError *error, NSString *responseString) {
-                [SVProgressHUD showErrorWithStatus:responseString];
+                NSString * msg = responseString;
+                if (error) {
+                    msg = @"加载失败";
+                }
+                [SVProgressHUD showErrorWithStatus:msg];
             }];
         }else{
-            NSLog(@"动态赞:%@",@{@"like_id":[[[object objectForKey:@"result"] objectAtIndex:[praiseUserList indexOfObject:users.uid]] objectForKey:@"like_id"],
+            NSLog(@"取消赞:%@",@{@"like_id":[[[object objectForKey:@"result"] objectAtIndex:[praiseUserList indexOfObject:users.uid]] objectForKey:@"like_id"],
                               @"rid":[[dyArray objectAtIndex:(button.tag-555)] objectForKey:@"rid"],@"uid":users.uid});
             [[HttpService sharedInstance] cancelLike:@{@"like_id":[[[object objectForKey:@"result"] objectAtIndex:[praiseUserList indexOfObject:users.uid]] objectForKey:@"like_id"],
                                                        @"rid":[[dyArray objectAtIndex:(button.tag-555)] objectForKey:@"rid"],@"uid":users.uid} completionBlock:^(id object) {
                 [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
             } failureBlock:^(NSError *error, NSString *responseString) {
-                [SVProgressHUD showErrorWithStatus:responseString];
+                NSString * msg = responseString;
+                if (error) {
+                    msg = @"加载失败";
+                }
+                [SVProgressHUD showErrorWithStatus:msg];
             }];
             }
         }
         else
         {
-             NSLog(@"动态赞2:%@",@{@"rid":[[dyArray objectAtIndex:(button.tag-555)] objectForKey:@"rid"],@"uid":users.uid});
+             NSLog(@"第一次添加赞:%@",@{@"rid":[[dyArray objectAtIndex:(button.tag-555)] objectForKey:@"rid"],@"uid":users.uid});
             [[HttpService sharedInstance] addLike:@{@"rid":[[dyArray objectAtIndex:(button.tag-555)] objectForKey:@"rid"],@"uid":users.uid} completionBlock:^(id object) {
                 [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
             } failureBlock:^(NSError *error, NSString *responseString) {
-                [SVProgressHUD showErrorWithStatus:responseString];
+                NSString * msg = responseString;
+                if (error) {
+                    msg = @"加载失败";
+                }
+                [SVProgressHUD showErrorWithStatus:msg];
             }];
         }
     } failureBlock:^(NSError *error, NSString *responseString) {
-         [SVProgressHUD showErrorWithStatus:responseString];
+        NSString * msg = responseString;
+        if (error) {
+            msg = @"加载失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
     }];
     
     
@@ -475,19 +566,26 @@
         
         [SVProgressHUD showSuccessWithStatus:@"加载完成"];
     } failureBlock:^(NSError *error, NSString *responseString) {
-        [SVProgressHUD showErrorWithStatus:responseString];
+        NSString * msg = responseString;
+        if (error) {
+            msg = @"加载失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
     }];
 }
 - (void)showOnlyMyBabyDyList
 {
-     [self hideGrayDropView:nil];
-    
-    UserInfo *user = [[UserDefault sharedInstance] userInfo];
-    [[HttpService sharedInstance] getRecordByUserID:@{@"baby_id":@"2",@"offset":@"0",  @"pagesize":@"10",@"uid":user.uid} completionBlock:^(id object) {
-        
+    [self hideGrayDropView:nil];
+    [[HttpService sharedInstance] getRecordList:@{@"offset":@"0", @"pagesize":@"10",@"uid":users.uid} completionBlock:^(id object) {
+        dyArray = [object objectForKey:@"result"];
+        [_dynamicPageTableView reloadData];
         [SVProgressHUD showSuccessWithStatus:@"加载完成"];
     } failureBlock:^(NSError *error, NSString *responseString) {
-        [SVProgressHUD showErrorWithStatus:responseString];
+        NSString * msg = responseString;
+        if (error) {
+            msg = @"加载失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
     }];
     
 }
@@ -496,10 +594,14 @@
      [self hideGrayDropView:nil];
     UserInfo *user = [[UserDefault sharedInstance] userInfo];
     [[HttpService sharedInstance] getRecordByFollow:@{@"uid":user.uid,@"offset":@"0", @"pagesize":@"10"} completionBlock:^(id object) {
-        
-        [SVProgressHUD showSuccessWithStatus:@"加载完成"];
+        dyArray = [object objectForKey:@"result"];
+        [_dynamicPageTableView reloadData];
     } failureBlock:^(NSError *error, NSString *responseString) {
-        [SVProgressHUD showErrorWithStatus:responseString];
+        NSString * msg = responseString;
+        if (error) {
+            msg = @"加载失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
     }];
     
 }
@@ -522,9 +624,10 @@
     [self.navigationController pushViewController:squareVC animated:YES];
 }
 
-- (void)showPraiseListVC
+- (void)showPraiseListVC:(UIButton *)sender
 {
     PraiseViewController *praiseListVC = [[PraiseViewController alloc] init];
+    praiseListVC.priaseRid = [NSString stringWithFormat:@"%d",sender.tag];
     [self.navigationController pushViewController:praiseListVC animated:YES];
 }
 

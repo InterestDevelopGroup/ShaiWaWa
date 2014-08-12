@@ -105,7 +105,7 @@
     [self HMSegmentedControlInitMethod];
     [self HMSegmentedControlInitMethodFull];
    
-    
+    babyDyList = [[NSMutableArray alloc] init];
     summaryKey = [NSArray arrayWithObjects:@"昵称",@"姓名",@"出生日期",@"性别",@"所在城市",@"出生身高",@"出生体重", nil];
     
     UserInfo *users = [[UserDefault sharedInstance] userInfo];
@@ -117,14 +117,29 @@
     } failureBlock:^(NSError *error, NSString *responseString) {
         [SVProgressHUD showErrorWithStatus:responseString];
     }];
+    //根据用户ID以及宝宝id获取相应动态
+    [[HttpService sharedInstance] getRecordByUserID:@{@"baby_id":curBaby_id,@"offset":@"0",@"pagesize":@"10",@"uid":users.uid} completionBlock:^(id object) {
+        
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        NSString * msg = responseString;
+        if (error) {
+            msg = @"加载失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+    }];
     
     //删除宝宝备注
     [[HttpService sharedInstance] deleteBabyRemark:@{@"uid":@"2",@"baby_id":@"2"} completionBlock:^(id object) {
          [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
     } failureBlock:^(NSError *error, NSString *responseString) {
-        [SVProgressHUD showErrorWithStatus:responseString];
+        NSString * msg = responseString;
+        if (error) {
+            msg = @"加载失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
     }];
-     
+    
     /*
     //获取宝宝备注
     [[HttpService sharedInstance] getBabyRemark:@{@"uid":@"2",@"baby_id":@"2"} completionBlock:^(id object) {
@@ -177,9 +192,13 @@
      completionBlock:^(id object) {
      NSLog(@"record:%@",[object objectForKey:@"result"]);
      } failureBlock:^(NSError *error, NSString *responseString) {
-     [SVProgressHUD showErrorWithStatus:responseString];
+         NSString * msg = responseString;
+         if (error) {
+             msg = @"加载失败";
+         }
+         [SVProgressHUD showErrorWithStatus:msg];
      }];
-     
+    
     
     
     
@@ -522,7 +541,11 @@
     [[HttpService sharedInstance] followBaby:@{@"uid":@"2",@"baby_id":@"2"} completionBlock:^(id object) {
         [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
     } failureBlock:^(NSError *error, NSString *responseString) {
-        [SVProgressHUD showErrorWithStatus:responseString];
+        NSString * msg = responseString;
+        if (error) {
+            msg = @"加载失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
     }];
     [self showList:nil];
 }

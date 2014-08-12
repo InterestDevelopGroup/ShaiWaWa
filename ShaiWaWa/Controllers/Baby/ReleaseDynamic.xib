@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ReleaseDynamic">
             <connections>
+                <outlet property="addMoreMediaButton" destination="yWW-o4-36E" id="CeZ-IW-NU5"/>
                 <outlet property="addr_Label" destination="3TB-YH-8Sp" id="IeF-SP-mkn"/>
                 <outlet property="allPublicBtn" destination="IVr-VC-ZTl" id="25R-ML-E9B"/>
                 <outlet property="babyAvatarImgView" destination="j2i-89-LDI" id="q2T-cm-6U8"/>
@@ -23,6 +24,8 @@
                 <outlet property="onlyParentBtn" destination="2EK-U8-zgI" id="GJG-nY-W4X"/>
                 <outlet property="picOrvideoSelectBar" destination="pne-R6-pTz" id="GZ1-td-x0Q"/>
                 <outlet property="playButton" destination="gE8-j9-MqQ" id="9db-Ek-tBR"/>
+                <outlet property="scrollSubView" destination="pne-R6-pTz" id="OqU-gP-PqF"/>
+                <outlet property="scrollViewForMedia" destination="Rfi-85-zic" id="NZN-Xt-opq"/>
                 <outlet property="shareXiaView" destination="Ab7-SY-uCj" id="I32-gY-BM2"/>
                 <outlet property="soundXiaView" destination="xLk-p7-50v" id="8L8-5x-7ZU"/>
                 <outlet property="topView" destination="M3w-nq-Sj7" id="cOH-6h-tQM"/>
@@ -137,18 +140,6 @@
                                                 </view>
                                             </subviews>
                                         </scrollView>
-                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yWW-o4-36E">
-                                            <rect key="frame" x="0.0" y="100" width="140" height="20"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                            <state key="normal" title="添加更多 (2/9)" image="pb_tianjia.png">
-                                                <color key="titleColor" red="0.46108314929999999" green="0.86744225539999997" blue="0.43640673330000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="showGrayTwoBtnView:" destination="-1" eventType="touchUpInside" id="YUb-1e-Iki"/>
-                                            </connections>
-                                        </button>
                                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gE8-j9-MqQ">
                                             <rect key="frame" x="122" y="92" width="62" height="29"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -414,7 +405,7 @@
                     <gestureRecognizers/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                 </view>
-                <view hidden="YES" alpha="0.80000000000000004" contentMode="scaleToFill" id="xvm-8S-4MG">
+                <view hidden="YES" alpha="0.90000000000000002" contentMode="scaleToFill" id="xvm-8S-4MG">
                     <rect key="frame" x="0.0" y="-1" width="320" height="506"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
@@ -428,6 +419,9 @@
                             <state key="normal" image="pb_zhaopian.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="showLocalPhoto:" destination="-1" eventType="touchUpInside" id="XRo-Eu-199"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mPm-TP-3ow">
                             <rect key="frame" x="209" y="145" width="40" height="40"/>
@@ -437,7 +431,6 @@
                             </state>
                             <connections>
                                 <action selector="showLocalCamer:" destination="-1" eventType="touchUpInside" id="g0a-Gx-KLF"/>
-                                <action selector="showLocalPhoto:" destination="-1" eventType="touchUpInside" id="jnV-0r-srl"/>
                             </connections>
                         </button>
                     </subviews>
@@ -448,6 +441,18 @@
                         <outletCollection property="gestureRecognizers" destination="9Cb-vx-hwU" appends="YES" id="imd-6c-dHe"/>
                     </connections>
                 </view>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yWW-o4-36E">
+                    <rect key="frame" x="20" y="190" width="140" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <state key="normal" title="添加更多 (2/9)" image="pb_tianjia.png">
+                        <color key="titleColor" red="0.46108314929999999" green="0.86744225539999997" blue="0.43640673330000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="showGrayTwoBtnView:" destination="-1" eventType="touchUpInside" id="YUb-1e-Iki"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.86274516580000005" green="0.87058830259999997" blue="0.86666673419999996" alpha="1" colorSpace="deviceRGB"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

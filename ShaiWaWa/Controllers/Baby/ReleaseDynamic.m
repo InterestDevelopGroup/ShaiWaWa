@@ -34,10 +34,15 @@
     NSString *dyLatitude;
     NSString *dyLongitude;
     NSString *babyID;
-    
+    UIImagePickerController *pickerPhotoView;
+    UIImagePickerController *pickerCamerView;
     AVAudioRecorder *recorder;
     NSURL *recordedFile;
     AVAudioPlayer *player;
+    NSArray *imgArray;
+    NSMutableArray *imagesArray;
+    NSMutableArray *imageViewArray;
+    
 }
 @property (nonatomic, strong) NSString *babyID;
 @end
@@ -81,6 +86,9 @@
     [self copyOfWeb];
     times = 1;
     
+    imgArray = [[NSArray alloc] init];
+    imagesArray = [[NSMutableArray alloc] init];
+    imageViewArray = [[NSMutableArray alloc] init];
     [self getBabyView];
     NSString *temp = [NSTemporaryDirectory() stringByAppendingString:@"RecordedFile.wav"];
     
@@ -232,9 +240,13 @@
                                                   @"image":@""} completionBlock:^(id object) {
                                                       [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
     } failureBlock:^(NSError *error, NSString *responseString) {
-        [SVProgressHUD showErrorWithStatus:responseString];
+        NSString * msg = responseString;
+        if (error) {
+            msg = @"加载失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
     }];
-     
+    
 }
 - (IBAction)showLocalPhoto:(id)sender
 {
@@ -252,13 +264,17 @@
 
 - (IBAction)showLocalFilm:(id)sender
 {
-    UIImagePickerController* pickerView = [[UIImagePickerController alloc] init];
-    pickerView.sourceType = UIImagePickerControllerSourceTypeCamera;
+    pickerCamerView = [[UIImagePickerController alloc] init];
+    pickerCamerView.sourceType = UIImagePickerControllerSourceTypeCamera;
     NSArray* availableMedia = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];
-    pickerView.mediaTypes = [NSArray arrayWithObject:availableMedia[1]];
-    [self presentViewController:pickerView animated:YES completion:^{}];
-    pickerView.videoMaximumDuration = 20;
-    pickerView.delegate = self;
+    pickerCamerView.mediaTypes = [NSArray arrayWithObject:availableMedia[1]];
+    [self presentViewController:pickerCamerView animated:YES completion:^{}];
+    pickerCamerView.videoMaximumDuration = 20;
+    pickerCamerView.delegate = self;
+    [pickerCamerView setShowsCameraControls:NO];
+    
+    //[pickerCamerView.view addSubview:];
+    
 }
 
 - (void)showLocalPhotoAndOther:(UIImagePickerControllerSourceType)sourceType
@@ -266,41 +282,55 @@
     // 判断是否支持相机
     //先设定sourceType为相机，然后判断相机是否可用（ipod）没相机，不可用将sourceType设定为相片库
 
-    UIImagePickerController *imagePickerController =[[UIImagePickerController alloc] init];
+    pickerPhotoView =[[UIImagePickerController alloc] init];
     
-    imagePickerController.delegate = self;
+    pickerPhotoView.delegate = self;
     
-    imagePickerController.allowsEditing = YES;
+    pickerPhotoView.allowsEditing = YES;
     
-    imagePickerController.sourceType = sourceType;
-    
-    [self presentViewController:imagePickerController animated:YES completion:^{}];
+    pickerPhotoView.sourceType = sourceType;
+    [self presentViewController:pickerPhotoView animated:YES completion:^{}];
+    [self hideGrayTwoView:nil];
 }
 
 //点击相册中的图片 或照相机照完后点击use  后触发的方法
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    [picker dismissViewControllerAnimated:YES completion:^{}];
-    NSURL *videoUrl = info[UIImagePickerControllerMediaURL];
-//    [info objectForKey:UIImagePickerControllerMediaURL] == info[UIImagePickerControllerMediaURL];
-//    [info valueForKey:UIImagePickerControllerMediaURL];
-    NSLog(@"%@",[videoUrl absoluteString]);
     
-    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-    // 保存图片至本地，方法见下文
-//    [self getRandPictureName];
-    //获得系统时间
-    NSDate *  senddate=[NSDate date];
-    NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
-//    [dateformatter setDateFormat:@"HH:mm"];
-//    NSString *  locationString=[dateformatter stringFromDate:senddate];
-    [dateformatter setDateFormat:@"YYYY-MM-dd-HH-mm-ss"];
-    NSString *  morelocationString=[dateformatter stringFromDate:senddate];
+        UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+        // 保存图片至本地，方法见下文
+        //    [self getRandPictureName];
+        //获得系统时间
+        NSDate *  senddate=[NSDate date];
+        NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
+        //    [dateformatter setDateFormat:@"HH:mm"];
+        //    NSString *  locationString=[dateformatter stringFromDate:senddate];
+        [dateformatter setDateFormat:@"YYYY-MM-dd-HH-mm-ss"];
+        NSString *  morelocationString=[dateformatter stringFromDate:senddate];
+        
+        [imagesArray addObject:image];
+        //    [imageViewArray removeAllObjects];
+        for(int i=[imageViewArray count]; i<[imagesArray count]; i++)
+        {
+            UIImageView *imgView = [[UIImageView alloc] initWithImage:[imagesArray objectAtIndex:i]];
+            [imageViewArray addObject:imgView];
+        }
+        
+        [self showImageViewToScrollView];
+        
+        [self saveImage:image withName:[NSString stringWithFormat:@"User_avatar_NumPic_%@.png",morelocationString]];
+        //[_touXiangView setImage:image];
+        //    NSString *fullPath = [[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"/Avatar"] stringByAppendingPathComponent:[NSString stringWithFormat:@"User_avatar_NumPic_%@.png",morelocationString]];
     
+        [picker setShowsCameraControls:NO];
+        NSURL *videoUrl = info[UIImagePickerControllerMediaURL];
+        //    [info objectForKey:UIImagePickerControllerMediaURL] == info[UIImagePickerControllerMediaURL];
+        //    [info valueForKey:UIImagePickerControllerMediaURL];
+        NSLog(@"%@",[videoUrl absoluteString]);
     
-    [self saveImage:image withName:[NSString stringWithFormat:@"User_avatar_NumPic_%@.png",morelocationString]];
-    //[_touXiangView setImage:image];
-//    NSString *fullPath = [[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"/Avatar"] stringByAppendingPathComponent:[NSString stringWithFormat:@"User_avatar_NumPic_%@.png",morelocationString]];
+
+       [picker dismissViewControllerAnimated:YES completion:^{}];
+
     
 }
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
@@ -333,17 +363,184 @@
     }
 }
 
+- (void)delImage:(UIButton *)button
+{
+    NSLog(@"%d",button.tag);
+    [self removeImgView:button.tag];
+  
+}
 
+- (void)removeImgView:(int)num
+{
+    [[imageViewArray objectAtIndex:num] removeFromSuperview];
+    [imageViewArray removeObjectAtIndex:num];
+    [imagesArray removeObjectAtIndex:num];
+    
+    NSString *fontStr = @"添加更多 (";
+    NSString *midStr = [NSString stringWithFormat:@"%d",[imageViewArray count]];
+    NSString *lastStr = @"/9)";
+    if ([imageViewArray count] == 0 || [imageViewArray count] == 9) {
+        _addMoreMediaButton.hidden = YES;
+        _scrollSubView.hidden = NO;
+        [imageViewArray removeAllObjects];
+        [imagesArray removeAllObjects];
+    }
+    else
+    {
+        _addMoreMediaButton.hidden = NO;
+        _scrollSubView.hidden = YES;
+    }
+    [_addMoreMediaButton setTitle:[[fontStr stringByAppendingString:midStr] stringByAppendingString:lastStr] forState:UIControlStateNormal];
+    for (int k=0; k<[imageViewArray count]; k++) {
+        [[imageViewArray objectAtIndex:k] setUserInteractionEnabled:YES];
+        _scrollViewForMedia.contentSize = CGSizeMake(298*(k+1), 123);
+        [[imageViewArray objectAtIndex:k] setFrame:CGRectMake(120*k+5, 10, 100, _scrollViewForMedia.bounds.size.height-20)];
+        [_scrollViewForMedia addSubview:[imageViewArray objectAtIndex:k]];
+        UIButton *delButton= [UIButton buttonWithType:UIButtonTypeCustom];
+        delButton.frame = CGRectMake([[imageViewArray objectAtIndex:k] bounds].size.width-15, -8, 25, 26);
+        [delButton addTarget:self action:@selector(delImage:) forControlEvents:UIControlEventTouchUpInside];
+        [[imageViewArray objectAtIndex:k] addSubview:delButton];
+        delButton.tag = k;
+        [delButton setImage:[UIImage imageNamed:@"pb_shanchu.png"] forState:UIControlStateNormal];
+    }
+    
+    /*
+    NSLog(@"按钮tag:%d",num);
+    NSLog(@"图片个数：%d",[imagesArray count]);
+    for (int j=0; j<[imagesArray count]; j++) {
+        UIImageView *imgView = (UIImageView *)[_scrollViewForMedia viewWithTag:j+2999];
+        [imgView removeFromSuperview];
+        if (j == [imagesArray count]-1) {
+            [_scrollViewForMedia setContentSize:CGSizeMake(298, 123)];
+            _scrollSubView.hidden = NO;
+            _addMoreMediaButton.hidden = YES;
+        }
+        
+    }
+    
+     */
+//    
+//     [[imageViewArray objectAtIndex:num] removeFromSuperview];
+//     [imagesArray removeObjectAtIndex:num];
+}
+
+- (void)showImageViewToScrollView
+{
+    for (int j=0; j<[imageViewArray count]; j++) {
+        [[imageViewArray objectAtIndex:j] removeFromSuperview];
+        if (j == [imagesArray count]-1) {
+            [_scrollViewForMedia setContentSize:CGSizeMake(298, 123)];
+            _scrollSubView.hidden = NO;
+            _addMoreMediaButton.hidden = YES;
+        }
+        
+    }
+    
+    
+    for (int k=0; k<[imageViewArray count]; k++) {
+        [[imageViewArray objectAtIndex:k] setUserInteractionEnabled:YES];
+    _scrollViewForMedia.contentSize = CGSizeMake(298*(k+1), 123);
+        [[imageViewArray objectAtIndex:k] setFrame:CGRectMake(120*k+5, 10, 100, _scrollViewForMedia.bounds.size.height-20)];
+    [_scrollViewForMedia addSubview:[imageViewArray objectAtIndex:k]];
+        UIButton *delButton= [UIButton buttonWithType:UIButtonTypeCustom];
+        delButton.frame = CGRectMake([[imageViewArray objectAtIndex:k] bounds].size.width-15, -8, 25, 26);
+        [delButton addTarget:self action:@selector(delImage:) forControlEvents:UIControlEventTouchUpInside];
+        [[imageViewArray objectAtIndex:k] addSubview:delButton];
+        delButton.tag = k;
+        [delButton setImage:[UIImage imageNamed:@"pb_shanchu.png"] forState:UIControlStateNormal];
+    }
+    
+    
+    
+    NSString *fontStr = @"添加更多 (";
+    NSString *midStr = [NSString stringWithFormat:@"%d",[imagesArray count]];
+    NSString *lastStr = @"/9)";
+    if ([imageViewArray count] == 0 || [imageViewArray count] == 9) {
+        _addMoreMediaButton.hidden = YES;
+        _scrollSubView.hidden = NO;
+    }
+    else
+    {
+        _addMoreMediaButton.hidden = NO;
+        _scrollSubView.hidden = YES;
+    }
+    [_addMoreMediaButton setTitle:[[fontStr stringByAppendingString:midStr] stringByAppendingString:lastStr] forState:UIControlStateNormal];
+}
+- (void)getImageFromPublic
+{
+    for (int k=0; k<[imagesArray count]; k++) {
+        _scrollViewForMedia.contentSize = CGSizeMake(298*(k+1), 123);
+        UIImageView *imgOne = [[UIImageView alloc] init];
+        [imgOne setUserInteractionEnabled:YES];
+        
+        UIButton *delButton= [UIButton buttonWithType:UIButtonTypeCustom];
+        delButton.frame = CGRectMake(imgOne.bounds.size.width-15, -8, 25, 26);
+        [delButton addTarget:self action:@selector(delImage:) forControlEvents:UIControlEventTouchUpInside];
+        [imgOne addSubview:delButton];
+        delButton.tag = k;
+        [delButton setImage:[UIImage imageNamed:@"pb_shanchu.png"] forState:UIControlStateNormal];
+        imgOne.image = [imagesArray objectAtIndex:k];
+        [imageViewArray addObject:imgOne];
+        
+        [[imageViewArray objectAtIndex:k] setFrame:CGRectMake(120*k+5, 10, 100, _scrollViewForMedia.bounds.size.height-20)];
+        [_scrollViewForMedia addSubview:[imageViewArray objectAtIndex:k]];
+    }
+    NSString *fontStr = @"添加更多 (";
+    NSString *midStr = [NSString stringWithFormat:@"%d",[imagesArray count]];
+    NSString *lastStr = @"/9)";
+    if ([imagesArray count] == 0 || [imagesArray count] == 9) {
+        _addMoreMediaButton.hidden = YES;
+        _scrollSubView.hidden = NO;
+    }
+    else
+    {
+        _addMoreMediaButton.hidden = NO;
+        _scrollSubView.hidden = YES;
+    }
+    [_addMoreMediaButton setTitle:[[fontStr stringByAppendingString:midStr] stringByAppendingString:lastStr] forState:UIControlStateNormal];
+    
+    /*
+  
+    
+    for (int i=0; i<[imagesArray count]; i++) {
+        _scrollViewForMedia.contentSize = CGSizeMake(298*(i+1), 123);
+        UIImageView *imgOne = [[UIImageView alloc] initWithFrame:CGRectMake(120*i+5, 10, 100, _scrollViewForMedia.bounds.size.height-20)];
+        imgOne.tag = 2999+i;
+        [imgOne setUserInteractionEnabled:YES];
+        UIButton *delButton= [UIButton buttonWithType:UIButtonTypeCustom];
+        delButton.frame = CGRectMake(imgOne.bounds.size.width-15, -8, 25, 26);
+        delButton.tag = 1999+i;
+        [delButton addTarget:self action:@selector(delImage:) forControlEvents:UIControlEventTouchUpInside];
+        [imgOne addSubview:delButton];
+        [delButton setImage:[UIImage imageNamed:@"pb_shanchu.png"] forState:UIControlStateNormal];
+        imgOne.image = [imagesArray objectAtIndex:i];
+        
+        NSString *fontStr = @"添加更多 (";
+        NSString *midStr = [NSString stringWithFormat:@"%d",[imagesArray count]];
+        NSString *lastStr = @"/9)";
+        if ([imagesArray count] == 0 || [imagesArray count] == 9) {
+            _addMoreMediaButton.hidden = YES;
+            _scrollSubView.hidden = NO;
+        }
+        else
+        {
+            _addMoreMediaButton.hidden = NO;
+            _scrollSubView.hidden = YES;
+        }
+        [_addMoreMediaButton setTitle:[[fontStr stringByAppendingString:midStr] stringByAppendingString:lastStr] forState:UIControlStateNormal];
+        [_scrollViewForMedia addSubview:imgOne];
+    }
+     */
+}
 
 - (IBAction)showGrayTwoBtnView:(id)sender
 {
-    NSLog(@"呵呵");
+    
     _grayTwoView.hidden = NO;
 }
 - (IBAction)hideGrayTwoView:(id)sender
 {
     _grayTwoView.hidden = YES;
-     NSLog(@"呵呵1");
 }
 - (IBAction)hideCanSeeView:(id)sender
 {
@@ -614,7 +811,11 @@
                                   rself.babyAvatarImgView.image = [UIImage imageWithContentsOfFile: [[[object objectForKey:@"result"] objectAtIndex:0] objectForKey:@"avatar"]];
                                   rself.babyNameLabel.text = [[[object objectForKey:@"result"] objectAtIndex:0] objectForKey:@"baby_name"];
                               } failureBlock:^(NSError *error, NSString *responseString) {
-                                  [SVProgressHUD showErrorWithStatus:responseString];
+                                  NSString * msg = responseString;
+                                  if (error) {
+                                      msg = @"加载失败";
+                                  }
+                                  [SVProgressHUD showErrorWithStatus:msg];
                               }];
 }
 

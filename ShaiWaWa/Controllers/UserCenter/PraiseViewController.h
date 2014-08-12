@@ -13,5 +13,5 @@
     NSMutableArray *praisePersonArr;
 }
 @property (strong, nonatomic) IBOutlet UITableView *praisePersonListTableView;
-
+@property (strong, nonatomic) NSString *priaseRid;
 @end

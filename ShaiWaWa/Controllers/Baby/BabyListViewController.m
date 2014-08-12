@@ -81,7 +81,11 @@
                                   [_babyListTableView reloadData];
                                   [SVProgressHUD showSuccessWithStatus:@"获取成功"];
     } failureBlock:^(NSError *error, NSString *responseString) {
-        [SVProgressHUD showErrorWithStatus:responseString];
+        NSString * msg = responseString;
+        if (error) {
+            msg = @"加载失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
     }];
 }
 
@@ -157,6 +161,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     BabyHomePageViewController *babyHomePageVC = [[BabyHomePageViewController alloc] init];
+     babyHomePageVC.curBaby_id = [[myBabyList objectAtIndex:indexPath.row] objectForKey:@"baby_id"];
     [self.navigationController pushViewController:babyHomePageVC animated:YES];
 }
 #pragma mark - UITextFieldDelegate

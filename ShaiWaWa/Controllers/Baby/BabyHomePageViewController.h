@@ -22,6 +22,7 @@
     UIButton *remarksBtn, *specialCareBtn;
     BOOL isRemarksBtnShown;
     NSString *curBaby_id;
+    NSMutableArray *babyDyList;
 }
 @property (strong, nonatomic) IBOutlet UIView *tabSelectionBar;
 @property (weak, nonatomic) IBOutlet UIView *tabSelectionFullBar;

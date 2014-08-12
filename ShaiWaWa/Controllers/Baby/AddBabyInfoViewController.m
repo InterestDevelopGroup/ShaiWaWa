@@ -81,18 +81,18 @@
 - (void)addBaby
 {
     UserInfo *user = [[UserDefault sharedInstance] userInfo];
-    NSLog(@"addBaby:%@",@{@"fid":user.uid,
-                  @"mid":@"3",
-                  @"baby_name":_babyNameField.text,
-                  @"avatar":@"32",
-                  @"sex":isBoy ? @"1" : @"0",
-                  @"birthday":_birthDayField.text,
-                  @"nickname":_babyNicknameField.text,
-                  @"birth_height":_birthStatureField.text,
-                  @"birth_weight":_birthWeightField.text,
-                  @"country":@"中国",
-                  @"province":location.state,
-                  @"city":location.city});
+//    NSLog(@"addBaby:%@",@{@"fid":user.uid,
+//                  @"mid":@"3",
+//                  @"baby_name":_babyNameField.text,
+//                  @"avatar":@"32",
+//                  @"sex":isBoy ? @"1" : @"0",
+//                  @"birthday":_birthDayField.text,
+//                  @"nickname":_babyNicknameField.text,
+//                  @"birth_height":_birthStatureField.text,
+//                  @"birth_weight":_birthWeightField.text,
+//                  @"country":@"中国",
+//                  @"province":location.state,
+//                  @"city":location.city});
     
     if (_babyNameField.text.length > 0 && _birthDayField.text.length > 0 && _babyNicknameField.text.length > 0 && _birthStatureField.text.length > 0 &&_birthWeightField.text.length > 0 ) {
       
@@ -110,8 +110,13 @@
                                                 @"city":location.city} completionBlock:^(id object) {
                                                     [SVProgressHUD showSuccessWithStatus:@"添加成功"];
                                                     [self clearTextField];
+                                                    [self resetStatus];
                                                 } failureBlock:^(NSError *error, NSString *responseString) {
-                                                    [SVProgressHUD showErrorWithStatus:responseString];
+                                                    NSString * msg = responseString;
+                                                    if (error) {
+                                                        msg = @"加载失败";
+                                                    }
+                                                    [SVProgressHUD showErrorWithStatus:msg];
                                                 }];
 
     }
@@ -314,10 +319,12 @@
     _babyNicknameField.text = nil;
     _birthStatureField.text = nil;
     _birthWeightField.text = nil;
+    _cityValueTextField.text = nil;
 }
 
 - (void)resetStatus
 {
-    
+    [self boySelected:nil];
+    [self girlSelected:nil];
 }
 @end
