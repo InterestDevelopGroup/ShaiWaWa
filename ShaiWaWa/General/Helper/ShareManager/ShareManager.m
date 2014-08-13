@@ -56,15 +56,16 @@
      appSecret:@"aed9b0303e3ed1e27bae87c33761161d"];
      */
     
-    [ShareSDK connectQZoneWithAppKey:@"100371282"
-                           appSecret:@"aed9b0303e3ed1e27bae87c33761161d"
+    [ShareSDK connectQZoneWithAppKey:@"1101328312"
+                           appSecret:@"nG136aiqNSDp0lvP"
                    qqApiInterfaceCls:[QQApiInterface class]
                      tencentOAuthCls:[TencentOAuth class]];
     
     
     //QQ
-    //[ShareSDK connectQQWithAppId:@"100371282" qqApiCls:[QQApiInterface class]];
-    [ShareSDK connectQQWithQZoneAppKey:@"100371282" qqApiInterfaceCls:[QQApiInterface class] tencentOAuthCls:[TencentOAuth class]];
+    
+//    [ShareSDK connectQQWithAppId:@"1101328312" qqApiCls:[QQApiInterface class]];
+//    [ShareSDK connectQQWithQZoneAppKey:@"1101328312" qqApiInterfaceCls:[QQApiInterface class] tencentOAuthCls:[TencentOAuth class]];
     
     /*
      //腾讯微博

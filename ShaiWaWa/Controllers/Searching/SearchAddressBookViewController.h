@@ -14,5 +14,6 @@
     AppDelegate *myDelegate;
 }
 - (IBAction)addrBookNext:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextField *phoneField;
 
 @end

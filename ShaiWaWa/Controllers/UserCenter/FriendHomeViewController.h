@@ -19,4 +19,5 @@
 @property (weak, nonatomic) IBOutlet UIImageView *friendAvatarImgView;
 @property (weak, nonatomic) IBOutlet UILabel *friendUserNameTextField;
 @property (weak, nonatomic) IBOutlet UILabel *friendSwwNumTextField;
+@property (strong, nonatomic) NSString *friendId;
 @end

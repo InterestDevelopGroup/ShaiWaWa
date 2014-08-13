@@ -17,10 +17,19 @@
 #import "UserDefault.h"
 #import "HttpService.h"
 #import "SVProgressHUD.h"
+#import "MF_Base64Additions.h"
+#import <CommonCrypto/CommonDigest.h>
+#import <CommonCrypto/CommonHMAC.h>
 
 @interface PersonCenterViewController ()
 {
     NSMutableArray *myBabyList;
+    NSString *avatarFilePath;
+    NSString *avatarKey;
+    NSString *bucketName;
+    NSString *token;
+    NSString *accessKey;
+    NSString *secertKey;
 }
 @end
 
@@ -69,6 +78,69 @@
     [self socialPlatformBindCell];
     [self createFolder];
     [self topViewData];
+    
+}
+//字符串计算HMAC-SHA1签名
+- (NSString *)hmacsha:(NSString *)param
+{
+    const char * cKey = [secertKey cStringUsingEncoding:NSUTF8StringEncoding];
+    const char * cData = [param cStringUsingEncoding:NSUTF8StringEncoding];
+    unsigned char cHMAC[CC_SHA256_DIGEST_LENGTH];
+    CCHmac(kCCHmacAlgSHA256, cKey, strlen(cKey), cData, strlen(cData), cHMAC);
+    NSMutableString* output = [NSMutableString stringWithCapacity:CC_SHA256_DIGEST_LENGTH * 2];
+    for(int i = 0; i < CC_SHA256_DIGEST_LENGTH; i++)
+        [output appendFormat:@"%02x", cHMAC[i]];
+    //生成64位16进制accesstoken
+    return output;
+}
+//图片信息词典,并且初始化根据传入图片参数token
+- (void)imageInfo:(NSString *)image Dealine:(NSString *)date Name:(NSString *)name Size:(NSString *)size Width:(NSString *)w Height:(NSString *)h Hash:(NSString *)hash
+{
+    accessKey = [NSString stringWithFormat:@"CXmPmkJtzAeP9dSqa_h684PIUtGX8eCIejkMXp9T"];
+    secertKey = [NSString stringWithFormat:@"VqGtXggvG7010TFozjuHqgSqLIlQpkdizbvhPLA-"];
+    NSString *strTemp = [NSString stringWithFormat:@"shaiwawa-app"];
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:@{@"scope":strTemp,@"dealine":@1407957644}];
+    //,@"returnBody":@"{\"key\":$(key),\"hash\":$(etag), \"w\":$(imageInfo.width), \"h\":$(imageInfo.height)}"
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary options:NSJSONWritingPrettyPrinted error:nil];
+    NSString * jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    NSString *signingStr = [jsonStr base64String];
+    NSString *encodedSign = [self hmacsha:signingStr];
+    encodedSign = [encodedSign base64String];
+    token = [[[[accessKey stringByAppendingString:@":"] stringByAppendingString:encodedSign] stringByAppendingString:@":"] stringByAppendingString:signingStr];
+    NSString * tmp = @"CXmPmkJtzAeP9dSqa_h684PIUtGX8eCIejkMXp9T:f0BjwS8-LSECEJ_XneSv2Wczpp4=:eyJzY29wZSI6InNoYWl3YXdhLWFwcCIsImRlYWRsaW5lIjoxNDA3OTU4NTg1fQ==";
+    sevenCowUpload = [[QiniuSimpleUploader alloc] initWithToken:tmp];
+    //设置消息器，消息接收器必须实现接口QiniuUploadDelegate。
+    sevenCowUpload.delegate = self;
+}
+// Upload progress
+- (void)uploadProgressUpdated:(NSString *)theFilePath percent:(float)percent
+{
+    NSString *progressStr = [NSString stringWithFormat:@"Progress Updated: - %f\n", percent];
+    
+    NSLog(@"%@",progressStr);
+}
+
+- (void)uploadSucceeded:(NSString *)theFilePath ret:(NSDictionary *)ret
+{
+    NSString *succeedMsg = [NSString stringWithFormat:@"Upload Succeeded: - Ret: %@\n", ret];
+    
+    NSLog(@"%@",succeedMsg);
+   
+}
+
+// Upload failed
+- (void)uploadFailed:(NSString *)theFilePath error:(NSError *)error
+{
+    NSString *failMsg = [NSString stringWithFormat:@"Upload Failed: %@  - Reason: %@", theFilePath, error];
+    NSLog(@"%@",failMsg);
+    
+}
+
+//
+- (NSString *) timeString {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat: @"yyyy-MM-dd-HH-mm-ss-zzz"];
+    return [formatter stringFromDate:[NSDate date]];
 }
 
 - (void)topViewData
@@ -82,6 +154,7 @@
     else
     {
         NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Avatar"] stringByAppendingPathComponent:@"avatar_DefaultPic.png"];
+        
         UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
         _touXiangView.image = savedImage;
     }
@@ -128,7 +201,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [picker dismissViewControllerAnimated:YES completion:^{}];
-    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
     // 保存图片至本地，方法见下文
     
     [self getRandPictureName];
@@ -136,6 +209,17 @@
     [self saveImage:image withName:[NSString stringWithFormat:@"User_avatar_NumPic%i.png",randNum]];
      [_touXiangView setImage:image];
     NSString *fullPath = [[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"/Avatar"] stringByAppendingPathComponent:[NSString stringWithFormat:@"User_avatar_NumPic%i.png",randNum]];
+    
+    avatarFilePath = fullPath;
+    avatarKey = [NSString stringWithFormat:@"User_avatar_NumPic%i.png",randNum];
+    // 开始上传
+    
+    int timeInterval = [[[NSDate date] dateByAddingTimeInterval:3600 * 10] timeIntervalSince1970];
+    
+    [self imageInfo:avatarKey Dealine:[NSString stringWithFormat:@"%i",timeInterval] Name:avatarKey Size:@"1" Width:[NSString stringWithFormat:@"%f",image.size.width] Height:[NSString stringWithFormat:@"%f",image.size.height] Hash:@"1"];
+    
+    [sevenCowUpload uploadFile:avatarFilePath key:avatarKey extra:nil];
+    
     users.avatar = fullPath;
     [[HttpService sharedInstance] updateUserInfo:@{@"user_id":users.uid,@"username":users.username,@"avatar":users.avatar,@"sex":users.sex,@"qq":[NSNull null],@"weibo":[NSNull null],@"wechat":[NSNull null]} completionBlock:^(id object) {
 //        [SVProgressHUD showSuccessWithStatus:@"更新成功"];
@@ -159,6 +243,8 @@
     NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Avatar"] stringByAppendingPathComponent:imageName];
     // 将图片写入文件
     [imageData writeToFile:fullPath atomically:NO];
+    
+    
 }
 //NSData * UIImageJPEGRepresentation ( UIImage *image, CGFloat compressionQuality
 //创建沙盒下文件夹
@@ -209,9 +295,12 @@
                                   
                                   myBabyList = [object objectForKey:@"result"];
                                 babyLabel.text = [NSString stringWithFormat:@"宝宝 (%i)",[myBabyList count]];
-                                  [SVProgressHUD showSuccessWithStatus:@"获取成功"];
                               } failureBlock:^(NSError *error, NSString *responseString) {
-                                  [SVProgressHUD showErrorWithStatus:responseString];
+                                  NSString * msg = responseString;
+                                  if (error) {
+                                      msg = @"加载失败";
+                                  }
+                                  [SVProgressHUD showErrorWithStatus:msg];
                               }];
     
     
@@ -235,9 +324,12 @@
     [[HttpService sharedInstance] getRecordList:@{@"offset":@"0", @"pagesize":@"10",@"uid":users.uid} completionBlock:^(id object) {
         
         dynamicLabel.text = [NSString stringWithFormat:@"动态 (%i)",[object count]];
-        [SVProgressHUD showSuccessWithStatus:@"加载完成"];
     } failureBlock:^(NSError *error, NSString *responseString) {
-        [SVProgressHUD showErrorWithStatus:responseString];
+        NSString * msg = responseString;
+        if (error) {
+            msg = @"加载失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
     }];
     
     UIImage *imageJianTou = [UIImage imageNamed:@"main_jiantou.png"];

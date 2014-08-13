@@ -13,4 +13,6 @@
     NSMutableArray *friendsArr;
 }
 @property (strong, nonatomic) IBOutlet UITableView *goodFriendListTableView;
+@property (weak, nonatomic) IBOutlet UITextField *keyworkField;
+
 @end

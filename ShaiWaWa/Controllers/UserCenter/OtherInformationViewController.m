@@ -10,6 +10,11 @@
 #import "UIViewController+BarItemAdapt.h"
 #import "SendValidateMsgViewController.h"
 
+#import "HttpService.h"
+#import "SVProgressHUD.h"
+#import "UserDefault.h"
+#import "UserInfo.h"
+
 @interface OtherInformationViewController ()
 
 @end
@@ -103,7 +108,10 @@
 
 - (void)sendValidateMsg
 {
+    UserInfo *users = [[UserDefault sharedInstance] userInfo];
+    
     SendValidateMsgViewController *validateMsg = [[SendValidateMsgViewController alloc] init];
+    validateMsg.unfamiliarId = users.uid;
     [self.navigationController pushViewController:validateMsg animated:YES];
 }
 @end

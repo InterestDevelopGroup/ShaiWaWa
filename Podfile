@@ -11,6 +11,7 @@ pod 'CorePlot', '~> 1.5.1'
 pod 'Reachability', '~> 3.1.1'
 pod 'SVProgressHUD', '~> 1.0'
 pod 'MBProgressHUD', '~> 0.8'
+pod 'Base64', '~> 1.0.1'
 #xcodeproj 'ShaiWaWa.xcodeproj'
 end
 

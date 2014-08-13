@@ -59,13 +59,24 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    dyArray = [[NSMutableArray alloc] init];
+    if (![dyArray isEqual:[NSNull null]]) {
+        [_dynamicPageTableView addHeaderWithTarget:self action:@selector(refreshData:)];
+        [_dynamicPageTableView setHeaderRefreshingText:@"数据正在加载"];
+        [_dynamicPageTableView headerBeginRefreshing];
+        
+        [_dynamicPageTableView addFooterWithTarget:self action:@selector(loadMoreData)];
+        [_dynamicPageTableView setFooterPullToRefreshText:@"上拉加载更多"];
+        [_dynamicPageTableView setFooterRefreshingText:@"数据正在加载"];
+    }
+   
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-
+    
+    
     [self initUI];
     __block __weak ChooseModeViewController *lchoose = self;
     [self setSpecialBlock:^(NSMutableArray *arr)
@@ -200,11 +211,11 @@
     else
     {
         if ([UIScreen mainScreen].bounds.size.height < 490) {
-              _releaseBtn.frame = CGRectMake(_dynamicPageTableView.bounds.size.width-60, [UIScreen mainScreen].bounds.size.height-120 , 44, 46);
+              _releaseBtn.frame = CGRectMake(_dynamicPageTableView.bounds.size.width-60, [UIScreen mainScreen].bounds.size.height-150 , 44, 46);
         }
         else
         {
-    _releaseBtn.frame = CGRectMake(_dynamicPageTableView.bounds.size.width-60, [UIScreen mainScreen].bounds.size.height-50 , 44, 46);
+            _releaseBtn.frame = CGRectMake(_dynamicPageTableView.bounds.size.width-60, [UIScreen mainScreen].bounds.size.height-50 , 44, 46);
         }
     }
     __block __weak ChooseModeViewController *lchoose = self;
@@ -220,14 +231,8 @@
     }];
     [_shareView addSubview:sv];
     
-    dyArray = [[NSMutableArray alloc] init];
     
-    [_dynamicPageTableView addHeaderWithTarget:self action:@selector(refreshData:)];
-    [_dynamicPageTableView setHeaderRefreshingText:@"数据正在加载"];
-    [_dynamicPageTableView headerBeginRefreshing];
-    [_dynamicPageTableView addFooterWithTarget:self action:@selector(loadMoreData)];
-    [_dynamicPageTableView setFooterPullToRefreshText:@"上拉加载更多"];
-    [_dynamicPageTableView setFooterRefreshingText:@"数据正在加载"];
+    
     
     //[_dynamicPageTableView footerBeginRefreshing];
     
@@ -260,6 +265,7 @@
     [[HttpService sharedInstance] getRecordList:@{@"offset":@"0", @"pagesize":@"10",@"uid":users.uid} completionBlock:^(id object) {
         dyArray = [object objectForKey:@"result"];
         [_dynamicPageTableView reloadData];
+        
     } failureBlock:^(NSError *error, NSString *responseString) {
         NSString * msg = responseString;
         if (error) {
@@ -297,13 +303,23 @@
 }
 
 #pragma mark - UITableView DataSources and Delegate
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [dyArray count];
+    if (![dyArray isEqual:[NSNull null]]) {
+        _btnAdd.hidden = YES;
+        _btnSearch.hidden = YES;
+        _btnView.hidden = YES;
+        _releaseBtn.hidden = NO;
+         return [dyArray count];
+    }
+    else
+    {
+        _btnAdd.hidden = NO;
+        _btnSearch.hidden = NO;
+        _btnView.hidden = NO;
+        _releaseBtn.hidden = YES;
+        return 0;
+    }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

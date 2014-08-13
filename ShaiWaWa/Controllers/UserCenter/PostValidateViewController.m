@@ -97,6 +97,7 @@
             if (_validateCoreTextField.text.length == 6) {
                 myDelegate.postValidateCore = _validateCoreTextField.text;
                 [ControlCenter pushToFinishRegisterVC];
+                 _validateCoreTextField.text = nil;
             }
             else
             {
@@ -111,8 +112,24 @@
     }
     else if ([myDelegate.postValidateType isEqualToString:@"addrBook"])
     {
-        SearchAddressListViewController *addressListVC = [[SearchAddressListViewController alloc] init];
-        [self.navigationController pushViewController:addressListVC animated:YES];
+        
+        if (_validateCoreTextField.text.length > 0) {
+            if (_validateCoreTextField.text.length == 6) {
+                myDelegate.postValidateCore = _validateCoreTextField.text;
+                SearchAddressListViewController *addressListVC = [[SearchAddressListViewController alloc] init];
+                [self.navigationController pushViewController:addressListVC animated:YES];
+                _validateCoreTextField.text = nil;
+            }
+            else
+            {
+                [SVProgressHUD showErrorWithStatus:@"输入验证码格式有误"];
+            }
+        }
+        else
+        {
+            [SVProgressHUD showErrorWithStatus:@"文本框不能为空"];
+        }
+
     }
     else
     {

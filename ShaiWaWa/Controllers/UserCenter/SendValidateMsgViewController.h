@@ -10,4 +10,6 @@
 
 @interface SendValidateMsgViewController : CommonViewController<UITextFieldDelegate>
 
+@property (weak, nonatomic) IBOutlet UITextField *remarkSendField;
+@property (nonatomic, strong) NSString *unfamiliarId;
 @end

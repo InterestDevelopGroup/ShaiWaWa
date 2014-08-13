@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SendValidateMsgViewController">
             <connections>
+                <outlet property="remarkSendField" destination="RVB-4n-4qi" id="UgS-Bb-wfP"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

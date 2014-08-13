@@ -297,6 +297,9 @@
         if (isError) {
             return ;
         }
+        if (success) {
+            success(obj);
+        }
         
     } failureBlock:failure];
 }
@@ -870,11 +873,7 @@
 //        Friend *friend = [self mapModel:[[obj objectForKey:@"result"] objectAtIndex:0] withClass:[Friend class]];
         
         if (success) {
-            if ([[obj objectForKey:@"result"] count] > 0) {
-                success([obj objectForKey:@"result"]);
-            }
-            else
-                success([[obj objectForKey:@"result"] objectAtIndexPath:0]);
+            success(obj);
         }
     } failureBlock:failure];
 }

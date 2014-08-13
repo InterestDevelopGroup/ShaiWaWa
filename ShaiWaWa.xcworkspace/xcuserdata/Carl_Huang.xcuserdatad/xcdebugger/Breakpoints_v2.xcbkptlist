@@ -72,11 +72,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ShaiWaWa/Controllers/UserCenter/ChooseModeViewController.m"
-            timestampString = "429541278.889383"
+            timestampString = "429622058.222002"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "414"
-            endingLineNumber = "414"
+            startingLineNumber = "430"
+            endingLineNumber = "430"
             landmarkName = "-praiseDYEvent:"
             landmarkType = "5">
          </BreakpointContent>

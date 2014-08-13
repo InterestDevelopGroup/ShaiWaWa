@@ -9,6 +9,9 @@
 #import "SearchAddressBookViewController.h"
 #import "UIViewController+BarItemAdapt.h"
 #import "PostValidateViewController.h"
+#import "HttpService.h"
+#import "SVProgressHUD.h"
+#import "ControlCenter.h"
 @interface SearchAddressBookViewController ()
 
 @end
@@ -44,8 +47,28 @@
 }
 - (IBAction)addrBookNext:(id)sender
 {
-    PostValidateViewController *postValidate = [[PostValidateViewController alloc] init];
     myDelegate.postValidateType = @"addrBook";
-    [self.navigationController pushViewController:postValidate animated:YES];
+    [_phoneField resignFirstResponder];
+    if (_phoneField.text.length > 0) {
+        if (_phoneField.text.length == 11) {
+            [[HttpService sharedInstance] sendValidateCode:@{@"phone":_phoneField.text} completionBlock:^(id object) {
+                myDelegate.postValidatePhoneNum = _phoneField.text;
+                
+                _phoneField.text = nil;
+                [ControlCenter pushToPostValidateVC];
+            } failureBlock:^(NSError *error, NSString *responseString) {
+                [SVProgressHUD showErrorWithStatus:responseString];
+            }];
+        }
+        else
+        {
+            [SVProgressHUD showErrorWithStatus:@"请输入正确手机号码"];
+        }
+        
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:@"不能为空"];
+    }
 }
 @end

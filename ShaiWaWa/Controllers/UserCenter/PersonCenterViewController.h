@@ -8,11 +8,13 @@
 
 #import "CommonViewController.h"
 #import "UserInfo.h"
+#import "QiniuSimpleUploader.h"
 
-@interface PersonCenterViewController : CommonViewController<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate>
+@interface PersonCenterViewController : CommonViewController<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,QiniuUploadDelegate>
 {
     UserInfo *users;
     int randNum;
+    QiniuSimpleUploader *sevenCowUpload;
 }
 @property (strong, nonatomic) IBOutlet UIButton *babyButton;
 

@@ -16,7 +16,9 @@
 #import "UserDefault.h"
 #import "UserInfo.h"
 @interface MyGoodFriendsListViewController ()
-
+{
+    NSMutableArray *friendList;
+}
 @end
 
 @implementation MyGoodFriendsListViewController
@@ -49,19 +51,26 @@
     self.title = @"我的好友";
     [self setLeftCusBarItem:@"square_back" action:nil];
     UserInfo *user = [[UserDefault sharedInstance] userInfo];
+    friendList = [[NSMutableArray alloc] init];
     UIImage *img = [[UIImage imageNamed:@"main_2-bg2.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(15, 15, 15, 15)];
     UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
     _goodFriendListTableView.backgroundView = imgView;
     [_goodFriendListTableView registerNibWithName:@"MyGoodFriendsListCell" reuseIdentifier:@"Cell"];
-    if (4*80 < _goodFriendListTableView.bounds.size.height) {
-        _goodFriendListTableView.frame = CGRectMake(20, 60, 285,4*80);
+    if ([friendList count]*80 < _goodFriendListTableView.bounds.size.height) {
+        _goodFriendListTableView.frame = CGRectMake(20, 60, 285,[friendList count]*80);
     }
-    [[HttpService sharedInstance] getFriendList:@{@"uid":user.uid,@"offset":@"1", @"pagesize": @"10"} completionBlock:^(id object) {
+    [[HttpService sharedInstance] getFriendList:@{@"uid":user.uid,@"offset":@"0", @"pagesize": @"10"} completionBlock:^(id object) {
         
-        
-        [SVProgressHUD showSuccessWithStatus:@"获取成功"];
+        if (![[object objectForKey:@"result"] isEqual:[NSNull null]]) {
+              friendList = [object objectForKey:@"result"];
+              [_goodFriendListTableView reloadData];
+        }
     } failureBlock:^(NSError *error, NSString *responseString) {
-        [SVProgressHUD showErrorWithStatus:responseString];
+        NSString * msg = responseString;
+        if (error) {
+            msg = @"加载失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
     }];
     
 }
@@ -69,7 +78,7 @@
 #pragma mark - UITableView DataSources and Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return [friendList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -89,12 +98,32 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     FriendHomeViewController *friendHomeVC = [[FriendHomeViewController alloc] init];
+    friendHomeVC.friendId = [[friendList objectAtIndex:indexPath.row] objectForKey:@"id"];
     [self.navigationController pushViewController:friendHomeVC animated:YES];
 }
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+    UserInfo *users = [[UserDefault sharedInstance] userInfo];
     [textField resignFirstResponder];
+    [[HttpService sharedInstance] searchFriend:@{@"uid":users.uid,
+                                                 @"keyword":_keyworkField.text,
+                                                 @"offset":@"0",
+                                                 @"pagesize":@"10"} completionBlock:^(id object) {
+                                                     if (![[object objectForKey:@"result"] isEqual:[NSNull null]]) {
+                                                         friendList = [object objectForKey:@"result"];
+                                                         if ([friendList count]*80 < _goodFriendListTableView.bounds.size.height) {
+                                                             _goodFriendListTableView.frame = CGRectMake(20, 60, 285,[friendList count]*80);
+                                                         }
+                                                         [_goodFriendListTableView reloadData];
+                                                     }
+                                                 } failureBlock:^(NSError *error, NSString *responseString) {
+                                                     NSString * msg = responseString;
+                                                     if (error) {
+                                                         msg = @"加载失败";
+                                                     }
+                                                     [SVProgressHUD showErrorWithStatus:msg];
+                                                 }];
     return YES;
 }
 @end

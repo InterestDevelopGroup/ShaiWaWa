@@ -10,7 +10,7 @@
 
 #import <ShareSDK/ShareSDK.h>
 
-
+#import "HttpService.h"
 
 @implementation TheThirdPartyLoginView
 
@@ -131,35 +131,37 @@
          if (result)
          {
              
-             NSLog(@"哈哈哈QQ!");
-             //                        PFQuery *query = [PFQuery queryWithClassName:@"UserInfo"];
-             //                        [query whereKey:@"uid" equalTo:[userInfo uid]];
-             //                        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
-             //                        {
-             //                            if ([objects count] == 0)
-             //                            {
-             //                                 PFObject *newUser = [PFObject objectWithClassName:@"UserInfo"];
-             //                                 [newUser setObject:[userInfo uid] forKey:@"uid"];
-             //                                 [newUser setObject:[userInfo nickname] forKey:@"name"];
-             //                                 [newUser setObject:[userInfo icon] forKey:@"icon"];
-             //                                 [newUser saveInBackground];
-             //                                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Hello" message:@"欢迎注册" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles: nil];
-             //                                 [alertView show];
-             //                                 [alertView release];
-             //                            }
-             //                            else
-             //                            {
-             //                                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Hello" message:@"欢迎回来" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles: nil];
-             //                                 [alertView show];
-             //                                 [alertView release];
-             //                            }
-             //                        }];
+             [[HttpService sharedInstance] openLogin:@{@"openid":[userInfo uid],
+                                                       @"type":@"1"} completionBlock:^(id object) {
+                                                           NSLog(@"%@",object);
+             } failureBlock:^(NSError *error, NSString *responseString) {
+                 NSLog(@"%@",responseString);
+             }];
+             
+             NSLog(@"获取用户所属平台类型:%d",[userInfo type]);
+             NSLog(@"获取用户个人主页:%@",[userInfo url]);
+             NSLog(@"获取用户认证类型:%d",[userInfo verifyType]);
+             NSLog(@"获取用户职业信息:%@",[userInfo works]);
+             NSLog(@"获取用户id:%@",[userInfo uid]);
+             NSLog(@"获取用户昵称:%@",[userInfo nickname]);
+             NSLog(@"获取用户个人简介:%@",[userInfo aboutMe]);
+             NSLog(@"获取用户所属的应用:%@",[userInfo app]);
+             NSLog(@"获取用户的原始数据信息:%@",[userInfo sourceData]);
+             NSLog(@"获取用户分享数:%d",[userInfo shareCount]);
+//             NSLog(@"设置用户的原始数据信息:%@",[userInfo setSourceData:<#(NSDictionary *)#>])
+//             NSLog(@"设置授权凭证:%@",[userInfo setCredential:<#(id<ISSPlatformCredential>)#>]);
+             NSLog(@"获取用户注册时间:%f",[userInfo regAt]);
+             NSLog(@"获取用户个人头像:%@",[userInfo profileImage]);
+             NSLog(@"获取用户等级%d",[userInfo level]);
+             NSLog(@"获取用户性别:%d",[userInfo gender]);
+             NSLog(@"获取用户关注数:%d",[userInfo friendCount]);
+             NSLog(@"获取用户粉丝数:%d",[userInfo followerCount]);
+             NSLog(@"获取用户的教育信息列表:%@",[userInfo educations]);
+//             NSLog(@"获取授权凭证%@",[userInfo credential]);
+             NSLog(@"获取用户生日:%@",[userInfo birthday]);
+             NSLog(@"%@",[[userInfo credential] token]);
          }
-         //            MainViewController *mainVC = [[[MainViewController alloc] init] autorelease];
-         //            [self.navigationController pushViewController:mainVC animated:YES];
      }];
-    //}
-    
 }
 
 @end

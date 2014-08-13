@@ -15,11 +15,13 @@
 #import "UserInfo.h"
 #import "Friend.h"
 @interface FriendHomeViewController ()
-
+{
+    NSMutableArray *babyList;
+}
 @end
 
 @implementation FriendHomeViewController
-
+@synthesize friendId;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -83,10 +85,25 @@
 {
     UILabel *babyLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 120, _babyButton.bounds.size.height-10)];
     babyLabel.backgroundColor = [UIColor clearColor];
-    babyLabel.text = [NSString stringWithFormat:@"宝宝 (%i)",2];
     babyLabel.font = [UIFont systemFontOfSize:15];
     babyLabel.textColor = [UIColor darkGrayColor];
     [_babyButton addSubview:babyLabel];
+    
+    [[HttpService sharedInstance] getBabyList:@{@"offset":@"0",
+                                                @"pagesize":@"10",
+                                                @"uid":friendId}
+                              completionBlock:^(id object) {
+                                  
+                                  babyList = [object objectForKey:@"result"];
+                                  babyLabel.text = [NSString stringWithFormat:@"宝宝 (%i)",[babyList count]];
+                              } failureBlock:^(NSError *error, NSString *responseString) {
+                                  NSString * msg = responseString;
+                                  if (error) {
+                                      msg = @"加载失败";
+                                  }
+                                  [SVProgressHUD showErrorWithStatus:msg];
+                              }];
+    
     
 //    UIImage *imageJianTou = [UIImage imageNamed:@"main_jiantou.png"];
 //    UIImageView *jianTou = [[UIImageView alloc] initWithImage:imageJianTou];
@@ -98,10 +115,19 @@
 {
     UILabel *dynamicLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 120, _dynamicButton.bounds.size.height-10)];
     dynamicLabel.backgroundColor = [UIColor clearColor];
-    dynamicLabel.text = [NSString stringWithFormat:@"动态 (%i)",28];
     dynamicLabel.font = [UIFont systemFontOfSize:15];
     dynamicLabel.textColor = [UIColor darkGrayColor];
     [_dynamicButton addSubview:dynamicLabel];
+    
+    [[HttpService sharedInstance] getRecordList:@{@"offset":@"0", @"pagesize":@"10",@"uid":friendId} completionBlock:^(id object) {
+        dynamicLabel.text = [NSString stringWithFormat:@"动态 (%i)",[object count]];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        NSString * msg = responseString;
+        if (error) {
+            msg = @"加载失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+    }];
     
 //    UIImage *imageJianTou = [UIImage imageNamed:@"main_jiantou.png"];
 //    UIImageView *jianTou = [[UIImageView alloc] initWithImage:imageJianTou];
