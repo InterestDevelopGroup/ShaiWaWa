@@ -253,6 +253,7 @@
         [SVProgressHUD showErrorWithStatus:responseString];
     }];
      */
+    [self isNoBabyAndFriend];
 
     
 }
@@ -306,18 +307,11 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (![dyArray isEqual:[NSNull null]]) {
-        _btnAdd.hidden = YES;
-        _btnSearch.hidden = YES;
-        _btnView.hidden = YES;
-        _releaseBtn.hidden = NO;
+      
          return [dyArray count];
     }
     else
     {
-        _btnAdd.hidden = NO;
-        _btnSearch.hidden = NO;
-        _btnView.hidden = NO;
-        _releaseBtn.hidden = YES;
         return 0;
     }
 }
@@ -344,6 +338,93 @@
         }
     }
     
+    
+    if (![[[dyArray objectAtIndex:indexPath.row] objectForKey:@"baby_id"] isEqual:[NSNull null]]) {
+        if (dyArray != nil) {
+            
+            [[HttpService sharedInstance] getBabyInfo:@{@"baby_id":[[dyArray objectAtIndex:indexPath.row] objectForKey:@"baby_id"]} completionBlock:^(id object) {
+                
+                
+                 if (![[[object objectForKey:@"result"] objectAtIndex:0] isEqual:[NSNull null]]) {
+                
+//                     dynamicCell.imageView.image = [UIImage imageWithContentsOfFile:[[[object objectForKey:@"result"] objectAtIndex:0] objectForKey:@"avatar"]];
+                     dynamicCell.babyNameLabel.text = [[[object objectForKey:@"result"] objectAtIndex:0] objectForKey:@"baby_name"];
+                      dynamicCell.babyBirthdayLabel.text = [[[object objectForKey:@"result"] objectAtIndex:0] objectForKey:@"birthday"];
+                 }
+                //summaryValue = [object objectForKey:@"result"];
+                //[_summaryTableView reloadData];
+            } failureBlock:^(NSError *error, NSString *responseString) {
+                [SVProgressHUD showErrorWithStatus:responseString];
+            }];
+        }
+    }
+    
+    //赞用户，取消赞用户模块
+    [[HttpService sharedInstance] getLikingList:@{@"rid":[[dyArray objectAtIndex:indexPath.row] objectForKey:@"rid"]} completionBlock:^(id object) {
+        if (![[object objectForKey:@"result"] isEqual:[NSNull null]]) {
+              [dynamicCell.zanButton setTitle:[NSString stringWithFormat:@"%d",[[object objectForKey:@"result"] count]] forState:UIControlStateNormal];
+            
+            [[HttpService sharedInstance] getUserInfo:@{@"uid":[[[object objectForKey:@"result"] objectAtIndex:0] objectForKey:@"uid"]} completionBlock:^(id obj) {
+                //NSLog(@"%@ %@",[[[obj objectForKey:@"result"] objectAtIndex:0] objectForKey:@"avatar"],users.avatar);
+                [dynamicCell.praiseUserFirstBtn setImage:[UIImage imageWithContentsOfFile:users.avatar] forState:UIControlStateNormal];
+                dynamicCell.praiseUserFirstBtn.hidden = NO;
+                //                 [dynamicCell.praiseUserFirstBtn setImage:[UIImage imageWithContentsOfFile:users.avatar] forState:UIControlStateNormal];
+            } failureBlock:^(NSError *error, NSString *responseString) {
+                NSString * msg = responseString;
+                if (error) {
+                    msg = @"加载失败";
+                }
+                [SVProgressHUD showErrorWithStatus:msg];
+            }];
+            if ([[object objectForKey:@"result"] count]>1) {
+                [[HttpService sharedInstance] getUserInfo:@{@"uid":[[[object objectForKey:@"result"] objectAtIndex:1] objectForKey:@"uid"]} completionBlock:^(id obj) {
+//                    [dynamicCell.praiseUserSecondBtn setImage:[UIImage imageWithContentsOfFile:[[[obj objectForKey:@"result"] objectAtIndex:0] objectForKey:@"avatar"]] forState:UIControlStateNormal];
+                    [dynamicCell.praiseUserSecondBtn setImage:[UIImage imageWithContentsOfFile:users.avatar] forState:UIControlStateNormal];
+                    dynamicCell.praiseUserSecondBtn.hidden = NO;
+                } failureBlock:^(NSError *error, NSString *responseString) {
+                    NSString * msg = responseString;
+                    if (error) {
+                        msg = @"加载失败";
+                    }
+                    [SVProgressHUD showErrorWithStatus:msg];
+                }];
+            }
+            if ([[object objectForKey:@"result"] count]>2) {
+                [[HttpService sharedInstance] getUserInfo:@{@"uid":[[[object objectForKey:@"result"] objectAtIndex:2] objectForKey:@"uid"]} completionBlock:^(id obj) {
+//                    [dynamicCell.praiseUserThirdBtn setImage:[UIImage imageWithContentsOfFile:[[[obj objectForKey:@"result"] objectAtIndex:0] objectForKey:@"avatar"]] forState:UIControlStateNormal];
+                    [dynamicCell.praiseUserThirdBtn setImage:[UIImage imageWithContentsOfFile:users.avatar] forState:UIControlStateNormal];
+                     dynamicCell.praiseUserThirdBtn.hidden = NO;
+                } failureBlock:^(NSError *error, NSString *responseString) {
+                    NSString * msg = responseString;
+                    if (error) {
+                        msg = @"加载失败";
+                    }
+                    [SVProgressHUD showErrorWithStatus:msg];
+                }];
+                
+            }
+            
+            
+           
+        }
+        else
+        {
+            [dynamicCell.zanButton setTitle:[NSString stringWithFormat:@"0"] forState:UIControlStateNormal];
+            dynamicCell.praiseUserFirstBtn.hidden = YES;
+            dynamicCell.praiseUserSecondBtn.hidden = YES;
+            dynamicCell.praiseUserThirdBtn.hidden = YES;
+        }
+        
+      
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        NSString * msg = responseString;
+        if (error) {
+            msg = @"加载失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+    }];
+    
+    
     dynamicCell.moreBtn.tag = indexPath.row + 2222;
     dynamicCell.zanButton.tag = indexPath.row + 555;
     [dynamicCell.zanButton addTarget:self action:@selector(praiseDYEvent:) forControlEvents:UIControlEventTouchUpInside];
@@ -357,19 +438,7 @@
     [dynamicCell.moreBtn addTarget:self action:@selector(showShareGrayView:) forControlEvents:UIControlEventTouchUpInside];
     
     [dynamicCell.topicBtn addTarget:self action:@selector(showTopicOfDyVC) forControlEvents:UIControlEventTouchUpInside];
-    /*
-     // 取当前section，设置单元格显示内容。
-     NSInteger section = indexPath.section;
-     // 获取这个分组的省份名称，再根据省份名称获得这个省份的城市列表。
-     NSString *sectionType = [sectionArr objectAtIndex:section];
-     NSArray *list = [babyList objectForKey:sectionType];
-     [list objectAtIndex:indexPath.row];
-     */
-    //babyListCell.selectionStyle = UITableViewCellSelectionStyleNone;
-    //    babyListCell.babyImage.image = [UIImage imageNamed:@""];
-    //    babyListCell.babyNameLabel.text = [NSString stringWithFormat:@""];
-    //    babyListCell.babyOldLabel.text = [NSString stringWithFormat:@""];
-    //    babyListCell.babySexImage.image = [UIImage imageNamed:@""];
+
     
     return dynamicCell;
     
@@ -394,7 +463,7 @@
     [self hideGayShareV:nil];
     [[HttpService sharedInstance] deleteRecord:@{@"rid":[[dyArray objectAtIndex:([mydelegate.deleteDyId intValue]-2222)] objectForKey:@"rid"],@"uid":users.uid} completionBlock:^(id object) {
         [[HttpService sharedInstance] getRecordList:@{@"offset":@"0", @"pagesize":@"10",@"uid":users.uid} completionBlock:^(id object) {
-            dyArray = [object copy];
+            dyArray = [object objectForKey:@"result"];
             [_dynamicPageTableView reloadData];
             [SVProgressHUD showSuccessWithStatus:@"加载完成"];
         } failureBlock:^(NSError *error, NSString *responseString) {
@@ -430,7 +499,17 @@
             NSLog(@"添加赞:%@",@{@"rid":[[dyArray objectAtIndex:(button.tag-555)] objectForKey:@"rid"],@"uid":users.uid});
             
             [[HttpService sharedInstance] addLike:@{@"rid":[[dyArray objectAtIndex:(button.tag-555)] objectForKey:@"rid"],@"uid":users.uid} completionBlock:^(id object) {
-                [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
+                
+                [[HttpService sharedInstance] getLikingList:@{@"rid":[[dyArray objectAtIndex:(button.tag-555)] objectForKey:@"rid"]} completionBlock:^(id obj) {
+                    
+                    [_dynamicPageTableView reloadData];
+                } failureBlock:^(NSError *error, NSString *responseString) {
+                    NSString * msg = responseString;
+                    if (error) {
+                        msg = @"加载失败";
+                    }
+                    [SVProgressHUD showErrorWithStatus:msg];
+                }];
             } failureBlock:^(NSError *error, NSString *responseString) {
                 NSString * msg = responseString;
                 if (error) {
@@ -443,7 +522,15 @@
                               @"rid":[[dyArray objectAtIndex:(button.tag-555)] objectForKey:@"rid"],@"uid":users.uid});
             [[HttpService sharedInstance] cancelLike:@{@"like_id":[[[object objectForKey:@"result"] objectAtIndex:[praiseUserList indexOfObject:users.uid]] objectForKey:@"like_id"],
                                                        @"rid":[[dyArray objectAtIndex:(button.tag-555)] objectForKey:@"rid"],@"uid":users.uid} completionBlock:^(id object) {
-                [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
+                                                           [[HttpService sharedInstance] getLikingList:@{@"rid":[[dyArray objectAtIndex:(button.tag-555)] objectForKey:@"rid"]} completionBlock:^(id obj) {
+                                                               [_dynamicPageTableView reloadData];
+                                                           } failureBlock:^(NSError *error, NSString *responseString) {
+                                                               NSString * msg = responseString;
+                                                               if (error) {
+                                                                   msg = @"加载失败";
+                                                               }
+                                                               [SVProgressHUD showErrorWithStatus:msg];
+                                                           }];
             } failureBlock:^(NSError *error, NSString *responseString) {
                 NSString * msg = responseString;
                 if (error) {
@@ -456,8 +543,56 @@
         else
         {
              NSLog(@"第一次添加赞:%@",@{@"rid":[[dyArray objectAtIndex:(button.tag-555)] objectForKey:@"rid"],@"uid":users.uid});
-            [[HttpService sharedInstance] addLike:@{@"rid":[[dyArray objectAtIndex:(button.tag-555)] objectForKey:@"rid"],@"uid":users.uid} completionBlock:^(id object) {
-                [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
+            [[HttpService sharedInstance] addLike:@{@"rid":[[dyArray objectAtIndex:(button.tag-555)] objectForKey:@"rid"],@"uid":users.uid} completionBlock:^(id obje) {
+                
+                [[HttpService sharedInstance] getLikingList:@{@"rid":[[dyArray objectAtIndex:(button.tag-555)] objectForKey:@"rid"]} completionBlock:^(id obj) {
+                DynamicCell *dycell  = (DynamicCell *)[_dynamicPageTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:(button.tag-555) inSection:0]];
+                
+                [[HttpService sharedInstance] getUserInfo:@{@"uid":[[[obj objectForKey:@"result"] objectAtIndex:0] objectForKey:@"uid"]} completionBlock:^(id objsub) {
+                    //                    [dynamicCell.praiseUserFirstBtn setImage:[UIImage imageWithContentsOfFile:[[[obj objectForKey:@"result"] objectAtIndex:0] objectForKey:@"avatar"]] forState:UIControlStateNormal];
+                    [dycell.praiseUserFirstBtn setImage:[UIImage imageWithContentsOfFile:users.avatar] forState:UIControlStateNormal];
+                } failureBlock:^(NSError *error, NSString *responseString) {
+                    NSString * msg = responseString;
+                    if (error) {
+                        msg = @"加载失败";
+                    }
+                    [SVProgressHUD showErrorWithStatus:msg];
+                }];
+                
+                if ([[obj objectForKey:@"result"] count]>1) {
+                    [[HttpService sharedInstance] getUserInfo:@{@"uid":[[[obj objectForKey:@"result"] objectAtIndex:1] objectForKey:@"uid"]} completionBlock:^(id objsub) {
+                        //                    [dynamicCell.praiseUserSecondBtn setImage:[UIImage imageWithContentsOfFile:[[[obj objectForKey:@"result"] objectAtIndex:0] objectForKey:@"avatar"]] forState:UIControlStateNormal];
+                        [dycell.praiseUserSecondBtn setImage:[UIImage imageWithContentsOfFile:users.avatar] forState:UIControlStateNormal];
+                    } failureBlock:^(NSError *error, NSString *responseString) {
+                        NSString * msg = responseString;
+                        if (error) {
+                            msg = @"加载失败";
+                        }
+                        [SVProgressHUD showErrorWithStatus:msg];
+                    }];
+                }
+                if ([[obj objectForKey:@"result"] count]>2) {
+                    [[HttpService sharedInstance] getUserInfo:@{@"uid":[[[obj objectForKey:@"result"] objectAtIndex:2] objectForKey:@"uid"]} completionBlock:^(id objsub) {
+                        //                    [dynamicCell.praiseUserThirdBtn setImage:[UIImage imageWithContentsOfFile:[[[obj objectForKey:@"result"] objectAtIndex:0] objectForKey:@"avatar"]] forState:UIControlStateNormal];
+                        [dycell.praiseUserThirdBtn setImage:[UIImage imageWithContentsOfFile:users.avatar] forState:UIControlStateNormal];
+
+                    } failureBlock:^(NSError *error, NSString *responseString) {
+                        NSString * msg = responseString;
+                        if (error) {
+                            msg = @"加载失败";
+                        }
+                        [SVProgressHUD showErrorWithStatus:msg];
+                    }];
+                    
+                }
+                    [_dynamicPageTableView reloadData];
+                } failureBlock:^(NSError *error, NSString *responseString) {
+                    NSString * msg = responseString;
+                    if (error) {
+                        msg = @"加载失败";
+                    }
+                    [SVProgressHUD showErrorWithStatus:msg];
+                }];
             } failureBlock:^(NSError *error, NSString *responseString) {
                 NSString * msg = responseString;
                 if (error) {
@@ -684,4 +819,37 @@
     [self.navigationController pushViewController:topicListOfDyVC animated:YES];
 }
 
+- (void)isNoBabyAndFriend
+{
+    [[HttpService sharedInstance] getBabyList:@{@"offset":@"0",
+                                                @"pagesize":@"10",
+                                                @"uid":users.uid}
+                              completionBlock:^(id object) {
+                                  
+                                  [[HttpService sharedInstance] getFriendList:@{@"uid":users.uid,@"offset":@"0", @"pagesize": @"10"} completionBlock:^(id obj) {
+        
+                                      if (([[object objectForKey:@"result"] isEqual:[NSNull null]] || [[object objectForKey:@"result"] count] == 0) && ([[obj objectForKey:@"result"] isEqual:[NSNull null]] || [[obj objectForKey:@"result"] count] == 0)) {
+                                          _btnAdd.hidden = NO;
+                                          _btnSearch.hidden = NO;
+                                          _btnView.hidden = NO;
+                                          _releaseBtn.hidden = YES;
+                                      }
+        
+                                  } failureBlock:^(NSError *error, NSString *responseString) {
+                                      NSString * msg = responseString;
+                                      if (error) {
+                                          msg = @"加载失败";
+                                      }
+                                      [SVProgressHUD showErrorWithStatus:msg];
+                                  }];
+
+                              } failureBlock:^(NSError *error, NSString *responseString) {
+                                  NSString * msg = responseString;
+                                  if (error) {
+                                      msg = @"加载失败";
+                                  }
+                                  [SVProgressHUD showErrorWithStatus:msg];
+                              }];
+    
+}
 @end

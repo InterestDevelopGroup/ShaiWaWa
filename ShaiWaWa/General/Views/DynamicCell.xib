@@ -124,7 +124,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" image="square_pic-7.png">
+                                        <state key="normal">
                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -134,7 +134,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                        <state key="normal" image="square_pic-8.png">
+                                        <state key="normal">
                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -144,7 +144,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                        <state key="normal" image="square_pic-9.png">
+                                        <state key="normal">
                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -181,6 +181,7 @@
             <color key="backgroundColor" red="0.8772335017103432" green="0.88731664540816324" blue="0.88731664540816324" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="addressLabel" destination="iJI-EJ-c99" id="dsg-i5-bj5"/>
+                <outlet property="babyAvatarImageView" destination="16n-xU-92a" id="M7A-Aj-eeG"/>
                 <outlet property="babyBirthdayLabel" destination="Txg-c2-wzn" id="scK-4u-ewy"/>
                 <outlet property="babyNameLabel" destination="zaO-M2-dW6" id="ijb-6Y-cPH"/>
                 <outlet property="dyContentTextView" destination="rg2-QV-IuH" id="jS0-AC-yH5"/>
@@ -199,9 +200,6 @@
         <image name="baby_4-bg-2.png" width="305" height="277"/>
         <image name="baby_baobei.png" width="69" height="68"/>
         <image name="square_pic-3.png" width="150" height="85"/>
-        <image name="square_pic-7.png" width="16" height="16"/>
-        <image name="square_pic-8.png" width="17" height="16"/>
-        <image name="square_pic-9.png" width="16" height="16"/>
         <image name="square_pinglun-2.png" width="21" height="19"/>
         <image name="square_pinglun-3.png" width="21" height="19"/>
         <image name="square_xihuan.png" width="55" height="15"/>

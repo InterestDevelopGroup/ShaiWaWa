@@ -10,6 +10,7 @@
 #import "UIViewController+BarItemAdapt.h"
 #import "MyGoodFriendsListCell.h"
 #import "OtherInformationViewController.h"
+#import "FriendHomeViewController.h"
 
 #import "HttpService.h"
 #import "SVProgressHUD.h"
@@ -60,6 +61,9 @@
     } failureBlock:^(NSError *error, NSString *responseString) {
         [SVProgressHUD showErrorWithStatus:responseString];
     }];
+    
+    
+    
 }
 
 #pragma mark - UITableView DataSources and Delegate
@@ -78,6 +82,31 @@
 {
     static NSString *identify = @"Cell";
     MyGoodFriendsListCell *cell = (MyGoodFriendsListCell *)[tableView dequeueReusableCellWithIdentifier:identify];
+    
+    [[HttpService sharedInstance] getUserInfo:@{@"uid":[[praisePersonArr objectAtIndex:indexPath.row] objectForKey:@"uid"]} completionBlock:^(id obj) {
+        cell.nickNameLabel.text = [[[obj objectForKey:@"result"] objectAtIndex:0] objectForKey:@"username"];
+        cell.headPicView.image = [UIImage imageWithContentsOfFile:[[[obj objectForKey:@"result"] objectAtIndex:0] objectForKey:@"avatar"]];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        NSString * msg = responseString;
+        if (error) {
+            msg = @"加载失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+    }];
+    
+    [[HttpService sharedInstance] getBabyList:@{@"offset":@"0",
+                                                @"pagesize":@"10",
+                                                @"uid":[[praisePersonArr objectAtIndex:indexPath.row] objectForKey:@"uid"]} completionBlock:^(id obj) {
+                                                    
+                                                    cell.countOfBabyLabel.text = [NSString stringWithFormat:@"%i个宝宝",[[obj objectForKey:@"result"] count]];
+                                                } failureBlock:^(NSError *error, NSString *responseString) {
+                                                    NSString * msg = responseString;
+                                                    if (error) {
+                                                        msg = @"加载失败";
+                                                    }
+                                                    [SVProgressHUD showErrorWithStatus:msg];
+                                                }];
+    
     cell.remarksLabel.hidden = YES;
     cell.backgroundColor = [UIColor clearColor];
     return cell;
@@ -85,7 +114,32 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    OtherInformationViewController *otherUserInfoVC = [[OtherInformationViewController alloc] init];
-    [self.navigationController pushViewController:otherUserInfoVC animated:YES];
+    UserInfo *users = [[UserDefault sharedInstance] userInfo];
+    [[HttpService sharedInstance] getFriendList:@{@"uid":users.uid,@"offset":@"0", @"pagesize": @"10"} completionBlock:^(id object) {
+        
+        if (![[object objectForKey:@"result"] isEqual:[NSNull null]]) {
+           NSMutableArray *friendList = [object objectForKey:@"result"];
+            if ([friendList containsObject:[[praisePersonArr objectAtIndex:indexPath.row] objectForKey:@"uid"]]) {
+                FriendHomeViewController *friendHomeVC = [[FriendHomeViewController alloc] init];
+                friendHomeVC.friendId = [[praisePersonArr objectAtIndex:indexPath.row] objectForKey:@"uid"];
+                [self.navigationController pushViewController:friendHomeVC animated:YES];
+            }
+            else
+            {
+                OtherInformationViewController *otherUserInfoVC = [[OtherInformationViewController alloc] init];
+                otherUserInfoVC.otherId = [[praisePersonArr objectAtIndex:indexPath.row] objectForKey:@"uid"];
+                [self.navigationController pushViewController:otherUserInfoVC animated:YES];
+            }
+            
+        }
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        NSString * msg = responseString;
+        if (error) {
+            msg = @"加载失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+    }];
+    
+    
 }
 @end

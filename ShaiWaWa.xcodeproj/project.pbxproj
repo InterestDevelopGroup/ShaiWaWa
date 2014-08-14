@@ -98,6 +98,8 @@
 		F41FEAE91980C3CB0095DB36 /* tuichu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F41FEAE81980C3CB0095DB36 /* tuichu@2x.png */; };
 		F42434621974FC97008E70C6 /* UICollectionViewWaterfallCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F424345F1974FC97008E70C6 /* UICollectionViewWaterfallCell.m */; };
 		F42434631974FC97008E70C6 /* UICollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = F42434611974FC97008E70C6 /* UICollectionViewWaterfallLayout.m */; };
+		F431482A199C57F000CAB2CD /* DynamicByUserIDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4314828199C57F000CAB2CD /* DynamicByUserIDViewController.m */; };
+		F431482B199C57F000CAB2CD /* DynamicByUserIDViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4314829199C57F000CAB2CD /* DynamicByUserIDViewController.xib */; };
 		F432BDD419762AC80086BBE9 /* baby_4-bg-1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F432BD3B19762AC80086BBE9 /* baby_4-bg-1@2x.png */; };
 		F432BDD519762AC80086BBE9 /* baby_4-bg-2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F432BD3C19762AC80086BBE9 /* baby_4-bg-2@2x.png */; };
 		F432BDD619762AC80086BBE9 /* baby_4-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F432BD3D19762AC80086BBE9 /* baby_4-bg@2x.png */; };
@@ -567,6 +569,9 @@
 		F424345F1974FC97008E70C6 /* UICollectionViewWaterfallCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewWaterfallCell.m; sourceTree = "<group>"; };
 		F42434601974FC97008E70C6 /* UICollectionViewWaterfallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewWaterfallLayout.h; sourceTree = "<group>"; };
 		F42434611974FC97008E70C6 /* UICollectionViewWaterfallLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewWaterfallLayout.m; sourceTree = "<group>"; };
+		F4314827199C57F000CAB2CD /* DynamicByUserIDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicByUserIDViewController.h; sourceTree = "<group>"; };
+		F4314828199C57F000CAB2CD /* DynamicByUserIDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicByUserIDViewController.m; sourceTree = "<group>"; };
+		F4314829199C57F000CAB2CD /* DynamicByUserIDViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DynamicByUserIDViewController.xib; sourceTree = "<group>"; };
 		F432BD3B19762AC80086BBE9 /* baby_4-bg-1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "baby_4-bg-1@2x.png"; sourceTree = "<group>"; };
 		F432BD3C19762AC80086BBE9 /* baby_4-bg-2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "baby_4-bg-2@2x.png"; sourceTree = "<group>"; };
 		F432BD3D19762AC80086BBE9 /* baby_4-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "baby_4-bg@2x.png"; sourceTree = "<group>"; };
@@ -1743,12 +1748,12 @@
 				F4A57A9D1998A8E900283B88 /* MyCollectionViewController.h */,
 				F4A57A9E1998A8E900283B88 /* MyCollectionViewController.m */,
 				F4A57A9F1998A8E900283B88 /* MyCollectionViewController.xib */,
+				F4314827199C57F000CAB2CD /* DynamicByUserIDViewController.h */,
+				F4314828199C57F000CAB2CD /* DynamicByUserIDViewController.m */,
+				F4314829199C57F000CAB2CD /* DynamicByUserIDViewController.xib */,
 				F43386AC1974C28500464D43 /* ForgetPwdViewController.h */,
 				F43386AD1974C28500464D43 /* ForgetPwdViewController.m */,
 				F43386AE1974C28500464D43 /* ForgetPwdViewController.xib */,
-				F43386AF1974C28500464D43 /* FriendHomeViewController.h */,
-				F43386B01974C28500464D43 /* FriendHomeViewController.m */,
-				F43386B11974C28500464D43 /* FriendHomeViewController.xib */,
 				F43386B21974C28500464D43 /* LocationsViewController.h */,
 				F43386B31974C28500464D43 /* LocationsViewController.m */,
 				F43386B41974C28500464D43 /* LocationsViewController.xib */,
@@ -1761,21 +1766,24 @@
 				F43386BE1974C28500464D43 /* MyGoodFriendsListViewController.h */,
 				F43386BF1974C28500464D43 /* MyGoodFriendsListViewController.m */,
 				F43386C01974C28500464D43 /* MyGoodFriendsListViewController.xib */,
+				F43386AF1974C28500464D43 /* FriendHomeViewController.h */,
+				F43386B01974C28500464D43 /* FriendHomeViewController.m */,
+				F43386B11974C28500464D43 /* FriendHomeViewController.xib */,
 				F43386C11974C28500464D43 /* OtherInformationViewController.h */,
 				F43386C21974C28500464D43 /* OtherInformationViewController.m */,
 				F43386C31974C28500464D43 /* OtherInformationViewController.xib */,
 				F43386DC1974C28500464D43 /* SendValidateMsgViewController.h */,
 				F43386DD1974C28500464D43 /* SendValidateMsgViewController.m */,
 				F43386DE1974C28500464D43 /* SendValidateMsgViewController.xib */,
+				F43386CD1974C28500464D43 /* PraiseViewController.h */,
+				F43386CE1974C28500464D43 /* PraiseViewController.m */,
+				F43386CF1974C28500464D43 /* PraiseViewController.xib */,
 				F43386C41974C28500464D43 /* PersonCenterViewController.h */,
 				F43386C51974C28500464D43 /* PersonCenterViewController.m */,
 				F43386C61974C28500464D43 /* PersonCenterViewController.xib */,
 				F43386C71974C28500464D43 /* PlatformBindViewController.h */,
 				F43386C81974C28500464D43 /* PlatformBindViewController.m */,
 				F43386C91974C28500464D43 /* PlatformBindViewController.xib */,
-				F43386CD1974C28500464D43 /* PraiseViewController.h */,
-				F43386CE1974C28500464D43 /* PraiseViewController.m */,
-				F43386CF1974C28500464D43 /* PraiseViewController.xib */,
 				F43386D01974C28500464D43 /* QRCodeCardViewController.h */,
 				F43386D11974C28500464D43 /* QRCodeCardViewController.m */,
 				F43386D21974C28500464D43 /* QRCodeCardViewController.xib */,
@@ -2270,6 +2278,7 @@
 				F432BE2019762AC80086BBE9 /* pd_gou@2x.png in Resources */,
 				F432BE4519762AC80086BBE9 /* square_sanjiaoxing@2x.png in Resources */,
 				F432BDD619762AC80086BBE9 /* baby_4-bg@2x.png in Resources */,
+				F431482B199C57F000CAB2CD /* DynamicByUserIDViewController.xib in Resources */,
 				F41F68EB1982081E00089E42 /* ShareSDKLocalizable.strings in Resources */,
 				F43388F61974C28600464D43 /* ShaiWaWa-Info.plist in Resources */,
 				F432BE1419762AC80086BBE9 /* pb_paizhao@2x.png in Resources */,
@@ -2519,6 +2528,7 @@
 				F433883C1974C28600464D43 /* UpdateUserNameViewController.m in Sources */,
 				F41F68E11982081E00089E42 /* UIImage+Util.m in Sources */,
 				F43388281974C28600464D43 /* PlatformBindViewController.m in Sources */,
+				F431482A199C57F000CAB2CD /* DynamicByUserIDViewController.m in Sources */,
 				F44CF76B199A3CB7003B7F7D /* UIScrollView+Extension.m in Sources */,
 				F43388201974C28600464D43 /* MybabyListViewController.m in Sources */,
 				F41F68DA1982081E00089E42 /* IO.m in Sources */,

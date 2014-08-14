@@ -10,6 +10,9 @@
                 <outlet property="babyButton" destination="hsL-wa-xMX" id="whQ-Fa-1V2"/>
                 <outlet property="dynamicButton" destination="gE9-Co-S28" id="p7r-T9-lSX"/>
                 <outlet property="goodFriendButton" destination="sXt-FU-yK4" id="gE1-CG-BeP"/>
+                <outlet property="otherAvatarImgView" destination="rWq-62-sIe" id="C4g-Rp-Y56"/>
+                <outlet property="otherSwwNumTextField" destination="flc-yK-kP9" id="MtS-Ln-SBl"/>
+                <outlet property="otherUserNameTextField" destination="PFP-PB-30c" id="j5x-Gy-Evk"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -36,7 +39,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="老李" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PFP-PB-30c">
-                            <rect key="frame" x="162" y="32" width="65" height="21"/>
+                            <rect key="frame" x="160" y="32" width="76" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -52,7 +55,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="346281" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="flc-yK-kP9">
-                            <rect key="frame" x="162" y="62" width="63" height="21"/>
+                            <rect key="frame" x="160" y="59" width="76" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>

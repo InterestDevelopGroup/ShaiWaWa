@@ -69,8 +69,8 @@
     [self dynamicCell];
     [self goodFriendCell];
     
-    UserInfo * user = [[UserDefault sharedInstance] userInfo];
-    [[HttpService sharedInstance] getUserInfo:@{@"uid":user.uid} completionBlock:^(id object) {
+    
+    [[HttpService sharedInstance] getUserInfo:@{@"uid":friendId} completionBlock:^(id object) {
         _friendAvatarImgView.image = [UIImage imageWithContentsOfFile:[object objectForKey:@"avatar"]];
         _friendUserNameTextField.text = [object objectForKey:@"username"];
         _friendSwwNumTextField.text = [object objectForKey:@"sww_number"];
@@ -163,9 +163,8 @@
 }
 - (void)deleteFriend
 {
-    UserInfo * user = [[UserDefault sharedInstance] userInfo];
-    Friend *friend = [[Friend alloc] init];
-    [[HttpService sharedInstance] deleteFriend:@{@"uid":user.uid,@"friend_id":friend.friend_id} completionBlock:^(id object) {
+    UserInfo * users = [[UserDefault sharedInstance] userInfo];
+    [[HttpService sharedInstance] deleteFriend:@{@"uid":users.uid,@"friend_id":friendId} completionBlock:^(id object) {
         
         [SVProgressHUD showSuccessWithStatus:@"删除成功"];
         [self.navigationController popViewControllerAnimated:YES];

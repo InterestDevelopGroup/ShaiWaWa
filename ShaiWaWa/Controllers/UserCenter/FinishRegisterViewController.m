@@ -17,7 +17,7 @@
 @end
 
 @implementation FinishRegisterViewController
-
+@synthesize userNameField,pwdField;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -45,15 +45,13 @@
     self.title = @"完成注册";
     [self setLeftCusBarItem:@"square_back" action:nil];
     mydelegate = [[UIApplication sharedApplication] delegate];
-    
-    __weak NSString *username = _userNameField.text;
-    __weak NSString *pwd = _pwdField.text;
     __weak NSString *phone = mydelegate.postValidatePhoneNum;
     __weak NSString *validateCore = mydelegate.postValidateCore;
     __weak FinishRegisterViewController *finishVC = self;
     
     [self setStrBlock:^(NSString *str){
-        [[HttpService sharedInstance] userRegister:@{@"username":username,@"password":pwd,@"phone":phone,@"sww_number":str,@"validate_code":validateCore} completionBlock:^(id object) {
+
+        [[HttpService sharedInstance] userRegister:@{@"username":finishVC.userNameField.text,@"password":finishVC.pwdField.text,@"phone":phone,@"sww_number":str,@"validate_code":validateCore} completionBlock:^(id object) {
             [SVProgressHUD showSuccessWithStatus:@"注册成功"];
             [finishVC.navigationController popToRootViewControllerAnimated:YES];
         } failureBlock:^(NSError *error, NSString *responseString) {
@@ -63,7 +61,7 @@
 }
 - (IBAction)disableSecure:(id)sender
 {
-    [_pwdField setSecureTextEntry:NO];
+    [pwdField setSecureTextEntry:NO];
 }
     
 - (IBAction)finishRegisterAndLogin:(id)sender
@@ -82,8 +80,8 @@
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    if (textField == _userNameField) {
-        [_pwdField becomeFirstResponder];
+    if (textField == userNameField) {
+        [pwdField becomeFirstResponder];
         return NO;
     }
     [textField resignFirstResponder];

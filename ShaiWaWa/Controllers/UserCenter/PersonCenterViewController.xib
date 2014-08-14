@@ -112,6 +112,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="dyPageShowEvent:" destination="-1" eventType="touchUpInside" id="Lq3-Ne-JnQ"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="k66-nm-o7A">
                     <rect key="frame" x="28" y="186" width="266" height="41"/>

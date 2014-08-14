@@ -40,4 +40,5 @@
 @property (weak, nonatomic) IBOutlet UIButton *qqButton;
 @property (weak, nonatomic) IBOutlet UIButton *addressbookButton;
 
+- (IBAction)dyPageShowEvent:(id)sender;
 @end

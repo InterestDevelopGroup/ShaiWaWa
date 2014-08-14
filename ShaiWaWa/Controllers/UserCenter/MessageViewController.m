@@ -147,6 +147,9 @@
                 msgCell.receiveImgView.hidden = YES;
                 msgCell.timeLabel.hidden = YES;
                 msgCell.actionLabel.text = @"请求加你为好友";
+                
+                msgCell.contentLabel.text = [[newMSGArray objectAtIndex:indexPath.row] objectForKey:@"remark"];
+                
                 break;
             case 4:     //好友申请被批准
                 msgCell.agreeButton.hidden = YES;
@@ -197,7 +200,14 @@
             default:
                 break;
         }
-        
+        //[[[[newMSGArray objectAtIndex:indexPath.row] objectForKey:@"content"] stringByAppendingString:@" "] stringByAppendingString:];
+
+        msgCell.agreeButton.tag = indexPath.row+111;
+        [msgCell.agreeButton addTarget:self action:@selector(agreeApply:) forControlEvents:UIControlEventTouchUpInside];
+        msgCell.ignoreButton.tag = indexPath.row+222;
+        [msgCell.ignoreButton addTarget:self action:@selector(ignoreApply:) forControlEvents:UIControlEventTouchUpInside];
+        msgCell.refuseButton.tag = indexPath.row+333;
+        [msgCell.refuseButton addTarget:self action:@selector(refuseApply:) forControlEvents:UIControlEventTouchUpInside];
         /*
          // 取当前section，设置单元格显示内容。
          NSInteger section = indexPath.section;
@@ -217,89 +227,106 @@
     else
     {
         MessageCell * msgCell = (MessageCell *)[tableView dequeueReusableCellWithIdentifier:@"Celler"];
-        UILabel *temp = [[UILabel alloc] init];
-        switch ([[[haveReadMSGArray objectAtIndex:indexPath.row] objectForKey:@"type"] intValue]) {
-            case 1:     //动态被评论
-                msgCell.agreeButton.hidden = YES;
-                msgCell.ignoreButton.hidden = YES;
-                msgCell.refuseButton.hidden = YES;
-                msgCell.actionLabel.text = @"评论了你的动态";
-                break;
-            case 2:     //动态被赞
-                msgCell.agreeButton.hidden = YES;
-                msgCell.ignoreButton.hidden = YES;
-                msgCell.refuseButton.hidden = YES;
-                msgCell.contentLabel.hidden = YES;
-                msgCell.actionLabel.text = @"赞了你的动态";
-                break;
-            case 3:     //申请成为好友
-                msgCell.receiveImgView.hidden = YES;
-                msgCell.timeLabel.hidden = YES;
-                msgCell.actionLabel.text = @"请求加你为好友";
-                break;
-            case 4:     //好友申请被批准
-                msgCell.agreeButton.hidden = YES;
-                msgCell.ignoreButton.hidden = YES;
-                msgCell.refuseButton.hidden = YES;
-                msgCell.receiveImgView.hidden = YES;
-                msgCell.contentLabel.hidden = YES;
-                msgCell.actionLabel.text = @"同意了你的好友请求";
-                break;
-            case 5:     //好友申请被拒绝
-                msgCell.agreeButton.hidden = YES;
-                msgCell.ignoreButton.hidden = YES;
-                msgCell.refuseButton.hidden = YES;
-                msgCell.receiveImgView.hidden = YES;
-                msgCell.contentLabel.hidden = YES;
+        NSString *typeId = [[haveReadMSGArray objectAtIndex:indexPath.row] objectForKey:@"type"];
+        
+        if ([typeId isEqualToString:@"1"]) {
+            //动态被评论
+            msgCell.agreeButton.hidden = YES;
+            msgCell.ignoreButton.hidden = YES;
+            msgCell.refuseButton.hidden = YES;
+            msgCell.actionLabel.text = @"评论了你的动态";
+        }
+        if ([typeId isEqualToString:@"2"]) {
+            //动态被赞
+            msgCell.agreeButton.hidden = YES;
+            msgCell.ignoreButton.hidden = YES;
+            msgCell.refuseButton.hidden = YES;
+            msgCell.contentLabel.hidden = YES;
+            msgCell.actionLabel.text = @"赞了你的动态";
+        }
+        if ([typeId isEqualToString:@"3"]) {
+            //申请成为好友
+            msgCell.receiveImgView.hidden = YES;
+            msgCell.timeLabel.hidden = YES;
+            msgCell.actionLabel.text = @"请求加你为好友";
+        }
+        if ([typeId isEqualToString:@"4"]) {
+            //好友申请被批准
+            msgCell.agreeButton.hidden = YES;
+            msgCell.ignoreButton.hidden = YES;
+            msgCell.refuseButton.hidden = YES;
+            msgCell.receiveImgView.hidden = YES;
+            msgCell.contentLabel.hidden = YES;
+            msgCell.actionLabel.text = @"同意了你的好友请求";
+        }
+        if ([typeId isEqualToString:@"5"]) {
+            //好友申请被拒绝
+            msgCell.agreeButton.hidden = YES;
+            msgCell.ignoreButton.hidden = YES;
+            msgCell.refuseButton.hidden = YES;
+            msgCell.receiveImgView.hidden = YES;
+            msgCell.contentLabel.hidden = YES;
+        }
+        if ([typeId isEqualToString:@"6"]) {
+            //自己的宝宝有新动态
+            msgCell.agreeButton.hidden = YES;
+            msgCell.ignoreButton.hidden = YES;
+            msgCell.refuseButton.hidden = YES;
+            msgCell.receiveImgView.hidden = YES;
+            msgCell.actionLabel.hidden = YES;
+            msgCell.timeLabel.hidden = YES;
+        }
+        if ([typeId isEqualToString:@"7"]) {
+            //特别关注的宝宝有新动态
+            msgCell.sendNameLabel.text = @"系统消息";
+            msgCell.sendNameLabel.textColor = [UIColor lightGrayColor];
+            [msgCell.sendNameLabel setFrame:CGRectMake(74, 15, 80, 21)];
+            msgCell.agreeButton.hidden = YES;
+            msgCell.ignoreButton.hidden = YES;
+            msgCell.refuseButton.hidden = YES;
+            msgCell.receiveImgView.hidden = YES;
+            msgCell.actionLabel.hidden = YES;
+            msgCell.timeLabel.hidden = YES;
+            
+            NSString *babyName = @"博城";
+            NSMutableAttributedString * attrString = [[NSMutableAttributedString alloc] initWithString:babyName];
+            [attrString addAttributes:@{NSUnderlineStyleAttributeName:[NSNumber numberWithInt:NSUnderlineStyleNone]} range:NSMakeRange(0, attrString.length)];
+            msgCell.contentLabel.text = [NSString stringWithFormat:@"你关注的宝宝有新的动态"];
+        }
+        if ([typeId isEqualToString:@"8"]) {
+            //被@了
+            msgCell.agreeButton.hidden = YES;
+            msgCell.ignoreButton.hidden = YES;
+            msgCell.refuseButton.hidden = YES;
+            msgCell.contentLabel.hidden = YES;
+            msgCell.actionLabel.text = @"在动态中@了你";
+            [[HttpService sharedInstance] getUserInfo:@{@"uid":[[haveReadMSGArray objectAtIndex:indexPath.row] objectForKey:@"send_uid"]} completionBlock:^(id obj) {
                 
-                break;
-            case 6:     //自己的宝宝有新动态
-                msgCell.agreeButton.hidden = YES;
-                msgCell.ignoreButton.hidden = YES;
-                msgCell.refuseButton.hidden = YES;
-                msgCell.receiveImgView.hidden = YES;
-                msgCell.actionLabel.hidden = YES;
-                msgCell.timeLabel.hidden = YES;
-                break;
-            case 7:     //特别关注的宝宝有新动态
-                msgCell.sendNameLabel.text = @"系统消息";
-                msgCell.sendNameLabel.textColor = [UIColor lightGrayColor];
-                msgCell.agreeButton.hidden = YES;
-                msgCell.ignoreButton.hidden = YES;
-                msgCell.refuseButton.hidden = YES;
-                msgCell.receiveImgView.hidden = YES;
-                msgCell.actionLabel.hidden = YES;
-                msgCell.timeLabel.hidden = YES;
+//                    msgCell.sendImgView.image = [UIImage imageWithContentsOfFile:[[[obj objectForKey:@"result"] objectAtIndex:0] objectForKey:@"avatar"]];
+                    msgCell.sendNameLabel.text = [[[obj objectForKey:@"result"] objectAtIndex:0] objectForKey:@"username"];
+                    msgCell.timeLabel.text = [[haveReadMSGArray objectAtIndex:indexPath.row] objectForKey:@"read_time"];
                 
-                temp.text = @"张山";
-                temp.textColor = [UIColor greenColor];
-                //            NSString *babyName =
-                msgCell.contentLabel.text = [NSString stringWithFormat:@"你关注的宝宝%@有新的动态",temp];
-                break;
-            case 8:     //被@了
-                msgCell.agreeButton.hidden = YES;
-                msgCell.ignoreButton.hidden = YES;
-                msgCell.refuseButton.hidden = YES;
-                msgCell.contentLabel.hidden = YES;
-                msgCell.actionLabel.text = @"在动态中@了你";
-                break;
-            default:
-                break;
+            } failureBlock:^(NSError *error, NSString *responseString) {
+                NSString * msg = responseString;
+                if (error) {
+                    msg = @"加载失败";
+                }
+                [SVProgressHUD showErrorWithStatus:msg];
+            }];
+            
+            [[HttpService sharedInstance] getUserInfo:@{@"uid":[[haveReadMSGArray objectAtIndex:indexPath.row] objectForKey:@"receive_uid"]} completionBlock:^(id obj) {
+//                msgCell.receiveImgView.image = [UIImage imageWithContentsOfFile:[[[obj objectForKey:@"result"] objectAtIndex:0] objectForKey:@"avatar"]];
+            } failureBlock:^(NSError *error, NSString *responseString) {
+                NSString * msg = responseString;
+                if (error) {
+                    msg = @"加载失败";
+                }
+                [SVProgressHUD showErrorWithStatus:msg];
+            }];
+
         }
         
-        /*
-         // 取当前section，设置单元格显示内容。
-         NSInteger section = indexPath.section;
-         // 获取这个分组的省份名称，再根据省份名称获得这个省份的城市列表。
-         NSString *sectionType = [sectionArr objectAtIndex:section];
-         NSArray *list = [babyList objectForKey:sectionType];
-         [list objectAtIndex:indexPath.row];
-         */
-        //babyListCell.selectionStyle = UITableViewCellSelectionStyleNone;
-        //    babyListCell.babyImage.image = [UIImage imageNamed:@""];
-        //    babyListCell.babyNameLabel.text = [NSString stringWithFormat:@""];
-        //    babyListCell.babyOldLabel.text = [NSString stringWithFormat:@""];
-        //    babyListCell.babySexImage.image = [UIImage imageNamed:@""];
+       
         
         return msgCell;
     }
@@ -376,6 +403,33 @@
         [segMentedControl setSelectedSegmentIndex:curPage animated:YES];
     }
     
+}
+//同意好友申请
+- (void)agreeApply:(UIButton *)btn
+{
+    NSString *noId = [[newMSGArray objectAtIndex:btn.tag-111] objectForKey:@"notification_id"];
+    NSString *fId  = [[newMSGArray objectAtIndex:btn.tag-111] objectForKey:@"fid"];
+    NSString *uId  = [[newMSGArray objectAtIndex:btn.tag-111] objectForKey:@"receive_uid"];
+    [[HttpService sharedInstance] passFriend:@{@"notification_id":noId,@"uid":uId,@"friend_id":fId} completionBlock:^(id object) {
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        NSString * msg = responseString;
+        if (error) {
+            msg = @"加载失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+    }];
+    [_msgTableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:btn.tag-111 inSection:1] animated:YES];
+}
+//忽略好友申请
+- (void)ignoreApply:(UIButton *)btn
+{
+    NSLog(@"%d",btn.tag-222);
+}
+//拒绝好友申请
+- (void)refuseApply:(UIButton *)btn
+{
+    NSLog(@"%d",btn.tag-333);
 }
 
 @end

@@ -322,7 +322,7 @@
         //[_touXiangView setImage:image];
         //    NSString *fullPath = [[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"/Avatar"] stringByAppendingPathComponent:[NSString stringWithFormat:@"User_avatar_NumPic_%@.png",morelocationString]];
     
-        [picker setShowsCameraControls:NO];
+//        [picker setShowsCameraControls:NO];
         NSURL *videoUrl = info[UIImagePickerControllerMediaURL];
         //    [info objectForKey:UIImagePickerControllerMediaURL] == info[UIImagePickerControllerMediaURL];
         //    [info valueForKey:UIImagePickerControllerMediaURL];

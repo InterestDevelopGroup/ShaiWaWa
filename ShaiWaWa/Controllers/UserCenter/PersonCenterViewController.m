@@ -21,6 +21,8 @@
 #import <CommonCrypto/CommonDigest.h>
 #import <CommonCrypto/CommonHMAC.h>
 
+#import "DynamicByUserIDViewController.h"
+
 @interface PersonCenterViewController ()
 {
     NSMutableArray *myBabyList;
@@ -322,8 +324,13 @@
     
     
     [[HttpService sharedInstance] getRecordList:@{@"offset":@"0", @"pagesize":@"10",@"uid":users.uid} completionBlock:^(id object) {
-        
-        dynamicLabel.text = [NSString stringWithFormat:@"动态 (%i)",[object count]];
+        if (![[object objectForKey:@"result"] isEqual:[NSNull null]]) {
+        dynamicLabel.text = [NSString stringWithFormat:@"动态 (%i)",[[object objectForKey:@"result"] count]];
+        }
+        else
+        {
+            dynamicLabel.text = [NSString stringWithFormat:@"动态 (0)"];
+        }
     } failureBlock:^(NSError *error, NSString *responseString) {
         NSString * msg = responseString;
         if (error) {
@@ -342,10 +349,27 @@
 {
     UILabel *goodFriendLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 120, _goodFriendButton.bounds.size.height-10)];
     goodFriendLabel.backgroundColor = [UIColor clearColor];
-    goodFriendLabel.text = [NSString stringWithFormat:@"好友 (%i)",32];
     goodFriendLabel.font = [UIFont systemFontOfSize:15];
     goodFriendLabel.textColor = [UIColor darkGrayColor];
     [_goodFriendButton addSubview:goodFriendLabel];
+    
+    
+    [[HttpService sharedInstance] getFriendList:@{@"uid":users.uid,@"offset":@"0", @"pagesize": @"10"} completionBlock:^(id object) {
+        
+        if (![[object objectForKey:@"result"] isEqual:[NSNull null]]) {
+            goodFriendLabel.text = [NSString stringWithFormat:@"好友 (%i)",[[object objectForKey:@"result"] count]];
+        }
+        else
+        {
+            goodFriendLabel.text = [NSString stringWithFormat:@"动态 (0)"];
+        }
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        NSString * msg = responseString;
+        if (error) {
+            msg = @"加载失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+    }];
     
     
     UIImage *imageJianTou = [UIImage imageNamed:@"main_jiantou.png"];
@@ -444,5 +468,10 @@
 - (IBAction)showMyCollectionVC:(id)sender
 {
     [ControlCenter pushToMyCollectionVC];
+}
+- (IBAction)dyPageShowEvent:(id)sender
+{
+    DynamicByUserIDViewController *dynamicVC = [[DynamicByUserIDViewController alloc] init];
+    [self.navigationController pushViewController:dynamicVC animated:NO];
 }
 @end

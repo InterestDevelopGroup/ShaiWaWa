@@ -60,7 +60,7 @@
                                                 @"friend_id":_unfamiliarId,
                                                 @"remark":_remarkSendField.text}
                               completionBlock:^(id object) {
-        
+                                _remarkSendField.text = nil;
     } failureBlock:^(NSError *error, NSString *responseString) {
         NSString * msg = responseString;
         if (error) {

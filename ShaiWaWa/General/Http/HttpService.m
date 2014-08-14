@@ -842,6 +842,9 @@
         if (isError) {
             return ;
         }
+        if (success) {
+            success(obj);
+        }
     } failureBlock:failure];
 }
 
@@ -855,6 +858,9 @@
         BOOL isError = [self filterError:obj failureBlock:failure];
         if (isError) {
             return ;
+        }
+        if (success) {
+            success(obj);
         }
     } failureBlock:failure];
 }
@@ -888,6 +894,9 @@
         BOOL isError = [self filterError:obj failureBlock:failure];
         if (isError) {
             return ;
+        }
+        if (success) {
+            success(obj);
         }
     } failureBlock:failure];
 }
