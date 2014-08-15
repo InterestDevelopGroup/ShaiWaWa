@@ -11,7 +11,7 @@
 
 @implementation BabyInfo
 @synthesize baby_ID;
-@synthesize userInfo;
+@synthesize uid;
 @synthesize fid;
 @synthesize mid;
 @synthesize baby_name;
@@ -29,10 +29,9 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    userInfo = [[UserInfo alloc] init];
     BabyInfo *babyInfo = [[[self class] allocWithZone:zone] init];
     babyInfo.baby_ID = [[self baby_ID] copy];
-    babyInfo.userInfo.uid = [self.userInfo.uid copy];
+    babyInfo.uid = [[self uid] copy];
     babyInfo.fid = [[self fid] copy];
     babyInfo.mid = [[self mid] copy];
     babyInfo.baby_name = [[self baby_name] copy];
@@ -53,7 +52,7 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
     [aCoder encodeObject:baby_ID forKey:@"baby_ID"];
-    [aCoder encodeObject:userInfo.uid forKey:@"uid"];
+    [aCoder encodeObject:uid forKey:@"uid"];
     [aCoder encodeObject:fid forKey:@"fid"];
     [aCoder encodeObject:mid forKey:@"mid"];
     [aCoder encodeObject:baby_name forKey:@"baby_name"];
@@ -75,7 +74,7 @@
     if (self = [super init]) {
         baby_ID = [aDecoder decodeObjectForKey:@"baby_ID"];
         
-        userInfo.uid = [aDecoder decodeObjectForKey:@"uid"];
+        uid = [aDecoder decodeObjectForKey:@"uid"];
         fid = [aDecoder decodeObjectForKey:@"fid"];
         mid = [aDecoder decodeObjectForKey:@"mid"];
         baby_name = [aDecoder decodeObjectForKey:@"baby_name"];

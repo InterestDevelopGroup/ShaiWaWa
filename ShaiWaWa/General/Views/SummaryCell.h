@@ -11,5 +11,7 @@
 @interface SummaryCell : UITableViewCell
 
 @property (strong, nonatomic) IBOutlet UILabel *summaryKeyLabel;
-@property (strong, nonatomic) IBOutlet UILabel *summaryValueLabel;
+@property (weak, nonatomic) IBOutlet UITextField *summaryValueField;
+
+@property (weak, nonatomic) IBOutlet UIImageView *sexImgView;
 @end

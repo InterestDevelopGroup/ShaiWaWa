@@ -9,7 +9,7 @@
 #import "CommonViewController.h"
 #import "HMSegmentedControl.h"
 
-@interface BabyHomePageViewController : CommonViewController<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface BabyHomePageViewController : CommonViewController<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 {
     HMSegmentedControl *segMentedControl;
     NSMutableDictionary *summaryDic;
@@ -57,4 +57,6 @@
 @property (weak, nonatomic) IBOutlet UITableView *hAndwTableView;
 - (IBAction)showAddHAndWPageVC:(id)sender;
 @property (weak, nonatomic) IBOutlet UIImageView *babyBackgroundImgView;
+@property (weak, nonatomic) IBOutlet UIImageView *babyAvatarImgView;
+
 @end

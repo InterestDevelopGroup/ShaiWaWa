@@ -32,7 +32,7 @@
 #define Add_Favorite                                @"add_favorite"
 #define Delete_Record                               @"delete_Record"
 #define Get_Record_List                             @"get_record_list"
-#define Get_Record_By_User_ID                       @"get_baby_list"
+#define Get_Record_By_User_ID                       @"get_baby_record_list"
 #define Get_Record_By_Friend                        @"get_record_by_friend"
 #define Get_Recrod_By_Follow                        @"get_record_by_follow"
 #define Search_Recrod                               @"search_record"
@@ -40,6 +40,7 @@
 #define Get_Favorite_List                           @"get_favorite_list"
 #define Apply_Friend                                @"apply_friend"
 #define Pass_Friend                                 @"pass_friend"
+#define Verify_Friend                               @"verify_friend"
 #define Get_Friend_List                             @"get_friend_list"
 #define Delete_Friend                               @"delete_friend"
 #define Search_Friend                               @"search_friend"
@@ -273,6 +274,12 @@ typedef enum {
  */
 //TODO:通过好友
 - (void)passFriend:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
+
+/**
+ @desc 通过以及拒绝申请好友
+ */
+//TODO:通过以及拒绝申请好友
+- (void)verifyFriend:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
 
 /**
  @desc 获取好友列表

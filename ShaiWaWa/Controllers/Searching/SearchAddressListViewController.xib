@@ -34,7 +34,7 @@
                     <textInputTraits key="textInputTraits" returnKeyType="search"/>
                 </textField>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="100" sectionHeaderHeight="1" sectionFooterHeight="1" id="sKS-NR-oAe">
-                    <rect key="frame" x="0.0" y="70" width="320" height="434"/>
+                    <rect key="frame" x="0.0" y="55" width="320" height="449"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>

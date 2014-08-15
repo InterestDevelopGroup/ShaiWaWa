@@ -380,6 +380,8 @@
 		F45375C51995E2290009274E /* BabySelectListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F45375C31995E2290009274E /* BabySelectListViewController.m */; };
 		F45375C61995E2290009274E /* BabySelectListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F45375C41995E2290009274E /* BabySelectListViewController.xib */; };
 		F45375C8199604350009274E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F45375C7199604350009274E /* AVFoundation.framework */; };
+		F461218F199DCEEB009316EE /* BabyPersonalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F461218D199DCEEB009316EE /* BabyPersonalCell.m */; };
+		F4612190199DCEEB009316EE /* BabyPersonalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F461218E199DCEEB009316EE /* BabyPersonalCell.xib */; };
 		F4705B5A19985DE8002AF3C5 /* amrFileCodec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F4705B4C19985DE8002AF3C5 /* amrFileCodec.mm */; };
 		F4705B5B19985DE8002AF3C5 /* wav.mm in Sources */ = {isa = PBXBuildFile; fileRef = F4705B4E19985DE8002AF3C5 /* wav.mm */; };
 		F4705B5C19985DE8002AF3C5 /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4705B5019985DE8002AF3C5 /* libopencore-amrnb.a */; };
@@ -928,6 +930,9 @@
 		F45375C31995E2290009274E /* BabySelectListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BabySelectListViewController.m; sourceTree = "<group>"; };
 		F45375C41995E2290009274E /* BabySelectListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BabySelectListViewController.xib; sourceTree = "<group>"; };
 		F45375C7199604350009274E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		F461218C199DCEEB009316EE /* BabyPersonalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BabyPersonalCell.h; sourceTree = "<group>"; };
+		F461218D199DCEEB009316EE /* BabyPersonalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BabyPersonalCell.m; sourceTree = "<group>"; };
+		F461218E199DCEEB009316EE /* BabyPersonalCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BabyPersonalCell.xib; sourceTree = "<group>"; };
 		F4705B4B19985DE8002AF3C5 /* amrFileCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amrFileCodec.h; sourceTree = "<group>"; };
 		F4705B4C19985DE8002AF3C5 /* amrFileCodec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = amrFileCodec.mm; sourceTree = "<group>"; };
 		F4705B4D19985DE8002AF3C5 /* wav.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wav.h; sourceTree = "<group>"; };
@@ -2083,6 +2088,9 @@
 				F47F54C8197FACE6006DCA75 /* DynamicCell.h */,
 				F47F54C9197FACE6006DCA75 /* DynamicCell.m */,
 				F47F54CA197FACE6006DCA75 /* DynamicCell.xib */,
+				F461218C199DCEEB009316EE /* BabyPersonalCell.h */,
+				F461218D199DCEEB009316EE /* BabyPersonalCell.m */,
+				F461218E199DCEEB009316EE /* BabyPersonalCell.xib */,
 				F47F54CB197FACE6006DCA75 /* DynamicDetailCell.h */,
 				F47F54CC197FACE6006DCA75 /* DynamicDetailCell.m */,
 				F47F54CD197FACE6006DCA75 /* DynamicDetailCell.xib */,
@@ -2410,6 +2418,7 @@
 				F432BE4619762AC80086BBE9 /* square_shaiwawa@2x.png in Resources */,
 				F432BE4C19762AC80086BBE9 /* square_zan-@2x.png in Resources */,
 				F432BE5119762AC80086BBE9 /* square_zuixin-@2x.png in Resources */,
+				F4612190199DCEEB009316EE /* BabyPersonalCell.xib in Resources */,
 				F433880B1974C28600464D43 /* FeebackViewController.xib in Resources */,
 				24A32323197BB168005CFEA4 /* yuanquan@2x.png in Resources */,
 				F432BDD719762AC80086BBE9 /* baby_4-gengduo@2x.png in Resources */,
@@ -2590,6 +2599,7 @@
 				F47F5500197FACE7006DCA75 /* DynamicHeadView.m in Sources */,
 				F4AE5080199AFBEE007683E9 /* QiniuUtils.m in Sources */,
 				F41F68DF1982081E00089E42 /* OSHelper.m in Sources */,
+				F461218F199DCEEB009316EE /* BabyPersonalCell.m in Sources */,
 				F43388161974C28600464D43 /* ForgetPwdViewController.m in Sources */,
 				F433883A1974C28600464D43 /* UpdatePwdViewController.m in Sources */,
 				F4E363BC1986009900A018A5 /* ShareView.m in Sources */,
@@ -2741,6 +2751,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "76999BA8-6205-4386-881F-2D53549A5D0B";
 				SDKROOT = iphoneos;
+				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -2803,6 +2814,7 @@
 					"$(PROJECT_DIR)/ShaiWaWa/General/Vendors/ShareSDK/Extend/WeChatSDK",
 					"$(PROJECT_DIR)/ShaiWaWa/General/Helper/AudioFormat/VoiceConvert/lib",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "76999BA8-6205-4386-881F-2D53549A5D0B";
 				SDKROOT = iphoneos;

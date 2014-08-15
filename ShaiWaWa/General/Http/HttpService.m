@@ -866,6 +866,24 @@
 }
 
 /**
+ @desc 通过以及拒绝申请好友
+ */
+//TODO:通过以及拒绝申请好友
+- (void)verifyFriend:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self postJSON:[self mergeURL:Verify_Friend] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+        if (success) {
+            success(obj);
+        }
+    } failureBlock:failure];
+}
+
+
+/**
  @desc 获取好友列表
  */
 //TODO:获取好友列表

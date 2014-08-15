@@ -1,14 +1,14 @@
 //
-//  ReleaseDynamicsCell.m
+//  BabyPersonalCell.m
 //  ShaiWaWa
 //
-//  Created by Carl_Huang on 14-7-18.
+//  Created by Carl_Huang on 14-8-15.
 //  Copyright (c) 2014年 helloworld. All rights reserved.
 //
 
-#import "ReleaseDynamicsCell.h"
+#import "BabyPersonalCell.h"
 
-@implementation ReleaseDynamicsCell
+@implementation BabyPersonalCell
 
 - (void)awakeFromNib
 {
@@ -18,7 +18,7 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-//main_baobaotouxiang-@2x.png
+
     // Configure the view for the selected state
 }
 

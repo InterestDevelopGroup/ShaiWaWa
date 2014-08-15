@@ -12,7 +12,7 @@
 @interface BabyInfo : NSObject <NSCopying, NSCoding>
 {
     NSString *baby_ID;      //宝宝id
-    UserInfo *userInfo;     //用户实体，获取用户ID
+    NSString *uid;     //用户实体，获取用户ID
     NSString *fid;          //父亲id
     NSString *mid;          //母亲id
     NSString *baby_name;    //宝宝名称
@@ -30,7 +30,7 @@
 }
 
 @property(nonatomic, retain) NSString *baby_ID;
-@property(nonatomic, retain) UserInfo *userInfo;
+@property(nonatomic, retain) NSString *uid;
 @property(nonatomic, retain) NSString *fid;
 @property(nonatomic, retain) NSString *mid;
 @property(nonatomic, retain) NSString *baby_name;

@@ -7,6 +7,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BabyHomePageViewController">
             <connections>
+                <outlet property="babyAvatarImgView" destination="DuL-Dh-kd1" id="Y1F-Zq-FiZ"/>
+                <outlet property="babyBackgroundImgView" destination="CFV-LV-Xsp" id="Wol-XY-9fJ"/>
                 <outlet property="dadButton" destination="w3O-Ne-G3w" id="ll6-TW-9ab"/>
                 <outlet property="dynamicFullListTableView" destination="QeS-Kf-bRf" id="4tr-VE-oWK"/>
                 <outlet property="dynamicListFullView" destination="qO5-Kx-Y5s" id="del-N0-xyj"/>
@@ -39,10 +41,6 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="164"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="baby_baobei.png" id="DuL-Dh-kd1">
-                    <rect key="frame" x="120" y="63" width="69" height="69"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="w3O-Ne-G3w">
                     <rect key="frame" x="70" y="18" width="65" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -69,6 +67,10 @@
                         <action selector="isYaoQing:" destination="-1" eventType="touchUpInside" id="s0o-02-p5A"/>
                     </connections>
                 </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="baby_baobei.png" id="DuL-Dh-kd1">
+                    <rect key="frame" x="120" y="63" width="69" height="69"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
                 <view contentMode="scaleToFill" id="JAJ-a9-ZOT">
                     <rect key="frame" x="0.0" y="164" width="320" height="35"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -359,7 +361,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="465"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="340" sectionHeaderHeight="1" sectionFooterHeight="1" id="QeS-Kf-bRf">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="290" sectionHeaderHeight="1" sectionFooterHeight="1" id="QeS-Kf-bRf">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="465"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -391,7 +393,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="302"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="340" sectionHeaderHeight="1" sectionFooterHeight="1" id="kKf-lW-wRI">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="290" sectionHeaderHeight="1" sectionFooterHeight="1" id="kKf-lW-wRI">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="302"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

@@ -99,6 +99,9 @@
          [SVProgressHUD showErrorWithStatus:responseString];
      }];
    
+    
+   
+    [self agreeApply:nil];
 }
 
 
@@ -407,11 +410,11 @@
 //同意好友申请
 - (void)agreeApply:(UIButton *)btn
 {
-    NSString *noId = [[newMSGArray objectAtIndex:btn.tag-111] objectForKey:@"notification_id"];
-    NSString *fId  = [[newMSGArray objectAtIndex:btn.tag-111] objectForKey:@"fid"];
-    NSString *uId  = [[newMSGArray objectAtIndex:btn.tag-111] objectForKey:@"receive_uid"];
-    [[HttpService sharedInstance] passFriend:@{@"notification_id":noId,@"uid":uId,@"friend_id":fId} completionBlock:^(id object) {
-        
+//    NSString *fId  = [[newMSGArray objectAtIndex:btn.tag-111] objectForKey:@"fid"];
+//    NSLog(@"%@",@{@"friend_id":fId,@"type":@"2"});
+//    
+    [[HttpService sharedInstance] verifyFriend:@{@"friend_id":@"1",@"type":@"2"} completionBlock:^(id object) {
+         [SVProgressHUD showSuccessWithStatus:@"添加成功"];
     } failureBlock:^(NSError *error, NSString *responseString) {
         NSString * msg = responseString;
         if (error) {
@@ -430,6 +433,18 @@
 - (void)refuseApply:(UIButton *)btn
 {
     NSLog(@"%d",btn.tag-333);
+    NSString *fId  = [[newMSGArray objectAtIndex:btn.tag-333] objectForKey:@"fid"];
+    NSLog(@"%@",@{@"friend_id":fId,@"type":@"3"});
+    
+    [[HttpService sharedInstance] verifyFriend:@{@"friend_id":fId,@"type":@"3"} completionBlock:^(id object) {
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        NSString * msg = responseString;
+        if (error) {
+            msg = @"加载失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+    }];
 }
 
 @end

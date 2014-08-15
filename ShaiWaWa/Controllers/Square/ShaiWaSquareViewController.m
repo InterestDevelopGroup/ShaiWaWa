@@ -16,7 +16,7 @@
 @end
 
 @implementation ShaiWaSquareViewController
-@synthesize collectionView;
+@synthesize collectionNew,collectionHot;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -46,22 +46,34 @@
       UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
     if ([[UIScreen mainScreen] bounds].size.height < 500) {
         _segScrollView.contentSize = CGSizeMake(320*2, _segScrollView.bounds.size.height-90);
-        collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,0,self.view.bounds.size.width, _segScrollView.bounds.size.height-90) collectionViewLayout:layout];
+        collectionNew = [[UICollectionView alloc]initWithFrame:CGRectMake(0,0,self.view.bounds.size.width, _segScrollView.bounds.size.height-90) collectionViewLayout:layout];
+        
+        collectionHot = [[UICollectionView alloc]initWithFrame:CGRectMake(320,0,self.view.bounds.size.width, _segScrollView.bounds.size.height-90) collectionViewLayout:layout];
     }
     else
     {
         _segScrollView.contentSize = CGSizeMake(320*2, _segScrollView.bounds.size.height);
-        collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,0,self.view.bounds.size.width, _segScrollView.bounds.size.height) collectionViewLayout:layout];
+        collectionNew = [[UICollectionView alloc]initWithFrame:CGRectMake(0,0,self.view.bounds.size.width, _segScrollView.bounds.size.height) collectionViewLayout:layout];
+        
+        collectionHot = [[UICollectionView alloc]initWithFrame:CGRectMake(320,0,self.view.bounds.size.width, _segScrollView.bounds.size.height) collectionViewLayout:layout];
     }
     [self HMSegmentedControlInitMethod];
     
   
     
-    collectionView.dataSource = self;
-    collectionView.delegate = self;
-    collectionView.backgroundColor = [UIColor clearColor];
-    [collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"GradientCell"];
-    [_segScrollView addSubview:collectionView];
+    collectionNew.dataSource = self;
+    collectionNew.delegate = self;
+    
+    collectionHot.dataSource = self;
+    collectionHot.delegate = self;
+    
+    collectionNew.backgroundColor = [UIColor clearColor];
+    [collectionNew registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"GradientCell"];
+    
+    collectionHot.backgroundColor = [UIColor clearColor];
+    [collectionHot registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"GradientCell"];
+    [_segScrollView addSubview:collectionHot];
+    [_segScrollView addSubview:collectionNew];
 }
 
 - (void)HMSegmentedControlInitMethod

@@ -59,6 +59,7 @@
     if ([friendList count]*80 < _goodFriendListTableView.bounds.size.height) {
         _goodFriendListTableView.frame = CGRectMake(20, 60, 285,[friendList count]*80);
     }
+    NSLog(@"%@",@{@"uid":user.uid,@"offset":@"0", @"pagesize": @"10"});
     [[HttpService sharedInstance] getFriendList:@{@"uid":user.uid,@"offset":@"0", @"pagesize": @"10"} completionBlock:^(id object) {
         
         if (![[object objectForKey:@"result"] isEqual:[NSNull null]]) {

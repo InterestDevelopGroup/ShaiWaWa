@@ -20,6 +20,7 @@
     BabyInfo *baby;
     TSLocateView *locateView;
     TSLocation *location;
+    NSString *imageFullUrlStr;
 }
 @end
 
@@ -81,25 +82,13 @@
 - (void)addBaby
 {
     UserInfo *user = [[UserDefault sharedInstance] userInfo];
-//    NSLog(@"addBaby:%@",@{@"fid":user.uid,
-//                  @"mid":@"3",
-//                  @"baby_name":_babyNameField.text,
-//                  @"avatar":@"32",
-//                  @"sex":isBoy ? @"1" : @"0",
-//                  @"birthday":_birthDayField.text,
-//                  @"nickname":_babyNicknameField.text,
-//                  @"birth_height":_birthStatureField.text,
-//                  @"birth_weight":_birthWeightField.text,
-//                  @"country":@"中国",
-//                  @"province":location.state,
-//                  @"city":location.city});
-    
     if (_babyNameField.text.length > 0 && _birthDayField.text.length > 0 && _babyNicknameField.text.length > 0 && _birthStatureField.text.length > 0 &&_birthWeightField.text.length > 0 ) {
       
-        [[HttpService sharedInstance] addBaby:@{@"uid":user.uid,@"fid":user.uid,
-                                                @"mid":@"",
+        [[HttpService sharedInstance] addBaby:@{@"uid":user.uid,
+                                                @"fid":isDad ? user.uid : @"",
+                                                @"mid":isMon ? user.uid : @"",
                                                 @"baby_name":_babyNameField.text,
-                                                @"avatar":@"32333",
+                                                @"avatar":![imageFullUrlStr isEqual:[NSNull null]] ? imageFullUrlStr : @"",
                                                 @"sex":isBoy ? @"1" : @"0",
                                                 @"birthday":_birthDayField.text,
                                                 @"nickname":_babyNicknameField.text,
@@ -223,8 +212,11 @@
 {
     [picker dismissViewControllerAnimated:YES completion:^{}];
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    
+    
     // 保存图片至本地，方法见下文
-    [self saveImage:image withName:@"Baby_avatar_NumPic.png"];
+    [self saveImage:image withName:@"Baby_avatar_NumPic"];
+  
     [_touXiangButton setImage:image forState:UIControlStateNormal];
 }
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
@@ -236,10 +228,19 @@
 - (void) saveImage:(UIImage *)currentImage withName:(NSString *)imageName
 {
     NSData *imageData = UIImageJPEGRepresentation(currentImage, 0.5);
+    
+    
+    NSDate *  senddate=[NSDate date];
+    NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
+    //    [dateformatter setDateFormat:@"HH:mm"];
+    //    NSString *  locationString=[dateformatter stringFromDate:senddate];
+    [dateformatter setDateFormat:@"YYYY-MM-dd-HH-mm-ss"];
+    NSString *morelocationString=[dateformatter stringFromDate:senddate];
+    
     // 获取沙盒目录
-    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Avatar"] stringByAppendingPathComponent:imageName];
+    imageFullUrlStr = [[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"/Avatar"] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%@.png",imageName,morelocationString]];
     // 将图片写入文件
-    [imageData writeToFile:fullPath atomically:NO];
+    [imageData writeToFile:imageFullUrlStr atomically:NO];
 }
 //NSData * UIImageJPEGRepresentation ( UIImage *image, CGFloat compressionQuality
 //创建沙盒下文件夹
@@ -325,6 +326,7 @@
 - (void)resetStatus
 {
     [self boySelected:nil];
-    [self girlSelected:nil];
+    [self monSelected:nil];
+    [_touXiangButton setImage:[UIImage imageNamed:@"main_baobaotouxiang.png"] forState:UIControlStateNormal];
 }
 @end

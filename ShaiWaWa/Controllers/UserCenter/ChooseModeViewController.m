@@ -332,6 +332,10 @@
         dynamicCell.addressLabel.text = [[dyArray objectAtIndex:indexPath.row] objectForKey:@"address"];
         }
     }
+    else
+    {
+         dynamicCell.addressLabel.text = @"中国";
+    }
     if (![[[dyArray objectAtIndex:indexPath.row] objectForKey:@"content"] isEqual:[NSNull null]]) {
         if (dyArray != nil) {
          dynamicCell.dyContentTextView.text = [[dyArray objectAtIndex:indexPath.row] objectForKey:@"content"];
@@ -852,4 +856,16 @@
                               }];
     
 }
+
+- (void)publicErrorMsg
+{
+    /*
+     NSString * msg = responseString;
+     if (error) {
+     msg = @"加载失败";
+     }
+     [SVProgressHUD showErrorWithStatus:msg];
+     */
+}
+
 @end

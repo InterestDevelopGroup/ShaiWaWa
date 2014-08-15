@@ -17,6 +17,7 @@
 }
 @property (strong, nonatomic) IBOutlet UIView *tabSelectionBar;
 @property (strong, nonatomic) IBOutlet UIScrollView *segScrollView;
-@property (nonatomic, strong) UICollectionView *collectionView;
+@property (nonatomic, strong) UICollectionView *collectionNew;
+@property (nonatomic, strong) UICollectionView *collectionHot;
 
 @end
