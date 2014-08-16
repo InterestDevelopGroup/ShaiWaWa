@@ -58,7 +58,7 @@
     [_typeOfFriendsTableView clearSeperateLine];
     [_typeOfFriendsTableView setBounces:NO];
     [_typeOfFriendsTableView setScrollEnabled:NO];
-
+    
 //    
 //    [_friendSelectListTableView clearSeperateLine];
 //    [_friendSelectListTableView registerNibWithName:@"FriendSelectedCell" reuseIdentifier:@"Cell"];

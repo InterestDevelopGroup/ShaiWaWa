@@ -40,6 +40,7 @@
 {
     ShareView *sv;
     AppDelegate *mydelegate;
+    SearchDynamicViewController *searchDyVC;
 }
 @property (nonatomic,strong) MJRefreshHeaderView * refreshHeaderView;
 @end
@@ -69,16 +70,29 @@
         [_dynamicPageTableView setFooterPullToRefreshText:@"上拉加载更多"];
         [_dynamicPageTableView setFooterRefreshingText:@"数据正在加载"];
     }
+    
    
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
-    
-    [self initUI];
     __block __weak ChooseModeViewController *lchoose = self;
+    searchDyVC = [[SearchDynamicViewController alloc] init];
+    [searchDyVC setSearchBlock:^(NSMutableArray *array){
+        
+        
+        if ([array count]>0) {
+            lchoose.dyArray = array;
+        }
+        else
+        {
+            lchoose.dyArray = nil;
+        }
+        [lchoose.dynamicPageTableView reloadData];
+    }];
+    [self initUI];
+    
     [self setSpecialBlock:^(NSMutableArray *arr)
      {
          if (!arr) {
@@ -763,7 +777,7 @@
 - (void)showSearchDyVC
 {
     [self hideGrayDropView:nil];
-    SearchDynamicViewController *searchDyVC = [[SearchDynamicViewController alloc] init];
+    
     [self.navigationController pushViewController:searchDyVC animated:YES];
 }
 - (void)showMsgVC

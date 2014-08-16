@@ -7,8 +7,8 @@
 //
 
 #import "CommonViewController.h"
-
+typedef void(^SearchRSBlock) (NSMutableArray *);
 @interface SearchDynamicViewController : CommonViewController<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *keywordTextField;
-
+@property (strong, nonatomic) SearchRSBlock searchBlock;
 @end

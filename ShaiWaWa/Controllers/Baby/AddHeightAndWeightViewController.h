@@ -16,4 +16,5 @@
 
 - (IBAction)add_OK:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UIButton *dateButton;
 @end

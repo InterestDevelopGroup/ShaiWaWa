@@ -22,7 +22,7 @@
 @end
 
 @implementation RemarksViewController
-
+@synthesize babyID;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -64,8 +64,10 @@
 }
 
 - (IBAction)btn_OK:(id)sender
-{   //alias:标题
-    [[HttpService sharedInstance] addBabyRemark:@{@"uid":@"2",@"baby_id":@"2",@"alias":_remarksField.text, @"remark":_remarksTextField.text} completionBlock:^(id object) {
+{
+    UserInfo *users = [[UserDefault sharedInstance] userInfo];
+    //alias:标题
+    [[HttpService sharedInstance] addBabyRemark:@{@"uid":users.uid,@"baby_id":babyID,@"alias":_remarksField.text, @"remark":_remarksTextField.text} completionBlock:^(id object) {
         [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
         _remarksField.text = nil;
         _remarksTextField.text = nil;

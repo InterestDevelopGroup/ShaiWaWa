@@ -43,11 +43,10 @@
 //    {
 //        
 //    }];
-    
     users = [[UserDefault sharedInstance] userInfo];
     self.title = users.username;
     userNameVal = users.username;
-    if ([users.sex isEqual:[NSNull null]]) {
+    if ([users.sex isEqualToString:@"0"]) {
         sexVal = @"保密";
     }
     else if([users.sex isEqualToString:@"1"])
@@ -76,6 +75,7 @@
     [self setLeftCusBarItem:@"square_back" action:nil];
     key = [[NSMutableArray alloc] initWithObjects:@"用户名",@"性别",@"修改密码", nil];
     userNameVal = users.username;
+    NSLog(@"%@",users.sex);
     if ([users.sex isEqualToString:@"0"]) {
         sexVal = @"保密";
     }

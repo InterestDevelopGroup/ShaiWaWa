@@ -930,6 +930,9 @@
         if (isError) {
             return ;
         }
+        if (success) {
+            success(obj);
+        }
     } failureBlock:failure];
 }
 

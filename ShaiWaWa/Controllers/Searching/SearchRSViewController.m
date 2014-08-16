@@ -21,7 +21,7 @@
 @end
 
 @implementation SearchRSViewController
-@synthesize searchValue;
+@synthesize searchValue,friendArray;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -51,15 +51,8 @@
     [_searchRSListTableView clearSeperateLine];
     [_searchRSListTableView registerNibWithName:@"SearchRSCell" reuseIdentifier:@"Cell"];
     _searchRSField.text = searchValue;
-    UserInfo *user = [[UserDefault sharedInstance] userInfo];
-    [[HttpService sharedInstance] searchFriend:@{@"uid":user.uid,
-                                                 @"keyword":_searchRSField.text,
-                                                 @"offset":@"1",
-                                                 @"pagesize":@"10"} completionBlock:^(id object) {
-                                                     [SVProgressHUD showSuccessWithStatus:@"搜索完成"];
-                                                 } failureBlock:^(NSError *error, NSString *responseString) {
-                                                     [SVProgressHUD showErrorWithStatus:responseString];
-                                                 }];
+    UserInfo *users = [[UserDefault sharedInstance] userInfo];
+   
 }
 
 #pragma mark - UITableView DataSources and Delegate

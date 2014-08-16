@@ -316,10 +316,18 @@
             <color key="backgroundColor" red="0.86274516582489014" green="0.87058830261230469" blue="0.86666673421859741" alpha="1" colorSpace="deviceRGB"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
-        <view hidden="YES" alpha="0.80000000000000004" contentMode="scaleToFill" id="2Fu-ff-pnB">
+        <view hidden="YES" contentMode="scaleToFill" id="2Fu-ff-pnB">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
+                <view alpha="0.5" contentMode="scaleToFill" id="hZ5-lT-Qo7">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.80458135190217395" green="0.80458135190217395" blue="0.80458135190217395" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="qZA-0U-HeO" appends="YES" id="1Y8-fq-gsQ"/>
+                    </connections>
+                </view>
                 <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="baby_4-bg-1.png" id="6Dn-FM-Whp">
                     <rect key="frame" x="0.0" y="202" width="320" height="100"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -345,12 +353,9 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <gestureRecognizers/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <connections>
-                <outletCollection property="gestureRecognizers" destination="qZA-0U-HeO" appends="YES" id="qhg-Hv-k0w"/>
-            </connections>
         </view>
         <tapGestureRecognizer id="qZA-0U-HeO">
             <connections>

@@ -9,7 +9,9 @@
 #import "CommonViewController.h"
 #import "HMSegmentedControl.h"
 
-@interface BabyHomePageViewController : CommonViewController<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
+#import <MessageUI/MFMessageComposeViewController.h>
+#import "TSLocateView.h"
+@interface BabyHomePageViewController : CommonViewController<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,MFMessageComposeViewControllerDelegate,UIActionSheetDelegate>
 {
     HMSegmentedControl *segMentedControl;
     NSMutableDictionary *summaryDic;
@@ -23,6 +25,9 @@
     BOOL isRemarksBtnShown;
     NSString *curBaby_id;
     NSMutableArray *babyDyList;
+    TSLocation *location;
+    TSLocateView *locateView;
+    
 }
 @property (strong, nonatomic) IBOutlet UIView *tabSelectionBar;
 @property (weak, nonatomic) IBOutlet UIView *tabSelectionFullBar;

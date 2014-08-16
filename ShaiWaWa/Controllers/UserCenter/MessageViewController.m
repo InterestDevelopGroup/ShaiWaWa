@@ -101,7 +101,7 @@
    
     
    
-    [self agreeApply:nil];
+//    [self agreeApply:nil];
 }
 
 

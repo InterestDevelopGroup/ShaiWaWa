@@ -12,4 +12,5 @@
 @property (strong, nonatomic) IBOutlet UITableView *searchRSListTableView;
 @property (strong, nonatomic) NSString *searchValue;
 @property (strong, nonatomic) IBOutlet UITextField *searchRSField;
+@property (strong, nonatomic) NSMutableArray *friendArray;
 @end

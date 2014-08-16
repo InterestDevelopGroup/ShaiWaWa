@@ -11,6 +11,7 @@
 @interface RemarksViewController : CommonViewController<UITextFieldDelegate,UITextViewDelegate>
 @property (strong, nonatomic) IBOutlet UITextField *remarksField;
 @property (strong, nonatomic) IBOutlet UITextView *remarksTextField;
+@property (strong, nonatomic) NSString *babyID;
 - (IBAction)btn_OK:(id)sender;
 
 @end

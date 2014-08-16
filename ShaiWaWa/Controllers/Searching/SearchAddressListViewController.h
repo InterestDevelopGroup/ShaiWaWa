@@ -8,6 +8,8 @@
 
 #import "CommonViewController.h"
 #import "AddrBookCell.h"
+#import <AddressBook/AddressBook.h>
+#import <AddressBookUI/AddressBookUI.h>
 
 @interface SearchAddressListViewController : CommonViewController<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {

@@ -23,6 +23,7 @@
 #import "UserInfo.h"
 #import "Friend.h"
 #import "BabyInfo.h"
+
 @interface BabyHomePageViewController ()
 @property (nonatomic, strong) BabyInfo *babyInfo;
 @property (nonatomic, strong) NSMutableArray *babyPersonalDyArray;
@@ -46,13 +47,18 @@
     
     // Do any additional setup after loading the view from its nib.
 }
-
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self initUI];
+    
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+/*
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
@@ -66,25 +72,14 @@
         isFullList = YES;
     }
 }
-
+*/
 #pragma mark - Private Methods
 - (void)initUI
 {
-    self.title = @"小龙";
+    
     [self setLeftCusBarItem:@"square_back" action:nil];
     _babyInfo = [[BabyInfo alloc] init];
     _babyPersonalDyArray = [[NSMutableArray alloc] init];
-    UIBarButtonItem *right_doWith= nil;
-    if ([OSHelper iOS7])
-    {
-        right_doWith = [self customBarItem:@"user_gengduo" action:@selector(showList:) size:CGSizeMake(38, 30) imageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, -25)];
-        
-    }
-    else
-    {
-        right_doWith = [self customBarItem:@"user_gengduo" action:@selector(showList:)];
-    }
-    self.navigationItem.rightBarButtonItem = right_doWith;
     remarksBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [remarksBtn setBackgroundColor:[UIColor whiteColor]];
     [remarksBtn setTitle:@"备注信息" forState:UIControlStateNormal];
@@ -114,8 +109,13 @@
     summaryDic = [[NSMutableDictionary alloc] init];
    UserInfo *users = [[UserDefault sharedInstance] userInfo];
     
+
+    
+    
+    
+    /*
     NSLog(@"%@",@{@"baby_id":curBaby_id,@"offset":@"0",@"pagesize":@"10",@"uid":users.uid});
-    //根据用户ID以及宝宝id获取相应动态
+    //根据用户ID以及宝宝id获取相应动态 出错
     [[HttpService sharedInstance] getRecordByUserID:@{@"baby_id":curBaby_id,@"offset":@"0",@"pagesize":@"10",@"uid":users.uid} completionBlock:^(id object) {
          NSLog(@"唉");
         if (![[object objectForKey:@"result"] isEqual:[NSNull null]]) {
@@ -131,6 +131,7 @@
         }
         [SVProgressHUD showErrorWithStatus:msg];
     }];
+     */
     /*
     //删除宝宝备注
     [[HttpService sharedInstance] deleteBabyRemark:@{@"uid":@"2",@"baby_id":@"2"} completionBlock:^(id object) {
@@ -143,14 +144,7 @@
         [SVProgressHUD showErrorWithStatus:msg];
     }];
     */
-    /*
-    //获取宝宝备注
-    [[HttpService sharedInstance] getBabyRemark:@{@"uid":@"2",@"baby_id":@"2"} completionBlock:^(id object) {
-        [SVProgressHUD showSuccessWithStatus:@"获取备注成功"];
-    } failureBlock:^(NSError *error, NSString *responseString) {
-        [SVProgressHUD showErrorWithStatus:responseString];
-    }];
-    */
+    
     /*
     //修改宝宝备注
     [[HttpService sharedInstance] updateBabyRemark:@{@"uid":@"2",@"baby_id":@"2",@"alias":@"1", @"remark":@"3"} completionBlock:^(id object) {
@@ -162,7 +156,7 @@
  
     
    
-    
+    [self getData];
     
 
     if ([[UIScreen mainScreen] bounds].size.height < 500) {
@@ -188,10 +182,7 @@
     
     
     _heightAndWeightTableView.frame = CGRectMake(320*2, 0, 320, _segScrollView.bounds.size.height);
-    
-    
-    
-    
+
     NALLabelsMatrix *naLabelsMatrix = [[NALLabelsMatrix alloc] initWithFrame:CGRectMake(10, 50, 300, 100) andColumnsWidths:[[NSArray alloc] initWithObjects:@90,@72,@72,@72, nil]];
     naLabelsMatrix.backgroundColor = [UIColor whiteColor];
     [naLabelsMatrix addRecord:[[NSArray alloc] initWithObjects:@"日期", @"身高(cm)", @"体重(kg)",@"体型", nil]];
@@ -204,6 +195,7 @@
                                                        @"uid":users.uid}
                                      completionBlock:^(id object) {
                                          if (![[object objectForKey:@"result"] isEqual:[NSNull null]]) {
+                                             
                                              for (int i=0; i<[[object objectForKey:@"result"] count]; i++) {
                                                  [naLabelsMatrix addRecord:[[NSArray alloc] initWithObjects:[[[object objectForKey:@"result"] objectAtIndex:i] objectForKey:@"add_time"],[[[object objectForKey:@"result"] objectAtIndex:i] objectForKey:@"height"], [[[object objectForKey:@"result"] objectAtIndex:i] objectForKey:@"weight"],@"完美体型", nil]];
                                              }
@@ -326,116 +318,59 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    UserInfo *users = [[UserDefault sharedInstance] userInfo];
     if (tableView == _summaryTableView) {
         static NSString *identify = @"Cell";
         SummaryCell *cell = (SummaryCell *)[tableView dequeueReusableCellWithIdentifier:identify];
-        
-         UserInfo *users = [[UserDefault sharedInstance] userInfo];
-        
         cell.summaryKeyLabel.text = [summaryKey objectAtIndex:indexPath.row];
         cell.summaryValueField.delegate = self;
         cell.summaryValueField.tag = indexPath.row + 999;
         cell.summaryValueField.enabled = NO;
         cell.sexImgView.hidden = YES;
         
-        //获取宝宝信息
-        [[HttpService sharedInstance] getBabyInfo:@{@"baby_id":curBaby_id} completionBlock:^(id object) {
-            summaryValue = [object objectForKey:@"result"];
+        if ([[summaryDic objectForKey:@"mid"] isEqualToString:users.uid] || [[summaryDic objectForKey:@"fid"] isEqualToString:users.uid]) {
+            cell.summaryValueField.enabled = YES;
             
-            summaryDic = [summaryValue objectAtIndex:0];
-            
-            _babyInfo.avatar = [summaryDic objectForKey:@"avatar"];
-            _babyInfo.uid = [summaryDic objectForKey:@"uid"];
-            _babyInfo.fid = [summaryDic objectForKey:@"fid"];
-            _babyInfo.mid = [summaryDic objectForKey:@"mid"];
-            _babyInfo.baby_name = [summaryDic objectForKey:@"baby_name"];
-            _babyInfo.sex = [summaryDic objectForKey:@"sex"];
-            _babyInfo.birthDate = [summaryDic objectForKey:@"birthday"];
-            _babyInfo.nickName = [summaryDic objectForKey:@"nickname"];
-            _babyInfo.country = [summaryDic objectForKey:@"country"];
-            _babyInfo.province = [summaryDic objectForKey:@"province"];
-            _babyInfo.city = [summaryDic objectForKey:@"city"];
-            _babyInfo.sex = [summaryDic objectForKey:@"sex"];
-            _babyInfo.birth_height = [summaryDic objectForKey:@"birth_height"];
-            _babyInfo.birth_weight = [summaryDic objectForKey:@"birth_weight"];
-            
-            _monButton.enabled = [[summaryDic objectForKey:@"mid"] intValue] == 0 ? YES : NO;
-            _dadButton.enabled = [[summaryDic objectForKey:@"fid"] intValue] == 0 ? YES : NO;
-            
-            if ([[summaryDic objectForKey:@"mid"] isEqualToString:users.uid] || [[summaryDic objectForKey:@"fid"] isEqualToString:users.uid]) {
-                cell.summaryValueField.enabled = YES;
-                
-            }
-            
-            
-            
-            if ([[summaryDic objectForKey:@"background"] isEqual:[NSNull null]]) {
-                _babyBackgroundImgView.image = [UIImage imageNamed:@"baby_4-bg.png"];
-            }
-            else
-            {
-                _babyBackgroundImgView.image = [UIImage imageWithContentsOfFile:[summaryDic objectForKey:@"background"]];
-            }
-            _babyAvatarImgView.image = [UIImage imageWithContentsOfFile:[summaryDic objectForKey:@"avatar"]];
-            
-            if (indexPath.row == 3) {
-                cell.sexImgView.hidden = NO;
-                cell.sexImgView.image = [UIImage imageNamed:[[summaryDic objectForKey:@"sex"] intValue] == 1 ? @"main_boy.png" : @"main_girl.png"];
-                cell.summaryValueField.text = nil;
-                cell.summaryValueField.text = [[summaryDic objectForKey:@"sex"] intValue] == 1 ? @"男" : @"女";
-            }
-            _babyAvatarImgView.image = [UIImage imageWithContentsOfFile:[summaryDic objectForKey:@"avatar"]];
-            if (indexPath.row == 0) {
-                cell.summaryValueField.text = nil;
-                cell.summaryValueField.text = [summaryDic objectForKey:@"nickname"];
-            }
-            if (indexPath.row == 1) {
-                cell.summaryValueField.text = nil;
-                cell.summaryValueField.text = [summaryDic objectForKey:@"baby_name"];
-            }
-            if (indexPath.row == 2) {
-                cell.summaryValueField.text = nil;
-                cell.summaryValueField.text = [summaryDic objectForKey:@"birthday"];
-            }
-            if (indexPath.row == 4) {
-                cell.summaryValueField.text = nil;
-                cell.summaryValueField.text = [summaryDic objectForKey:@"city"];
-            }
-            if (indexPath.row == 5) {
-                cell.summaryValueField.text = nil;
-                cell.summaryValueField.text = [summaryDic objectForKey:@"birth_height"];
-            }
-            if (indexPath.row == 6) {
-                cell.summaryValueField.text = nil;
-                cell.summaryValueField.text = [summaryDic objectForKey:@"birth_weight"];
-            }
-            
-             if (!_dadButton.enabled) {
-             
-             [[HttpService sharedInstance] getUserInfo:@{@"uid":[[[object objectForKey:@"result"] objectAtIndex:0] objectForKey:@"fid"]} completionBlock:^(id obj) {
-             [_dadButton setImage:[UIImage imageWithContentsOfFile:[[[obj objectForKey:@"result"] objectAtIndex:0] objectForKey:@"avatar"]] forState:UIControlStateNormal];
-             } failureBlock:^(NSError *error, NSString *responseString) {
-             
-             }];
-             
-             }
-             if (!_monButton.enabled) {
-             
-             [[HttpService sharedInstance] getUserInfo:@{@"uid":[[[object objectForKey:@"result"] objectAtIndex:0] objectForKey:@"mid"]} completionBlock:^(id obj) {
-             [_monButton setImage:[UIImage imageWithContentsOfFile:[[[obj objectForKey:@"result"] objectAtIndex:0] objectForKey:@"avatar"]] forState:UIControlStateNormal];
-             } failureBlock:^(NSError *error, NSString *responseString) {
-                 
-             }];
-             }
-        } failureBlock:^(NSError *error, NSString *responseString) {
-            [SVProgressHUD showErrorWithStatus:responseString];
-        }];
+        }
+        else
+        {
+             cell.summaryValueField.enabled = NO;
+        }
         
         
+        if (indexPath.row == 3) {
+            cell.sexImgView.hidden = NO;
+            cell.sexImgView.image = [UIImage imageNamed:[[summaryDic objectForKey:@"sex"] intValue] == 1 ? @"main_boy.png" : @"main_girl.png"];
+            cell.summaryValueField.text = nil;
+            cell.summaryValueField.text = [[summaryDic objectForKey:@"sex"] intValue] == 1 ? @"男" : @"女";
+        }
+       
+        if (indexPath.row == 0) {
+            cell.summaryValueField.text = nil;
+            cell.summaryValueField.text = [summaryDic objectForKey:@"nickname"];
+        }
+        if (indexPath.row == 1) {
+            cell.summaryValueField.text = nil;
+            cell.summaryValueField.text = [summaryDic objectForKey:@"baby_name"];
+        }
+        if (indexPath.row == 2) {
+            cell.summaryValueField.text = nil;
+            cell.summaryValueField.text = [summaryDic objectForKey:@"birthday"];
+        }
+        if (indexPath.row == 4) {
+            cell.summaryValueField.text = nil;
+            cell.summaryValueField.text = [summaryDic objectForKey:@"city"];
+        }
+        if (indexPath.row == 5) {
+            cell.summaryValueField.text = nil;
+            cell.summaryValueField.text = [summaryDic objectForKey:@"birth_height"];
+        }
+        if (indexPath.row == 6) {
+            cell.summaryValueField.text = nil;
+            cell.summaryValueField.text = [summaryDic objectForKey:@"birth_weight"];
+        }
         
         
-        
-
        
 //        cell.contentView.backgroundColor = [UIColor clearColor];
 //        if (indexPath.row == 3) {
@@ -548,7 +483,25 @@
 }
 - (IBAction)msgYaoQingButton:(id)sender
 {
-    
+   //调用指定phoneNumber
+   //[[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"sms://10000"]];
+    Class messageClass = (NSClassFromString(@"MFMessageComposeViewController"));
+    if (messageClass != nil) {
+        // 发送短信
+        if ([messageClass canSendText]) {
+            MFMessageComposeViewController *picker = [[MFMessageComposeViewController alloc] init];
+            picker.messageComposeDelegate = self;
+            
+            NSString *smsBody = [NSString stringWithFormat:@"亲爱的,我发现一个很不错的手机应用'晒娃娃', 可以用来晒宝宝的照片和视频。你也下一个一起玩吧。下载地址: http://www.shaiwawa.com/download"];
+            picker.body=smsBody;
+            
+            [self presentViewController:picker animated:YES completion:nil];
+        }
+        else {
+            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@""message:@"该设备不支持短信功能" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [alert show];
+        }
+    }
 }
 
 - (IBAction)weiXinYaoQingButton:(id)sender
@@ -601,11 +554,13 @@
 {
     [self showList:nil];
     RemarksViewController *remarksVC = [[RemarksViewController alloc] init];
+    remarksVC.babyID = curBaby_id;
     [self.navigationController pushViewController:remarksVC animated:YES];
 }
 - (void)specialCare
 {
-    [[HttpService sharedInstance] followBaby:@{@"uid":@"2",@"baby_id":@"2"} completionBlock:^(id object) {
+    UserInfo *users = [[UserDefault sharedInstance] userInfo];
+    [[HttpService sharedInstance] followBaby:@{@"uid":users.uid,@"baby_id":curBaby_id} completionBlock:^(id object) {
         [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
     } failureBlock:^(NSError *error, NSString *responseString) {
         NSString * msg = responseString;
@@ -646,6 +601,7 @@
     UITextField *textF6 = (UITextField *)[_summaryTableView viewWithTag:1004];
     UITextField *textF7 = (UITextField *)[_summaryTableView viewWithTag:1005];
     
+    
     if ([textF4.text isEqualToString:@"男"] || [textF4.text isEqualToString:@"女"]) {
          [self updateBabyInfoWithName:textF2.text Sex:[textF4.text isEqualToString:@"男"] ? @"1" : @"0" Birthday:textF3.text NickName:textF1.text Province:textF5.text City:textF5.text BirthH:textF6.text birthW:textF7.text];
     }
@@ -663,6 +619,7 @@
 #pragma mark 解决虚拟键盘挡住UITextField的方法
 - (void)keyboardWillShow:(NSNotification *)noti
 {
+    
     //键盘输入的界面调整
     //键盘的高度
     float height = 216.0;
@@ -677,57 +634,236 @@
 }
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    CGRect frame = textField.frame;
-    int offset;
-    if (self.view.bounds.size.height > 490.0)
-    {
-        offset = frame.origin.y + 428 - 286;
+  
+
+    
+    UITextField *textF1 = (UITextField *)[_summaryTableView viewWithTag:999];
+    UITextField *textF2 = (UITextField *)[_summaryTableView viewWithTag:1000];
+    UITextField *textF3 = (UITextField *)[_summaryTableView viewWithTag:1001];
+    UITextField *textF4 = (UITextField *)[_summaryTableView viewWithTag:1002];
+    UITextField *textF5 = (UITextField *)[_summaryTableView viewWithTag:1003];
+    UITextField *textF6 = (UITextField *)[_summaryTableView viewWithTag:1004];
+    UITextField *textF7 = (UITextField *)[_summaryTableView viewWithTag:1005];
+    if (!textF4.editing || !textF5.editing) {
+        
+        
+        CGRect frame = textField.frame;
+        int offset;
+        if (self.view.bounds.size.height > 490.0)
+        {
+            offset = frame.origin.y + 428 - 286;
+        }
+        else
+        {
+            offset = frame.origin.y + 500 - self.view.frame.size.height - 216;
+        }
+        NSTimeInterval animationDuration = 0.30f;
+        [UIView beginAnimations:@"ResizeForKeyBoard" context:nil];
+        [UIView setAnimationDuration:animationDuration];
+        float width = self.view.frame.size.width;
+        float height = self.view.frame.size.height;
+        if(offset > 0)
+        {
+            CGRect rect = CGRectMake(0.0f, -offset,width,height);
+            self.view.frame = rect;
+        }
+        
+        [UIView commitAnimations];
+    }
+    if (textF5.editing) {
+        [textF5 resignFirstResponder];
+        locateView = [[TSLocateView alloc] initWithTitle:@"定位城市" delegate:nil];
+        locateView.tag = 11111;
+        [locateView showInView:self.view];
     }
     else
     {
-        offset = frame.origin.y + 500 - self.view.frame.size.height - 216;
+        [textF4 resignFirstResponder];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:@"男" otherButtonTitles:@"女", nil];
+        [actionSheet showInView:self.view];
+        
+       
     }
-    NSTimeInterval animationDuration = 0.30f;
-    [UIView beginAnimations:@"ResizeForKeyBoard" context:nil];
-    [UIView setAnimationDuration:animationDuration];
-    float width = self.view.frame.size.width;
-    float height = self.view.frame.size.height;
-    if(offset > 0)
-    {
-        CGRect rect = CGRectMake(0.0f, -offset,width,height);
-        self.view.frame = rect;
-    }
-    
-    [UIView commitAnimations];
 }
 
 //更改宝宝信息
 - (void)updateBabyInfoWithName:(NSString *)babyName Sex:(NSString *)babySex Birthday:(NSString *)babyBirthdate NickName:(NSString *)babyNickName Province:(NSString *)babyProvince City:(NSString *)babyCity BirthH:(NSString *)babyBirthH birthW:(NSString *)babyBirhW
 {
-    //更新宝宝信息
-    [[HttpService sharedInstance] updateBabyInfo:@{@"baby_id":curBaby_id,
-                                                   @"uid":_babyInfo.uid,
-                                                   @"fid":_babyInfo.fid,
-                                                   @"mid":_babyInfo.mid,
-                                                   @"baby_name":babyName,
-                                                   @"avatar":_babyInfo.avatar,
-                                                   @"sex":babySex,
-                                                   @"birthday":babyBirthdate,
-                                                   @"nickname":babyNickName,
-                                                   @"country":@"中国",
-                                                   @"province":babyProvince,
-                                                   @"city":babyCity,
-                                                   @"birth_height":babyBirthH,
-                                                   @"birth_weight":babyBirhW} completionBlock:^(id object) {
-                                                       [_summaryTableView reloadData];
-                                                       [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
-     } failureBlock:^(NSError *error, NSString *responseString) {
-         NSString *msg = responseString;
-         if (error) {
-             msg = @"数据未变改";
-         }
-         [SVProgressHUD showErrorWithStatus:msg];
-     }];
+    if (babyName != nil && babySex != nil && babyBirthdate != nil && babyNickName != nil && babyProvince != nil && babyCity != nil && babyBirthH != nil && babyBirhW != nil) {
+        
+        //更新宝宝信息
+        [[HttpService sharedInstance] updateBabyInfo:@{@"baby_id":curBaby_id,
+                                                       @"uid":_babyInfo.uid,
+                                                       @"fid":_babyInfo.fid,
+                                                       @"mid":_babyInfo.mid,
+                                                       @"baby_name":babyName,
+                                                       @"avatar":_babyInfo.avatar,
+                                                       @"sex":babySex,
+                                                       @"birthday":babyBirthdate,
+                                                       @"nickname":babyNickName,
+                                                       @"country":@"中国",
+                                                       @"province":babyProvince,
+                                                       @"city":babyCity,
+                                                       @"birth_height":babyBirthH,
+                                                       @"birth_weight":babyBirhW} completionBlock:^(id object) {
+                                                           
+                                                           [self getData];
+                                                           [_summaryTableView reloadData];
+                                                           [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
+                                                       } failureBlock:^(NSError *error, NSString *responseString) {
+                                                           NSString *msg = responseString;
+                                                           if (error) {
+                                                               msg = @"数据未变改";
+                                                           }
+                                                           [SVProgressHUD showErrorWithStatus:msg];
+                                                       }];
+        
+
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:@"网络繁忙"];
+    }
+
     
 }
+
+//调用sendSMS函数
+//内容，收件人列表
+- (void)sendSMS:(NSString *)bodyOfMessage recipientList:(NSArray *)recipients
+{
+    
+    MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
+    
+    if([MFMessageComposeViewController canSendText])
+        
+    {
+        
+        controller.body = bodyOfMessage;
+        
+        controller.recipients = recipients;
+        
+        controller.messageComposeDelegate = self;
+        
+        [self presentViewController:controller animated:YES completion:^{}];
+        
+    }
+    
+}
+
+// 处理发送完的响应结果
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
+{
+    [self dismissViewControllerAnimated:YES completion:^{}];
+    [self hideCurView:nil];
+    if (result == MessageComposeResultCancelled)
+    {
+        NSLog(@"Message cancelled");
+    }
+    else if (result == MessageComposeResultSent)
+    {
+        NSLog(@"Message sent");
+    }
+    else
+    {
+        NSLog(@"Message failed");
+    }
+}
+
+- (void)getData
+{
+    UserInfo *users = [[UserDefault sharedInstance] userInfo];
+    //获取宝宝信息
+    [[HttpService sharedInstance] getBabyInfo:@{@"baby_id":curBaby_id} completionBlock:^(id object) {
+        summaryValue = [object objectForKey:@"result"];
+        
+        summaryDic = [summaryValue objectAtIndex:0];
+        
+        _babyInfo.avatar = [summaryDic objectForKey:@"avatar"];
+        _babyInfo.uid = [summaryDic objectForKey:@"uid"];
+        _babyInfo.fid = [summaryDic objectForKey:@"fid"];
+        _babyInfo.mid = [summaryDic objectForKey:@"mid"];
+        _babyInfo.baby_name = [summaryDic objectForKey:@"baby_name"];
+        _babyInfo.sex = [summaryDic objectForKey:@"sex"];
+        _babyInfo.birthDate = [summaryDic objectForKey:@"birthday"];
+        _babyInfo.nickName = [summaryDic objectForKey:@"nickname"];
+        _babyInfo.country = [summaryDic objectForKey:@"country"];
+        _babyInfo.province = [summaryDic objectForKey:@"province"];
+        _babyInfo.city = [summaryDic objectForKey:@"city"];
+        _babyInfo.sex = [summaryDic objectForKey:@"sex"];
+        _babyInfo.birth_height = [summaryDic objectForKey:@"birth_height"];
+        _babyInfo.birth_weight = [summaryDic objectForKey:@"birth_weight"];
+        
+        
+        _monButton.enabled = [[summaryDic objectForKey:@"mid"] intValue] == 0 ? YES : NO;
+        _dadButton.enabled = [[summaryDic objectForKey:@"fid"] intValue] == 0 ? YES : NO;
+        
+        if (!_dadButton.enabled) {
+            [[HttpService sharedInstance] getUserInfo:@{@"uid":[summaryDic objectForKey:@"fid"]} completionBlock:^(id obj) {
+                [_dadButton setImage:[UIImage imageWithContentsOfFile:[[[obj objectForKey:@"result"] objectAtIndex:0] objectForKey:@"avatar"]] forState:UIControlStateNormal];
+            } failureBlock:^(NSError *error, NSString *responseString) {
+                
+            }];
+        }
+        if (!_monButton.enabled) {
+            [[HttpService sharedInstance] getUserInfo:@{@"uid":[summaryDic objectForKey:@"mid"]} completionBlock:^(id obj) {
+                [_monButton setImage:[UIImage imageWithContentsOfFile:[[[obj objectForKey:@"result"] objectAtIndex:0] objectForKey:@"avatar"]] forState:UIControlStateNormal];
+            } failureBlock:^(NSError *error, NSString *responseString) {
+                
+            }];
+        }
+        
+        if ([[summaryDic objectForKey:@"mid"] isEqualToString:users.uid] || [[summaryDic objectForKey:@"fid"] isEqualToString:users.uid]) {
+            
+            
+        }
+        else
+        {
+            UIBarButtonItem *right_doWith= nil;
+            if ([OSHelper iOS7])
+            {
+                right_doWith = [self customBarItem:@"user_gengduo" action:@selector(showList:) size:CGSizeMake(38, 30) imageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, -25)];
+                
+            }
+            else
+            {
+                right_doWith = [self customBarItem:@"user_gengduo" action:@selector(showList:)];
+            }
+            self.navigationItem.rightBarButtonItem = right_doWith;
+        }
+        
+        if ([[summaryDic objectForKey:@"background"] isEqual:[NSNull null]]) {
+            _babyBackgroundImgView.image = [UIImage imageNamed:@"baby_4-bg.png"];
+        }
+        else
+        {
+            _babyBackgroundImgView.image = [UIImage imageWithContentsOfFile:[summaryDic objectForKey:@"background"]];
+        }
+        _babyAvatarImgView.image = [UIImage imageWithContentsOfFile:[summaryDic objectForKey:@"avatar"]];
+        
+        
+        //获取宝宝备注
+        [[HttpService sharedInstance] getBabyRemark:@{@"uid":users.uid,@"baby_id":curBaby_id} completionBlock:^(id obj) {
+            if (![[obj objectForKey:@"result"] isEqual:[NSNull null]]) {
+                self.title = [[[obj objectForKey:@"result"] objectAtIndex:0] objectForKey:@"alias"];
+            }
+            else
+            {
+                self.title = _babyInfo.nickName;
+            }
+            
+        } failureBlock:^(NSError *error, NSString *responseString) {
+            [SVProgressHUD showErrorWithStatus:responseString];
+        }];
+        
+        [_summaryTableView reloadData];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
+
+   
+    
+
+}
+
 @end

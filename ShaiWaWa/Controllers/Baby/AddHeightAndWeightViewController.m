@@ -46,7 +46,13 @@
 {
     self.title = @"添加身高体重";
     [self setLeftCusBarItem:@"square_back" action:nil];
-    
+    NSDate *  senddate=[NSDate date];
+    NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
+    //    [dateformatter setDateFormat:@"HH:mm"];
+    //    NSString *  locationString=[dateformatter stringFromDate:senddate];
+    [dateformatter setDateFormat:@"YYYY-MM-dd-HH-mm-ss"];
+    NSString *morelocationString = [dateformatter stringFromDate:senddate];
+    [_dateButton setTitle:morelocationString forState:UIControlStateNormal];
     
 }
 

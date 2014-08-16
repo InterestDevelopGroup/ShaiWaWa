@@ -434,6 +434,7 @@
 		F4AE507F199AFBEE007683E9 /* QiniuSimpleUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AE5076199AFBEE007683E9 /* QiniuSimpleUploader.m */; };
 		F4AE5080199AFBEE007683E9 /* QiniuUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AE5079199AFBEE007683E9 /* QiniuUtils.m */; };
 		F4AE5082199AFC12007683E9 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F4AE5081199AFC12007683E9 /* libz.dylib */; };
+		F4C4C608199F4C4B00B348A5 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4C4C607199F4C4B00B348A5 /* AddressBookUI.framework */; };
 		F4E363B91985ECC100A018A5 /* TheThirdPartyLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4E363B81985ECC100A018A5 /* TheThirdPartyLoginView.m */; };
 		F4E363BC1986009900A018A5 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4E363BB1986009900A018A5 /* ShareView.m */; };
 /* End PBXBuildFile section */
@@ -1025,6 +1026,7 @@
 		F4AE5078199AFBEE007683E9 /* QiniuUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiniuUtils.h; sourceTree = "<group>"; };
 		F4AE5079199AFBEE007683E9 /* QiniuUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiniuUtils.m; sourceTree = "<group>"; };
 		F4AE5081199AFC12007683E9 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		F4C4C607199F4C4B00B348A5 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		F4E363B71985ECC100A018A5 /* TheThirdPartyLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheThirdPartyLoginView.h; sourceTree = "<group>"; };
 		F4E363B81985ECC100A018A5 /* TheThirdPartyLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheThirdPartyLoginView.m; sourceTree = "<group>"; };
 		F4E363BA1986009900A018A5 /* ShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareView.h; sourceTree = "<group>"; };
@@ -1037,6 +1039,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4C4C608199F4C4B00B348A5 /* AddressBookUI.framework in Frameworks */,
+				F41F691619820B8100089E42 /* AddressBook.framework in Frameworks */,
 				F4AE5082199AFC12007683E9 /* libz.dylib in Frameworks */,
 				F45375C8199604350009274E /* AVFoundation.framework in Frameworks */,
 				F41F65501981F03500089E42 /* libicucore.dylib in Frameworks */,
@@ -1049,7 +1053,6 @@
 				F41F6923198228C000089E42 /* MobileCoreServices.framework in Frameworks */,
 				F41F6921198228A600089E42 /* StoreKit.framework in Frameworks */,
 				F41F654E1981F02400089E42 /* MessageUI.framework in Frameworks */,
-				F41F691619820B8100089E42 /* AddressBook.framework in Frameworks */,
 				F41F691419820B7800089E42 /* AssetsLibrary.framework in Frameworks */,
 				F41F691219820B6F00089E42 /* CoreText.framework in Frameworks */,
 				F41F691019820B6400089E42 /* MediaPlayer.framework in Frameworks */,
@@ -1154,6 +1157,7 @@
 		C32B41811965B5B8003979EE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F4C4C607199F4C4B00B348A5 /* AddressBookUI.framework */,
 				F4AE5081199AFC12007683E9 /* libz.dylib */,
 				F45375C7199604350009274E /* AVFoundation.framework */,
 				F41F6928198228FA00089E42 /* AudioToolbox.framework */,
