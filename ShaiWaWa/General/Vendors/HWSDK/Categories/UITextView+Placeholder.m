@@ -30,8 +30,10 @@
     id holder = objc_getAssociatedObject(self, &@selector(tapMySelf:));
     if([self.text isEqualToString:holder] || [self.text length] == 0)
     {
-        [self becomeFirstResponder];
-        self.text = nil;
+        
+        self.text = @"";
     }
+    
+    [self becomeFirstResponder];
 }
 @end

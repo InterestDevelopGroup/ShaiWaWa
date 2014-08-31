@@ -2,13 +2,14 @@
 //  TopicViewController.m
 //  ShaiWaWa
 //
-//  Created by 祥 on 14-7-8.
+//  Created by Carl on 14-7-8.
 //  Copyright (c) 2014年 helloworld. All rights reserved.
 //
 
 #import "TopicViewController.h"
 #import "UIViewController+BarItemAdapt.h"
-
+#import "Topic.h"
+#import "PersistentStore.h"
 @interface TopicViewController ()
 
 @end
@@ -20,6 +21,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        topicList = [PersistentStore getAllObjectWithType:[Topic class]];
+        topicList = [[topicList reverseObjectEnumerator] allObjects];
     }
     return self;
 }
@@ -41,9 +44,35 @@
 {
     self.title = @"话题";
     [self setLeftCusBarItem:@"square_back" action:nil];
-    topicList = [[NSMutableArray alloc] initWithObjects:@"满月了",@"抓周",@"会走了", nil];
     [_topicListTableView clearSeperateLine];
 }
+
+- (IBAction)finishAction:(id)sender
+{
+    [_topicValue resignFirstResponder];
+    if([_topicValue.text length] == 0)
+    {
+        return ;
+    }
+    
+    NSString * str = _topicValue.text;
+    if(self.didSelectTopic)
+    {
+        self.didSelectTopic(str);
+    }
+    
+    //先判断话题是否存在数据库，如果不存在，则保存
+    int count = [PersistentStore countOfObjectWithType:[Topic class] Key:@"topic" Value:str];
+    if(count == 0)
+    {
+        Topic * topic = [Topic MR_createEntity];
+        topic.topic = str;
+        [PersistentStore save];
+    }
+    
+    [self popVIewController];
+}
+
 
 #pragma mark - UITableView DataSources and Delegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -58,9 +87,10 @@
     if (nil == cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
     }
+    Topic * topic = topicList[indexPath.row];
     cell.textLabel.textColor = [UIColor darkGrayColor];
     cell.textLabel.font = [UIFont systemFontOfSize:15];
-    cell.textLabel.text = [topicList objectAtIndex:indexPath.row];
+    cell.textLabel.text = topic.topic;
     cell.backgroundColor = [UIColor clearColor];
     return cell;
     
@@ -68,9 +98,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    _topicValue.text = [topicList objectAtIndex:indexPath.row];
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    tableView.hidden = YES;
+    Topic * topic = topicList[indexPath.row];
+    if(self.didSelectTopic)
+    {
+        self.didSelectTopic(topic.topic);
+    }
+    
+    [self popVIewController];
 }
 
 #pragma mark - UITextFieldDelegate
@@ -79,6 +113,7 @@
     [textField resignFirstResponder];
     return YES;
 }
+
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     if (textField.text.length < 1) {

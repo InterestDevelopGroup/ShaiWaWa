@@ -2,7 +2,7 @@
 //  LocationsViewController.m
 //  ShaiWaWa
 //
-//  Created by 祥 on 14-7-8.
+//  Created by Carl on 14-7-8.
 //  Copyright (c) 2014年 helloworld. All rights reserved.
 //
 
@@ -10,9 +10,9 @@
 #import "UIViewController+BarItemAdapt.h"
 #import "UIView+CutLayer.h"
 
-#import "MMLocationManager.h"
 @interface LocationsViewController ()
-
+@property (nonatomic,strong) CLLocationManager * locationManager;
+@property (nonatomic,strong) NSArray * placemarks;
 @end
 
 @implementation LocationsViewController
@@ -22,6 +22,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        _placemarks = @[];
     }
     return self;
 }
@@ -29,20 +30,36 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    _locationManager = [[CLLocationManager alloc] init];
+    _locationManager.delegate = self;
+    _locationManager.delegate = self;
+    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [_locationManager startUpdatingLocation];
+
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [_locationManager startUpdatingLocation];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [_locationManager stopUpdatingLocation];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Private Methods
 - (void)initUI
 {
     self.title = @"我在这里";
-    [self setLeftCusBarItem:@"square_back" action:nil];
+    [self setLeftCusBarItem:@"square_back" action:@selector(backAction:)];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn setTitle:@"删除位置" forState:UIControlStateNormal];
     [btn setFrame:CGRectMake(0, 10, 60, 30)];
@@ -54,37 +71,61 @@
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
     self.navigationItem.rightBarButtonItem = rightItem;
    
-    [self getAddress];
-    [self getLat];
-    
-    
-    addrNames = [[NSMutableArray alloc] initWithObjects:@"建华酒店花木店",@"富春饭店",@"上海小南国",@"欧德咖啡", nil];
-    addrDetails = [[NSMutableArray alloc] initWithObjects:@"上海市 浦东新区 梅花路591号",@"上海市 浦东新区 长柳路100号",@"上海市 浦东新区 花木路1378号",@"上海市 浦东新区 花木路999号", nil];
+    //清除分割线
     [_addrTableView clearSeperateLine];
     
 }
 
--(void)getAddress
+- (void)backAction:(id)sender
 {
-    __block __weak LocationsViewController *lself = self;
-    [[MMLocationManager shareLocation] getAddress:^(NSString *addressString) {
-        _addressStrBlock(addressString);
-        [lself.addrField setText:addressString];
-    }];
+    if([_placemarks count] == 0)
+    {
+        if(self.didSelectPlacemark)
+        {
+            self.didSelectPlacemark(nil);
+        }
+    }
+    
+    [self popVIewController];
 }
 
--(void)getLat
+
+//搜索过滤地址
+- (IBAction)finishEvent:(id)sender
 {
-    [[MMLocationManager shareLocation] getLocationCoordinate:^(CLLocationCoordinate2D locationCorrrdinate) {
-        _latitudeStrBlock([NSString stringWithFormat:@"%f",locationCorrrdinate.latitude]);
-        _longitudeStrBlock([NSString stringWithFormat:@"%f",locationCorrrdinate.longitude]);
-    }];
+    [_addrField resignFirstResponder];
+    if([_addrField.text length] == 0)
+    {
+        return ;
+    }
+    
+    NSMutableArray * tmp = [@[] mutableCopy];
+    for(CLPlacemark * placemark in _placemarks)
+    {
+        NSRange range = [placemark.name rangeOfString:_addrField.text];
+        if(range.location != NSNotFound)
+        {
+            [tmp addObject:placemark];
+        }
+    }
+    
+    _placemarks = tmp;
+    [_addrTableView reloadData];
 }
+
+
+//清楚地址
+- (void)clearLocation
+{
+    _placemarks = @[];
+    [_addrTableView reloadData];
+}
+
 
 #pragma mark - UITableView DataSources and Delegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [addrNames count];
+    return [_placemarks count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -94,12 +135,29 @@
     if (nil == cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identify];
     }
+    
+    CLPlacemark * placemark = _placemarks[indexPath.row];
+    DDLogInfo(@"%@,%@,%@,%@,%@,%@,%@",placemark.thoroughfare,placemark.locality,placemark.subLocality,placemark.subThoroughfare,placemark.country,placemark.subLocality,placemark.administrativeArea);
     cell.textLabel.textColor = [UIColor darkGrayColor];
     cell.textLabel.font = [UIFont systemFontOfSize:15];
-    cell.textLabel.text = [addrNames objectAtIndex:indexPath.row];
+    
+    NSString * address = @"";
+    if(placemark.subLocality != nil)
+    {
+        address = [address stringByAppendingString:placemark.subLocality];
+    }
+    if(placemark.thoroughfare != nil)
+    {
+        address = [address stringByAppendingString:placemark.thoroughfare];
+    }
+    if(placemark.subThoroughfare)
+    {
+        address = [address stringByAppendingString:placemark.subThoroughfare];
+    }
+    cell.textLabel.text = address;
     cell.detailTextLabel.textColor = [UIColor darkGrayColor];
     cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
-    cell.detailTextLabel.text = [addrDetails objectAtIndex:indexPath.row];
+    cell.detailTextLabel.text = placemark.name;
     cell.backgroundColor = [UIColor clearColor];
     return cell;
     
@@ -107,9 +165,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    _addrField.text = [addrNames objectAtIndex:indexPath.row];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    CLPlacemark * placemark = _placemarks[indexPath.row];
+    if(self.didSelectPlacemark)
+    {
+        self.didSelectPlacemark(placemark);
+    }
+    [self popVIewController];
 }
+
 
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -117,24 +181,49 @@
     [textField resignFirstResponder];
     return YES;
 }
-- (IBAction)finishEvent:(id)sender
+
+#pragma mark CLLocationManagerDelegate Methods
+-(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-    if (_addrField.text.length > 0) {
-        _addressStrBlock(_addrField.text);
-    }
-    else
-    {
-        _addressStrBlock(@"添加位置");
-    }
-    [_addrField resignFirstResponder];
-    [self.navigationController popViewControllerAnimated:YES];
-    [_addrField setText:nil];
-    
+    CLGeocoder * geocoder = [[CLGeocoder alloc] init];
+    [geocoder reverseGeocodeLocation:newLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+        
+        if(error)
+        {
+            UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"定位失败!" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+            [alertView show];
+            alertView = nil;
+
+            DDLogError(@"定位失败");
+            return ;
+        }
+        
+        if([placemarks count] > 0)
+        {
+            [_locationManager stopUpdatingLocation];
+            _placemarks = placemarks;
+            [_addrTableView reloadData];
+            
+//            CLPlacemark * placemark = placemarks[0];
+//            _addrField.text = placemark.name;
+        }
+        
+    }];
 }
-- (void)clearLocation
+
+
+-(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
-    _addrField.text = nil;
-    _addressStrBlock(@"添加位置");
-    [self.navigationController popViewControllerAnimated:YES];
+    [_locationManager stopUpdatingLocation];
+    UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"定位失败!" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+    [alertView show];
+    alertView = nil;
 }
+
+#pragma mark - UIAlertViewDelegate Methods
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [self popVIewController];
+}
+
 @end

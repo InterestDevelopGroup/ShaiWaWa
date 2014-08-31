@@ -17,10 +17,16 @@
 #import "Friend.h"
 #import "BabyInfo.h"
 
+#import "MJRefreshHeaderView.h"
+#import "MJRefreshFooterView.h"
+#import "MJRefresh.h"
+#import "AppMacros.h"
+
 @interface MyCollectionViewController ()
 {
      NSMutableArray *dyArray;
 }
+@property (nonatomic,assign) int currentOffset;
 @end
 
 @implementation MyCollectionViewController
@@ -30,6 +36,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        dyArray = [@[] mutableCopy];
+        _currentOffset = 0;
     }
     return self;
 }
@@ -37,36 +45,90 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
+
+
 - (void)initUI
 {
     self.title = @"我的收藏";
     [self setLeftCusBarItem:@"square_back" action:nil];
     [_myFavoriveList clearSeperateLine];
     [_myFavoriveList registerNibWithName:@"DynamicCell" reuseIdentifier:@"Cell"];
+    
+    [_myFavoriveList addHeaderWithCallback:^{
+        [self refresh];
+    }];
+    
+    [_myFavoriveList addFooterWithCallback:^{
+        [self loadMore];
+    }];
+    
+    [_myFavoriveList headerBeginRefreshing];
+    
+}
+
+- (void)refresh
+{
+    _currentOffset = 0;
+    [self getMyFavorite];
+}
+
+- (void)loadMore
+{
+    _currentOffset = [dyArray count];
+    [self getMyFavorite];
+}
+
+- (void)getMyFavorite
+{
     //获取收藏的宝宝动态
     UserInfo *users = [[UserDefault sharedInstance] userInfo];
-    [[HttpService sharedInstance] getFavorite:@{@"uid":users.uid,@"offset":@"0",@"pagesize":@"10"} completionBlock:^(id object) {
-        dyArray = [object objectForKey:@"result"];
+    [[HttpService sharedInstance] getFavorite:@{@"uid":users.uid,@"offset":[NSString stringWithFormat:@"%i",_currentOffset],@"pagesize":[NSString stringWithFormat:@"%i",CommonPageSize]} completionBlock:^(id object) {
+        [_myFavoriveList headerEndRefreshing];
+        [_myFavoriveList footerEndRefreshing];
+        if(_currentOffset == 0)
+        {
+            if(object == nil || [object count] == 0)
+            {
+                [SVProgressHUD showErrorWithStatus:@"暂时没有收藏."];
+                return ;
+            }
+            dyArray = (NSMutableArray *)dyArray;
+        }
+        else
+        {
+            [dyArray addObjectsFromArray:object];
+        }
+        
         [_myFavoriveList reloadData];
-        [SVProgressHUD showSuccessWithStatus:@"获取收藏成功"];
+        
     } failureBlock:^(NSError *error, NSString *responseString) {
-        [SVProgressHUD showErrorWithStatus:responseString];
+        [_myFavoriveList headerEndRefreshing];
+        [_myFavoriveList footerEndRefreshing];
+        
+        NSString * msg = responseString;
+        if (error)
+        {
+            msg = NSLocalizedString(@"LoadError", nil);
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
     }];
 }
+
 
 #pragma mark - UITableView DataSources and Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
 }
+
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [dyArray count];

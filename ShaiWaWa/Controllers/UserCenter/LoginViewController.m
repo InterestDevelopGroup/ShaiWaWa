@@ -9,23 +9,19 @@
 #import "LoginViewController.h"
 #import "ControlCenter.h"
 #import "ChooseModeViewController.h"
-
 #import "UserDefault.h"
 #import "UserInfo.h"
-
 #import "TheThirdPartyLoginView.h"
-
 #import "HttpService.h"
-
 #import "MBProgressHUD.h"
 #import "SVProgressHUD.h"
-
+#import "InputHelper.h"
 @interface LoginViewController ()
 
 @end
 
 @implementation LoginViewController
-
+#pragma mark - Life Cycle
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -34,23 +30,17 @@
     }
     return self;
 }
+
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    UserInfo *users = [[UserDefault sharedInstance] userInfo];
-    if (users != nil)
-    {
-        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
-        [SVProgressHUD setStatus:@"加载中..."];
-        _phoneField.text = users.phone;
-        _pwdField.text = users.password;
-        [self showMainVC:nil];
-    }
 }
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
     
 }
 
@@ -71,27 +61,22 @@
 #pragma mark - Private Methods
 - (void)initUI
 {
-    self.title = @"登陆";
+    self.title = NSLocalizedString(@"LoginVCTitle", nil);
     NSMutableAttributedString * attrString = [[NSMutableAttributedString alloc] initWithString:_hoverRegisterLabel.text];
     [attrString addAttributes:@{NSUnderlineStyleAttributeName:[NSNumber numberWithInt:NSUnderlineStyleSingle]} range:NSMakeRange(0, attrString.length)];
     _hoverRegisterLabel.attributedText = attrString;
     _hoverRegisterLabel.textColor = [UIColor lightGrayColor];
-    
-    
-    
     TheThirdPartyLoginView *thirdLoginView = [[TheThirdPartyLoginView alloc] initWithFrame:CGRectMake(0, 0, 242, 116)];
-    
     [thirdLoginView setXinlanBlock:^(void){
-        NSLog(@"sina");
+        
+        
     }];
     [thirdLoginView setQqBlock:^(void){
-        NSLog(@"qq");
+        
     }];
     
     [_thirdSuperView addSubview:thirdLoginView];
     
-    afHttp = [AFHttp shareInstanced];
-    isRec = afHttp.isReachableViaWiFi;
     
 }
 
@@ -104,43 +89,49 @@
 {
     [_phoneField resignFirstResponder];
     [_pwdField resignFirstResponder];
-    if (_phoneField.text.length > 0) {
-        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
-        [SVProgressHUD setStatus:@"登陆中..."];
-        [[HttpService sharedInstance] userLogin:@{@"phone":_phoneField.text,@"password":_pwdField.text}
-                    completionBlock:^(id object){
-                        
-                        
-                        [SVProgressHUD dismiss];
-                        [SVProgressHUD showSuccessWithStatus:@"成功登陆"];
-                        ChooseModeViewController *chooseModeVC = [[ChooseModeViewController alloc] init];
-                        [self.navigationController pushViewController:chooseModeVC animated:YES];
-                        
-                        _phoneField.text = nil;
-                        _pwdField.text = nil;
-                    } failureBlock:^(NSError *error, NSString *responseString){
-                        [SVProgressHUD showErrorWithStatus:responseString];
-        }];
-    }
-    else
+    NSString * phone = [InputHelper trim:_phoneField.text];
+    NSString * pass = [InputHelper trim:_pwdField.text];
+    
+    if([phone length] == 0)
     {
-          [SVProgressHUD showErrorWithStatus:@"文本框不能为空哦"];
-        
-        
-//        [[MBProgressHUD showHUDAddedTo:self.view animated:YES] setLabelText:@"文本框不能为空"];
-       
-        DDLogInfo(@"文本框不能为空");
-        
+        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"手机不能为空", nil)];
+        return ;
     }
+    
+    if(![InputHelper isPhone:phone])
+    {
+        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"InvalidatePhone", nil)];
+        return ;
+    }
+    
+    if([InputHelper isEmpty:pass])
+    {
+        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"PassCanNotEmpty", nil)];
+        return ;
+    }
+    
+    
+    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+    [SVProgressHUD setStatus:NSLocalizedString(@"Logining", nil)];
+    [[HttpService sharedInstance] userLogin:@{@"phone":phone,@"password":pass}completionBlock:^(id object){
+        [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"LoginSuccess", nil)];
+        _phoneField.text = nil;
+        _pwdField.text = nil;
+        [self showChooseModeVC];
+    } failureBlock:^(NSError *error, NSString *responseString){
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
     
 }
 
 
-//取消登陆
-/*
- [ShareSDK cancelAuthWithType:ShareTypeSinaWeibo];
- 
- */
+- (void)showChooseModeVC
+{
+    ChooseModeViewController *chooseModeVC = [[ChooseModeViewController alloc] initWithNibName:nil bundle:nil];
+    [self.navigationController pushViewController:chooseModeVC animated:YES];
+}
+
 
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

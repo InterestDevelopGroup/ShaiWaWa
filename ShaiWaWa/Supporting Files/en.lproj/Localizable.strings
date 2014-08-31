@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  ShaiWaWa
+
+  Created by Carl on 14-8-18.
+  Copyright (c) 2014年 helloworld. All rights reserved.
+*/
+
+"RegisterVCTitle"="注册";
+"LoginVCTitle"="登陆";
+"Loading"="加载中...";

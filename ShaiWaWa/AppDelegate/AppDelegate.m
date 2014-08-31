@@ -10,12 +10,11 @@
 #import "ControlCenter.h"
 #import "ShareManager.h"
 #import "HttpService.h"
+#import "AppMacros.h"
+#import "PersistentStore.h"
+#import "Topic.h"
 #import <ShareSDK/ShareSDK.h>
 @implementation AppDelegate
-
-@synthesize managedObjectContext = _managedObjectContext;
-@synthesize managedObjectModel = _managedObjectModel;
-@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 @synthesize postValidateType= _postValidateType;
 @synthesize postValidatePhoneNum = _postValidatePhoneNum;
 @synthesize postValidateCore = _postValidateCore;
@@ -23,11 +22,15 @@
 @synthesize deleteDyId = _deleteDyId;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [MagicalRecord setupCoreDataStackWithStoreNamed:@"ShaiWaWa"];
+    [IO createDirectoryInDocument:Avatar_Folder];
+    [IO createDirectoryInDocument:Publish_Image_Folder];
+    [IO createDirectoryInDocument:Publish_Video_Folder];
     [[ShareManager sharePlatform] configShare];
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     [ControlCenter makeKeyAndVisible];
     [self customUI];
-    [self testAPI];
+    [self firstLaunch];
     return YES;
 }
 
@@ -67,94 +70,8 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Saves changes in the application's managed object context before the application terminates.
-    [self saveContext];
-}
-
-- (void)saveContext
-{
-    NSError *error = nil;
-    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
-    if (managedObjectContext != nil) {
-        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-             // Replace this implementation with code to handle the error appropriately.
-             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
-        } 
-    }
-}
-
-#pragma mark - Core Data stack
-
-// Returns the managed object context for the application.
-// If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
-- (NSManagedObjectContext *)managedObjectContext
-{
-    if (_managedObjectContext != nil) {
-        return _managedObjectContext;
-    }
+    [MagicalRecord cleanUp];
     
-    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (coordinator != nil) {
-        _managedObjectContext = [[NSManagedObjectContext alloc] init];
-        [_managedObjectContext setPersistentStoreCoordinator:coordinator];
-    }
-    return _managedObjectContext;
-}
-
-// Returns the managed object model for the application.
-// If the model doesn't already exist, it is created from the application's model.
-- (NSManagedObjectModel *)managedObjectModel
-{
-    if (_managedObjectModel != nil) {
-        return _managedObjectModel;
-    }
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"ShaiWaWa" withExtension:@"momd"];
-    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
-    return _managedObjectModel;
-}
-
-// Returns the persistent store coordinator for the application.
-// If the coordinator doesn't already exist, it is created and the application's store added to it.
-- (NSPersistentStoreCoordinator *)persistentStoreCoordinator
-{
-    if (_persistentStoreCoordinator != nil) {
-        return _persistentStoreCoordinator;
-    }
-    
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"ShaiWaWa.sqlite"];
-    
-    NSError *error = nil;
-    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
-        /*
-         Replace this implementation with code to handle the error appropriately.
-         
-         abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
-         
-         Typical reasons for an error here include:
-         * The persistent store is not accessible;
-         * The schema for the persistent store is incompatible with current managed object model.
-         Check the error message to determine what the actual problem was.
-         
-         
-         If the persistent store is not accessible, there is typically something wrong with the file path. Often, a file URL is pointing into the application's resources directory instead of a writeable directory.
-         
-         If you encounter schema incompatibility errors during development, you can reduce their frequency by:
-         * Simply deleting the existing store:
-         [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil]
-         
-         * Performing automatic lightweight migration by passing the following dictionary as the options parameter:
-         @{NSMigratePersistentStoresAutomaticallyOption:@YES, NSInferMappingModelAutomaticallyOption:@YES}
-         
-         Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
-         
-         */
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }    
-    
-    return _persistentStoreCoordinator;
 }
 
 #pragma mark - Application's Documents directory
@@ -178,25 +95,25 @@
             //[[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"black_顶栏"] forBarMetrics:UIBarMetricsDefault];
         }
 #endif
-    }
-
-
-- (void)testAPI
-{
-    /*
-    [[HttpService sharedInstance] userRegister:@{@"username":@"cara",@"password":@"123456",@"phone":@"15018755275",@"validate_code":@"123456"} completionBlock:^(id object) {
-        
-    } failureBlock:^(NSError *error, NSString *responseString) {
-        
-    }];
-    
-    [[HttpService sharedInstance] userLogin:@{@"phone":@"15018755275",@"password":@"123456"} completionBlock:^(id object) {
-        
-    } failureBlock:^(NSError *error, NSString *responseString) {
-        
-    }];
-    */
-     
 }
+
+- (void)firstLaunch
+{
+    //判断是否第一次启动
+    if(![[NSUserDefaults standardUserDefaults] boolForKey:FirstLaunch])
+    {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:FirstLaunch];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        NSArray * topics = @[@"宝宝出生",@"宝宝满月",@"会叫爸爸了",@"会叫妈妈了",@"会爬了",@"会走了",@"一周岁了"];
+        
+        for(NSString * str in topics)
+        {
+            Topic * topic = [Topic MR_createEntity];
+            topic.topic = str;
+            [PersistentStore save];
+        }
+    }
+}
+
 
 @end

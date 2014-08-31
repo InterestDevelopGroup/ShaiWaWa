@@ -7,4 +7,7 @@
 //
 #import "BaseModel.h"
 #import "User.h"
+#import "BabyRecord.h"
+#import "BabyInfo.h"
+#import "RecordComment.h"
 

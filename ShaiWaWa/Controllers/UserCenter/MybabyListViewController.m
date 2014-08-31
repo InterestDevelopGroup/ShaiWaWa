@@ -2,7 +2,7 @@
 //  MybabyViewController.m
 //  ShaiWaWa
 //
-//  Created by 祥 on 14-7-7.
+//  Created by Carl on 14-7-7.
 //  Copyright (c) 2014年 helloworld. All rights reserved.
 //
 
@@ -16,10 +16,18 @@
 #import "UserDefault.h"
 #import "UserInfo.h"
 
+#import "MJRefreshHeaderView.h"
+#import "MJRefreshFooterView.h"
+#import "MJRefresh.h"
+
+#import "AppMacros.h"
+#import "UIImageView+WebCache.h"
+
 @interface MybabyListViewController ()
 {
     NSMutableArray *myBabyList;
 }
+@property (nonatomic,assign) int currentOffset;
 @end
 
 @implementation MybabyListViewController
@@ -29,6 +37,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        _currentOffset = 0;
+        myBabyList = [@[] mutableCopy];
     }
     return self;
 }
@@ -52,24 +62,64 @@
     [self setLeftCusBarItem:@"square_back" action:nil];
     [_babyListTableView clearSeperateLine];
     [_babyListTableView registerNibWithName:@"BabyListCell" reuseIdentifier:@"Cell"];
+    __weak MybabyListViewController * weakSelf = self;
+    [_babyListTableView addHeaderWithCallback:^{
+        [weakSelf refresh];
+    }];
     
+    [_babyListTableView addFooterWithCallback:^{
+        [weakSelf loadMore];
+    }];
+
+    [_babyListTableView headerBeginRefreshing];
+}
+
+- (void)refresh
+{
+    _currentOffset= 0;
+    [self getBabys];
+}
+
+- (void)loadMore
+{
+    _currentOffset = [myBabyList count];
+    [self getBabys];
+}
+
+//获取宝宝列表
+- (void)getBabys
+{
     UserInfo *user = [[UserDefault sharedInstance] userInfo];
-    NSLog(@"%@",@{@"offset":@"0",
-                  @"pagesize":@"10",
-                  @"uid":user.uid});
-    
-    
-    [[HttpService sharedInstance] getBabyList:@{@"offset":@"0",
-                                                @"pagesize":@"10",
-                                                @"uid":user.uid}
-                              completionBlock:^(id object) {
-                                  
-                                  myBabyList = [object objectForKey:@"result"];
-                                  [_babyListTableView reloadData];
-                                  [SVProgressHUD showSuccessWithStatus:@"获取成功"];
-                              } failureBlock:^(NSError *error, NSString *responseString) {
-                                  [SVProgressHUD showErrorWithStatus:responseString];
-                              }];
+    [[HttpService sharedInstance] getBabyList:@{@"offset":[NSString stringWithFormat:@"%i",_currentOffset],@"pagesize":[NSString stringWithFormat:@"%i",CommonPageSize],@"uid":user.uid}completionBlock:^(id object) {
+        
+        [_babyListTableView headerEndRefreshing];
+        [_babyListTableView footerEndRefreshing];
+        if(_currentOffset == 0)
+        {
+            if(object == nil || [object count] == 0)
+            {
+                [SVProgressHUD showErrorWithStatus:@"您还没有添加宝宝."];
+                return ;
+            }
+            myBabyList = (NSMutableArray *)object;
+        }
+        else
+        {
+            [myBabyList addObjectsFromArray:object];
+        }
+        
+        [_babyListTableView reloadData];
+        //[SVProgressHUD showSuccessWithStatus:@"获取成功"];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        
+        [_babyListTableView headerEndRefreshing];
+        [_babyListTableView footerEndRefreshing];
+        NSString * msg = responseString;
+        if (error) {
+            msg = NSLocalizedString(@"LoadError", nil);
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+    }];
 }
 
 #pragma mark - UITableView DataSources and Delegate
@@ -82,19 +132,29 @@
 {
     BabyListCell * babyListCell = (BabyListCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
     
-    babyListCell.babyNameLabel.text = [NSString stringWithFormat:@"%@",[[myBabyList objectAtIndex:indexPath.row] objectForKey:@"baby_name"]];
-    babyListCell.babyOldLabel.text = [NSString stringWithFormat:@"%@",[[myBabyList objectAtIndex:indexPath.row] objectForKey:@"birthday"]];
-    if ([[[myBabyList objectAtIndex:indexPath.row] objectForKey:@"sex"] intValue] == 0) {
-        babyListCell.babySexImage.image = [UIImage imageNamed:@"main_girl.png"];
-    }
-    else
+    BabyInfo * baby = myBabyList[indexPath.row];
+    babyListCell.babyNameLabel.text = baby.nickname;
+    
+    [babyListCell.babyImage setImageWithURL:[NSURL URLWithString:baby.avatar] placeholderImage:Default_Avatar];
+    
+    if([baby.sex isEqualToString:@"0"])
     {
+        //保密
+        babyListCell.babySexImage.hidden = YES;
+    }
+    else if([baby.sex isEqualToString:@"1"])
+    {
+        //男
+        babyListCell.babySexImage.hidden = NO;
         babyListCell.babySexImage.image = [UIImage imageNamed:@"main_boy.png"];
     }
-    
-    
-    //babyListCell.selectionStyle = UITableViewCellSelectionStyleNone;
-//    babyListCell.babyImage.image = [UIImage imageNamed:@""];
+    else if([baby.sex isEqualToString:@"2"])
+    {
+        //女
+        babyListCell.babySexImage.hidden = NO;
+        babyListCell.babySexImage.image = [UIImage imageNamed:@"main_girl.png"];
+    }
+
     
     return babyListCell;
    
@@ -104,7 +164,16 @@
 {
     [_babyListTableView deselectRowAtIndexPath:indexPath animated:YES];
     BabyHomePageViewController *babyHomePageVC = [[BabyHomePageViewController alloc] initWithNibName:nil bundle:nil];
-    babyHomePageVC.curBaby_id = [[myBabyList objectAtIndex:indexPath.row] objectForKey:@"baby_id"];
+    BabyInfo * babyInfo = [myBabyList objectAtIndex:indexPath.row];
+    
+    if(self.didSelectBaby)
+    {
+        self.didSelectBaby(babyInfo);
+        [self popVIewController];
+        return ;
+    }
+    
+    babyHomePageVC.babyInfo = babyInfo;
     [self.navigationController pushViewController:babyHomePageVC animated:YES];
     
 }

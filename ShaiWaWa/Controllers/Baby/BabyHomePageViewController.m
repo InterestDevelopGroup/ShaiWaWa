@@ -25,7 +25,7 @@
 #import "BabyInfo.h"
 
 @interface BabyHomePageViewController ()
-@property (nonatomic, strong) BabyInfo *babyInfo;
+
 @property (nonatomic, strong) NSMutableArray *babyPersonalDyArray;
 @property (nonatomic, strong) NSString *dyNum;
 @end
@@ -58,21 +58,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-/*
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:YES];
-    if (!isFullList) {
-        [self HMSegmentedControlInitMethod];
-        isFullList = NO;
-    }
-    else
-    {
-        [self HMSegmentedControlInitMethodFull];
-        isFullList = YES;
-    }
-}
-*/
+
 #pragma mark - Private Methods
 - (void)initUI
 {
@@ -156,7 +142,7 @@
  
     
    
-    [self getData];
+    //[self getData];
     
 
     if ([[UIScreen mainScreen] bounds].size.height < 500) {
@@ -188,6 +174,7 @@
     [naLabelsMatrix addRecord:[[NSArray alloc] initWithObjects:@"日期", @"身高(cm)", @"体重(kg)",@"体型", nil]];
     
     
+      /*
      //获取宝宝成长记录
      [[HttpService sharedInstance] getBabyGrowRecord:@{@"baby_id":curBaby_id,
                                                        @"offset":@"0",
@@ -216,6 +203,7 @@
          [SVProgressHUD showErrorWithStatus:msg];
      }];
     
+    */
     [_hAndwTableView setTableHeaderView:_heightAndWeight];
     [_segScrollView addSubview:_heightAndWeightTableView];
     
@@ -785,8 +773,8 @@
         _babyInfo.mid = [summaryDic objectForKey:@"mid"];
         _babyInfo.baby_name = [summaryDic objectForKey:@"baby_name"];
         _babyInfo.sex = [summaryDic objectForKey:@"sex"];
-        _babyInfo.birthDate = [summaryDic objectForKey:@"birthday"];
-        _babyInfo.nickName = [summaryDic objectForKey:@"nickname"];
+        _babyInfo.birthday = [summaryDic objectForKey:@"birthday"];
+        _babyInfo.nickname = [summaryDic objectForKey:@"nickname"];
         _babyInfo.country = [summaryDic objectForKey:@"country"];
         _babyInfo.province = [summaryDic objectForKey:@"province"];
         _babyInfo.city = [summaryDic objectForKey:@"city"];
@@ -849,7 +837,7 @@
             }
             else
             {
-                self.title = _babyInfo.nickName;
+                self.title = _babyInfo.nickname;
             }
             
         } failureBlock:^(NSError *error, NSString *responseString) {

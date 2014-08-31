@@ -43,7 +43,7 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="baby_4-bg-2.png" id="5AX-9k-UAR">
-                            <rect key="frame" x="10" y="14" width="299" height="428"/>
+                            <rect key="frame" x="10" y="6" width="299" height="436"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                         </imageView>
                         <view contentMode="scaleToFill" id="x7m-tw-b6A">
@@ -54,12 +54,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="298" height="56"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="baby_baobei.png" id="j2i-89-LDI">
-                                            <rect key="frame" x="12" y="6" width="45" height="45"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main_baobaotouxiang-.png" id="SnP-5E-Sbx">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_touxiang.png" id="j2i-89-LDI">
                                             <rect key="frame" x="12" y="6" width="45" height="45"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -504,8 +499,6 @@
     <resources>
         <image name="baby_4-bg-1.png" width="320" height="100"/>
         <image name="baby_4-bg-2.png" width="305" height="277"/>
-        <image name="baby_baobei.png" width="69" height="68"/>
-        <image name="main_baobaotouxiang-.png" width="82" height="82"/>
         <image name="main_jiantou.png" width="7" height="11"/>
         <image name="pb_logo-1.png" width="23" height="22"/>
         <image name="pb_logo-2.png" width="23" height="22"/>
@@ -526,5 +519,6 @@
         <image name="square_bofang-bg.png" width="62" height="29"/>
         <image name="square_bofang.png" width="5" height="9"/>
         <image name="square_zizhi.png" width="7" height="8"/>
+        <image name="user_touxiang.png" width="74" height="70"/>
     </resources>
 </document>

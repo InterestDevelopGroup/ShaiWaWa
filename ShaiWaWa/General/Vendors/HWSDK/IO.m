@@ -46,6 +46,24 @@
     return [NSURL fileURLWithPath:filePath];
 }
 
+
++ (NSString *)pathForResource:(NSString *)name inDirectory:(NSString *)directory
+{
+    NSString * doc = [[self class] documentPath];
+    NSString * directoryPath;
+    if(directory != nil)
+    {
+        directoryPath = [doc stringByAppendingPathComponent:directory];
+    }
+    else
+    {
+        directoryPath = doc;
+    }
+    
+    NSString * filePath = [directoryPath stringByAppendingPathComponent:name];
+    return filePath;
+}
+
 + (BOOL)writeImageToDocument:(NSData *)data
 {
     
@@ -82,7 +100,29 @@
     }
     
     return NO;
+}
+
++ (BOOL)writeFileToPath:(NSString *)path withData:(NSData *)data
+{
+    if(!data){
+        NSLog(@"The data is nil.");
+        return NO;
+    }
     
+    if(path == nil)
+    {
+        NSLog(@"The path is nil.");
+        return NO;
+    }
+    
+    if([data writeToFile:path atomically:YES])
+    {
+        
+        return YES;
+    }
+    
+    return NO;
+
 }
 
 
@@ -228,6 +268,38 @@
 }
 
 
++ (BOOL)deleteFileAtPath:(NSString *)path
+{
+    NSFileManager * fileManager = [NSFileManager defaultManager];
+    if(![fileManager fileExistsAtPath:path])
+    {
+        return YES;
+    }
+    NSError * error = nil;
+    BOOL result = [fileManager removeItemAtPath:path error:&error];
+    if(error)
+    {
+        NSLog(@"%@",error);
+    }
+    return result;
+}
+
++ (NSInteger) getFileSize:(NSString*) path
+{
+    NSFileManager * filemanager = [NSFileManager defaultManager];
+    if([filemanager fileExistsAtPath:path]){
+        NSDictionary * attributes = [filemanager attributesOfItemAtPath:path error:nil];
+        NSNumber *theFileSize;
+        if ( (theFileSize = [attributes objectForKey:NSFileSize]) )
+            return  [theFileSize intValue]/1024;
+        else
+            return -1;
+    }
+    else
+    {
+        return -1;
+    }
+}
 
 
 @end

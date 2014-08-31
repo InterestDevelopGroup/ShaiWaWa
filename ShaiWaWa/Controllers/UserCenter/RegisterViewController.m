@@ -1,23 +1,22 @@
 //
 //  RegisterViewController.m
 //  ShaiWaWa
-//
-//  Created by 祥 on 14-7-5.
+//  注册页面
+//  Created by Carl on 14-7-5.
 //  Copyright (c) 2014年 helloworld. All rights reserved.
 //
 
 #import "RegisterViewController.h"
 #import "ControlCenter.h"
-
 #import "TheThirdPartyLoginView.h"
-
 #import "HttpService.h"
 #import "SVProgressHUD.h"
 #import "UserDefault.h"
 #import "UserInfo.h"
 #import "Friend.h"
 #import "BabyInfo.h"
-
+#import "InputHelper.h"
+#import "PostValidateViewController.h"
 @interface RegisterViewController ()
 
 @end
@@ -49,7 +48,7 @@
 #pragma mark - Private Methods
 - (void)initUI
 {
-    self.title = @"注册";
+    self.title = NSLocalizedString(@"RegisterVCTitle", nil);
     [self.navigationItem setHidesBackButton:YES];
     myDelegate = [[UIApplication sharedApplication] delegate];
     NSMutableAttributedString * attrString = [[NSMutableAttributedString alloc] initWithString:_hoverLoginLabel.text];
@@ -79,32 +78,49 @@
 {
     myDelegate.postValidateType = @"reg";
     [_phoneField resignFirstResponder];
-    if (_phoneField.text.length > 0) {
-        if (_phoneField.text.length == 11) {
-            [[HttpService sharedInstance] sendValidateCode:@{@"phone":_phoneField.text} completionBlock:^(id object) {
-                myDelegate.postValidatePhoneNum = _phoneField.text;
-                
-                _phoneField.text = nil;
-                [ControlCenter pushToPostValidateVC];
-            } failureBlock:^(NSError *error, NSString *responseString) {
-                [SVProgressHUD showErrorWithStatus:responseString];
-            }];
-        }
-        else
+    NSString * phone = [InputHelper trim:_phoneField.text];
+    if (phone.length == 0)
+    {
+        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"CanNotEmpty", nil)];
+        return ;
+    }
+    
+    if(![InputHelper isPhone:phone])
+    {
+        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"InvalidatePhone", nil)];
+        return ;
+    }
+    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    [[HttpService sharedInstance] sendValidateCode:@{@"phone":phone} completionBlock:^(id object) {
+        [self showNextStepWithPhone:phone];
+        _phoneField.text = nil;
+        [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"SendSuccess", nil)];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        
+        NSString * msg = responseString;
+        if(error != nil)
         {
-            [SVProgressHUD showErrorWithStatus:@"请输入正确手机号码"];
+            msg = NSLocalizedString(@"SendError", nil);
         }
         
-    }
-    else
-    {
-        [SVProgressHUD showErrorWithStatus:@"不能为空"];
-    }
+        [SVProgressHUD showErrorWithStatus:msg];
+        
+    }];
    
     
 }
-    
-    
+
+
+- (void)showNextStepWithPhone:(NSString *)phone
+{
+    PostValidateViewController * vc = [[PostValidateViewController alloc] initWithNibName:nil bundle:nil];
+    vc.currentPhone = phone;
+    [self push:vc];
+    vc = nil;
+}
+
+
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {

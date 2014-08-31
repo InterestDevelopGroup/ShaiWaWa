@@ -14,4 +14,8 @@
    @return NSString 
   */
 - (NSString *)filterHTML;
+
+
+
+
 @end

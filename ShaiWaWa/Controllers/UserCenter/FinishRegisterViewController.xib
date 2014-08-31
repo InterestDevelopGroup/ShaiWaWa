@@ -40,7 +40,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                    <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done" secureTextEntry="YES"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="0sM-Ul-qQf"/>
                     </connections>
@@ -57,7 +57,7 @@
                         <action selector="finishRegisterAndLogin:" destination="-1" eventType="touchUpInside" id="X4k-UD-Dvo"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="KQH-72-dLw">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="KQH-72-dLw">
                     <rect key="frame" x="20" y="120" width="67" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>

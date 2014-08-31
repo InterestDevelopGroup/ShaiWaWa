@@ -53,7 +53,7 @@
                         <action selector="showPostValidateVC:" destination="-1" eventType="touchUpInside" id="2Ba-du-9FK"/>
                     </connections>
                 </button>
-                <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="还没有帐号，直接登陆" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xCI-nF-jXv">
+                <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已经有帐号，直接登陆" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xCI-nF-jXv">
                     <rect key="frame" x="165" y="135" width="122" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

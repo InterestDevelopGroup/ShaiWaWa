@@ -13,4 +13,6 @@
 @property (strong, nonatomic) NSString *searchValue;
 @property (strong, nonatomic) IBOutlet UITextField *searchRSField;
 @property (strong, nonatomic) NSMutableArray *friendArray;
+- (IBAction)cancelAction:(id)sender;
+
 @end

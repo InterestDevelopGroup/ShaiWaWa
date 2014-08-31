@@ -2,7 +2,7 @@
 //  BabyListViewController.m
 //  ShaiWaWa
 //
-//  Created by 祥 on 14-7-8.
+//  Created by Carl on 14-7-8.
 //  Copyright (c) 2014年 helloworld. All rights reserved.
 //
 
@@ -16,7 +16,12 @@
 #import "UserDefault.h"
 #import "UserInfo.h"
 #import "Friend.h"
-
+#import "BabyInfo.h"
+#import "MJRefreshHeaderView.h"
+#import "MJRefreshFooterView.h"
+#import "MJRefresh.h"
+#import "UIImageView+WebCache.h"
+#import "AppMacros.h"
 @interface BabyListViewController ()
 
 @end
@@ -49,44 +54,48 @@
 {
     self.title = @"宝宝列表";
     [self setLeftCusBarItem:@"square_back" action:nil];
-    sectionArr = [[NSArray alloc] initWithObjects:@"我的宝宝",@"好友的宝宝", nil];
+    sectionArr = [[NSArray alloc] initWithObjects:@"我的宝宝", nil];
     myBabyList = [[NSArray alloc] init];
     friendsBabyList =  [[NSArray alloc] init];
-    babyAll = [NSArray arrayWithObjects:myBabyList,friendsBabyList, nil];
-    //以段名数组，段数据为参数创建数据资源用的字典实例
-    babyList = [[NSDictionary alloc] initWithObjects:babyAll forKeys:sectionArr];
-    
-    //[_babyListTableView clearSeperateLine];
-    //[_babyListTableView registerNibWithName:@"BabyListCell" reuseIdentifier:@"Cell"];
+
     [_babyListTableView clearSeperateLine];
     [_babyListTableView registerNibWithName:@"BabyListCell" reuseIdentifier:@"Cell"];
+    [_babyListTableView addHeaderWithTarget:self action:@selector(refresh)];
+    [_babyListTableView setHeaderRefreshingText:NSLocalizedString(@"DataLoading", nil)];
+    [_babyListTableView headerBeginRefreshing];
+
     
-    
+}
+
+- (void)refresh
+{
+    [self getBabys];
+}
+
+
+//获取宝宝列表
+- (void)getBabys
+{
     UserInfo *user = [[UserDefault sharedInstance] userInfo];
-    NSLog(@"%@",@{@"offset":@"0",
-                  @"pagesize":@"10",
-                  @"uid":user.uid});
-    
-    
-    [[HttpService sharedInstance] getBabyList:@{@"offset":@"0",
-                                                @"pagesize":@"10",
-                                                @"uid":user.uid}
-                              completionBlock:^(id object) {
-                                  
-                                 
-                                  myBabyList = [object objectForKey:@"result"];
-                                  babyAll = [NSArray arrayWithObjects:myBabyList,friendsBabyList, nil];
-                                  //以段名数组，段数据为参数创建数据资源用的字典实例
-                                  babyList = [[NSDictionary alloc] initWithObjects:babyAll forKeys:sectionArr];
-                                  [_babyListTableView reloadData];
-                                  [SVProgressHUD showSuccessWithStatus:@"获取成功"];
+    [[HttpService sharedInstance] getBabyList:@{@"offset":@"0",@"pagesize":@"100",@"uid":user.uid} completionBlock:^(id object) {
+        [_babyListTableView headerEndRefreshing];
+        if(object == nil || [object count] == 0)
+        {
+            
+            [SVProgressHUD showErrorWithStatus:@"您还没有添加宝宝."];
+            return  ;
+        }
+        myBabyList = object;
+        [_babyListTableView reloadData];
     } failureBlock:^(NSError *error, NSString *responseString) {
         NSString * msg = responseString;
         if (error) {
             msg = @"加载失败";
         }
         [SVProgressHUD showErrorWithStatus:msg];
+        [_babyListTableView headerEndRefreshing];
     }];
+
 }
 
 
@@ -94,49 +103,40 @@
 #pragma mark - UITableView DataSources and Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [babyList count];
+    return [sectionArr count];
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // 获取当前section的名称，据此获取到当前section的数量。
-    NSString *sectionType = [sectionArr objectAtIndex:section];
-    NSArray *list = [babyList objectForKey:sectionType];
-    if (nil == list) {
-        return 0;
-    }
-    return [list count];
+    return [myBabyList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    //NSString *sectionType = [sectionArr objectAtIndex:indexPath.section];
-    //NSArray *list = [babyList objectForKey:sectionType];
     
     BabyListCell * babyListCell = (BabyListCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
-   
-    // 取当前section，设置单元格显示内容。
-    NSInteger section = indexPath.section;
-    // 获取这个分组的名称，再根据名称获得这个列表。
-    NSString *sectionType = [sectionArr objectAtIndex:section];
-    NSArray *list = [babyList objectForKey:sectionType];
-//   [list objectAtIndex:indexPath.row];
+    BabyInfo * baby = myBabyList[indexPath.row];
+    babyListCell.babyNameLabel.text = baby.nickname;
     
-    
-    //babyListCell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-//        [[[list objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"baby_name"]
-//    [[list objectAtIndex:indexPath.row] objectForKey:@"baby_name"]
+    [babyListCell.babyImage setImageWithURL:[NSURL URLWithString:baby.avatar] placeholderImage:Default_Avatar];
 
-//    babyListCell.babyImage.image = [UIImage imageNamed:@""];
-        babyListCell.babyNameLabel.text = [NSString stringWithFormat:@"%@",[[list objectAtIndex:indexPath.row] objectForKey:@"baby_name"]];
-        babyListCell.babyOldLabel.text = [NSString stringWithFormat:@"%@",[[list objectAtIndex:indexPath.row] objectForKey:@"birthday"]];
-    if ([[[list objectAtIndex:indexPath.row] objectForKey:@"sex"] intValue] == 0) {
-        babyListCell.babySexImage.image = [UIImage imageNamed:@"main_girl.png"];
-    }
-    else
+    if([baby.sex isEqualToString:@"0"])
     {
-         babyListCell.babySexImage.image = [UIImage imageNamed:@"main_boy.png"];
+        //保密
+        babyListCell.babySexImage.hidden = YES;
+    }
+    else if([baby.sex isEqualToString:@"1"])
+    {
+        //男
+        babyListCell.babySexImage.hidden = NO;
+        babyListCell.babySexImage.image = [UIImage imageNamed:@"main_boy.png"];
+    }
+    else if([baby.sex isEqualToString:@"2"])
+    {
+        //女
+        babyListCell.babySexImage.hidden = NO;
+        babyListCell.babySexImage.image = [UIImage imageNamed:@"main_girl.png"];
     }
 
     
@@ -161,9 +161,10 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     BabyHomePageViewController *babyHomePageVC = [[BabyHomePageViewController alloc] init];
-     babyHomePageVC.curBaby_id = [[myBabyList objectAtIndex:indexPath.row] objectForKey:@"baby_id"];
     [self.navigationController pushViewController:babyHomePageVC animated:YES];
 }
+
+
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {

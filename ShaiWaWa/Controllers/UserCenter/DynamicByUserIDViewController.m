@@ -14,10 +14,16 @@
 #import "UIViewController+BarItemAdapt.h"
 #import "DynamicCell.h"
 #import "DynamicDetailViewController.h"
+#import "AppMacros.h"
+#import "MJRefreshHeaderView.h"
+#import "MJRefreshFooterView.h"
+#import "MJRefresh.h"
+
 @interface DynamicByUserIDViewController ()
 {
     NSMutableArray *dyArray;
 }
+@property (nonatomic,assign) int currentOffset;
 @end
 
 @implementation DynamicByUserIDViewController
@@ -27,6 +33,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        _currentOffset = 0;
     }
     return self;
 }
@@ -34,67 +41,90 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
 }
 
+
+#pragma mark - Private Methods
 - (void)initUI
 {
-    UserInfo *users = [[UserDefault sharedInstance] userInfo];
     self.title = @"动态";
     [self setLeftCusBarItem:@"square_back" action:nil];
     dyArray = [[NSMutableArray alloc] init];
     [_dyTableView clearSeperateLine];
     [_dyTableView registerNibWithName:@"DynamicCell" reuseIdentifier:@"Cell"];
+    [_dyTableView addHeaderWithTarget:self action:@selector(refreshData)];
+    [_dyTableView setHeaderRefreshingText:NSLocalizedString(@"DataLoading", nil)];
+    [_dyTableView addFooterWithTarget:self action:@selector(loadMoreData)];
+    [_dyTableView setFooterPullToRefreshText:NSLocalizedString(@"PullTOLoad", nil)];
+    [_dyTableView setFooterRefreshingText:NSLocalizedString(@"DataLoading", nil)];
     
-    [[HttpService sharedInstance] getRecordList:@{@"offset":@"0", @"pagesize":@"10",@"uid":users.uid} completionBlock:^(id object) {
-        dyArray = [object objectForKey:@"result"];
+    [_dyTableView headerBeginRefreshing];
+}
+
+
+- (void)refreshData
+{
+    _currentOffset = 0;
+    [self showOnlyMyBabyDyList];
+}
+
+- (void)loadMoreData
+{
+    _currentOffset = [dyArray count];
+    [self showOnlyMyBabyDyList];
+}
+
+
+
+- (void)showOnlyMyBabyDyList
+{
+    UserInfo *users = [[UserDefault sharedInstance] userInfo];
+    [[HttpService sharedInstance] getRecordByUserID:@{@"offset":[NSString stringWithFormat:@"%i",_currentOffset], @"pagesize":[NSString stringWithFormat:@"%i",CommonPageSize],@"uid":users.uid} completionBlock:^(id object) {
+        [_dyTableView headerEndRefreshing];
+        [_dyTableView footerEndRefreshing];
+        if(_currentOffset == 0)
+        {
+            dyArray = object;
+        }
+        else
+        {
+            [dyArray addObjectsFromArray:object];
+        }
+        
         [_dyTableView reloadData];
-        [SVProgressHUD showSuccessWithStatus:@"加载完成"];
+        [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"LoadFinish", nil)];
     } failureBlock:^(NSError *error, NSString *responseString) {
         NSString * msg = responseString;
-        if (error) {
-            msg = @"加载失败";
+        if (error)
+        {
+            msg = NSLocalizedString(@"LoadError", nil);
         }
         [SVProgressHUD showErrorWithStatus:msg];
+        [_dyTableView headerEndRefreshing];
+        [_dyTableView footerEndRefreshing];
     }];
+    
 }
+
 
 #pragma mark - UITableView DataSources and Delegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (![dyArray isEqual:[NSNull null]]) {
-        return [dyArray count];
-    }
-    else
-    {
-        return 0;
-    }
-    
+    return [dyArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DynamicCell * dynamicCell = (DynamicCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
-
-    if (![[[dyArray objectAtIndex:indexPath.row] objectForKey:@"add_time"] isEqual:[NSNull null]]) {
-        dynamicCell.releaseTimeLabel.text = [[dyArray objectAtIndex:indexPath.row] objectForKey:@"add_time"];
-    }
-    if (![[[dyArray objectAtIndex:indexPath.row] objectForKey:@"address"] isEqual:[NSNull null]]) {
-        dynamicCell.addressLabel.text = [[dyArray objectAtIndex:indexPath.row] objectForKey:@"address"];
-    }
-    if (![[[dyArray objectAtIndex:indexPath.row] objectForKey:@"content"] isEqual:[NSNull null]]) {
-        dynamicCell.dyContentTextView.text = [[dyArray objectAtIndex:indexPath.row] objectForKey:@"content"];
-    }
     
-    dynamicCell.moreBtn.tag = indexPath.row + 2222;
-    dynamicCell.zanButton.tag = indexPath.row + 555;
-    [dynamicCell.zanButton setTitle:@"1" forState:UIControlStateNormal];
+
     return dynamicCell;
     
 }
@@ -102,7 +132,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     DynamicDetailViewController *dynamicDetailVC = [[DynamicDetailViewController alloc] init];
-    dynamicDetailVC.r_id = [[dyArray objectAtIndex:indexPath.row] objectForKey:@"rid"];
+
     [self.navigationController pushViewController:dynamicDetailVC animated:YES];
 }
 

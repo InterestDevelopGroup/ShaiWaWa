@@ -29,6 +29,7 @@
 #define Cancel_Like                                 @"cancel_like"
 #define Get_Likes_List                              @"get_likes_list"
 #define Add_Comment                                 @"add_comment"
+#define Get_Comment_List                            @"get_record_comment_list"
 #define Add_Favorite                                @"add_favorite"
 #define Delete_Record                               @"delete_Record"
 #define Get_Record_List                             @"get_record_list"
@@ -65,7 +66,15 @@ typedef enum {
     Param_Invalid_Error_Code,
     Illegal_Request_Error_Code,
     Username_Existed_Error_Code,
-    ShaiWaWa_Num_Existed_Error_Code
+    ShaiWaWa_Num_Existed_Error_Code,
+    Validate_Times_Beyond_Error_Code,
+    Validate_Num_Timeout_Error_Code,
+    Invalidate_Num_Error_Code,
+    Dynamic_Have_Collected_Error_Code,
+    Dynamic_Have_Liked_Error_Code,
+    Have_Apply_Friend_Error_Code,
+    Were_Friends_Error_Code,
+    Open_Platform_Unbind_Error_Code
 }API_Error_Code;
 
 @interface HttpService : AFHttp
@@ -211,6 +220,13 @@ typedef enum {
  */
 //TODO:添加评论
 - (void)addComment:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
+
+/**
+ @desc 获取评论列表
+ */
+//TODO:获取评论列表
+- (void)getCommentList:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
+
 
 /**
  @desc 添加收藏

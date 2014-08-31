@@ -7,7 +7,7 @@
 //
 
 #import "CommonViewController.h"
-
+#import "BabyRecord.h"
 @interface DynamicDetailViewController : CommonViewController<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 {
     BOOL isShareViewShown;
@@ -18,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIView *grayShareView;
 @property (weak, nonatomic) IBOutlet UIView *shareView;
 @property (weak, nonatomic) IBOutlet UITextField *pinLunContextTextField;
-@property (nonatomic,strong) NSString *r_id;
+@property (strong,nonatomic) BabyRecord * babyRecord;
 
 
 - (IBAction)hideGrayShareV:(id)sender;

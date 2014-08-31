@@ -2,7 +2,7 @@
 //  DynamicCell.h
 //  ShaiWaWa
 //
-//  Created by 祥 on 14-7-10.
+//  Created by Carl on 14-7-10.
 //  Copyright (c) 2014年 helloworld. All rights reserved.
 //
 
@@ -13,7 +13,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *praiseUserSecondBtn;
 @property (weak, nonatomic) IBOutlet UIButton *praiseUserFirstBtn;
 @property (weak, nonatomic) IBOutlet UIButton *moreBtn;
-@property (weak, nonatomic) IBOutlet UIButton *topicBtn;
+@property (weak, nonatomic) IBOutlet UILabel *topicView;
+@property (weak, nonatomic) IBOutlet UIView *likeUserView;
+
+@property (weak, nonatomic) IBOutlet UIButton *commentBtn;
 
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 @property (weak, nonatomic) IBOutlet UILabel *whoLabel;

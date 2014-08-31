@@ -7,7 +7,8 @@
 //
 
 #import "NSString+Utils.h"
-
+#import <CommonCrypto/CommonDigest.h>
+#import <CommonCrypto/CommonHMAC.h>
 @implementation NSString (Utils)
 - (NSString *)filterHTML
 {
@@ -23,4 +24,7 @@
     html = [html stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
     return html;
 }
+
+
+
 @end

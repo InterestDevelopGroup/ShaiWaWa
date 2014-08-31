@@ -1,0 +1,74 @@
+//
+//  ResponseHelper.m
+//  ShaiWaWa
+//
+//  Created by Carl on 14-8-19.
+//  Copyright (c) 2014年 helloworld. All rights reserved.
+//
+
+#import "ResponseHelper.h"
+
+@implementation ResponseHelper
+
++ (NSArray *)transformToBabyRecords:(NSArray *)arr
+{
+    if(arr == nil || [arr isEqual:[NSNull null]] || [arr count] == 0)
+    {
+        return @[];
+    }
+    NSMutableArray * results = [@[] mutableCopy];
+    
+    for(NSDictionary * dic in arr)
+    {
+        BabyRecord * record = [[BabyRecord alloc] init];
+        record.baby_id = dic[@"baby_id"];
+        record.uid = dic[@"uid"];
+        record.rid = dic[@"rid"];
+        record.add_time = dic[@"add_time"];
+        record.content = dic[@"content"] == [NSNull null] ? @"" : dic[@"content"];
+        record.address = dic[@"address"] == [NSNull null] ? @"" : dic[@"address"];
+        record.latitude = dic[@"latitude"] == [NSNull null] ? @"" : dic[@"latitude"];
+        record.longitude = dic[@"longitude"] == [NSNull null] ? @"" : dic[@"longitude"];
+        record.visibility = dic[@"visibility"];
+        record.baby_name = dic[@"baby_name"];
+        record.baby_nickname = dic[@"baby_nickname"];
+        record.like_count = dic[@"like_count"];
+        record.comment_count = dic[@"comment_count"];
+        record.images = dic[@"image"] == [NSNull null] ? @[] : dic[@"images"];
+        record.video = dic[@"video"] == [NSNull null] ? @[] : dic[@"video"];
+        record.audio = dic[@"audio"] == [NSNull null] ? @[] : dic[@"audio"];
+        record.top_3_likes = dic[@"top_3_likes"] == [NSNull null] ? @[] : dic[@"top_3_likes"];
+        [results addObject:record];
+        record = nil;
+    }
+    return results;
+}
+
+
++ (NSArray *)transformToRecordComments:(NSArray *)arr
+{
+    if(arr == nil || [arr isEqual:[NSNull null]] || [arr count] == 0)
+    {
+        return @[];
+    }
+    NSMutableArray * results = [@[] mutableCopy];
+    
+    for(NSDictionary * dic in arr)
+    {
+        RecordComment * comment = [[RecordComment alloc] init];
+        comment.uid = dic[@"uid"];
+        comment.username = dic[@"username"];
+        comment.avatar = dic[@"avatar"];
+        comment.content = dic[@"content"];
+        comment.comment_id = dic[@"comment_id"];
+        comment.reply_id = dic[@"reply_id"];
+        comment.reply_list = dic[@"reply_list"] == [NSNull null] ? @[] : dic[@"reply_list"];
+        comment.add_time = dic[@"add_time"];
+        [results addObject:comment];
+        comment = nil;
+        
+    }
+    return results;
+}
+
+@end

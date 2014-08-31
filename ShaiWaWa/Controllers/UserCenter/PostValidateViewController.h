@@ -2,7 +2,7 @@
 //  PostValidateViewController.h
 //  ShaiWaWa
 //
-//  Created by 祥 on 14-7-5.
+//  Created by Carl on 14-7-5.
 //  Copyright (c) 2014年 helloworld. All rights reserved.
 //
 
@@ -13,13 +13,12 @@
 {
     AppDelegate *myDelegate;
     int countBacki;
-    NSTimer *timer;
 }
-- (IBAction)showFinishRegisterVC:(id)sender;
+@property (nonatomic,strong) NSString * currentPhone;
 @property (weak, nonatomic) IBOutlet UILabel *phoneNumberLabel;
-
 @property (weak, nonatomic) IBOutlet UITextField *validateCoreTextField;
 @property (weak, nonatomic) IBOutlet UIButton *getCoreAgainButton;
 - (IBAction)getCoreAgainEvent:(id)sender;
+- (IBAction)showFinishRegisterVC:(id)sender;
 
 @end

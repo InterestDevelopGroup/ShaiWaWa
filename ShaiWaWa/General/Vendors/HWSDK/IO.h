@@ -28,6 +28,8 @@
  * @return NSURL 对应文件URL
  */
 + (NSURL *)URLForResource:(NSString *)name inDirectory:(NSString *)directory;
+
++ (NSString *)pathForResource:(NSString *)name inDirectory:(NSString *)directory;
 /*
  * @desc 获取沙盒document目录下面的所有文件，不包括目录
  * @return NSArray 包含沙盒目录下所有文件对应文件NSURL的数组
@@ -50,6 +52,8 @@
  * @return BOOL 是否成功
  */
 + (BOOL)writeImageToDocument:(NSData *)data;
+
++ (BOOL)writeFileToPath:(NSString *)path withData:(NSData *)data;
 /*
  * @desc 将图片保存到沙盒document目录下的directory目录里面
  * @param directory 目录名称,需位于沙盒document目录下面
@@ -70,4 +74,8 @@
  * @return BOOL 是否成功
  */
 + (BOOL)createFileInDirectory:(NSString *)directory withFileName:(NSString *)fileName;
+
++ (BOOL)deleteFileAtPath:(NSString *)path;
+
++ (NSInteger) getFileSize:(NSString*)path;
 @end

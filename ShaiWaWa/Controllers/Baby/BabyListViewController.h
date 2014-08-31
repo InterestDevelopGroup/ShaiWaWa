@@ -11,9 +11,7 @@
 @interface BabyListViewController : CommonViewController<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {
     NSArray *sectionArr;
-    NSArray *babyAll;
     NSArray *myBabyList, *friendsBabyList;
-    NSDictionary *babyList;
 }
 @property (strong, nonatomic) IBOutlet UITableView *babyListTableView;
 

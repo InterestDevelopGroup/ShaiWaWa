@@ -13,11 +13,12 @@ typedef void(^StrBlock)(NSString *);
 
 @interface FinishRegisterViewController : CommonViewController
 {
-    AppDelegate *mydelegate;
+    
 }
+@property (strong, nonatomic) NSString * currentPhone;
+@property (strong, nonatomic) NSString * validateCode;
 @property (strong, nonatomic) IBOutlet UITextField *userNameField;
 @property (strong, nonatomic) IBOutlet UITextField *pwdField;
-@property (strong, nonatomic) StrBlock strBlock;
 - (IBAction)disableSecure:(id)sender;
 - (IBAction)finishRegisterAndLogin:(id)sender;
 

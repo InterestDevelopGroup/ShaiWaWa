@@ -12,7 +12,8 @@
 #define HW @"hw_"       //关键字属性前缀
 #define Public_Key  @"5df39a7723b31e8abc5a826d"
 #define Private_Key @"1ee947ee71d3f4d214796750"
-
+#import "AllModels.h"
+#import "ResponseHelper.h"
 #import "UserInfo.h"
 #import "UserDefault.h"
 #import "SVProgressHUD.h"
@@ -165,6 +166,30 @@
         case ShaiWaWa_Num_Existed_Error_Code:
             msg = @"晒娃娃号已经存在.";
             break;
+        case Validate_Times_Beyond_Error_Code:
+            msg = @"验证码发送次数超过5次";
+            break;
+        case Validate_Num_Timeout_Error_Code:
+            msg = @"验证码已经过期.";
+            break;
+        case Invalidate_Num_Error_Code:
+            msg = @"无效验证码.";
+            break;
+        case Dynamic_Have_Collected_Error_Code:
+            msg = @"该动态已经收藏过了.";
+            break;
+        case Dynamic_Have_Liked_Error_Code:
+            msg = @"动态已经赞过了.";
+            break;
+        case Have_Apply_Friend_Error_Code:
+            msg = @"已经提交好友申请.";
+            break;
+        case Were_Friends_Error_Code:
+            msg = @"已经是好友了.";
+            break;
+        case Open_Platform_Unbind_Error_Code:
+            msg = @"第三方账号未绑定.";
+            break;
         default:
             msg = @"请求失败.";
             break;
@@ -232,8 +257,8 @@
     {
         [dic setObject:auth[key] forKey:key];
     }
-    //DDLogVerbose(@"%@",dic);
-    [super postJSON:url withParams:dic completionBlock:success failureBlock:false];
+    DDLogVerbose(@"%@",dic);
+    [super postJSON:url withParams:dic completionBlock:success failureBlock:failure];
 }
 
 /**
@@ -412,12 +437,7 @@
             return ;
         }
         if (success) {
-            success(obj);
-//            if ([[obj objectForKey:@"result"] count] > 0) {
-//                success([obj objectForKey:@"result"]);
-//            }
-//            else
-//                success([[obj objectForKey:@"result"] objectAtIndexPath:0]);
+            success(obj[@"result"]);
         }
     } failureBlock:failure];
 }
@@ -464,21 +484,10 @@
         if (isError) {
             return ;
         }
-        if (success) {
-            success(obj);
-                     }
-//            if (![obj isEqual:[NSNull null]]) {
-//                if ([[obj objectForKey:@"result"] count] > 1) {
-//                    success([obj objectForKey:@"result"]);
-//                }
-//                else
-//                    success([[obj objectForKey:@"result"] objectAtIndexPath:0]);
-//            }
-//            else
-//            {
-//                success(obj);
-//            }
-//        }
+        if (success)
+        {
+            success([self mapModelsProcess:obj[@"result"] withClass:[BabyInfo class]]);
+        }
     } failureBlock:failure];
 }
 
@@ -496,6 +505,7 @@
         if (success) {
             success(obj);
         }
+        
     } failureBlock:failure];
 }
 
@@ -572,7 +582,7 @@
 /**
  @desc 删除动态
  */
-//TODO 删除动态
+//TODO:删除动态
 - (void)deleteRecord:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
 {
     [self postJSON:[self mergeURL:Delete_Record] withParams:params completionBlock:^(id obj) {
@@ -672,6 +682,25 @@
     } failureBlock:failure];
 }
 
+
+/**
+ @desc 获取评论列表
+ */
+//TODO:获取评论列表
+- (void)getCommentList:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self postJSON:[self mergeURL:Get_Comment_List] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+        if (success) {
+            success([ResponseHelper transformToRecordComments:obj[@"result"]]);
+        }
+    } failureBlock:failure];
+
+}
+
 /**
  @desc 添加收藏
  */
@@ -702,7 +731,7 @@
             return ;
         }
         if (success) {
-            success(obj);
+            success([ResponseHelper transformToBabyRecords:obj[@"result"]]);
         }
     } failureBlock:failure];
 }
@@ -710,7 +739,7 @@
 /**
  @desc 获取动态列表
  */
-//TODO 获取动态列表
+//TODO:获取动态列表
 - (void)getRecordList:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
 {
     [self postJSON:[self mergeURL:Get_Record_List] withParams:params completionBlock:^(id obj) {
@@ -720,7 +749,9 @@
         }
         
         if (success) {
-            success(obj);
+            
+            success([ResponseHelper transformToBabyRecords:obj[@"result"]]);
+            
         }
     } failureBlock:failure];
 }
@@ -739,7 +770,7 @@
         }
         if (success) {
      
-                success(obj);
+            success([ResponseHelper transformToBabyRecords:obj[@"result"]]);
             
         }
     } failureBlock:failure];
@@ -772,16 +803,12 @@
 {
     [self postJSON:[self mergeURL:Get_Recrod_By_Follow] withParams:params completionBlock:^(id obj) {
         BOOL isError = [self filterError:obj failureBlock:failure];
-        if (isError) {
+        if (isError){
             return ;
         }
-        if (success) {
-            success(obj);
-//            if ([[obj objectForKey:@"result"] count] > 0) {
-//                success([obj objectForKey:@"result"]);
-//            }
-//            else
-//                success([[obj objectForKey:@"result"] objectAtIndexPath:0]);
+        if (success)
+        {
+            success([ResponseHelper transformToBabyRecords:obj[@"result"]]);
         }
     } failureBlock:failure];
 }
@@ -821,12 +848,7 @@
             return ;
         }
         if (success) {
-            success(obj);
-//            if ([[obj objectForKey:@"result"] count] > 0) {
-//                success([obj objectForKey:@"result"]);
-//            }
-//            else
-//                success([[obj objectForKey:@"result"] objectAtIndexPath:0]);
+            success([ResponseHelper transformToBabyRecords:obj[@"result"]]);
         }
     } failureBlock:failure];
 }
@@ -894,10 +916,11 @@
         if (isError) {
             return ;
         }
-//        Friend *friend = [self mapModel:[[obj objectForKey:@"result"] objectAtIndex:0] withClass:[Friend class]];
-        
+
         if (success) {
-            success(obj);
+            
+            NSArray * arr = [self mapModelsProcess:obj[@"result"] withClass:[Friend class]];
+            success(arr);
         }
     } failureBlock:failure];
 }
@@ -931,7 +954,8 @@
             return ;
         }
         if (success) {
-            success(obj);
+            NSArray * arr = [self mapModelsProcess:obj[@"result"] withClass:[Friend class]];
+            success(arr);
         }
     } failureBlock:failure];
 }
@@ -1116,8 +1140,6 @@
             return ;
         }
   
-//        NSLog(@"%@",[obj objectForKey:@"id"]);
-//        Setting *user_set = [self mapModel:[obj objectForKey:@"result"] withClass:[Setting class]];
         
         Setting *user_set = [[Setting alloc] init];
         user_set.set_id = [[[obj objectForKey:@"result"] objectAtIndex:0] objectForKey:@"id"];
@@ -1126,14 +1148,13 @@
         user_set.visibility = [[[obj objectForKey:@"result"] objectAtIndex:0]objectForKey:@"visibility"];
         user_set.show_position = [[[obj objectForKey:@"result"] objectAtIndex:0]objectForKey:@"show_position"];
         user_set.is_share = [[[obj objectForKey:@"result"] objectAtIndex:0] objectForKey:@"is_share"];
-        user_set.upload_video_only_wifi = [[[obj objectForKey:@"result"] objectAtIndex:0]objectForKey:@"upload_video_only_wifi"];
-        user_set.upload_audio_only_wifi = [[[obj objectForKey:@"result"] objectAtIndex:0]objectForKey:@"upload_audio_only_wifi"];
-        user_set.upload_image_only_wifi = [[[obj objectForKey:@"result"] objectAtIndex:0]objectForKey:@"upload_image_only_wifi"];
+        user_set.upload_video_only_wifi = [[[obj objectForKey:@"result"] objectAtIndex:0] objectForKey:@"upload_video_only_wifi"];
+        user_set.upload_audio_only_wifi = [[[obj objectForKey:@"result"] objectAtIndex:0] objectForKey:@"upload_audio_only_wifi"];
+        user_set.upload_image_only_wifi = [[[obj objectForKey:@"result"] objectAtIndex:0] objectForKey:@"upload_image_only_wifi"];
         
         [[UserDefault sharedInstance] setSet:user_set];
         if(success)
         {
-            
             success(user_set);
         }
     } failureBlock:failure];

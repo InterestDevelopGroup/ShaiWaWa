@@ -48,12 +48,6 @@
 #define COCOAPODS_VERSION_MINOR_AFNetworking_UIKit 2
 #define COCOAPODS_VERSION_PATCH_AFNetworking_UIKit 4
 
-// Base64
-#define COCOAPODS_POD_AVAILABLE_Base64
-#define COCOAPODS_VERSION_MAJOR_Base64 1
-#define COCOAPODS_VERSION_MINOR_Base64 0
-#define COCOAPODS_VERSION_PATCH_Base64 1
-
 // CocoaLumberjack
 #define COCOAPODS_POD_AVAILABLE_CocoaLumberjack
 #define COCOAPODS_VERSION_MAJOR_CocoaLumberjack 1
@@ -90,11 +84,29 @@
 #define COCOAPODS_VERSION_MINOR_MBProgressHUD 8
 #define COCOAPODS_VERSION_PATCH_MBProgressHUD 0
 
-// Reachability
-#define COCOAPODS_POD_AVAILABLE_Reachability
-#define COCOAPODS_VERSION_MAJOR_Reachability 3
-#define COCOAPODS_VERSION_MINOR_Reachability 1
-#define COCOAPODS_VERSION_PATCH_Reachability 1
+// MagicalRecord
+#define COCOAPODS_POD_AVAILABLE_MagicalRecord
+#define COCOAPODS_VERSION_MAJOR_MagicalRecord 2
+#define COCOAPODS_VERSION_MINOR_MagicalRecord 2
+#define COCOAPODS_VERSION_PATCH_MagicalRecord 0
+
+// MagicalRecord/Core
+#define COCOAPODS_POD_AVAILABLE_MagicalRecord_Core
+#define COCOAPODS_VERSION_MAJOR_MagicalRecord_Core 2
+#define COCOAPODS_VERSION_MINOR_MagicalRecord_Core 2
+#define COCOAPODS_VERSION_PATCH_MagicalRecord_Core 0
+
+// SDWebImage
+#define COCOAPODS_POD_AVAILABLE_SDWebImage
+#define COCOAPODS_VERSION_MAJOR_SDWebImage 3
+#define COCOAPODS_VERSION_MINOR_SDWebImage 7
+#define COCOAPODS_VERSION_PATCH_SDWebImage 1
+
+// SDWebImage/Core
+#define COCOAPODS_POD_AVAILABLE_SDWebImage_Core
+#define COCOAPODS_VERSION_MAJOR_SDWebImage_Core 3
+#define COCOAPODS_VERSION_MINOR_SDWebImage_Core 7
+#define COCOAPODS_VERSION_PATCH_SDWebImage_Core 1
 
 // SVProgressHUD
 #define COCOAPODS_POD_AVAILABLE_SVProgressHUD

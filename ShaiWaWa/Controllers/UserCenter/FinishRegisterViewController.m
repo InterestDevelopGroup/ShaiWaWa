@@ -9,9 +9,9 @@
 #import "FinishRegisterViewController.h"
 #import "UIViewController+BarItemAdapt.h"
 #import "ControlCenter.h"
-
 #import "HttpService.h"
 #import "SVProgressHUD.h"
+#import "InputHelper.h"
 @interface FinishRegisterViewController ()
 
 @end
@@ -44,20 +44,8 @@
 {
     self.title = @"完成注册";
     [self setLeftCusBarItem:@"square_back" action:nil];
-    mydelegate = [[UIApplication sharedApplication] delegate];
-    __weak NSString *phone = mydelegate.postValidatePhoneNum;
-    __weak NSString *validateCore = mydelegate.postValidateCore;
-    __weak FinishRegisterViewController *finishVC = self;
-    
-    [self setStrBlock:^(NSString *str){
 
-        [[HttpService sharedInstance] userRegister:@{@"username":finishVC.userNameField.text,@"password":finishVC.pwdField.text,@"phone":phone,@"sww_number":str,@"validate_code":validateCore} completionBlock:^(id object) {
-            [SVProgressHUD showSuccessWithStatus:@"注册成功"];
-            [finishVC.navigationController popToRootViewControllerAnimated:YES];
-        } failureBlock:^(NSError *error, NSString *responseString) {
-            [SVProgressHUD showErrorWithStatus:responseString];
-        }];
-    }];
+    
 }
 - (IBAction)disableSecure:(id)sender
 {
@@ -66,17 +54,49 @@
     
 - (IBAction)finishRegisterAndLogin:(id)sender
 {
+    
+    NSString * username = [InputHelper trim:userNameField.text];
+    NSString * pass = [InputHelper trim:pwdField.text];
+    
+    if([InputHelper isEmpty:username])
+    {
+        [SVProgressHUD showErrorWithStatus:@"NameCanNotEmpty"];
+        return ;
+    }
+    
+    if([InputHelper isEmpty:pass])
+    {
+        [SVProgressHUD showErrorWithStatus:@"PassCanNotEmpty"];
+        return ;
+    }
+    
     NSString *sww_Num = [self fitSwwNum];
     [[HttpService sharedInstance] isExists:@{@"sww_number":sww_Num} completionBlock:^(id object) {
-        _strBlock(sww_Num);
+        [self registerWithNum:sww_Num];
     } failureBlock:^(NSError *error, NSString *responseString) {
-        [SVProgressHUD showErrorWithStatus:responseString];
+        
+        NSString * msg = NSLocalizedString(@"RegisterError", nil);
+        [SVProgressHUD showErrorWithStatus:msg];
     }];
     
- 
-    
 }
-    
+
+- (void)registerWithNum:(NSString *)sww_Num
+{
+    NSString * username = [InputHelper trim:userNameField.text];
+    NSString * pass = [InputHelper trim:pwdField.text];
+    [[HttpService sharedInstance] userRegister:@{@"username":username,@"password":pass,@"phone":_currentPhone,@"sww_number":sww_Num,@"validate_code":_validateCode} completionBlock:^(id object) {
+        [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"RegisterSuccess", nil)];
+        [self popToRoot];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        NSString * msg = NSLocalizedString(@"RegisterError", nil);
+        if(error == nil)
+            msg = responseString;
+        [SVProgressHUD showErrorWithStatus:msg];
+    }];
+
+}
+
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -97,6 +117,8 @@
     NSString *randomSww_num = [[randomString componentsSeparatedByString:@"."]objectAtIndex:1];
     return randomSww_num;
 }
+
+
 #pragma mark -- 是否符合晒娃娃号需求
 - (NSString *)fitSwwNum
 {

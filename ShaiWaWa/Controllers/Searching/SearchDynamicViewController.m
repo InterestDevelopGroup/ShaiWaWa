@@ -11,7 +11,7 @@
 #import "HttpService.h"
 #import "SVProgressHUD.h"
 #import "ChooseModeViewController.h"
-
+#import "InputHelper.h"
 @interface SearchDynamicViewController ()
 
 @end
@@ -30,22 +30,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Private Methods
 - (void)initUI
 {
-    self.title = @"搜索动态";
+    self.title = NSLocalizedString(@"SearchRecordVCTitle", nil);
     [self setLeftCusBarItem:@"square_back" action:nil];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setTitle:@"完成" forState:UIControlStateNormal];
+    [btn setTitle:NSLocalizedString(@"Finish", nil) forState:UIControlStateNormal];
     [btn setFrame:CGRectMake(0, 0, 40, 30)];
     btn.titleLabel.font = [UIFont systemFontOfSize:15];
     [btn addTarget:self action:@selector(finishDone) forControlEvents:UIControlEventTouchUpInside];
@@ -54,22 +52,19 @@
 }
 - (void)finishDone
 {
-    [[HttpService sharedInstance] searchRecord:@{@"keyword":_keywordTextField.text, @"offset":@"0", @"pagesize":@"10" } completionBlock:^(id object) {
-        
-
-        if (![[object objectForKey:@"result"] isEqual:[NSNull null]]) {
-            _searchBlock([object objectForKey:@"result"]);
-            
-        }
-        else
-        {
-            _searchBlock([NSMutableArray array]);
-        }
-        [self.navigationController popViewControllerAnimated:YES];
-        [SVProgressHUD showSuccessWithStatus:@"已更新"];
-    } failureBlock:^(NSError *error, NSString *responseString) {
-        [SVProgressHUD showErrorWithStatus:responseString];
-    }];
+    NSString * keyword = [InputHelper trim:_keywordTextField.text];
+    if([InputHelper isEmpty:keyword])
+    {
+        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"CanNotEmpty", nil)];
+        return ;
+    }
+    
+    if(self.searchBlock)
+    {
+        self.searchBlock(keyword);
+    }
+    
+    [self popVIewController];
 }
 
 #pragma mark - UITextFieldDelegate

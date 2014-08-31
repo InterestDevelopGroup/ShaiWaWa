@@ -19,6 +19,8 @@
 @synthesize qq,weibo,wechat;
 @synthesize sina_openId,tecent_openId;
 @synthesize login_time,register_time;
+@synthesize baby_count,record_count;
+@synthesize favorite_count,friend_count;
 - (id)copyWithZone:(NSZone *)zone
 {
 	UserInfo *userInfo = [[[self class] allocWithZone:zone] init];
@@ -29,7 +31,6 @@
     userInfo.sex = [[self sex] copy];
 	userInfo.sww_number = [[self sww_number] copy];
     userInfo.avatar = [[self avatar] copy];
-    
 	userInfo.qq = [[self qq] copy];
     userInfo.weibo = [[self weibo] copy];
 	userInfo.wechat = [[self wechat] copy];
@@ -37,6 +38,10 @@
 	userInfo.tecent_openId = [[self tecent_openId] copy];
     userInfo.login_time = [[self login_time] copy];
 	userInfo.register_time = [[self register_time] copy];
+    userInfo.baby_count = [[self baby_count] copy];
+    userInfo.record_count = [[self record_count] copy];
+    userInfo.favorite_count = [[self favorite_count] copy];
+    userInfo.friend_count = [[self friend_count] copy];
 	return userInfo;
 }
 
@@ -56,24 +61,32 @@
     [aCoder encodeObject:tecent_openId forKey:@"tecent_openId"];
     [aCoder encodeObject:login_time forKey:@"login_time"];
     [aCoder encodeObject:register_time forKey:@"register_time"];
+    [aCoder encodeObject:baby_count forKey:@"baby_count"];
+    [aCoder encodeObject:record_count forKey:@"record_count"];
+    [aCoder encodeObject:favorite_count forKey:@"favorite_count"];
+    [aCoder encodeObject:friend_count forKey:@"friend_count"];
 }
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super init]) {
-        phone = [aDecoder decodeObjectForKey:@"phone"];
-        password = [aDecoder decodeObjectForKey:@"pwd"];
-        username = [aDecoder decodeObjectForKey:@"username"];
-        sww_number = [aDecoder decodeObjectForKey:@"sww_number"];
-        uid = [aDecoder decodeObjectForKey:@"uid"];
-        sex = [aDecoder decodeObjectForKey:@"sex"];
-        avatar = [aDecoder decodeObjectForKey:@"avatar"];
-        qq = [aDecoder decodeObjectForKey:@"qq"];
-        weibo = [aDecoder decodeObjectForKey:@"weibo"];
-        wechat = [aDecoder decodeObjectForKey:@"wechat"];
-        sina_openId = [aDecoder decodeObjectForKey:@"sina_openId"];
-        tecent_openId = [aDecoder decodeObjectForKey:@"tecent_openId"];
-        login_time = [aDecoder decodeObjectForKey:@"login_time"];
-        register_time = [aDecoder decodeObjectForKey:@"register_time"];
+        self.phone = [aDecoder decodeObjectForKey:@"phone"];
+        self.password = [aDecoder decodeObjectForKey:@"pwd"];
+        self.username = [aDecoder decodeObjectForKey:@"username"];
+        self.sww_number = [aDecoder decodeObjectForKey:@"sww_number"];
+        self.uid = [aDecoder decodeObjectForKey:@"uid"];
+        self.sex = [aDecoder decodeObjectForKey:@"sex"];
+        self.avatar = [aDecoder decodeObjectForKey:@"avatar"];
+        self.qq = [aDecoder decodeObjectForKey:@"qq"];
+        self.weibo = [aDecoder decodeObjectForKey:@"weibo"];
+        self.wechat = [aDecoder decodeObjectForKey:@"wechat"];
+        self.sina_openId = [aDecoder decodeObjectForKey:@"sina_openId"];
+        self.tecent_openId = [aDecoder decodeObjectForKey:@"tecent_openId"];
+        self.login_time = [aDecoder decodeObjectForKey:@"login_time"];
+        self.register_time = [aDecoder decodeObjectForKey:@"register_time"];
+        self.baby_count = [aDecoder decodeObjectForKey:@"baby_count"];
+        self.record_count = [aDecoder decodeObjectForKey:@"record_count"];
+        self.favorite_count = [aDecoder decodeObjectForKey:@"favorite_count"];
+        self.friend_count = [aDecoder decodeObjectForKey:@"friend_count"];
     }
     return self;
 }

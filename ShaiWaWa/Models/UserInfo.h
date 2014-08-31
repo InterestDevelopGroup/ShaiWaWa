@@ -17,13 +17,17 @@
     NSString *sww_number;     //晒娃娃号
     NSString *sex;            //性别 1：man 2:woman 0: secury
     NSString *avatar;         //用户头像
-    NSString *qq;           //qq
-    NSString *weibo;        //sina
-    NSString *wechat;       //wechat
-    NSString *sina_openId;  //sina_openId
-    NSString *tecent_openId;//tencentQQ_openId
-    NSString *login_time;  //登陆时间
-    NSString *register_time;//注册时间
+    NSString *qq;             //qq
+    NSString *weibo;          //sina
+    NSString *wechat;         //wechat
+    NSString *sina_openId;    //sina_openId
+    NSString *tecent_openId;  //tencentQQ_openId
+    NSString *login_time;     //登陆时间
+    NSString *register_time;  //注册时间
+    NSString *baby_count;
+    NSString *record_count;
+    NSString *favorite_count;
+    NSString *friend_count;
     
 }
 @property (nonatomic,retain)NSString *uid;
@@ -40,6 +44,10 @@
 @property (nonatomic,retain)NSString *tecent_openId;
 @property (nonatomic,retain)NSString *login_time;
 @property (nonatomic,retain)NSString *register_time;
+@property (nonatomic,retain)NSString *baby_count;
+@property (nonatomic,retain)NSString *record_count;
+@property (nonatomic,retain)NSString *favorite_count;
+@property (nonatomic,retain)NSString *friend_count;
 
 - (UserInfo *)initWithName :(NSString*)_username
                      and : (NSString *)_password;

@@ -2,26 +2,19 @@
 //  RecordComment.h
 //  ShaiWaWa
 //
-//  Created by Carl_Huang on 14-8-4.
+//  Created by Carl on 14-8-27.
 //  Copyright (c) 2014年 helloworld. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-@class DynamicRecord,UserInfo;
-@interface RecordComment : NSObject<NSCopying, NSCoding> 
-{
-    NSString *comment_id;       //评论id
-    DynamicRecord *dynamicRecord;
-    UserInfo *userInfo;
-    NSString *reply_id;         //回复id
-    NSString *content;          //内容
-    NSString *add_time;         //发表时间
-}
+#import "BaseModel.h"
 
-@property (nonatomic, strong) NSString *comment_id;
-@property (nonatomic, strong) DynamicRecord *dynamicRecord;
-@property (nonatomic, strong) UserInfo *userInfo;
-@property (nonatomic, strong) NSString *reply_id;
-@property (nonatomic, strong) NSString *content;
-@property (nonatomic, strong) NSString *add_time;
+@interface RecordComment : BaseModel
+@property (nonatomic,strong) NSString * uid;
+@property (nonatomic,strong) NSString * comment_id;
+@property (nonatomic,strong) NSString * avatar;
+@property (nonatomic,strong) NSString * content;
+@property (nonatomic,strong) NSString * username;
+@property (nonatomic,strong) NSString * reply_id;
+@property (nonatomic,strong) NSString * reply_list;
+@property (nonatomic,strong) NSString * add_time;
 @end

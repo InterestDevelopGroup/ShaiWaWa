@@ -2,7 +2,7 @@
 //  SearchGoodFriendsViewController.m
 //  ShaiWaWa
 //
-//  Created by 祥 on 14-7-8.
+//  Created by Carl on 14-7-8.
 //  Copyright (c) 2014年 helloworld. All rights reserved.
 //
 
@@ -63,6 +63,20 @@
 //    [_friendSelectListTableView clearSeperateLine];
 //    [_friendSelectListTableView registerNibWithName:@"FriendSelectedCell" reuseIdentifier:@"Cell"];
 }
+
+
+- (IBAction)startSearch:(id)sender
+{
+    [_searchField resignFirstResponder];
+    if (_searchField.text.length > 0) {
+        SearchRSViewController *searchRS = [[SearchRSViewController alloc] init];
+        searchRS.searchValue = _searchField.text;
+        [self.navigationController pushViewController:searchRS animated:YES];
+        
+    }
+}
+
+
 #pragma mark - UITableView DataSources and Delegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -89,6 +103,8 @@
         typeName.tag = 9939;
         typeName.textColor = [UIColor darkGrayColor];
         [cell addSubview:typeName];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
        
     }
     UIImageView *Icon = (UIImageView *)[cell viewWithTag:9929];
@@ -106,13 +122,25 @@
     SearchQQFriendViewController *qqFriendVC= [[SearchQQFriendViewController alloc] init];
     SearchAddressBookViewController *addressBookVC =[[SearchAddressBookViewController alloc] init];
     ScannerQRCodeViewController *scannCodeCardVC = [[ScannerQRCodeViewController alloc] init];
-    
+    UserInfo * user = [[UserDefault sharedInstance] userInfo];
     int num = indexPath.row;
     switch (num) {
         case 0:
+        {
+            if(user == nil || user.sina_openId == nil)
+            {
+                [SVProgressHUD showErrorWithStatus:@"您还没有绑定新浪微博."];
+                return ;
+            }
             [self.navigationController pushViewController:weiBoVC animated:YES];
             break;
+        }
         case 1:
+            if(user == nil || user.tecent_openId == nil)
+            {
+                [SVProgressHUD showErrorWithStatus:@"您还没有绑定QQ."];
+                return ;
+            }
             [self.navigationController pushViewController:qqFriendVC animated:YES];
             break;
         case 2:
@@ -131,26 +159,9 @@
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    if (_searchField.text.length > 0) {
-        [textField resignFirstResponder];
-        SearchRSViewController *searchRS = [[SearchRSViewController alloc] init];
-        searchRS.searchValue = _searchField.text;
-        _searchField.text = nil;
-        [self.navigationController pushViewController:searchRS animated:YES];
-        
-    }
-    [textField resignFirstResponder];
+ 
+    [self startSearch:nil];
     return YES;
 }
 
-- (IBAction)startSearch:(id)sender
-{
-    if (_searchField.text.length > 0) {
-        [_searchField resignFirstResponder];
-        SearchRSViewController *searchRS = [[SearchRSViewController alloc] init];
-        searchRS.searchValue = _searchField.text;
-        [self.navigationController pushViewController:searchRS animated:YES];
-        
-    }
-}
 @end

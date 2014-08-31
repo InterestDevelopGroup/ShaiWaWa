@@ -2,7 +2,7 @@
 //  AddBabyInfoViewController.m
 //  ShaiWaWa
 //
-//  Created by 祥 on 14-7-7.
+//  Created by Carl on 14-7-7.
 //  Copyright (c) 2014年 helloworld. All rights reserved.
 //
 
@@ -15,7 +15,10 @@
 #import "UserInfo.h"
 #import "Friend.h"
 #import "BabyInfo.h"
-@interface AddBabyInfoViewController ()
+#import "AppMacros.h"
+#import "QNUploadHelper.h"
+#import "InputHelper.h"
+@interface AddBabyInfoViewController ()<UIAlertViewDelegate>
 {
     BabyInfo *baby;
     TSLocateView *locateView;
@@ -38,13 +41,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Private Methods
@@ -72,46 +73,100 @@
     jianTou.frame = CGRectMake(_cityButton.bounds.size.width-18, 15, 7, 11);
     [_cityButton addSubview:jianTou];
     
-    [self createFolder];
     
-    baby = [[BabyInfo alloc] init];
+
     
 
 }
 
+
+
 - (void)addBaby
 {
-    UserInfo *user = [[UserDefault sharedInstance] userInfo];
-    if (_babyNameField.text.length > 0 && _birthDayField.text.length > 0 && _babyNicknameField.text.length > 0 && _birthStatureField.text.length > 0 &&_birthWeightField.text.length > 0 ) {
-      
-        [[HttpService sharedInstance] addBaby:@{@"uid":user.uid,
-                                                @"fid":isDad ? user.uid : @"",
-                                                @"mid":isMon ? user.uid : @"",
-                                                @"baby_name":_babyNameField.text,
-                                                @"avatar":![imageFullUrlStr isEqual:[NSNull null]] ? imageFullUrlStr : @"",
-                                                @"sex":isBoy ? @"1" : @"0",
-                                                @"birthday":_birthDayField.text,
-                                                @"nickname":_babyNicknameField.text,
-                                                @"birth_height":_birthStatureField.text,
-                                                @"birth_weight":_birthWeightField.text,
-                                                @"country":@"中国",
-                                                @"province":location.state,
-                                                @"city":location.city} completionBlock:^(id object) {
-                                                    [SVProgressHUD showSuccessWithStatus:@"添加成功"];
-                                                    [self clearTextField];
-                                                    [self resetStatus];
-                                                } failureBlock:^(NSError *error, NSString *responseString) {
-                                                    NSString * msg = responseString;
-                                                    if (error) {
-                                                        msg = @"加载失败";
-                                                    }
-                                                    [SVProgressHUD showErrorWithStatus:msg];
-                                                }];
-
+    
+    NSString * babyName = [InputHelper trim:_babyNicknameField.text];
+    NSString * birthday = [InputHelper trim:_birthDayField.text];
+    
+    if([InputHelper isEmpty:babyName])
+    {
+        [SVProgressHUD showErrorWithStatus:@"宝宝名称不能为空."];
+        return ;
     }
-    else
-    [SVProgressHUD showErrorWithStatus:@"不允许为空"];
-   }
+    
+    if([InputHelper isEmpty:birthday])
+    {
+        [SVProgressHUD showErrorWithStatus:@"出生日期不能为空."];
+        return ;
+    }
+    
+    
+    //先判断是否有头像，如果有先上传到七牛.
+    if(imageFullUrlStr != nil)
+    {
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+        [[QNUploadHelper sharedHelper] setUploadFailure:^(NSString * path){
+        
+            [SVProgressHUD dismiss];
+            UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:nil message:@"图片上传失败" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"重试", nil];
+            [alertView show];
+            alertView = nil;
+        }];
+        
+        [[QNUploadHelper sharedHelper] setUploadSuccess:^(NSString * path){
+            imageFullUrlStr = [NSString stringWithFormat:@"%@%@",QN_URL,[path lastPathComponent]];
+            [self submitBabyInfo];
+        }];
+        
+        [[QNUploadHelper sharedHelper] uploadFile:imageFullUrlStr];
+        return ;
+    }
+    
+    [self submitBabyInfo];
+    
+    /*
+    @{@"uid":user.uid,@"fid":isDad ? user.uid : @"",@"mid":isMon ? user.uid : @"",@"baby_name":_babyNameField.text,@"avatar":![imageFullUrlStr isEqual:[NSNull null]] ? imageFullUrlStr : @"",@"sex":isBoy ? @"1" : @"0",@"birthday":_birthDayField.text,
+      @"nickname":_babyNicknameField.text,
+      @"birth_height":_birthStatureField.text,
+      @"birth_weight":_birthWeightField.text,
+      @"country":@"中国",
+      @"province":location.state,
+      @"city":location.city}
+     */
+
+}
+
+- (void)submitBabyInfo
+{
+    NSString * babyName = [InputHelper trim:_babyNicknameField.text];
+    NSString * birthday = [InputHelper trim:_birthDayField.text];
+    UserInfo *user = [[UserDefault sharedInstance] userInfo];
+    NSMutableDictionary * params = [@{} mutableCopy];
+    params[@"uid"] = user.uid;
+    params[@"fid"] = isDad ? user.uid : @"";
+    params[@"mid"] = isMon ? user.uid : @"";
+    params[@"baby_name"] = _babyNameField.text != nil ? _babyNameField.text : @"";
+    params[@"avatar"] = imageFullUrlStr != nil ? imageFullUrlStr : @"";
+    params[@"sex"] = isBoy? @"1" : @"0";
+    params[@"nickname"] = babyName;
+    params[@"birthday"] = birthday;
+    params[@"birth_height"] = _birthStatureField.text != nil ? _birthStatureField.text : @"";
+    params[@"birth_weight"] = _birthWeightField.text != nil ? _birthWeightField.text : @"";
+    params[@"country"] = @"中国";
+    params[@"province"] = location.state != nil ? location.state : @"";
+    params[@"city"] =  location.city != nil ? location.city : @"";
+    [[HttpService sharedInstance] addBaby:params completionBlock:^(id object) {
+        [SVProgressHUD showSuccessWithStatus:@"添加成功"];
+        [self clearTextField];
+        [self resetStatus];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        NSString * msg = responseString;
+        if (error) {
+            msg = @"加载失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+    }];
+
+}
 
 - (IBAction)boySelected:(id)sender
 {
@@ -159,6 +214,27 @@
     [actionSheet showFromRect:CGRectMake(0, 0, 320, 100) inView:self.view animated:YES];
 }
 
+- (void)clearTextField
+{
+    imageFullUrlStr = nil;
+    _babyNameField.text = nil;
+    _birthDayField.text = nil;
+    _babyNicknameField.text = nil;
+    _birthStatureField.text = nil;
+    _birthWeightField.text = nil;
+    _cityValueTextField.text = nil;
+}
+
+- (void)resetStatus
+{
+    [self boySelected:nil];
+    [self monSelected:nil];
+    [_touXiangButton setImage:[UIImage imageNamed:@"main_baobaotouxiang.png"] forState:UIControlStateNormal];
+}
+
+
+
+#pragma mark - UIActionSheetDelegate Methods
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (actionSheet.tag == 11111)
@@ -178,32 +254,28 @@
     }
     else
     {
-    // 判断是否支持相机
-    //先设定sourceType为相机，然后判断相机是否可用（ipod）没相机，不可用将sourceType设定为相片库
-    UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
-    
-    switch (buttonIndex) {
-        case 0:
-            // 相机
-            sourceType = UIImagePickerControllerSourceTypeCamera;
-            break;
-        case 1:
-            // 相册
-            sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-            break;
-        case 2:
-            // 取消
-            return;
-    }
-    UIImagePickerController *imagePickerController =[[UIImagePickerController alloc] init];
-    
-    imagePickerController.delegate = self;
-    
-    imagePickerController.allowsEditing = YES;
-    
-    imagePickerController.sourceType = sourceType;
-    
-    [self presentViewController:imagePickerController animated:YES completion:^{}];
+        // 判断是否支持相机
+        //先设定sourceType为相机，然后判断相机是否可用（ipod）没相机，不可用将sourceType设定为相片库
+        UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
+        
+        switch (buttonIndex) {
+            case 0:
+                // 相机
+                sourceType = UIImagePickerControllerSourceTypeCamera;
+                break;
+            case 1:
+                // 相册
+                sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                break;
+            case 2:
+                // 取消
+                return;
+        }
+        UIImagePickerController *imagePickerController =[[UIImagePickerController alloc] init];
+        imagePickerController.delegate = self;
+        imagePickerController.allowsEditing = YES;
+        imagePickerController.sourceType = sourceType;
+        [self presentViewController:imagePickerController animated:YES completion:^{}];
     }
 }
 
@@ -211,56 +283,25 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [picker dismissViewControllerAnimated:YES completion:^{}];
-    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-    
-    
-    // 保存图片至本地，方法见下文
-    [self saveImage:image withName:@"Baby_avatar_NumPic"];
-  
-    [_touXiangButton setImage:image forState:UIControlStateNormal];
+    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+    NSString * fileName = [[IO generateRndString] stringByAppendingPathExtension:@"png"];
+    NSString *fullPath = [IO pathForResource:fileName inDirectory:Avatar_Folder];
+    if(![IO writeFileToPath:fullPath withData:UIImagePNGRepresentation(image)])
+    {
+        [SVProgressHUD showErrorWithStatus:@"保存失败."];
+        return ;
+    }
+
+    [_touXiangButton setImage:[image ellipseImageWithDefaultSetting] forState:UIControlStateNormal];
+    imageFullUrlStr = fullPath;
 }
+
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [self dismissViewControllerAnimated:YES completion:^{}];
 }
 
-#pragma mark - 保存图片至沙盒
-- (void) saveImage:(UIImage *)currentImage withName:(NSString *)imageName
-{
-    NSData *imageData = UIImageJPEGRepresentation(currentImage, 0.5);
-    
-    
-    NSDate *  senddate=[NSDate date];
-    NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
-    //    [dateformatter setDateFormat:@"HH:mm"];
-    //    NSString *  locationString=[dateformatter stringFromDate:senddate];
-    [dateformatter setDateFormat:@"YYYY-MM-dd-HH-mm-ss"];
-    NSString *morelocationString=[dateformatter stringFromDate:senddate];
-    
-    // 获取沙盒目录
-    imageFullUrlStr = [[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"/Avatar"] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%@.png",imageName,morelocationString]];
-    // 将图片写入文件
-    [imageData writeToFile:imageFullUrlStr atomically:NO];
-}
-//NSData * UIImageJPEGRepresentation ( UIImage *image, CGFloat compressionQuality
-//创建沙盒下文件夹
-- (void)createFolder
-{
-    NSString *dirName = @"Avatar";
-    NSString *fullPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-    NSString *imageDir = [NSString stringWithFormat:@"%@/%@", fullPath,dirName];
-    BOOL isDir = NO;
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    BOOL existed = [fileManager fileExistsAtPath:imageDir isDirectory:&isDir];
-    if ( !(isDir == YES && existed == YES) )
-    {
-        [fileManager createDirectoryAtPath:imageDir withIntermediateDirectories:YES attributes:nil error:nil];
-    }
-}
-//删除文件夹及文件级内的文件：
-//NSString *imageDir = [NSString stringWithFormat:@"%@/Caches/%@", NSHomeDirectory(), dirName];
-//NSFileManager *fileManager = [NSFileManager defaultManager];
-//[fileManager removeItemAtPath:imageDir error:nil];
+
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -280,6 +321,7 @@
     return YES;
 }
 
+
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     if (textField == _birthWeightField) {
@@ -292,6 +334,8 @@
         _scrollView.contentOffset = CGPointMake(0, 246);
     }
 }
+
+
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     if (textField == _birthWeightField) {
@@ -313,20 +357,15 @@
     [_birthWeightField resignFirstResponder];
 }
 
-- (void)clearTextField
+#pragma mark - UIAlertViewDelegate Methods
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    _babyNameField.text = nil;
-    _birthDayField.text = nil;
-    _babyNicknameField.text = nil;
-    _birthStatureField.text = nil;
-    _birthWeightField.text = nil;
-    _cityValueTextField.text = nil;
+    if(buttonIndex == 0)
+    {
+        return ;
+    }
+    
+    [self addBaby];
 }
 
-- (void)resetStatus
-{
-    [self boySelected:nil];
-    [self monSelected:nil];
-    [_touXiangButton setImage:[UIImage imageNamed:@"main_baobaotouxiang.png"] forState:UIControlStateNormal];
-}
 @end

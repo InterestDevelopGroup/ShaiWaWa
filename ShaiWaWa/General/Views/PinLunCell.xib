@@ -25,16 +25,8 @@
                         <color key="textColor" red="0.71764707565307617" green="0.82745105028152466" blue="0.59215688705444336" alpha="1" colorSpace="deviceRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="一二三四五六七八九十，一二三四五六七八" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Fgw-Sm-afh">
-                        <rect key="frame" x="31" y="26" width="232" height="17"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="九十，一二三四五六七八九十，一二三四" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="s71-LI-w6l">
-                        <rect key="frame" x="31" y="43" width="232" height="17"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="九十，一二三四五六七八九十，一二三四" lineBreakMode="tailTruncation" numberOfLines="100" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="s71-LI-w6l">
+                        <rect key="frame" x="31" y="23" width="232" height="44"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -52,6 +44,11 @@
                 </subviews>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="addTimeLabel" destination="jao-zR-5HE" id="atu-xE-usO"/>
+                <outlet property="contentLabel" destination="s71-LI-w6l" id="cnF-yq-etP"/>
+                <outlet property="usernameLabel" destination="0fX-hD-GtQ" id="oYl-hq-Zlm"/>
+            </connections>
         </tableViewCell>
     </objects>
 </document>

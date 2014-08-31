@@ -1,8 +1,8 @@
 //
 //  PostValidateViewController.m
 //  ShaiWaWa
-//
-//  Created by 祥 on 14-7-5.
+//  提交验证码
+//  Created by Carl on 14-7-5.
 //  Copyright (c) 2014年 helloworld. All rights reserved.
 //
 
@@ -10,16 +10,13 @@
 #import "ControlCenter.h"
 #import "UIViewController+BarItemAdapt.h"
 #import "SearchAddressListViewController.h"
-
+#import "FinishRegisterViewController.h"
 #import "HttpService.h"
 #import "SVProgressHUD.h"
-#import "UserDefault.h"
-#import "UserInfo.h"
-#import "Friend.h"
-#import "BabyInfo.h"
+#import "InputHelper.h"
 
 @interface PostValidateViewController ()
-
+@property (nonatomic,strong) NSTimer * countTimer;
 @end
 
 @implementation PostValidateViewController
@@ -29,6 +26,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        countBacki = 60;
     }
     return self;
 }
@@ -37,6 +35,18 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self startTimer];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self stopTimer];
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,38 +58,112 @@
 #pragma mark - Private Methods
 - (void)initUI
 {
-    self.title = @"提交验证码";
+    self.title = NSLocalizedString(@"ValidateCodeVCTitle", nil);
     [self setLeftCusBarItem:@"square_back" action:nil];
-    myDelegate = [[UIApplication sharedApplication] delegate];
-    _phoneNumberLabel.text = myDelegate.postValidatePhoneNum;
-    if (myDelegate.postValidateCoreTime != nil) {
-        countBacki = [myDelegate.postValidateCoreTime intValue];
-        timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(countBackwards) userInfo:nil repeats:YES];
-    }
-    else
+    _phoneNumberLabel.text = _currentPhone;
+}
+
+
+- (void)startTimer
+{
+    
+    if(_countTimer == nil)
     {
-    countBacki = 60;
-    timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(countBackwards) userInfo:nil repeats:YES];
-      
+        NSBlockOperation * operation = [NSBlockOperation blockOperationWithBlock:^{
+            
+            _countTimer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(countBackwards) userInfo:nil repeats:YES];
+            [[NSRunLoop currentRunLoop] addTimer:_countTimer forMode:NSRunLoopCommonModes];
+            [_countTimer setFireDate:[NSDate date]];
+            [_countTimer fire];
+        }];
+        [operation start];
+        return ;
+    }
+    
+    [_countTimer setFireDate:[NSDate date]];
+    [_countTimer fire];
+}
+
+- (void)stopTimer
+{
+    if(_countTimer)
+    {
+        [_countTimer setFireDate:[NSDate distantFuture]];
     }
 }
+
+
 
 
 - (void)countBackwards
 {
     countBacki--;
     [_getCoreAgainButton setBackgroundImage:[UIImage imageNamed:@"login_box-5.png"] forState:UIControlStateNormal];
-    myDelegate.postValidateCoreTime = [NSString stringWithFormat:@"%d",countBacki];
     [_getCoreAgainButton setTitle:[NSString stringWithFormat:@"重发(%d)",countBacki] forState:UIControlStateNormal];
-    if (countBacki == 0) {
-        [timer invalidate];
-        timer = nil;
-        myDelegate.postValidateCoreTime = nil;
+    if(countBacki <= 0)
+    {
         [_getCoreAgainButton setTitle:[NSString stringWithFormat:@"重发"] forState:UIControlStateNormal];
         [_getCoreAgainButton setBackgroundImage:[UIImage imageNamed:@"login_box3.png"] forState:UIControlStateNormal];
-         _getCoreAgainButton.enabled = YES;
-        
+        _getCoreAgainButton.enabled = YES;
+        [self stopTimer];
+        return ;
     }
+    
+}
+
+
+- (IBAction)showFinishRegisterVC:(id)sender
+{
+    [_validateCoreTextField resignFirstResponder];
+    //先判断验证码是否空
+    NSString * code = [InputHelper trim:_validateCoreTextField.text];
+    if([InputHelper isEmpty:code])
+    {
+        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"CanNotEmpty", nil)];
+        return ;
+    }
+    //判断长度是否是6
+    if(![InputHelper isLength:6 withString:code])
+    {
+        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"InvalidateCode", nil)];
+        return ;
+    }
+    
+    
+    //[ControlCenter pushToFinishRegisterVC];
+    
+    FinishRegisterViewController * vc = [[FinishRegisterViewController alloc] initWithNibName:nil bundle:nil];
+    vc.currentPhone = _currentPhone;
+    vc.validateCode = code;
+    [self push:vc];
+    vc = nil;
+   
+}
+- (IBAction)getCoreAgainEvent:(id)sender
+{
+    
+    if(countBacki > 0)
+    {
+        return ;
+    }
+    
+    if(_currentPhone == nil)
+    {
+        DDLogError(@"The phone is nil.");
+        return ;
+    }
+    
+    [[HttpService sharedInstance] sendValidateCode:@{@"phone":_currentPhone} completionBlock:^(id object) {
+        countBacki = 60;
+        [self startTimer];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        NSString * msg = responseString;
+        if(error)
+        {
+            msg = NSLocalizedString(@"LoadError", nil);
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+    }];
 }
 
 #pragma mark - UITextFieldDelegate
@@ -89,68 +173,4 @@
     return YES;
 }
 
-- (IBAction)showFinishRegisterVC:(id)sender
-{
-    [_validateCoreTextField resignFirstResponder];
-    if ([myDelegate.postValidateType isEqualToString:@"reg"]) {
-        if (_validateCoreTextField.text.length > 0) {
-            if (_validateCoreTextField.text.length == 6) {
-                myDelegate.postValidateCore = _validateCoreTextField.text;
-                [ControlCenter pushToFinishRegisterVC];
-                 _validateCoreTextField.text = nil;
-            }
-            else
-            {
-                [SVProgressHUD showErrorWithStatus:@"输入验证码格式有误"];
-            }
-        }
-        else
-        {
-            [SVProgressHUD showErrorWithStatus:@"文本框不能为空"];
-        }
-       
-    }
-    else if ([myDelegate.postValidateType isEqualToString:@"addrBook"])
-    {
-        
-        if (_validateCoreTextField.text.length > 0) {
-            if (_validateCoreTextField.text.length == 6) {
-                myDelegate.postValidateCore = _validateCoreTextField.text;
-                SearchAddressListViewController *addressListVC = [[SearchAddressListViewController alloc] init];
-                [self.navigationController pushViewController:addressListVC animated:YES];
-                _validateCoreTextField.text = nil;
-            }
-            else
-            {
-                [SVProgressHUD showErrorWithStatus:@"输入验证码格式有误"];
-            }
-        }
-        else
-        {
-            [SVProgressHUD showErrorWithStatus:@"文本框不能为空"];
-        }
-
-    }
-    else
-    {
-    
-    }
-   
-}
-- (IBAction)getCoreAgainEvent:(id)sender
-{
-    
-    if (myDelegate.postValidateCoreTime != nil) {
-        [SVProgressHUD showErrorWithStatus:@"一分钟内不可重复获取"];
-    }
-    else
-    {
-    [[HttpService sharedInstance] sendValidateCode:@{@"phone":myDelegate.postValidatePhoneNum} completionBlock:^(id object) {
-        countBacki = 60;
-        timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(countBackwards) userInfo:nil repeats:YES];
-    } failureBlock:^(NSError *error, NSString *responseString) {
-        [SVProgressHUD showErrorWithStatus:responseString];
-    }];
-    }
-}
 @end

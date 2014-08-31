@@ -1,0 +1,46 @@
+/* 
+  Localizable.strings
+  ShaiWaWa
+
+  Created by Carl on 14-8-18.
+  Copyright (c) 2014年 helloworld. All rights reserved.
+*/
+//Title
+"RegisterVCTitle"="注册";
+"LoginVCTitle"="登陆";
+"ValidateCodeVCTitle"="提交验证码";
+"ReleaseVCTitle"="发布动态";
+"SearchRecordVCTitle"="搜索动态";
+"SettingVCTitle"="设置";
+"PublishVCTitle"="发布动态";
+
+//Button Title
+"Finish"="完成";
+"Back"="返回";
+"Add"="添加";
+"Cancel"="取消";
+"TryAgain"="重试";
+//Notice
+"Loading"="加载中...";
+"SendSuccess"="发送成功.";
+"CanNotEmpty"="不能为空.";
+"InvalidatePhone"="请输入正确手机号码";
+"PhoneCanNotEmpty"="手机不能为空";
+"InvalidateCode"="输入验证码格式有误";
+"PassCanNotEmpty"="密码不能为空";
+"NameCanNotEmpty"="名字不能为空";
+"SendError"="发送出错.";
+"LoadError"="加载出错";
+"LoadFinish"="加载完成";
+"LoginSuccess"="登陆成功.";
+"Logining"="登陆中...";
+"SetSuccess"="设置成功";
+"RegisterError"="注册失败";
+"RegisterSuccess"="注册成功";
+"HaveNotBaby"="您当前还未添加宝宝，请先添加！";
+"GetBabyError"="获取宝宝失败,请重试!";
+"SaveError"="保存失败.";
+//Refresh Notice
+"DataLoading"="数据正在加载";
+"PullTOLoad"="上拉加载更多";
+"PullToRefresh"="下拉刷新";

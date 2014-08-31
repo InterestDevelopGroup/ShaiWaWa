@@ -8,7 +8,7 @@
 
 #import "ControlCenter.h"
 #import "UserDefault.h"
-
+#import "UserInfo.h"
 
 @implementation ControlCenter
 
@@ -32,11 +32,18 @@
 + (void)makeKeyAndVisible
 {
     
-    //LoginViewController
     AppDelegate * appDelegate = [[self class] appDelegate];
-    //[[self class] setNavigationTitleWhiteColor];
     appDelegate.window = [[self class] newWindow];
-    UINavigationController *nav = [[self class] navWithRootVC:[[self class] viewControllerWithName:@"LoginViewController"]];
+    UINavigationController * nav;
+    UserInfo *users = [[UserDefault sharedInstance] userInfo];
+    if(users == nil)
+    {
+        nav = [[self class] navWithRootVC:[[self class] viewControllerWithName:@"LoginViewController"]];
+    }
+    else
+    {
+        nav = [[self class] navWithRootVC:[[self class] viewControllerWithName:@"ChooseModeViewController"]];
+    }
     appDelegate.navigationController = nav;
     appDelegate.window.rootViewController = appDelegate.navigationController;
     [appDelegate.window makeKeyAndVisible];

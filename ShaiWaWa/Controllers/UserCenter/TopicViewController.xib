@@ -36,6 +36,9 @@
                     <state key="normal" image="pb_wanchwng.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="finishAction:" destination="-1" eventType="touchUpInside" id="OFm-QW-KzB"/>
+                    </connections>
                 </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="fUx-XD-4Jy">
                     <rect key="frame" x="0.0" y="64" width="320" height="440"/>

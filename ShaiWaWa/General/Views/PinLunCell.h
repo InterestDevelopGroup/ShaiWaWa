@@ -10,4 +10,8 @@
 
 @interface PinLunCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *addTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *contentLabel;
+
 @end

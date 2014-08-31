@@ -7,8 +7,9 @@
 //
 
 #import "CommonViewController.h"
-
+#import "BabyInfo.h"
+typedef void (^DidSelectBaby)(BabyInfo * babyInfo);
 @interface MybabyListViewController : CommonViewController<UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *babyListTableView;
-
+@property (nonatomic,copy) DidSelectBaby didSelectBaby;
 @end

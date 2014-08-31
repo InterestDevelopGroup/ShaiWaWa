@@ -20,6 +20,7 @@
 #import "UITableView+Addition.h"
 #import "UITextView+Placeholder.h"
 #import "UIColor+Utils.h"
+#import "UIImage+Resize.h"
 
 
 

@@ -7,6 +7,7 @@
 //
 
 #import "ReleaseDynamic.h"
+#import "BabySelectListViewController.h"
 #import "UIViewController+BarItemAdapt.h"
 #import "TopicViewController.h"
 #import "LocationsViewController.h"
@@ -18,9 +19,9 @@
 #import "UserInfo.h"
 #import "Friend.h"
 #import "BabyInfo.h"
-#import "DynamicRecord.h"
 
-#import "BabySelectListViewController.h"
+
+
 
 #import "VoiceConverter.h"
 
@@ -75,7 +76,7 @@
 {
     
     
-    self.title = @"发表动态";
+    self.title = NSLocalizedString(@"ReleaseVCTitle", nil);
     [self setLeftCusBarItem:@"square_back" action:nil];
     self.navigationItem.rightBarButtonItem = [self customBarItem:@"pb_fabu" action:@selector(releaseDy) size:CGSizeMake(57, 27)];
      [self labelUnderLine];
@@ -94,7 +95,6 @@
     
     recordedFile = [NSURL fileURLWithPath:temp];
     
-//    recordedFile = [NSURL fileURLWithPath:[VoiceConverter wavToAmr:temp]];
     
     
     AVAudioSession *session = [AVAudioSession sharedInstance];
@@ -198,7 +198,6 @@
     
     __block __weak ReleaseDynamic *rself = self;
     LocationsViewController *locationVC = [[LocationsViewController alloc] init];
-    
     [locationVC setAddressStrBlock:^(NSString *address)
      {
          [rself.addr_Label setText:address];
@@ -217,7 +216,7 @@
 
 - (void)releaseDy
 {
-//    __block __weak ReleaseDynamic *rself = self;
+    
      visible = [_letPersonSawLabel.text isEqualToString:@"仅父母可见"] ? @"1" : ([_letPersonSawLabel.text isEqualToString:@"仅朋友可见"] ? @"2" : @"3");
     
     __block NSString *dyAdress;
@@ -228,8 +227,10 @@
     {
         dyAdress =_addr_Label.text;
     }
+    
+    UserInfo * user = [[UserDefault sharedInstance] userInfo];
     [[HttpService sharedInstance] publishRecord:@{@"baby_id":babyID.length > 0 ? babyID : @"2",
-                                                  @"uid":@"2",
+                                                  @"uid":user.uid,
                                                   @"visibility":visible,
                                                   @"content":_dyContextTextView.text,
                                                   @"address":dyAdress,
@@ -319,13 +320,7 @@
         [self showImageViewToScrollView];
         
         [self saveImage:image withName:[NSString stringWithFormat:@"User_avatar_NumPic_%@.png",morelocationString]];
-        //[_touXiangView setImage:image];
-        //    NSString *fullPath = [[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"/Avatar"] stringByAppendingPathComponent:[NSString stringWithFormat:@"User_avatar_NumPic_%@.png",morelocationString]];
-    
-//        [picker setShowsCameraControls:NO];
         NSURL *videoUrl = info[UIImagePickerControllerMediaURL];
-        //    [info objectForKey:UIImagePickerControllerMediaURL] == info[UIImagePickerControllerMediaURL];
-        //    [info valueForKey:UIImagePickerControllerMediaURL];
         NSLog(@"%@",[videoUrl absoluteString]);
     
 

@@ -42,15 +42,13 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jNp-Q1-2jL">
-                                <rect key="frame" x="178" y="11" width="65" height="16"/>
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="576-uS-Oz3">
+                                <rect key="frame" x="139" y="11" width="155" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.92323369565217395" green="0.92323369565217395" blue="0.92323369565217395" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="话题1">
-                                    <color key="titleColor" red="0.84099014949999995" green="0.84099014949999995" blue="0.84099014949999995" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
@@ -184,13 +182,15 @@
                 <outlet property="babyAvatarImageView" destination="16n-xU-92a" id="M7A-Aj-eeG"/>
                 <outlet property="babyBirthdayLabel" destination="Txg-c2-wzn" id="scK-4u-ewy"/>
                 <outlet property="babyNameLabel" destination="zaO-M2-dW6" id="ijb-6Y-cPH"/>
+                <outlet property="commentBtn" destination="EAE-B8-67F" id="tWs-fs-BJM"/>
                 <outlet property="dyContentTextView" destination="rg2-QV-IuH" id="jS0-AC-yH5"/>
+                <outlet property="likeUserView" destination="6bo-Vm-OC3" id="ZZw-XD-Ygx"/>
                 <outlet property="moreBtn" destination="Oxb-Fu-Ull" id="zBY-g2-9kt"/>
                 <outlet property="praiseUserFirstBtn" destination="xbc-H6-b6Q" id="3Tj-PJ-Z1Q"/>
                 <outlet property="praiseUserSecondBtn" destination="lpM-gC-JPE" id="MfH-gc-H07"/>
                 <outlet property="praiseUserThirdBtn" destination="1x4-2T-8QK" id="cyw-Sp-xj2"/>
                 <outlet property="releaseTimeLabel" destination="TTI-s9-o57" id="mPg-ez-ofZ"/>
-                <outlet property="topicBtn" destination="jNp-Q1-2jL" id="6ej-Jz-MGg"/>
+                <outlet property="topicView" destination="576-uS-Oz3" id="6Cv-Xa-joK"/>
                 <outlet property="whoLabel" destination="3ci-zv-cJx" id="4Hw-Pi-kf6"/>
                 <outlet property="zanButton" destination="QJ0-US-ilI" id="LJf-tP-wzd"/>
             </connections>

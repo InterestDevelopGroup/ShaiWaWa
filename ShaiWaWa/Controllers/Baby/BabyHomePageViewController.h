@@ -11,6 +11,7 @@
 
 #import <MessageUI/MFMessageComposeViewController.h>
 #import "TSLocateView.h"
+#import "BabyInfo.h"
 @interface BabyHomePageViewController : CommonViewController<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,MFMessageComposeViewControllerDelegate,UIActionSheetDelegate>
 {
     HMSegmentedControl *segMentedControl;
@@ -38,30 +39,36 @@
 @property (strong, nonatomic) IBOutlet UIButton *monButton;
 @property (strong, nonatomic) IBOutlet UIButton *dadButton;
 @property (strong, nonatomic) NSString *curBaby_id;
+@property (nonatomic, strong) BabyInfo *babyInfo;
 
-- (IBAction)isYaoQing:(id)sender;
+
 
 @property (strong, nonatomic) IBOutlet UIView *yaoQingbgView;
-- (IBAction)msgYaoQingButton:(id)sender;
 
-- (IBAction)weiXinYaoQingButton:(id)sender;
-- (IBAction)hideCurView:(id)sender;
 @property (strong, nonatomic) IBOutlet UIView *dynamicListView;
 @property (weak, nonatomic) IBOutlet UITableView *dynamicListTableView;
 @property (weak, nonatomic) IBOutlet UIView *grayShareView;
-- (IBAction)hideGayShareV:(id)sender;
+
 @property (strong, nonatomic) IBOutlet UIView *fullView;
 @property (strong, nonatomic) IBOutlet UIView *inStatusView;
 @property (weak, nonatomic) IBOutlet UIScrollView *segFullScrollView;
 @property (weak, nonatomic) IBOutlet UIView *grayShareFullView;
-- (IBAction)hideGayShareFullV:(id)sender;
+
 @property (weak, nonatomic) IBOutlet UITableView *dynamicFullListTableView;
 @property (strong, nonatomic) IBOutlet UIView *dynamicListFullView;
 @property (strong, nonatomic) IBOutlet UIView *heightAndWeight;
 @property (strong, nonatomic) IBOutlet UIView *heightAndWeightTableView;
 @property (weak, nonatomic) IBOutlet UITableView *hAndwTableView;
-- (IBAction)showAddHAndWPageVC:(id)sender;
+
 @property (weak, nonatomic) IBOutlet UIImageView *babyBackgroundImgView;
 @property (weak, nonatomic) IBOutlet UIImageView *babyAvatarImgView;
+
+- (IBAction)isYaoQing:(id)sender;
+- (IBAction)showAddHAndWPageVC:(id)sender;
+- (IBAction)hideGayShareFullV:(id)sender;
+- (IBAction)hideGayShareV:(id)sender;
+- (IBAction)msgYaoQingButton:(id)sender;
+- (IBAction)weiXinYaoQingButton:(id)sender;
+- (IBAction)hideCurView:(id)sender;
 
 @end
