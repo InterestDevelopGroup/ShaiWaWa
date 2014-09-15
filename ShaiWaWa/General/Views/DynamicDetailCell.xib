@@ -41,10 +41,6 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square_pic-3.png" id="tJP-1u-zrN">
-                        <rect key="frame" x="11" y="61" width="279" height="109"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    </imageView>
                     <view contentMode="scaleToFill" id="V30-4X-Km7">
                         <rect key="frame" x="11" y="252" width="279" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -156,6 +152,10 @@
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
+                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="9aS-0v-1xX">
+                        <rect key="frame" x="11" y="61" width="279" height="109"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    </scrollView>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             </tableViewCellContentView>
@@ -173,13 +173,13 @@
                 <outlet property="praiseUserSecondBtn" destination="mHf-ex-Cia" id="zpB-uj-ODf"/>
                 <outlet property="praiseUserThirdBtn" destination="d6a-cg-UrV" id="2fG-Vo-b7f"/>
                 <outlet property="publishTimeLabel" destination="d0j-qZ-FpJ" id="mum-1B-YA5"/>
+                <outlet property="scrollView" destination="9aS-0v-1xX" id="j59-Th-EPv"/>
                 <outlet property="whoLabel" destination="rKL-kd-8r6" id="AGW-tC-at2"/>
             </connections>
         </tableViewCell>
     </objects>
     <resources>
         <image name="baby_baobei.png" width="69" height="68"/>
-        <image name="square_pic-3.png" width="150" height="85"/>
         <image name="square_pinglun-2.png" width="21" height="19"/>
         <image name="square_pinglun-3.png" width="21" height="19"/>
         <image name="square_xihuan.png" width="55" height="15"/>

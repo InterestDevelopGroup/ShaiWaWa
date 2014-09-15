@@ -14,13 +14,13 @@
 #import "SearchQQFriendViewController.h"
 #import "SearchAddressBookViewController.h"
 #import "ScannerQRCodeViewController.h"
-
+#import "SearchAddressListViewController.h"
 #import "HttpService.h"
 #import "SVProgressHUD.h"
 #import "UserDefault.h"
 #import "UserInfo.h"
 #import "Friend.h"
-
+#import "ShareManager.h"
 @interface SearchGoodFriendsViewController ()
 
 @end
@@ -59,9 +59,6 @@
     [_typeOfFriendsTableView setBounces:NO];
     [_typeOfFriendsTableView setScrollEnabled:NO];
     
-//    
-//    [_friendSelectListTableView clearSeperateLine];
-//    [_friendSelectListTableView registerNibWithName:@"FriendSelectedCell" reuseIdentifier:@"Cell"];
 }
 
 
@@ -122,6 +119,7 @@
     SearchQQFriendViewController *qqFriendVC= [[SearchQQFriendViewController alloc] init];
     SearchAddressBookViewController *addressBookVC =[[SearchAddressBookViewController alloc] init];
     ScannerQRCodeViewController *scannCodeCardVC = [[ScannerQRCodeViewController alloc] init];
+    SearchAddressListViewController * adressListVC = [[SearchAddressListViewController alloc] initWithNibName:nil bundle:nil];
     UserInfo * user = [[UserDefault sharedInstance] userInfo];
     int num = indexPath.row;
     switch (num) {
@@ -144,10 +142,15 @@
             [self.navigationController pushViewController:qqFriendVC animated:YES];
             break;
         case 2:
+            if(user.phone != nil && [user.phone length] != 0)
+            {
+                [self push:adressListVC];
+                return ;
+            }
             [self.navigationController pushViewController:addressBookVC animated:YES];
             break;
         case 3:
-//            [self.navigationController pushViewController:<#(UIViewController *)#> animated:YES];
+            [[ShareManager sharePlatform] shareToWeiXinFriend];
             break;
         case 4:
            [self.navigationController pushViewController:scannCodeCardVC animated:YES];

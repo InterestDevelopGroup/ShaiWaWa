@@ -33,17 +33,13 @@
 {
     [ShareSDK registerApp:@"2075d02bcb88"];
     [ShareSDK importWeChatClass:[WXApi class]];
-//    [ShareSDK importQQClass:[QQApiInterface class] tencentOAuthCls:[TencentOAuth class]];
     
     //新浪微博
-     [ShareSDK connectSinaWeiboWithAppKey:@"568898243"
-     appSecret:@"38a4f8204cc784f81f9f0daaf31e02e3"
+     [ShareSDK connectSinaWeiboWithAppKey:@"3760443588"
+     appSecret:@"13662c0f4a3d11a596e933359ac98849"
      redirectUri:@"http://www.yichatea.com/"];
     
-    /*
-     [Parse setApplicationId:@"pSr2dNiZUqcgxrINsyrgJa3vwLcKyATkubNfZ0iX"
-                  clientKey:@"aiK1CTRUKjDukAyyKXHJ7ScTfnsLw5IupC8bg1vu"];
-    */
+
     //微信
     //wxac01db4d5123ff1f
     [ShareSDK connectWeChatWithAppId:@"wxac01db4d5123ff1f" wechatCls:[WXApi class]];
@@ -62,15 +58,6 @@
                      tencentOAuthCls:[TencentOAuth class]];
     
     
-    //QQ
-    
-//    [ShareSDK connectQQWithAppId:@"1101328312" qqApiCls:[QQApiInterface class]];
-//    [ShareSDK connectQQWithQZoneAppKey:@"1101328312" qqApiInterfaceCls:[QQApiInterface class] tencentOAuthCls:[TencentOAuth class]];
-    
-    /*
-     //腾讯微博
-     [ShareSDK connectTencentWeiboWithAppKey:@"801307650" appSecret:@"ae36f4ee3946e1cbb98d6965b0b2ff5c" redirectUri:@"http://www.yichatea.com/"];
-     */
     //导入QQ互联和QQ好友分享需要的外部库类型，如果不需要QQ空间SSO和QQ好友分享可以不调用此方法
     [ShareSDK importQQClass:[QQApiInterface class]
             tencentOAuthCls:[TencentOAuth class]];
@@ -80,6 +67,13 @@
 {
      [self share:ShareTypeWeixiSession];
 }
+
+- (void)shareToWeiXinFriend
+{
+    [self share:ShareTypeWeixiSession];
+}
+
+
 - (void)shareToWeiXinCycle
 {
      [self share:ShareTypeWeixiTimeline];

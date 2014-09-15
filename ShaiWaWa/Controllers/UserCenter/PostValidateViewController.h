@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *phoneNumberLabel;
 @property (weak, nonatomic) IBOutlet UITextField *validateCoreTextField;
 @property (weak, nonatomic) IBOutlet UIButton *getCoreAgainButton;
+@property (assign, nonatomic) BOOL isBinding;
 - (IBAction)getCoreAgainEvent:(id)sender;
 - (IBAction)showFinishRegisterVC:(id)sender;
 

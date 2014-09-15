@@ -8,9 +8,9 @@
 
 
 #import <UIKit/UIKit.h>
-
-typedef void(^XinLangBlock)(void);
-typedef void(^QqBlock)(void);
+#import "UserInfo.h"
+typedef void (^UnbindBlock)(NSString * token,NSString * type);
+typedef void (^BindBlock)(UserInfo * user);
 
 @interface TheThirdPartyLoginView : UIView
 
@@ -18,6 +18,7 @@ typedef void(^QqBlock)(void);
 @property (nonatomic,retain) UIButton *xinlanButton;
 @property (nonatomic,retain) UIButton *qqButton;
 
-@property (nonatomic,strong) XinLangBlock xinlanBlock;
-@property (nonatomic,strong) QqBlock qqBlock;
+@property (nonatomic,copy) UnbindBlock unbindBlock;
+@property (nonatomic,copy) BindBlock bindBlock;
+
 @end

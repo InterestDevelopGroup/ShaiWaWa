@@ -2,7 +2,7 @@
 //  AddHeightAndWeightViewController.m
 //  ShaiWaWa
 //
-//  Created by 祥 on 14-7-10.
+//  Created by Carl on 14-7-10.
 //  Copyright (c) 2014年 helloworld. All rights reserved.
 //
 
@@ -15,12 +15,12 @@
 #import "UserInfo.h"
 #import "Friend.h"
 #import "BabyInfo.h"
+#import "InputHelper.h"
 @interface AddHeightAndWeightViewController ()
 
 @end
 
 @implementation AddHeightAndWeightViewController
-@synthesize addCurBabyId = _addCurBabyId;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -48,13 +48,56 @@
     [self setLeftCusBarItem:@"square_back" action:nil];
     NSDate *  senddate=[NSDate date];
     NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
-    //    [dateformatter setDateFormat:@"HH:mm"];
-    //    NSString *  locationString=[dateformatter stringFromDate:senddate];
-    [dateformatter setDateFormat:@"YYYY-MM-dd-HH-mm-ss"];
+    [dateformatter setDateFormat:@"yyyy-MM-dd"];
     NSString *morelocationString = [dateformatter stringFromDate:senddate];
-    [_dateButton setTitle:morelocationString forState:UIControlStateNormal];
-    
+    _datePicker.maximumDate = [NSDate date];
+    _dateField.text = morelocationString;
+    _heightField.inputAccessoryView = _toolbar;
+    _weightField.inputAccessoryView = _toolbar;
+    _dateField.inputAccessoryView = _toolbar;
+    _dateField.inputView = _datePicker;
 }
+
+
+- (IBAction)add_OK:(id)sender
+{
+    NSString * height = [InputHelper trim:_heightField.text];
+    NSString * weight = [InputHelper trim:_weightField.text];
+    if([InputHelper isEmpty:height])
+    {
+        [SVProgressHUD showErrorWithStatus:@"请填写身高"];
+        return ;
+    }
+    
+    if([InputHelper isEmpty:weight])
+    {
+        [SVProgressHUD showErrorWithStatus:@"请填写体重"];
+        return ;
+    }
+    
+    UserInfo *user = [[UserDefault sharedInstance] userInfo];
+    [[HttpService sharedInstance] addBabyGrowRecord:@{@"baby_id":_babyInfo.baby_id,@"height":height,@"weight":weight,@"uid":user.uid} completionBlock:^(id object) {
+          [SVProgressHUD showSuccessWithStatus:@"添加成功."];
+          _heightField.text = nil;
+          _weightField.text = nil;
+          [_heightField resignFirstResponder];
+          [_weightField resignFirstResponder];
+      } failureBlock:^(NSError *error, NSString *responseString) {
+          NSString * msg = responseString;
+          if (error) {
+              msg = @"添加失败";
+          }
+          [SVProgressHUD showErrorWithStatus:msg];
+      }];
+}
+
+
+- (IBAction)dismissKeyboard:(id)sender
+{
+    [self.view endEditing:YES];
+    [self resignFirstResponder];
+}
+
 
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -65,28 +108,5 @@
     }
     [textField resignFirstResponder];
     return YES;
-}
-- (IBAction)timeSelected:(id)sender {
-}
-
-- (IBAction)add_OK:(id)sender
-{
-    UserInfo *user = [[UserDefault sharedInstance] userInfo];
-    [[HttpService sharedInstance] addBabyGrowRecord:@{@"baby_id":_addCurBabyId,
-                                                      @"height":_heightField.text,
-                                                      @"weight":_weightField.text,
-                                                      @"uid":user.uid} completionBlock:^(id object) {
-        [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
-                    _heightField.text = nil;
-                    _weightField.text = nil;
-                    [_heightField resignFirstResponder];
-                    [_weightField resignFirstResponder];
-    } failureBlock:^(NSError *error, NSString *responseString) {
-        NSString * msg = responseString;
-        if (error) {
-            msg = @"加载失败";
-        }
-        [SVProgressHUD showErrorWithStatus:msg];
-    }];
 }
 @end

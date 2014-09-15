@@ -13,6 +13,8 @@
 #import "AppMacros.h"
 #import "PersistentStore.h"
 #import "Topic.h"
+#import "UserInfo.h"
+#import "UserDefault.h"
 #import <ShareSDK/ShareSDK.h>
 @implementation AppDelegate
 @synthesize postValidateType= _postValidateType;
@@ -31,6 +33,7 @@
     [ControlCenter makeKeyAndVisible];
     [self customUI];
     [self firstLaunch];
+    [self fetchConfig];
     return YES;
 }
 
@@ -112,6 +115,20 @@
             topic.topic = str;
             [PersistentStore save];
         }
+    }
+}
+
+
+- (void)fetchConfig
+{
+    UserInfo * user = [[UserDefault sharedInstance] userInfo];
+    if(user)
+    {
+        [[HttpService sharedInstance] getUserSetting:@{@"uid":user.uid} completionBlock:^(id object) {
+            NSLog(@"加载配置成功.");
+        } failureBlock:^(NSError *error, NSString *responseString) {
+            NSLog(@"加载配置失败.");
+        }];
     }
 }
 

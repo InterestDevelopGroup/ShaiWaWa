@@ -2,7 +2,7 @@
 //  SearchAddressListViewController.h
 //  ShaiWaWa
 //
-//  Created by 祥 on 14-7-10.
+//  Created by Carl on 14-7-10.
 //  Copyright (c) 2014年 helloworld. All rights reserved.
 //
 
@@ -14,14 +14,11 @@
 @interface SearchAddressListViewController : CommonViewController<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {
     NSArray *sectionArr;
-    NSArray *friendsAll;
-    NSArray *waitToCardList, *mayYaoQiList;
-    NSDictionary *freindsList;
-    int numOfYaoQing;
-    AddrBookCell * addrBookCell;
     BOOL isSelectedBtn;
 }
 @property (strong, nonatomic) IBOutlet UITableView *addrListTableView;
+@property (weak, nonatomic) IBOutlet UITextField *searchField;
+- (IBAction)searchAction:(id)sender;
 
 
 @end

@@ -60,7 +60,6 @@
 {
     self.title = @"我的好友";
     [self setLeftCusBarItem:@"square_back" action:nil];
-    UserInfo *user = [[UserDefault sharedInstance] userInfo];
     friendList = [[NSMutableArray alloc] init];
     UIImage *img = [[UIImage imageNamed:@"main_2-bg2.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(15, 15, 15, 15)];
     UIImageView *imgView = [[UIImageView alloc] initWithImage:img];

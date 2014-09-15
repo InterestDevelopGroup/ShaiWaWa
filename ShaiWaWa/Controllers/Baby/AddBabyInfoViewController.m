@@ -75,14 +75,51 @@
     
     
 
-    
+    //判断当前用户的性别，如果是女就自动选择为母亲，如果是男就自动选择为父亲，如果保密，用户可以手动切换
+    UserInfo * user = [[UserDefault sharedInstance] userInfo];
+    if(![user.sex isEqual:[NSNull null]])
+    {
+        if([user.sex isEqualToString:@"1"])
+        {
+            isDad = YES;
+            isMon = NO;
+            [_monRadioButton setImage:[UIImage imageNamed:@"main_dian-.png"] forState:UIControlStateNormal];
+            isDad = YES;
+            [_dadRadioButton setImage:[UIImage imageNamed:@"main_dian.png"] forState:UIControlStateNormal];
+            _monRadioButton.enabled = NO;
+        }
+        else if([user.sex isEqualToString:@"2"])
+        {
+            isMon = YES;
+            isDad = NO;
+            [_monRadioButton setImage:[UIImage imageNamed:@"main_dian.png"] forState:UIControlStateNormal];
+            isDad = NO;
+            [_dadRadioButton setImage:[UIImage imageNamed:@"main_dian-.png"] forState:UIControlStateNormal];
+            _dadRadioButton.enabled = NO;
+        }
+    }
 
+    locateView = [[TSLocateView alloc] initWithTitle:@"定位城市" delegate:self];
+    locateView.tag = 11111;
+    
+    [_datePicker setMaximumDate:[NSDate date]];
+    [_datePicker addTarget:self action:@selector(dateChange:) forControlEvents:UIControlEventValueChanged];
+    
+    _birthDayField.inputAccessoryView = _toolBar;
+    _birthDayField.inputView = _datePicker;
+    
+    _birthStatureField.inputAccessoryView = _toolBar;
+    _birthWeightField.inputAccessoryView = _toolBar;
 }
 
 
 
 - (void)addBaby
 {
+ 
+    //先隐藏键盘或者城市选择
+    [locateView removeFromSuperview];
+    [self dismissKeyboard:nil];
     
     NSString * babyName = [InputHelper trim:_babyNicknameField.text];
     NSString * birthday = [InputHelper trim:_birthDayField.text];
@@ -117,21 +154,14 @@
             [self submitBabyInfo];
         }];
         
-        [[QNUploadHelper sharedHelper] uploadFile:imageFullUrlStr];
+        UIImage * image = [UIImage imageWithContentsOfFile:imageFullUrlStr];
+        [[QNUploadHelper sharedHelper] uploadFileData:UIImageJPEGRepresentation(image, 0.5f) withKey:[imageFullUrlStr lastPathComponent]];
         return ;
     }
     
+    //提交宝宝信息
     [self submitBabyInfo];
     
-    /*
-    @{@"uid":user.uid,@"fid":isDad ? user.uid : @"",@"mid":isMon ? user.uid : @"",@"baby_name":_babyNameField.text,@"avatar":![imageFullUrlStr isEqual:[NSNull null]] ? imageFullUrlStr : @"",@"sex":isBoy ? @"1" : @"0",@"birthday":_birthDayField.text,
-      @"nickname":_babyNicknameField.text,
-      @"birth_height":_birthStatureField.text,
-      @"birth_weight":_birthWeightField.text,
-      @"country":@"中国",
-      @"province":location.state,
-      @"city":location.city}
-     */
 
 }
 
@@ -202,16 +232,28 @@
 
 - (IBAction)openCitiesSelectView:(id)sender
 {
-    
-    locateView = [[TSLocateView alloc] initWithTitle:@"定位城市" delegate:self];
-    locateView.tag = 11111;
+    [self dismissKeyboard:nil];
+    _scrollView.contentOffset = CGPointMake(0, 320);
     [locateView showInView:self.view];
 }
+
 
 - (IBAction)touXiangSelectEvent:(id)sender
 {
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"拍照" otherButtonTitles:@"相册", nil];
     [actionSheet showFromRect:CGRectMake(0, 0, 320, 100) inView:self.view animated:YES];
+}
+
+- (void)dateChange:(id)sender
+{
+    NSString * dateStr = [_datePicker.date formatDateString:@"yyyy-MM-dd"];
+    _birthDayField.text = dateStr;
+}
+
+- (IBAction)dismissKeyboard:(id)sender
+{
+    [self.view endEditing:YES];
+    [self resignFirstResponder];
 }
 
 - (void)clearTextField
@@ -239,6 +281,7 @@
 {
     if (actionSheet.tag == 11111)
     {
+        [_scrollView scrollRectToVisible:CGRectMake(0, _scrollView.contentSize.height - CGRectGetHeight(_scrollView.frame), CGRectGetWidth(_scrollView.frame), CGRectGetHeight(_scrollView.frame)) animated:YES];
        locateView  = (TSLocateView *)actionSheet;
         location = locateView.locate;
         
@@ -279,6 +322,7 @@
     }
 }
 
+#pragma mark - UIImagePickerControllerDelegate Methods
 //点击相册中的图片 货照相机照完后点击use  后触发的方法
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
@@ -286,7 +330,7 @@
     UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
     NSString * fileName = [[IO generateRndString] stringByAppendingPathExtension:@"png"];
     NSString *fullPath = [IO pathForResource:fileName inDirectory:Avatar_Folder];
-    if(![IO writeFileToPath:fullPath withData:UIImagePNGRepresentation(image)])
+    if(![IO writeFileToPath:fullPath withData:UIImageJPEGRepresentation(image, 0.5)])
     {
         [SVProgressHUD showErrorWithStatus:@"保存失败."];
         return ;
@@ -306,46 +350,80 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if (textField == _babyNicknameField) {
-    [_birthDayField becomeFirstResponder];
+        [_birthDayField becomeFirstResponder];
         return NO;
     }
-    if (textField == _babyNameField) {
-        [_birthStatureField becomeFirstResponder];
-        return NO;
+    if (textField == _babyNameField)
+    {
+        [_babyNameField resignFirstResponder];
+        [locateView showInView:self.view];
+        _scrollView.contentOffset = CGPointMake(0, 300);
+        
+        return YES;
     }
-    if (textField == _birthStatureField) {
+    if (textField == _birthStatureField)
+    {
+        _scrollView.contentOffset = CGPointMake(0, 390);
         [_birthWeightField becomeFirstResponder];
         return NO;
     }
+    
+    
     [textField resignFirstResponder];
     return YES;
 }
 
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    [locateView removeFromSuperview];
+    return YES;
+}
+
+
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    if (textField == _birthWeightField) {
-        _scrollView.contentOffset = CGPointMake(0, 296);
+    if(textField == _babyNicknameField)
+    {
+        _scrollView.contentOffset = CGPointMake(0, 30);
     }
-    if (textField == _birthStatureField) {
-         _scrollView.contentOffset = CGPointMake(0, 246);
+    
+    if(textField == _birthDayField)
+    {
+        _scrollView.contentOffset = CGPointMake(0, 100);
     }
-    if (textField == _babyNameField) {
+    
+    if (textField == _babyNameField)
+    {
         _scrollView.contentOffset = CGPointMake(0, 246);
     }
+
+    
+    if (textField == _birthStatureField)
+    {
+        _scrollView.contentOffset = CGPointMake(0, 340);
+    }
+    
+    if (textField == _birthWeightField)
+    {
+        _scrollView.contentOffset = CGPointMake(0, 390);
+    }
+    
+
+    
+    
 }
 
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    if (textField == _birthWeightField) {
-        _scrollView.contentOffset = CGPointMake(0, 58);
-    }
-    else
+    if(textField == _birthWeightField || textField == _birthStatureField)
     {
-        _scrollView.contentOffset = CGPointMake(0, 0);
+        [_scrollView scrollRectToVisible:CGRectMake(0, _scrollView.contentSize.height - CGRectGetHeight(_scrollView.frame), CGRectGetWidth(_scrollView.frame), CGRectGetHeight(_scrollView.frame)) animated:YES];
     }
+
 }
+
 
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
@@ -355,6 +433,7 @@
     [_babyNameField resignFirstResponder];
     [_birthStatureField resignFirstResponder];
     [_birthWeightField resignFirstResponder];
+    [locateView removeFromSuperview];
 }
 
 #pragma mark - UIAlertViewDelegate Methods

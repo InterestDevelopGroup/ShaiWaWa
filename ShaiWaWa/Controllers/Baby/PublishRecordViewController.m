@@ -26,11 +26,13 @@
 #import "ChooseFriendViewController.h"
 #import "NSStringUtil.h"
 #import "ImageDisplayView.h"
+#import "Setting.h"
 @import MediaPlayer;
 #define PlaceHolder @"关于宝宝的开心事情..."
 @interface PublishRecordViewController ()<UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate,UIActionSheetDelegate>
 @property (nonatomic,strong) BabyInfo * babyInfo;
 @property (nonatomic,strong) UserInfo * userInfo;
+@property (nonatomic,strong) Setting * setting;
 @property (nonatomic,strong) CLPlacemark * placemark; //位置
 @property (nonatomic,strong) NSString * visibility; //可见性
 @property (nonatomic,strong) NSMutableArray * images; //图片路径数组
@@ -38,7 +40,6 @@
 @property (nonatomic,strong) NSMutableArray * uploadedImages;  //上传成功图片队列
 @property (nonatomic,strong) NSMutableArray * uploadFailImages; //上传失败图片队列
 @property (nonatomic,strong) NSString * videoPath;  //本地视频路径
-@property (nonatomic,assign) BOOL uploadVideoFail;
 @end
 
 @implementation PublishRecordViewController
@@ -48,14 +49,13 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        _setting = [[UserDefault sharedInstance] set];
         _userInfo = [[UserDefault sharedInstance] userInfo];
         _images = [@[] mutableCopy];
         _imageViews = [@[] mutableCopy];
         _uploadedImages = [@[] mutableCopy];
         _uploadFailImages = [@[] mutableCopy];
         _visibility = @"2";
-        _uploadVideoFail = NO;
-        
     }
     return self;
 }
@@ -63,6 +63,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
@@ -138,7 +152,7 @@
 //更新当前宝宝的头像和名称
 - (void)updateBabyInfo:(BabyInfo *)babyInfo
 {
-    [_avatarImageView setImageWithURL:[NSURL URLWithString:babyInfo.avatar] placeholderImage:Default_Avatar];
+    [_avatarImageView sd_setImageWithURL:[NSURL URLWithString:babyInfo.avatar] placeholderImage:Default_Avatar];
     _babyNameLabel.text = babyInfo.nickname;
 }
 
@@ -265,7 +279,6 @@
         [tmpImageURLS addObject:[NSString stringWithFormat:@"%@%@",QN_URL,[path lastPathComponent]]];
     }
     [_uploadedImages removeAllObjects];
-    
     NSString * content = [InputHelper trim:_textView.text];
     NSMutableDictionary * params = [@{} mutableCopy];
     params[@"baby_id"] = _babyInfo.baby_id;
@@ -290,6 +303,10 @@
         [SVProgressHUD showSuccessWithStatus:@"上传成功."];
         //清楚数据
         [self cleanUp];
+        
+        //返回上个页面
+        [self popVIewController];
+        
     } failureBlock:^(NSError *error, NSString *responseString) {
         NSString * msg = responseString;
         if (error) {
@@ -327,6 +344,9 @@
         [SVProgressHUD showSuccessWithStatus:@"上传成功."];
         //清楚数据
         [self cleanUp];
+        
+        //返回上个页面
+        [self popVIewController];
         
     } failureBlock:^(NSError *error, NSString *responseString) {
         NSString * msg = responseString;
@@ -501,7 +521,7 @@
     //先保存
     NSString * fileName = [[IO generateRndString] stringByAppendingPathExtension:@"png"];
     NSString * path = [IO pathForResource:fileName inDirectory:Publish_Image_Folder];
-    if(![IO writeFileToPath:path withData:UIImagePNGRepresentation(image)])
+    if(![IO writeFileToPath:path withData:UIImageJPEGRepresentation(image, 0.5)])
     {
         [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"SaveError", nil)];
         return ;
@@ -631,6 +651,40 @@
         PublishImageView * imageView = _imageViews[i];
         imageView.frame = CGRectMake((i + 1) * offx + i * CGRectGetWidth(imageView.frame), 0, CGRectGetWidth(imageView.frame), CGRectGetHeight(imageView.frame));
     }
+}
+
+- (void)keyboardShow:(NSNotification *)notification
+{
+    float duration = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    //NSLog(@"%@",[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey]);
+    CGRect beginRect = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+    CGRect endRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+    //NSLog(@"%f",self.view.frame.origin.y);
+    
+    [UIView animateWithDuration:duration animations:^{
+        
+        float offset ;
+        if(beginRect.size.height == endRect.size.height)
+        {
+            offset = - beginRect.size.height + 65;
+        }
+        else
+        {
+            offset = beginRect.size.height - endRect.size.height;
+        }
+        self.view.frame = CGRectOffset(self.view.frame, 0,offset);
+    }];
+    
+}
+
+- (void)keyboardHide:(NSNotification *)notification
+{
+    float duration = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    [UIView animateWithDuration:duration animations:^{
+        self.view.frame = CGRectMake(0,  [OSHelper iOS7]?64:0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
+    }];
+
 }
 
 

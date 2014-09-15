@@ -2,14 +2,12 @@
 //  SearchQQFriendViewController.m
 //  ShaiWaWa
 //
-//  Created by 祥 on 14-7-10.
+//  Created by Carl on 14-7-10.
 //  Copyright (c) 2014年 helloworld. All rights reserved.
 //
 
 #import "SearchQQFriendViewController.h"
 #import "UIViewController+BarItemAdapt.h"
-
-
 #import "HttpService.h"
 #import "SVProgressHUD.h"
 #import "UserDefault.h"
@@ -120,6 +118,8 @@
 {
     
 }
+
+
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {

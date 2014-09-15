@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1536" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -27,7 +26,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小龙李" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zaO-M2-dW6">
-                                <rect key="frame" x="70" y="11" width="54" height="16"/>
+                                <rect key="frame" x="69" y="11" width="74" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -35,7 +34,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2年零13个月" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Txg-c2-wzn">
-                                <rect key="frame" x="70" y="34" width="66" height="13"/>
+                                <rect key="frame" x="69" y="34" width="66" height="13"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
@@ -53,14 +52,8 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="3HT-Sy-QDq">
-                        <rect key="frame" x="11" y="68" width="299" height="142"/>
+                        <rect key="frame" x="11" y="68" width="299" height="143"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square_pic-3.png" id="p2o-jV-NR9">
-                                <rect key="frame" x="0.0" y="-1" width="299" height="143"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
-                        </subviews>
                     </scrollView>
                     <view contentMode="scaleToFill" id="pBw-ah-t6J">
                         <rect key="frame" x="11" y="210" width="299" height="114"/>
@@ -190,6 +183,7 @@
                 <outlet property="praiseUserSecondBtn" destination="lpM-gC-JPE" id="MfH-gc-H07"/>
                 <outlet property="praiseUserThirdBtn" destination="1x4-2T-8QK" id="cyw-Sp-xj2"/>
                 <outlet property="releaseTimeLabel" destination="TTI-s9-o57" id="mPg-ez-ofZ"/>
+                <outlet property="scrollView" destination="3HT-Sy-QDq" id="wWt-lG-Bux"/>
                 <outlet property="topicView" destination="576-uS-Oz3" id="6Cv-Xa-joK"/>
                 <outlet property="whoLabel" destination="3ci-zv-cJx" id="4Hw-Pi-kf6"/>
                 <outlet property="zanButton" destination="QJ0-US-ilI" id="LJf-tP-wzd"/>
@@ -199,10 +193,14 @@
     <resources>
         <image name="baby_4-bg-2.png" width="305" height="277"/>
         <image name="baby_baobei.png" width="69" height="68"/>
-        <image name="square_pic-3.png" width="150" height="85"/>
         <image name="square_pinglun-2.png" width="21" height="19"/>
         <image name="square_pinglun-3.png" width="21" height="19"/>
         <image name="square_xihuan.png" width="55" height="15"/>
         <image name="square_zizhi.png" width="7" height="8"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>

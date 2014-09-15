@@ -33,10 +33,11 @@
         record.baby_name = dic[@"baby_name"];
         record.baby_nickname = dic[@"baby_nickname"];
         record.like_count = dic[@"like_count"];
+        record.is_like = dic[@"is_like"];
         record.comment_count = dic[@"comment_count"];
-        record.images = dic[@"image"] == [NSNull null] ? @[] : dic[@"images"];
-        record.video = dic[@"video"] == [NSNull null] ? @[] : dic[@"video"];
-        record.audio = dic[@"audio"] == [NSNull null] ? @[] : dic[@"audio"];
+        record.images = dic[@"image"] == [NSNull null] ? @[] : dic[@"image"];
+        record.video = dic[@"video"] == [NSNull null] ? @"" : dic[@"video"];
+        record.audio = dic[@"audio"] == [NSNull null] ? @"" : dic[@"audio"];
         record.top_3_likes = dic[@"top_3_likes"] == [NSNull null] ? @[] : dic[@"top_3_likes"];
         [results addObject:record];
         record = nil;

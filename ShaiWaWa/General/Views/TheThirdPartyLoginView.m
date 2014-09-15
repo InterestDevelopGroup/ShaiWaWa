@@ -11,7 +11,9 @@
 #import <ShareSDK/ShareSDK.h>
 
 #import "HttpService.h"
-
+#import "SVProgressHUD.h"
+#import "UserInfo.h"
+#import "UserDefault.h"
 @implementation TheThirdPartyLoginView
 
 - (id)initWithFrame:(CGRect)frame
@@ -56,112 +58,205 @@
 
 - (void)xinlanBtnClick
 {
-    _xinlanBlock();
     [self sinaLoginEvent];
 }
 
 - (void)qqBtnClick
 {
-    _qqBlock();
     [self qqLoginEvent];
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
+
 - (void)sinaLoginEvent
 {
-    //    if (!isRec) {
-    //        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"未连接到网络" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-    //        [alertView show];
-    //    }
-    //    else
-    //    {
+
     [ShareSDK getUserInfoWithType:ShareTypeSinaWeibo authOptions:nil
                            result:^(BOOL result, id<ISSPlatformUser> userInfo, id<ICMErrorInfo> error)
      {
+         
+         if(error)
+         {
+             NSLog(@"%@",error);
+             return  ;
+         }
+         
          if (result)
          {
              
-             NSLog(@"哈哈哈Sina!");
-             //                        PFQuery *query = [PFQuery queryWithClassName:@"UserInfo"];
-             //                        [query whereKey:@"uid" equalTo:[userInfo uid]];
-             //                        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
-             //                        {
-             //                            if ([objects count] == 0)
-             //                            {
-             //                                 PFObject *newUser = [PFObject objectWithClassName:@"UserInfo"];
-             //                                 [newUser setObject:[userInfo uid] forKey:@"uid"];
-             //                                 [newUser setObject:[userInfo nickname] forKey:@"name"];
-             //                                 [newUser setObject:[userInfo icon] forKey:@"icon"];
-             //                                 [newUser saveInBackground];
-             //                                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Hello" message:@"欢迎注册" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles: nil];
-             //                                 [alertView show];
-             //                                 [alertView release];
-             //                            }
-             //                            else
-             //                            {
-             //                                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Hello" message:@"欢迎回来" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles: nil];
-             //                                 [alertView show];
-             //                                 [alertView release];
-             //                            }
-             //                        }];
          }
-         //            MainViewController *mainVC = [[[MainViewController alloc] init] autorelease];
-         //            [self.navigationController pushViewController:mainVC animated:YES];
+
      }];
-    //}
+    
 }
 
 - (void)qqLoginEvent
 {
-    //    if (!isRec) {
-    //        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"未连接到网络" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-    //        [alertView show];
-    //    }
-    //    else
-    //    {
+
     [ShareSDK getUserInfoWithType:ShareTypeQQSpace authOptions:nil
                            result:^(BOOL result, id<ISSPlatformUser> userInfo, id<ICMErrorInfo> error)
      {
-         if (result)
+         
+         if(error)
          {
-             
-             [[HttpService sharedInstance] openLogin:@{@"openid":[userInfo uid],
-                                                       @"type":@"1"} completionBlock:^(id object) {
-                                                           NSLog(@"%@",object);
-             } failureBlock:^(NSError *error, NSString *responseString) {
-                 NSLog(@"%@",responseString);
-             }];
-             
-             NSLog(@"获取用户所属平台类型:%d",[userInfo type]);
-             NSLog(@"获取用户个人主页:%@",[userInfo url]);
-             NSLog(@"获取用户认证类型:%d",[userInfo verifyType]);
-             NSLog(@"获取用户职业信息:%@",[userInfo works]);
-             NSLog(@"获取用户id:%@",[userInfo uid]);
-             NSLog(@"获取用户昵称:%@",[userInfo nickname]);
-             NSLog(@"获取用户个人简介:%@",[userInfo aboutMe]);
-             NSLog(@"获取用户所属的应用:%@",[userInfo app]);
-             NSLog(@"获取用户的原始数据信息:%@",[userInfo sourceData]);
-             NSLog(@"获取用户分享数:%d",[userInfo shareCount]);
-//             NSLog(@"设置用户的原始数据信息:%@",[userInfo setSourceData:<#(NSDictionary *)#>])
-//             NSLog(@"设置授权凭证:%@",[userInfo setCredential:<#(id<ISSPlatformCredential>)#>]);
-             NSLog(@"获取用户注册时间:%f",[userInfo regAt]);
-             NSLog(@"获取用户个人头像:%@",[userInfo profileImage]);
-             NSLog(@"获取用户等级%d",[userInfo level]);
-             NSLog(@"获取用户性别:%d",[userInfo gender]);
-             NSLog(@"获取用户关注数:%d",[userInfo friendCount]);
-             NSLog(@"获取用户粉丝数:%d",[userInfo followerCount]);
-             NSLog(@"获取用户的教育信息列表:%@",[userInfo educations]);
-//             NSLog(@"获取授权凭证%@",[userInfo credential]);
-             NSLog(@"获取用户生日:%@",[userInfo birthday]);
-             NSLog(@"%@",[[userInfo credential] token]);
+             UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"授权失败." delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+             [alertView show];
+             alertView = nil;
+             return ;
          }
+         
+         if(!result)
+         {
+             UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"登陆失败." delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+             [alertView show];
+             alertView = nil;
+             return ;
+
+         }
+         
+         NSLog(@"获取用户所属平台类型:%d",[userInfo type]);
+         NSLog(@"获取用户个人主页:%@",[userInfo url]);
+         NSLog(@"获取用户认证类型:%d",[userInfo verifyType]);
+         NSLog(@"获取用户职业信息:%@",[userInfo works]);
+         NSLog(@"获取用户id:%@",[userInfo uid]);
+         NSLog(@"获取用户昵称:%@",[userInfo nickname]);
+         NSLog(@"获取用户个人简介:%@",[userInfo aboutMe]);
+         NSLog(@"获取用户所属的应用:%@",[userInfo app]);
+         NSLog(@"获取用户的原始数据信息:%@",[userInfo sourceData]);
+         NSLog(@"获取用户分享数:%d",[userInfo shareCount]);
+         NSLog(@"获取用户注册时间:%f",[userInfo regAt]);
+         NSLog(@"获取用户个人头像:%@",[userInfo profileImage]);
+         NSLog(@"获取用户等级%d",[userInfo level]);
+         NSLog(@"获取用户性别:%d",[userInfo gender]);
+         NSLog(@"获取用户关注数:%d",[userInfo friendCount]);
+         NSLog(@"获取用户粉丝数:%d",[userInfo followerCount]);
+         NSLog(@"获取用户的教育信息列表:%@",[userInfo educations]);
+         NSLog(@"获取用户生日:%@",[userInfo birthday]);
+         NSLog(@"token:%@",[[userInfo credential] token]);
+         NSLog(@"secret:%@",[[userInfo credential] secret]);
+         [self loginWithUserInfo:userInfo type:@"1"];
+         
      }];
 }
+
+- (void)loginWithUserInfo:(id<ISSPlatformUser>) userInfo type:(NSString *)type
+{
+     [[HttpService sharedInstance] openLogin:@{@"open_id":[[userInfo credential] token],
+     @"type":type} completionBlock:^(id object) {
+         if(object == nil || ![object isKindOfClass:[UserInfo class]])
+         {
+             NSLog(@"没有绑定账号.");
+             [self registerWithUserInfo:userInfo type:type];
+             return ;
+         }
+         NSLog(@"%@",object);
+         
+         if(_bindBlock)
+         {
+             _bindBlock(object);
+         }
+         
+     } failureBlock:^(NSError *error, NSString *responseString) {
+         NSString * msg = responseString;
+         if(error)
+         {
+             msg = @"登陆失败.";
+         }
+         [SVProgressHUD showErrorWithStatus:msg];
+     }];
+    
+}
+
+- (void)registerWithUserInfo:(id<ISSPlatformUser>)userInfo type:(NSString *)type
+{
+    NSString *sww_Num = [self fitSwwNum];
+    
+    void (^RegisterBlock)(id<ISSPlatformUser>info,NSString * t);
+    RegisterBlock = ^(id<ISSPlatformUser>info,NSString * t){
+        
+        NSMutableDictionary * params = [@{} mutableCopy];
+        params[@"username"] = [info nickname];
+        params[@"password"] = @"";
+        params[@"phone"] = @"";
+        params[@"sww_number"] = sww_Num;
+        params[@"type"] = t;
+        params[@"open_id"] = [[info credential] token];
+        params[@"validate_code"] = @"";
+        [[HttpService sharedInstance] userRegister:params completionBlock:^(id object) {
+            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"RegisterSuccess", nil)];
+            
+            UserInfo *curUser = [[HttpService sharedInstance] mapModel:[[object objectForKey:@"result"] objectAtIndex:0] withClass:[UserInfo class]];
+            
+            [[UserDefault sharedInstance] setUserInfo:curUser];
+            
+            if(_bindBlock)
+            {
+                _bindBlock(object);
+            }
+
+        } failureBlock:^(NSError *error, NSString *responseString) {
+            NSString * msg = NSLocalizedString(@"RegisterError", nil);
+            if(error == nil)
+                msg = responseString;
+            [SVProgressHUD showErrorWithStatus:msg];
+        }];
+        
+    };
+    
+
+    
+    
+    [[HttpService sharedInstance] isExists:@{@"sww_number":sww_Num} completionBlock:^(id object) {
+        
+        RegisterBlock(userInfo,type);
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        
+        if(error)
+        {
+            NSString * msg = NSLocalizedString(@"RegisterError", nil);
+            [SVProgressHUD showErrorWithStatus:msg];
+            return ;
+        }
+        
+        [self registerWithUserInfo:userInfo type:type];
+    }];
+
+
+
+}
+
+
+
+#pragma mark -- 随机生成一个八位数
+- (NSString *)randomNum{
+    //自动生成8位随机密码
+    NSTimeInterval random=[NSDate timeIntervalSinceReferenceDate];
+    NSString *randomString = [NSString stringWithFormat:@"%.8f",random];
+    NSString *randomSww_num = [[randomString componentsSeparatedByString:@"."]objectAtIndex:1];
+    return randomSww_num;
+}
+
+
+#pragma mark -- 是否符合晒娃娃号需求
+- (NSString *)fitSwwNum
+{
+    NSString *number = [self randomNum];                      //获取随机数
+    int count = 0;
+    for (int i = 0; i < 8; i++) {
+        char num = [number characterAtIndex:i];
+        if (num == '4') {
+            count ++;
+            if (count > 3) {
+                [self fitSwwNum];
+            }
+            if (i == 7) {
+                [self fitSwwNum];
+            }
+        }
+    }
+    return number;
+}
+
+
+
 
 @end

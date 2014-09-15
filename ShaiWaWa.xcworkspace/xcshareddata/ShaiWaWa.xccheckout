@@ -10,29 +10,29 @@
 	<string>ShaiWaWa</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>CCD4A1FA-70BE-48F2-A304-BB6A08F08542</key>
+		<key>73E5D18B8EDC9A0EEFEA19CB7BE24AAD80774135</key>
 		<string>https://github.com/Carl-Huang/ShaiWaWa.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>ShaiWaWa.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>CCD4A1FA-70BE-48F2-A304-BB6A08F08542</key>
+		<key>73E5D18B8EDC9A0EEFEA19CB7BE24AAD80774135</key>
 		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/Carl-Huang/ShaiWaWa.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>CCD4A1FA-70BE-48F2-A304-BB6A08F08542</string>
+	<string>73E5D18B8EDC9A0EEFEA19CB7BE24AAD80774135</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>CCD4A1FA-70BE-48F2-A304-BB6A08F08542</string>
+			<string>73E5D18B8EDC9A0EEFEA19CB7BE24AAD80774135</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ShaiWaWa</string>
 		</dict>

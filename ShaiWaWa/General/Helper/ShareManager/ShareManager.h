@@ -16,5 +16,5 @@
 - (void)shareToWeiXinCycle;
 - (void)shareToSinaWeiBo;
 - (void)shareToQzone;
-
+- (void)shareToWeiXinFriend;
 @end

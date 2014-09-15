@@ -119,7 +119,7 @@
     BabyInfo * baby = myBabyList[indexPath.row];
     babyListCell.babyNameLabel.text = baby.nickname;
     
-    [babyListCell.babyImage setImageWithURL:[NSURL URLWithString:baby.avatar] placeholderImage:Default_Avatar];
+    [babyListCell.babyImage sd_setImageWithURL:[NSURL URLWithString:baby.avatar] placeholderImage:Default_Avatar];
 
     if([baby.sex isEqualToString:@"0"])
     {
@@ -160,7 +160,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    BabyHomePageViewController *babyHomePageVC = [[BabyHomePageViewController alloc] init];
+    BabyHomePageViewController *babyHomePageVC = [[BabyHomePageViewController alloc] initWithNibName:nil bundle:nil];
+    BabyInfo * babyInfo = myBabyList[indexPath.row];
+    babyHomePageVC.babyInfo = babyInfo;
     [self.navigationController pushViewController:babyHomePageVC animated:YES];
 }
 

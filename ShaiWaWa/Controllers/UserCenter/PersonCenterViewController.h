@@ -21,14 +21,9 @@
 @property (strong, nonatomic) IBOutlet UIButton *myCollectionButton;
 
 @property (strong, nonatomic) IBOutlet UIImageView *sheJianBar;
-- (IBAction)showUserInfoPageVC:(id)sender;
-- (IBAction)showPlatformBind:(id)sender;
+
 @property (strong, nonatomic) IBOutlet UIImageView *touXiangView;
-- (IBAction)changeImg:(id)sender;
-- (IBAction)showGoodFriendListVC:(id)sender;
-- (IBAction)showMyBabyListVC:(id)sender;
-- (IBAction)showMyQRCardVC:(id)sender;
-- (IBAction)showMyCollectionVC:(id)sender;
+
 
 @property (weak, nonatomic) IBOutlet UIImageView *personalTouXiangImgView;
 @property (weak, nonatomic) IBOutlet UILabel *acountName;
@@ -38,4 +33,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *addressbookButton;
 
 - (IBAction)dyPageShowEvent:(id)sender;
+- (IBAction)changeImg:(id)sender;
+- (IBAction)showGoodFriendListVC:(id)sender;
+- (IBAction)showMyBabyListVC:(id)sender;
+- (IBAction)showMyQRCardVC:(id)sender;
+- (IBAction)showMyCollectionVC:(id)sender;
+- (IBAction)showUserInfoPageVC:(id)sender;
+- (IBAction)showPlatformBind:(id)sender;
 @end

@@ -2,17 +2,30 @@
 //  ShaiWaSquareViewController.m
 //  ShaiWaWa
 //
-//  Created by 祥 on 14-7-7.
+//  Created by Carl on 14-7-7.
 //  Copyright (c) 2014年 helloworld. All rights reserved.
 //
 
 #import "ShaiWaSquareViewController.h"
 #import "UIViewController+BarItemAdapt.h"
-//#import "UICollectionViewWaterfallCell.h"
 #import "DynamicDetailViewController.h"
-
+#import "UIImageView+WebCache.h"
+#import "BabyRecord.h"
+#import "HttpService.h"
+#import "SVProgressHUD.h"
+#import "MJRefreshHeaderView.h"
+#import "MJRefreshFooterView.h"
+#import "MJRefresh.h"
+#import "SquareCollectionCell.h"
+#import "UserInfo.h"
+#import "UserDefault.h"
+#import "AppMacros.h"
+#import "SDWebImageManager.h"
+#import "VideoConvertHelper.h"
 @interface ShaiWaSquareViewController ()
-
+@property (nonatomic,strong) NSMutableArray * newestDyArray;
+@property (nonatomic,strong) NSMutableArray * hotDyArray;
+@property (nonatomic,assign) int currentOffset;
 @end
 
 @implementation ShaiWaSquareViewController
@@ -22,6 +35,9 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        _newestDyArray = [@[] mutableCopy];
+        _hotDyArray = [@[] mutableCopy];
+        _currentOffset = 0;
     }
     return self;
 }
@@ -44,22 +60,14 @@
     self.title = @"晒娃广场";
     [self setLeftCusBarItem:@"square_back" action:nil];
       UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
-    if ([[UIScreen mainScreen] bounds].size.height < 500) {
-        _segScrollView.contentSize = CGSizeMake(320*2, _segScrollView.bounds.size.height-90);
-        collectionNew = [[UICollectionView alloc]initWithFrame:CGRectMake(0,0,self.view.bounds.size.width, _segScrollView.bounds.size.height-90) collectionViewLayout:layout];
+
+    collectionNew = [[UICollectionView alloc]initWithFrame:CGRectMake(0,0,self.view.bounds.size.width, _segScrollView.bounds.size.height) collectionViewLayout:layout];
         
-        collectionHot = [[UICollectionView alloc]initWithFrame:CGRectMake(320,0,self.view.bounds.size.width, _segScrollView.bounds.size.height-90) collectionViewLayout:layout];
-    }
-    else
-    {
-        _segScrollView.contentSize = CGSizeMake(320*2, _segScrollView.bounds.size.height);
-        collectionNew = [[UICollectionView alloc]initWithFrame:CGRectMake(0,0,self.view.bounds.size.width, _segScrollView.bounds.size.height) collectionViewLayout:layout];
-        
-        collectionHot = [[UICollectionView alloc]initWithFrame:CGRectMake(320,0,self.view.bounds.size.width, _segScrollView.bounds.size.height) collectionViewLayout:layout];
-    }
+    collectionHot = [[UICollectionView alloc]initWithFrame:CGRectMake(320,0,self.view.bounds.size.width, _segScrollView.bounds.size.height) collectionViewLayout:layout];
+
+
     [self HMSegmentedControlInitMethod];
     
-  
     
     collectionNew.dataSource = self;
     collectionNew.delegate = self;
@@ -68,12 +76,34 @@
     collectionHot.delegate = self;
     
     collectionNew.backgroundColor = [UIColor clearColor];
-    [collectionNew registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"GradientCell"];
-    
+    UINib * nib = [UINib nibWithNibName:@"SquareCollectionCell" bundle:[NSBundle bundleForClass:[SquareCollectionCell class]]];
+    [collectionNew registerNib:nib forCellWithReuseIdentifier:@"Cell"];
+    __weak ShaiWaSquareViewController * weakSelf = self;
+    [collectionNew addHeaderWithCallback:^{
+        [weakSelf refresh];
+    }];
+    [collectionNew addFooterWithCallback:^{
+        [weakSelf loadMore];
+    }];
+    //自动刷新
+    [collectionNew headerBeginRefreshing];
     collectionHot.backgroundColor = [UIColor clearColor];
-    [collectionHot registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"GradientCell"];
-    [_segScrollView addSubview:collectionHot];
+    [collectionHot registerNib:nib forCellWithReuseIdentifier:@"Cell"];
+    
+    
+    [collectionHot addHeaderWithCallback:^{
+        [weakSelf refresh];
+    }];
+    
+    [collectionHot addFooterWithCallback:^{
+        [weakSelf loadMore];
+    }];
+    
     [_segScrollView addSubview:collectionNew];
+    [_segScrollView addSubview:collectionHot];
+    
+    
+    [_segScrollView setContentSize:CGSizeMake(2 * CGRectGetWidth(_segScrollView.frame), CGRectGetHeight(_segScrollView.frame))];
 }
 
 - (void)HMSegmentedControlInitMethod
@@ -98,83 +128,217 @@
 {
     int curPage = segBtn.selectedSegmentIndex;
     [_segScrollView setContentOffset:CGPointMake(curPage*320, 0)];
+    
+    //切换的时候，先判断当前是否有数据，如果没有数据，则刷新
+    if(segBtn.selectedSegmentIndex == 0)
+    {
+        if([_newestDyArray count] == 0)
+        {
+            [collectionNew headerBeginRefreshing];
+        }
+    }
+    else
+    {
+        if([_hotDyArray count] == 0)
+        {
+            [collectionHot headerBeginRefreshing];
+        }
+    }
+    
 }
+
+
+- (void)refresh
+{
+    _currentOffset = 0;
+    //先判断是获取最新还是最热
+    if(segMentedControl.selectedSegmentIndex == 0)
+    {
+        [self getNewRecrods];
+    }
+    else
+    {
+        [self getHotRecords];
+    }
+}
+
+- (void)loadMore
+{
+    //先判断是获取最新还是最热
+    if(segMentedControl.selectedSegmentIndex == 0)
+    {
+        _currentOffset = [_newestDyArray count];
+        [self getNewRecrods];
+    }
+    else
+    {
+        _currentOffset = [_hotDyArray count];
+        [self getHotRecords];
+    }
+}
+
+//获取最新的动态
+- (void)getNewRecrods
+{
+    UserInfo * user = [[UserDefault sharedInstance] userInfo];
+    
+    [[HttpService sharedInstance] getSquareRecord:@{@"uid":user.uid,@"offset":[NSString stringWithFormat:@"%i",_currentOffset],@"pagesize":[NSString stringWithFormat:@"%i",CommonPageSize],@"type":@"1"} completionBlock:^(id object) {
+        [collectionNew headerEndRefreshing];
+        [collectionNew footerEndRefreshing];
+        
+        if(_currentOffset == 0)
+        {
+            _newestDyArray = (NSMutableArray *)object;
+
+        }
+        else
+        {
+            [_newestDyArray addObjectsFromArray:object];
+        }
+        
+        [collectionNew reloadData];
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [collectionNew headerEndRefreshing];
+        [collectionNew footerEndRefreshing];
+        NSString * msg = responseString;
+        if (error)
+        {
+            msg = NSLocalizedString(@"LoadError", nil);
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+    }];
+
+}
+
+//获取最热的动态
+- (void)getHotRecords
+{
+    UserInfo * user = [[UserDefault sharedInstance] userInfo];
+    [[HttpService sharedInstance] getSquareRecord:@{@"uid":user.uid,@"offset":[NSString stringWithFormat:@"%i",_currentOffset],@"pagesize":[NSString stringWithFormat:@"%i",CommonPageSize],@"type":@"2"} completionBlock:^(id object) {
+        [collectionHot headerEndRefreshing];
+        [collectionHot footerEndRefreshing];
+        
+        if (_currentOffset == 0) {
+            _hotDyArray = (NSMutableArray *)object;
+        }
+        else
+        {
+            [_hotDyArray addObjectsFromArray:object];
+        }
+        [collectionHot reloadData];
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [collectionHot headerEndRefreshing];
+        [collectionHot footerEndRefreshing];
+        NSString * msg = responseString;
+        if (error)
+        {
+            msg = NSLocalizedString(@"LoadError", nil);
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+    }];
+}
+
 
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    int curPage = scrollView.bounds.origin.x/320;
+    int curPage = scrollView.contentOffset.x/CGRectGetWidth(scrollView.frame);
     [segMentedControl setSelectedSegmentIndex:curPage animated:YES];
+    
+    //只有是滚动scrollview的时候才执行，因为collectionview滚动也会调用这个函数
+    NSString * tmp = NSStringFromClass([scrollView class]);
+    if([tmp isEqualToString:@"UIScrollView"])
+    {
+        //切换的时候，先判断当前是否有数据，如果没有数据，则刷新
+        if(curPage == 0)
+        {
+            if([_newestDyArray count] == 0)
+            {
+                [collectionNew headerBeginRefreshing];
+            }
+        }
+        else
+        {
+            if([_hotDyArray count] == 0)
+            {
+                [collectionHot headerBeginRefreshing];
+            }
+        }
+    }
 }
 
 #pragma mark - UICollectionViewDataSource
-//定义展示的UICollectionViewCell的个数
--(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
-    return 10;
-}
+
 //定义展示的Section的个数
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 1;
 }
 
+//定义展示的UICollectionViewCell的个数
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    if(segMentedControl.selectedSegmentIndex == 0)
+    {
+        return [_newestDyArray count];
+    }
+    else if(segMentedControl.selectedSegmentIndex == 1)
+    {
+        return [_hotDyArray count];
+    }
+
+    return 0;
+}
+
+
 //每个UICollectionView展示的内容
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString * CellIdentifier = @"GradientCell";
-    UICollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
+    static NSString * CellIdentifier = @"Cell";
+    SquareCollectionCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    //    UICollectionViewWaterfallCell *cell =
-    //    (UICollectionViewWaterfallCell *)[collectionView dequeueReusableCellWithReuseIdentifier:CELL_IDENTIFIER forIndexPath:indexPath];
-    //
-    //    cell.displayString = [NSString stringWithFormat:@"%d", indexPath.row];
-    //    cell.explainString = [NSString stringWithFormat:@"这是第%d张", indexPath.row+1];
-    //    cell.releaseNameString = @"张三";
-    //    cell.releaseTimeString = @"1分钟前";
-    cell.contentView.backgroundColor = [UIColor clearColor];
-    UIImageView *babyImgView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, cell.bounds.size.width-10, 121)];
-    babyImgView.userInteractionEnabled = YES;
-    babyImgView.image = [UIImage imageNamed:@"square_pic-1.png"];
-    UIButton *praiseButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIButton *discussButton  = [UIButton buttonWithType:UIButtonTypeCustom];
-    praiseButton.frame = CGRectMake(cell.bounds.size.width-50, 1, 24, 24);
-    [praiseButton setImage:[UIImage imageNamed:@"square_zan.png"] forState:UIControlStateNormal];
-    discussButton.frame = CGRectMake(cell.bounds.size.width-30, 1, 24, 24);
-    [discussButton setImage:[UIImage imageNamed:@"square_pinglun.png"] forState:UIControlStateNormal];
-    [babyImgView addSubview:praiseButton];
-    [babyImgView addSubview:discussButton];
-    [cell.contentView addSubview:babyImgView];
+    BabyRecord * record;
+    if(segMentedControl.selectedSegmentIndex == 0)
+    {
+        record = _newestDyArray[indexPath.row];
+    }
+    else
+    {
+        record = _hotDyArray[indexPath.row];
+    }
     
-    UITextView *explainTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, cell.contentView.bounds.size.height-75, cell.contentView.bounds.size.width, 30)];
-    explainTextView.font = [UIFont systemFontOfSize:14];
-    explainTextView.text =@"天使一般的宝宝。。。。。。";
-    explainTextView.scrollEnabled = NO;
-    explainTextView.editable = NO;
-    explainTextView.showsHorizontalScrollIndicator = NO;
-    explainTextView.showsVerticalScrollIndicator = NO;
-    explainTextView.backgroundColor = [UIColor lightGrayColor];
-    explainTextView.textColor = [UIColor whiteColor];
-    //    explainTextView.textAlignment = NSTextAlignmentCenter;
-    [cell.contentView addSubview:explainTextView];
-    //cell.contentView.backgroundColor = [UIColor clearColor];
+    if(record.video != nil && [record.video length] != 0)
+    {
+        if([[SDWebImageManager sharedManager] cachedImageExistsForURL:[NSURL URLWithString:record.video]])
+        {
+            [cell.babyImageView sd_setImageWithURL:[NSURL URLWithString:record.video]];
+        }
+        else
+        {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                UIImage * image = [[VideoConvertHelper sharedHelper] getVideoThumb:record.video];
+                [[SDWebImageManager sharedManager] saveImageToCache:image forURL:[NSURL URLWithString:record.video]];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    cell.babyImageView.image = image;
+                });
+            });
+        }
+    }
+    else if([record.images count] > 0)
+    {
+        [cell.babyImageView sd_setImageWithURL:[NSURL URLWithString:record.images[0]] placeholderImage:[UIImage imageNamed:@"square_pic-1"]];
+    }
+    else
+    {
+        cell.babyImageView.image = [UIImage imageNamed:@"square_pic-1"];
+    }
     
-    UIView *releaseView = [[UIView alloc] initWithFrame:CGRectMake(0, cell.contentView.bounds.size.height-45, cell.contentView.bounds.size.width, 47)];
-//    releaseView.backgroundColor = [UIColor orangeColor];
-    UIImageView *releaseTouXiangImgView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 40, 40)];
-    releaseTouXiangImgView.image = [UIImage imageNamed:@"square_pic-2.png"];
-    UILabel *releaseNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 11, 80, 20)];
-    UILabel *releaseTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 29, 80, 20)];
-    releaseNameLabel.text = @"张三";
-    releaseNameLabel.backgroundColor = [UIColor clearColor];
-    releaseNameLabel.font = [UIFont systemFontOfSize:12];
-    releaseTimeLabel.text = @"1分钟前";
-    releaseTimeLabel.backgroundColor = [UIColor clearColor];
-    releaseTimeLabel.font = [UIFont systemFontOfSize:10];
-    [releaseView addSubview:releaseTouXiangImgView];
-    [releaseView addSubview:releaseNameLabel];
-    [releaseView addSubview:releaseTimeLabel];
-    [cell.contentView addSubview:releaseView];
+    [cell.usernameLabel setText:record.baby_nickname];
+    [cell.contentLabel setText:record.content];
+    [cell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:record.avatar] placeholderImage:[UIImage imageNamed:@"square_pic-2"]];
+    
     return cell;
 }
 
@@ -186,21 +350,36 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(146, 200);
+    return CGSizeMake(146, 240);
 }
+
+
 //定义每个UICollectionView 的 margin
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-   
     return UIEdgeInsetsMake(1, 9, 1, 9);
 }
+
 #pragma mark --UICollectionViewDelegate
 //UICollectionView被选中时调用的方法
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//    UICollectionViewCell * cell = (UICollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-//    cell.backgroundColor = [UIColor whiteColor];
-    DynamicDetailViewController *dynamicDetailVC = [[DynamicDetailViewController alloc] init];
+
+    BabyRecord * record;
+    if(segMentedControl.selectedSegmentIndex == 0)
+    {
+        record = _newestDyArray[indexPath.row];
+    }
+    else if(segMentedControl.selectedSegmentIndex == 1)
+    {
+        record = _hotDyArray[indexPath.row];
+    }
+    else
+    {
+        return ;
+    }
+    DynamicDetailViewController *dynamicDetailVC = [[DynamicDetailViewController alloc] initWithNibName:nil bundle:nil];
+    dynamicDetailVC.babyRecord = record;
     [self.navigationController pushViewController:dynamicDetailVC animated:YES];
     
 }

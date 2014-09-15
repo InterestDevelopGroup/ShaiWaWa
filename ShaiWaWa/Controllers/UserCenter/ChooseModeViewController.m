@@ -40,6 +40,10 @@
 #import "UIImageView+WebCache.h"
 #import "UIButton+WebCache.h"
 #import "NSStringUtil.h"
+#import "PublishImageView.h"
+#import "ImageDisplayView.h"
+#import "PraiseViewController.h"
+@import MediaPlayer;
 @import QuartzCore;
 typedef enum{
     All_Record,
@@ -56,6 +60,7 @@ typedef enum{
 @property (nonatomic,assign) Record_Type recordType;
 @property (nonatomic,assign) int currentOffset;
 @property (nonatomic,strong) NSString * keyword;
+@property (nonatomic,strong) NSIndexPath * selectedIndexPath;
 @end
 
 @implementation ChooseModeViewController
@@ -77,15 +82,13 @@ typedef enum{
     [super viewDidLoad];
     dyArray = [[NSMutableArray alloc] init];
 
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    
     [super viewDidAppear:animated];
     
-    
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -162,6 +165,7 @@ typedef enum{
     {
         [_dynamicPageTableView headerBeginRefreshing];
     }
+
 }
 
 
@@ -176,21 +180,25 @@ typedef enum{
          [self showSettingVC];
          
      }];
+    
     [mainMenu setSearchFriendBtnBlock:^(UIButton * btn)
      {
          [self showSearchFriendsVC:btn];
          
      }];
+    
     [mainMenu setExitBtnBlock:^(UIButton * btn)
      {
          [self quitCurUser];
          
      }];
+    
     [mainMenu setFeeBackBtnBlock:^(UIButton * btn)
      {
          [self showFeeBackVC];
          
      }];
+    
     [mainMenu setBabyListBtnBlock:^(UIButton * btn)
      {
          [self showBabyListVC];
@@ -202,6 +210,7 @@ typedef enum{
          [self showAddBabyVC:btn];
          
      }];
+    
     [mainMenu setMyGoodFriendBtnBlock:^(UIButton * btn)
      {
          [self showMyGoodFriendListVC];
@@ -216,7 +225,7 @@ typedef enum{
     
     
     mainMenu.nameLabel.text = users.username;
-    [mainMenu.touXiangImgView setImageWithURL:[NSURL URLWithString:users.avatar] placeholderImage:[UIImage imageNamed:@"user_touxiang"]];
+    [mainMenu.touXiangImgView sd_setImageWithURL:[NSURL URLWithString:users.avatar] placeholderImage:[UIImage imageNamed:@"user_touxiang"]];
     [_mainAddView addSubview:mainMenu];
 }
 
@@ -244,6 +253,7 @@ typedef enum{
     [sv setDeleteBlock:^(){
         
     }];
+
     [sv setCollectionBlock:^(){
         
     }];
@@ -345,7 +355,7 @@ typedef enum{
         [_dynamicPageTableView footerEndRefreshing];
         if(_currentOffset == 0)
         {
-            dyArray = object;
+            dyArray = (NSMutableArray *)object;
         }
         else
         {
@@ -426,6 +436,7 @@ typedef enum{
     }];
 }
 
+
 - (void)loadMoreData
 {
     _currentOffset = [dyArray count];
@@ -463,18 +474,43 @@ typedef enum{
     }
     NSIndexPath * indexPath = [_dynamicPageTableView indexPathForCell:cell];
     BabyRecord * record = dyArray[indexPath.row];
-    [[HttpService sharedInstance] addLike:@{@"rid":record.rid,@"uid":users.uid} completionBlock:^(id object) {
-        
-        [SVProgressHUD showSuccessWithStatus:@"谢谢您的参与."];
-        
-    } failureBlock:^(NSError *error, NSString *responseString) {
-        NSString * msg = responseString;
-        if(error)
-        {
-            msg = @"请求失败";
-        }
-        [SVProgressHUD showErrorWithStatus:msg];
-    }];
+    
+    if([record.is_like isEqualToString:@"1"])
+    {
+        //取消赞
+        [[HttpService sharedInstance] cancelLike:@{@"rid":record.rid,@"uid":users.uid} completionBlock:^(id object) {
+            
+            [SVProgressHUD showSuccessWithStatus:@"取消赞成功."];
+            record.is_like = @"0";
+            
+        } failureBlock:^(NSError *error, NSString *responseString) {
+            NSString * msg = responseString;
+            if(error)
+            {
+                msg = @"请求失败";
+            }
+            [SVProgressHUD showErrorWithStatus:msg];
+        }];
+
+    }
+    else
+    {
+        [[HttpService sharedInstance] addLike:@{@"rid":record.rid,@"uid":users.uid} completionBlock:^(id object) {
+            
+            [SVProgressHUD showSuccessWithStatus:@"谢谢您的参与."];
+            record.is_like = @"1";
+            
+        } failureBlock:^(NSError *error, NSString *responseString) {
+            NSString * msg = responseString;
+            if(error)
+            {
+                msg = @"请求失败";
+            }
+            [SVProgressHUD showErrorWithStatus:msg];
+        }];
+
+    }
+    
 }
 
 
@@ -587,6 +623,7 @@ typedef enum{
 - (IBAction)showGrayDropV:(id)sender
 {
     [self hideMenuGray:nil];
+    [self hideGayShareV:nil];
     if (!isDropMenuShown) {
         _grayDropView.hidden = NO;
         isDropMenuShown = YES;
@@ -639,13 +676,53 @@ typedef enum{
 
 - (void)showPraiseListVC:(UIButton *)sender
 {
+    
+    UIButton * btn = (UIButton *)sender;
+    DynamicCell * cell;
+    
+    if([btn.superview.superview.superview.superview.superview isKindOfClass:[DynamicCell class]])
+    {
+        cell = (DynamicCell *)btn.superview.superview.superview.superview.superview;
+    }
+    else if([btn.superview.superview.superview.superview isKindOfClass:[DynamicCell class]])
+    {
+        cell = (DynamicCell *)btn.superview.superview.superview.superview;
+    }
+    else
+    {
+        cell = (DynamicCell *)btn.superview.superview.superview;
+    }
+    NSIndexPath * indexPath = [_dynamicPageTableView indexPathForCell:cell];
+    BabyRecord * record = dyArray[indexPath.row];
+
+    
     PraiseViewController *praiseListVC = [[PraiseViewController alloc] init];
-    praiseListVC.priaseRid = [NSString stringWithFormat:@"%d",sender.tag];
+    praiseListVC.record = record;
     [self.navigationController pushViewController:praiseListVC animated:YES];
 }
 
 - (void)showShareGrayView:(UIButton *)button
 {
+    
+    UIButton * btn = (UIButton *)button;
+    DynamicCell * cell;
+    
+    if([btn.superview.superview.superview.superview isKindOfClass:[DynamicCell class]])
+    {
+        cell = (DynamicCell *)btn.superview.superview.superview.superview;
+    }
+    else if([btn.superview.superview.superview isKindOfClass:[DynamicCell class]])
+    {
+        cell = (DynamicCell *)btn.superview.superview.superview;
+    }
+    else
+    {
+        cell = (DynamicCell *)btn.superview.superview;
+    }
+    NSIndexPath * indexPath = [_dynamicPageTableView indexPathForCell:cell];
+    BabyRecord * record = dyArray[indexPath.row];
+    
+    
     
     if (!isShareViewShown) {
         _grayShareView.hidden = NO;
@@ -697,11 +774,31 @@ typedef enum{
 - (void)showTopicDynamic:(UIButton *)sender
 {
     NSString * topic = [sender titleForState:UIControlStateNormal];
-    
+    TopicListOfDynamic * vc = [[TopicListOfDynamic alloc] initWithNibName:nil bundle:nil];
+    vc.topic = topic;
+    [self push:vc];
+    vc = nil;
 }
 
 
+#pragma mark -  UIScrollViewDelegate Methods
+int _lastPosition;    //A variable define in headfile
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    int currentPostion = scrollView.contentOffset.y;
+    if (currentPostion - _lastPosition > 280) {
+        _lastPosition = currentPostion;
+        [self.navigationController setNavigationBarHidden:YES animated:YES];
+        //NSLog(@"ScrollUp now");
+        
+    }
+    else if (_lastPosition - currentPostion > 280)
+    {
+        _lastPosition = currentPostion;
+        [self.navigationController setNavigationBarHidden:NO animated:YES];
+        //NSLog(@"ScrollDown now");
+    }
+}
 
 #pragma mark - UITableView DataSources and Delegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -715,6 +812,17 @@ typedef enum{
     DynamicCell * dynamicCell = (DynamicCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
     dynamicCell.selectionStyle = UITableViewCellSelectionStyleNone;
     BabyRecord * recrod = [dyArray objectAtIndex:indexPath.row];
+    dynamicCell.addressLabel.text = recrod.address;
+    dynamicCell.dyContentTextView.attributedText = [NSStringUtil makeTopicString:recrod.content];
+    [dynamicCell.babyAvatarImageView sd_setImageWithURL:[NSURL URLWithString:recrod.avatar] placeholderImage:Default_Avatar];
+    dynamicCell.babyNameLabel.text = recrod.baby_nickname;
+    [dynamicCell.zanButton setTitle:recrod.like_count forState:UIControlStateNormal];
+    [dynamicCell.commentBtn setTitle:recrod.comment_count forState:UIControlStateNormal];
+    [dynamicCell.zanButton addTarget:self action:@selector(likeAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [dynamicCell.moreBtn addTarget:self action:@selector(showShareGrayView:) forControlEvents:UIControlEventTouchUpInside];
+    
+    //显示话题
     NSArray * topics = [NSStringUtil getTopicStringArray:recrod.content];
     if([topics count] > 0)
     {
@@ -751,29 +859,27 @@ typedef enum{
     {
         dynamicCell.topicView.hidden = YES;
     }
-    dynamicCell.addressLabel.text = recrod.address;
-    dynamicCell.dyContentTextView.attributedText = [NSStringUtil makeTopicString:recrod.content];
-    [dynamicCell.babyAvatarImageView setImageWithURL:[NSURL URLWithString:recrod.avatar] placeholderImage:Default_Avatar];
-    dynamicCell.babyNameLabel.text = recrod.baby_nickname;
-    [dynamicCell.zanButton setTitle:recrod.like_count forState:UIControlStateNormal];
-    [dynamicCell.commentBtn setTitle:recrod.comment_count forState:UIControlStateNormal];
-    [dynamicCell.zanButton addTarget:self action:@selector(likeAction:) forControlEvents:UIControlEventTouchUpInside];
+
     
+    //显示赞用户头像
     if([recrod.top_3_likes count] > 0)
     {
         dynamicCell.likeUserView.hidden = NO;
         NSDictionary * userDic = recrod.top_3_likes[0];
-        [dynamicCell.praiseUserFirstBtn setImageWithURL:[NSURL URLWithString:userDic[@"avatar"]] forState:UIControlStateNormal];
+        [dynamicCell.praiseUserFirstBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal];
+        [dynamicCell.praiseUserFirstBtn addTarget:self action:@selector(showPraiseListVC:) forControlEvents:UIControlEventTouchUpInside];
         if([recrod.top_3_likes count] > 1)
         {
             userDic = recrod.top_3_likes[1];
-            [dynamicCell.praiseUserSecondBtn setImageWithURL:[NSURL URLWithString:userDic[@"avatar"]] forState:UIControlStateNormal];
+            [dynamicCell.praiseUserSecondBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal];
+            [dynamicCell.praiseUserSecondBtn addTarget:self action:@selector(showPraiseListVC:) forControlEvents:UIControlEventTouchUpInside];
         }
         
         if([recrod.top_3_likes count] > 2)
         {
             userDic = recrod.top_3_likes[2];
-            [dynamicCell.praiseUserThirdBtn setImageWithURL:[NSURL URLWithString:userDic[@"avatar"]] forState:UIControlStateNormal];
+            [dynamicCell.praiseUserThirdBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal];
+            [dynamicCell.praiseUserThirdBtn addTarget:self action:@selector(showPraiseListVC:) forControlEvents:UIControlEventTouchUpInside];
         }
     }
     else
@@ -781,6 +887,64 @@ typedef enum{
         dynamicCell.likeUserView.hidden = YES;
     }
     
+    
+    //删除重用cell原来的图片
+    NSArray * scrollSubviews = [dynamicCell.scrollView subviews];
+    for(UIView * view in scrollSubviews)
+    {
+        if([view isKindOfClass:[PublishImageView class]])
+        {
+            [view removeFromSuperview];
+        }
+    }
+    
+    //显示动态图片或者视频
+    if(recrod.video != nil && [recrod.video length] != 0)
+    {
+        PublishImageView * imageView = [[PublishImageView alloc] initWithFrame:dynamicCell.scrollView.bounds withPath:recrod.video];
+        imageView.tapBlock = ^(NSString * path){
+            
+            MPMoviePlayerViewController * player = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:recrod.video]];
+            player.moviePlayer.shouldAutoplay = YES;
+            [player.moviePlayer setControlStyle:MPMovieControlStyleFullscreen];
+            [player.moviePlayer prepareToPlay];
+            [self presentViewController:player animated:YES completion:nil];
+            
+        };
+        [imageView setCloseHidden];
+        [dynamicCell.scrollView addSubview:imageView];
+        imageView = nil;
+    }
+    else if([recrod.images count] != 0)
+    {
+        int count = [recrod.images count];
+        if(count > 3)
+        {
+            count = 3;
+        }
+        float width = CGRectGetWidth(dynamicCell.scrollView.bounds)/count;
+        for(int i = 0; i < [recrod.images count]; i++)
+        {
+            PublishImageView * imageView = [[PublishImageView alloc] initWithFrame:CGRectMake(i * width, 0, width, CGRectGetHeight(dynamicCell.scrollView.bounds)) withPath:recrod.images[i]];
+            imageView.tapBlock = ^(NSString * path){
+                ImageDisplayView * displayView = [[ImageDisplayView alloc] initWithFrame:self.navigationController.view.bounds withPath:path];
+                [self.navigationController.view addSubview:displayView];
+                [displayView show];
+            };
+            [imageView setCloseHidden];
+            [dynamicCell.scrollView addSubview:imageView];
+            imageView = nil;
+        }
+        [dynamicCell.scrollView setContentSize:CGSizeMake([recrod.images count] * width, CGRectGetHeight(dynamicCell.scrollView.bounds))];
+        
+    }
+    else
+    {
+        PublishImageView * imageView = [[PublishImageView alloc] initWithFrame:dynamicCell.scrollView.bounds withPath:nil];
+        [imageView setCloseHidden];
+        [dynamicCell.scrollView addSubview:imageView];
+        imageView = nil;
+    }
     
     return dynamicCell;
     
@@ -790,7 +954,7 @@ typedef enum{
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    DynamicDetailViewController *dynamicDetailVC = [[DynamicDetailViewController alloc] init];
+    DynamicDetailViewController *dynamicDetailVC = [[DynamicDetailViewController alloc] initWithNibName:nil bundle:nil];
     BabyRecord * record = dyArray[indexPath.row];
     dynamicDetailVC.babyRecord = record;
     [self.navigationController pushViewController:dynamicDetailVC animated:YES];

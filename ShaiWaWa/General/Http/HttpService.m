@@ -288,6 +288,9 @@
     } failureBlock:failure];
 }
 
+
+
+
 /**
  @desc 用户注册
  */
@@ -318,12 +321,29 @@
 {
     [self postJSON:[self mergeURL:Open_Login] withParams:params completionBlock:^(id obj) {
         
-        BOOL isError = [self filterError:obj failureBlock:failure];
-        if (isError) {
+        if([obj[@"err_code"] intValue] != No_Error_Code && [obj[@"err_code"] intValue] != Open_Platform_Unbind_Error_Code)
+        {
+            if(failure)
+            {
+                failure(nil,[self getErrorMsgByCode:[obj[@"err_code"] intValue]]);
+            }
             return ;
         }
-        if (success) {
-            success(obj);
+        
+        if([obj[@"err_code"] intValue] == Open_Platform_Unbind_Error_Code)
+        {
+            if (success) {
+                success(nil);
+            }
+            return ;
+        }
+        
+        UserInfo *curUser = [self mapModel:[[obj objectForKey:@"result"] objectAtIndex:0] withClass:[UserInfo class]];
+        
+        [[UserDefault sharedInstance] setUserInfo:curUser];
+        if(success)
+        {
+            success(curUser);
         }
         
     } failureBlock:failure];
@@ -659,8 +679,9 @@
         if (isError) {
             return ;
         }
+        
         if (success) {
-            success(obj);
+            success([self mapModelsProcess:obj[@"result"] withClass:[LikeUser class]]);
         }
     } failureBlock:failure];
 }
@@ -676,6 +697,7 @@
         if (isError) {
             return ;
         }
+        
         if (success) {
             success(obj);
         }
@@ -819,18 +841,32 @@
 //TODO:根据话题获取宝宝动态接口
 - (void)getRecordByTopic:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
 {
-    [self postJSON:[self mergeURL:Get_Recrod_By_Follow] withParams:params completionBlock:^(id obj) {
+    [self postJSON:[self mergeURL:Get_Record_By_Topic] withParams:params completionBlock:^(id obj) {
         BOOL isError = [self filterError:obj failureBlock:failure];
         if (isError) {
             return ;
         }
         
         if (success) {
-            if ([[obj objectForKey:@"result"] count] > 0) {
-                success([obj objectForKey:@"result"]);
-            }
-            else
-                success([[obj objectForKey:@"result"] objectAtIndexPath:0]);
+            success([ResponseHelper transformToBabyRecords:obj[@"result"]]);
+        }
+    } failureBlock:failure];
+}
+
+/**
+ @desc 根据宝宝获取动态
+ */
+//TODO:根据宝宝获取动态
+- (void)getRecordByBaby:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self postJSON:[self mergeURL:Get_Record_By_Baby] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+        
+        if (success) {
+            success([ResponseHelper transformToBabyRecords:obj[@"result"]]);
         }
     } failureBlock:failure];
 }
@@ -843,6 +879,23 @@
 - (void)searchRecord:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
 {
     [self postJSON:[self mergeURL:Search_Recrod] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+        if (success) {
+            success([ResponseHelper transformToBabyRecords:obj[@"result"]]);
+        }
+    } failureBlock:failure];
+}
+
+/**
+ @desc 获取广场动态
+ */
+//TODO:获取广场动态
+- (void)getSquareRecord:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self postJSON:[self mergeURL:Get_Square_Recrod] withParams:params completionBlock:^(id obj) {
         BOOL isError = [self filterError:obj failureBlock:failure];
         if (isError) {
             return ;
@@ -999,6 +1052,13 @@
         if (isError) {
             return ;
         }
+        
+        if(success)
+        {
+            NSArray * arr = [self mapModelsProcess:obj[@"result"] withClass:[ContactUser class]];
+            success(arr);
+        }
+        
     } failureBlock:failure];
 }
 
@@ -1201,6 +1261,45 @@
         
     } failureBlock:failure];
 
+}
+
+/**
+ @desc 绑定手机
+ */
+//TODO:绑定手机
+- (void)bindPhone:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self postJSON:[self mergeURL:Bind_Phone] withParams:params completionBlock:^(id obj) {
+        
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+        if (success) {
+            success(obj);
+        }
+        
+    } failureBlock:failure];
+
+}
+
+/**
+ @desc 校验验证码
+ */
+//TODO:校验验证码
+- (void)verifyValidateCode:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self postJSON:[self mergeURL:Verify_Validatecode] withParams:params completionBlock:^(id obj) {
+        
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+        if (success) {
+            success(obj);
+        }
+        
+    } failureBlock:failure];
 }
 
 @end

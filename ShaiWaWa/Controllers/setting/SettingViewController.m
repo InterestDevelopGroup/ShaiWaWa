@@ -2,19 +2,24 @@
 //  SettingViewController.m
 //  ShaiWaWa
 //
-//  Created by 祥 on 14-7-8.
+//  Created by Carl on 14-7-8.
 //  Copyright (c) 2014年 helloworld. All rights reserved.
 //
 
 #import "SettingViewController.h"
 #import "UIViewController+BarItemAdapt.h"
 #import "LoginViewController.h"
-#import "OSHelper.h"
+#import "AboutUsViewController.h"
 #import "HttpService.h"
 #import "UserDefault.h"
 #import "SVProgressHUD.h"
+#import "MBProgressHUD.h"
 #import "Setting.h"
-@interface SettingViewController ()
+#import "ShareManager.h"
+#import "AppMacros.h"
+@import MessageUI;
+@import StoreKit;
+@interface SettingViewController ()<SKStoreProductViewControllerDelegate,MFMessageComposeViewControllerDelegate>
 {
     Setting *setInfo;
     __block NSString *isRemind;
@@ -257,7 +262,7 @@
     //Setting *set = [[UserDefault sharedInstance] set];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
      NSInteger section = indexPath.section;
-     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+     //UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if(section == 0 && indexPath.row == 1)
     {
         NSString *strOne = @"所有都可见";
@@ -266,11 +271,43 @@
         UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"请选择:" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:strOne,strTwo,strThree,nil];
         [actionSheet showFromRect:CGRectMake(0, 0, 320, 200) inView:self.view animated:YES];
     }
-    else
+    else if(indexPath.section == 3 && indexPath.row == 0)
     {
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        //推荐给好友
+        [_invitationView removeFromSuperview];
+        _invitationView.frame = self.view.bounds;
+        [self.view addSubview:_invitationView];
     }
+    else if(indexPath.section == 3 && indexPath.row == 1)
+    {
+        //检查更新
+        [self checkUpdate];
+        
+    }
+    else if(indexPath.section == 3 && indexPath.row == 2)
+    {
+        //关于我们
+        AboutUsViewController * vc = [[AboutUsViewController alloc] initWithNibName:nil bundle:nil];
+        [self push:vc];
+        vc = nil;
+    }
+
     
+}
+
+#pragma mark - UIAlertViewDelegate Methods
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 1)
+    {
+        SKStoreProductViewController * vc = [[SKStoreProductViewController alloc] init];
+        vc.delegate = self;
+        [vc loadProductWithParameters:@{SKStoreProductParameterITunesItemIdentifier:APPID} completionBlock:^(BOOL result, NSError *error) {
+            DDLogVerbose(@"%@",error);
+        }];
+        [self presentViewController:vc animated:YES completion:nil];
+        vc = nil;
+    }
 }
 
 
@@ -313,7 +350,11 @@
     [self updateSetting];
 }
 
-
+#pragma mark - SKStoreProductViewControllerDelegate
+- (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController
+{
+    [viewController dismissViewControllerAnimated:YES completion:nil];
+}
 
 
 #pragma mark - refresh List
@@ -407,6 +448,43 @@
     
 }
 
+
+- (void)checkUpdate
+{
+    MBProgressHUD * _hud  = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    _hud.labelText = @"检测中...";
+    
+    [VersionManager checkUpdate:APPID compleitionBlock:^(BOOL hasNew, NSError *error) {
+        
+        if(error)
+        {
+            _hud.labelText = @"检测失败";
+            [_hud hide:YES afterDelay:1.5];
+            return ;
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [_hud hide:YES];
+            if(hasNew)
+            {
+                
+                UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"发现AppStore上面有新版本." delegate:self cancelButtonTitle:@"关闭" otherButtonTitles:@"更新", nil];
+                [alertView show];
+                alertView = nil;
+                
+            }
+            else
+            {
+                UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"当前是最新版本了." delegate:nil cancelButtonTitle:@"关闭" otherButtonTitles:nil, nil];
+                [alertView show];
+                alertView = nil;
+            }
+        });
+        
+        
+    }];
+}
+
 - (IBAction)quitCurAccountEvent:(id)sender
 {
     [[UserDefault sharedInstance] setUserInfo:nil];
@@ -415,13 +493,43 @@
     vc = nil;
 }
 
+- (IBAction)msgInvitation:(id)sender
+{
+    [_invitationView removeFromSuperview];
+    Class messageClass = (NSClassFromString(@"MFMessageComposeViewController"));
+    if (messageClass == nil)
+    {
+        return ;
+    }
+    
+    // 发送短信
+    if ([messageClass canSendText])
+    {
+        MFMessageComposeViewController *picker = [[MFMessageComposeViewController alloc] init];
+        picker.messageComposeDelegate = self;
+        
+        NSString *smsBody = [NSString stringWithFormat:@"亲爱的,我发现一个很不错的手机应用'晒娃娃', 可以用来晒宝宝的照片和视频。你也下一个一起玩吧。下载地址: http://www.shaiwawa.com/download"];
+        picker.body=smsBody;
+        [self presentViewController:picker animated:YES completion:nil];
+    }
+    else
+    {
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@""message:@"该设备不支持短信功能" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+    }
+
+}
+
+- (IBAction)wechatInvitation:(id)sender
+{
+    [_invitationView removeFromSuperview];
+    [[ShareManager sharePlatform] shareToWeiXinFriend];
+}
+
 
 - (void)updateSetting
 {
     Setting *setting = [[UserDefault sharedInstance] set];
-    
-    //NSLog(@"%@",@{@"uid":[[UserDefault sharedInstance] userInfo].uid,@"is_remind":setting.is_remind,@"visibility":setting.visibility,@"show_position":setting.show_position,@"is_share":setting.is_share,@"upload_video_only_wifi":setting.upload_video_only_wifi,@"upload_audio_only_wifi":setting.upload_audio_only_wifi,@"upload_image_only_wifi":setting.upload_image_only_wifi});
-    
     [[HttpService sharedInstance] updateUserSetting:@{@"uid":[[UserDefault sharedInstance] userInfo].uid,  @"is_remind":setting.is_remind,@"visibility":setting.visibility,@"show_position":setting.show_position,@"is_share":setting.is_share,@"upload_video_only_wifi":setting.upload_video_only_wifi,@"upload_audio_only_wifi":setting.upload_audio_only_wifi,@"upload_image_only_wifi":setting.upload_image_only_wifi}completionBlock:^(id object) {
         [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"SetSuccess", nil)];
     } failureBlock:^(NSError *error, NSString *responseString) {
@@ -433,4 +541,25 @@
         [SVProgressHUD showErrorWithStatus:msg];
     }];
 }
+
+
+// 处理发送完的响应结果
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
+{
+    [self dismissViewControllerAnimated:YES completion:^{}];
+    if (result == MessageComposeResultCancelled)
+    {
+        NSLog(@"Message cancelled");
+    }
+    else if (result == MessageComposeResultSent)
+    {
+        NSLog(@"Message sent");
+    }
+    else
+    {
+        NSLog(@"Message failed");
+    }
+}
+
+
 @end

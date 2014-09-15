@@ -19,6 +19,7 @@
 @property (nonatomic,strong) NSString * longitude;
 @property (nonatomic,strong) NSString * latitude;
 @property (nonatomic,strong) NSString * like_count;
+@property (nonatomic,strong) NSString * is_like;
 @property (nonatomic,strong) NSString * comment_count;
 @property (nonatomic,strong) NSString * avatar;
 @property (nonatomic,strong) NSString * baby_name;
@@ -26,6 +27,6 @@
 @property (nonatomic,strong) NSString * sex;
 @property (nonatomic,strong) NSArray * top_3_likes;
 @property (nonatomic,strong) NSArray * images;
-@property (nonatomic,strong) NSArray * video;
-@property (nonatomic,strong) NSArray * audio;
+@property (nonatomic,strong) NSString * video;
+@property (nonatomic,strong) NSString * audio;
 @end

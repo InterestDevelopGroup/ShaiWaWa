@@ -25,5 +25,6 @@
 @property (weak, nonatomic) IBOutlet UIView *likeView;
 
 
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end

@@ -36,6 +36,7 @@
 #define Get_Record_By_User_ID                       @"get_baby_record_list"
 #define Get_Record_By_Friend                        @"get_record_by_friend"
 #define Get_Recrod_By_Follow                        @"get_record_by_follow"
+#define Get_Record_By_Baby                          @"get_record_by_baby"
 #define Search_Recrod                               @"search_record"
 #define Get_Record_By_Topic                         @"get_record_by_topic"
 #define Get_Favorite_List                           @"get_favorite_list"
@@ -47,7 +48,7 @@
 #define Search_Friend                               @"search_friend"
 #define Get_Sina_Friend                             @"get_sina_friend"
 #define Get_QQ_Friend                               @"get_qq_friend"
-#define Get_Addressbook_Friend                      @"get_addressbook_friend"
+#define Get_Addressbook_Friend                      @"get_contacts_friends"
 #define Get_User_Info                               @"get_user_info"
 #define Follow_Baby                                 @"follow"
 #define Get_User_Setting                            @"get_user_setting"
@@ -57,6 +58,9 @@
 #define Update_Baby_Remark                          @"update_remark"
 #define Delete_Baby_Remark                          @"delete_remark"
 #define Update_User_Setting                         @"update_user_setting"
+#define Get_Square_Recrod                           @"square"
+#define Bind_Phone                                  @"bind_phone"
+#define Verify_Validatecode                         @"verify_validatecode"
 typedef enum {
     No_Error_Code = 10000,
     Unknow_Error_Code,
@@ -81,12 +85,14 @@ typedef enum {
 
 + (HttpService *)sharedInstance;
 
-
+- (id)mapModel:(id)reponseObject withClass:(Class)cls;
+- (NSArray *)mapModelsProcess:(id)responseObject withClass:(Class)class;
 /**
  @desc 用户登录
  */
 //TODO:用户登录
 - (void)userLogin:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
+
 /**
  @desc 用户注册
  */
@@ -243,7 +249,7 @@ typedef enum {
 /**
  @desc 获取动态列表
  */
-//TODO 获取动态列表
+//TODO:获取动态列表
 - (void)getRecordList:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
 
 /**
@@ -272,12 +278,25 @@ typedef enum {
 //TODO:根据话题获取宝宝动态接口
 - (void)getRecordByTopic:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
 
+/**
+ @desc 根据宝宝获取动态
+ */
+//TODO:根据宝宝获取动态
+- (void)getRecordByBaby:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
+
 
 /**
  @desc 搜索动态接口
  */
 //TODO:搜索动态接口
 - (void)searchRecord:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
+
+/**
+ @desc 获取广场动态
+ */
+//TODO:获取广场动态
+- (void)getSquareRecord:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
+
 
 /**
  @desc 申请好友
@@ -386,4 +405,17 @@ typedef enum {
  */
 //TODO:更新用户配置
 - (void)updateUserSetting:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
+
+/**
+ @desc 绑定手机
+ */
+//TODO:绑定手机
+- (void)bindPhone:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
+
+/**
+ @desc 校验验证码
+ */
+//TODO:校验验证码
+- (void)verifyValidateCode:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
+
 @end

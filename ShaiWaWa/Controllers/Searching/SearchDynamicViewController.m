@@ -2,7 +2,7 @@
 //  SearchDynamicViewController.m
 //  ShaiWaWa
 //
-//  Created by 祥 on 14-7-11.
+//  Created by Carl on 14-7-11.
 //  Copyright (c) 2014年 helloworld. All rights reserved.
 //
 

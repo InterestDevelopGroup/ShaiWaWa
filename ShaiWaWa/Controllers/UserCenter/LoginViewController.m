@@ -16,6 +16,7 @@
 #import "MBProgressHUD.h"
 #import "SVProgressHUD.h"
 #import "InputHelper.h"
+#import "BindUserViewController.h"
 @interface LoginViewController ()
 
 @end
@@ -67,14 +68,17 @@
     _hoverRegisterLabel.attributedText = attrString;
     _hoverRegisterLabel.textColor = [UIColor lightGrayColor];
     TheThirdPartyLoginView *thirdLoginView = [[TheThirdPartyLoginView alloc] initWithFrame:CGRectMake(0, 0, 242, 116)];
-    [thirdLoginView setXinlanBlock:^(void){
+    thirdLoginView.unbindBlock = ^(NSString * token,NSString * type){
         
+        BindUserViewController * vc = [[BindUserViewController alloc] initWithNibName:nil bundle:nil];
+        vc.token = token;
+        vc.type = type;
+        [self push:vc];
         
-    }];
-    [thirdLoginView setQqBlock:^(void){
-        
-    }];
-    
+    };
+    thirdLoginView.bindBlock = ^(UserInfo * user){
+        [self showChooseModeVC];
+    };
     [_thirdSuperView addSubview:thirdLoginView];
     
     

@@ -2,16 +2,28 @@
 //  SearchAddressListViewController.m
 //  ShaiWaWa
 //
-//  Created by 祥 on 14-7-10.
+//  Created by Carl on 14-7-10.
 //  Copyright (c) 2014年 helloworld. All rights reserved.
 //
 
 #import "SearchAddressListViewController.h"
 #import "UIViewController+BarItemAdapt.h"
-
-
-@interface SearchAddressListViewController ()
-
+#import "AddressBook.h"
+#import "HttpService.h"
+#import "SVProgressHUD.h"
+#import "ContactUser.h"
+#import "SearchGoodFriendsViewController.h"
+#import "AppMacros.h"
+#import "UserInfo.h"
+#import "UserDefault.h"
+#import "InputHelper.h"
+@import MessageUI;
+@interface SearchAddressListViewController ()<MFMessageComposeViewControllerDelegate>
+@property (nonatomic,strong) RHAddressBook *ab;
+@property (nonatomic,strong) NSArray * allPersons;
+@property (nonatomic,strong) NSMutableArray * isAuthedFriends;
+@property (nonatomic,strong) NSMutableArray * notAuthedFriends;
+@property (nonatomic,strong) NSMutableArray * invitationFriends;
 @end
 
 @implementation SearchAddressListViewController
@@ -21,6 +33,11 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        _allPersons = @[];
+        _isAuthedFriends = [@[] mutableCopy];
+        _notAuthedFriends = [@[] mutableCopy];
+        _invitationFriends = [@[] mutableCopy];
+
     }
     return self;
 }
@@ -28,42 +45,264 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
+
+
 #pragma mark - Private Methods
 - (void)initUI
 {
     self.title = @"通讯录好友";
-    [self setLeftCusBarItem:@"square_back" action:nil];
-    numOfYaoQing = 0;
+    [self setLeftCusBarItem:@"square_back" action:@selector(backAtion:)];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setTitle:[NSString stringWithFormat:@"邀请(%i)",numOfYaoQing] forState:UIControlStateNormal];
+    [btn setTitle:[NSString stringWithFormat:@"邀请(%i)",0] forState:UIControlStateNormal];
     [btn setFrame:CGRectMake(0, 0, 60, 30)];
     btn.titleLabel.font = [UIFont systemFontOfSize:15];
-//    [btn setImage:<#(UIImage *)#> forState:<#(UIControlState)#>];
-//    [btn setBackgroundImage:<#(UIImage *)#> forState:<#(UIControlState)#>];
     [btn addTarget:self action:@selector(YaoQing) forControlEvents:UIControlEventTouchUpInside];
-    
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
-    
     self.navigationItem.rightBarButtonItem = rightItem;
     sectionArr = [[NSArray alloc] initWithObjects:@"待关注好友",@"可邀请好友", nil];
-    waitToCardList = [[NSArray alloc] initWithObjects:@"1",@"3",@"5",@"7", nil];
-    mayYaoQiList =  [[NSArray alloc] initWithObjects:@"2",@"4",@"6",@"8", nil];
-    friendsAll = [NSArray arrayWithObjects:waitToCardList,mayYaoQiList, nil];
-    //以段名数组，段数据为参数创建数据资源用的字典实例
-    freindsList = [[NSDictionary alloc] initWithObjects:friendsAll forKeys:sectionArr];
-    
-    //[_babyListTableView clearSeperateLine];
-    //[_babyListTableView registerNibWithName:@"BabyListCell" reuseIdentifier:@"Cell"];
+
+
     [_addrListTableView clearSeperateLine];
     [_addrListTableView registerNibWithName:@"AddrBookCell" reuseIdentifier:@"Cell"];
+    
+    
+    _ab = [[RHAddressBook alloc] init];
+    //if not yet authorized, force an auth.
+    if ([RHAddressBook authorizationStatus] == RHAuthorizationStatusNotDetermined){
+        [_ab requestAuthorizationWithCompletion:^(bool granted, NSError *error) {
+            
+    
+            if([_ab numberOfPeople] > 0)
+            {
+                [self uploadContacts];
+            }
+
+            
+        }];
+    }
+    
+    // warn re being denied access to contacts
+    if ([RHAddressBook authorizationStatus] == RHAuthorizationStatusDenied){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"当前不能访问通讯录" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+        
+    }
+    
+    // warn re restricted access to contacts
+    if ([RHAddressBook authorizationStatus] == RHAuthorizationStatusRestricted){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"当前不能访问通讯录" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+        
+    }
+    
+    if([RHAddressBook authorizationStatus] == RHAuthorizationStatusAuthorized)
+    {
+        if([_ab numberOfPeople] > 0)
+        {
+            [self uploadContacts];
+        }
+    }
+
+}
+
+- (void)backAtion:(id)sender
+{
+    NSArray * vcs = self.navigationController.viewControllers;
+    
+    for(UIViewController * vc in vcs)
+    {
+        if([vc isKindOfClass:[SearchGoodFriendsViewController class]])
+        {
+            [self.navigationController popToViewController:vc animated:YES];
+            break ;
+        }
+    }
+    
+}
+
+
+- (void)uploadContacts
+{
+    NSArray * people = [_ab peopleOrderedByUsersPreference];
+    NSMutableArray * arr = [@[] mutableCopy];
+    
+    for(RHPerson * person in people)
+    {
+        NSString * phone = person.phoneNumbers.values[0];
+        phone = [phone stringByReplacingOccurrencesOfString:@"-" withString:@""];
+        phone = [phone stringByReplacingOccurrencesOfString:@"+" withString:@""];
+        NSDictionary * dic = @{@"name":person.name,@"phone":phone};
+        [arr addObject:dic];
+    }
+    
+    NSDictionary * dic = @{@"contacts":arr};
+    
+    [[HttpService sharedInstance] getAddressBookFriend:dic completionBlock:^(id object) {
+        
+        if(object == nil || [object count] == 0)
+        {
+            return ;
+        }
+        
+        _allPersons = object;
+        for(ContactUser * contact in object)
+        {
+            if([contact.is_auth isEqualToString:@"0"])
+            {
+                [_notAuthedFriends addObject:contact];
+            }
+            else
+            {
+                [_isAuthedFriends addObject:contact];
+            }
+        }
+        
+        [_addrListTableView reloadData];
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        NSString * msg = responseString;
+        if(error)
+        {
+            msg = @"获取失败.";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+    }];
+}
+
+- (void)YaoQing
+{
+    if([_invitationFriends count] == 0)
+    {
+        [SVProgressHUD showErrorWithStatus:@"请选择要邀请的好友."];
+        return ;
+    }
+    
+    NSMutableArray * phones = [@[] mutableCopy];
+    for(ContactUser * contact in _invitationFriends)
+    {
+        [phones addObject:contact.phone];
+    }
+    
+    [self sendSMS:Invitation_Msg_Content recipientList:phones];
+}
+
+
+- (void)btnSelected:(UIButton *)button
+{
+    AddrBookCell * cell ;
+    if([button.superview.superview.superview isKindOfClass:[AddrBookCell class]])
+    {
+        cell = (AddrBookCell *)button.superview.superview.superview;
+    }
+    else if([button.superview.superview isKindOfClass:[AddrBookCell class]])
+    {
+        cell = (AddrBookCell *)button.superview.superview;
+    }
+    else
+    {
+        cell = (AddrBookCell *)button.superview;
+    }
+    
+    NSIndexPath * indexPath = [_addrListTableView indexPathForCell:cell];
+    if(indexPath.section == 0)
+    {
+        ContactUser * contact = _isAuthedFriends[indexPath.row];
+        UserInfo * user = [[UserDefault sharedInstance] userInfo];
+        
+        [[HttpService sharedInstance] applyFriend:@{@"uid":user.uid,@"friend_id":contact.uid,@"remark":@"申请好友"} completionBlock:^(id object) {
+            
+            [SVProgressHUD showSuccessWithStatus:@"已发送申请."];
+            
+        } failureBlock:^(NSError *error, NSString *responseString) {
+            NSString * msg = responseString;
+            if(error)
+            {
+                msg = @"申请失败.";
+            }
+            [SVProgressHUD showErrorWithStatus:msg];
+        }];
+    }
+    else
+    {
+        ContactUser * contact = _notAuthedFriends[indexPath.row];
+        if([_invitationFriends containsObject:contact])
+        {
+            [_invitationFriends removeObject:contact];
+        }
+        else
+        {
+            [_invitationFriends addObject:contact];
+        }
+        
+        UIButton * btn = (UIButton *)self.navigationItem.rightBarButtonItem.customView;
+        [btn setTitle:[NSString stringWithFormat:@"邀请(%i)",[_invitationFriends count]] forState:UIControlStateNormal];
+    }
+}
+
+
+
+//调用sendSMS函数
+//内容，收件人列表
+- (void)sendSMS:(NSString *)bodyOfMessage recipientList:(NSArray *)recipients
+{
+    
+    MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
+    if([MFMessageComposeViewController canSendText])
+        
+    {
+        controller.body = bodyOfMessage;
+        controller.recipients = recipients;
+        controller.messageComposeDelegate = self;
+        [self presentViewController:controller animated:YES completion:^{}];
+    }
+    
+}
+
+- (IBAction)searchAction:(id)sender
+{
+    [_searchField resignFirstResponder];
+    NSString * keyword = [InputHelper trim:_searchField.text];
+    if([InputHelper isEmpty:keyword])
+    {
+        //[SVProgressHUD showErrorWithStatus:@"请输入关键字"];
+        return ;
+    }
+    
+    NSMutableArray * tmp = [@[] mutableCopy];
+    for(ContactUser * contact in _notAuthedFriends)
+    {
+        NSRange range = [contact.name rangeOfString:keyword];
+        if(range.location != NSNotFound)
+        {
+            [tmp addObject:contact];
+        }
+    }
+    
+    _notAuthedFriends = tmp;
+    
+    tmp = [@[] mutableCopy];
+    
+    for(ContactUser * contact in _isAuthedFriends)
+    {
+        NSRange range = [contact.name rangeOfString:keyword];
+        if(range.location != NSNotFound)
+        {
+            [tmp addObject:contact];
+        }
+    }
+    
+    _isAuthedFriends = tmp;
+    
+    [_addrListTableView reloadData];
+    
+    
+    
 }
 
 
@@ -71,28 +310,28 @@
 #pragma mark - UITableView DataSources and Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [freindsList count];
+    return 2;
 }
+
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // 获取当前section的名称，据此获取到当前section的数量。
-    NSString *sectionType = [sectionArr objectAtIndex:section];
-    NSArray *list = [freindsList objectForKey:sectionType];
-    if (nil == list) {
-        return 0;
+    if(section == 0)
+    {
+        return [_isAuthedFriends count];
     }
-    return [list count];
+    return [_notAuthedFriends count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    addrBookCell = (AddrBookCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    AddrBookCell * addrBookCell = (AddrBookCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    addrBookCell.selectionStyle = UITableViewCellEditingStyleNone;
     addrBookCell.isAddBtn_Selected = NO;
-    if (addrBookCell == nil) {
-        addrBookCell = [[AddrBookCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
-       
-    }
-    if (indexPath.section == 1) {
+    ContactUser * contact ;
+    if (indexPath.section == 1)
+    {
+        contact = _notAuthedFriends[indexPath.row];
         [addrBookCell.addFriendButton setImage:[UIImage imageNamed:@"jiahaoyou2.png"] forState:UIControlStateNormal];
         isSelectedBtn = addrBookCell.isAddBtn_Selected;
         [addrBookCell.addFriendButton setSelected:NO];
@@ -100,21 +339,14 @@
     }
     else
     {
+        contact = _isAuthedFriends[indexPath.row];
         [addrBookCell.addFriendButton setImage:[UIImage imageNamed:@"jiahaoyou.png"] forState:UIControlStateNormal];
+        [addrBookCell.addFriendButton addTarget:self action:@selector(btnSelected:) forControlEvents:UIControlEventTouchUpInside];
     }
-    /*
-     // 取当前section，设置单元格显示内容。
-     NSInteger section = indexPath.section;
-     // 获取这个分组的省份名称，再根据省份名称获得这个省份的城市列表。
-     NSString *sectionType = [sectionArr objectAtIndex:section];
-     NSArray *list = [babyList objectForKey:sectionType];
-     [list objectAtIndex:indexPath.row];
-     */
-    //babyListCell.selectionStyle = UITableViewCellSelectionStyleNone;
-    //    babyListCell.babyImage.image = [UIImage imageNamed:@""];
-    //    babyListCell.babyNameLabel.text = [NSString stringWithFormat:@""];
-    //    babyListCell.babyOldLabel.text = [NSString stringWithFormat:@""];
-    //    babyListCell.babySexImage.image = [UIImage imageNamed:@""];
+    
+    addrBookCell.nameLabel.text = contact.name;
+    addrBookCell.phoneNumLabel.text = contact.phone;
+    
     
     return addrBookCell;
     
@@ -137,39 +369,39 @@
 {
 
 }
+
+
+
+#pragma mark - MFMessageComposeViewControllerDelegate Methods
+
+// 处理发送完的响应结果
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
+{
+    [self dismissViewControllerAnimated:YES completion:^{}];
+    if (result == MessageComposeResultCancelled)
+    {
+        NSLog(@"Message cancelled");
+    }
+    else if (result == MessageComposeResultSent)
+    {
+        NSLog(@"Message sent");
+        [_invitationFriends removeAllObjects];
+        UIButton * btn = (UIButton *)self.navigationItem.rightBarButtonItem.customView;
+        [btn setTitle:[NSString stringWithFormat:@"邀请(%i)",[_invitationFriends count]] forState:UIControlStateNormal];
+    }
+    else
+    {
+        NSLog(@"Message failed");
+        [SVProgressHUD showErrorWithStatus:@"发送失败."];
+    }
+}
+
+
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [textField resignFirstResponder];
+    [self searchAction:nil];
     return YES;
 }
 
-- (void)YaoQing
-{
-    
-}
-
-- (void)btnSelected:(UIButton *)button
-{
-//    if (!button.isSelected)
-//    {
-//        
-//      [button setImage:[UIImage imageNamed:@"jiahaoyou.png"] forState:UIControlStateNormal];
-//      [button setSelected:YES];
-//        isSelectedBtn = YES;
-//    }
-//    else
-//    {
-//        if (!isSelectedBtn) {
-//            [button setImage:[UIImage imageNamed:@"jiahaoyou.png"] forState:UIControlStateNormal];
-//            isSelectedBtn = YES;
-//        }
-//        else
-//        {
-//            [button setImage:[UIImage imageNamed:@"jiahaoyou2.png"] forState:UIControlStateNormal];
-//            isSelectedBtn = NO;
-//        }
-//        [button setSelected:NO];
-//    }
-}
 @end

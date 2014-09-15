@@ -25,7 +25,10 @@
 #import "UIImageView+WebCache.h"
 #import "UIButton+WebCache.h"
 #import "NSStringUtil.h"
-
+#import "PublishImageView.h"
+#import "ImageDisplayView.h"
+#import "PraiseViewController.h"
+@import MediaPlayer;
 @interface DynamicDetailViewController ()
 
 @end
@@ -43,8 +46,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
 }
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -113,21 +129,6 @@
 }
 
 
-#pragma mark 解决虚拟键盘挡住UITextField的方法
-- (void)keyboardWillShow:(NSNotification *)noti
-{
-    //键盘输入的界面调整
-    //键盘的高度
-    float height = 216.0;
-    CGRect frame = self.view.frame;
-    frame.size = CGSizeMake(frame.size.width, frame.size.height - height);
-    [UIView beginAnimations:@"Curl"context:nil];//动画开始
-    [UIView setAnimationDuration:0.30];
-    [UIView setAnimationDelegate:self];
-    [self.view setFrame:frame];
-    [UIView commitAnimations];
-    
-}
 
 - (void)showShareGrayView
 {
@@ -156,18 +157,47 @@
         [SVProgressHUD showErrorWithStatus:@"请先登录"];
         return ;
     }
-    [[HttpService sharedInstance] addLike:@{@"rid":_babyRecord.rid,@"uid":user.uid} completionBlock:^(id object) {
-        
-        [SVProgressHUD showSuccessWithStatus:@"谢谢您的参与."];
-        
-    } failureBlock:^(NSError *error, NSString *responseString) {
-        NSString * msg = responseString;
-        if(error)
-        {
-            msg = @"请求失败";
-        }
-        [SVProgressHUD showErrorWithStatus:msg];
-    }];
+    
+    //先判断是否有赞过，0：没有赞过，1：赞过
+    if([_babyRecord.is_like isEqualToString:@"0"])
+    {
+        [[HttpService sharedInstance] addLike:@{@"rid":_babyRecord.rid,@"uid":user.uid} completionBlock:^(id object) {
+            //成功之后设置为1，表示已经赞过
+            _babyRecord.is_like = @"1";
+            [SVProgressHUD showSuccessWithStatus:@"谢谢您的参与."];
+            
+        } failureBlock:^(NSError *error, NSString *responseString) {
+            NSString * msg = responseString;
+            if(error)
+            {
+                msg = @"请求失败";
+            }
+            [SVProgressHUD showErrorWithStatus:msg];
+        }];
+    }
+    else
+    {
+        [[HttpService sharedInstance] cancelLike:@{@"rid":_babyRecord.rid,@"uid":user.uid} completionBlock:^(id object) {
+            //成功之后设置为0，表示没有赞过
+            _babyRecord.is_like = @"0";
+            [SVProgressHUD showSuccessWithStatus:@"取消赞成功."];
+            
+        } failureBlock:^(NSError *error, NSString *responseString) {
+            NSString * msg = responseString;
+            if(error)
+            {
+                msg = @"请求失败";
+            }
+            [SVProgressHUD showErrorWithStatus:msg];
+        }];
+    }
+    
+
+}
+
+- (void)moreAction:(id)sender
+{
+    
 }
 
 - (IBAction)pinLunEvent:(id)sender
@@ -192,6 +222,49 @@
          }
          [SVProgressHUD showErrorWithStatus:msg];
     }];
+}
+
+
+- (void)showPraiseListVC:(id)sender
+{
+    PraiseViewController * vc = [[PraiseViewController alloc] initWithNibName:nil bundle:nil];
+    vc.record = _babyRecord;
+    [self push:vc];
+    vc = nil;
+}
+
+- (void)keyboardShow:(NSNotification *)notification
+{
+    float duration = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    //NSLog(@"%@",[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey]);
+    CGRect beginRect = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+    CGRect endRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+    //NSLog(@"%f",self.view.frame.origin.y);
+    
+    [UIView animateWithDuration:duration animations:^{
+        
+        float offset ;
+        if(beginRect.size.height == endRect.size.height)
+        {
+            offset = - beginRect.size.height;
+        }
+        else
+        {
+            offset = beginRect.size.height - endRect.size.height;
+        }
+        self.view.frame = CGRectOffset(self.view.frame, 0,offset);
+    }];
+    
+}
+
+- (void)keyboardHide:(NSNotification *)notification
+{
+    float duration = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    [UIView animateWithDuration:duration animations:^{
+        self.view.frame = CGRectMake(0, [OSHelper iOS7]?64:0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
+    }];
+    
 }
 
 
@@ -231,36 +304,100 @@
     {
         cell = [tableView dequeueReusableCellWithIdentifier:@"DynamicDetailCell"];
         DynamicDetailCell * detailCell = (DynamicDetailCell *)cell;
-        [detailCell.avatarImageView setImageWithURL:[NSURL URLWithString:_babyRecord.avatar] placeholderImage:Default_Avatar];
-        detailCell.babyNameLabel.text = _babyRecord.baby_name;
+        [detailCell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:_babyRecord.avatar] placeholderImage:Default_Avatar];
+        detailCell.babyNameLabel.text = _babyRecord.baby_nickname;
         detailCell.addressLabel.text = _babyRecord.address;
         detailCell.contentTextView.attributedText = [NSStringUtil makeTopicString:_babyRecord.content];
 
         [detailCell.likeBtn setTitle:_babyRecord.like_count forState:UIControlStateNormal];
         [detailCell.commentBtn setTitle:_babyRecord.comment_count forState:UIControlStateNormal];
-        
         [detailCell.likeBtn addTarget:self action:@selector(likeAction:) forControlEvents:UIControlEventTouchUpInside];
+        [detailCell.moreBtn addTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
         
+        //显示赞用户头像
         if([_babyRecord.top_3_likes count] > 0)
         {
             detailCell.likeView.hidden = NO;
             NSDictionary * userDic = _babyRecord.top_3_likes[0];
-            [detailCell.praiseUserFirstBtn setImageWithURL:[NSURL URLWithString:userDic[@"avatar"]] forState:UIControlStateNormal];
+            [detailCell.praiseUserFirstBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal];
+            [detailCell.praiseUserFirstBtn addTarget:self action:@selector(showPraiseListVC:) forControlEvents:UIControlEventTouchUpInside];
             if([_babyRecord.top_3_likes count] > 1)
             {
                 userDic = _babyRecord.top_3_likes[1];
-                [detailCell.praiseUserSecondBtn setImageWithURL:[NSURL URLWithString:userDic[@"avatar"]] forState:UIControlStateNormal];
+                [detailCell.praiseUserSecondBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal];
+                [detailCell.praiseUserSecondBtn addTarget:self action:@selector(showPraiseListVC:) forControlEvents:UIControlEventTouchUpInside];;
             }
             
             if([_babyRecord.top_3_likes count] > 2)
             {
                 userDic = _babyRecord.top_3_likes[2];
-                [detailCell.praiseUserThirdBtn setImageWithURL:[NSURL URLWithString:userDic[@"avatar"]] forState:UIControlStateNormal];
+                [detailCell.praiseUserThirdBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal];
+                [detailCell.praiseUserThirdBtn addTarget:self action:@selector(showPraiseListVC:) forControlEvents:UIControlEventTouchUpInside];
             }
         }
         else
         {
             detailCell.likeView.hidden = YES;
+        }
+        
+        DynamicDetailCell * dynamicCell = detailCell;
+        BabyRecord * recrod = _babyRecord;
+        //删除重用cell原来的图片
+        NSArray * scrollSubviews = [dynamicCell.scrollView subviews];
+        for(UIView * view in scrollSubviews)
+        {
+            if([view isKindOfClass:[PublishImageView class]])
+            {
+                [view removeFromSuperview];
+            }
+        }
+        
+        //显示动态图片或者视频
+        if(recrod.video != nil && [recrod.video length] != 0)
+        {
+            PublishImageView * imageView = [[PublishImageView alloc] initWithFrame:dynamicCell.scrollView.bounds withPath:recrod.video];
+            imageView.tapBlock = ^(NSString * path){
+                
+                MPMoviePlayerViewController * player = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:recrod.video]];
+                player.moviePlayer.shouldAutoplay = YES;
+                [player.moviePlayer setControlStyle:MPMovieControlStyleFullscreen];
+                [player.moviePlayer prepareToPlay];
+                [self presentViewController:player animated:YES completion:nil];
+                
+            };
+            [imageView setCloseHidden];
+            [dynamicCell.scrollView addSubview:imageView];
+            imageView = nil;
+        }
+        else if([recrod.images count] != 0)
+        {
+            int count = [recrod.images count];
+            if(count > 3)
+            {
+                count = 3;
+            }
+            float width = CGRectGetWidth(dynamicCell.scrollView.bounds)/count;
+            for(int i = 0; i < [recrod.images count]; i++)
+            {
+                PublishImageView * imageView = [[PublishImageView alloc] initWithFrame:CGRectMake(i * width, 0, width, CGRectGetHeight(dynamicCell.scrollView.bounds)) withPath:recrod.images[i]];
+                imageView.tapBlock = ^(NSString * path){
+                    ImageDisplayView * displayView = [[ImageDisplayView alloc] initWithFrame:self.navigationController.view.bounds withPath:path];
+                    [self.navigationController.view addSubview:displayView];
+                    [displayView show];
+                };
+                [imageView setCloseHidden];
+                [dynamicCell.scrollView addSubview:imageView];
+                imageView = nil;
+            }
+            [dynamicCell.scrollView setContentSize:CGSizeMake([recrod.images count] * width, CGRectGetHeight(dynamicCell.scrollView.bounds))];
+            
+        }
+        else
+        {
+            PublishImageView * imageView = [[PublishImageView alloc] initWithFrame:dynamicCell.scrollView.bounds withPath:nil];
+            [imageView setCloseHidden];
+            [dynamicCell.scrollView addSubview:imageView];
+            imageView = nil;
         }
 
         
@@ -284,54 +421,9 @@
 
 
 
-
 #pragma mark - UITextFieldDelegate Methods
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    CGRect frame = textField.frame;
-    int offset;
-    if (self.view.bounds.size.height > 490.0)
-    {
-        offset = frame.origin.y + 428 - self.view.frame.size.height - 216;
-    }
-    else
-    {
-        offset = frame.origin.y + 500 - self.view.frame.size.height - 216;
-    }
-    NSTimeInterval animationDuration = 0.30f;
-    [UIView beginAnimations:@"ResizeForKeyBoard" context:nil];
-    [UIView setAnimationDuration:animationDuration];
-    float width = self.view.frame.size.width;
-    float height = self.view.frame.size.height;
-    if(offset > 0)
-    {
-        CGRect rect = CGRectMake(0.0f, -offset,width,height);
-        self.view.frame = rect;
-    }
-    [UIView commitAnimations];
-}
-
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    // When the user presses return, take focus away from the text field so that the keyboard is dismissed.
-    NSTimeInterval animationDuration = 0.30f;
-    [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
-    [UIView setAnimationDuration:animationDuration];
-    [textField becomeFirstResponder];
-    CGRect rect;
-    if ([[UIDevice currentDevice].systemVersion floatValue] >= 7.0)
-    {
-        rect = CGRectMake(0.0f, 64.0f, self.view.frame.size.width, self.view.frame.size.height);
-    }
-    else
-    {
-        rect = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
-    }
-    
-    
-    
-    self.view.frame = rect;
-    [UIView commitAnimations];
     [textField resignFirstResponder];
     return YES;
 }

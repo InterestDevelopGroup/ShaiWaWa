@@ -14,7 +14,8 @@
 #import "HttpService.h"
 #import "SVProgressHUD.h"
 #import "InputHelper.h"
-
+#import "UserDefault.h"
+#import "UserInfo.h"
 @interface PostValidateViewController ()
 @property (nonatomic,strong) NSTimer * countTimer;
 @end
@@ -129,8 +130,49 @@
         return ;
     }
     
-    
-    //[ControlCenter pushToFinishRegisterVC];
+    if(_isBinding)
+    {
+        void (^BindBlock)(void) = ^(void){
+            
+            UserInfo * user = [[UserDefault sharedInstance] userInfo];
+            
+            [[HttpService sharedInstance] bindPhone:@{@"uid":user.uid,@"phone":_currentPhone} completionBlock:^(id object) {
+                //保存到本地
+                user.phone = _currentPhone;
+                [[UserDefault sharedInstance] setUserInfo:user];
+                [SVProgressHUD showSuccessWithStatus:@"绑定成功."];
+                SearchAddressListViewController * vc = [[SearchAddressListViewController alloc] initWithNibName:nil bundle:nil];
+                [self push:vc];
+                vc = nil;
+                
+            } failureBlock:^(NSError *error, NSString *responseString) {
+                NSString * msg = responseString;
+                if(error)
+                {
+                    msg = @"绑定手机失败.";
+                }
+                [SVProgressHUD showErrorWithStatus:msg];
+
+            }];
+            
+        };
+        
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+        [[HttpService sharedInstance] verifyValidateCode:@{@"phone":_currentPhone,@"validate_code":code} completionBlock:^(id object) {
+            
+            BindBlock();
+            
+        } failureBlock:^(NSError *error, NSString *responseString) {
+            NSString * msg = responseString;
+            if(error)
+            {
+                msg = @"校验失败.";
+            }
+            [SVProgressHUD showErrorWithStatus:msg];
+        }];
+        
+        return ;
+    }
     
     FinishRegisterViewController * vc = [[FinishRegisterViewController alloc] initWithNibName:nil bundle:nil];
     vc.currentPhone = _currentPhone;

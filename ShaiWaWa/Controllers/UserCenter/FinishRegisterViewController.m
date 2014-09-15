@@ -30,13 +30,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
     
 #pragma mark - Private Methods
@@ -110,7 +108,8 @@
 
 
 #pragma mark -- 随机生成一个八位数
-- (NSString *)randomNum{
+- (NSString *)randomNum
+{
     //自动生成8位随机密码
     NSTimeInterval random=[NSDate timeIntervalSinceReferenceDate];
     NSString *randomString = [NSString stringWithFormat:@"%.8f",random];

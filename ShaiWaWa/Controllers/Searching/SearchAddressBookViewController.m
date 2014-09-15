@@ -2,7 +2,7 @@
 //  SearchAddressBookViewController.m
 //  ShaiWaWa
 //
-//  Created by 祥 on 14-7-10.
+//  Created by Carl on 14-7-10.
 //  Copyright (c) 2014年 helloworld. All rights reserved.
 //
 
@@ -12,6 +12,8 @@
 #import "HttpService.h"
 #import "SVProgressHUD.h"
 #import "ControlCenter.h"
+#import "InputHelper.h"
+#import "PostValidateViewController.h"
 @interface SearchAddressBookViewController ()
 
 @end
@@ -30,45 +32,59 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
+
+
 #pragma mark - Private Methods
 - (void)initUI
 {
     self.title = @"查找通讯录好友";
     [self setLeftCusBarItem:@"square_back" action:nil];
-    myDelegate = [[UIApplication sharedApplication] delegate];
 }
+
 - (IBAction)addrBookNext:(id)sender
 {
-    myDelegate.postValidateType = @"addrBook";
+
     [_phoneField resignFirstResponder];
-    if (_phoneField.text.length > 0) {
-        if (_phoneField.text.length == 11) {
-            [[HttpService sharedInstance] sendValidateCode:@{@"phone":_phoneField.text} completionBlock:^(id object) {
-                myDelegate.postValidatePhoneNum = _phoneField.text;
-                
-                _phoneField.text = nil;
-                [ControlCenter pushToPostValidateVC];
-            } failureBlock:^(NSError *error, NSString *responseString) {
-                [SVProgressHUD showErrorWithStatus:responseString];
-            }];
-        }
-        else
-        {
-            [SVProgressHUD showErrorWithStatus:@"请输入正确手机号码"];
-        }
-        
-    }
-    else
+    
+    NSString * phone = [InputHelper trim:_phoneField.text];
+    
+    if([InputHelper isEmpty:phone])
     {
-        [SVProgressHUD showErrorWithStatus:@"不能为空"];
+        [SVProgressHUD showErrorWithStatus:@"请填写手机号码."];
+        return ;
     }
+    
+    if(![InputHelper isPhone:phone])
+    {
+        [SVProgressHUD showErrorWithStatus:@"手机号码无效."];
+        return ;
+    }
+
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+    [[HttpService sharedInstance] sendValidateCode:@{@"phone":phone} completionBlock:^(id object) {
+        
+        [SVProgressHUD dismiss];
+        _phoneField.text = nil;
+        
+        PostValidateViewController * vc = [[PostValidateViewController alloc] initWithNibName:nil bundle:nil];
+        vc.currentPhone = phone;
+        vc.isBinding = YES;
+        [self push:vc];
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        NSString * msg = responseString;
+        if(error)
+        {
+            msg = @"发送失败.";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+    }];
+   
 }
 @end

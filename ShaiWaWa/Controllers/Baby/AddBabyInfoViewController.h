@@ -26,13 +26,18 @@
 @property (strong, nonatomic) IBOutlet UITextField *birthStatureField;
 @property (strong, nonatomic) IBOutlet UITextField *birthWeightField;
 
+@property (weak, nonatomic) IBOutlet UIButton *touXiangButton;
+@property (weak, nonatomic) IBOutlet UITextField *cityValueTextField;
+
+@property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
+@property (strong, nonatomic) IBOutlet UIToolbar *toolBar;
+
 - (IBAction)boySelected:(id)sender;
 - (IBAction)girlSelected:(id)sender;
 - (IBAction)monSelected:(id)sender;
 - (IBAction)dadSelected:(id)sender;
 - (IBAction)openCitiesSelectView:(id)sender;
 - (IBAction)touXiangSelectEvent:(id)sender;
-@property (weak, nonatomic) IBOutlet UIButton *touXiangButton;
-@property (weak, nonatomic) IBOutlet UITextField *cityValueTextField;
+- (IBAction)dismissKeyboard:(id)sender;
 
 @end

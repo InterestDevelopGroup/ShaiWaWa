@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 @class BabyInfo,DynamicRecord;
-@interface NotificationMsg : NSObject<NSCopying, NSCoding> 
+@interface NotificationMsg : NSObject 
 {
     NSString *notification_id;      //消息id
     NSString *msg_type;                 //消息类型

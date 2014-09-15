@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *moreBtn;
 @property (weak, nonatomic) IBOutlet UILabel *topicView;
 @property (weak, nonatomic) IBOutlet UIView *likeUserView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property (weak, nonatomic) IBOutlet UIButton *commentBtn;
 

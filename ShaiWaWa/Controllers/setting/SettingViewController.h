@@ -2,13 +2,13 @@
 //  SettingViewController.h
 //  ShaiWaWa
 //
-//  Created by 祥 on 14-7-8.
+//  Created by Carl on 14-7-8.
 //  Copyright (c) 2014年 helloworld. All rights reserved.
 //
 
 #import "CommonViewController.h"
 
-@interface SettingViewController : CommonViewController<UITableViewDataSource, UITableViewDelegate,UIActionSheetDelegate>
+@interface SettingViewController : CommonViewController<UITableViewDataSource, UITableViewDelegate,UIActionSheetDelegate,UIAlertViewDelegate>
 {
     NSArray *sectionArr;
     NSMutableArray *setAllList;
@@ -18,7 +18,11 @@
 }
 @property (strong, nonatomic) IBOutlet UITableView *setListTableView;
 @property (strong, nonatomic) IBOutlet UIView *customFootView;
-- (IBAction)quitCurAccountEvent:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *quitCurBtn;
+@property (strong, nonatomic) IBOutlet UIView *invitationView;
+
+- (IBAction)quitCurAccountEvent:(id)sender;
+- (IBAction)msgInvitation:(id)sender;
+- (IBAction)wechatInvitation:(id)sender;
 
 @end

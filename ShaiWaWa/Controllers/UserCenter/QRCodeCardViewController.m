@@ -2,13 +2,16 @@
 //  QRCodeCardViewController.m
 //  ShaiWaWa
 //
-//  Created by 祥 on 14-7-10.
+//  Created by Carl on 14-7-10.
 //  Copyright (c) 2014年 helloworld. All rights reserved.
 //
 
 #import "QRCodeCardViewController.h"
 #import "UIViewController+BarItemAdapt.h"
-
+#import "UserInfo.h"
+#import "UserDefault.h"
+#import "UIImageView+WebCache.h"
+#import "QRCodeGenerator.h"
 @interface QRCodeCardViewController ()
 
 @end
@@ -27,13 +30,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Private Methods
@@ -41,5 +42,9 @@
 {
     self.title = @"二维码名片";
     [self setLeftCusBarItem:@"square_back" action:nil];
+    UserInfo * user = [[UserDefault sharedInstance] userInfo];
+    _usernameLabel.text = user.username;
+    [_avatarImageView sd_setImageWithURL:[NSURL URLWithString:user.avatar] placeholderImage:_avatarImageView.image];
+    _qrCodeImageView.image = [QRCodeGenerator qrImageForString:[NSString stringWithFormat:@"#com.gzinterest.%@#",user.uid] imageSize:CGRectGetWidth(_qrCodeImageView.frame)];
 }
 @end

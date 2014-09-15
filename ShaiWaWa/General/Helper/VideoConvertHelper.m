@@ -94,7 +94,16 @@
 
 - (UIImage *)getVideoThumb:(NSString *)path
 {
-    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:path] options:nil];
+    NSURL * url;
+    if([path hasPrefix:@"http"])
+    {
+        url = [NSURL URLWithString:path];
+    }
+    else
+    {
+        url = [NSURL fileURLWithPath:path];
+    }
+    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:url options:nil];
     AVAssetImageGenerator *gen = [[AVAssetImageGenerator alloc] initWithAsset:asset];
     gen.appliesPreferredTrackTransform = YES;
     CMTime time = CMTimeMake(0.0, 600);

@@ -58,12 +58,6 @@
     
     TheThirdPartyLoginView *thirdLoginView = [[TheThirdPartyLoginView alloc] initWithFrame:CGRectMake(0, 0, 242, 116)];
     
-    [thirdLoginView setXinlanBlock:^(void){
-        NSLog(@"sina");
-    }];
-    [thirdLoginView setQqBlock:^(void){
-       NSLog(@"qq");
-    }];
     
     [_thirdSuperView addSubview:thirdLoginView];
     

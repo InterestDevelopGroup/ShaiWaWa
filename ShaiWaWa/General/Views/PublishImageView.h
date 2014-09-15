@@ -16,5 +16,5 @@ typedef void (^TapBlock)(NSString * path);
 @property (nonatomic,copy) TapBlock tapBlock;
 
 - (id)initWithFrame:(CGRect)frame withPath:(NSString *)path;
-
+- (void)setCloseHidden;
 @end
