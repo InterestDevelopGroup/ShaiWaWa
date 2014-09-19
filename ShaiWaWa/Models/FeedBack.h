@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 @class UserInfo;
-@interface FeedBack : NSObject<NSCopying, NSCoding> 
+@interface FeedBack : NSObject 
 {
     NSString *feedBack_id;          //反馈ID
     UserInfo *userInfo;

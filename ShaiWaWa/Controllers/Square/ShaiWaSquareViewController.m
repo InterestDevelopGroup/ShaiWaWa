@@ -22,6 +22,8 @@
 #import "AppMacros.h"
 #import "SDWebImageManager.h"
 #import "VideoConvertHelper.h"
+#import "FriendHomeViewController.h"
+#import "PersonCenterViewController.h"
 @interface ShaiWaSquareViewController ()
 @property (nonatomic,strong) NSMutableArray * newestDyArray;
 @property (nonatomic,strong) NSMutableArray * hotDyArray;
@@ -240,6 +242,38 @@
     }];
 }
 
+- (void)showFriendInfo:(UITapGestureRecognizer *)gesture
+{
+    if(![gesture.view isKindOfClass:[UIImageView class]])
+    {
+        return ;
+    }
+    UIImageView * imageView = (UIImageView *)gesture.view;
+    BabyRecord * record ;
+    if(segMentedControl.selectedSegmentIndex == 0)
+    {
+        record = _newestDyArray[imageView.tag];
+    }
+    else
+    {
+        record = _hotDyArray[imageView.tag];
+    }
+    
+    
+    UserInfo * user = [[UserDefault sharedInstance] userInfo];
+    if(user != nil && [user.uid isEqualToString:record.uid])
+    {
+        PersonCenterViewController * vc = [[PersonCenterViewController alloc] initWithNibName:nil bundle:nil];
+        [self push:vc];
+        return ;
+    }
+    
+    FriendHomeViewController * vc = [[FriendHomeViewController alloc] initWithNibName:nil bundle:nil];
+    vc.friendId = record.uid;
+    [self push:vc];
+    vc = nil;
+}
+
 
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
@@ -314,6 +348,7 @@
         if([[SDWebImageManager sharedManager] cachedImageExistsForURL:[NSURL URLWithString:record.video]])
         {
             [cell.babyImageView sd_setImageWithURL:[NSURL URLWithString:record.video]];
+            
         }
         else
         {
@@ -338,7 +373,11 @@
     [cell.usernameLabel setText:record.baby_nickname];
     [cell.contentLabel setText:record.content];
     [cell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:record.avatar] placeholderImage:[UIImage imageNamed:@"square_pic-2"]];
-    
+    cell.avatarImageView.userInteractionEnabled = YES;
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showFriendInfo:)];
+    [cell.avatarImageView addGestureRecognizer:tap];
+    cell.avatarImageView.tag = indexPath.row;
+    tap = nil;
     return cell;
 }
 

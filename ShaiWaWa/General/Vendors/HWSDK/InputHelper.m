@@ -34,7 +34,7 @@
 
 + (BOOL)minLength:(int)length withString:(NSString *)str
 {
-    if([str length] < 4)
+    if([str length] < length)
     {
         return NO;
     }
@@ -44,7 +44,7 @@
 
 + (BOOL)maxLength:(int)length withString:(NSString *)str
 {
-    if ([str length] > 12)
+    if ([str length] > length)
     {
         return NO;
     }

@@ -9,9 +9,12 @@
 #import "CommonViewController.h"
 
 @interface PublishRecordViewController : CommonViewController
+@property (weak, nonatomic) IBOutlet UIView *containView;
+
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UILabel *babyNameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *moreButton;
+@property (weak, nonatomic) IBOutlet UIButton *recordBtn;
 
 @property (strong, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -21,12 +24,15 @@
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 @property (strong, nonatomic) IBOutlet UIView *button3View;
 @property (strong, nonatomic) IBOutlet UIView *bottomView;
+@property (strong, nonatomic) IBOutlet UIView *recrodView;
+@property (strong, nonatomic) IBOutlet UIView *shareView;
+
+
 @property (strong, nonatomic) IBOutlet UIView *overlayView;
 - (IBAction)showMoreBaby:(id)sender;
 - (IBAction)showButtonsAction:(id)sender;
 - (IBAction)hideOverlay:(id)sender;
 - (IBAction)dismissKeyboard:(id)sender;
-
 - (IBAction)openPictureAction:(id)sender;
 - (IBAction)takePictureAction:(id)sender;
 - (IBAction)takeMovieAction:(id)sender;
@@ -34,6 +40,8 @@
 - (IBAction)setVisibilityAction:(id)sender;
 - (IBAction)showTopicAction:(id)sender;
 - (IBAction)showFriendAction:(id)sender;
+- (IBAction)showRecord:(id)sender;
+- (IBAction)showShare:(id)sender;
 
 
 @end

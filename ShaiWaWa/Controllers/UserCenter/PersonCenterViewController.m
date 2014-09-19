@@ -83,7 +83,7 @@
     UITapGestureRecognizer *touXiangImgViewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showActionSheetView)];
     [_touXiangView addGestureRecognizer:touXiangImgViewTap];
     
-    [_touXiangView setImageWithURL:[NSURL URLWithString:users.avatar] placeholderImage:[UIImage imageNamed:@"user_touxiang"]];
+    [_touXiangView sd_setImageWithURL:[NSURL URLWithString:users.avatar] placeholderImage:[UIImage imageNamed:@"user_touxiang"]];
 }
 
 - (void)showActionSheetView

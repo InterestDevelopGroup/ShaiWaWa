@@ -29,7 +29,7 @@
 #import "Setting.h"
 @import MediaPlayer;
 #define PlaceHolder @"关于宝宝的开心事情..."
-@interface PublishRecordViewController ()<UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate,UIActionSheetDelegate>
+@interface PublishRecordViewController ()<UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate,UIActionSheetDelegate,CLLocationManagerDelegate>
 @property (nonatomic,strong) BabyInfo * babyInfo;
 @property (nonatomic,strong) UserInfo * userInfo;
 @property (nonatomic,strong) Setting * setting;
@@ -40,6 +40,8 @@
 @property (nonatomic,strong) NSMutableArray * uploadedImages;  //上传成功图片队列
 @property (nonatomic,strong) NSMutableArray * uploadFailImages; //上传失败图片队列
 @property (nonatomic,strong) NSString * videoPath;  //本地视频路径
+@property (nonatomic,strong) CLLocationManager * locationManager;
+@property (nonatomic,assign) BOOL isOffset;
 @end
 
 @implementation PublishRecordViewController
@@ -56,6 +58,7 @@
         _uploadedImages = [@[] mutableCopy];
         _uploadFailImages = [@[] mutableCopy];
         _visibility = @"2";
+        _isOffset = NO;
     }
     return self;
 }
@@ -71,12 +74,14 @@
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [_textView resignFirstResponder];
 }
 
 
@@ -108,6 +113,34 @@
     
     //获取宝宝列表
     [self getBabys];
+    
+    
+    //判断是否自动定位
+    if([_setting.show_position isEqualToString:@"1"])
+    {
+        _locationManager = [[CLLocationManager alloc] init];
+        _locationManager.delegate = self;
+        _locationManager.delegate = self;
+        _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        [_locationManager startUpdatingLocation];
+    }
+    
+    //设置可见性
+    if([_setting.visibility isEqualToString:@"1"])
+    {
+        _visibilityLabel.text = @"所有都可见";
+        _visibility = @"1";
+    }
+    else if([_setting.visibility isEqualToString:@"2"])
+    {
+        _visibilityLabel.text = @"仅好友可见";
+        _visibility = @"2";
+    }
+    else if ([_setting.visibility isEqualToString:@"3"])
+    {
+        _visibilityLabel.text = @"仅父母可见";
+        _visibility = @"3";
+    }
 }
 
 //获取宝宝列表
@@ -169,19 +202,14 @@
     
     [_textView resignFirstResponder];
     //判断是否有添加图片
-    if([_images count] == 0 && _videoPath == nil)
+    //判断内容是否为空
+    NSString * content = [InputHelper trim:_textView.text];
+    if([_images count] == 0 && _videoPath == nil && ([InputHelper isEmpty:content] || [content isEqualToString:PlaceHolder]))
     {
-        [SVProgressHUD showErrorWithStatus:@"请添加图片或者视频."];
+        [SVProgressHUD showErrorWithStatus:@"请添加内容."];
         return ;
     }
     
-    //判断内容是否为空
-    NSString * content = [InputHelper trim:_textView.text];
-    if([InputHelper isEmpty:content] || [content isEqualToString:PlaceHolder])
-    {
-        [SVProgressHUD showErrorWithStatus:@"请输入内容."];
-        return ;
-    }
     
 
     
@@ -242,10 +270,20 @@
         return ;
     }
     
-    for(NSString * path in _images)
+    if([_images count] > 0)
     {
-        [[QNUploadHelper sharedHelper] uploadFile:path];
+        for(NSString * path in _images)
+        {
+            [[QNUploadHelper sharedHelper] uploadFile:path];
+        }
+        
+        return ;
     }
+    
+    //只发布内容不发布多媒体
+    [self uploadVideoFinish];
+    
+    
 }
 
 
@@ -507,6 +545,98 @@
     chooseFriendsVC = nil;
 }
 
+- (IBAction)showRecord:(id)sender
+{
+    //判断是否录音按钮显示中
+    if(_isOffset)
+    {
+        //如果父视图存在则说明当前是显示状态
+        if(_recrodView.superview)
+        {
+            //从视图中移除
+            CGRect recordRect = _recrodView.frame;
+            CGRect containRect = _containView.frame;
+            CGRect bottomRect = _bottomView.frame;
+            _isOffset = NO;
+            [_recrodView removeFromSuperview];
+            containRect.size.height = containRect.size.height + recordRect.size.height - 15;
+            bottomRect.origin.y = bottomRect.origin.y + recordRect.size.height - 15;
+            _containView.frame = containRect;
+            _bottomView.frame = bottomRect;
+        }
+        else
+        {
+            //当前不在显示状态,先删除分享按钮
+            [_shareView removeFromSuperview];
+            CGRect recordRect = _recrodView.frame;
+            recordRect.origin.y = CGRectGetHeight(self.view.frame) - recordRect.size.height;
+            [self.view addSubview:_recrodView];
+        }
+    }
+    else
+    {
+        //显示录音按钮，并调整位置
+        CGRect recordRect = _recrodView.frame;
+        CGRect containRect = _containView.frame;
+        CGRect bottomRect = _bottomView.frame;
+        containRect.size.height = containRect.size.height - recordRect.size.height + 15;
+        bottomRect.origin.y = bottomRect.origin.y - recordRect.size.height + 15;
+        recordRect.origin.y = CGRectGetHeight(self.view.frame) - recordRect.size.height;
+        _containView.frame = containRect;
+        _bottomView.frame = bottomRect;
+        _recrodView.frame = recordRect;
+        [self.view addSubview:_recrodView];
+        _isOffset = YES;
+    }
+}
+
+- (IBAction)showShare:(id)sender
+{
+    //判断是否分享按钮显示中
+    if(_isOffset)
+    {
+        //如果父视图存在则说明当前是显示状态
+        if(_shareView.superview)
+        {
+            //从视图中移除
+            CGRect shareRect = _shareView.frame;
+            CGRect containRect = _containView.frame;
+            CGRect bottomRect = _bottomView.frame;
+            _isOffset = NO;
+            [_shareView removeFromSuperview];
+            containRect.size.height = containRect.size.height + shareRect.size.height - 15;
+            bottomRect.origin.y = bottomRect.origin.y + shareRect.size.height - 15;
+            _containView.frame = containRect;
+            _bottomView.frame = bottomRect;
+        }
+        else
+        {
+            //当前不在显示状态,先删除录音按钮
+            [_recrodView removeFromSuperview];
+            CGRect shareRect = _shareView.frame;
+            shareRect.origin.y = CGRectGetHeight(self.view.frame) - shareRect.size.height;
+            [self.view addSubview:_shareView];
+        }
+    }
+    else
+    {
+        //显示分享按钮，并调整位置
+        _isOffset = YES;
+        CGRect shareRect = _shareView.frame;
+        CGRect containRect = _containView.frame;
+        CGRect bottomRect = _bottomView.frame;
+        containRect.size.height = containRect.size.height - shareRect.size.height + 15;
+        bottomRect.origin.y = bottomRect.origin.y - shareRect.size.height + 15;
+        shareRect.origin.y = CGRectGetHeight(self.view.frame) - shareRect.size.height;
+        _containView.frame = containRect;
+        _bottomView.frame = bottomRect;
+        _shareView.frame = shareRect;
+        [self.view addSubview:_shareView];
+
+    }
+
+}
+
 //显示添加宝宝页面
 - (void)showAddBaby
 {
@@ -541,11 +671,17 @@
         [_addMoreButton setTitle:[NSString stringWithFormat:@"添加更多(%i/9)",[_images count]] forState:UIControlStateNormal];
         if([_images count] == 0)
         {
+            _recordBtn.enabled = NO;
+            if(_isOffset && _recrodView.superview)
+            {
+                [self showRecord:nil];
+            }
             _addMoreButton.hidden = YES;
             [self.view addSubview:_button3View];
             
         }
     };
+    _recordBtn.enabled = YES;
     [_images addObject:path];
     [_imageViews addObject:imageView];
     [_scrollView addSubview:imageView];
@@ -655,6 +791,17 @@
 
 - (void)keyboardShow:(NSNotification *)notification
 {
+    
+    if(_isOffset && _recrodView.superview)
+    {
+        [self showRecord:nil];
+    }
+    
+    if(_isOffset && _shareView.superview)
+    {
+        [self showShare:nil];
+    }
+    
     float duration = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
     //NSLog(@"%@",[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey]);
     CGRect beginRect = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
@@ -717,6 +864,42 @@
 {
     [picker dismissViewControllerAnimated:YES completion:^{}];
 }
+
+#pragma mark CLLocationManagerDelegate Methods
+-(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    CLGeocoder * geocoder = [[CLGeocoder alloc] init];
+    [geocoder reverseGeocodeLocation:newLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+        
+        if(error)
+        {
+            UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"定位失败!" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+            [alertView show];
+            alertView = nil;
+            [_locationManager stopUpdatingLocation];
+            DDLogError(@"定位失败");
+            return ;
+        }
+        
+        if([placemarks count] > 0)
+        {
+            [_locationManager stopUpdatingLocation];
+            _placemark = placemarks[0];
+            _addressLabel.text = _placemark.name;
+        }
+        
+    }];
+}
+
+
+-(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    [_locationManager stopUpdatingLocation];
+    UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"定位失败!" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+    [alertView show];
+    alertView = nil;
+}
+
 
 
 #pragma mark - UIActionSheetDelegate Methods

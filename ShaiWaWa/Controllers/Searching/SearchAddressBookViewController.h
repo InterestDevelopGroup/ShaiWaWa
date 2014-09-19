@@ -9,10 +9,8 @@
 #import "CommonViewController.h"
 
 @interface SearchAddressBookViewController : CommonViewController
-{
-    
-}
-- (IBAction)addrBookNext:(id)sender;
-@property (weak, nonatomic) IBOutlet UITextField *phoneField;
 
+@property (nonatomic,strong) NSString * type;
+@property (weak, nonatomic) IBOutlet UITextField *phoneField;
+- (IBAction)addrBookNext:(id)sender;
 @end

@@ -2,7 +2,7 @@
 //  MyGoodFriendsListViewController.m
 //  ShaiWaWa
 //
-//  Created by 祥 on 14-7-7.
+//  Created by Carl on 14-7-7.
 //  Copyright (c) 2014年 helloworld. All rights reserved.
 //
 
@@ -19,7 +19,7 @@
 #import "MJRefreshHeaderView.h"
 #import "MJRefreshFooterView.h"
 #import "MJRefresh.h"
-
+#import "Friend.h"
 @interface MyGoodFriendsListViewController ()
 {
     NSMutableArray *friendList;
@@ -65,9 +65,11 @@
     UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
     _goodFriendListTableView.backgroundView = imgView;
     [_goodFriendListTableView registerNibWithName:@"MyGoodFriendsListCell" reuseIdentifier:@"Cell"];
+    /*
     if ([friendList count]*80 < _goodFriendListTableView.bounds.size.height) {
         _goodFriendListTableView.frame = CGRectMake(20, 60, 285,[friendList count]*80);
     }
+    */
     
     [_goodFriendListTableView clearSeperateLine];
 
@@ -76,6 +78,8 @@
     [_goodFriendListTableView addFooterWithTarget:self action:@selector(loadMore)];
     [_goodFriendListTableView setFooterPullToRefreshText:NSLocalizedString(@"PullTOLoad", nil)];
     [_goodFriendListTableView setFooterRefreshingText:NSLocalizedString(@"DataLoading", nil)];
+    _goodFriendListTableView.delegate = self;
+    _goodFriendListTableView.dataSource = self;
     
     [_goodFriendListTableView headerBeginRefreshing];
 }
@@ -161,7 +165,7 @@
                 [SVProgressHUD showErrorWithStatus:@"没有搜索到好友."];
                 return ;
             }
-            friendList = object;
+            friendList = [NSMutableArray arrayWithArray:object];
         }
         else
         {
@@ -205,9 +209,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    FriendHomeViewController *friendHomeVC = [[FriendHomeViewController alloc] init];
-    friendHomeVC.friendId = [[friendList objectAtIndex:indexPath.row] objectForKey:@"id"];
-    [self.navigationController pushViewController:friendHomeVC animated:YES];
+    //FriendHomeViewController *friendHomeVC = [[FriendHomeViewController alloc] init];
+    //friendHomeVC.friendId = [[friendList objectAtIndex:indexPath.row] objectForKey:@"id"];
+    //[self.navigationController pushViewController:friendHomeVC animated:YES];
 }
 
 

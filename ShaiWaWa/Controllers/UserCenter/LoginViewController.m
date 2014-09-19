@@ -16,7 +16,6 @@
 #import "MBProgressHUD.h"
 #import "SVProgressHUD.h"
 #import "InputHelper.h"
-#import "BindUserViewController.h"
 @interface LoginViewController ()
 
 @end
@@ -70,10 +69,7 @@
     TheThirdPartyLoginView *thirdLoginView = [[TheThirdPartyLoginView alloc] initWithFrame:CGRectMake(0, 0, 242, 116)];
     thirdLoginView.unbindBlock = ^(NSString * token,NSString * type){
         
-        BindUserViewController * vc = [[BindUserViewController alloc] initWithNibName:nil bundle:nil];
-        vc.token = token;
-        vc.type = type;
-        [self push:vc];
+
         
     };
     thirdLoginView.bindBlock = ^(UserInfo * user){

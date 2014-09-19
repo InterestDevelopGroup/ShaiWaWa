@@ -53,6 +53,7 @@
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -65,7 +66,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 
@@ -164,6 +164,8 @@
         [[HttpService sharedInstance] addLike:@{@"rid":_babyRecord.rid,@"uid":user.uid} completionBlock:^(id object) {
             //成功之后设置为1，表示已经赞过
             _babyRecord.is_like = @"1";
+            _babyRecord.like_count = [NSString stringWithFormat:@"%i",[_babyRecord.like_count intValue] + 1];
+            [_pinLunListTableView reloadData];
             [SVProgressHUD showSuccessWithStatus:@"谢谢您的参与."];
             
         } failureBlock:^(NSError *error, NSString *responseString) {
@@ -180,6 +182,8 @@
         [[HttpService sharedInstance] cancelLike:@{@"rid":_babyRecord.rid,@"uid":user.uid} completionBlock:^(id object) {
             //成功之后设置为0，表示没有赞过
             _babyRecord.is_like = @"0";
+            _babyRecord.like_count = [NSString stringWithFormat:@"%i",[_babyRecord.like_count intValue] - 1];
+            [_pinLunListTableView reloadData];
             [SVProgressHUD showSuccessWithStatus:@"取消赞成功."];
             
         } failureBlock:^(NSError *error, NSString *responseString) {
@@ -212,6 +216,8 @@
     [[HttpService sharedInstance] addComment:@{@"rid":_babyRecord.rid,@"uid":users.uid,@"reply_id":@"",@"content":_pinLunContextTextField.text} completionBlock:^(id object) {
         //发布成功
         _pinLunContextTextField.text = @"";
+        _babyRecord.comment_count = [NSString stringWithFormat:@"%i",[_babyRecord.comment_count intValue] + 1];
+        [_pinLunListTableView reloadData];
         [SVProgressHUD showSuccessWithStatus:@"评论成功,谢谢您的参与."];
         //重新刷新数据
         [_pinLunListTableView headerBeginRefreshing];

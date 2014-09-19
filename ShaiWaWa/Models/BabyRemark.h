@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 @class BabyInfo,UserInfo;
-@interface BabyRemark : NSObject<NSCopying, NSCoding> 
+@interface BabyRemark : NSObject 
 {
     NSString *remark_id;            //备注id
     BabyInfo *babyInfo;

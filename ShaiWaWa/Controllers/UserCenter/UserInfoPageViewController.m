@@ -2,7 +2,7 @@
 //  UserInfoPageViewController.m
 //  ShaiWaWa
 //
-//  Created by 祥 on 14-7-10.
+//  Created by Carl on 14-7-10.
 //  Copyright (c) 2014年 helloworld. All rights reserved.
 //
 
@@ -91,7 +91,7 @@
     
     keyOfvalue = [[NSMutableArray alloc] initWithObjects:userNameVal,sexVal,pwdVal, nil];
     [_userInfoTableView clearSeperateLine];
-    UIImage *img = [[UIImage imageNamed:@"main_2-bg2.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(15, 15, 15, 15)];
+    UIImage *img = [[UIImage imageNamed:@"main_2-bg2"] resizableImageWithCapInsets:UIEdgeInsetsMake(15, 15, 15, 15)];
     UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
     _userInfoTableView.backgroundView = imgView;
     if (3*80 < _userInfoTableView.bounds.size.height) {

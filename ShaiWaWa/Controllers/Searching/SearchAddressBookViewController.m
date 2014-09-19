@@ -43,7 +43,14 @@
 #pragma mark - Private Methods
 - (void)initUI
 {
-    self.title = @"查找通讯录好友";
+    if([_type isEqualToString:@"1"])
+    {
+        self.title = @"绑定手机";
+    }
+    else
+    {
+        self.title = @"查找通讯录好友";
+    }
     [self setLeftCusBarItem:@"square_back" action:nil];
 }
 
@@ -75,6 +82,7 @@
         PostValidateViewController * vc = [[PostValidateViewController alloc] initWithNibName:nil bundle:nil];
         vc.currentPhone = phone;
         vc.isBinding = YES;
+        vc.type = _type;
         [self push:vc];
         
     } failureBlock:^(NSError *error, NSString *responseString) {

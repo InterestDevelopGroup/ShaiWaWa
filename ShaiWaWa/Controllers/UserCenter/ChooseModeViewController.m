@@ -472,6 +472,8 @@ typedef enum{
     {
         cell = (DynamicCell *)btn.superview.superview;
     }
+    
+    
     NSIndexPath * indexPath = [_dynamicPageTableView indexPathForCell:cell];
     BabyRecord * record = dyArray[indexPath.row];
     
@@ -482,7 +484,8 @@ typedef enum{
             
             [SVProgressHUD showSuccessWithStatus:@"取消赞成功."];
             record.is_like = @"0";
-            
+            record.like_count = [NSString stringWithFormat:@"%i",[record.like_count intValue] - 1];
+            [_dynamicPageTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
         } failureBlock:^(NSError *error, NSString *responseString) {
             NSString * msg = responseString;
             if(error)
@@ -499,7 +502,8 @@ typedef enum{
             
             [SVProgressHUD showSuccessWithStatus:@"谢谢您的参与."];
             record.is_like = @"1";
-            
+            record.like_count = [NSString stringWithFormat:@"%i",[record.like_count intValue] + 1];
+            [_dynamicPageTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
         } failureBlock:^(NSError *error, NSString *responseString) {
             NSString * msg = responseString;
             if(error)

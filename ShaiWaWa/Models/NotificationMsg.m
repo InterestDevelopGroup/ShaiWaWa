@@ -9,6 +9,6 @@
 #import "NotificationMsg.h"
 
 @implementation NotificationMsg
-@synthesize notification_id,msg_type,content,babyInfo,send_uid,receive_uid,comment_id,dynamicRecord,remark,status,add_time,read_time;
+
 
 @end

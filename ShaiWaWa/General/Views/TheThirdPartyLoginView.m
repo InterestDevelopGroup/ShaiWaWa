@@ -132,23 +132,58 @@
          NSLog(@"获取用户生日:%@",[userInfo birthday]);
          NSLog(@"token:%@",[[userInfo credential] token]);
          NSLog(@"secret:%@",[[userInfo credential] secret]);
-         [self loginWithUserInfo:userInfo type:@"1"];
-         
+         //[self loginWithUserInfo:userInfo type:@"1"];
+         [self getOpenIDWithUserInfo:userInfo type:@"1"];
      }];
 }
 
-- (void)loginWithUserInfo:(id<ISSPlatformUser>) userInfo type:(NSString *)type
+
+
+- (void)getOpenIDWithUserInfo:(id<ISSPlatformUser>) userInfo type:(NSString *)type
 {
-     [[HttpService sharedInstance] openLogin:@{@"open_id":[[userInfo credential] token],
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+    [[HttpService sharedInstance] get:@"https://graph.qq.com/oauth2.0/me" parameters:@{@"access_token":[[userInfo credential] token]} completionBlock:^(id obj) {
+        //不需要处理成功返回的数据，因为服务端返回的数据不是json根式
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        
+        NSRange range1 = [responseString rangeOfString:@"{"];
+        NSRange range2 = [responseString rangeOfString:@"}"];
+        
+        NSString * jsonStr = [responseString substringWithRange:NSMakeRange(range1.location, range2.location + 1 - range1.location)];
+        NSDictionary * info = [NSJSONSerialization JSONObjectWithData:[jsonStr dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];
+        //没有出错
+        if(info[@"openid"] != nil)
+        {
+            [self loginWithUserInfo:userInfo openid:info[@"openid"] type:@"1"];
+            return ;
+        }
+        
+        //错误提示
+        NSString * msg = responseString;
+        if(error)
+        {
+            msg = @"登陆失败.";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+    }];
+}
+
+- (void)loginWithUserInfo:(id<ISSPlatformUser>)userInfo openid:(NSString *)openid type:(NSString *)type
+{
+     [[HttpService sharedInstance] openLogin:@{@"open_id":openid,
      @"type":type} completionBlock:^(id object) {
          if(object == nil || ![object isKindOfClass:[UserInfo class]])
          {
              NSLog(@"没有绑定账号.");
-             [self registerWithUserInfo:userInfo type:type];
+             [self registerWithUserInfo:userInfo openid:openid type:type];
              return ;
          }
          NSLog(@"%@",object);
+         [SVProgressHUD dismiss];
          
+         NSUserDefaults * userDefault = [NSUserDefaults standardUserDefaults];
+         [userDefault setObject:[[userInfo credential] token] forKey:@"QQ_ACCESS_TOKEN"];
+         [userDefault synchronize];
          if(_bindBlock)
          {
              _bindBlock(object);
@@ -165,7 +200,7 @@
     
 }
 
-- (void)registerWithUserInfo:(id<ISSPlatformUser>)userInfo type:(NSString *)type
+- (void)registerWithUserInfo:(id<ISSPlatformUser>)userInfo openid:(NSString *)openid type:(NSString *)type
 {
     NSString *sww_Num = [self fitSwwNum];
     
@@ -178,10 +213,14 @@
         params[@"phone"] = @"";
         params[@"sww_number"] = sww_Num;
         params[@"type"] = t;
-        params[@"open_id"] = [[info credential] token];
+        params[@"open_id"] = openid;
         params[@"validate_code"] = @"";
         [[HttpService sharedInstance] userRegister:params completionBlock:^(id object) {
             [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"RegisterSuccess", nil)];
+            
+            NSUserDefaults * userDefault = [NSUserDefaults standardUserDefaults];
+            [userDefault setObject:[[info credential] token] forKey:@"QQ_ACCESS_TOKEN"];
+            [userDefault synchronize];
             
             UserInfo *curUser = [[HttpService sharedInstance] mapModel:[[object objectForKey:@"result"] objectAtIndex:0] withClass:[UserInfo class]];
             
@@ -217,7 +256,7 @@
             return ;
         }
         
-        [self registerWithUserInfo:userInfo type:type];
+        [self registerWithUserInfo:userInfo openid:openid type:type];
     }];
 
 

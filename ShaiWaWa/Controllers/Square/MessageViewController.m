@@ -19,6 +19,7 @@
 #import "MJRefreshFooterView.h"
 #import "MJRefresh.h"
 #import "AppMacros.h"
+#import "NotificationMsg.h"
 @interface MessageViewController ()
 {
     
@@ -164,7 +165,7 @@
          {
              if(object == nil || object == [NSNull null])
              {
-                 [SVProgressHUD showErrorWithStatus:@"暂时没有系统消息."];
+                 [SVProgressHUD showErrorWithStatus:@"暂时没有新消息."];
                  return  ;
              }
              
@@ -201,7 +202,7 @@
          {
              if(object == nil || object == [NSNull null])
              {
-                 [SVProgressHUD showErrorWithStatus:@"暂时没有系统消息."];
+                 [SVProgressHUD showErrorWithStatus:@"暂时没有已读消息."];
                  return  ;
              }
              
@@ -249,49 +250,69 @@
 }
 
 
-//同意好友申请
-- (void)agreeApply:(UIButton *)btn
-{
 
-    [[HttpService sharedInstance] verifyFriend:@{@"friend_id":@"1",@"type":@"2"} completionBlock:^(id object) {
+- (void)agreeAction:(UIButton *)sender
+{
+    NotificationMsg * msg = [self getMessageByCellButton:sender];
+    [[HttpService sharedInstance] verifyFriend:@{@"fid":msg.fid,@"type":@"2"} completionBlock:^(id object) {
         [SVProgressHUD showSuccessWithStatus:@"添加成功"];
     } failureBlock:^(NSError *error, NSString *responseString) {
         NSString * msg = responseString;
         if (error) {
-            msg = @"加载失败";
+            msg = @"操作失败";
         }
         [SVProgressHUD showErrorWithStatus:msg];
     }];
-    [_msgTableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:btn.tag-111 inSection:1] animated:YES];
 }
 
-
-//忽略好友申请
-- (void)ignoreApply:(UIButton *)btn
+- (void)ignoreAction:(UIButton *)sender
 {
-
-}
-
-
-//拒绝好友申请
-- (void)refuseApply:(UIButton *)btn
-{
-
-    NSString *fId  = [[_newestMsgArray objectAtIndex:btn.tag-333] objectForKey:@"fid"];
-    NSLog(@"%@",@{@"friend_id":fId,@"type":@"3"});
-    
-    [[HttpService sharedInstance] verifyFriend:@{@"friend_id":fId,@"type":@"3"} completionBlock:^(id object) {
-        
+    NotificationMsg * msg = [self getMessageByCellButton:sender];
+    [[HttpService sharedInstance] verifyFriend:@{@"fid":msg.fid,@"type":@"3"} completionBlock:^(id object) {
+        [SVProgressHUD showSuccessWithStatus:@"添加成功"];
     } failureBlock:^(NSError *error, NSString *responseString) {
         NSString * msg = responseString;
         if (error) {
-            msg = @"加载失败";
+            msg = @"操作失败";
         }
         [SVProgressHUD showErrorWithStatus:msg];
     }];
 }
 
+- (void)refuseAction:(UIButton *)sender
+{
+    NotificationMsg * msg = [self getMessageByCellButton:sender];
+    [[HttpService sharedInstance] verifyFriend:@{@"fid":msg.fid,@"type":@"4"} completionBlock:^(id object) {
+        [SVProgressHUD showSuccessWithStatus:@"添加成功"];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        NSString * msg = responseString;
+        if (error) {
+            msg = @"操作失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+    }];
+}
 
+- (NotificationMsg *)getMessageByCellButton:(UIButton *)sender
+{
+    MessageCell * cell;
+    if([sender.superview.superview.superview isKindOfClass:[MessageCell class]])
+    {
+        cell = (MessageCell *)sender.superview.superview.superview;
+    }
+    else if([sender.superview.superview isKindOfClass:[MessageCell class]])
+    {
+        cell = (MessageCell *)sender.superview.superview;
+    }
+    else
+    {
+        cell = (MessageCell *)sender.superview;
+    }
+    
+    NSIndexPath * indexPath = [_msgTableView indexPathForCell:cell];
+    NotificationMsg * msg = _newestMsgArray[indexPath.row];
+    return msg;
+}
 
 #pragma mark - UITableView DataSources and Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -317,10 +338,23 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView == _msgTableView) {
+    
+    
+    NotificationMsg * msg ;
+    if(segMentedControl.selectedSegmentIndex == 0)
+    {
+        msg = _newestMsgArray[indexPath.row];
+    }
+    else
+    {
+        msg = _haveReadMSGArray[indexPath.row];
+    }
+
+    if (tableView == _msgTableView)
+    {
         MessageCell * msgCell = (MessageCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
         UILabel *temp = [[UILabel alloc] init];
-        switch ([[[_newestMsgArray objectAtIndex:indexPath.row] objectForKey:@"type"] intValue]) {
+        switch ([msg.type intValue]) {
             case 1:     //动态被评论
                 msgCell.agreeButton.hidden = YES;
                 msgCell.ignoreButton.hidden = YES;
@@ -338,9 +372,10 @@
                 msgCell.receiveImgView.hidden = YES;
                 msgCell.timeLabel.hidden = YES;
                 msgCell.actionLabel.text = @"请求加你为好友";
-                
-                msgCell.contentLabel.text = [[_newestMsgArray objectAtIndex:indexPath.row] objectForKey:@"remark"];
-                
+                msgCell.contentLabel.text = msg.remark;
+                [msgCell.agreeButton addTarget:self action:@selector(agreeAction:) forControlEvents:UIControlEventTouchUpInside];
+                [msgCell.ignoreButton addTarget:self action:@selector(ignoreAction:) forControlEvents:UIControlEventTouchUpInside];
+                [msgCell.refuseButton addTarget:self action:@selector(refuseAction:) forControlEvents:UIControlEventTouchUpInside];
                 break;
             case 4:     //好友申请被批准
                 msgCell.agreeButton.hidden = YES;
@@ -391,21 +426,13 @@
             default:
                 break;
         }
-
-
-        msgCell.agreeButton.tag = indexPath.row+111;
-        [msgCell.agreeButton addTarget:self action:@selector(agreeApply:) forControlEvents:UIControlEventTouchUpInside];
-        msgCell.ignoreButton.tag = indexPath.row+222;
-        [msgCell.ignoreButton addTarget:self action:@selector(ignoreApply:) forControlEvents:UIControlEventTouchUpInside];
-        msgCell.refuseButton.tag = indexPath.row+333;
-        [msgCell.refuseButton addTarget:self action:@selector(refuseApply:) forControlEvents:UIControlEventTouchUpInside];
         
         return msgCell;
     }
     else
     {
         MessageCell * msgCell = (MessageCell *)[tableView dequeueReusableCellWithIdentifier:@"Celler"];
-        NSString *typeId = [[_haveReadMSGArray objectAtIndex:indexPath.row] objectForKey:@"type"];
+        NSString *typeId = msg.type;
         
         if ([typeId isEqualToString:@"1"]) {
             //动态被评论
@@ -479,7 +506,6 @@
             msgCell.contentLabel.hidden = YES;
             msgCell.actionLabel.text = @"在动态中@了你";
 
-
         }
         
        
@@ -491,8 +517,9 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%@",@{@"notification_id":[[_newestMsgArray objectAtIndex:indexPath.row] objectForKey:@"notification_id"],@"status":@"1"});
+
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    /*
     UserInfo *user = [[UserDefault sharedInstance] userInfo];
     [[HttpService sharedInstance] updateSystemNotification:
             @{@"notification_id":[[_newestMsgArray objectAtIndex:indexPath.row] objectForKey:@"notification_id"],@"status":@"1"} completionBlock:^(id object)
@@ -514,6 +541,7 @@
             } failureBlock:^(NSError *error, NSString *responseString) {
                     [SVProgressHUD showErrorWithStatus:responseString];
      }];
+     */
 }
 
 

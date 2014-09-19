@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -13,9 +13,13 @@
                 <outlet property="babyNameLabel" destination="gh3-jI-LV8" id="P9M-5q-Y3Y"/>
                 <outlet property="bottomView" destination="IlJ-2G-sRi" id="Kva-ms-8dU"/>
                 <outlet property="button3View" destination="pBi-Dc-tsP" id="fp1-Ol-ytj"/>
+                <outlet property="containView" destination="JeM-Np-V63" id="PE1-dl-dgs"/>
                 <outlet property="moreButton" destination="C1y-lp-2PX" id="a7y-aQ-JeC"/>
                 <outlet property="overlayView" destination="Rrp-FS-tdZ" id="ILY-92-GLc"/>
+                <outlet property="recordBtn" destination="Ufw-Ru-3Zz" id="qI5-YX-bmL"/>
+                <outlet property="recrodView" destination="oiJ-Of-JaE" id="5BT-mp-ZEV"/>
                 <outlet property="scrollView" destination="TeX-kV-Y8z" id="9tO-d2-gLq"/>
+                <outlet property="shareView" destination="u9L-kZ-Qcf" id="8HU-0N-w1Q"/>
                 <outlet property="textView" destination="9DS-rw-AiI" id="1pf-eC-nuU"/>
                 <outlet property="toolbar" destination="wM0-Er-8Z9" id="XBD-GA-ymP"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -27,99 +31,106 @@
             <rect key="frame" x="0.0" y="64" width="320" height="504"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="baby_4-bg-2.png" id="lJv-Pp-TJt">
-                    <rect key="frame" x="11" y="7" width="299" height="426"/>
+                <view contentMode="scaleToFill" id="JeM-Np-V63">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                </imageView>
-                <view contentMode="scaleToFill" id="mBI-y6-KrG">
-                    <rect key="frame" x="11" y="7" width="298" height="52"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_touxiang.png" id="ECm-5C-e5f">
-                            <rect key="frame" x="12" y="5" width="45" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="baby_4-bg-2.png" id="lJv-Pp-TJt">
+                            <rect key="frame" x="11" y="7" width="299" height="426"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小龙李" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gh3-jI-LV8">
-                            <rect key="frame" x="70" y="20" width="54" height="16"/>
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="TeX-kV-Y8z">
+                            <rect key="frame" x="11" y="64" width="298" height="108"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="textColor" red="0.51372551919999998" green="0.66274511810000003" blue="0.34509804840000002" alpha="1" colorSpace="deviceRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="C1y-lp-2PX">
-                            <rect key="frame" x="152" y="18" width="14" height="19"/>
+                        </scrollView>
+                        <view contentMode="scaleToFill" id="mBI-y6-KrG">
+                            <rect key="frame" x="11" y="7" width="298" height="52"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <state key="normal" backgroundImage="main_jiantou.png">
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_touxiang.png" id="ECm-5C-e5f">
+                                    <rect key="frame" x="12" y="5" width="45" height="45"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </imageView>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小龙李" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gh3-jI-LV8">
+                                    <rect key="frame" x="70" y="20" width="54" height="16"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <color key="textColor" red="0.51372551919999998" green="0.66274511810000003" blue="0.34509804840000002" alpha="1" colorSpace="deviceRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="C1y-lp-2PX">
+                                    <rect key="frame" x="152" y="18" width="14" height="19"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <state key="normal" backgroundImage="main_jiantou.png">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="showMoreBaby:" destination="-1" eventType="touchUpInside" id="JXa-FX-8uF"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" red="0.97624798710000005" green="0.98845108699999995" blue="0.98845108699999995" alpha="1" colorSpace="calibratedRGB"/>
+                            <gestureRecognizers/>
+                        </view>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="GQi-87-wai">
+                            <rect key="frame" x="20" y="178" width="130" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <inset key="imageEdgeInsets" minX="1" minY="-1" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="添加更多 (2/9)" image="pb_tianjia.png">
+                                <color key="titleColor" red="0.46108314929999999" green="0.86744225539999997" blue="0.43640673330000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="showMoreBaby:" destination="-1" eventType="touchUpInside" id="JXa-FX-8uF"/>
+                                <action selector="showButtonsAction:" destination="-1" eventType="touchUpInside" id="Q4C-Qf-LDK"/>
                             </connections>
                         </button>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text=" 关于宝宝的开心事情..." id="9DS-rw-AiI">
+                            <rect key="frame" x="20" y="198" width="275" height="203"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="3eR-FB-5vR"/>
+                            </connections>
+                        </textView>
+                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square_zizhi.png" id="PLv-cS-CLN">
+                            <rect key="frame" x="17" y="441" width="12" height="16"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <gestureRecognizers/>
+                        </imageView>
+                        <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="添加位置" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gCt-nj-SLx">
+                            <rect key="frame" x="36" y="440" width="196" height="17"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <gestureRecognizers/>
+                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="962-rS-06j" appends="YES" id="KWO-t9-sye"/>
+                            </connections>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="仅亲友可见" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SGo-Sn-kpG">
+                            <rect key="frame" x="237" y="441" width="60" height="17"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <gestureRecognizers/>
+                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                            <color key="textColor" red="0.52549022440000004" green="0.75686281919999998" blue="0.26274511220000002" alpha="1" colorSpace="deviceRGB"/>
+                            <nil key="highlightedColor"/>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="TAJ-gG-JOl" appends="YES" id="ukw-kv-0qI"/>
+                            </connections>
+                        </label>
                     </subviews>
-                    <color key="backgroundColor" red="0.97624798710000005" green="0.98845108699999995" blue="0.98845108699999995" alpha="1" colorSpace="calibratedRGB"/>
-                    <gestureRecognizers/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="TeX-kV-Y8z">
-                    <rect key="frame" x="11" y="64" width="298" height="108"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </scrollView>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="GQi-87-wai">
-                    <rect key="frame" x="20" y="176" width="130" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                    <inset key="imageEdgeInsets" minX="1" minY="-1" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="添加更多 (2/9)" image="pb_tianjia.png">
-                        <color key="titleColor" red="0.46108314929999999" green="0.86744225539999997" blue="0.43640673330000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="showButtonsAction:" destination="-1" eventType="touchUpInside" id="Q4C-Qf-LDK"/>
-                    </connections>
-                </button>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text=" 关于宝宝的开心事情..." id="9DS-rw-AiI">
-                    <rect key="frame" x="20" y="198" width="275" height="203"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="3eR-FB-5vR"/>
-                    </connections>
-                </textView>
-                <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="仅亲友可见" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SGo-Sn-kpG">
-                    <rect key="frame" x="237" y="441" width="60" height="17"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <gestureRecognizers/>
-                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                    <color key="textColor" red="0.52549022440000004" green="0.75686281919999998" blue="0.26274511220000002" alpha="1" colorSpace="deviceRGB"/>
-                    <nil key="highlightedColor"/>
-                    <connections>
-                        <outletCollection property="gestureRecognizers" destination="TAJ-gG-JOl" appends="YES" id="ukw-kv-0qI"/>
-                    </connections>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="添加位置" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gCt-nj-SLx">
-                    <rect key="frame" x="36" y="441" width="196" height="17"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <gestureRecognizers/>
-                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                    <connections>
-                        <outletCollection property="gestureRecognizers" destination="962-rS-06j" appends="YES" id="KWO-t9-sye"/>
-                    </connections>
-                </label>
-                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square_zizhi.png" id="PLv-cS-CLN">
-                    <rect key="frame" x="17" y="441" width="12" height="16"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <gestureRecognizers/>
-                </imageView>
             </subviews>
             <color key="backgroundColor" red="0.86274516580000005" green="0.87058830259999997" blue="0.86666673419999996" alpha="1" colorSpace="deviceRGB"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
@@ -262,12 +273,16 @@
                         <action selector="showFriendAction:" destination="-1" eventType="touchUpInside" id="9Pb-tG-9WI"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ufw-Ru-3Zz">
+                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ufw-Ru-3Zz">
                     <rect key="frame" x="188" y="3" width="30" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <state key="normal" image="pb_logo-3.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="disabled" image="pd_xiaohuatong.png"/>
+                    <connections>
+                        <action selector="showRecord:" destination="-1" eventType="touchUpInside" id="GAO-pZ-7pf"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="eHJ-o5-dmy">
                     <rect key="frame" x="268" y="3" width="30" height="30"/>
@@ -275,6 +290,9 @@
                     <state key="normal" image="pb_logo-4.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="showShare:" destination="-1" eventType="touchUpInside" id="d3i-zI-yTl"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.91246477459999997" green="0.92387058420000001" blue="0.92387058420000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -308,6 +326,63 @@
                 </barButtonItem>
             </items>
         </toolbar>
+        <view alpha="0.80000001192092896" contentMode="scaleToFill" id="oiJ-Of-JaE">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pd_xiala.png" id="mft-J6-QNX">
+                    <rect key="frame" x="0.0" y="0.0" width="335" height="46"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9a0-bI-cj3">
+                    <rect key="frame" x="77" y="19" width="166" height="24"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <state key="normal" image="pd_anzhushuohua.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <gestureRecognizers/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        </view>
+        <view alpha="0.80000001192092896" contentMode="scaleToFill" id="u9L-kZ-Qcf">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pd_xiala.png" id="zGo-gT-9Fv">
+                    <rect key="frame" x="0.0" y="0.0" width="465" height="46"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="TwF-Q3-tkO">
+                    <rect key="frame" x="140" y="10" width="32" height="36"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <state key="normal" image="pd_fenxiang-.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="NUh-ZZ-Za5">
+                    <rect key="frame" x="226" y="10" width="32" height="36"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <state key="normal" image="pd_fenxiang-2.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="M90-gY-6EO">
+                    <rect key="frame" x="54" y="10" width="32" height="36"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <state key="normal" image="pd_fenxiang-3.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <gestureRecognizers/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        </view>
     </objects>
     <resources>
         <image name="baby_4-bg-1.png" width="320" height="100"/>
@@ -321,6 +396,12 @@
         <image name="pb_shipin.png" width="54" height="61"/>
         <image name="pb_tianjia.png" width="25" height="26"/>
         <image name="pb_zhaopian.png" width="54" height="61"/>
+        <image name="pd_anzhushuohua.png" width="166" height="24"/>
+        <image name="pd_fenxiang-.png" width="31" height="26"/>
+        <image name="pd_fenxiang-2.png" width="31" height="26"/>
+        <image name="pd_fenxiang-3.png" width="31" height="26"/>
+        <image name="pd_xiala.png" width="320" height="49"/>
+        <image name="pd_xiaohuatong.png" width="23" height="22"/>
         <image name="square_zizhi.png" width="7" height="8"/>
         <image name="user_touxiang.png" width="74" height="70"/>
     </resources>

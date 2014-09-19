@@ -40,6 +40,10 @@
 		C35DFB2219B4B7B80023B4CF /* QRCodeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = C35DFB2119B4B7B80023B4CF /* QRCodeGenerator.m */; };
 		C360009F19AA427C00940421 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = C360009D19AA427C00940421 /* GTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C361F85719AE0F9D00AA5248 /* RecordComment.m in Sources */ = {isa = PBXBuildFile; fileRef = C361F85619AE0F9D00AA5248 /* RecordComment.m */; };
+		C365F98519CB2E870094377F /* SetPasswordStepOneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C365F98319CB2E870094377F /* SetPasswordStepOneViewController.m */; };
+		C365F98619CB2E870094377F /* SetPasswordStepOneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C365F98419CB2E870094377F /* SetPasswordStepOneViewController.xib */; };
+		C365F98A19CB31ED0094377F /* SetPassStepTwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C365F98819CB31ED0094377F /* SetPassStepTwoViewController.m */; };
+		C365F98B19CB31ED0094377F /* SetPassStepTwoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C365F98919CB31ED0094377F /* SetPassStepTwoViewController.xib */; };
 		C37E536D19A847AA00C55861 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C37E536C19A847AA00C55861 /* CoreMedia.framework */; };
 		C3891B2919C01A390039F29D /* NSThread+RHBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C3891B1019C01A390039F29D /* NSThread+RHBlockAdditions.m */; };
 		C3891B2B19C01A390039F29D /* RHAddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = C3891B1419C01A390039F29D /* RHAddressBook.m */; };
@@ -65,8 +69,6 @@
 		C39AAE1719B3093100C8A7BE /* PersistentStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C39AAE1619B3093100C8A7BE /* PersistentStore.m */; };
 		C39AAE1B19B30A3200C8A7BE /* Topic.m in Sources */ = {isa = PBXBuildFile; fileRef = C39AAE1A19B30A3200C8A7BE /* Topic.m */; };
 		C39AAE1E19B3124200C8A7BE /* CommonAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = C39AAE1D19B3124200C8A7BE /* CommonAlert.m */; };
-		C3A2365C19BF50B80014BE30 /* BindUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A2365A19BF50B80014BE30 /* BindUserViewController.m */; };
-		C3A2365D19BF50B80014BE30 /* BindUserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3A2365B19BF50B80014BE30 /* BindUserViewController.xib */; };
 		F41389C5197F48D000ABC8AE /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F41389C4197F48D000ABC8AE /* UserInfo.m */; };
 		F41F654A1981F01400089E42 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F41F65491981F01400089E42 /* SystemConfiguration.framework */; };
 		F41F654C1981F01D00089E42 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F41F654B1981F01D00089E42 /* QuartzCore.framework */; };
@@ -517,6 +519,12 @@
 		C360009E19AA427C00940421 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
 		C361F85519AE0F9D00AA5248 /* RecordComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordComment.h; sourceTree = "<group>"; };
 		C361F85619AE0F9D00AA5248 /* RecordComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordComment.m; sourceTree = "<group>"; };
+		C365F98219CB2E870094377F /* SetPasswordStepOneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetPasswordStepOneViewController.h; sourceTree = "<group>"; };
+		C365F98319CB2E870094377F /* SetPasswordStepOneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetPasswordStepOneViewController.m; sourceTree = "<group>"; };
+		C365F98419CB2E870094377F /* SetPasswordStepOneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetPasswordStepOneViewController.xib; sourceTree = "<group>"; };
+		C365F98719CB31ED0094377F /* SetPassStepTwoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetPassStepTwoViewController.h; sourceTree = "<group>"; };
+		C365F98819CB31ED0094377F /* SetPassStepTwoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetPassStepTwoViewController.m; sourceTree = "<group>"; };
+		C365F98919CB31ED0094377F /* SetPassStepTwoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetPassStepTwoViewController.xib; sourceTree = "<group>"; };
 		C37E536C19A847AA00C55861 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		C3891B0E19C01A390039F29D /* AddressBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressBook.h; sourceTree = "<group>"; };
 		C3891B0F19C01A390039F29D /* NSThread+RHBlockAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSThread+RHBlockAdditions.h"; sourceTree = "<group>"; };
@@ -569,9 +577,6 @@
 		C39AAE1A19B30A3200C8A7BE /* Topic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Topic.m; sourceTree = "<group>"; };
 		C39AAE1C19B3124200C8A7BE /* CommonAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonAlert.h; sourceTree = "<group>"; };
 		C39AAE1D19B3124200C8A7BE /* CommonAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonAlert.m; sourceTree = "<group>"; };
-		C3A2365919BF50B80014BE30 /* BindUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindUserViewController.h; sourceTree = "<group>"; };
-		C3A2365A19BF50B80014BE30 /* BindUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindUserViewController.m; sourceTree = "<group>"; };
-		C3A2365B19BF50B80014BE30 /* BindUserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindUserViewController.xib; sourceTree = "<group>"; };
 		F41389C3197F48D000ABC8AE /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
 		F41389C4197F48D000ABC8AE /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
 		F41F65491981F01400089E42 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -1930,9 +1935,12 @@
 				F43386EB1974C28500464D43 /* UserInfoPageViewController.h */,
 				F43386EC1974C28500464D43 /* UserInfoPageViewController.m */,
 				F43386ED1974C28500464D43 /* UserInfoPageViewController.xib */,
-				C3A2365919BF50B80014BE30 /* BindUserViewController.h */,
-				C3A2365A19BF50B80014BE30 /* BindUserViewController.m */,
-				C3A2365B19BF50B80014BE30 /* BindUserViewController.xib */,
+				C365F98219CB2E870094377F /* SetPasswordStepOneViewController.h */,
+				C365F98319CB2E870094377F /* SetPasswordStepOneViewController.m */,
+				C365F98419CB2E870094377F /* SetPasswordStepOneViewController.xib */,
+				C365F98719CB31ED0094377F /* SetPassStepTwoViewController.h */,
+				C365F98819CB31ED0094377F /* SetPassStepTwoViewController.m */,
+				C365F98919CB31ED0094377F /* SetPassStepTwoViewController.xib */,
 			);
 			path = UserCenter;
 			sourceTree = "<group>";
@@ -2466,7 +2474,6 @@
 				F432BE6119762AC80086BBE9 /* user_3-weixin@2x.png in Resources */,
 				F433885D1974C28600464D43 /* Images.xcassets in Resources */,
 				F432BDF819762AC80086BBE9 /* main_dian-@2x.png in Resources */,
-				C3A2365D19BF50B80014BE30 /* BindUserViewController.xib in Resources */,
 				24A32311197AEFF8005CFEA4 /* TopicListOfDynamic.xib in Resources */,
 				F433881D1974C28600464D43 /* LoginViewController.xib in Resources */,
 				F432BE5919762AC80086BBE9 /* phone@2x.png in Resources */,
@@ -2492,6 +2499,7 @@
 				F432BDDC19762AC80086BBE9 /* baby_duanxinyaoqing@2x.png in Resources */,
 				F432BE1E19762AC80086BBE9 /* pd_fenxiang-3@2x.png in Resources */,
 				F433882B1974C28600464D43 /* PostValidateViewController.xib in Resources */,
+				C365F98B19CB31ED0094377F /* SetPassStepTwoViewController.xib in Resources */,
 				F41F68F71982081F00089E42 /* ShareSDKiPadDefaultShareViewUI.bundle in Resources */,
 				F43388211974C28600464D43 /* MybabyListViewController.xib in Resources */,
 				F432BDED19762AC80086BBE9 /* login_tianjia@2x.png in Resources */,
@@ -2568,6 +2576,7 @@
 				F432BE4E19762AC80086BBE9 /* square_zizhi@2x.png in Resources */,
 				F433883F1974C28600464D43 /* UserGenderUpdateViewController.xib in Resources */,
 				F432BE3419762AC80086BBE9 /* square_jubao@2x.png in Resources */,
+				C365F98619CB2E870094377F /* SetPasswordStepOneViewController.xib in Resources */,
 				F43388411974C28600464D43 /* UserInfoPageViewController.xib in Resources */,
 				F432BE5B19762AC80086BBE9 /* qrcode.png in Resources */,
 				F432BE5D19762AC80086BBE9 /* user_2-bg@2x.png in Resources */,
@@ -2642,6 +2651,7 @@
 				F43388301974C28600464D43 /* RegisterViewController.m in Sources */,
 				F44F1CA7198F15B5004E37CF /* Setting.m in Sources */,
 				F43387F81974C28600464D43 /* RemarksViewController.m in Sources */,
+				C365F98519CB2E870094377F /* SetPasswordStepOneViewController.m in Sources */,
 				F47F5503197FACE7006DCA75 /* MainDropMenu.m in Sources */,
 				C397F57819A6273A006CAFA6 /* PublishImageView.m in Sources */,
 				F433883C1974C28600464D43 /* UpdateUserNameViewController.m in Sources */,
@@ -2673,6 +2683,7 @@
 				C39AAE1B19B30A3200C8A7BE /* Topic.m in Sources */,
 				F47F5504197FACE7006DCA75 /* MainMenu.m in Sources */,
 				F41F68D71982081E00089E42 /* UITextView+Placeholder.m in Sources */,
+				C365F98A19CB31ED0094377F /* SetPassStepTwoViewController.m in Sources */,
 				F43388081974C28600464D43 /* SearchWeiboFriendViewController.m in Sources */,
 				24A32310197AEFF8005CFEA4 /* TopicListOfDynamic.m in Sources */,
 				F44CF76C199A3CB7003B7F7D /* UIScrollView+MJRefresh.m in Sources */,
@@ -2732,7 +2743,6 @@
 				F4AE507A199AFBEE007683E9 /* QiniuBlkputRet.m in Sources */,
 				C398741C19A33F1B00A1050C /* ResponseHelper.m in Sources */,
 				F41F68DB1982081E00089E42 /* NSDate+Utils.m in Sources */,
-				C3A2365C19BF50B80014BE30 /* BindUserViewController.m in Sources */,
 				F43387F61974C28600464D43 /* BabyListViewController.m in Sources */,
 				C355E97D19A7903E003EC151 /* VideoConvertHelper.m in Sources */,
 				C3891B2D19C01A390039F29D /* RHAddressBookSharedServices.m in Sources */,

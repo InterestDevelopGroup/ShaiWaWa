@@ -10,8 +10,10 @@
 #import "QRCodeCardViewController.h"
 #import "UIViewController+BarItemAdapt.h"
 
-
-
+#import "FriendHomeViewController.h"
+#import "UserInfo.h"
+#import "UserDefault.h"
+#import "PersonCenterViewController.h"
 @interface ScannerQRCodeViewController ()
 
 @end
@@ -88,12 +90,47 @@
 
 - (void)readerView:(ZBarReaderView *)readerView didReadSymbols:(ZBarSymbolSet *)symbols fromImage:(UIImage *)image
 {
+    NSString * symbolStr = nil;
     for (ZBarSymbol *symbol in symbols) {
-        NSLog(@"%@", symbol.data);
+        //NSLog(@"%@", symbol.data);
+        symbolStr = symbol.data;
         break;
     }
     
     [zbarReaderView stop];
+    
+    if(symbolStr == nil)
+    {
+        return ;
+    }
+    
+    if([symbolStr hasPrefix:@"#"] && [symbolStr hasSuffix:@"#"])
+    {
+        NSString * tmp = [symbolStr stringByReplacingOccurrencesOfString:@"#" withString:@""];
+        NSRange range = [tmp rangeOfString:@"com.gzinterest."];
+        if(range.location != NSNotFound)
+        {
+            NSString * uid = [tmp stringByReplacingOccurrencesOfString:@"com.gzinterest." withString:@""];
+            
+            UserInfo * user = [[UserDefault sharedInstance] userInfo];
+            
+            
+            if([user.uid isEqualToString:uid])
+            {
+                PersonCenterViewController * vc = [[PersonCenterViewController alloc] initWithNibName:nil bundle:nil];
+                [self push:vc];
+                vc = nil;
+                return;
+            }
+            
+            FriendHomeViewController * vc = [[FriendHomeViewController alloc] initWithNibName:nil bundle:nil];
+            vc.friendId = uid;
+            [self push:vc];
+            vc = nil;
+        }
+    }
+    
+    
 }
 
 @end

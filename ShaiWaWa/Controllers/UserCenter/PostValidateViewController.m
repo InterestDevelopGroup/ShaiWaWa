@@ -16,6 +16,8 @@
 #import "InputHelper.h"
 #import "UserDefault.h"
 #import "UserInfo.h"
+#import "PlatformBindViewController.h"
+#import "SetPassStepTwoViewController.h"
 @interface PostValidateViewController ()
 @property (nonatomic,strong) NSTimer * countTimer;
 @end
@@ -141,9 +143,27 @@
                 user.phone = _currentPhone;
                 [[UserDefault sharedInstance] setUserInfo:user];
                 [SVProgressHUD showSuccessWithStatus:@"绑定成功."];
-                SearchAddressListViewController * vc = [[SearchAddressListViewController alloc] initWithNibName:nil bundle:nil];
-                [self push:vc];
-                vc = nil;
+                
+                //查找通讯录
+                if([_type isEqualToString:@"0"])
+                {
+                    SearchAddressListViewController * vc = [[SearchAddressListViewController alloc] initWithNibName:nil bundle:nil];
+                    [self push:vc];
+                    vc = nil;
+                }
+                else
+                {
+                    //绑定完成后返回
+                    NSArray * vcs = self.navigationController.viewControllers;
+                    for(UIViewController * vc in vcs)
+                    {
+                        if([vc isKindOfClass:[PlatformBindViewController class]])
+                        {
+                            [self.navigationController popToViewController:vc animated:YES];
+                            break ;
+                        }
+                    }
+                }
                 
             } failureBlock:^(NSError *error, NSString *responseString) {
                 NSString * msg = responseString;
@@ -160,6 +180,16 @@
         [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
         [[HttpService sharedInstance] verifyValidateCode:@{@"phone":_currentPhone,@"validate_code":code} completionBlock:^(id object) {
             
+            if([_type isEqualToString:@"2"])
+            {
+                [SVProgressHUD dismiss];
+                //前去设置密码
+                SetPassStepTwoViewController * vc = [[SetPassStepTwoViewController alloc] initWithNibName:nil bundle:nil];
+                [self push:vc];
+                vc = nil;
+                return ;
+            }
+
             BindBlock();
             
         } failureBlock:^(NSError *error, NSString *responseString) {
@@ -173,6 +203,7 @@
         
         return ;
     }
+    
     
     FinishRegisterViewController * vc = [[FinishRegisterViewController alloc] initWithNibName:nil bundle:nil];
     vc.currentPhone = _currentPhone;

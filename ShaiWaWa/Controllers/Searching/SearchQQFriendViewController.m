@@ -54,8 +54,10 @@
     [_qqListTableView clearSeperateLine];
     [_qqListTableView registerNibWithName:@"QQCell" reuseIdentifier:@"Cell"];
     
+    NSString * token = [[NSUserDefaults standardUserDefaults] objectForKey:@"QQ_ACCESS_TOKEN"];
+    
     UserInfo *user = [[UserDefault sharedInstance] userInfo];
-    [[HttpService sharedInstance] getQQFriend:@{@"uid":user.uid} completionBlock:^(id object) {
+    [[HttpService sharedInstance] getQQFriend:@{@"uid":user.uid,@"access_token":token,@"offset":@"0",@"pagesize":@"100"} completionBlock:^(id object) {
         
         
     } failureBlock:^(NSError *error, NSString *responseString) {
@@ -68,6 +70,8 @@
 {
     return [freindsList count];
 }
+
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // 获取当前section的名称，据此获取到当前section的数量。

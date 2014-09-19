@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 @class UserInfo,BabyInfo;
-@interface Follow : NSObject<NSCopying, NSCoding> 
+@interface Follow : NSObject
 {
     NSString *follow_id;        //关注id
     BabyInfo *babyInfo;

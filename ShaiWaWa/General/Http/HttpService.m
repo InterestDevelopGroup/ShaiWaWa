@@ -457,7 +457,7 @@
             return ;
         }
         if (success) {
-            success(obj[@"result"]);
+            success([self mapModelsProcess:obj[@"result"] withClass:[NotificationMsg class]]);
         }
     } failureBlock:failure];
 }
@@ -1073,9 +1073,9 @@
         if (isError) {
             return ;
         }
-//        UserInfo *user = [self mapModel:[[obj objectForKey:@"result"] objectAtIndexPath:0] withClass:[UserInfo class]];
+        UserInfo *user = [self mapModel:[[obj objectForKey:@"result"] objectAtIndex:0] withClass:[UserInfo class]];
         if (success) {
-            success(obj);
+            success(user);
         }
         
     } failureBlock:failure];
@@ -1300,6 +1300,49 @@
         }
         
     } failureBlock:failure];
+}
+
+
+/**
+ @desc 判断是否为好友
+ */
+//TODO:判断是否为好友
+- (void)isFriend:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self postJSON:[self mergeURL:Is_Friend] withParams:params completionBlock:^(id obj) {
+        
+        if([obj[@"err_code"] intValue] != Not_Friend_Error_Code && [obj[@"err_code"] intValue] != Normal_Friend_Error_Code && [obj[@"err_code"] intValue] == Is_Spouses_Error_Code)
+        {
+            failure(nil,[self getErrorMsgByCode:[obj[@"err_code"] intValue]]);
+            return ;
+        }
+        
+        if(success)
+        {
+            success([NSNumber numberWithInt:[obj[@"err_code"] intValue]]);
+        }
+        
+    } failureBlock:failure];
+}
+
+/**
+ @desc 解除绑定
+ */
+//TODO:解除绑定
+- (void)unbind:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self postJSON:[self mergeURL:UnBind] withParams:params completionBlock:^(id obj) {
+        
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+        if (success) {
+            success(obj);
+        }
+        
+    } failureBlock:failure];
+
 }
 
 @end

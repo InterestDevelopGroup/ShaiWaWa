@@ -2,7 +2,7 @@
 //  PlatformBindViewController.h
 //  ShaiWaWa
 //
-//  Created by 祥 on 14-7-10.
+//  Created by Carl on 14-7-10.
 //  Copyright (c) 2014年 helloworld. All rights reserved.
 //
 
@@ -10,5 +10,6 @@
 
 @interface PlatformBindViewController : CommonViewController<UITableViewDataSource,UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *platformListTableView;
+- (IBAction)setPassword:(id)sender;
 
 @end

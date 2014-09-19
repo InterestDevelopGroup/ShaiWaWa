@@ -144,6 +144,7 @@
         case 2:
             if(user.phone != nil && [user.phone length] != 0)
             {
+                addressBookVC.type = @"0";
                 [self push:adressListVC];
                 return ;
             }

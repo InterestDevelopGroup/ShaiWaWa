@@ -11,5 +11,6 @@
 #import "BabyInfo.h"
 #import "RecordComment.h"
 #import "ContactUser.h"
+#import "NotificationMsg.h"
 #import "LikeUser.h"
 

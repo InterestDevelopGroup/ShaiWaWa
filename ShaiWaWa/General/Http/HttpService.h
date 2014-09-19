@@ -47,7 +47,7 @@
 #define Delete_Friend                               @"delete_friend"
 #define Search_Friend                               @"search_friend"
 #define Get_Sina_Friend                             @"get_sina_friend"
-#define Get_QQ_Friend                               @"get_qq_friend"
+#define Get_QQ_Friend                               @"get_qq_friends"
 #define Get_Addressbook_Friend                      @"get_contacts_friends"
 #define Get_User_Info                               @"get_user_info"
 #define Follow_Baby                                 @"follow"
@@ -61,6 +61,8 @@
 #define Get_Square_Recrod                           @"square"
 #define Bind_Phone                                  @"bind_phone"
 #define Verify_Validatecode                         @"verify_validatecode"
+#define Is_Friend                                   @"friendship"
+#define UnBind                                      @"unbind"
 typedef enum {
     No_Error_Code = 10000,
     Unknow_Error_Code,
@@ -78,7 +80,11 @@ typedef enum {
     Dynamic_Have_Liked_Error_Code,
     Have_Apply_Friend_Error_Code,
     Were_Friends_Error_Code,
-    Open_Platform_Unbind_Error_Code
+    Open_Platform_Unbind_Error_Code,
+    No_Password_Error_Code,
+    Not_Friend_Error_Code,
+    Normal_Friend_Error_Code,
+    Is_Spouses_Error_Code
 }API_Error_Code;
 
 @interface HttpService : AFHttp
@@ -417,5 +423,19 @@ typedef enum {
  */
 //TODO:校验验证码
 - (void)verifyValidateCode:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
+
+/**
+ @desc 判断是否为好友
+ */
+//TODO:判断是否为好友
+- (void)isFriend:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
+
+
+/**
+ @desc 解除绑定
+ */
+//TODO:解除绑定
+- (void)unbind:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
+
 
 @end
