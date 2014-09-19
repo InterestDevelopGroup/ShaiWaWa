@@ -24,6 +24,7 @@
                 <outlet property="toolbar" destination="wM0-Er-8Z9" id="XBD-GA-ymP"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="visibilityLabel" destination="SGo-Sn-kpG" id="CBq-eb-8eB"/>
+                <outlet property="voiceImageView" destination="UWB-Wr-vIR" id="IKM-JN-Liq"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -273,7 +274,7 @@
                         <action selector="showFriendAction:" destination="-1" eventType="touchUpInside" id="9Pb-tG-9WI"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ufw-Ru-3Zz">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ufw-Ru-3Zz">
                     <rect key="frame" x="188" y="3" width="30" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <state key="normal" image="pb_logo-3.png">
@@ -340,6 +341,10 @@
                     <state key="normal" image="pd_anzhushuohua.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="startRecord:" destination="-1" eventType="touchDown" id="PCi-0Z-hPq"/>
+                        <action selector="stopRecord:" destination="-1" eventType="touchUpInside" id="rQa-cf-2Qx"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -383,6 +388,10 @@
             <gestureRecognizers/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
+        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pd_huatong.png" id="UWB-Wr-vIR">
+            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+        </imageView>
     </objects>
     <resources>
         <image name="baby_4-bg-1.png" width="320" height="100"/>
@@ -400,6 +409,7 @@
         <image name="pd_fenxiang-.png" width="31" height="26"/>
         <image name="pd_fenxiang-2.png" width="31" height="26"/>
         <image name="pd_fenxiang-3.png" width="31" height="26"/>
+        <image name="pd_huatong.png" width="151" height="150"/>
         <image name="pd_xiala.png" width="320" height="49"/>
         <image name="pd_xiaohuatong.png" width="23" height="22"/>
         <image name="square_zizhi.png" width="7" height="8"/>

@@ -637,6 +637,25 @@
 
 }
 
+- (IBAction)startRecord:(id)sender
+{
+    if (_voiceImageView.superview)
+    {
+        [_voiceImageView removeFromSuperview];
+    }
+    
+    _voiceImageView.center = self.navigationController.view.center;
+    [self.view addSubview:_voiceImageView];
+}
+
+- (IBAction)stopRecord:(id)sender
+{
+    if (_voiceImageView.superview) {
+        [_voiceImageView removeFromSuperview];
+    }
+
+}
+
 //显示添加宝宝页面
 - (void)showAddBaby
 {
@@ -671,17 +690,12 @@
         [_addMoreButton setTitle:[NSString stringWithFormat:@"添加更多(%i/9)",[_images count]] forState:UIControlStateNormal];
         if([_images count] == 0)
         {
-            _recordBtn.enabled = NO;
-            if(_isOffset && _recrodView.superview)
-            {
-                [self showRecord:nil];
-            }
+
             _addMoreButton.hidden = YES;
             [self.view addSubview:_button3View];
             
         }
     };
-    _recordBtn.enabled = YES;
     [_images addObject:path];
     [_imageViews addObject:imageView];
     [_scrollView addSubview:imageView];
