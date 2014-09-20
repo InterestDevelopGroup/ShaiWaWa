@@ -20,6 +20,8 @@
 #import "MJRefreshFooterView.h"
 #import "MJRefresh.h"
 #import "Friend.h"
+#import "UIImageView+WebCache.h"
+
 @interface MyGoodFriendsListViewController ()
 {
     NSMutableArray *friendList;
@@ -198,20 +200,31 @@
     static NSString *identify = @"Cell";
     MyGoodFriendsListCell *cell = (MyGoodFriendsListCell *)[tableView dequeueReusableCellWithIdentifier:identify];
     
-//    cell.headPicView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"baby_mama.png"]];
-//    cell.nickNameLabel.text = @"张氏";
-//    cell.countOfBabyLabel.text = @"1个宝宝";
-//    cell.remarksLabel.text = @"孩子他妈";
-    cell.backgroundColor = [UIColor clearColor];
+    Friend *friend = friendList[indexPath.row];
+    [cell.headPicView sd_setImageWithURL:[NSURL URLWithString:friend.avatar] placeholderImage:[UIImage imageNamed:@"baby_mama@2x.png"]];
+    cell.nickNameLabel.text = friend.username;
+#warning 返回数据暂时不齐
+    cell.countOfBabyLabel.text = @"1个宝宝";
+    //判断好友类型，1为普通朋友，2为配偶
+    if ([friend.type intValue] == 1) {
+        cell.remarksLabel.text = @"普通朋友";
+    }else{
+        if ([friend.sex intValue] == 1) {    //1为男，0为女
+            cell.remarksLabel.text = @"孩子他爸";
+        }else{
+            cell.remarksLabel.text = @"孩子他妈";
+        }
+    }
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    //FriendHomeViewController *friendHomeVC = [[FriendHomeViewController alloc] init];
-    //friendHomeVC.friendId = [[friendList objectAtIndex:indexPath.row] objectForKey:@"id"];
-    //[self.navigationController pushViewController:friendHomeVC animated:YES];
+    FriendHomeViewController *friendHomeVC = [[FriendHomeViewController alloc] init];
+    Friend *friend = friendList[indexPath.row];
+    friendHomeVC.friendId = friend.friend_id;
+    [self.navigationController pushViewController:friendHomeVC animated:YES];
 }
 
 
