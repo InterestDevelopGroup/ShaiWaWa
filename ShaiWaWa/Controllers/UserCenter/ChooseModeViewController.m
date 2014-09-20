@@ -81,7 +81,6 @@ typedef enum{
 {
     [super viewDidLoad];
     dyArray = [[NSMutableArray alloc] init];
-
 }
 
 - (void)viewDidAppear:(BOOL)animated

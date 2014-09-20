@@ -20,6 +20,7 @@
     NSMutableArray *babyList;
     UserInfo * user;
 }
+
 @end
 
 @implementation FriendHomeViewController
@@ -36,13 +37,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapView)]];
     // Do any additional setup after loading the view from its nib.
 }
 
-- (void)didReceiveMemoryWarning
+- (void)viewWillDisappear:(BOOL)animated
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    //返回时让删除按钮消失
+    [self tapView];
 }
 
 #pragma mark - Private Methods
@@ -50,7 +53,6 @@
 {
     isDelBtnShown = NO;
     [self setLeftCusBarItem:@"square_back" action:nil];
-
     if ([OSHelper iOS7])
     {
         right_doWith = [self customBarItem:@"user_gengduo" action:@selector(showDelButton) size:CGSizeMake(38, 30) imageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, -25)];
@@ -79,6 +81,7 @@
 
 - (void)getUserInfo
 {
+    [SVProgressHUD showWithStatus:@"加载中" maskType:SVProgressHUDMaskTypeGradient];
     [[HttpService sharedInstance] getUserInfo:@{@"uid":friendId} completionBlock:^(id object) {
         
         user = (UserInfo *)object;
@@ -196,6 +199,8 @@
 //    jianTou.frame = CGRectMake(_goodFriendButton.bounds.size.width-18, 15, 7, 11);
 //    [_goodFriendButton addSubview:jianTou];
 }
+
+#pragma 删除按钮
 - (void)showDelButton
 {
     if (!isDelBtnShown) {
@@ -208,6 +213,7 @@
         isDelBtnShown = NO;
     }
 }
+#pragma mark - 删除好友按钮
 - (void)deleteFriend
 {
     UserInfo * users = [[UserDefault sharedInstance] userInfo];
@@ -223,6 +229,21 @@
         }
         [SVProgressHUD showErrorWithStatus:msg];
     }];
+}
+
+#pragma mark -点击屏幕，让删除按钮消失
+- (void)tapView
+{
+    if (delBtn.superview != nil) {
+        [delBtn removeFromSuperview];
+        isDelBtnShown = NO;
+    }
+}
+
+#pragma mark - 返回按钮
+- (void)back
+{
+    [self tapView];
 }
 
 @end
