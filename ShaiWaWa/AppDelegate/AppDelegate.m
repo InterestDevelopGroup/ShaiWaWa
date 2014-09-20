@@ -28,6 +28,7 @@
     [IO createDirectoryInDocument:Avatar_Folder];
     [IO createDirectoryInDocument:Publish_Image_Folder];
     [IO createDirectoryInDocument:Publish_Video_Folder];
+    [IO createDirectoryInDocument:Publish_Audio_Folder];
     [[ShareManager sharePlatform] configShare];
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     [ControlCenter makeKeyAndVisible];

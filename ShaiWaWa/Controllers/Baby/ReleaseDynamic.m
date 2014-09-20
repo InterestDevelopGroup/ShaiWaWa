@@ -20,9 +20,6 @@
 #import "Friend.h"
 #import "BabyInfo.h"
 
-
-
-
 #import "VoiceConverter.h"
 
 @interface ReleaseDynamic ()
