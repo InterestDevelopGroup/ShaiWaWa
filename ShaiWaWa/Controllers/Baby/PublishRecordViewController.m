@@ -27,6 +27,7 @@
 #import "NSStringUtil.h"
 #import "ImageDisplayView.h"
 #import "Setting.h"
+@import AVFoundation;
 @import MediaPlayer;
 #define PlaceHolder @"关于宝宝的开心事情..."
 @interface PublishRecordViewController ()<UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate,UIActionSheetDelegate,CLLocationManagerDelegate>
@@ -41,6 +42,9 @@
 @property (nonatomic,strong) NSMutableArray * uploadFailImages; //上传失败图片队列
 @property (nonatomic,strong) NSString * videoPath;  //本地视频路径
 @property (nonatomic,strong) CLLocationManager * locationManager;
+@property (nonatomic,strong) AVAudioRecorder * audioRecord;
+@property (nonatomic,strong) NSTimer * recordTimer;
+@property (nonatomic,assign) int recordSecond;
 @property (nonatomic,assign) BOOL isOffset;
 @end
 
@@ -59,6 +63,7 @@
         _uploadFailImages = [@[] mutableCopy];
         _visibility = @"2";
         _isOffset = NO;
+        _recordSecond = 0;
     }
     return self;
 }
@@ -66,7 +71,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    AVAudioSession * audioSession = [AVAudioSession sharedInstance];
+    [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:nil]; //设置音频类别，这里表示当应用启动，停掉后台其他音频
+    [audioSession setActive:YES error:nil];//设置当前应用音频活跃性
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -646,6 +653,28 @@
     
     _voiceImageView.center = self.navigationController.view.center;
     [self.view addSubview:_voiceImageView];
+    
+    NSDictionary *recordSetting = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                   [NSNumber numberWithFloat: 44100.0],AVSampleRateKey, //采样率
+                                   [NSNumber numberWithInt: kAudioFormatLinearPCM],AVFormatIDKey,
+                                   [NSNumber numberWithInt:16],AVLinearPCMBitDepthKey,//采样位数,默认 16
+                                   [NSNumber numberWithInt: 2], AVNumberOfChannelsKey,//通道的数目
+                                   [NSNumber numberWithBool:NO],AVLinearPCMIsBigEndianKey,//大端还是小端是内存的组织方式
+                                   [NSNumber numberWithBool:NO],AVLinearPCMIsFloatKey,nil];//采样信号是整数还是浮点数
+    NSString * fileName = [[IO generateRndString] stringByAppendingPathExtension:@"wav"];
+    NSURL * url = [IO URLForResource:fileName inDirectory:Publish_Audio_Folder];
+    NSError * error;
+    _audioRecord = [[AVAudioRecorder alloc] initWithURL:url settings:recordSetting error:&error];
+    
+    if(error)
+    {
+        [SVProgressHUD showErrorWithStatus:@"录音失败."];
+        return ;
+    }
+    
+    [_audioRecord prepareToRecord];
+    [_audioRecord record];
+    
 }
 
 - (IBAction)stopRecord:(id)sender
@@ -653,7 +682,56 @@
     if (_voiceImageView.superview) {
         [_voiceImageView removeFromSuperview];
     }
+    
+    if([_audioRecord isRecording])
+    {
+        [_audioRecord stop];
+    }
 
+    _recordBtn.enabled = NO;
+    [self showRecord:nil];
+}
+
+
+- (void)startTimer
+{
+    _recordSecond = 0;
+    if(_recordTimer == nil)
+    {
+        NSBlockOperation * operation = [NSBlockOperation blockOperationWithBlock:^{
+            _recordTimer = [[NSTimer alloc] initWithFireDate:[NSDate date] interval:1.0 target:self selector:@selector(checkoutRecordTime:) userInfo:nil repeats:YES];
+            [[NSRunLoop currentRunLoop] addTimer:_recordTimer forMode:NSRunLoopCommonModes];
+            [_recordTimer fire];
+        }];
+        [operation start];
+    }
+    else
+    {
+        [_recordTimer setFireDate:[NSDate date]];
+        [_recordTimer fire];
+    }
+}
+
+- (void)stopTimer
+{
+    if(![_recordTimer isValid])
+    {
+        [_recordTimer setFireDate:[NSDate distantFuture]];
+        [_recordTimer invalidate];
+    }
+}
+
+- (void)checkoutRecordTime:(NSTimer *)timer
+{
+    if(_recordSecond >= 10)
+    {
+        [self stopTimer];
+        [self stopRecord:nil];
+        return ;
+    }
+    
+    _recordSecond += 1;
+    
 }
 
 //显示添加宝宝页面
