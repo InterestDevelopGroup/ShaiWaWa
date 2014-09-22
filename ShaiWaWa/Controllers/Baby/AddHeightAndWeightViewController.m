@@ -36,11 +36,6 @@
     // Do any additional setup after loading the view from its nib.
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 #pragma mark - Private Methods
 - (void)initUI
 {
@@ -74,7 +69,9 @@
         [SVProgressHUD showErrorWithStatus:@"请填写体重"];
         return ;
     }
-    
+    //根据宝宝信息判断他的体型
+    [self judgeShapeWithSex:[_babyInfo.sex intValue] Age:_babyInfo.birthday Height:[height floatValue]Weight:[weight floatValue]];
+    return;
     UserInfo *user = [[UserDefault sharedInstance] userInfo];
     [[HttpService sharedInstance] addBabyGrowRecord:@{@"baby_id":_babyInfo.baby_id,@"height":height,@"weight":weight,@"uid":user.uid} completionBlock:^(id object) {
           [SVProgressHUD showSuccessWithStatus:@"添加成功."];
@@ -108,5 +105,16 @@
     }
     [textField resignFirstResponder];
     return YES;
+}
+
+#pragma mark - 根据宝宝的数据判断它的体型
+- (NSString *)judgeShapeWithSex:(int)sex Age:(NSString *)birthday Height:(CGFloat)height Weight:(CGFloat)weight
+{
+    //获取今天的日期
+    NSDate *today = [[NSDate alloc] init];
+    NSLog(@"birthday:%@",birthday);
+    NSLog(@"today:%@",today);
+    
+    return nil;
 }
 @end

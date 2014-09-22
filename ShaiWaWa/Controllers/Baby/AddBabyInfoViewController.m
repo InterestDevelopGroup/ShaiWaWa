@@ -123,7 +123,6 @@
     
     NSString * babyName = [InputHelper trim:_babyNicknameField.text];
     NSString * birthday = [InputHelper trim:_birthDayField.text];
-    
     if([InputHelper isEmpty:babyName])
     {
         [SVProgressHUD showErrorWithStatus:@"宝宝名称不能为空."];

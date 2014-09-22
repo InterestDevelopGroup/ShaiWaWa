@@ -148,6 +148,7 @@
     [_datePicker setMaximumDate:[NSDate date]];
 }
 
+
 - (void)HMSegmentedControlInitMethod
 {
     segMentedControl = [[HMSegmentedControl alloc] init];
@@ -229,6 +230,7 @@
      }];
 }
 
+#warning 须待完成
 //获取宝宝成长记录
 - (void)getGrowRecords
 {
@@ -236,8 +238,7 @@
     UserInfo * user = [[UserDefault sharedInstance] userInfo];
      //获取宝宝成长记录
      [[HttpService sharedInstance] getBabyGrowRecord:@{@"baby_id":_babyInfo.baby_id,@"offset":@"0",@"pagesize":@"10000",@"uid":user.uid} completionBlock:^(id object) {
-     
-    
+         NSLog(@"%@",object);
      } failureBlock:^(NSError *error, NSString *responseString) {
          NSString * msg = responseString;
          if (error) {
@@ -939,9 +940,4 @@
         NSLog(@"Message failed");
     }
 }
-
-
-
-
-
 @end
