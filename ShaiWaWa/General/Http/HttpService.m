@@ -565,7 +565,17 @@
             return ;
         }
         if (success) {
-            success(obj);
+            NSArray *array = obj[@"result"];
+            if ([array isKindOfClass:[NSNull class]]) {
+                success(@"您还没为宝宝添加成长记录");
+                return;
+            }
+            NSMutableArray *resultArray = [NSMutableArray array];
+            for (NSDictionary *dict in array) {
+                BabyGrowRecord *b = [[BabyGrowRecord alloc] initWithDict:dict];
+                [resultArray addObject:b];
+            }
+            success(resultArray);
         }
     } failureBlock:failure];
 }

@@ -2,69 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>SchemeUserState</key>
-	<dict>
-		<key>Pods-ShaiWaWa-AFNetworking.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-ShaiWaWa-CocoaLumberjack.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-ShaiWaWa-CorePlot.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-ShaiWaWa-HMSegmentedControl.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-ShaiWaWa-MBProgressHUD.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-ShaiWaWa-MagicalRecord.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-ShaiWaWa-SDWebImage.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-ShaiWaWa-SSCheckBoxView.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-ShaiWaWa-SVProgressHUD.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-ShaiWaWa-ZBarSDK.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-ShaiWaWa-libqrencode.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-ShaiWaWa.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>06FDD3ED3B1C4760A028760D</key>
@@ -73,11 +10,6 @@
 			<true/>
 		</dict>
 		<key>0773BF8A43514C629BB485A0</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>22EC99CE4A3A4101A21AE2E0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -92,47 +24,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>42C2A51DBF8E4F049ABA4B30</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>4AFD2C9C1B8940F7979A7035</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4EF5F622C6FC44E895A451B0</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>50CDCEA354D444018992B13D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>679A029C351B460A98449B56</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>683CB66F38CE4500B8F9FE94</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>783FA640EE824BE998DF52C3</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>9ABCD4845445414DA45BDD31</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>ACDBBB640B2D4C9BAEC15B08</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -147,11 +44,6 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CF2B57A41E1A4E27BA242425</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>DEF1096B98F6409FA6D8E3FB</key>
 		<dict>
 			<key>primary</key>
@@ -162,22 +54,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E4E96F8909DE414884F720E9</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>EBF898057FD14F489504D3D2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>EFB509B352124B508016DEDC</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F55BCF33EA9E4B3C94C45CE5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
