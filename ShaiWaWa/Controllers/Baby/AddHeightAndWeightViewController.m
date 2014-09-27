@@ -71,7 +71,6 @@
     }
     //根据宝宝信息判断他的体型
     [self judgeShapeWithSex:[_babyInfo.sex intValue] Age:_babyInfo.birthday Height:[height floatValue]Weight:[weight floatValue]];
-    return;
     UserInfo *user = [[UserDefault sharedInstance] userInfo];
     [[HttpService sharedInstance] addBabyGrowRecord:@{@"baby_id":_babyInfo.baby_id,@"height":height,@"weight":weight,@"uid":user.uid} completionBlock:^(id object) {
           [SVProgressHUD showSuccessWithStatus:@"添加成功."];
