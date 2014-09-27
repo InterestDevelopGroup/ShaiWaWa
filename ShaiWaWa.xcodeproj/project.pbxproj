@@ -138,6 +138,11 @@
 		F41F6927198228F000089E42 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F41F6926198228F000089E42 /* CFNetwork.framework */; };
 		F41F6929198228FA00089E42 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F41F6928198228FA00089E42 /* AudioToolbox.framework */; };
 		F41FEAE91980C3CB0095DB36 /* tuichu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F41FEAE81980C3CB0095DB36 /* tuichu@2x.png */; };
+		F421621719D65B4A00F01C18 /* 女孩体重.plist in Resources */ = {isa = PBXBuildFile; fileRef = F421621319D65B4A00F01C18 /* 女孩体重.plist */; };
+		F421621819D65B4A00F01C18 /* 女孩身高.plist in Resources */ = {isa = PBXBuildFile; fileRef = F421621419D65B4A00F01C18 /* 女孩身高.plist */; };
+		F421621919D65B4A00F01C18 /* 男孩体重.plist in Resources */ = {isa = PBXBuildFile; fileRef = F421621519D65B4A00F01C18 /* 男孩体重.plist */; };
+		F421621A19D65B4A00F01C18 /* 男孩身高.plist in Resources */ = {isa = PBXBuildFile; fileRef = F421621619D65B4A00F01C18 /* 男孩身高.plist */; };
+		F4249B6D19D694FC0050A6AA /* BabyGrowRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = F4249B6C19D694FC0050A6AA /* BabyGrowRecord.m */; };
 		F431482A199C57F000CAB2CD /* DynamicByUserIDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4314828199C57F000CAB2CD /* DynamicByUserIDViewController.m */; };
 		F431482B199C57F000CAB2CD /* DynamicByUserIDViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4314829199C57F000CAB2CD /* DynamicByUserIDViewController.xib */; };
 		F432BDD419762AC80086BBE9 /* baby_4-bg-1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F432BD3B19762AC80086BBE9 /* baby_4-bg-1@2x.png */; };
@@ -673,6 +678,12 @@
 		F41F6926198228F000089E42 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		F41F6928198228FA00089E42 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		F41FEAE81980C3CB0095DB36 /* tuichu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tuichu@2x.png"; sourceTree = "<group>"; };
+		F421621319D65B4A00F01C18 /* 女孩体重.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "女孩体重.plist"; sourceTree = "<group>"; };
+		F421621419D65B4A00F01C18 /* 女孩身高.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "女孩身高.plist"; sourceTree = "<group>"; };
+		F421621519D65B4A00F01C18 /* 男孩体重.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "男孩体重.plist"; sourceTree = "<group>"; };
+		F421621619D65B4A00F01C18 /* 男孩身高.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "男孩身高.plist"; sourceTree = "<group>"; };
+		F4249B6B19D694FC0050A6AA /* BabyGrowRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BabyGrowRecord.h; sourceTree = "<group>"; };
+		F4249B6C19D694FC0050A6AA /* BabyGrowRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BabyGrowRecord.m; sourceTree = "<group>"; };
 		F4314827199C57F000CAB2CD /* DynamicByUserIDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicByUserIDViewController.h; sourceTree = "<group>"; };
 		F4314828199C57F000CAB2CD /* DynamicByUserIDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicByUserIDViewController.m; sourceTree = "<group>"; };
 		F4314829199C57F000CAB2CD /* DynamicByUserIDViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DynamicByUserIDViewController.xib; sourceTree = "<group>"; };
@@ -1518,6 +1529,25 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		F421621119D65B4A00F01C18 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				F421621219D65B4A00F01C18 /* 世卫组织婴儿身高体重对照表 */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		F421621219D65B4A00F01C18 /* 世卫组织婴儿身高体重对照表 */ = {
+			isa = PBXGroup;
+			children = (
+				F421621319D65B4A00F01C18 /* 女孩体重.plist */,
+				F421621419D65B4A00F01C18 /* 女孩身高.plist */,
+				F421621519D65B4A00F01C18 /* 男孩体重.plist */,
+				F421621619D65B4A00F01C18 /* 男孩身高.plist */,
+			);
+			path = "世卫组织婴儿身高体重对照表";
+			sourceTree = "<group>";
+		};
 		F432BD3919762AC80086BBE9 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -2013,6 +2043,8 @@
 				C350724919C28E4A0046D4A3 /* LikeUser.m */,
 				C34E560619D30EF30026E23D /* WeiboUser.h */,
 				C34E560719D30EF30026E23D /* WeiboUser.m */,
+				F4249B6B19D694FC0050A6AA /* BabyGrowRecord.h */,
+				F4249B6C19D694FC0050A6AA /* BabyGrowRecord.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2020,6 +2052,7 @@
 		F43387291974C28600464D43 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F421621119D65B4A00F01C18 /* Data */,
 				F432BD3919762AC80086BBE9 /* UI */,
 			);
 			path = Resources;
@@ -2321,6 +2354,7 @@
 				F43388171974C28600464D43 /* ForgetPwdViewController.xib in Resources */,
 				F43388291974C28600464D43 /* PlatformBindViewController.xib in Resources */,
 				F43388091974C28600464D43 /* SearchWeiboFriendViewController.xib in Resources */,
+				F421621819D65B4A00F01C18 /* 女孩身高.plist in Resources */,
 				F432BE6419762AC80086BBE9 /* user_touxiang@2x.png in Resources */,
 				F41F68F11982081E00089E42 /* WeiboSDK.bundle in Resources */,
 				F432BE0919762AC80086BBE9 /* main_weixin@2x.png in Resources */,
@@ -2451,6 +2485,7 @@
 				F432BE5C19762AC80086BBE9 /* user_1-bg@2x.png in Resources */,
 				F43387FB1974C28600464D43 /* ScannerQRCodeViewController.xib in Resources */,
 				F47F5514197FACE7006DCA75 /* SummaryCell.xib in Resources */,
+				F421621719D65B4A00F01C18 /* 女孩体重.plist in Resources */,
 				F43387FD1974C28600464D43 /* SearchAddressBookViewController.xib in Resources */,
 				F432BE1D19762AC80086BBE9 /* pd_fenxiang-2@2x.png in Resources */,
 				F433880F1974C28600464D43 /* ShaiWaSquareViewController.xib in Resources */,
@@ -2491,6 +2526,7 @@
 				C398E00319A50016000F08DB /* PublishRecordViewController.xib in Resources */,
 				F432BE0719762AC80086BBE9 /* main_tianjiabaobei@2x.png in Resources */,
 				F432BE4619762AC80086BBE9 /* square_shaiwawa@2x.png in Resources */,
+				F421621919D65B4A00F01C18 /* 男孩体重.plist in Resources */,
 				F432BE4C19762AC80086BBE9 /* square_zan-@2x.png in Resources */,
 				F432BE5119762AC80086BBE9 /* square_zuixin-@2x.png in Resources */,
 				F433880B1974C28600464D43 /* FeebackViewController.xib in Resources */,
@@ -2528,6 +2564,7 @@
 				F432BDFB19762AC80086BBE9 /* main_girl@2x.png in Resources */,
 				F432BE5019762AC80086BBE9 /* square_zuire@2x.png in Resources */,
 				F432BE0819762AC80086BBE9 /* main_tuichu@2x.png in Resources */,
+				F421621A19D65B4A00F01C18 /* 男孩身高.plist in Resources */,
 				F432BE2119762AC80086BBE9 /* pd_huatong@2x.png in Resources */,
 				F432BDDF19762AC80086BBE9 /* baby_mama@2x.png in Resources */,
 				F432BE4E19762AC80086BBE9 /* square_zizhi@2x.png in Resources */,
@@ -2650,6 +2687,7 @@
 				F47F54F6197FACE7006DCA75 /* HttpService.m in Sources */,
 				F41F68E21982081E00089E42 /* UIViewController+BarItem.m in Sources */,
 				F43388181974C28600464D43 /* FriendHomeViewController.m in Sources */,
+				F4249B6D19D694FC0050A6AA /* BabyGrowRecord.m in Sources */,
 				F47F5515197FACE7006DCA75 /* WeiBoCell.m in Sources */,
 				F43388361974C28600464D43 /* SendValidateMsgViewController.m in Sources */,
 				F433885E1974C28600464D43 /* BaseModel.m in Sources */,
