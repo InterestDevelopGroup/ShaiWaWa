@@ -67,21 +67,23 @@
 {
     UserInfo *users = [[UserDefault sharedInstance] userInfo];
     //alias:标题
-    [[HttpService sharedInstance] addBabyRemark:@{@"uid":users.uid,@"baby_id":babyID,@"alias":_remarksField.text, @"remark":_remarksTextField.text} completionBlock:^(id object) {
+    [[HttpService sharedInstance] addBabyRemark:@{@"uid":users.uid,@"baby_id":_babyInfo.baby_id,@"alias":_remarksField.text, @"remark":_remarksTextField.text} completionBlock:^(id object) {
         [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
         _remarksField.text = nil;
         _remarksTextField.text = nil;
+        [self popVIewController];
     } failureBlock:^(NSError *error, NSString *responseString) {
         [SVProgressHUD showErrorWithStatus:responseString];
     }];
 }
+
+
 - (void)copyOfWeb
 {
     //定义一个toolBar
-    UIToolbar * topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
+    UIToolbar * topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 49)];
     
-    //设置style
-    [topView setBarStyle:UIBarStyleBlack];
+
     
     //定义两个flexibleSpace的button，放在toolBar上，这样完成按钮就会在最右边
     UITextField *temp_txt = [[UITextField alloc] initWithFrame:CGRectMake(10, 0, 120, 30)];

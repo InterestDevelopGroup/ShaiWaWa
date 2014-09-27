@@ -62,16 +62,20 @@
 - (void)initUI
 {
     self.title = @"我的动态";
-    [self setLeftCusBarItem:@"square_back" action:nil];
+    if(_user == nil)
+    {
+        _user = [[UserDefault sharedInstance] userInfo];
+    }
+    else
+    {
+        self.title = [NSString stringWithFormat:@"%@的动态",_user.username];
+    }
     
+    [self setLeftCusBarItem:@"square_back" action:nil];
     [_dyTableView clearSeperateLine];
     [_dyTableView registerNibWithName:@"DynamicCell" reuseIdentifier:@"Cell"];
     [_dyTableView addHeaderWithTarget:self action:@selector(refreshData)];
-    //[_dyTableView setHeaderRefreshingText:NSLocalizedString(@"DataLoading", nil)];
     [_dyTableView addFooterWithTarget:self action:@selector(loadMoreData)];
-    //[_dyTableView setFooterPullToRefreshText:NSLocalizedString(@"PullTOLoad", nil)];
-    //[_dyTableView setFooterRefreshingText:NSLocalizedString(@"DataLoading", nil)];
-    
     [_dyTableView headerBeginRefreshing];
 }
 
@@ -92,8 +96,8 @@
 
 - (void)showOnlyMyBabyDyList
 {
-    UserInfo *users = [[UserDefault sharedInstance] userInfo];
-    [[HttpService sharedInstance] getRecordByUserID:@{@"offset":[NSString stringWithFormat:@"%i",_currentOffset], @"pagesize":[NSString stringWithFormat:@"%i",CommonPageSize],@"uid":users.uid} completionBlock:^(id object) {
+
+    [[HttpService sharedInstance] getRecordByUserID:@{@"offset":[NSString stringWithFormat:@"%i",_currentOffset], @"pagesize":[NSString stringWithFormat:@"%i",CommonPageSize],@"uid":_user.uid} completionBlock:^(id object) {
         [_dyTableView headerEndRefreshing];
         [_dyTableView footerEndRefreshing];
         if(_currentOffset == 0)
@@ -234,6 +238,18 @@
     {
         dynamicCell.topicView.hidden = YES;
     }
+    
+    NSString * who = recrod.username;
+    if([recrod.sex isEqualToString:@"1"])
+    {
+        who = [NSString stringWithFormat:@"%@(爸爸)",who];
+    }
+    else if ([recrod.sex isEqualToString:@"2"])
+    {
+        who = [NSString stringWithFormat:@"%@(妈妈)",who];
+    }
+    dynamicCell.whoLabel.text = who;
+
     dynamicCell.addressLabel.text = recrod.address;
     dynamicCell.dyContentTextView.attributedText = [NSStringUtil makeTopicString:recrod.content];
     [dynamicCell.babyAvatarImageView sd_setImageWithURL:[NSURL URLWithString:recrod.avatar] placeholderImage:Default_Avatar];

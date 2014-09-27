@@ -2,7 +2,7 @@
 //  UpdateUserNameViewController.m
 //  ShaiWaWa
 //
-//  Created by 祥 on 14-7-10.
+//  Created by Carl on 14-7-10.
 //  Copyright (c) 2014年 helloworld. All rights reserved.
 //
 
@@ -52,18 +52,26 @@
 
 - (IBAction)update_OK:(id)sender
 {
-//     usernameTextBlock(_userNameField.text);
-    UserInfo *curUser = [[UserInfo alloc] init];
-    curUser.phone = [[[UserDefault sharedInstance] userInfo] phone];
-    curUser.username = _userNameField.text;
-    curUser.password = [[[UserDefault sharedInstance] userInfo] password];
-    curUser.uid = [[[UserDefault sharedInstance] userInfo] uid];
-    curUser.sex = [[[UserDefault sharedInstance] userInfo] sex];
-    curUser.sww_number = [[[UserDefault sharedInstance] userInfo] sww_number];
-    curUser.avatar =  [[[UserDefault sharedInstance] userInfo] avatar];
     
-    [[HttpService sharedInstance] updateUserInfo:@{@"user_id":curUser.uid,@"username":curUser.username,@"avatar":[NSNull null],@"sex":[NSNull null],@"qq":[NSNull null],@"weibo":[NSNull null],@"wechat":[NSNull null]} completionBlock:^(id object) {
+    if([_userNameField.text length] == 0)
+    {
+        return ;
+    }
+    
+    UserInfo * user = [[UserDefault sharedInstance] userInfo];
+    if([_userNameField.text isEqualToString:user.username])
+    {
+        return ;
+    }
+    
+    user.username = _userNameField.text;
+    
+
+    
+    
+    [[HttpService sharedInstance] updateUserInfo:@{@"user_id":user.uid,@"username":user.username,@"avatar":user.avatar,@"sex":user.sex,@"qq":user.qq,@"weibo":user.weibo,@"wechat":user.wechat} completionBlock:^(id object) {
          [SVProgressHUD showSuccessWithStatus:@"更新成功"];
+         [[UserDefault sharedInstance] setUserInfo:user];
          [self.navigationController popViewControllerAnimated:YES];
     } failureBlock:^(NSError *error, NSString *responseString) {
         [SVProgressHUD showErrorWithStatus:responseString];

@@ -13,6 +13,7 @@ pod 'SVProgressHUD', '~> 1.0'
 pod 'MBProgressHUD', '~> 0.8'
 pod 'SDWebImage', '~> 3.6'
 pod 'MagicalRecord', '~> 2.2'
+pod 'SSCheckBoxView', '~> 0.0.1'
 end
 
 target "ShaiWaWaTests" do

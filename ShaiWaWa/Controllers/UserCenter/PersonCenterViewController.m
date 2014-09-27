@@ -45,6 +45,12 @@
 
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:YES];
@@ -264,6 +270,8 @@
         NSString * weibo = users.weibo == NULL ? @"" : users.weibo;
         NSString * sex = users.sex == NULL ? @"" : users.sex;
         [[HttpService sharedInstance] updateUserInfo:@{@"user_id":users.uid,@"username":users.username,@"avatar":[QN_URL stringByAppendingString:fileName],@"sex":sex,@"qq":qq,@"weibo":weibo,@"wechat":wechat} completionBlock:^(id object) {
+            users.avatar = [QN_URL stringByAppendingString:fileName];
+            [[UserDefault sharedInstance] setUserInfo:users];
             [SVProgressHUD showSuccessWithStatus:@"上传成功."];
         } failureBlock:^(NSError *error, NSString *responseString) {
             NSString * msg = responseString;
@@ -299,15 +307,15 @@
     
     switch (buttonIndex) {
         case 0:
-            // 相机
+            //相机
             sourceType = UIImagePickerControllerSourceTypeCamera;
             break;
         case 1:
-            // 相册
+            //相册
             sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
             break;
         case 2:
-            // 取消
+            //取消
             return;
     }
     UIImagePickerController *imagePickerController =[[UIImagePickerController alloc] init];

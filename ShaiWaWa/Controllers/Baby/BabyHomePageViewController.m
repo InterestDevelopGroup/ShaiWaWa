@@ -60,6 +60,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];
 }
@@ -68,6 +69,11 @@
 {
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    if(isRemarksBtnShown)
+    {
+        [self showList:nil];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -81,6 +87,17 @@
     self.title = _babyInfo.nickname;
     [self setLeftCusBarItem:@"square_back" action:nil];
     _babyPersonalDyArray = [[NSMutableArray alloc] init];
+    if ([OSHelper iOS7])
+    {
+        UIBarButtonItem * right_doWith = [self customBarItem:@"user_gengduo" action:@selector(showList:) size:CGSizeMake(38, 30) imageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, -25)];
+        self.navigationItem.rightBarButtonItem = right_doWith;
+        
+    }
+    else
+    {
+        UIBarButtonItem * right_doWith = [self customBarItem:@"user_gengduo" action:@selector(showList:)];
+        self.navigationItem.rightBarButtonItem = right_doWith;
+    }
     remarksBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [remarksBtn setBackgroundColor:[UIColor whiteColor]];
     [remarksBtn setTitle:@"备注信息" forState:UIControlStateNormal];
@@ -542,6 +559,11 @@
 }
 
 
+- (void)showTopicDynamic:(UIButton *)sender
+{
+    
+}
+
 
 
 #pragma mark - UIScrollViewDelegate
@@ -817,8 +839,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DynamicDetailViewController *dynamicDetailVC = [[DynamicDetailViewController alloc] init];
-    [self.navigationController pushViewController:dynamicDetailVC animated:YES];
+    if(tableView == _dynamicListTableView)
+    {
+        DynamicDetailViewController *dynamicDetailVC = [[DynamicDetailViewController alloc] initWithNibName:nil bundle:nil];
+        BabyRecord * record = [_babyPersonalDyArray objectAtIndex:indexPath.row];
+        dynamicDetailVC.babyRecord = record;
+        [self.navigationController pushViewController:dynamicDetailVC animated:YES];
+    }
 }
 
 #pragma mark - UITextFieldDelegate

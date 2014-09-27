@@ -27,6 +27,11 @@
 #import "NSStringUtil.h"
 #import "ImageDisplayView.h"
 #import "Setting.h"
+#import "Friend.h"
+#import "AudioView.h"
+#import "Mp3RecordWriter.h"
+#import "MLAudioMeterObserver.h"
+#import "MLAudioRecorder.h"
 @import AVFoundation;
 @import MediaPlayer;
 #define PlaceHolder @"关于宝宝的开心事情..."
@@ -41,11 +46,18 @@
 @property (nonatomic,strong) NSMutableArray * uploadedImages;  //上传成功图片队列
 @property (nonatomic,strong) NSMutableArray * uploadFailImages; //上传失败图片队列
 @property (nonatomic,strong) NSString * videoPath;  //本地视频路径
+@property (nonatomic,strong) NSString * uploadedVideoPath;  //上传成功后视频路径
+@property (nonatomic,strong) NSString * audioPath;  //本地音频路径
+@property (nonatomic,strong) NSString * uploadedAudioPath;  //上传成功后音频路径
 @property (nonatomic,strong) CLLocationManager * locationManager;
 @property (nonatomic,strong) AVAudioRecorder * audioRecord;
 @property (nonatomic,strong) NSTimer * recordTimer;
 @property (nonatomic,assign) int recordSecond;
 @property (nonatomic,assign) BOOL isOffset;
+@property (nonatomic,strong) NSMutableArray * selectedFriends;
+@property (nonatomic, strong) Mp3RecordWriter *mp3Writer;
+@property (nonatomic, strong) MLAudioMeterObserver *meterObserver;
+@property (nonatomic, strong) MLAudioRecorder *recorder;
 @end
 
 @implementation PublishRecordViewController
@@ -64,6 +76,7 @@
         _visibility = @"2";
         _isOffset = NO;
         _recordSecond = 0;
+        _selectedFriends = [@[] mutableCopy];
     }
     return self;
 }
@@ -208,17 +221,23 @@
      */
     
     [_textView resignFirstResponder];
+    
+    //判断是否有选择宝宝
+    if(_babyInfo == nil)
+    {
+        [SVProgressHUD showErrorWithStatus:@"请选择宝宝."];
+        return ;
+    }
+    
     //判断是否有添加图片
     //判断内容是否为空
     NSString * content = [InputHelper trim:_textView.text];
-    if([_images count] == 0 && _videoPath == nil && ([InputHelper isEmpty:content] || [content isEqualToString:PlaceHolder]))
+    if([_images count] == 0 && _videoPath == nil && ([InputHelper isEmpty:content] || [content isEqualToString:PlaceHolder]) && _audioPath == nil)
     {
         [SVProgressHUD showErrorWithStatus:@"请添加内容."];
         return ;
     }
     
-    
-
     
     [SVProgressHUD showWithStatus:@"提交中..." maskType:SVProgressHUDMaskTypeGradient];
     
@@ -243,13 +262,26 @@
         else if([str hasSuffix:@"mp4"] || [str hasSuffix:@"mov"])
         {
             //上传视频成功，将内容提交到服务器
+            self.uploadedVideoPath =[NSString stringWithFormat:@"%@%@",QN_URL,[_videoPath lastPathComponent]];
             [self uploadVideoFinish];
+        }
+        else if([str hasSuffix:@"wav"] || [str hasSuffix:@"mp3"])
+        {
+            self.uploadedAudioPath = [NSString stringWithFormat:@"%@%@",QN_URL,[_audioPath lastPathComponent]];
+            if([_images count] != 0)
+            {
+                [self checkUploadIsComplete];
+            }
+            else
+            {
+                [self uploadVideoFinish];
+            }
         }
         
     }];
     //上传失败回调
     [[QNUploadHelper sharedHelper] setUploadFailure:^(NSString * str){
-
+        [SVProgressHUD dismiss];
         //判断是上传视频还是图片
         if([str hasSuffix:@"png"] || [str hasSuffix:@"jpg"])
         {
@@ -264,11 +296,24 @@
             UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"上传视频失败." delegate:self cancelButtonTitle:@"返回" otherButtonTitles:@"重试", nil];
             [alertView show];
             alertView = nil;
+            _uploadedVideoPath = nil;
         }
-        
+        else if([str hasSuffix:@"wav"] || [str hasSuffix:@"mp3"])
+        {
+            UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"上传音频失败." delegate:self cancelButtonTitle:@"返回" otherButtonTitles:@"重试", nil];
+            [alertView show];
+            alertView = nil;
+            _uploadedAudioPath = nil;
+        }
 
 
     }];
+    
+    //如果有音频则上传
+    if(_audioPath != nil)
+    {
+        [[QNUploadHelper sharedHelper] uploadFile:_audioPath];
+    }
     
     //如果有视频则上传,然后返回，不需要上传图片
     if(_videoPath != nil)
@@ -302,6 +347,11 @@
         return ;
     }
     
+    if(_audioPath != nil && _uploadedAudioPath == nil)
+    {
+        return ;
+    }
+    
     if([_uploadFailImages count] > 0)
     {
         DDLogCInfo(@"Some images upload failed.");
@@ -324,7 +374,10 @@
         [tmpImageURLS addObject:[NSString stringWithFormat:@"%@%@",QN_URL,[path lastPathComponent]]];
     }
     [_uploadedImages removeAllObjects];
-    NSString * content = [InputHelper trim:_textView.text];
+    //NSString * content = [InputHelper trim:_textView.text];
+    NSString * content = _textView.text;
+    //将@用户替换成特殊字符，{uid}
+    content = [self processTuiFriends:content];
     NSMutableDictionary * params = [@{} mutableCopy];
     params[@"baby_id"] = _babyInfo.baby_id;
     params[@"uid"] =  _userInfo.uid;
@@ -340,8 +393,9 @@
         params[@"latitude"] = [NSString stringWithFormat:@"%f",_placemark.location.coordinate.latitude];
     }
     
-    params[@"video"] = _videoPath != nil ? _videoPath : @"";
-    params[@"audio"] = @"";
+    //params[@"video"] = _videoPath != nil ? _videoPath : @"";
+    params[@"video"] = self.uploadedVideoPath == nil ? @"" : self.uploadedVideoPath;
+    params[@"audio"] = self.uploadedAudioPath == nil ? @"" : self.uploadedAudioPath;
     params[@"images"] = tmpImageURLS;
     [[HttpService sharedInstance] publishRecord:params completionBlock:^(id object) {
         
@@ -365,7 +419,16 @@
 //视频上传7牛后调用的函数
 - (void)uploadVideoFinish
 {
-    NSString * content = [InputHelper trim:_textView.text];
+    
+    if((_videoPath != nil && _uploadedVideoPath == nil) || (_audioPath != nil && _uploadedAudioPath == nil))
+    {
+        return ;
+    }
+    //NSString * content = [InputHelper trim:_textView.text];
+    
+    NSString * content = _textView.text;
+    //将@用户替换成特殊字符，{uid}
+    content = [self processTuiFriends:content];
     NSMutableDictionary * params = [@{} mutableCopy];
     params[@"baby_id"] = _babyInfo.baby_id;
     params[@"uid"] =  _userInfo.uid;
@@ -381,8 +444,9 @@
         params[@"latitude"] = [NSString stringWithFormat:@"%f",_placemark.location.coordinate.latitude];
     }
     
-    params[@"video"] = _videoPath != nil ? [NSString stringWithFormat:@"%@%@",QN_URL,[_videoPath lastPathComponent]] : @"";
-    params[@"audio"] = @"";
+    //params[@"video"] = _videoPath != nil ? [NSString stringWithFormat:@"%@%@",QN_URL,[_videoPath lastPathComponent]] : @"";
+    params[@"video"] = self.uploadedVideoPath == nil ? @"" : self.uploadedVideoPath;
+    params[@"audio"] = self.uploadedAudioPath == nil ? @"" : self.uploadedAudioPath;
     params[@"images"] = @"";
     [[HttpService sharedInstance] publishRecord:params completionBlock:^(id object) {
         
@@ -400,6 +464,35 @@
         }
         [SVProgressHUD showErrorWithStatus:msg];
     }];
+}
+
+
+//将@用户替换成特殊字符，{uid}
+- (NSString *)processTuiFriends:(NSString *)content
+{
+    //将@用户替换成特殊字符，{uid}
+    if([content length] > 0)
+    {
+        if([_selectedFriends count] > 0)
+        {
+            NSArray * arr = [NSStringUtil getUserStringRangeArray:content];
+            for(NSString * rangeString in arr)
+            {
+                NSRange range = NSRangeFromString(rangeString);
+                NSString * username = [[content substringWithRange:range] stringByReplacingOccurrencesOfString:@"@" withString:@""];
+                for(Friend * friend in _selectedFriends)
+                {
+                    if([friend.username isEqualToString:username])
+                    {
+                        content = [content stringByReplacingCharactersInRange:range withString:[NSString stringWithFormat:@"{@%@} ",friend.friend_id]];
+                        break ;
+                    }
+                }
+            }
+        }
+    }
+    
+    return content;
 }
 
 
@@ -548,6 +641,40 @@
 - (IBAction)showFriendAction:(id)sender
 {
     ChooseFriendViewController *chooseFriendsVC = [[ChooseFriendViewController alloc] initWithNibName:nil bundle:nil];
+    chooseFriendsVC.finishSelectedBlock = ^(NSArray * friends){
+        
+        if(friends == nil || [friends count] == 0)
+        {
+            return ;
+        }
+        
+        
+        
+        if([_textView.text isEqualToString:PlaceHolder])
+        {
+            _textView.text = @"";
+        }
+        
+        NSMutableAttributedString * text = [[NSMutableAttributedString alloc] initWithAttributedString:_textView.attributedText];
+        
+        for(Friend * friend in friends)
+        {
+            [text appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"@%@ ",friend.username] attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:131.0/255.0f green:169.0/255.0f blue:88.0/255.0f alpha:1.0]}]];
+
+        }
+        
+        
+        [_selectedFriends addObjectsFromArray:friends];
+        
+        if([text length] > 140)
+        {
+            [SVProgressHUD showErrorWithStatus:@"内容不能超出140个字符."];
+            return ;
+        }
+        
+        _textView.attributedText = text;
+        
+    };
     [self.navigationController pushViewController:chooseFriendsVC animated:YES];
     chooseFriendsVC = nil;
 }
@@ -654,6 +781,7 @@
     _voiceImageView.center = self.navigationController.view.center;
     [self.view addSubview:_voiceImageView];
     
+    /*
     NSDictionary *recordSetting = [[NSDictionary alloc] initWithObjectsAndKeys:
                                    [NSNumber numberWithFloat: 44100.0],AVSampleRateKey, //采样率
                                    [NSNumber numberWithInt: kAudioFormatLinearPCM],AVFormatIDKey,
@@ -663,6 +791,7 @@
                                    [NSNumber numberWithBool:NO],AVLinearPCMIsFloatKey,nil];//采样信号是整数还是浮点数
     NSString * fileName = [[IO generateRndString] stringByAppendingPathExtension:@"wav"];
     NSURL * url = [IO URLForResource:fileName inDirectory:Publish_Audio_Folder];
+    self.audioPath = [url path];
     NSError * error;
     _audioRecord = [[AVAudioRecorder alloc] initWithURL:url settings:recordSetting error:&error];
     
@@ -674,22 +803,100 @@
     
     [_audioRecord prepareToRecord];
     [_audioRecord record];
+    */
+    
+    NSString * fileName = [[IO generateRndString] stringByAppendingPathExtension:@"mp3"];
+    NSString * path = [IO pathForResource:fileName inDirectory:Publish_Audio_Folder];
+    Mp3RecordWriter *mp3Writer = [[Mp3RecordWriter alloc]init];
+    mp3Writer.filePath = path;
+    mp3Writer.maxSecondCount = 60;
+    mp3Writer.maxFileSize = 1024*256;
+    self.mp3Writer = mp3Writer;
+    
+    MLAudioMeterObserver *meterObserver = [[MLAudioMeterObserver alloc]init];
+    meterObserver.actionBlock = ^(NSArray *levelMeterStates,MLAudioMeterObserver *meterObserver){
+        NSLog(@"volume:%f",[MLAudioMeterObserver volumeForLevelMeterStates:levelMeterStates]);
+    };
+    meterObserver.errorBlock = ^(NSError *error,MLAudioMeterObserver *meterObserver){
+        [[[UIAlertView alloc]initWithTitle:@"错误" message:error.userInfo[NSLocalizedDescriptionKey] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil]show];
+        
+        if (_voiceImageView.superview)
+        {
+            [_voiceImageView removeFromSuperview];
+        }
+
+        self.audioPath = nil;
+    };
+    self.meterObserver = meterObserver;
+    MLAudioRecorder *recorder = [[MLAudioRecorder alloc]init];
+    __weak __typeof(self)weakSelf = self;
+    recorder.receiveStoppedBlock = ^{
+        weakSelf.meterObserver.audioQueue = nil;
+        [self addAudioView];
+    };
+    recorder.receiveErrorBlock = ^(NSError *error){
+        
+        if (_voiceImageView.superview)
+        {
+            [_voiceImageView removeFromSuperview];
+        }
+
+        weakSelf.meterObserver.audioQueue = nil;
+        [[[UIAlertView alloc]initWithTitle:@"错误" message:error.userInfo[NSLocalizedDescriptionKey] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil]show];
+    };
+    
+    self.recorder = recorder;
+    
+    recorder.fileWriterDelegate = mp3Writer;
+    self.audioPath = path;
+    //开始录音
+    [self.recorder startRecording];
+    self.meterObserver.audioQueue = self.recorder->_audioQueue;
     
 }
 
 - (IBAction)stopRecord:(id)sender
 {
-    if (_voiceImageView.superview) {
-        [_voiceImageView removeFromSuperview];
-    }
     
+    /*
     if([_audioRecord isRecording])
     {
         [_audioRecord stop];
     }
+    */
+
+    if([_recorder isRecording])
+    {
+        [_recorder stopRecording];
+    }
+
+}
+
+
+- (void)addAudioView
+{
+    
+    
+    if (_voiceImageView.superview)
+    {
+        [_voiceImageView removeFromSuperview];
+    }
 
     _recordBtn.enabled = NO;
     [self showRecord:nil];
+    
+    AudioView * audio = [[AudioView alloc] initWithFrame:CGRectMake(123, 149, 82, 50) withPath:self.audioPath];
+    
+    audio.deleteBlock = ^(NSString * path){
+        
+        _recordBtn.enabled = YES;
+        _uploadedAudioPath = nil;
+        _audioPath = nil;
+    };
+    
+    [self.view addSubview:audio];
+    [self.view bringSubviewToFront:audio];
+
 }
 
 
@@ -827,6 +1034,7 @@
         __weak PublishImageView * weakImageView = imageView;
         imageView.deleteBlock = ^(NSString * path){
             _videoPath = nil;
+            _uploadedVideoPath = nil;
             [_imageViews removeObject:weakImageView];
             _addMoreButton.hidden = YES;
             [self.view addSubview:_button3View];
@@ -965,9 +1173,11 @@
         
         if(error)
         {
+            /*
             UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"定位失败!" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
             [alertView show];
             alertView = nil;
+            */
             [_locationManager stopUpdatingLocation];
             DDLogError(@"定位失败");
             return ;
@@ -987,9 +1197,11 @@
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
     [_locationManager stopUpdatingLocation];
+    /*
     UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"定位失败!" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
     [alertView show];
     alertView = nil;
+    */
 }
 
 
@@ -1042,7 +1254,21 @@
             {
                 NSString * text = [textView.text substringToIndex:lastRange.location];
                 textView.attributedText = [NSStringUtil makeTopicString:text];
-                return NO;
+            }
+        }
+        
+        //匹配@用户
+        regex = @"@[\\u4e00-\\u9fa5\\w\\-]+";
+        regularExpress = [NSRegularExpression regularExpressionWithPattern:regex options:NSRegularExpressionCaseInsensitive error:nil];
+        arr = [regularExpress matchesInString:textView.text options:0 range:NSMakeRange(0, [textView.text length])];
+        if([arr count] > 0)
+        {
+            NSTextCheckingResult * last = [arr lastObject];
+            NSRange lastRange = last.range;
+            if(lastRange.location + lastRange.length >= range.location)
+            {
+                NSString * text = [textView.text substringToIndex:lastRange.location];
+                textView.attributedText = [NSStringUtil makeTopicString:text];
             }
         }
     }

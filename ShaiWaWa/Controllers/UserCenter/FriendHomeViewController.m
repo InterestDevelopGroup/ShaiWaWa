@@ -15,6 +15,9 @@
 #import "UserInfo.h"
 #import "Friend.h"
 #import "UIImageView+WebCache.h"
+#import "DynamicByUserIDViewController.h"
+#import "MybabyListViewController.h"
+#import "HisFriendsViewController.h"
 @interface FriendHomeViewController ()
 {
     NSMutableArray *babyList;
@@ -40,6 +43,12 @@
     
     [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapView)]];
     // Do any additional setup after loading the view from its nib.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -162,11 +171,11 @@
     babyLabel.textColor = [UIColor darkGrayColor];
     babyLabel.text = [NSString stringWithFormat:@"宝宝 (%@)",user.baby_count];
     [_babyButton addSubview:babyLabel];
-    
-//    UIImage *imageJianTou = [UIImage imageNamed:@"main_jiantou.png"];
-//    UIImageView *jianTou = [[UIImageView alloc] initWithImage:imageJianTou];
-//    jianTou.frame = CGRectMake(_babyButton.bounds.size.width-18, 15, 7, 11);
-//    [_babyButton addSubview:jianTou];
+    [_babyButton addTarget:self action:@selector(showHisBabys) forControlEvents:UIControlEventTouchUpInside];
+    UIImage *imageJianTou = [UIImage imageNamed:@"main_jiantou.png"];
+    UIImageView *jianTou = [[UIImageView alloc] initWithImage:imageJianTou];
+    jianTou.frame = CGRectMake(_babyButton.bounds.size.width-18, 15, 7, 11);
+    [_babyButton addSubview:jianTou];
 }
 
 - (void)dynamicCell
@@ -177,12 +186,11 @@
     dynamicLabel.text = [NSString stringWithFormat:@"动态 (%@)",user.record_count];
     dynamicLabel.textColor = [UIColor darkGrayColor];
     [_dynamicButton addSubview:dynamicLabel];
-   
-    
-//    UIImage *imageJianTou = [UIImage imageNamed:@"main_jiantou.png"];
-//    UIImageView *jianTou = [[UIImageView alloc] initWithImage:imageJianTou];
-//    jianTou.frame = CGRectMake(_dynamicButton.bounds.size.width-18, 15, 7, 11);
-//    [_dynamicButton addSubview:jianTou];
+    [_dynamicButton addTarget:self action:@selector(showHisDynamic) forControlEvents:UIControlEventTouchUpInside];
+    UIImage *imageJianTou = [UIImage imageNamed:@"main_jiantou.png"];
+    UIImageView *jianTou = [[UIImageView alloc] initWithImage:imageJianTou];
+    jianTou.frame = CGRectMake(_dynamicButton.bounds.size.width-18, 15, 7, 11);
+    [_dynamicButton addSubview:jianTou];
 }
 
 - (void)goodFriendCell
@@ -193,17 +201,57 @@
     goodFriendLabel.font = [UIFont systemFontOfSize:15];
     goodFriendLabel.textColor = [UIColor darkGrayColor];
     [_goodFriendButton addSubview:goodFriendLabel];
+    [_goodFriendButton addTarget:self action:@selector(showHisFriend) forControlEvents:UIControlEventTouchUpInside];
+    UIImage *imageJianTou = [UIImage imageNamed:@"main_jiantou.png"];
+    UIImageView *jianTou = [[UIImageView alloc] initWithImage:imageJianTou];
+    jianTou.frame = CGRectMake(_goodFriendButton.bounds.size.width-18, 15, 7, 11);
+    [_goodFriendButton addSubview:jianTou];
+}
+
+- (void)showHisBabys
+{
+    if([user.baby_count isEqualToString:@"0"])
+    {
+        return ;
+    }
     
-//    UIImage *imageJianTou = [UIImage imageNamed:@"main_jiantou.png"];
-//    UIImageView *jianTou = [[UIImageView alloc] initWithImage:imageJianTou];
-//    jianTou.frame = CGRectMake(_goodFriendButton.bounds.size.width-18, 15, 7, 11);
-//    [_goodFriendButton addSubview:jianTou];
+    MybabyListViewController * vc = [[MybabyListViewController alloc] initWithNibName:nil bundle:nil];
+    vc.user = user;
+    [self push:vc];
+    vc = nil;
+}
+
+- (void)showHisDynamic
+{
+    if([user.record_count isEqualToString:@"0"])
+    {
+        return ;
+    }
+    
+    DynamicByUserIDViewController * vc = [[DynamicByUserIDViewController alloc] initWithNibName:nil bundle:nil];
+    vc.user = user;
+    [self push:vc];
+    vc = nil;
+}
+
+- (void)showHisFriend
+{
+    if([user.friend_count isEqualToString:@"0"])
+    {
+        return ;
+    }
+    
+    HisFriendsViewController * vc = [[HisFriendsViewController alloc] initWithNibName:nil bundle:nil];
+    vc.user = user;
+    [self push:vc];
+    vc = nil;
 }
 
 #pragma 删除按钮
 - (void)showDelButton
 {
-    if (!isDelBtnShown) {
+    if (!isDelBtnShown)
+    {
         [self.navigationController.view addSubview:delBtn];
         isDelBtnShown = YES;
     }
@@ -234,7 +282,8 @@
 #pragma mark -点击屏幕，让删除按钮消失
 - (void)tapView
 {
-    if (delBtn.superview != nil) {
+    if (delBtn.superview != nil)
+    {
         [delBtn removeFromSuperview];
         isDelBtnShown = NO;
     }

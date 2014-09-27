@@ -28,6 +28,7 @@
 #import "PublishImageView.h"
 #import "ImageDisplayView.h"
 #import "PraiseViewController.h"
+#import "BabyHomePageViewController.h"
 @import MediaPlayer;
 @interface DynamicDetailViewController ()
 
@@ -239,6 +240,35 @@
     vc = nil;
 }
 
+
+- (void)showBabyHomePage:(UITapGestureRecognizer *)gesture
+{
+    if(![gesture.view isKindOfClass:[UIImageView class]])
+    {
+        return ;
+    }
+    
+    BabyRecord * record = _babyRecord;
+    
+    [SVProgressHUD showWithStatus:@"加载中..."];
+    [[HttpService sharedInstance] getBabyInfo:@{@"baby_id":record.baby_id} completionBlock:^(id object) {
+        [SVProgressHUD dismiss];
+        BabyHomePageViewController * vc = [[BabyHomePageViewController alloc] initWithNibName:nil bundle:nil];
+        vc.babyInfo = object;
+        [self push:vc];
+        vc = nil;
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        NSString * msg = responseString;
+        if(error)
+        {
+            msg = @"加载失败.";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+    }];
+}
+
+
 - (void)keyboardShow:(NSNotification *)notification
 {
     float duration = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
@@ -311,6 +341,25 @@
         cell = [tableView dequeueReusableCellWithIdentifier:@"DynamicDetailCell"];
         DynamicDetailCell * detailCell = (DynamicDetailCell *)cell;
         [detailCell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:_babyRecord.avatar] placeholderImage:Default_Avatar];
+        
+        //添加头像点击手势
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showBabyHomePage:)];
+        detailCell.avatarImageView.userInteractionEnabled = YES;
+        [detailCell.avatarImageView addGestureRecognizer:tap];
+        tap = nil;
+        
+        NSString * who = _babyRecord.username;
+        if([_babyRecord.sex isEqualToString:@"1"])
+        {
+            who = [NSString stringWithFormat:@"%@(爸爸)",who];
+        }
+        else if ([_babyRecord.sex isEqualToString:@"2"])
+        {
+            who = [NSString stringWithFormat:@"%@(妈妈)",who];
+        }
+        detailCell.whoLabel.text = who;
+
+        
         detailCell.babyNameLabel.text = _babyRecord.baby_nickname;
         detailCell.addressLabel.text = _babyRecord.address;
         detailCell.contentTextView.attributedText = [NSStringUtil makeTopicString:_babyRecord.content];
@@ -325,19 +374,19 @@
         {
             detailCell.likeView.hidden = NO;
             NSDictionary * userDic = _babyRecord.top_3_likes[0];
-            [detailCell.praiseUserFirstBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal];
+            [detailCell.praiseUserFirstBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal placeholderImage:Default_Avatar];
             [detailCell.praiseUserFirstBtn addTarget:self action:@selector(showPraiseListVC:) forControlEvents:UIControlEventTouchUpInside];
             if([_babyRecord.top_3_likes count] > 1)
             {
                 userDic = _babyRecord.top_3_likes[1];
-                [detailCell.praiseUserSecondBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal];
+                [detailCell.praiseUserSecondBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal placeholderImage:Default_Avatar];
                 [detailCell.praiseUserSecondBtn addTarget:self action:@selector(showPraiseListVC:) forControlEvents:UIControlEventTouchUpInside];;
             }
             
             if([_babyRecord.top_3_likes count] > 2)
             {
                 userDic = _babyRecord.top_3_likes[2];
-                [detailCell.praiseUserThirdBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal];
+                [detailCell.praiseUserThirdBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal placeholderImage:Default_Avatar];
                 [detailCell.praiseUserThirdBtn addTarget:self action:@selector(showPraiseListVC:) forControlEvents:UIControlEventTouchUpInside];
             }
         }
@@ -431,6 +480,12 @@
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
+    
+    if([textField.text length] > 0)
+    {
+        [self pinLunEvent:nil];
+    }
+    
     return YES;
 }
 
