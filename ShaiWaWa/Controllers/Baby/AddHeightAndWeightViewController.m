@@ -111,7 +111,6 @@
 {
     //计算今天与宝宝出生日期相差的天数
     int deltaDay = [self calculateDeltaDay:birthday];
-    deltaDay  = 26;
     //初始化身高体重数组
     NSArray *heightArray = nil;
     NSArray *weightArray = nil;
