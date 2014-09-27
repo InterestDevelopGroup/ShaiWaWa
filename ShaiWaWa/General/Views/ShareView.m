@@ -74,6 +74,22 @@
     return self;
 }
 
+- (void)showDelBtn
+{
+    [_collectionButton setFrame:CGRectMake(13, 119, 93, 28)];
+    [_deleteButton setFrame:CGRectMake(215, 119, 93, 28)];
+    [_reportButton setFrame:CGRectMake(114, 119, 93, 28)];
+    _deleteButton.hidden = NO;
+}
+
+- (void)hideDelBtn
+{
+    _deleteButton.hidden = YES;
+    [_collectionButton setFrame:CGRectMake(13, 119, 93, 28)];
+    [_reportButton setFrame:CGRectMake(215, 119, 93, 28)];
+}
+
+
 - (void)touchEvent:(id)sender
 {
     if (sender == _weiXinButton)

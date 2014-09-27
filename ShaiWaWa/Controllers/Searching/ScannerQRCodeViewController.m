@@ -9,7 +9,6 @@
 #import "ScannerQRCodeViewController.h"
 #import "QRCodeCardViewController.h"
 #import "UIViewController+BarItemAdapt.h"
-
 #import "FriendHomeViewController.h"
 #import "UserInfo.h"
 #import "UserDefault.h"

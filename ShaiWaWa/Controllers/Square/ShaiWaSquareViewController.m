@@ -63,11 +63,12 @@
     [self setLeftCusBarItem:@"square_back" action:nil];
       UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
 
-    collectionNew = [[UICollectionView alloc]initWithFrame:CGRectMake(0,0,self.view.bounds.size.width, _segScrollView.bounds.size.height) collectionViewLayout:layout];
+    collectionNew = [[UICollectionView alloc]initWithFrame:CGRectMake(0,0,self.view.bounds.size.width, _segScrollView.frame.size.height) collectionViewLayout:layout];
+    collectionNew.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         
-    collectionHot = [[UICollectionView alloc]initWithFrame:CGRectMake(320,0,self.view.bounds.size.width, _segScrollView.bounds.size.height) collectionViewLayout:layout];
+    collectionHot = [[UICollectionView alloc]initWithFrame:CGRectMake(320,0,self.view.bounds.size.width, _segScrollView.frame.size.height) collectionViewLayout:layout];
 
-
+    collectionHot.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     [self HMSegmentedControlInitMethod];
     
     
@@ -372,7 +373,7 @@
     
     [cell.usernameLabel setText:record.baby_nickname];
     [cell.contentLabel setText:record.content];
-    [cell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:record.avatar] placeholderImage:[UIImage imageNamed:@"square_pic-2"]];
+    [cell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:(record.user_avatar == [NSNull null] ? @"" : record.user_avatar)] placeholderImage:[UIImage imageNamed:@"square_pic-2"]];
     cell.avatarImageView.userInteractionEnabled = YES;
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showFriendInfo:)];
     [cell.avatarImageView addGestureRecognizer:tap];
@@ -427,4 +428,23 @@
 {
     return YES;
 }
+
+#pragma mark -  UIScrollViewDelegate Methods
+int _lastPosition;    //A variable define in headfile
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    int currentPostion = scrollView.contentOffset.y;
+    if (currentPostion - _lastPosition > 280) {
+        _lastPosition = currentPostion;
+        [self.navigationController setNavigationBarHidden:YES animated:YES];
+        //NSLog(@"ScrollUp now");
+        
+    }
+    else if (_lastPosition - currentPostion > 280)
+    {
+        _lastPosition = currentPostion;
+        [self.navigationController setNavigationBarHidden:NO animated:YES];
+        //NSLog(@"ScrollDown now");
+    }
+}
+
 @end

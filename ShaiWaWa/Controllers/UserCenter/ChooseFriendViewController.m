@@ -2,7 +2,7 @@
 //  ChooseFriendViewController.m
 //  ShaiWaWa
 //
-//  Created by 祥 on 14-7-8.
+//  Created by Carl on 14-7-8.
 //  Copyright (c) 2014年 helloworld. All rights reserved.
 //
 
@@ -17,9 +17,12 @@
 #import "MJRefreshHeaderView.h"
 #import "MJRefreshFooterView.h"
 #import "MJRefresh.h"
-
+#import "Friend.h"
+#import "UIImageView+WebCache.h"
+#import "SSCheckBoxView.h"
 @interface ChooseFriendViewController ()
 @property(nonatomic,strong) NSMutableArray * friendList;
+@property(nonatomic,strong) NSMutableArray * selectedFriends;
 @property(nonatomic,assign) int currentOffset;
 @property(nonatomic,strong) NSString * keyword;
 @property(nonatomic,assign) int apiType;
@@ -32,6 +35,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        _selectedFriends = [@[] mutableCopy];
         _friendList = [@[] mutableCopy];
         _currentOffset = 0;
         _apiType = 0;
@@ -57,10 +61,10 @@
     UIButton *addFriendButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [addFriendButton setTitle:@"完成" forState:UIControlStateNormal];
     addFriendButton.frame = CGRectMake(0, 0, 40, 30);
+    [addFriendButton addTarget:self action:@selector(finishAction:) forControlEvents:UIControlEventTouchUpInside];
     [addFriendButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
     UIBarButtonItem *right_addFriend = [[UIBarButtonItem alloc] initWithCustomView:addFriendButton];
     self.navigationItem.rightBarButtonItem = right_addFriend;
-    
     [_friendSelectListTableView clearSeperateLine];
     [_friendSelectListTableView registerNibWithName:@"FriendSelectedCell" reuseIdentifier:@"Cell"];
     [_friendSelectListTableView addHeaderWithTarget:self action:@selector(refresh)];
@@ -68,7 +72,6 @@
     [_friendSelectListTableView addFooterWithTarget:self action:@selector(loadMore)];
     [_friendSelectListTableView setFooterPullToRefreshText:NSLocalizedString(@"PullTOLoad", nil)];
     [_friendSelectListTableView setFooterRefreshingText:NSLocalizedString(@"DataLoading", nil)];
-    
     [_friendSelectListTableView headerBeginRefreshing];
 }
 
@@ -176,6 +179,45 @@
     }];
 }
 
+- (void)checkboxStateChanged:(SSCheckBoxView *)checkbox
+{
+    FriendSelectedCell * cell;
+    if([checkbox.superview.superview.superview isKindOfClass:[FriendSelectedCell class]])
+    {
+        cell = (FriendSelectedCell *)checkbox.superview.superview.superview;
+    }
+    else if([checkbox.superview.superview isKindOfClass:[FriendSelectedCell class]])
+    {
+        cell = (FriendSelectedCell *)checkbox.superview.superview;
+    }
+    else
+    {
+        cell = (FriendSelectedCell *)checkbox.superview;
+    }
+    
+    NSIndexPath * indexPath = [_friendSelectListTableView indexPathForCell:cell];
+    Friend * friend = _friendList[indexPath.row];
+    if([_selectedFriends containsObject:friend])
+    {
+        [_selectedFriends removeObject:friend];
+    }
+    else
+    {
+        [_selectedFriends addObject:friend];
+    }
+    [_friendSelectListTableView reloadData];
+}
+
+- (void)finishAction:(id)sender
+{
+    if(self.finishSelectedBlock)
+    {
+        self.finishSelectedBlock(_selectedFriends);
+    }
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 #pragma mark - UITableView DataSources and Delegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -184,15 +226,35 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    FriendSelectedCell * friendSelectedListCell = (FriendSelectedCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
-    //babyListCell.selectionStyle = UITableViewCellSelectionStyleNone;
-    //    babyListCell.babyImage.image = [UIImage imageNamed:@""];
-    //    babyListCell.babyNameLabel.text = [NSString stringWithFormat:@""];
-    //    babyListCell.babyOldLabel.text = [NSString stringWithFormat:@""];
-    //    babyListCell.babySexImage.image = [UIImage imageNamed:@""];
-    friendSelectedListCell.backgroundColor = [UIColor clearColor];
-    return friendSelectedListCell;
+    FriendSelectedCell * cell = (FriendSelectedCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    Friend * friend = _friendList[indexPath.row];
+    [cell.headImgView sd_setImageWithURL:[NSURL URLWithString:friend.avatar] placeholderImage:[UIImage imageNamed:@"user_touxiang"]];
+    cell.nickNameLabel.text = friend.username;
     
+    [[cell.contentView viewWithTag:10000] removeFromSuperview];
+    SSCheckBoxView * checkButton = [[SSCheckBoxView alloc] initWithFrame:cell.isSelectedButton.frame style:kSSCheckBoxViewStyleGlossy checked:[_selectedFriends containsObject:friend]];
+    [cell.contentView addSubview:checkButton];
+    [checkButton setStateChangedTarget:self selector:@selector(checkboxStateChanged:)];
+    checkButton.tag = 10000;
+    [cell.isSelectedButton removeFromSuperview];
+    cell.backgroundColor = [UIColor clearColor];
+    return cell;
+    
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Friend * friend = _friendList[indexPath.row];
+    if([_selectedFriends containsObject:friend])
+    {
+        [_selectedFriends removeObject:friend];
+    }
+    else
+    {
+        [_selectedFriends addObject:friend];
+    }
+    [_friendSelectListTableView reloadData];
 }
 
 #pragma mark - UITextFieldDelegate

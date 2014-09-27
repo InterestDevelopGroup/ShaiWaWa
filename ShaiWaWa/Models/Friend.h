@@ -7,21 +7,26 @@
 //
 
 #import <Foundation/Foundation.h>
-@class UserInfo;
-@interface Friend : NSObject<NSCopying, NSCoding> 
+//@class UserInfo;
+@interface Friend : NSObject
 {
-    NSString *column_id;    //id
-    NSString *friend_id;    //朋友id
-    UserInfo *userInfo;
-    NSString *type;         //关系类型(1:普通朋友，2:配偶)
-    NSString *add_time;     //申请时间
-    
+
 }
-
-@property (nonatomic, strong) NSString *column_id;
-@property (nonatomic, strong) NSString *friend_id;
-@property (nonatomic, strong) UserInfo *userInfo;
-@property (nonatomic, strong) NSString *type;
 @property (nonatomic, strong) NSString *add_time;
-
+@property (nonatomic, strong) NSString *avatar;
+@property (nonatomic, strong) NSString *fid;
+@property (nonatomic, strong) NSString *friend_id;
+@property (nonatomic, strong) NSString *login_time;
+@property (nonatomic, strong) NSString *phone;
+@property (nonatomic, strong) NSString *qq;
+@property (nonatomic, strong) NSString *register_time;
+@property (nonatomic, strong) NSString *sex;
+@property (nonatomic, strong) NSString *sina_openID;
+@property (nonatomic, strong) NSString *sww_number;
+@property (nonatomic, strong) NSString *tecent_openID;
+@property (nonatomic, strong) NSString *type; //关系类型(1:普通朋友，2:配偶)
+@property (nonatomic, strong) NSString *username;
+@property (nonatomic, strong) NSString *wechat;
+@property (nonatomic, strong) NSString *weibo;
+@property (nonatomic, strong) NSString *baby_count;
 @end

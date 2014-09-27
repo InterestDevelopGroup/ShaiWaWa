@@ -29,4 +29,6 @@
 @property (nonatomic,strong) NSArray * images;
 @property (nonatomic,strong) NSString * video;
 @property (nonatomic,strong) NSString * audio;
+@property (nonatomic,strong) NSString * user_avatar;
+@property (nonatomic,strong) NSString * username;
 @end

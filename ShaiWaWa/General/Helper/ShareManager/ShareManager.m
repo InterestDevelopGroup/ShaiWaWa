@@ -35,9 +35,9 @@
     [ShareSDK importWeChatClass:[WXApi class]];
     
     //新浪微博
-     [ShareSDK connectSinaWeiboWithAppKey:@"3760443588"
-     appSecret:@"13662c0f4a3d11a596e933359ac98849"
-     redirectUri:@"http://www.yichatea.com/"];
+     [ShareSDK connectSinaWeiboWithAppKey:@"1000068529"
+     appSecret:@"5258f9253910966082e8828fe092841d"
+     redirectUri:@"http://www.gzinterest.com"];
     
 
     //微信
@@ -52,8 +52,8 @@
      appSecret:@"aed9b0303e3ed1e27bae87c33761161d"];
      */
     
-    [ShareSDK connectQZoneWithAppKey:@"1101328312"
-                           appSecret:@"nG136aiqNSDp0lvP"
+    [ShareSDK connectQZoneWithAppKey:@"1102927704"
+                           appSecret:@"kXvZ57IaEyknuUiy"
                    qqApiInterfaceCls:[QQApiInterface class]
                      tencentOAuthCls:[TencentOAuth class]];
     

@@ -24,6 +24,7 @@
 #import "AppMacros.h"
 #import "UIImageView+WebCache.h"
 #import "LikeUser.h"
+#import "PersonCenterViewController.h"
 @interface PraiseViewController ()
 @property (nonatomic,assign) int currentOffset;
 @end
@@ -46,11 +47,19 @@
     // Do any additional setup after loading the view from its nib.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 #pragma mark - Private Methods
 - (void)initUI
 {
@@ -134,7 +143,21 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    //UserInfo *users = [[UserDefault sharedInstance] userInfo];
+    UserInfo *users = [[UserDefault sharedInstance] userInfo];
+    LikeUser * likeUser = [praisePersonArr objectAtIndex:indexPath.row];
+    if(![likeUser.uid isEqualToString:users.uid])
+    {
+        FriendHomeViewController * vc = [[FriendHomeViewController alloc] initWithNibName:nil bundle:nil];
+        vc.friendId = likeUser.uid;
+        [self push:vc];
+        vc = nil;
+    }
+    else
+    {
+        PersonCenterViewController * vc = [[PersonCenterViewController alloc] initWithNibName:nil bundle:nil];
+        [self push:vc];
+        vc = nil;
+    }
 
 }
 @end

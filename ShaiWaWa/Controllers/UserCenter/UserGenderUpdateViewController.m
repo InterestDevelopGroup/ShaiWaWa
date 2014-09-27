@@ -2,7 +2,7 @@
 //  UserGenderUpdateViewController.m
 //  ShaiWaWa
 //
-//  Created by 祥 on 14-7-10.
+//  Created by Carl on 14-7-10.
 //  Copyright (c) 2014年 helloworld. All rights reserved.
 //
 
@@ -103,26 +103,32 @@
 
 - (IBAction)update_ok:(id)sender
 {
-    UserInfo *curUser = [[UserInfo alloc] init];
-    curUser.phone = [[[UserDefault sharedInstance] userInfo] phone];
-    curUser.username = [[[UserDefault sharedInstance] userInfo] username];
-    curUser.password = [[[UserDefault sharedInstance] userInfo] password];
-    curUser.uid = [[[UserDefault sharedInstance] userInfo] uid];
     
+    UserInfo * user = [[UserDefault sharedInstance] userInfo];
+    
+    NSString * sex;
     if (isSecure) {
-        curUser.sex = @"0";
+        sex = @"0";
     }
     if (isMan) {
-        curUser.sex = @"1";
+        sex = @"1";
     }
     if (isWoman) {
-        curUser.sex = @"2";
+        sex = @"2";
     }
     
+    if([user.sex isEqualToString:sex])
+    {
+        [SVProgressHUD showSuccessWithStatus:@"更新成功"];
+        [self.navigationController popViewControllerAnimated:YES];
+
+        return ;
+    }
     
-    curUser.sww_number = [[[UserDefault sharedInstance] userInfo] sww_number];
-    NSLog(@"%@",@{@"user_id":curUser.uid,@"username":curUser.username,@"avatar":[NSNull null],@"sex":@"1",@"qq":[NSNull null],@"weibo":[NSNull null],@"wechat":[NSNull null]});
-    [[HttpService sharedInstance] updateUserInfo:@{@"user_id":curUser.uid,@"username":curUser.username,@"avatar":[NSNull null],@"sex":curUser.sex,@"qq":[NSNull null],@"weibo":[NSNull null],@"wechat":[NSNull null]} completionBlock:^(id object) {
+    user.sex = sex;
+
+    [[HttpService sharedInstance] updateUserInfo:@{@"user_id":user.uid,@"username":user.username,@"avatar":(user.avatar == nil ? @"" : user.avatar) ,@"sex":user.sex,@"qq":(user.qq == nil ? @"":user.qq),@"weibo":(user.weibo == nil ? @"":user.weibo),@"wechat":(user.wechat == nil ? @"":user.wechat)} completionBlock:^(id object) {
+        [[UserDefault sharedInstance] setUserInfo:user];
         [SVProgressHUD showSuccessWithStatus:@"更新成功"];
         [self.navigationController popViewControllerAnimated:YES];
     } failureBlock:^(NSError *error, NSString *responseString) {

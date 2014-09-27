@@ -59,6 +59,16 @@
 - (void)initUI
 {
     self.title = @"我的宝宝";
+    
+    if(_user == nil)
+    {
+        _user = [[UserDefault sharedInstance] userInfo];
+    }
+    else
+    {
+        self.title = [NSString stringWithFormat:@"%@的宝宝",_user.username];
+    }
+    
     [self setLeftCusBarItem:@"square_back" action:nil];
     [_babyListTableView clearSeperateLine];
     [_babyListTableView registerNibWithName:@"BabyListCell" reuseIdentifier:@"Cell"];
@@ -89,8 +99,8 @@
 //获取宝宝列表
 - (void)getBabys
 {
-    UserInfo *user = [[UserDefault sharedInstance] userInfo];
-    [[HttpService sharedInstance] getBabyList:@{@"offset":[NSString stringWithFormat:@"%i",_currentOffset],@"pagesize":[NSString stringWithFormat:@"%i",CommonPageSize],@"uid":user.uid}completionBlock:^(id object) {
+
+    [[HttpService sharedInstance] getBabyList:@{@"offset":[NSString stringWithFormat:@"%i",_currentOffset],@"pagesize":[NSString stringWithFormat:@"%i",CommonPageSize],@"uid":_user.uid}completionBlock:^(id object) {
         
         [_babyListTableView headerEndRefreshing];
         [_babyListTableView footerEndRefreshing];
@@ -154,6 +164,8 @@
         babyListCell.babySexImage.hidden = NO;
         babyListCell.babySexImage.image = [UIImage imageNamed:@"main_girl.png"];
     }
+    
+    babyListCell.babyOldLabel.text = [NSString stringWithFormat:@"%@条动态",baby.record_count];
 
     
     return babyListCell;
