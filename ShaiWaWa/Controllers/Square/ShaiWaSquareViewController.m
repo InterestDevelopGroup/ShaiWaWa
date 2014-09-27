@@ -373,7 +373,7 @@
     
     [cell.usernameLabel setText:record.baby_nickname];
     [cell.contentLabel setText:record.content];
-    [cell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:record.avatar] placeholderImage:[UIImage imageNamed:@"square_pic-2"]];
+    [cell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:(record.user_avatar == [NSNull null] ? @"" : record.user_avatar)] placeholderImage:[UIImage imageNamed:@"square_pic-2"]];
     cell.avatarImageView.userInteractionEnabled = YES;
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showFriendInfo:)];
     [cell.avatarImageView addGestureRecognizer:tap];

@@ -75,7 +75,6 @@
     [self setLeftCusBarItem:@"square_back" action:nil];
     key = [[NSMutableArray alloc] initWithObjects:@"用户名",@"性别",@"修改密码", nil];
     userNameVal = users.username;
-    NSLog(@"%@",users.sex);
     if ([users.sex isEqualToString:@"0"]) {
         sexVal = @"保密";
     }

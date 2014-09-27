@@ -13,8 +13,7 @@
     NSArray *sectionArr;
     NSArray *friendsAll;
     NSDictionary *freindsList;
-    int numOfYaoQing;
-    WeiBoCell *weiBoCell;
+
 
 }
 @property (strong, nonatomic) IBOutlet UITableView *weiBoListTableView;

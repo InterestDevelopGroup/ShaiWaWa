@@ -76,14 +76,43 @@
          if(error)
          {
              NSLog(@"%@",error);
+             UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"授权失败." delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+             [alertView show];
+             alertView = nil;
              return  ;
          }
          
-         if (result)
+         if(!result)
          {
+             UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"登陆失败." delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+             [alertView show];
+             alertView = nil;
+             return ;
              
          }
-
+         
+         NSLog(@"获取用户所属平台类型:%d",[userInfo type]);
+         NSLog(@"获取用户个人主页:%@",[userInfo url]);
+         NSLog(@"获取用户认证类型:%d",[userInfo verifyType]);
+         NSLog(@"获取用户职业信息:%@",[userInfo works]);
+         NSLog(@"获取用户id:%@",[userInfo uid]);
+         NSLog(@"获取用户昵称:%@",[userInfo nickname]);
+         NSLog(@"获取用户个人简介:%@",[userInfo aboutMe]);
+         NSLog(@"获取用户所属的应用:%@",[userInfo app]);
+         NSLog(@"获取用户的原始数据信息:%@",[userInfo sourceData]);
+         NSLog(@"获取用户分享数:%d",[userInfo shareCount]);
+         NSLog(@"获取用户注册时间:%f",[userInfo regAt]);
+         NSLog(@"获取用户个人头像:%@",[userInfo profileImage]);
+         NSLog(@"获取用户等级%d",[userInfo level]);
+         NSLog(@"获取用户性别:%d",[userInfo gender]);
+         NSLog(@"获取用户关注数:%d",[userInfo friendCount]);
+         NSLog(@"获取用户粉丝数:%d",[userInfo followerCount]);
+         NSLog(@"获取用户的教育信息列表:%@",[userInfo educations]);
+         NSLog(@"获取用户生日:%@",[userInfo birthday]);
+         NSLog(@"token:%@",[[userInfo credential] token]);
+         NSLog(@"secret:%@",[[userInfo credential] secret]);
+         
+         [self loginWithUserInfo:userInfo openid:[userInfo uid] type:@"2"];
      }];
     
 }
@@ -168,6 +197,8 @@
     }];
 }
 
+
+
 - (void)loginWithUserInfo:(id<ISSPlatformUser>)userInfo openid:(NSString *)openid type:(NSString *)type
 {
      [[HttpService sharedInstance] openLogin:@{@"open_id":openid,
@@ -181,9 +212,20 @@
          NSLog(@"%@",object);
          [SVProgressHUD dismiss];
          
+         NSString * key = @"QQ_ACCESS_TOKEN";
+         if([type isEqualToString:@"1"])
+         {
+             key = @"QQ_ACCESS_TOKEN";
+         }
+         else if([type isEqualToString:@"2"])
+         {
+             key = @"SIAN_ACCESS_TOKEN";
+         }
+         
          NSUserDefaults * userDefault = [NSUserDefaults standardUserDefaults];
-         [userDefault setObject:[[userInfo credential] token] forKey:@"QQ_ACCESS_TOKEN"];
+         [userDefault setObject:[[userInfo credential] token] forKey:key];
          [userDefault synchronize];
+
          if(_bindBlock)
          {
              _bindBlock(object);
@@ -218,8 +260,17 @@
         [[HttpService sharedInstance] userRegister:params completionBlock:^(id object) {
             [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"RegisterSuccess", nil)];
             
+            NSString * key = @"QQ_ACCESS_TOKEN";
+            if([type isEqualToString:@"1"])
+            {
+                key = @"QQ_ACCESS_TOKEN";
+            }
+            else if([type isEqualToString:@"2"])
+            {
+                key = @"SIAN_ACCESS_TOKEN";
+            }
             NSUserDefaults * userDefault = [NSUserDefaults standardUserDefaults];
-            [userDefault setObject:[[info credential] token] forKey:@"QQ_ACCESS_TOKEN"];
+            [userDefault setObject:[[userInfo credential] token] forKey:key];
             [userDefault synchronize];
             
             UserInfo *curUser = [[HttpService sharedInstance] mapModel:[[object objectForKey:@"result"] objectAtIndex:0] withClass:[UserInfo class]];

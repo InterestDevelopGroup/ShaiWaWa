@@ -33,6 +33,7 @@ PODS:
   - SDWebImage (3.7.1):
     - SDWebImage/Core
   - SDWebImage/Core (3.7.1)
+  - SSCheckBoxView (0.0.1)
   - SVProgressHUD (1.0)
   - ZBarSDK (1.3.1)
 
@@ -45,6 +46,7 @@ DEPENDENCIES:
   - MagicalRecord (~> 2.2)
   - MBProgressHUD (~> 0.8)
   - SDWebImage (~> 3.6)
+  - SSCheckBoxView (~> 0.0.1)
   - SVProgressHUD (~> 1.0)
   - ZBarSDK (~> 1.3.1)
 
@@ -57,6 +59,7 @@ SPEC CHECKSUMS:
   MagicalRecord: 2b471584fc9e3137f3d0a56967917baa4979e224
   MBProgressHUD: 2038dbcf3dce73215abed6001657043d53aa79a8
   SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
+  SSCheckBoxView: 9a475f158e23c486771fbae49a3c862712c33019
   SVProgressHUD: 5034c6e22b8c2ca3e09402e48d41ed0340aa1c50
   ZBarSDK: 3ed560856963f765b66d834f464590bd6ba13b44
 

@@ -187,6 +187,9 @@
         [SVProgressHUD showSuccessWithStatus:@"添加成功"];
         [self clearTextField];
         [self resetStatus];
+        
+        user.baby_count = [NSString stringWithFormat:@"%i",[user.baby_count intValue] + 1];
+        [[UserDefault sharedInstance] setUserInfo:user];
     } failureBlock:^(NSError *error, NSString *responseString) {
         NSString * msg = responseString;
         if (error) {

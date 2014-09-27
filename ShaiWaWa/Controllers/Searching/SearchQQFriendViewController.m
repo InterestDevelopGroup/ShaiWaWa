@@ -61,7 +61,12 @@
         
         
     } failureBlock:^(NSError *error, NSString *responseString) {
-        [SVProgressHUD showErrorWithStatus:responseString];
+        NSString * msg = responseString;
+        if(error)
+        {
+            msg = @"获取失败.";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
     }];
 }
 

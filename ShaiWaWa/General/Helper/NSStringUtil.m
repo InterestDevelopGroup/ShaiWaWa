@@ -29,6 +29,16 @@
         //DDLogInfo(@"%@",[text substringWithRange:result.range]);
         [attrContent addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:131.0/255.0f green:169.0/255.0f blue:88.0/255.0f alpha:1.0] range:result.range];
     }
+    
+    
+    regex = @"@[\\u4e00-\\u9fa5\\w\\-]+";
+    regularExpress = [NSRegularExpression regularExpressionWithPattern:regex options:NSRegularExpressionCaseInsensitive error:nil];
+    arr = [regularExpress matchesInString:text options:0 range:NSMakeRange(0, [text length])];
+    for(NSTextCheckingResult * result in arr)
+    {
+        [attrContent addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:131.0/255.0f green:169.0/255.0f blue:88.0/255.0f alpha:1.0]  range:result.range];
+    }
+    
     return attrContent;
 }
 
@@ -46,6 +56,26 @@
     for(NSTextCheckingResult * result in results)
     {
         [arr addObject:[text substringWithRange:result.range]];
+    }
+    
+    return (NSArray *)arr;
+}
+
++ (NSArray *)getUserStringRangeArray:(NSString *)text
+{
+    if(text == nil)
+    {
+        return @[];
+    }
+
+    NSString * regex = @"@[\\u4e00-\\u9fa5\\w\\-]+";
+    NSRegularExpression * regularExpress = [NSRegularExpression regularExpressionWithPattern:regex options:NSRegularExpressionCaseInsensitive error:nil];
+    NSArray * results = [regularExpress matchesInString:text options:0 range:NSMakeRange(0, [text length])];
+    NSMutableArray * arr = [@[] mutableCopy];
+    for(NSTextCheckingResult * result in results)
+    {
+        //[arr addObject:[text substringWithRange:result.range]];
+        [arr addObject:NSStringFromRange(result.range)];
     }
     
     return (NSArray *)arr;

@@ -22,7 +22,8 @@
 #import "Friend.h"
 #import "ShareManager.h"
 @interface SearchGoodFriendsViewController ()
-
+@property (nonatomic,strong) NSString * keyword;
+@property (nonatomic,strong) NSMutableArray * friends;
 @end
 
 @implementation SearchGoodFriendsViewController
@@ -56,8 +57,8 @@
     typeOfFriendsArry = [[NSMutableArray alloc] initWithObjects:@"新浪微博上的好友",@"QQ好友",@"手机通讯录好友",@"微信邀请好友",@"扫描二维码", nil];
     typeIconArry = [[NSMutableArray alloc] initWithObjects:@"main_xinlang.png",@"qq.png",@"dianhua2.png",@"main_weixin.png",@"qrcode.png", nil];
     [_typeOfFriendsTableView clearSeperateLine];
-    [_typeOfFriendsTableView setBounces:NO];
-    [_typeOfFriendsTableView setScrollEnabled:NO];
+//    [_typeOfFriendsTableView setBounces:NO];
+//    [_typeOfFriendsTableView setScrollEnabled:NO];
     
 }
 
@@ -66,9 +67,22 @@
 {
     [_searchField resignFirstResponder];
     if (_searchField.text.length > 0) {
+        /*
         SearchRSViewController *searchRS = [[SearchRSViewController alloc] init];
         searchRS.searchValue = _searchField.text;
         [self.navigationController pushViewController:searchRS animated:YES];
+         */
+        
+        [[HttpService sharedInstance] findFriends:@{@"keyword":_keyword,@"offset":@"0",@"pagesize":@"10000"} completionBlock:^(id object) {
+            
+        } failureBlock:^(NSError *error, NSString *responseString) {
+            NSString * msg = responseString;
+            if(msg)
+            {
+                msg = @"搜索失败";
+            }
+            [SVProgressHUD showErrorWithStatus:msg];
+        }];
         
     }
 }
@@ -164,6 +178,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
  
+    _keyword = textField.text;
     [self startSearch:nil];
     return YES;
 }
