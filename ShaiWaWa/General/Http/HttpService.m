@@ -407,7 +407,7 @@
         curUser.sww_number = [[[UserDefault sharedInstance] userInfo] sww_number];
         curUser.avatar = [[[UserDefault sharedInstance] userInfo] avatar];
         
-        [[UserDefault sharedInstance] setUserInfo:curUser];
+        //[[UserDefault sharedInstance] setUserInfo:curUser];
         if(success)
         {
             
@@ -432,8 +432,7 @@
         }
 
         UserInfo *curUser = [self mapModel:[[obj objectForKey:@"result"] objectAtIndex:0] withClass:[UserInfo class]];
-        NSLog(@"%@",curUser.avatar);
-        [[UserDefault sharedInstance] setUserInfo:curUser];
+        //[[UserDefault sharedInstance] setUserInfo:curUser];
         
         if(success)
         {
@@ -473,6 +472,12 @@
         if (isError) {
             return ;
         }
+        
+        if(success)
+        {
+            success(nil);
+        }
+        
     } failureBlock:failure];
 }
 
@@ -523,7 +528,7 @@
             return ;
         }
         if (success) {
-            success(obj);
+            success([self mapModel:obj[@"result"][0] withClass:[BabyInfo class]]);
         }
         
     } failureBlock:failure];
@@ -560,7 +565,17 @@
             return ;
         }
         if (success) {
-            success(obj);
+            NSArray *array = obj[@"result"];
+            if ([array isKindOfClass:[NSNull class]]) {
+                success(@"您还没为宝宝添加成长记录");
+                return;
+            }
+            NSMutableArray *resultArray = [NSMutableArray array];
+            for (NSDictionary *dict in array) {
+                BabyGrowRecord *b = [[BabyGrowRecord alloc] initWithDict:dict];
+                [resultArray addObject:b];
+            }
+            success(resultArray);
         }
     } failureBlock:failure];
 }
@@ -1024,6 +1039,13 @@
         if (isError) {
             return ;
         }
+        
+        if(success)
+        {
+            NSArray * arr = [self mapModelsProcess:obj[@"result"] withClass:[WeiboUser class]];
+            success(arr);
+        }
+        
     } failureBlock:failure];
 }
 
@@ -1343,6 +1365,43 @@
         
     } failureBlock:failure];
 
+}
+
+/**
+ @desc 第三方绑定
+ */
+//TODO:第三方绑定
+- (void)bindOpenLogin:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self postJSON:[self mergeURL:Bind_Open_Login] withParams:params completionBlock:^(id obj) {
+        
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+        if (success) {
+            success(obj);
+        }
+        
+    } failureBlock:failure];
+}
+
+/**
+ @desc 查找好友（整站）
+ */
+//TODO:查找好友（整站）
+- (void)findFriends:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self postJSON:[self mergeURL:Find_Friends] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+        if (success) {
+            success(obj);
+        }
+
+    } failureBlock:failure];
 }
 
 @end

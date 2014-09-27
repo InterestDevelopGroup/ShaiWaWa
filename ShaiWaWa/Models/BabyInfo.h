@@ -17,7 +17,7 @@
     NSString *mid;          //母亲id
     NSString *baby_name;    //宝宝名称
     NSString *avatar;       //宝宝头像
-    NSString *sex;          //性别(1:男 0:女)
+    NSString *sex;          //性别(1:男 2:女)
     NSString *birthday;    //出生日期
     NSString *nickname;     //昵称
     NSString *country;      //国家
@@ -45,5 +45,6 @@
 @property(nonatomic, retain) NSString *birth_weight;
 @property(nonatomic, retain) NSString *background;
 @property(nonatomic, retain) NSString *add_time;
+@property(nonatomic, retain) NSString * record_count;
 
 @end

@@ -46,7 +46,7 @@
 #define Get_Friend_List                             @"get_friend_list"
 #define Delete_Friend                               @"delete_friend"
 #define Search_Friend                               @"search_friend"
-#define Get_Sina_Friend                             @"get_sina_friend"
+#define Get_Sina_Friend                             @"get_sina_friends"
 #define Get_QQ_Friend                               @"get_qq_friends"
 #define Get_Addressbook_Friend                      @"get_contacts_friends"
 #define Get_User_Info                               @"get_user_info"
@@ -63,6 +63,8 @@
 #define Verify_Validatecode                         @"verify_validatecode"
 #define Is_Friend                                   @"friendship"
 #define UnBind                                      @"unbind"
+#define Bind_Open_Login                             @"bind_open_login"
+#define Find_Friends                                @"find_friends"
 typedef enum {
     No_Error_Code = 10000,
     Unknow_Error_Code,
@@ -437,5 +439,16 @@ typedef enum {
 //TODO:解除绑定
 - (void)unbind:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
 
+/**
+ @desc 第三方绑定
+ */
+//TODO:第三方绑定
+- (void)bindOpenLogin:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
+
+/**
+ @desc 查找好友（整站）
+ */
+//TODO:查找好友（整站）
+- (void)findFriends:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
 
 @end

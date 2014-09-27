@@ -2,7 +2,7 @@
 //  MessageViewController.m
 //  ShaiWaWa
 //
-//  Created by x on 14-7-13.
+//  Created by Carl on 14-7-13.
 //  Copyright (c) 2014年 helloworld. All rights reserved.
 //
 
@@ -255,6 +255,7 @@
 {
     NotificationMsg * msg = [self getMessageByCellButton:sender];
     [[HttpService sharedInstance] verifyFriend:@{@"fid":msg.fid,@"type":@"2"} completionBlock:^(id object) {
+        [self updateMsgStatus:@"1" msg:msg];
         [SVProgressHUD showSuccessWithStatus:@"添加成功"];
     } failureBlock:^(NSError *error, NSString *responseString) {
         NSString * msg = responseString;
@@ -269,13 +270,16 @@
 {
     NotificationMsg * msg = [self getMessageByCellButton:sender];
     [[HttpService sharedInstance] verifyFriend:@{@"fid":msg.fid,@"type":@"3"} completionBlock:^(id object) {
+        [self updateMsgStatus:@"1" msg:msg];
         [SVProgressHUD showSuccessWithStatus:@"添加成功"];
     } failureBlock:^(NSError *error, NSString *responseString) {
-        NSString * msg = responseString;
+        [self updateMsgStatus:@"1" msg:msg];
+        NSString * msgstr = responseString;
         if (error) {
-            msg = @"操作失败";
+            msgstr = @"操作失败";
         }
-        [SVProgressHUD showErrorWithStatus:msg];
+        [SVProgressHUD showErrorWithStatus:msgstr];
+        
     }];
 }
 
@@ -283,6 +287,7 @@
 {
     NotificationMsg * msg = [self getMessageByCellButton:sender];
     [[HttpService sharedInstance] verifyFriend:@{@"fid":msg.fid,@"type":@"4"} completionBlock:^(id object) {
+        [self updateMsgStatus:@"1" msg:msg];
         [SVProgressHUD showSuccessWithStatus:@"添加成功"];
     } failureBlock:^(NSError *error, NSString *responseString) {
         NSString * msg = responseString;
@@ -312,6 +317,21 @@
     NSIndexPath * indexPath = [_msgTableView indexPathForCell:cell];
     NotificationMsg * msg = _newestMsgArray[indexPath.row];
     return msg;
+}
+
+- (void)updateMsgStatus:(NSString *)status msg:(NotificationMsg *)msg
+{
+    [[HttpService sharedInstance] updateSystemNotification:@{@"notification_id":msg.notification_id,@"status":@"1"} completionBlock:^(id object) {
+        
+        if([_newestMsgArray containsObject:msg])
+        {
+            [_newestMsgArray removeObject:msg];
+            [_msgTableView reloadData];
+        }
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        
+    }];
 }
 
 #pragma mark - UITableView DataSources and Delegate
@@ -426,7 +446,7 @@
             default:
                 break;
         }
-        
+        msgCell.selectionStyle = UITableViewCellSelectionStyleNone;
         return msgCell;
     }
     else
@@ -509,7 +529,7 @@
         }
         
        
-        
+        msgCell.selectionStyle = UITableViewCellSelectionStyleNone;
         return msgCell;
     }
     
@@ -517,31 +537,7 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    /*
-    UserInfo *user = [[UserDefault sharedInstance] userInfo];
-    [[HttpService sharedInstance] updateSystemNotification:
-            @{@"notification_id":[[_newestMsgArray objectAtIndex:indexPath.row] objectForKey:@"notification_id"],@"status":@"1"} completionBlock:^(id object)
-            {
-                
-                [[HttpService sharedInstance] getSystemNotification:@{@"receive_uid":user.uid,@"offset":@"0", @"pagesize":@"10"} completionBlock:^(id object)
-                 {
-                     
-                     [_msgTableView reloadData];
-                     [_haveReadMsgTableView reloadData];
-                     [SVProgressHUD showSuccessWithStatus:@"获取消息列表完成"];
-                 } failureBlock:^(NSError *error, NSString *responseString) {
-                     [SVProgressHUD showErrorWithStatus:responseString];
-                 }];
-                
-                    [_msgTableView reloadData];
-                    [_haveReadMsgTableView reloadData];
-                    [SVProgressHUD showSuccessWithStatus:@"消息已更新"];
-            } failureBlock:^(NSError *error, NSString *responseString) {
-                    [SVProgressHUD showErrorWithStatus:responseString];
-     }];
-     */
 }
 
 

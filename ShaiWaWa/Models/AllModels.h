@@ -13,4 +13,6 @@
 #import "ContactUser.h"
 #import "NotificationMsg.h"
 #import "LikeUser.h"
+#import "WeiboUser.h"
+#import "BabyGrowRecord.h"
 

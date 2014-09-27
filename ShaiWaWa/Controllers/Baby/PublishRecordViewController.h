@@ -26,6 +26,7 @@
 @property (strong, nonatomic) IBOutlet UIView *bottomView;
 @property (strong, nonatomic) IBOutlet UIView *recrodView;
 @property (strong, nonatomic) IBOutlet UIView *shareView;
+@property (strong, nonatomic) IBOutlet UIImageView *voiceImageView;
 
 
 @property (strong, nonatomic) IBOutlet UIView *overlayView;
@@ -42,6 +43,8 @@
 - (IBAction)showFriendAction:(id)sender;
 - (IBAction)showRecord:(id)sender;
 - (IBAction)showShare:(id)sender;
+- (IBAction)startRecord:(id)sender;
+- (IBAction)stopRecord:(id)sender;
 
 
 @end

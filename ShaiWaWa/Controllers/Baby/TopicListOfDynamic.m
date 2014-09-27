@@ -25,6 +25,7 @@
 #import "MJRefresh.h"
 #import "PublishImageView.h"
 #import "ImageDisplayView.h"
+#import "BabyHomePageViewController.h"
 @import MediaPlayer;
 @interface TopicListOfDynamic ()
 @property (nonatomic,assign) int currentOffset;
@@ -47,14 +48,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
+
+
+
 #pragma mark - Private Methods
 - (void)initUI
 {
@@ -176,6 +184,50 @@
 }
 
 
+- (void)showBabyHomePage:(UITapGestureRecognizer *)gesture
+{
+    if(![gesture.view isKindOfClass:[UIImageView class]])
+    {
+        return ;
+    }
+    
+    UIImageView * imageView = (UIImageView *)gesture.view;
+    DynamicCell * cell ;
+    if([imageView.superview.superview.superview.superview isKindOfClass:[DynamicCell class]])
+    {
+        cell = (DynamicCell *)imageView.superview.superview.superview.superview;
+    }
+    else if ([imageView.superview.superview.superview isKindOfClass:[DynamicCell class]])
+    {
+        cell = (DynamicCell *)imageView.superview.superview.superview;
+    }
+    else
+    {
+        cell = (DynamicCell *)imageView.superview.superview;
+    }
+    
+    NSIndexPath * indexPath = [_dynamicPageTableView indexPathForCell:cell];
+    BabyRecord * record = [_dyArray objectAtIndex:indexPath.row];
+    
+    [SVProgressHUD showWithStatus:@"加载中..."];
+    [[HttpService sharedInstance] getBabyInfo:@{@"baby_id":record.baby_id} completionBlock:^(id object) {
+        [SVProgressHUD dismiss];
+        BabyHomePageViewController * vc = [[BabyHomePageViewController alloc] initWithNibName:nil bundle:nil];
+        vc.babyInfo = object;
+        [self push:vc];
+        vc = nil;
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        NSString * msg = responseString;
+        if(error)
+        {
+            msg = @"加载失败.";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+    }];
+}
+
+
 
 #pragma mark - UITableView DataSources and Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -231,6 +283,25 @@
     dynamicCell.addressLabel.text = recrod.address;
     dynamicCell.dyContentTextView.attributedText = [NSStringUtil makeTopicString:recrod.content];
     [dynamicCell.babyAvatarImageView sd_setImageWithURL:[NSURL URLWithString:recrod.avatar] placeholderImage:Default_Avatar];
+    
+    //添加头像点击手势
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showBabyHomePage:)];
+    dynamicCell.babyAvatarImageView.userInteractionEnabled = YES;
+    [dynamicCell.babyAvatarImageView addGestureRecognizer:tap];
+    tap = nil;
+    
+    NSString * who = recrod.username;
+    if([recrod.sex isEqualToString:@"1"])
+    {
+        who = [NSString stringWithFormat:@"%@(爸爸)",who];
+    }
+    else if ([recrod.sex isEqualToString:@"2"])
+    {
+        who = [NSString stringWithFormat:@"%@(妈妈)",who];
+    }
+    dynamicCell.whoLabel.text = who;
+
+    
     dynamicCell.babyNameLabel.text = recrod.baby_nickname;
     [dynamicCell.zanButton setTitle:recrod.like_count forState:UIControlStateNormal];
     [dynamicCell.commentBtn setTitle:recrod.comment_count forState:UIControlStateNormal];
@@ -240,17 +311,17 @@
     {
         dynamicCell.likeUserView.hidden = NO;
         NSDictionary * userDic = recrod.top_3_likes[0];
-        [dynamicCell.praiseUserFirstBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal];
+        [dynamicCell.praiseUserFirstBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal placeholderImage:Default_Avatar];
         if([recrod.top_3_likes count] > 1)
         {
             userDic = recrod.top_3_likes[1];
-            [dynamicCell.praiseUserSecondBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal];
+            [dynamicCell.praiseUserSecondBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal placeholderImage:Default_Avatar];
         }
         
         if([recrod.top_3_likes count] > 2)
         {
             userDic = recrod.top_3_likes[2];
-            [dynamicCell.praiseUserThirdBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal];
+            [dynamicCell.praiseUserThirdBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal placeholderImage:Default_Avatar];
         }
     }
     else

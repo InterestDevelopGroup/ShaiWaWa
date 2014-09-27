@@ -12,4 +12,5 @@
 
 + (NSMutableAttributedString *)makeTopicString:(NSString *)text;
 + (NSArray *)getTopicStringArray:(NSString *)text;
++ (NSArray *)getUserStringRangeArray:(NSString *)text;
 @end

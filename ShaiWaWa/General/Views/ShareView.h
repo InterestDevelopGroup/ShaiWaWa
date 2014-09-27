@@ -35,7 +35,8 @@ typedef void(^DelBlock)(void);
 @property (nonatomic,strong) CollectionBlock collectionBlock;
 @property (nonatomic,strong) ReportBlock reportBlock;
 @property (nonatomic,strong) DelBlock deleteBlock;
-
-
 @property (nonatomic,retain) NSString *name;
+
+- (void)showDelBtn;
+- (void)hideDelBtn;
 @end

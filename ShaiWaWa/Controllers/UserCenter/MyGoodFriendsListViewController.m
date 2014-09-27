@@ -21,7 +21,6 @@
 #import "MJRefresh.h"
 #import "Friend.h"
 #import "UIImageView+WebCache.h"
-
 @interface MyGoodFriendsListViewController ()
 {
     NSMutableArray *friendList;
@@ -203,8 +202,7 @@
     Friend *friend = friendList[indexPath.row];
     [cell.headPicView sd_setImageWithURL:[NSURL URLWithString:friend.avatar] placeholderImage:[UIImage imageNamed:@"baby_mama@2x.png"]];
     cell.nickNameLabel.text = friend.username;
-#warning 返回数据暂时不齐
-    cell.countOfBabyLabel.text = @"1个宝宝";
+    cell.countOfBabyLabel.text = [NSString stringWithFormat:@"%@个宝宝",friend.baby_count];
     //判断好友类型，1为普通朋友，2为配偶
     if ([friend.type intValue] == 1) {
         cell.remarksLabel.text = @"普通朋友";
