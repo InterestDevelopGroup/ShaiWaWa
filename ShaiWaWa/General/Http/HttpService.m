@@ -1394,4 +1394,23 @@
     } failureBlock:failure];
 }
 
+/**
+ @desc 举报动态
+ */
+//TODO:举报动态
+- (void)addReport:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self postJSON:[self mergeURL:Add_Report] withParams:params completionBlock:^(id obj) {
+        
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+        if (success) {
+            success(obj);
+        }
+        
+    } failureBlock:failure];
+}
+
 @end

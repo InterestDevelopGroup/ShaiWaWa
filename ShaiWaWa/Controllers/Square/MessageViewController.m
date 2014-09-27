@@ -20,6 +20,8 @@
 #import "MJRefresh.h"
 #import "AppMacros.h"
 #import "NotificationMsg.h"
+#import "UIImageView+WebCache.h"
+#import "FriendHomeViewController.h"
 @interface MessageViewController ()
 {
     
@@ -334,6 +336,42 @@
     }];
 }
 
+
+- (void)showHomePage:(UITapGestureRecognizer *)gesture
+{
+    UIImageView * imageView = (UIImageView *)gesture.view;
+    MessageCell * cell ;
+    if([imageView.superview.superview.superview isKindOfClass:[MessageCell class]])
+    {
+        cell = (MessageCell *)imageView.superview.superview.superview;
+    }
+    else if([imageView.superview.superview isKindOfClass:[MessageCell class]])
+    {
+        cell = (MessageCell *)imageView.superview.superview;
+    }
+    else
+    {
+        cell = (MessageCell *)imageView.superview;
+    }
+    
+    NSIndexPath * indexPath = [_msgTableView indexPathForCell:cell];
+    
+    NotificationMsg * msg ;
+    if(segMentedControl.selectedSegmentIndex == 0)
+    {
+        msg = [_newestMsgArray objectAtIndex:indexPath.row];
+    }
+    else
+    {
+        msg = [_haveReadMSGArray objectAtIndex:indexPath.row];
+    }
+    
+    FriendHomeViewController * vc = [[FriendHomeViewController alloc] initWithNibName:nil bundle:nil];
+    vc.friendId = msg.send_uid;
+    [self push:vc];
+    vc = nil;
+}
+
 #pragma mark - UITableView DataSources and Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -393,6 +431,7 @@
                 msgCell.timeLabel.hidden = YES;
                 msgCell.actionLabel.text = @"请求加你为好友";
                 msgCell.contentLabel.text = msg.remark;
+                
                 [msgCell.agreeButton addTarget:self action:@selector(agreeAction:) forControlEvents:UIControlEventTouchUpInside];
                 [msgCell.ignoreButton addTarget:self action:@selector(ignoreAction:) forControlEvents:UIControlEventTouchUpInside];
                 [msgCell.refuseButton addTarget:self action:@selector(refuseAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -446,6 +485,8 @@
             default:
                 break;
         }
+        msgCell.sendNameLabel.text = msg.username;
+        [msgCell.sendImgView sd_setImageWithURL:[NSURL URLWithString:msg.avatar] placeholderImage:Default_Avatar];
         msgCell.selectionStyle = UITableViewCellSelectionStyleNone;
         return msgCell;
     }
@@ -456,16 +497,10 @@
         
         if ([typeId isEqualToString:@"1"]) {
             //动态被评论
-            msgCell.agreeButton.hidden = YES;
-            msgCell.ignoreButton.hidden = YES;
-            msgCell.refuseButton.hidden = YES;
             msgCell.actionLabel.text = @"评论了你的动态";
         }
         if ([typeId isEqualToString:@"2"]) {
             //动态被赞
-            msgCell.agreeButton.hidden = YES;
-            msgCell.ignoreButton.hidden = YES;
-            msgCell.refuseButton.hidden = YES;
             msgCell.contentLabel.hidden = YES;
             msgCell.actionLabel.text = @"赞了你的动态";
         }
@@ -474,29 +509,21 @@
             msgCell.receiveImgView.hidden = YES;
             msgCell.timeLabel.hidden = YES;
             msgCell.actionLabel.text = @"请求加你为好友";
+            msgCell.contentLabel.text = msg.remark;
         }
         if ([typeId isEqualToString:@"4"]) {
             //好友申请被批准
-            msgCell.agreeButton.hidden = YES;
-            msgCell.ignoreButton.hidden = YES;
-            msgCell.refuseButton.hidden = YES;
             msgCell.receiveImgView.hidden = YES;
             msgCell.contentLabel.hidden = YES;
             msgCell.actionLabel.text = @"同意了你的好友请求";
         }
         if ([typeId isEqualToString:@"5"]) {
             //好友申请被拒绝
-            msgCell.agreeButton.hidden = YES;
-            msgCell.ignoreButton.hidden = YES;
-            msgCell.refuseButton.hidden = YES;
             msgCell.receiveImgView.hidden = YES;
             msgCell.contentLabel.hidden = YES;
         }
         if ([typeId isEqualToString:@"6"]) {
             //自己的宝宝有新动态
-            msgCell.agreeButton.hidden = YES;
-            msgCell.ignoreButton.hidden = YES;
-            msgCell.refuseButton.hidden = YES;
             msgCell.receiveImgView.hidden = YES;
             msgCell.actionLabel.hidden = YES;
             msgCell.timeLabel.hidden = YES;
@@ -506,9 +533,7 @@
             msgCell.sendNameLabel.text = @"系统消息";
             msgCell.sendNameLabel.textColor = [UIColor lightGrayColor];
             [msgCell.sendNameLabel setFrame:CGRectMake(74, 15, 80, 21)];
-            msgCell.agreeButton.hidden = YES;
-            msgCell.ignoreButton.hidden = YES;
-            msgCell.refuseButton.hidden = YES;
+
             msgCell.receiveImgView.hidden = YES;
             msgCell.actionLabel.hidden = YES;
             msgCell.timeLabel.hidden = YES;
@@ -520,16 +545,23 @@
         }
         if ([typeId isEqualToString:@"8"]) {
             //被@了
-            msgCell.agreeButton.hidden = YES;
-            msgCell.ignoreButton.hidden = YES;
-            msgCell.refuseButton.hidden = YES;
+ 
             msgCell.contentLabel.hidden = YES;
             msgCell.actionLabel.text = @"在动态中@了你";
 
         }
         
-       
+        msgCell.agreeButton.hidden = YES;
+        msgCell.ignoreButton.hidden = YES;
+        msgCell.refuseButton.hidden = YES;
+        msgCell.sendNameLabel.text = msg.username;
+        [msgCell.sendImgView sd_setImageWithURL:[NSURL URLWithString:msg.avatar] placeholderImage:Default_Avatar];
         msgCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHomePage:)];
+        msgCell.sendImgView.userInteractionEnabled = YES;
+        [msgCell.sendImgView addGestureRecognizer:tap];
+        
         return msgCell;
     }
     

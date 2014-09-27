@@ -45,6 +45,13 @@
 		C35DFB2219B4B7B80023B4CF /* QRCodeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = C35DFB2119B4B7B80023B4CF /* QRCodeGenerator.m */; };
 		C360009F19AA427C00940421 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = C360009D19AA427C00940421 /* GTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C361F85719AE0F9D00AA5248 /* RecordComment.m in Sources */ = {isa = PBXBuildFile; fileRef = C361F85619AE0F9D00AA5248 /* RecordComment.m */; };
+		C362C00119D6A23E00753082 /* AudioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C362BFF719D6A23E00753082 /* AudioButton.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C362C00219D6A23E00753082 /* AudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C362BFF919D6A23E00753082 /* AudioPlayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C362C00319D6A23E00753082 /* AudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = C362BFFB19D6A23E00753082 /* AudioStreamer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C362C00419D6A23E00753082 /* loading.png in Resources */ = {isa = PBXBuildFile; fileRef = C362BFFD19D6A23E00753082 /* loading.png */; };
+		C362C00519D6A23E00753082 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = C362BFFE19D6A23E00753082 /* play.png */; };
+		C362C00619D6A23E00753082 /* screenshots.png in Resources */ = {isa = PBXBuildFile; fileRef = C362BFFF19D6A23E00753082 /* screenshots.png */; };
+		C362C00719D6A23E00753082 /* stop.png in Resources */ = {isa = PBXBuildFile; fileRef = C362C00019D6A23E00753082 /* stop.png */; };
 		C365F98519CB2E870094377F /* SetPasswordStepOneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C365F98319CB2E870094377F /* SetPasswordStepOneViewController.m */; };
 		C365F98619CB2E870094377F /* SetPasswordStepOneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C365F98419CB2E870094377F /* SetPasswordStepOneViewController.xib */; };
 		C365F98A19CB31ED0094377F /* SetPassStepTwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C365F98819CB31ED0094377F /* SetPassStepTwoViewController.m */; };
@@ -528,6 +535,16 @@
 		C360009E19AA427C00940421 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
 		C361F85519AE0F9D00AA5248 /* RecordComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordComment.h; sourceTree = "<group>"; };
 		C361F85619AE0F9D00AA5248 /* RecordComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordComment.m; sourceTree = "<group>"; };
+		C362BFF619D6A23E00753082 /* AudioButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioButton.h; sourceTree = "<group>"; };
+		C362BFF719D6A23E00753082 /* AudioButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioButton.m; sourceTree = "<group>"; };
+		C362BFF819D6A23E00753082 /* AudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPlayer.h; sourceTree = "<group>"; };
+		C362BFF919D6A23E00753082 /* AudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioPlayer.m; sourceTree = "<group>"; };
+		C362BFFA19D6A23E00753082 /* AudioStreamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioStreamer.h; sourceTree = "<group>"; };
+		C362BFFB19D6A23E00753082 /* AudioStreamer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioStreamer.m; sourceTree = "<group>"; };
+		C362BFFD19D6A23E00753082 /* loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading.png; sourceTree = "<group>"; };
+		C362BFFE19D6A23E00753082 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
+		C362BFFF19D6A23E00753082 /* screenshots.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshots.png; sourceTree = "<group>"; };
+		C362C00019D6A23E00753082 /* stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stop.png; sourceTree = "<group>"; };
 		C365F98219CB2E870094377F /* SetPasswordStepOneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetPasswordStepOneViewController.h; sourceTree = "<group>"; };
 		C365F98319CB2E870094377F /* SetPasswordStepOneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetPasswordStepOneViewController.m; sourceTree = "<group>"; };
 		C365F98419CB2E870094377F /* SetPasswordStepOneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetPasswordStepOneViewController.xib; sourceTree = "<group>"; };
@@ -1098,6 +1115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F41F6929198228FA00089E42 /* AudioToolbox.framework in Frameworks */,
 				C37E536D19A847AA00C55861 /* CoreMedia.framework in Frameworks */,
 				F45375C8199604350009274E /* AVFoundation.framework in Frameworks */,
 				F4C4C608199F4C4B00B348A5 /* AddressBookUI.framework in Frameworks */,
@@ -1105,7 +1123,6 @@
 				F4AE5082199AFC12007683E9 /* libz.dylib in Frameworks */,
 				C34E560419D294CF0026E23D /* libmp3lame.a in Frameworks */,
 				F41F65501981F03500089E42 /* libicucore.dylib in Frameworks */,
-				F41F6929198228FA00089E42 /* AudioToolbox.framework in Frameworks */,
 				F41F6927198228F000089E42 /* CFNetwork.framework in Frameworks */,
 				F41F690E19820B5A00089E42 /* CoreLocation.framework in Frameworks */,
 				F41F690619820ACC00089E42 /* Security.framework in Frameworks */,
@@ -1309,6 +1326,31 @@
 			path = GTMBase64;
 			sourceTree = "<group>";
 		};
+		C362BFF519D6A23E00753082 /* AudioPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				C362BFF619D6A23E00753082 /* AudioButton.h */,
+				C362BFF719D6A23E00753082 /* AudioButton.m */,
+				C362BFF819D6A23E00753082 /* AudioPlayer.h */,
+				C362BFF919D6A23E00753082 /* AudioPlayer.m */,
+				C362BFFA19D6A23E00753082 /* AudioStreamer.h */,
+				C362BFFB19D6A23E00753082 /* AudioStreamer.m */,
+				C362BFFC19D6A23E00753082 /* images */,
+			);
+			path = AudioPlayer;
+			sourceTree = "<group>";
+		};
+		C362BFFC19D6A23E00753082 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				C362BFFD19D6A23E00753082 /* loading.png */,
+				C362BFFE19D6A23E00753082 /* play.png */,
+				C362BFFF19D6A23E00753082 /* screenshots.png */,
+				C362C00019D6A23E00753082 /* stop.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
 		C3891B0D19C01A390039F29D /* RHAddressBook */ = {
 			isa = PBXGroup;
 			children = (
@@ -1353,6 +1395,7 @@
 		F41F68861982081E00089E42 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				C362BFF519D6A23E00753082 /* AudioPlayer */,
 				C34E55E519D294CF0026E23D /* MLAudioRecorder */,
 				C3891B0D19C01A390039F29D /* RHAddressBook */,
 				C360009B19AA427C00940421 /* GTMBase64 */,
@@ -2315,6 +2358,7 @@
 				F432BE0619762AC80086BBE9 /* main_tianjia@2x.png in Resources */,
 				F41F68F91982081F00089E42 /* ShareSDKiPadSimpleShareViewUI.bundle in Resources */,
 				F432BDF019762AC80086BBE9 /* main_2-bg@2x.png in Resources */,
+				C362C00719D6A23E00753082 /* stop.png in Resources */,
 				F43388151974C28600464D43 /* FinishRegisterViewController.xib in Resources */,
 				F41F68EC1982081E00089E42 /* Resource.bundle in Resources */,
 				F432BE5419762AC80086BBE9 /* dianhua2@2x.png in Resources */,
@@ -2391,12 +2435,14 @@
 				F432BE5819762AC80086BBE9 /* jiebaoding@2x.png in Resources */,
 				F43388131974C28600464D43 /* ChooseModeViewController.xib in Resources */,
 				F432BE4319762AC80086BBE9 /* square_pinglun-big@2x.png in Resources */,
+				C362C00519D6A23E00753082 /* play.png in Resources */,
 				F432BE2A19762AC80086BBE9 /* square_bofang@2x.png in Resources */,
 				F43387F31974C28600464D43 /* AddHeightAndWeightViewController.xib in Resources */,
 				F43EA37A1990A6980048081E /* ProvincesAndCities.plist in Resources */,
 				F432BE3C19762AC80086BBE9 /* square_pic-7@2x.png in Resources */,
 				F432BE5319762AC80086BBE9 /* bangding@2x.png in Resources */,
 				F432BE1B19762AC80086BBE9 /* pd_anzhushuohua@2x.png in Resources */,
+				C362C00619D6A23E00753082 /* screenshots.png in Resources */,
 				F432BE2619762AC80086BBE9 /* pd_xiaokuang@2x.png in Resources */,
 				F432BDEE19762AC80086BBE9 /* login_xinlang@2x.png in Resources */,
 				F432BE3D19762AC80086BBE9 /* square_pic-8@2x.png in Resources */,
@@ -2517,6 +2563,7 @@
 				F432BE2319762AC80086BBE9 /* pd_kuang@2x.png in Resources */,
 				F432BE3219762AC80086BBE9 /* square_fenxiang-bg@2x.png in Resources */,
 				F432BDF319762AC80086BBE9 /* main_baobaoliebiao@2x.png in Resources */,
+				C362C00419D6A23E00753082 /* loading.png in Resources */,
 				F432BDF519762AC80086BBE9 /* main_baobaotouxiang@2x.png in Resources */,
 				F432BDE719762AC80086BBE9 /* login_box-6@2x.png in Resources */,
 				F432BE0E19762AC80086BBE9 /* pb_bofang@2x.png in Resources */,
@@ -2621,6 +2668,7 @@
 				C3891B2E19C01A390039F29D /* RHAddressBookThreadMain.m in Sources */,
 				F41F68DA1982081E00089E42 /* IO.m in Sources */,
 				F44CF768199A3CB7003B7F7D /* MJRefreshConst.m in Sources */,
+				C362C00119D6A23E00753082 /* AudioButton.m in Sources */,
 				F41F68E31982081E00089E42 /* VersionManager.m in Sources */,
 				F44F1CD1198F82E9004E37CF /* Friend.m in Sources */,
 				C398742019A3A61100A1050C /* AboutUsViewController.m in Sources */,
@@ -2709,6 +2757,7 @@
 				24FAD0BC1986935F00FFE11E /* ShareManager.m in Sources */,
 				F43387F21974C28600464D43 /* AddHeightAndWeightViewController.m in Sources */,
 				F43387F41974C28600464D43 /* BabyHomePageViewController.m in Sources */,
+				C362C00319D6A23E00753082 /* AudioStreamer.m in Sources */,
 				F41F68DE1982081E00089E42 /* NSString+Utils.m in Sources */,
 				F433882C1974C28600464D43 /* PraiseViewController.m in Sources */,
 				F4348FF219779C4600347195 /* DynamicDetailViewController.m in Sources */,
@@ -2724,6 +2773,7 @@
 				F41F68D91982081E00089E42 /* HWConnect.m in Sources */,
 				C350622F19D1315F0096006C /* HisFriendsViewController.m in Sources */,
 				C35DFB2219B4B7B80023B4CF /* QRCodeGenerator.m in Sources */,
+				C362C00219D6A23E00753082 /* AudioPlayer.m in Sources */,
 				C360009F19AA427C00940421 /* GTMBase64.m in Sources */,
 				F43388141974C28600464D43 /* FinishRegisterViewController.m in Sources */,
 				C35DFA6B19B412160023B4CF /* ImageDisplayView.m in Sources */,

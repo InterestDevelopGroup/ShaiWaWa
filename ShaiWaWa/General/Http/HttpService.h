@@ -31,7 +31,7 @@
 #define Add_Comment                                 @"add_comment"
 #define Get_Comment_List                            @"get_record_comment_list"
 #define Add_Favorite                                @"add_favorite"
-#define Delete_Record                               @"delete_Record"
+#define Delete_Record                               @"delete_record"
 #define Get_Record_List                             @"get_record_list"
 #define Get_Record_By_User_ID                       @"get_baby_record_list"
 #define Get_Record_By_Friend                        @"get_record_by_friend"
@@ -65,6 +65,7 @@
 #define UnBind                                      @"unbind"
 #define Bind_Open_Login                             @"bind_open_login"
 #define Find_Friends                                @"find_friends"
+#define Add_Report                                  @"add_report"
 typedef enum {
     No_Error_Code = 10000,
     Unknow_Error_Code,
@@ -450,5 +451,11 @@ typedef enum {
  */
 //TODO:查找好友（整站）
 - (void)findFriends:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
+
+/**
+ @desc 举报动态
+ */
+//TODO:举报动态
+- (void)addReport:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
 
 @end

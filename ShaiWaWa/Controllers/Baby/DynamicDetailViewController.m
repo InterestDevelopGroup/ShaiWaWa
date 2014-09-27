@@ -29,6 +29,9 @@
 #import "ImageDisplayView.h"
 #import "PraiseViewController.h"
 #import "BabyHomePageViewController.h"
+#import "FriendHomeViewController.h"
+#import "PersonCenterViewController.h"
+#import "AudioView.h"
 @import MediaPlayer;
 @interface DynamicDetailViewController ()
 
@@ -304,6 +307,39 @@
 }
 
 
+- (void)showPersonalHome:(UITapGestureRecognizer *)tap
+{
+    UILabel * label = (UILabel *)tap.view;
+    UserInfo *users = [[UserDefault sharedInstance] userInfo];
+    PinLunCell * cell;
+    if([label.superview.superview.superview isKindOfClass:[PinLunCell class]])
+    {
+        cell = (PinLunCell *)label.superview.superview.superview;
+    }
+    else if([label.superview.superview isKindOfClass:[PinLunCell class]])
+    {
+        cell = (PinLunCell *)label.superview.superview;
+    }
+    else
+    {
+        cell = (PinLunCell *)label.superview;
+    }
+    NSIndexPath * indexPath = [_pinLunListTableView indexPathForCell:cell];
+    RecordComment * comment = [pinLunArray objectAtIndex:indexPath.row];
+    if([users.uid isEqualToString:comment.uid])
+    {
+        PersonCenterViewController * vc = [[PersonCenterViewController alloc] initWithNibName:nil bundle:nil];
+        [self push:vc];
+        vc = nil;
+    }
+    else
+    {
+        FriendHomeViewController * vc = [[FriendHomeViewController alloc] initWithNibName:nil bundle:nil];
+        vc.friendId = comment.uid;
+        [self push:vc];
+        vc = nil;
+    }
+}
 
 #pragma mark - UITableView DataSources and Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -368,6 +404,8 @@
         [detailCell.commentBtn setTitle:_babyRecord.comment_count forState:UIControlStateNormal];
         [detailCell.likeBtn addTarget:self action:@selector(likeAction:) forControlEvents:UIControlEventTouchUpInside];
         [detailCell.moreBtn addTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
+        NSTimeInterval timeInterval = [_babyRecord.add_time doubleValue];
+        detailCell.publishTimeLabel.text = [[NSDate dateWithTimeIntervalSince1970:timeInterval] formatDateString:@"yyyy-MM-dd"];
         
         //显示赞用户头像
         if([_babyRecord.top_3_likes count] > 0)
@@ -465,6 +503,10 @@
         pinLunCell.usernameLabel.text = comment.username;
         pinLunCell.contentLabel.text = comment.content;
         pinLunCell.addTimeLabel.text = [NSString stringWithFormat:@"(%@)",[[NSDate dateWithTimeIntervalSince1970:[comment.add_time intValue]] formatDateString:@"yyyy-MM-dd"]];
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPersonalHome:)];
+        pinLunCell.usernameLabel.userInteractionEnabled = YES;
+        [pinLunCell.usernameLabel addGestureRecognizer:tap];
+        tap = nil;
     }
  
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

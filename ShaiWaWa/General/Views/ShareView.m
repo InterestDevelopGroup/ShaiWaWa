@@ -94,36 +94,52 @@
 {
     if (sender == _weiXinButton)
     {
-        [[ShareManager sharePlatform] shareToWeiXin];
-//        _weiXinCycleBlock();
+        if (self.weiXinCycleBlock)
+        {
+            _weiXinCycleBlock();
+        }
     }
     else if (sender == _weiXinCycleButton)
     {
-        [[ShareManager sharePlatform] shareToWeiXinCycle];
-//        _weiXinCycleBlock();
+        if(_weiXinCycleBlock)
+        {
+            _weiXinCycleBlock();
+        }
     }
     else if (sender == _xinLanWbButton)
     {
-        [[ShareManager sharePlatform] shareToSinaWeiBo];
-//        _xinLanWbBlock();
+        if(_xinLanWbBlock)
+        {
+            _xinLanWbBlock();
+        }
     }
     else if (sender == _qzoneButton)
     {
-        [[ShareManager sharePlatform] shareToQzone];
-//        _qzoneBlock();
+        if(_qzoneBlock)
+        {
+            _qzoneBlock();
+        }
     }
     else if (sender == _collectionButton)
     {
-        _collectionBlock();
+        if(self.collectionBlock)
+        {
+            _collectionBlock();
+        }
     }
     else if (sender == _reportButton)
     {
-//        _reportBlock();
+        if(self.reportBlock)
+        {
+            _reportBlock();
+        }
     }
     else if (sender == _deleteButton)
     {
-        
-        _deleteBlock();
+        if(self.deleteBlock)
+        {
+            _deleteBlock();
+        }
     }
 }
 

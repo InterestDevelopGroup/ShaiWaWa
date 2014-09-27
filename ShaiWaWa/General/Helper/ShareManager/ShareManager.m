@@ -7,7 +7,7 @@
 //
 
 #import "ShareManager.h"
-#import <ShareSDK/ShareSDK.h>
+
 #import "WXApi.h"
 #import <TencentOpenAPI/QQApi.h>
 #import <TencentOpenAPI/QQApiInterface.h>
@@ -92,7 +92,7 @@
     NSString * content = @"分享内容";
     id<ISSCAttachment>  image = [ShareSDK pngImageWithImage:nil];
     NSString * title = @"分享";
-    NSString * url = @"http://www.baidu.com";
+    NSString * url = @"http://www.gzinterest.com";
     id<ISSContent> publishContent = [ShareSDK content:content
                                        defaultContent:content
                                                 image:image
@@ -119,4 +119,113 @@
         }
     }];
 }
+
+- (void)shareWithType:(ShareType)type withContent:(NSString *)content withImage:(UIImage *)image
+{
+    if(content == nil)
+    {
+        content = @"分享内容";
+    }
+    id<ISSCAttachment> attachment = nil;
+    if(image != nil)
+    {
+        attachment = [ShareSDK pngImageWithImage:image];
+    }
+    
+    NSString * title = content;
+    NSString * url = @"http://www.gzinterest.com";
+    id<ISSContent> publishContent = [ShareSDK content:title
+                                       defaultContent:title
+                                                image:attachment
+                                                title:title
+                                                  url:url
+                                          description:content
+                                            mediaType:SSPublishContentMediaTypeNews];
+    id<ISSAuthOptions> authOptions = [ShareSDK authOptionsWithAutoAuth:YES
+                                                         allowCallback:NO
+                                                         authViewStyle:SSAuthViewStyleModal
+                                                          viewDelegate:nil
+                                               authManagerViewDelegate:nil];
+    
+    id<ISSShareOptions> shareOptions = [ShareSDK defaultShareOptionsWithTitle:title oneKeyShareList:nil qqButtonHidden:YES wxSessionButtonHidden:YES wxTimelineButtonHidden:YES showKeyboardOnAppear:YES shareViewDelegate:nil friendsViewDelegate:nil picViewerViewDelegate:nil];
+    
+    [ShareSDK shareContent:publishContent type:type authOptions:authOptions shareOptions:shareOptions statusBarTips:YES result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
+        
+        if (state == SSPublishContentStateSuccess)
+        {
+            UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:nil message:@"分享成功" delegate:nil cancelButtonTitle:@"关闭" otherButtonTitles:nil, nil];
+            [alertView show];
+            NSLog(@"发表成功");
+        }
+        else if (state == SSPublishContentStateFail)
+        {
+            
+            NSLog(@"发布失败!error code == %d, error == %@", [error errorCode], [error errorDescription]);
+            NSString * msg = @"分享失败.";
+            if([error errorCode] == -22003)
+            {
+                msg = @"未安装客户端.";
+            }
+            
+            UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:nil message:msg delegate:nil cancelButtonTitle:@"关闭" otherButtonTitles:nil, nil];
+            [alertView show];
+            
+        }
+    }];
+}
+
+- (void)shareWithType:(ShareType)type withContent:(NSString *)content withImagePath:(NSString *)path
+{
+    if(content == nil)
+    {
+        content = @"分享内容";
+    }
+    id<ISSCAttachment> attachment = nil;
+    if(path != nil)
+    {
+        attachment = [ShareSDK imageWithUrl:path];
+    }
+    
+    NSString * title = content;
+    NSString * url = @"http://www.gzinterest.com";
+    id<ISSContent> publishContent = [ShareSDK content:title
+                                       defaultContent:title
+                                                image:attachment
+                                                title:title
+                                                  url:url
+                                          description:content
+                                            mediaType:SSPublishContentMediaTypeNews];
+    id<ISSAuthOptions> authOptions = [ShareSDK authOptionsWithAutoAuth:YES
+                                                         allowCallback:NO
+                                                         authViewStyle:SSAuthViewStyleModal
+                                                          viewDelegate:nil
+                                               authManagerViewDelegate:nil];
+    
+    id<ISSShareOptions> shareOptions = [ShareSDK defaultShareOptionsWithTitle:title oneKeyShareList:nil qqButtonHidden:YES wxSessionButtonHidden:YES wxTimelineButtonHidden:YES showKeyboardOnAppear:YES shareViewDelegate:nil friendsViewDelegate:nil picViewerViewDelegate:nil];
+    
+    [ShareSDK shareContent:publishContent type:type authOptions:authOptions shareOptions:shareOptions statusBarTips:YES result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
+        
+        if (state == SSPublishContentStateSuccess)
+        {
+            UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:nil message:@"分享成功" delegate:nil cancelButtonTitle:@"关闭" otherButtonTitles:nil, nil];
+            [alertView show];
+            NSLog(@"发表成功");
+        }
+        else if (state == SSPublishContentStateFail)
+        {
+            
+            NSLog(@"发布失败!error code == %d, error == %@", [error errorCode], [error errorDescription]);
+            NSString * msg = @"分享失败.";
+            if([error errorCode] == -22003)
+            {
+                msg = @"未安装客户端.";
+            }
+            
+            UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:nil message:msg delegate:nil cancelButtonTitle:@"关闭" otherButtonTitles:nil, nil];
+            [alertView show];
+            
+        }
+    }];
+}
+
 @end

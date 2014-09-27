@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <ShareSDK/ShareSDK.h>
 @interface ShareManager : NSObject
 
 + (instancetype)sharePlatform;
@@ -17,4 +17,7 @@
 - (void)shareToSinaWeiBo;
 - (void)shareToQzone;
 - (void)shareToWeiXinFriend;
+
+- (void)shareWithType:(ShareType)type withContent:(NSString *)content withImage:(UIImage *)image;
+- (void)shareWithType:(ShareType)type withContent:(NSString *)content withImagePath:(NSString *)path;
 @end

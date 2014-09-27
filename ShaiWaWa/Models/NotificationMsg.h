@@ -36,4 +36,6 @@
 @property (nonatomic, strong) NSString *add_time;
 @property (nonatomic, strong) NSString *read_time;
 @property (nonatomic, strong) NSString *type;
+@property (nonatomic, strong) NSString *avatar;
+@property (nonatomic, strong) NSString * username;
 @end

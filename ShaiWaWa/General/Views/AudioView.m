@@ -18,6 +18,7 @@
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.frame = CGRectMake(5, 5, CGRectGetWidth(self.frame) - 10, CGRectGetHeight(self.frame) - 10);
         [button setImage:[UIImage imageNamed:@"square_bofang-bg"] forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:button];
         
         
@@ -61,4 +62,45 @@
     [self removeFromSuperview];
 }
 
+- (void)clickAction:(id)sender
+{
+    if(_path == nil) return ;
+    /*
+
+    */
+    
+    if(![_path hasPrefix:@"http"])
+    {
+        
+        if(_localPlayer != nil && [_localPlayer isPlaying])
+        {
+            [_localPlayer stop];
+            _localPlayer = nil;
+            return ;
+        }
+        AVAudioSession * session = [AVAudioSession sharedInstance];
+        [session setCategory:AVAudioSessionCategoryPlayback error:nil];
+        [session setActive:YES error:nil];
+        _localPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:_path] error:nil];
+        [_localPlayer prepareToPlay];
+        [_localPlayer play];
+    }
+    else
+    {
+        ;
+        if(_player != nil && [_player isProcessing])
+        {
+            [_player stop];
+            _player = nil;
+            return ;
+        }
+        
+        _player = [[AudioPlayer alloc] init];
+        _player.url = [NSURL URLWithString:_path];
+        [_player play];
+
+    }
+    
+    
+}
 @end

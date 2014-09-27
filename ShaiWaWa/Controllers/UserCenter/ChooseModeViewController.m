@@ -43,6 +43,10 @@
 #import "ImageDisplayView.h"
 #import "PraiseViewController.h"
 #import "BabyHomePageViewController.h"
+#import "AudioView.h"
+#import <ShareSDK/ShareSDK.h>
+#import "ShareManager.h"
+#import "SDImageCache.h"
 @import MediaPlayer;
 @import QuartzCore;
 typedef enum{
@@ -60,7 +64,7 @@ typedef enum{
 @property (nonatomic,assign) Record_Type recordType;
 @property (nonatomic,assign) int currentOffset;
 @property (nonatomic,strong) NSString * keyword;
-@property (nonatomic,strong) NSIndexPath * selectedIndexPath;
+@property (nonatomic,strong) BabyRecord * selectedRecrod;
 @end
 
 @implementation ChooseModeViewController
@@ -258,16 +262,131 @@ typedef enum{
     isShareViewShown = NO;
     sv = [[ShareView alloc] initWithFrame:CGRectMake(0, 0, 320, 162)];
     
+    __weak ChooseModeViewController * weakSelf = self;
     [sv setDeleteBlock:^(){
         
+        weakSelf.grayShareView.hidden = YES;
+        isShareViewShown = NO;
+        [weakSelf deleteRecord:weakSelf.selectedRecrod];
     }];
 
     [sv setCollectionBlock:^(){
-        
+        weakSelf.grayShareView.hidden = YES;
+        isShareViewShown = NO;
+        [weakSelf collectionRecord:weakSelf.selectedRecrod];
+    }];
+    
+    [sv setReportBlock:^(){
+        weakSelf.grayShareView.hidden = YES;
+        isShareViewShown = NO;
+        [weakSelf reportRecord:weakSelf.selectedRecrod];
     }];
     
     
+    [sv setWeiXinBlock:^(){
+        weakSelf.grayShareView.hidden = YES;
+        isShareViewShown = NO;
+        [weakSelf shareWityType:ShareTypeWeixiSession babyRecord:weakSelf.selectedRecrod];
+    }];
+    
+    [sv setWeiXinCycleBlock:^(){
+        weakSelf.grayShareView.hidden = YES;
+        isShareViewShown = NO;
+        [weakSelf shareWityType:ShareTypeWeixiTimeline babyRecord:weakSelf.selectedRecrod];
+    }];
+    
+    [sv setQzoneBlock:^(){
+        weakSelf.grayShareView.hidden = YES;
+        isShareViewShown = NO;
+        [weakSelf shareWityType:ShareTypeQQSpace babyRecord:weakSelf.selectedRecrod];
+    }];
+    
+    [sv setXinLanWbBlock:^(){
+        weakSelf.grayShareView.hidden = YES;
+        isShareViewShown = NO;
+        [weakSelf shareWityType:ShareTypeSinaWeibo babyRecord:weakSelf.selectedRecrod];
+    }];
     [_shareView addSubview:sv];
+}
+
+
+- (void)shareWityType:(ShareType)type babyRecord:(BabyRecord *)babyRecord
+{
+    if(babyRecord == nil) return;
+    
+    if(babyRecord.video != nil && [babyRecord.video length] != 0)
+    {
+        UIImage * image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:babyRecord.video];
+        [[ShareManager sharePlatform] shareWithType:type withContent:babyRecord.content withImage:image];
+    }
+    else if([babyRecord.images count] > 0)
+    {
+        [[ShareManager sharePlatform] shareWithType:type withContent:babyRecord.content withImagePath:babyRecord.images[0]];
+    }
+    else
+    {
+        [[ShareManager sharePlatform] shareWithType:type withContent:babyRecord.content withImage:nil];
+    }
+}
+
+- (void)deleteRecord:(BabyRecord *)babyRecord
+{
+    if(babyRecord == nil) return;
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+    [[HttpService sharedInstance] deleteRecord:@{@"uid":users.uid,@"rid":babyRecord.rid} completionBlock:^(id object) {
+        if([dyArray containsObject:babyRecord])
+        {
+            [dyArray removeObject:babyRecord];
+            [_dynamicPageTableView reloadData];
+        }
+        [SVProgressHUD showSuccessWithStatus:@"删除成功."];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        NSString * msg = responseString;
+        if(error)
+        {
+            msg = @"删除失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+    }];
+}
+
+
+- (void)collectionRecord:(BabyRecord *)babyRecord
+{
+    if(babyRecord == nil) return;
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+    [[HttpService sharedInstance] addFavorite:@{@"uid":users.uid,@"rid":babyRecord.rid} completionBlock:^(id object) {
+        
+        [SVProgressHUD showSuccessWithStatus:@"收藏成功."];
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        NSString * msg = responseString;
+        if(error)
+        {
+            msg = @"收藏失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+
+    }];
+}
+
+- (void)reportRecord:(BabyRecord *)babyRecord
+{
+    if(babyRecord == nil) return;
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+    [[HttpService sharedInstance] addReport:@{@"uid":users.uid,@"rid":babyRecord.rid,@"type":@"4",@"remark":@"举报动态"} completionBlock:^(id object) {
+        
+        [SVProgressHUD showSuccessWithStatus:@"举报成功."];
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        NSString * msg = responseString;
+        if(error)
+        {
+            msg = @"举报失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+        
+    }];
 }
 
 
@@ -733,7 +852,7 @@ typedef enum{
     }
     NSIndexPath * indexPath = [_dynamicPageTableView indexPathForCell:cell];
     BabyRecord * record = dyArray[indexPath.row];
-    
+    self.selectedRecrod = record;
     if([record.uid isEqualToString:users.uid])
     {
         [sv showDelBtn];
@@ -742,6 +861,8 @@ typedef enum{
     {
         [sv hideDelBtn];
     }
+    
+    
     
     if (!isShareViewShown) {
         _grayShareView.hidden = NO;
@@ -853,6 +974,7 @@ int _lastPosition;    //A variable define in headfile
     int currentPostion = scrollView.contentOffset.y;
     if (currentPostion - _lastPosition > 280) {
         _lastPosition = currentPostion;
+        _releaseBtn.hidden = YES;
         [self.navigationController setNavigationBarHidden:YES animated:YES];
         //NSLog(@"ScrollUp now");
         
@@ -860,6 +982,7 @@ int _lastPosition;    //A variable define in headfile
     else if (_lastPosition - currentPostion > 280)
     {
         _lastPosition = currentPostion;
+        _releaseBtn.hidden = NO;
         [self.navigationController setNavigationBarHidden:NO animated:YES];
         //NSLog(@"ScrollDown now");
     }
@@ -1035,6 +1158,19 @@ int _lastPosition;    //A variable define in headfile
         [imageView setCloseHidden];
         [dynamicCell.scrollView addSubview:imageView];
         imageView = nil;
+    }
+    
+    NSTimeInterval timeInterval = [recrod.add_time doubleValue];
+    dynamicCell.releaseTimeLabel.text = [[NSDate dateWithTimeIntervalSince1970:timeInterval] formatDateString:@"yyyy-MM-dd"];
+    
+    [[dynamicCell.contentView viewWithTag:20000] removeFromSuperview];
+    if(recrod.audio != nil && [recrod.audio length] > 0)
+    {
+        
+        AudioView * audioView = [[AudioView alloc] initWithFrame:CGRectMake(123, 175, 82, 50) withPath:recrod.audio];
+        audioView.tag = 20000;
+        [audioView setCloseHidden];
+        [dynamicCell.contentView addSubview:audioView];
     }
     
     return dynamicCell;
