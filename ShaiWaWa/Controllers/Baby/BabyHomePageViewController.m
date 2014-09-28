@@ -345,6 +345,9 @@
 
 - (IBAction)fullScreen:(UIButton *)sender {
     NSLog(@"全屏");
+//    [UIView animateWithDuration:1.0 animations:^{
+//        [sender.superview ]
+//    }];
 }
 
 - (IBAction)isYaoQing:(id)sender
