@@ -146,7 +146,6 @@
      kBabyTypeTall = 5,
      kBabyTypeShort = 6
      } babyType;
-     
      */
     
     //取出某天宝宝的数据对照标准

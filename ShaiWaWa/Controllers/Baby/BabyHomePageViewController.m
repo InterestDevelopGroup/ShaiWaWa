@@ -32,6 +32,7 @@
 #import "UIButton+WebCache.h"
 #import "UIImageView+WebCache.h"
 #import "NSStringUtil.h"
+
 @import MediaPlayer;
 @interface BabyHomePageViewController ()
 @property (nonatomic, strong) NSMutableArray *babyPersonalDyArray;
@@ -304,7 +305,22 @@
 }
 
 
-#pragma mark - Action Methods
+#pragma mark - 表格，折线图切换
+- (IBAction)changDisplayStyle:(UIButton *)sender {
+    if (sender.selected) {
+        [sender setSelected:NO];
+        [sender setBackgroundImage:[UIImage imageNamed:@"yuanquan.png"] forState:UIControlStateNormal];
+    }else{
+        [sender setSelected:YES];
+#warning 暂时没有图片
+        [sender setBackgroundImage:[UIImage imageNamed:@"baby_baba@2x.png"] forState:UIControlStateSelected];
+    }
+}
+
+- (IBAction)fullScreen:(id)sender {
+    NSLog(@"全屏");
+}
+
 - (IBAction)isYaoQing:(id)sender
 {
     _yaoQingbgView.hidden = NO;
