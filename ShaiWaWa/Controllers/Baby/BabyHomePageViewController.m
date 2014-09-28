@@ -10,6 +10,7 @@
 #import "UIViewController+BarItemAdapt.h"
 #import "SummaryCell.h"
 #import "DynamicCell.h"
+#import "NetCell.h"
 #import "PraiseViewController.h"
 #import "DynamicDetailViewController.h"
 #import "NALLabelsMatrix.h"
@@ -32,12 +33,17 @@
 #import "UIButton+WebCache.h"
 #import "UIImageView+WebCache.h"
 #import "NSStringUtil.h"
+#import "BabyGrowRecord.h"
 
 @import MediaPlayer;
 @interface BabyHomePageViewController ()
+{
+    UITableView *_gridView;   ///身高体重显示的tableView
+    NSArray *_growRecordArray; //存放宝宝成长记录的数组
+}
 @property (nonatomic, strong) NSMutableArray *babyPersonalDyArray;
 @property (nonatomic, strong) NSString *dyNum;
-@property (nonatomic, strong) NALLabelsMatrix * matrix;
+//@property (nonatomic, strong) NALLabelsMatrix * matrix;
 @property (nonatomic, assign) int dyOffset;
 @end
 
@@ -58,12 +64,16 @@
     [super viewDidLoad];
 }
 
+
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];
+    //获取宝宝成长记录
+    [self getGrowRecords];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -138,6 +148,9 @@
     _dynamicListView.frame = CGRectMake(320, 0, 320, _segScrollView.bounds.size.height);
     [_segScrollView addSubview:_dynamicListView];
     
+//    [_gridView registerNibWithName:@"NetCell" reuseIdentifier:@"CellID"];
+//    [_segScrollView addSubview:_gridView];
+    
     //下拉刷新
     [_dynamicListTableView addHeaderWithCallback:^{
         [self refreshRecords];
@@ -153,14 +166,24 @@
     _heightAndWeightTableView.frame = CGRectMake(320*2, 0, 320, _segScrollView.bounds.size.height);
     [_segScrollView addSubview:_heightAndWeightTableView];
     UITableView *gridView = [[UITableView alloc] initWithFrame:CGRectMake(10, 45, 300, 250)];
-    [gridView clearSeperateLine];
+    gridView.delegate = self;
+    gridView.dataSource = self;
+//    [gridView clearSeperateLine];
     [_heightAndWeightTableView addSubview:gridView];
-    _matrix = [[NALLabelsMatrix alloc] initWithFrame:CGRectMake(0, 0, 300, 250) andColumnsWidths:@[@78,@75,@75,@75]];
-    [_matrix addRecord:@[@"日期",@"身高(cm)",@"体重(kg)",@"体型"]];
-    _matrix.backgroundColor = [UIColor whiteColor];
-    [gridView setTableHeaderView:_matrix];
-    //获取宝宝成长记录
-    [self getGrowRecords];
+    _gridView = gridView;
+    [_gridView registerNibWithName:@"NetCell" reuseIdentifier:@"CellID"];
+    _gridView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _gridView.showsVerticalScrollIndicator = NO;
+//    NetCell *header = [[NetCell alloc] init];
+//    header.recordDay.text = @"日期";
+//    header.height.text = @"身高(cm)";
+//    header.weight.text = @"体重(kg)";
+//    header.bodyType.text = @"体型";
+//    _gridView.tableHeaderView = header;
+//    _matrix = [[NALLabelsMatrix alloc] initWithFrame:CGRectMake(0, 0, 300, 250) andColumnsWidths:@[@78,@75,@75,@75]];
+//    [_matrix addRecord:@[@"日期",@"身高(cm)",@"体重(kg)",@"体型"]];
+//    _matrix.backgroundColor = [UIColor whiteColor];
+//    [gridView setTableHeaderView:_matrix];
     //宝宝出生日期时间选择器
     [_datePicker addTarget:self action:@selector(dateChange:) forControlEvents:UIControlEventValueChanged];
     [_datePicker setMaximumDate:[NSDate date]];
@@ -186,7 +209,7 @@
 }
 
 
-
+#pragma mark 点击简介,动态,身高体重导航条监听方法
 - (void)changePage:(HMSegmentedControl *)segBtn
 {
     int curPage = segBtn.selectedSegmentIndex;
@@ -252,11 +275,14 @@
 //获取宝宝成长记录
 - (void)getGrowRecords
 {
-    
+    _growRecordArray = [NSArray array];
     UserInfo * user = [[UserDefault sharedInstance] userInfo];
      //获取宝宝成长记录
      [[HttpService sharedInstance] getBabyGrowRecord:@{@"baby_id":_babyInfo.baby_id,@"offset":@"0",@"pagesize":@"10000",@"uid":user.uid} completionBlock:^(id object) {
-         NSLog(@"%@",object);
+         if ([object isKindOfClass:[NSArray class]]) {
+             _growRecordArray = object;
+             [_gridView reloadData];
+         }
      } failureBlock:^(NSError *error, NSString *responseString) {
          NSString * msg = responseString;
          if (error) {
@@ -317,7 +343,7 @@
     }
 }
 
-- (IBAction)fullScreen:(id)sender {
+- (IBAction)fullScreen:(UIButton *)sender {
     NSLog(@"全屏");
 }
 
@@ -641,12 +667,17 @@
     {
         return [summaryKey count];
     }
-    else
+    else if(tableView == _dynamicListTableView)
     {
         return [_babyPersonalDyArray count];
     }
+    else
+    {
+        return _growRecordArray.count + 1;
+    }
     
 }
+#pragma mark tableview代理方法
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UserInfo *users = [[UserDefault sharedInstance] userInfo];
@@ -717,7 +748,7 @@
         }
         return cell;
     }
-    else
+    else if(tableView == _dynamicListTableView)
     {
         DynamicCell * dynamicCell = [tableView dequeueReusableCellWithIdentifier:@"Celler"];
         BabyRecord * recrod = [_babyPersonalDyArray objectAtIndex:indexPath.row];
@@ -851,7 +882,20 @@
 
         return dynamicCell;
     }
-   
+    else
+    {
+        NetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellID"];
+        if (indexPath.row == 0) {
+            cell.recordDay.text = @"日期";
+            cell.height.text = @"身高(cm)";
+            cell.weight.text = @"体重(kg)";
+            cell.bodyType.text = @"体型";
+        }else{
+            BabyGrowRecord *b = _growRecordArray[indexPath.row - 1];
+            cell.babyGrowRecord = b;
+        }
+        return cell;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -862,6 +906,19 @@
         BabyRecord * record = [_babyPersonalDyArray objectAtIndex:indexPath.row];
         dynamicDetailVC.babyRecord = record;
         [self.navigationController pushViewController:dynamicDetailVC animated:YES];
+    }
+}
+
+- (CGFloat)tableView:(UITableView*)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath
+{
+    UITableViewCell *cell = nil;
+    if (tableView == _gridView) {
+        cell =(NetCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+        return cell.frame.size.height - 2;
+    }else
+    {
+        cell =[self tableView:tableView cellForRowAtIndexPath:indexPath];
+        return cell.frame.size.height;
     }
 }
 

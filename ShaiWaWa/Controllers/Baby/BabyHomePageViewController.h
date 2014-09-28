@@ -48,7 +48,7 @@
 @property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (strong, nonatomic) IBOutlet UIToolbar *toolBar;
 - (IBAction)changDisplayStyle:(UIButton *)sender;   //表格，折线图切换
-- (IBAction)fullScreen:(id)sender;//全屏
+- (IBAction)fullScreen:(UIButton *)sender;//全屏
 
 - (IBAction)isYaoQing:(id)sender;
 - (IBAction)showAddHAndWPageVC:(id)sender;
