@@ -26,6 +26,7 @@
 @synthesize birth_weight;
 @synthesize background;
 @synthesize add_time;
+@synthesize is_focus;
 
 - (id)copyWithZone:(NSZone *)zone
 {

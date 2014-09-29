@@ -375,7 +375,7 @@
     }
     [_uploadedImages removeAllObjects];
     //NSString * content = [InputHelper trim:_textView.text];
-    NSString * content = _textView.text;
+    NSString * content = [_textView.text isEqualToString:PlaceHolder] ? @"" : _textView.text;
     //将@用户替换成特殊字符，{uid}
     content = [self processTuiFriends:content];
     NSMutableDictionary * params = [@{} mutableCopy];
@@ -426,7 +426,7 @@
     }
     //NSString * content = [InputHelper trim:_textView.text];
     
-    NSString * content = _textView.text;
+    NSString * content = [_textView.text isEqualToString:PlaceHolder] ? @"" : _textView.text;
     //将@用户替换成特殊字符，{uid}
     content = [self processTuiFriends:content];
     NSMutableDictionary * params = [@{} mutableCopy];

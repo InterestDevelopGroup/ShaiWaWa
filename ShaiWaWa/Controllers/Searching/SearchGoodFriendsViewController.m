@@ -21,6 +21,11 @@
 #import "UserInfo.h"
 #import "Friend.h"
 #import "ShareManager.h"
+#import "AppMacros.h"
+#import "MyGoodFriendsListCell.h"
+#import "UIImageView+WebCache.h"
+#import "PersonCenterViewController.h"
+#import "FriendHomeViewController.h"
 @interface SearchGoodFriendsViewController ()
 @property (nonatomic,strong) NSString * keyword;
 @property (nonatomic,strong) NSMutableArray * friends;
@@ -57,6 +62,7 @@
     typeOfFriendsArry = [[NSMutableArray alloc] initWithObjects:@"新浪微博上的好友",@"QQ好友",@"手机通讯录好友",@"微信邀请好友",@"扫描二维码", nil];
     typeIconArry = [[NSMutableArray alloc] initWithObjects:@"main_xinlang.png",@"qq.png",@"dianhua2.png",@"main_weixin.png",@"qrcode.png", nil];
     [_typeOfFriendsTableView clearSeperateLine];
+    [_typeOfFriendsTableView registerNibWithName:@"MyGoodFriendsListCell" reuseIdentifier:@"FriendCell"];
 //    [_typeOfFriendsTableView setBounces:NO];
 //    [_typeOfFriendsTableView setScrollEnabled:NO];
     
@@ -72,10 +78,23 @@
         searchRS.searchValue = _searchField.text;
         [self.navigationController pushViewController:searchRS animated:YES];
          */
+        _keyword = _searchField.text;
         
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
         [[HttpService sharedInstance] findFriends:@{@"keyword":_keyword,@"offset":@"0",@"pagesize":@"10000"} completionBlock:^(id object) {
+            if(object == nil || [object count] == 0)
+            {
+                _keyword = nil;
+                [SVProgressHUD showErrorWithStatus:@"没有该好友."];
+                return ;
+            }
+            
+            _friends = object;
+            [_typeOfFriendsTableView reloadData];
+            [SVProgressHUD dismiss];
             
         } failureBlock:^(NSError *error, NSString *responseString) {
+            _keyword = nil;
             NSString * msg = responseString;
             if(msg)
             {
@@ -85,50 +104,104 @@
         }];
         
     }
+    else
+    {
+        _keyword = nil;
+        [_typeOfFriendsTableView reloadData];
+    }
 }
 
 
 #pragma mark - UITableView DataSources and Delegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if(_keyword != nil)
+    {
+        return [_friends count];
+    }
+    
     return [typeOfFriendsArry count];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(_keyword != nil)
+    {
+        return 80.0f;
+    }
+    return 55.0f;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *identify = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identify];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        if ([[typeIconArry objectAtIndex:indexPath.row] length] > 0) {
-            UIImageView *typeIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[typeIconArry objectAtIndex:indexPath.row]]];
-            typeIcon.frame = CGRectMake(30, 15, 28, 23);
-            typeIcon.tag = 9929;
-            [cell addSubview:typeIcon];
+    if(_keyword == nil)
+    {
+        static NSString *identify = @"Cell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identify];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            if ([[typeIconArry objectAtIndex:indexPath.row] length] > 0) {
+                UIImageView *typeIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[typeIconArry objectAtIndex:indexPath.row]]];
+                typeIcon.frame = CGRectMake(30, 15, 28, 23);
+                typeIcon.tag = 9929;
+                [cell addSubview:typeIcon];
+                
+            }
+            UILabel *typeName = [[UILabel alloc] initWithFrame:CGRectMake(74, 15, 180, 30)];
+            typeName.backgroundColor = [UIColor clearColor];
+            typeName.text = [typeOfFriendsArry objectAtIndex:indexPath.row];
+            typeName.tag = 9939;
+            typeName.textColor = [UIColor darkGrayColor];
+            [cell addSubview:typeName];
+            
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
         }
-        UILabel *typeName = [[UILabel alloc] initWithFrame:CGRectMake(74, 15, 180, 30)];
-        typeName.backgroundColor = [UIColor clearColor];
-        typeName.text = [typeOfFriendsArry objectAtIndex:indexPath.row];
-        typeName.tag = 9939;
-        typeName.textColor = [UIColor darkGrayColor];
-        [cell addSubview:typeName];
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-       
+        UIImageView *Icon = (UIImageView *)[cell viewWithTag:9929];
+        Icon.image = [UIImage imageNamed:[typeIconArry objectAtIndex:indexPath.row]];
+        cell.backgroundColor = [UIColor clearColor];
+        UILabel *lblName = (UILabel *)[cell viewWithTag:9939];
+        lblName.text = [typeOfFriendsArry objectAtIndex:indexPath.row];
+        return cell;
     }
-    UIImageView *Icon = (UIImageView *)[cell viewWithTag:9929];
-    Icon.image = [UIImage imageNamed:[typeIconArry objectAtIndex:indexPath.row]];
-    cell.backgroundColor = [UIColor clearColor];
-    
-    UILabel *lblName = (UILabel *)[cell viewWithTag:9939];
-    lblName.text = [typeOfFriendsArry objectAtIndex:indexPath.row];
-    return cell;
+    else
+    {
+        MyGoodFriendsListCell * cell = [tableView dequeueReusableCellWithIdentifier:@"FriendCell"];
+        cell.remarksLabel.hidden = YES;
+        Friend *friend = _friends[indexPath.row];
+        [cell.headPicView sd_setImageWithURL:[NSURL URLWithString:friend.avatar] placeholderImage:[UIImage imageNamed:@"baby_mama@2x.png"]];
+        cell.nickNameLabel.text = friend.username;
+        cell.countOfBabyLabel.text = [NSString stringWithFormat:@"%@个宝宝",friend.baby_count];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+    }
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    if(_keyword != nil)
+    {
+        Friend * friend = _friends[indexPath.row];
+        UserInfo * user = [[UserDefault sharedInstance] userInfo];
+        if([user.uid isEqualToString:friend.uid])
+        {
+            PersonCenterViewController * vc = [[PersonCenterViewController alloc] initWithNibName:nil bundle:nil];
+            [self push:vc];
+            vc = nil;
+        }
+        else
+        {
+            FriendHomeViewController * vc = [[FriendHomeViewController alloc] initWithNibName:nil bundle:nil];
+            vc.friendId = friend.uid;
+            [self push:vc];
+            vc = nil;
+        }
+        return ;
+    }
+    
+    
     SearchWeiboFriendViewController *weiBoVC = [[SearchWeiboFriendViewController alloc] init];
     SearchQQFriendViewController *qqFriendVC= [[SearchQQFriendViewController alloc] init];
     SearchAddressBookViewController *addressBookVC =[[SearchAddressBookViewController alloc] init];
@@ -165,7 +238,7 @@
             [self.navigationController pushViewController:addressBookVC animated:YES];
             break;
         case 3:
-            [[ShareManager sharePlatform] shareToWeiXinFriend];
+            [[ShareManager sharePlatform] invitationWeXinFriend:Invitation_Msg_Content];
             break;
         case 4:
            [self.navigationController pushViewController:scannCodeCardVC animated:YES];

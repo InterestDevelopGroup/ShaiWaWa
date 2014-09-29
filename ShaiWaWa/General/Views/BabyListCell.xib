@@ -42,6 +42,10 @@
                         <rect key="frame" x="297" y="29" width="7" height="12"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="爱心.png" id="CFK-xU-2oe">
+                        <rect key="frame" x="169" y="18" width="20" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
                 </subviews>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -50,6 +54,7 @@
                 <outlet property="babyNameLabel" destination="seJ-Ho-fJH" id="04m-Qc-TpL"/>
                 <outlet property="babyOldLabel" destination="XIw-Mz-I0X" id="XcU-6q-efu"/>
                 <outlet property="babySexImage" destination="Wk3-Pb-pCb" id="vym-zG-bEH"/>
+                <outlet property="focusImageView" destination="CFK-xU-2oe" id="t0t-Ev-puy"/>
             </connections>
         </tableViewCell>
     </objects>
@@ -57,5 +62,6 @@
         <image name="baby_baobei.png" width="69" height="68"/>
         <image name="main_boy.png" width="11" height="13"/>
         <image name="main_jiantou.png" width="7" height="11"/>
+        <image name="爱心.png" width="24" height="20"/>
     </resources>
 </document>
