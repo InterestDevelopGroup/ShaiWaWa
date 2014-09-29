@@ -17,7 +17,7 @@
 - (void)shareToSinaWeiBo;
 - (void)shareToQzone;
 - (void)shareToWeiXinFriend;
-
+- (void)invitationWeXinFriend:(NSString *)text;
 - (void)shareWithType:(ShareType)type withContent:(NSString *)content withImage:(UIImage *)image;
 - (void)shareWithType:(ShareType)type withContent:(NSString *)content withImagePath:(NSString *)path;
 @end

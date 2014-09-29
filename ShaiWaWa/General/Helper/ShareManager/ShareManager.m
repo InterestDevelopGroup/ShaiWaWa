@@ -120,6 +120,50 @@
     }];
 }
 
+
+- (void)invitationWeXinFriend:(NSString *)text
+{
+    id<ISSContent> publishContent = [ShareSDK content:text
+                                       defaultContent:text
+                                                image:nil
+                                                title:@"邀请好友"
+                                                  url:nil
+                                          description:text
+                                            mediaType:SSPublishContentMediaTypeText];
+    id<ISSAuthOptions> authOptions = [ShareSDK authOptionsWithAutoAuth:YES
+                                                         allowCallback:NO
+                                                         authViewStyle:SSAuthViewStyleModal
+                                                          viewDelegate:nil
+                                               authManagerViewDelegate:nil];
+    
+    id<ISSShareOptions> shareOptions = [ShareSDK defaultShareOptionsWithTitle:@"邀请好友" oneKeyShareList:nil qqButtonHidden:YES wxSessionButtonHidden:YES wxTimelineButtonHidden:YES showKeyboardOnAppear:YES shareViewDelegate:nil friendsViewDelegate:nil picViewerViewDelegate:nil];
+    
+    [ShareSDK shareContent:publishContent type:ShareTypeWeixiSession authOptions:authOptions shareOptions:shareOptions statusBarTips:YES result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
+        
+        if (state == SSPublishContentStateSuccess)
+        {
+            UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:nil message:@"分享成功" delegate:nil cancelButtonTitle:@"关闭" otherButtonTitles:nil, nil];
+            [alertView show];
+            NSLog(@"发表成功");
+        }
+        else if (state == SSPublishContentStateFail)
+        {
+            
+            NSLog(@"发布失败!error code == %d, error == %@", [error errorCode], [error errorDescription]);
+            NSString * msg = @"分享失败.";
+            if([error errorCode] == -22003)
+            {
+                msg = @"未安装客户端.";
+            }
+            
+            UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:nil message:msg delegate:nil cancelButtonTitle:@"关闭" otherButtonTitles:nil, nil];
+            [alertView show];
+            
+        }
+    }];
+
+}
+
 - (void)shareWithType:(ShareType)type withContent:(NSString *)content withImage:(UIImage *)image
 {
     if(content == nil)

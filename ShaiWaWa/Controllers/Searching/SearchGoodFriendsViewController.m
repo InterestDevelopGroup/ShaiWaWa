@@ -21,6 +21,7 @@
 #import "UserInfo.h"
 #import "Friend.h"
 #import "ShareManager.h"
+#import "AppMacros.h"
 @interface SearchGoodFriendsViewController ()
 @property (nonatomic,strong) NSString * keyword;
 @property (nonatomic,strong) NSMutableArray * friends;
@@ -165,7 +166,7 @@
             [self.navigationController pushViewController:addressBookVC animated:YES];
             break;
         case 3:
-            [[ShareManager sharePlatform] shareToWeiXinFriend];
+            [[ShareManager sharePlatform] invitationWeXinFriend:Invitation_Msg_Content];
             break;
         case 4:
            [self.navigationController pushViewController:scannCodeCardVC animated:YES];

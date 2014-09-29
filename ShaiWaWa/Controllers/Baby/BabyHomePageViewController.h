@@ -34,6 +34,7 @@
 @property (nonatomic, strong) BabyInfo *babyInfo;
 
 
+@property (weak, nonatomic) IBOutlet UIButton *addButton;
 
 @property (strong, nonatomic) IBOutlet UIView *yaoQingbgView;
 
@@ -58,5 +59,6 @@
 - (IBAction)weiXinYaoQingButton:(id)sender;
 - (IBAction)hideCurView:(id)sender;
 - (IBAction)dismissKeyboard:(id)sender;
+- (IBAction)hideInvitationView:(id)sender;
 
 @end

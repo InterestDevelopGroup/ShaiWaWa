@@ -34,7 +34,9 @@
 #import "UIImageView+WebCache.h"
 #import "NSStringUtil.h"
 #import "BabyGrowRecord.h"
-
+#import "PersonCenterViewController.h"
+#import "FriendHomeViewController.h"
+#import "ShareManager.h"
 @import MediaPlayer;
 @interface BabyHomePageViewController ()
 {
@@ -187,7 +189,78 @@
     //宝宝出生日期时间选择器
     [_datePicker addTarget:self action:@selector(dateChange:) forControlEvents:UIControlEventValueChanged];
     [_datePicker setMaximumDate:[NSDate date]];
+    
+    
+    //设置宝宝头像
+    [_babyAvatarImgView sd_setImageWithURL:[NSURL URLWithString:_babyInfo.avatar] placeholderImage:[UIImage imageNamed:@"baby_baobei"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        
+        if(image)
+        {
+            _babyAvatarImgView.image = [image ellipseImageWithDefaultSetting];
+        }
+        
+    }];
+    
+    //获取爸爸或者妈妈头像
+    if(_babyInfo.fid != nil && ![_babyInfo.fid isEqualToString:@"0"])
+    {
+        [self getUserInfo:@"1" withUid:_babyInfo.fid];
+    }
+    else
+    {
+        [_dadButton setTitle:@"邀请" forState:UIControlStateNormal];
+        //[_dadButton setImage:nil forState:UIControlStateNormal];
+        //[_dadButton setBackgroundColor:[UIColor whiteColor]];
+    }
+    
+    if(_babyInfo.mid != nil && ![_babyInfo.mid isEqualToString:@"0"])
+    {
+        [self getUserInfo:@"2" withUid:_babyInfo.mid];
+    }
+    else
+    {
+        [_monButton setTitle:@"邀请" forState:UIControlStateNormal];
+        //[_monButton setImage:nil forState:UIControlStateNormal];
+    }
+    
+    UserInfo * user = [[UserDefault sharedInstance] userInfo];
+    if([user.uid isEqualToString:_babyInfo.fid] || [user.uid isEqualToString:_babyInfo.mid])
+    {
+        _addButton.hidden = YES;
+    }
 }
+
+
+
+- (void)getUserInfo:(NSString *)type withUid:(NSString *)uid
+{
+    [[HttpService sharedInstance] getUserInfo:@{@"uid":uid} completionBlock:^(id object) {
+        
+        UserInfo * user = (UserInfo *)object;
+        if([type isEqualToString:@"1"])
+        {
+            [_dadButton sd_setImageWithURL:[NSURL URLWithString:user.avatar] forState:UIControlStateNormal placeholderImage:Default_Avatar];
+        }
+        else if([type isEqualToString:@"2"])
+        {
+            [_monButton sd_setImageWithURL:[NSURL URLWithString:user.avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"baby_mama"]];
+        }
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        NSString * msg = @"获取爸爸头像失败";
+        if([type isEqualToString:@"1"])
+        {
+            msg = @"获取爸爸头像失败";
+        }
+        else if([type isEqualToString:@"2"])
+        {
+            msg = @"获取妈妈头像失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+    }];
+}
+
+
 
 
 - (void)HMSegmentedControlInitMethod
@@ -338,8 +411,7 @@
         [sender setBackgroundImage:[UIImage imageNamed:@"yuanquan.png"] forState:UIControlStateNormal];
     }else{
         [sender setSelected:YES];
-#warning 暂时没有图片
-        [sender setBackgroundImage:[UIImage imageNamed:@"baby_baba@2x.png"] forState:UIControlStateSelected];
+        [sender setBackgroundImage:[UIImage imageNamed:@"baby_baba"] forState:UIControlStateSelected];
     }
 }
 
@@ -352,14 +424,55 @@
 
 - (IBAction)isYaoQing:(id)sender
 {
-    _yaoQingbgView.hidden = NO;
+    UserInfo * user = [[UserDefault sharedInstance] userInfo];
+    //_yaoQingbgView.hidden = NO;
     if (sender == _monButton)
     {
-        
+        if(_babyInfo.mid != nil && [_babyInfo.mid length] != 0 && ![_babyInfo.mid isEqualToString:@"0"])
+        {
+            if([user.uid isEqualToString:_babyInfo.mid])
+            {
+                PersonCenterViewController * vc = [[PersonCenterViewController alloc] initWithNibName:nil bundle:nil];
+                [self push:vc];
+                vc = nil;
+            }
+            else
+            {
+                FriendHomeViewController * vc = [[FriendHomeViewController alloc] initWithNibName:nil bundle:nil];
+                vc.friendId = _babyInfo.mid;
+                [self push:vc];
+                vc = nil;
+            }
+        }
+        else
+        {
+            [self.navigationController.view addSubview:_yaoQingbgView];
+            _yaoQingbgView.hidden = NO;
+        }
     }
     if (sender == _dadButton)
     {
-        
+        if(_babyInfo.fid != nil && [_babyInfo.fid length] != 0 && ![_babyInfo.fid isEqualToString:@"0"])
+        {
+            if([user.uid isEqualToString:_babyInfo.fid])
+            {
+                PersonCenterViewController * vc = [[PersonCenterViewController alloc] initWithNibName:nil bundle:nil];
+                [self push:vc];
+                vc = nil;
+            }
+            else
+            {
+                FriendHomeViewController * vc = [[FriendHomeViewController alloc] initWithNibName:nil bundle:nil];
+                vc.friendId = _babyInfo.fid;
+                [self push:vc];
+                vc = nil;
+            }
+        }
+        else
+        {
+            [self.navigationController.view addSubview:_yaoQingbgView];
+            _yaoQingbgView.hidden = NO;
+        }
     }
     
 }
@@ -367,6 +480,7 @@
 //短信邀请界面
 - (IBAction)msgYaoQingButton:(id)sender
 {
+    [_yaoQingbgView removeFromSuperview];
     Class messageClass = (NSClassFromString(@"MFMessageComposeViewController"));
     if (messageClass == nil)
     {
@@ -392,7 +506,8 @@
 
 - (IBAction)weiXinYaoQingButton:(id)sender
 {
-    
+    [_yaoQingbgView removeFromSuperview];
+    [[ShareManager sharePlatform] invitationWeXinFriend:Invitation_Msg_Content];
 }
 
 - (IBAction)hideCurView:(id)sender
@@ -405,6 +520,10 @@
     [locateView removeFromSuperview];
     [self.view endEditing:YES];
     [self resignFirstResponder];
+}
+
+- (IBAction)hideInvitationView:(id)sender {
+    [_yaoQingbgView removeFromSuperview];
 }
 
 - (void)showPraiseListVC
