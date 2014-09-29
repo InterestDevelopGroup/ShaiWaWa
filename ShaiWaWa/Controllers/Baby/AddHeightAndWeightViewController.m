@@ -74,10 +74,11 @@
     UserInfo *user = [[UserDefault sharedInstance] userInfo];
     [[HttpService sharedInstance] addBabyGrowRecord:@{@"baby_id":_babyInfo.baby_id,@"height":height,@"weight":weight,@"uid":user.uid,@"body_type":[NSString stringWithFormat:@"%d",bodyType]} completionBlock:^(id object) {
           [SVProgressHUD showSuccessWithStatus:@"添加成功."];
-          _heightField.text = nil;
-          _weightField.text = nil;
-          [_heightField resignFirstResponder];
-          [_weightField resignFirstResponder];
+        [self popVIewController];
+//          _heightField.text = nil;
+//          _weightField.text = nil;
+//          [_heightField resignFirstResponder];
+//          [_weightField resignFirstResponder];
       } failureBlock:^(NSError *error, NSString *responseString) {
           NSString * msg = responseString;
           if (error) {
@@ -146,7 +147,6 @@
      kBabyTypeTall = 5,
      kBabyTypeShort = 6
      } babyType;
-     
      */
     
     //取出某天宝宝的数据对照标准
