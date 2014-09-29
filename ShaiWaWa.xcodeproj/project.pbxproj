@@ -143,6 +143,8 @@
 		F421621919D65B4A00F01C18 /* 男孩体重.plist in Resources */ = {isa = PBXBuildFile; fileRef = F421621519D65B4A00F01C18 /* 男孩体重.plist */; };
 		F421621A19D65B4A00F01C18 /* 男孩身高.plist in Resources */ = {isa = PBXBuildFile; fileRef = F421621619D65B4A00F01C18 /* 男孩身高.plist */; };
 		F4249B6D19D694FC0050A6AA /* BabyGrowRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = F4249B6C19D694FC0050A6AA /* BabyGrowRecord.m */; };
+		F428BDCD19D7E520008A7D84 /* NetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F428BDCB19D7E520008A7D84 /* NetCell.xib */; };
+		F428BDCE19D7E520008A7D84 /* NetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F428BDCC19D7E520008A7D84 /* NetCell.m */; };
 		F431482A199C57F000CAB2CD /* DynamicByUserIDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4314828199C57F000CAB2CD /* DynamicByUserIDViewController.m */; };
 		F431482B199C57F000CAB2CD /* DynamicByUserIDViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4314829199C57F000CAB2CD /* DynamicByUserIDViewController.xib */; };
 		F432BDD419762AC80086BBE9 /* baby_4-bg-1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F432BD3B19762AC80086BBE9 /* baby_4-bg-1@2x.png */; };
@@ -684,6 +686,9 @@
 		F421621619D65B4A00F01C18 /* 男孩身高.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "男孩身高.plist"; sourceTree = "<group>"; };
 		F4249B6B19D694FC0050A6AA /* BabyGrowRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BabyGrowRecord.h; sourceTree = "<group>"; };
 		F4249B6C19D694FC0050A6AA /* BabyGrowRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BabyGrowRecord.m; sourceTree = "<group>"; };
+		F428BDCA19D7E520008A7D84 /* NetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetCell.h; sourceTree = "<group>"; };
+		F428BDCB19D7E520008A7D84 /* NetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetCell.xib; sourceTree = "<group>"; };
+		F428BDCC19D7E520008A7D84 /* NetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetCell.m; sourceTree = "<group>"; };
 		F4314827199C57F000CAB2CD /* DynamicByUserIDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicByUserIDViewController.h; sourceTree = "<group>"; };
 		F4314828199C57F000CAB2CD /* DynamicByUserIDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicByUserIDViewController.m; sourceTree = "<group>"; };
 		F4314829199C57F000CAB2CD /* DynamicByUserIDViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DynamicByUserIDViewController.xib; sourceTree = "<group>"; };
@@ -2186,6 +2191,9 @@
 				F47F54C8197FACE6006DCA75 /* DynamicCell.h */,
 				F47F54C9197FACE6006DCA75 /* DynamicCell.m */,
 				F47F54CA197FACE6006DCA75 /* DynamicCell.xib */,
+				F428BDCA19D7E520008A7D84 /* NetCell.h */,
+				F428BDCB19D7E520008A7D84 /* NetCell.xib */,
+				F428BDCC19D7E520008A7D84 /* NetCell.m */,
 				F47F54CB197FACE6006DCA75 /* DynamicDetailCell.h */,
 				F47F54CC197FACE6006DCA75 /* DynamicDetailCell.m */,
 				F47F54CD197FACE6006DCA75 /* DynamicDetailCell.xib */,
@@ -2450,6 +2458,7 @@
 				F433881F1974C28600464D43 /* MessageViewController.xib in Resources */,
 				F432BE4419762AC80086BBE9 /* square_pinglun@2x.png in Resources */,
 				F432BDFA19762AC80086BBE9 /* main_fankui@2x.png in Resources */,
+				F428BDCD19D7E520008A7D84 /* NetCell.xib in Resources */,
 				F432BE0519762AC80086BBE9 /* main_tebieguanxin@2x.png in Resources */,
 				F43EA3771990A6980048081E /* btn_021.disable@2x.png in Resources */,
 				F43387FF1974C28600464D43 /* SearchAddressListViewController.xib in Resources */,
@@ -2709,6 +2718,7 @@
 				C38FA62119B0821B00B342A3 /* NSStringUtil.m in Sources */,
 				F433881A1974C28600464D43 /* LocationsViewController.m in Sources */,
 				F43388061974C28600464D43 /* SearchRSViewController.m in Sources */,
+				F428BDCE19D7E520008A7D84 /* NetCell.m in Sources */,
 				F47F5513197FACE7006DCA75 /* SummaryCell.m in Sources */,
 				F4A57AA01998A8E900283B88 /* MyCollectionViewController.m in Sources */,
 				F43EA37B1990A6980048081E /* TSLocateView.m in Sources */,

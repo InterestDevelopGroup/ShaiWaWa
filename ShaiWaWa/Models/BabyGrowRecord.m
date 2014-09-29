@@ -13,7 +13,7 @@
 - (id)initWithDict:(NSDictionary *)dict
 {
     if (self = [super init]) {
-        self.add_time = dict[@"id"];
+        self.add_time = dict[@"add_time"];
         self.baby_id = dict[@"baby_id"];
         self.body_type = [dict[@"boby_type"] intValue];
         self.height = dict[@"height"];
