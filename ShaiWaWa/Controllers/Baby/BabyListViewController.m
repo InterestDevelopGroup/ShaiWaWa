@@ -42,8 +42,8 @@
     self.title = @"宝宝列表";
     [self setLeftCusBarItem:@"square_back" action:nil];
     sectionArr = [[NSArray alloc] initWithObjects:@"我的宝宝",@"好友宝宝",nil];
-    myBabyList = [[NSArray alloc] init];
-    friendsBabyList =  [[NSArray alloc] init];
+    myBabyList = [[NSMutableArray alloc] init];
+    friendsBabyList =  [[NSMutableArray alloc] init];
     [_babyListTableView clearSeperateLine];
     [_babyListTableView registerNibWithName:@"BabyListCell" reuseIdentifier:@"Cell"];
     [_babyListTableView addHeaderWithTarget:self action:@selector(refresh)];
@@ -68,21 +68,23 @@
     //获取我好友的宝宝
     [self getMyFriendBabysWithUid:user.uid];
     //关闭刷新状态
-    [_babyListTableView headerEndRefreshing];
+    //[_babyListTableView headerEndRefreshing];
     //刷新数据
-    [_babyListTableView reloadData];
+    //[_babyListTableView reloadData];
 }
 
 #pragma mark - 获取往我的宝宝
 - (void)getMyBabysWithUid:(NSString *)uid
 {
-    [[HttpService sharedInstance] getBabyList:@{@"offset":@"0",@"pagesize":@"100",@"uid":uid} completionBlock:^(id object) {
+    [[HttpService sharedInstance] getBabyList:@{@"offset":@"0",@"pagesize":@"10000",@"uid":uid} completionBlock:^(id object) {
+        [_babyListTableView headerEndRefreshing];
         if(object == nil || [object count] == 0)
         {
             [SVProgressHUD showErrorWithStatus:@"您还没有添加宝宝."];
             return  ;
         }
         myBabyList = object;
+        [_babyListTableView reloadData];
     } failureBlock:^(NSError *error, NSString *responseString) {
         NSString * msg = responseString;
         if (error) {
@@ -96,13 +98,15 @@
 #pragma mark - 获取往我好友的宝宝
 - (void)getMyFriendBabysWithUid:(NSString *)uid
 {
-    [[HttpService sharedInstance] getBabyListByFriend:@{@"offset":@"0",@"pagesize":@"100",@"uid":uid} completionBlock:^(id object) {
+    [[HttpService sharedInstance] getBabyListByFriend:@{@"offset":@"0",@"pagesize":@"10000",@"uid":uid} completionBlock:^(id object) {
+        [_babyListTableView headerEndRefreshing];
         if(object == nil || [object count] == 0)
         {
-            [SVProgressHUD showErrorWithStatus:@"您好友没有添加宝宝."];
+            //[SVProgressHUD showErrorWithStatus:@"您好友没有添加宝宝."];
             return  ;
         }
         friendsBabyList = object;
+        [_babyListTableView reloadData];
     } failureBlock:^(NSError *error, NSString *responseString) {
         NSString * msg = responseString;
         if (error) {
@@ -162,7 +166,17 @@
         babyListCell.babySexImage.image = [UIImage imageNamed:@"main_girl.png"];
     }
 
+    babyListCell.babyOldLabel.text = [NSString stringWithFormat:@"%@条动态",baby.record_count];
     
+    if([baby.is_focus isEqualToString:@"0"])
+    {
+        babyListCell.focusImageView.hidden = YES;
+    }
+    else
+    {
+        babyListCell.focusImageView.hidden = NO;
+    }
+
     return babyListCell;
     
 }
@@ -185,9 +199,48 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     BabyHomePageViewController *babyHomePageVC = [[BabyHomePageViewController alloc] initWithNibName:nil bundle:nil];
-    BabyInfo * babyInfo = myBabyList[indexPath.row];
+    BabyInfo * babyInfo ;
+    if(indexPath.section == 0)
+    {
+        babyInfo = myBabyList[indexPath.row];
+    }
+    else
+    {
+        babyInfo = friendsBabyList[indexPath.row];
+    }
+    
+    
     babyHomePageVC.babyInfo = babyInfo;
     [self.navigationController pushViewController:babyHomePageVC animated:YES];
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.section == 0)
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(UITableViewCellEditingStyleDelete != editingStyle)
+    {
+        return ;
+    }
+    
+    [myBabyList removeObjectAtIndex:indexPath.row];
+    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+    
 }
 
 

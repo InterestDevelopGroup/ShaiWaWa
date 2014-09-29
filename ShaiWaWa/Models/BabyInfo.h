@@ -45,6 +45,7 @@
 @property(nonatomic, retain) NSString *birth_weight;
 @property(nonatomic, retain) NSString *background;
 @property(nonatomic, retain) NSString *add_time;
-@property(nonatomic, retain) NSString * record_count;
+@property(nonatomic, retain) NSString *record_count;
+@property(nonatomic, retain) NSString *is_focus;
 
 @end

@@ -167,7 +167,7 @@
     
     babyListCell.babyOldLabel.text = [NSString stringWithFormat:@"%@条动态",baby.record_count];
 
-    
+    babyListCell.focusImageView.hidden = YES;
     return babyListCell;
    
 }

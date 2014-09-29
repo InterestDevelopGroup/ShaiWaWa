@@ -1216,7 +1216,7 @@ int _lastPosition;    //A variable define in headfile
     if(recrod.audio != nil && [recrod.audio length] > 0)
     {
         
-        AudioView * audioView = [[AudioView alloc] initWithFrame:CGRectMake(123, 175, 82, 50) withPath:recrod.audio];
+        AudioView * audioView = [[AudioView alloc] initWithFrame:CGRectMake(123, 180, 82, 50) withPath:recrod.audio];
         audioView.tag = 20000;
         [audioView setCloseHidden];
         [dynamicCell.contentView addSubview:audioView];

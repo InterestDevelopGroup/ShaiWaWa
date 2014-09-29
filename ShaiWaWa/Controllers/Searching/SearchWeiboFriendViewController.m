@@ -126,6 +126,44 @@
     }];
 }
 
+- (void)btnSelected:(UIButton *)button
+{
+    WeiBoCell * cell ;
+    if([button.superview.superview.superview isKindOfClass:[WeiboUser class]])
+    {
+        cell = (WeiBoCell *)button.superview.superview.superview;
+    }
+    else if([button.superview.superview isKindOfClass:[WeiboUser class]])
+    {
+        cell = (WeiBoCell *)button.superview.superview;
+    }
+    else
+    {
+        cell = (WeiBoCell *)button.superview;
+    }
+    
+    NSIndexPath * indexPath = [_weiBoListTableView indexPathForCell:cell];
+    if(indexPath.section == 0)
+    {
+        WeiboUser * contact = _isAuthFriends[indexPath.row];
+        UserInfo * user = [[UserDefault sharedInstance] userInfo];
+        
+        [[HttpService sharedInstance] applyFriend:@{@"uid":user.uid,@"friend_id":contact.uid,@"remark":@"申请好友"} completionBlock:^(id object) {
+            
+            [SVProgressHUD showSuccessWithStatus:@"已发送申请."];
+            
+        } failureBlock:^(NSError *error, NSString *responseString) {
+            NSString * msg = responseString;
+            if(error)
+            {
+                msg = @"申请失败.";
+            }
+            [SVProgressHUD showErrorWithStatus:msg];
+        }];
+    }
+    
+}
+
 
 
 #pragma mark - UITableView DataSources and Delegate
@@ -156,6 +194,8 @@
     if(indexPath.section == 0)
     {
         user = _isAuthFriends[indexPath.row];
+        weiBoCell.addFriendButton.hidden = NO;
+        [weiBoCell.addFriendButton addTarget:self action:@selector(btnSelected:) forControlEvents:UIControlEventTouchUpInside];
     }
     else
     {
