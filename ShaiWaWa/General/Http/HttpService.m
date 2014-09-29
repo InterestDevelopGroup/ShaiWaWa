@@ -1398,7 +1398,8 @@
             return ;
         }
         if (success) {
-            success(obj);
+            NSArray * arr =[self mapModelsProcess:obj[@"result"] withClass:[Friend class]];
+            success(arr);
         }
 
     } failureBlock:failure];

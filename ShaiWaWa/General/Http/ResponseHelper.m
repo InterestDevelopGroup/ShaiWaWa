@@ -40,6 +40,7 @@
         record.audio = dic[@"audio"] == [NSNull null] ? @"" : dic[@"audio"];
         record.top_3_likes = dic[@"top_3_likes"] == [NSNull null] ? @[] : dic[@"top_3_likes"];
         record.user_avatar = dic[@"user_avatar"] == [NSNull null] ? @"" : dic[@"user_avatar"];
+        record.avatar = dic[@"avatar"] == [NSNull null] ? @"" : dic[@"avatar"];
         record.username = dic[@"username"] == [NSNull null] ? @"" : dic[@"username"];
         [results addObject:record];
         record = nil;

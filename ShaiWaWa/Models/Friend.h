@@ -29,4 +29,5 @@
 @property (nonatomic, strong) NSString *wechat;
 @property (nonatomic, strong) NSString *weibo;
 @property (nonatomic, strong) NSString *baby_count;
+@property (nonatomic, strong) NSString *uid;
 @end
