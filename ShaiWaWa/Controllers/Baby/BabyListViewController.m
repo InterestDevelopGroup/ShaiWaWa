@@ -49,8 +49,6 @@
     [_babyListTableView addHeaderWithTarget:self action:@selector(refresh)];
     [_babyListTableView setHeaderRefreshingText:NSLocalizedString(@"DataLoading", nil)];
     [_babyListTableView headerBeginRefreshing];
-
-    
 }
 
 - (void)refresh
@@ -65,24 +63,24 @@
     UserInfo *user = [[UserDefault sharedInstance] userInfo];
     //获取我的宝宝
     [self getMyBabysWithUid:user.uid];
-    //获取我好友的宝宝
-    [self getMyFriendBabysWithUid:user.uid];
-    //关闭刷新状态
-    [_babyListTableView headerEndRefreshing];
-    //刷新数据
-    [_babyListTableView reloadData];
 }
 
 #pragma mark - 获取往我的宝宝
 - (void)getMyBabysWithUid:(NSString *)uid
 {
     [[HttpService sharedInstance] getBabyList:@{@"offset":@"0",@"pagesize":@"100",@"uid":uid} completionBlock:^(id object) {
+        //关闭刷新状态
+//        [_babyListTableView headerEndRefreshing];
         if(object == nil || [object count] == 0)
         {
             [SVProgressHUD showErrorWithStatus:@"您还没有添加宝宝."];
             return  ;
         }
         myBabyList = object;
+        //获取我好友的宝宝
+        [self getMyFriendBabysWithUid:uid];
+        //刷新数据
+//        [_babyListTableView reloadData];
     } failureBlock:^(NSError *error, NSString *responseString) {
         NSString * msg = responseString;
         if (error) {
@@ -97,12 +95,16 @@
 - (void)getMyFriendBabysWithUid:(NSString *)uid
 {
     [[HttpService sharedInstance] getBabyListByFriend:@{@"offset":@"0",@"pagesize":@"100",@"uid":uid} completionBlock:^(id object) {
+        //关闭刷新状态
+        [_babyListTableView headerEndRefreshing];
         if(object == nil || [object count] == 0)
         {
             [SVProgressHUD showErrorWithStatus:@"您好友没有添加宝宝."];
             return  ;
         }
         friendsBabyList = object;
+        //刷新数据
+        [_babyListTableView reloadData];
     } failureBlock:^(NSError *error, NSString *responseString) {
         NSString * msg = responseString;
         if (error) {
@@ -181,11 +183,18 @@
     return 20.0f;
 }
 
+#pragma mark - 点击cell的监听方法
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     BabyHomePageViewController *babyHomePageVC = [[BabyHomePageViewController alloc] initWithNibName:nil bundle:nil];
-    BabyInfo * babyInfo = myBabyList[indexPath.row];
+    BabyInfo * babyInfo = nil;
+    if (indexPath.section == 0) {
+       babyInfo = myBabyList[indexPath.row];
+    }else
+    {
+        babyInfo = friendsBabyList[indexPath.row];
+    }
     babyHomePageVC.babyInfo = babyInfo;
     [self.navigationController pushViewController:babyHomePageVC animated:YES];
 }
