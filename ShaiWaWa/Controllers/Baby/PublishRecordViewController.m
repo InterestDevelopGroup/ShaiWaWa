@@ -955,7 +955,7 @@
     //先保存
     NSString * fileName = [[IO generateRndString] stringByAppendingPathExtension:@"png"];
     NSString * path = [IO pathForResource:fileName inDirectory:Publish_Image_Folder];
-    if(![IO writeFileToPath:path withData:UIImageJPEGRepresentation(image, 0.5)])
+    if(![IO writeFileToPath:path withData:UIImageJPEGRepresentation(image, 0.6)])
     {
         [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"SaveError", nil)];
         return ;

@@ -82,9 +82,6 @@
 {
     //定义一个toolBar
     UIToolbar * topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 49)];
-    
-
-    
     //定义两个flexibleSpace的button，放在toolBar上，这样完成按钮就会在最右边
     UITextField *temp_txt = [[UITextField alloc] initWithFrame:CGRectMake(10, 0, 120, 30)];
     temp_txt.hidden = YES;

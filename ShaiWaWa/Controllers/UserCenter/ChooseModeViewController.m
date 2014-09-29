@@ -47,6 +47,7 @@
 #import <ShareSDK/ShareSDK.h>
 #import "ShareManager.h"
 #import "SDImageCache.h"
+#import "FriendHomeViewController.h"
 @import MediaPlayer;
 @import QuartzCore;
 typedef enum{
@@ -55,7 +56,7 @@ typedef enum{
     Special_Record,
     Keyword_Recrod
 }Record_Type;
-@interface ChooseModeViewController ()
+@interface ChooseModeViewController ()<UIActionSheetDelegate>
 {
     ShareView *sv;
     SearchDynamicViewController *searchDyVC;
@@ -279,7 +280,11 @@ typedef enum{
     [sv setReportBlock:^(){
         weakSelf.grayShareView.hidden = YES;
         isShareViewShown = NO;
-        [weakSelf reportRecord:weakSelf.selectedRecrod];
+        
+        UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"色情",@"反动",@"敏感话题",@"其他", nil];
+        [actionSheet showInView:weakSelf.view];
+        actionSheet = nil;
+        
     }];
     
     
@@ -370,11 +375,11 @@ typedef enum{
     }];
 }
 
-- (void)reportRecord:(BabyRecord *)babyRecord
+- (void)reportRecord:(BabyRecord *)babyRecord type:(NSString *)type
 {
     if(babyRecord == nil) return;
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
-    [[HttpService sharedInstance] addReport:@{@"uid":users.uid,@"rid":babyRecord.rid,@"type":@"4",@"remark":@"举报动态"} completionBlock:^(id object) {
+    [[HttpService sharedInstance] addReport:@{@"uid":users.uid,@"rid":babyRecord.rid,@"type":type,@"remark":@"举报动态"} completionBlock:^(id object) {
         
         [SVProgressHUD showSuccessWithStatus:@"举报成功."];
         
@@ -966,6 +971,47 @@ typedef enum{
     }];
 }
 
+- (void)showHomePage:(UITapGestureRecognizer *)gesture
+{
+    
+    if(![gesture.view isKindOfClass:[UILabel class]])
+    {
+        return ;
+    }
+    
+    UILabel * label = (UILabel *)gesture.view;
+    DynamicCell * cell ;
+    if([label.superview.superview.superview.superview isKindOfClass:[DynamicCell class]])
+    {
+        cell = (DynamicCell *)label.superview.superview.superview.superview;
+    }
+    else if ([label.superview.superview.superview isKindOfClass:[DynamicCell class]])
+    {
+        cell = (DynamicCell *)label.superview.superview.superview;
+    }
+    else
+    {
+        cell = (DynamicCell *)label.superview.superview;
+    }
+    
+    NSIndexPath * indexPath = [_dynamicPageTableView indexPathForCell:cell];
+    BabyRecord * record = [dyArray objectAtIndex:indexPath.row];
+    if([record.uid isEqualToString:users.uid])
+    {
+        PersonCenterViewController * vc = [[PersonCenterViewController alloc] initWithNibName:nil bundle:nil];
+        [self push:vc];
+        vc = nil;
+    }
+    else
+    {
+        FriendHomeViewController * vc = [[FriendHomeViewController alloc] initWithNibName:nil bundle:nil];
+        vc.friendId = record.uid;
+        [self push:vc];
+        vc = nil;
+    }
+    
+}
+
 
 #pragma mark -  UIScrollViewDelegate Methods
 int _lastPosition;    //A variable define in headfile
@@ -1015,6 +1061,10 @@ int _lastPosition;    //A variable define in headfile
         who = [NSString stringWithFormat:@"%@(妈妈)",who];
     }
     dynamicCell.whoLabel.text = who;
+    UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHomePage:)];
+    [dynamicCell.whoLabel addGestureRecognizer:tapGesture];
+    dynamicCell.whoLabel.userInteractionEnabled = YES;
+    tapGesture = nil;
     
     //添加头像点击手势
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showBabyHomePage:)];
@@ -1187,7 +1237,20 @@ int _lastPosition;    //A variable define in headfile
     [self.navigationController pushViewController:dynamicDetailVC animated:YES];
 }
 
-
+#pragma mark - UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    //NSLog(@"%i",buttonIndex);
+    if(buttonIndex== actionSheet.cancelButtonIndex)
+    {
+        _selectedRecrod = nil;
+        return ;
+    }
+    
+    NSString * type = [NSString stringWithFormat:@"%i",buttonIndex + 1];
+    
+    [self reportRecord:_selectedRecrod type:type];
+}
 
 
 @end

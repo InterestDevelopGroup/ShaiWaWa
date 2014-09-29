@@ -146,6 +146,7 @@
     [_goodFriendButton addSubview:jianTou];
 }
 
+
 //二维码
 - (void)twoDimensionCodeCell
 {

@@ -430,7 +430,7 @@
         float width = CGRectGetWidth(dynamicCell.scrollView.bounds)/count;
         for(int i = 0; i < [recrod.images count]; i++)
         {
-            PublishImageView * imageView = [[PublishImageView alloc] initWithFrame:CGRectMake(i * width, 0, width, CGRectGetHeight(dynamicCell.scrollView.bounds)) withPath:recrod.images[i][@"image"]];
+            PublishImageView * imageView = [[PublishImageView alloc] initWithFrame:CGRectMake(i * width, 0, width, CGRectGetHeight(dynamicCell.scrollView.bounds)) withPath:recrod.images[i]];
             imageView.tapBlock = ^(NSString * path){
                 ImageDisplayView * displayView = [[ImageDisplayView alloc] initWithFrame:self.navigationController.view.bounds withPath:path];
                 [self.navigationController.view addSubview:displayView];
