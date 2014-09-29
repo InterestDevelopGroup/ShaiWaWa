@@ -517,6 +517,25 @@
 }
 
 /**
+ @desc 获取好友宝宝列表
+ */
+//TODO:获取好友宝宝列表
+- (void)getBabyListByFriend:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self postJSON:[self mergeURL:Get_Baby_List_By_Friend] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+        if (success)
+        {
+            success([self mapModelsProcess:obj[@"result"] withClass:[BabyInfo class]]);
+        }
+    } failureBlock:failure];
+}
+
+
+/**
  @desc 获取宝宝信息
  */
 //TODO:获取宝宝信息

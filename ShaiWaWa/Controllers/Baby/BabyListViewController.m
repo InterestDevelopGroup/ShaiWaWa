@@ -10,7 +10,6 @@
 #import "UIViewController+BarItemAdapt.h"
 #import "BabyListCell.h"
 #import "BabyHomePageViewController.h"
-
 #import "HttpService.h"
 #import "SVProgressHUD.h"
 #import "UserDefault.h"
@@ -37,27 +36,14 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - Private Methods
 - (void)initUI
 {
     self.title = @"宝宝列表";
     [self setLeftCusBarItem:@"square_back" action:nil];
-    sectionArr = [[NSArray alloc] initWithObjects:@"我的宝宝", nil];
+    sectionArr = [[NSArray alloc] initWithObjects:@"我的宝宝",@"好友宝宝",nil];
     myBabyList = [[NSArray alloc] init];
     friendsBabyList =  [[NSArray alloc] init];
-
     [_babyListTableView clearSeperateLine];
     [_babyListTableView registerNibWithName:@"BabyListCell" reuseIdentifier:@"Cell"];
     [_babyListTableView addHeaderWithTarget:self action:@selector(refresh)];
@@ -77,16 +63,26 @@
 - (void)getBabys
 {
     UserInfo *user = [[UserDefault sharedInstance] userInfo];
-    [[HttpService sharedInstance] getBabyList:@{@"offset":@"0",@"pagesize":@"100",@"uid":user.uid} completionBlock:^(id object) {
-        [_babyListTableView headerEndRefreshing];
+    //获取我的宝宝
+    [self getMyBabysWithUid:user.uid];
+    //获取我好友的宝宝
+    [self getMyFriendBabysWithUid:user.uid];
+    //关闭刷新状态
+    [_babyListTableView headerEndRefreshing];
+    //刷新数据
+    [_babyListTableView reloadData];
+}
+
+#pragma mark - 获取往我的宝宝
+- (void)getMyBabysWithUid:(NSString *)uid
+{
+    [[HttpService sharedInstance] getBabyList:@{@"offset":@"0",@"pagesize":@"100",@"uid":uid} completionBlock:^(id object) {
         if(object == nil || [object count] == 0)
         {
-            
             [SVProgressHUD showErrorWithStatus:@"您还没有添加宝宝."];
             return  ;
         }
         myBabyList = object;
-        [_babyListTableView reloadData];
     } failureBlock:^(NSError *error, NSString *responseString) {
         NSString * msg = responseString;
         if (error) {
@@ -95,7 +91,26 @@
         [SVProgressHUD showErrorWithStatus:msg];
         [_babyListTableView headerEndRefreshing];
     }];
+}
 
+#pragma mark - 获取往我好友的宝宝
+- (void)getMyFriendBabysWithUid:(NSString *)uid
+{
+    [[HttpService sharedInstance] getBabyListByFriend:@{@"offset":@"0",@"pagesize":@"100",@"uid":uid} completionBlock:^(id object) {
+        if(object == nil || [object count] == 0)
+        {
+            [SVProgressHUD showErrorWithStatus:@"您好友没有添加宝宝."];
+            return  ;
+        }
+        friendsBabyList = object;
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        NSString * msg = responseString;
+        if (error) {
+            msg = @"加载失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+        [_babyListTableView headerEndRefreshing];
+    }];
 }
 
 #pragma mark - UITableView DataSources and Delegate
@@ -103,18 +118,28 @@
 {
     return [sectionArr count];
 }
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // 获取当前section的名称，据此获取到当前section的数量。
-    return [myBabyList count];
+    if (section == 0) {
+        return [myBabyList count];
+    }
+    return [friendsBabyList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    
     BabyListCell * babyListCell = (BabyListCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
-    BabyInfo * baby = myBabyList[indexPath.row];
+    
+    BabyInfo * baby = nil;
+    if (indexPath.section == 0) {
+       baby = myBabyList[indexPath.row];
+    }else
+    {
+        baby = friendsBabyList[indexPath.row];
+    }
+    
     babyListCell.babyNameLabel.text = baby.nickname;
     
     [babyListCell.babyImage sd_setImageWithURL:[NSURL URLWithString:baby.avatar] placeholderImage:Default_Avatar];
@@ -141,6 +166,7 @@
     return babyListCell;
     
 }
+
 // 这个方法用来告诉表格第section分组的名称
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {

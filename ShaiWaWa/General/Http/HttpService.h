@@ -19,6 +19,7 @@
 #define Update_System_Notification                  @"update_system_notification"
 #define Add_Baby                                    @"add_baby"
 #define Get_Baby_List                               @"get_baby_list"
+#define Get_Baby_List_By_Friend                     @"get_baby_list_by_friend"
 #define Get_Baby_Info                               @"get_baby_info"
 #define Add_Baby_Grow_Record                        @"add_baby_grow_record"
 #define Get_Baby_Grow_Record                        @"get_baby_grow_record_list"
@@ -165,6 +166,12 @@ typedef enum {
  */
 //TODO:获取宝宝列表
 - (void)getBabyList:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
+
+/**
+ @desc 获取好友宝宝列表
+ */
+//TODO:获取好友宝宝列表
+- (void)getBabyListByFriend:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
 
 /**
  @desc 获取宝宝信息
