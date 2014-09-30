@@ -22,7 +22,7 @@
 #import "UIImageView+WebCache.h"
 #import "AppMacros.h"
 @interface BabyListViewController ()
-
+@property (nonatomic,strong) NSString * keyword;
 @end
 
 @implementation BabyListViewController
@@ -41,7 +41,7 @@
 {
     self.title = @"宝宝列表";
     [self setLeftCusBarItem:@"square_back" action:nil];
-    [self setRightCustomBarItem:@"user_gengduo" action:@selector(edit:)];
+    //[self setRightCustomBarItem:@"user_gengduo" action:@selector(edit:)];
     sectionArr = [[NSArray alloc] initWithObjects:@"我的宝宝",@"好友宝宝",nil];
     myBabyList = [[NSMutableArray alloc] init];
     friendsBabyList =  [[NSMutableArray alloc] init];
@@ -64,6 +64,8 @@
     UserInfo *user = [[UserDefault sharedInstance] userInfo];
     //获取我的宝宝
     [self getMyBabysWithUid:user.uid];
+    //获取我好友的宝宝
+    [self getMyFriendBabysWithUid:user.uid];
 }
 
 #pragma mark - 获取往我的宝宝
@@ -71,7 +73,7 @@
 {
 
     [[HttpService sharedInstance] getBabyList:@{@"offset":@"0",@"pagesize":@"10000",@"uid":uid} completionBlock:^(id object) {
-//        [_babyListTableView headerEndRefreshing];
+        [_babyListTableView headerEndRefreshing];
 
         if(object == nil || [object count] == 0)
         {
@@ -79,8 +81,9 @@
             return  ;
         }
         myBabyList = object;
-        //获取我好友的宝宝
-        [self getMyFriendBabysWithUid:uid];
+        [_babyListTableView reloadData];
+        
+        
     } failureBlock:^(NSError *error, NSString *responseString) {
         NSString * msg = responseString;
         if (error) {
@@ -104,7 +107,6 @@
             return  ;
         }
         friendsBabyList = object;
-
         [_babyListTableView reloadData];
     } failureBlock:^(NSError *error, NSString *responseString) {
         NSString * msg = responseString;
@@ -115,6 +117,63 @@
         [_babyListTableView headerEndRefreshing];
     }];
 }
+
+- (void)filterBabys
+{
+    if(_keyword == nil || [_keyword length] == 0)
+    {
+        //重新获取宝宝
+        [self getBabys];
+    }
+    else
+    {
+        NSMutableArray * arr_1, * arr_2;
+        arr_1 = [@[] mutableCopy];
+        arr_2 = [@[] mutableCopy];
+        for(BabyInfo * baby in myBabyList)
+        {
+            NSRange range_1 = [baby.nickname rangeOfString:_keyword];
+            NSRange range_2 = [baby.baby_name rangeOfString:_keyword];
+            
+            if(range_1.location != NSNotFound || range_2.location != NSNotFound)
+            {
+                [arr_1 addObject:baby];
+            }
+        }
+        
+        myBabyList = arr_1;
+        
+        for(BabyInfo * baby in friendsBabyList)
+        {
+            NSRange range_1 = [baby.nickname rangeOfString:_keyword];
+            NSRange range_2 = [baby.baby_name rangeOfString:_keyword];
+            
+            if(range_1.location != NSNotFound || range_2.location != NSNotFound)
+            {
+                [arr_2 addObject:baby];
+            }
+        }
+        
+        friendsBabyList = arr_2;
+        
+        [_babyListTableView reloadData];
+
+    }
+}
+
+#pragma mark 右上角按钮方法监听
+- (void)edit:(UIButton *)btn
+{
+    [btn setSelected:!btn.selected];
+    if (btn.selected) {
+        
+        [self.babyListTableView setEditing:YES animated:YES];
+    }else
+    {
+        [self.babyListTableView setEditing:NO animated:YES];
+    }
+}
+
 
 #pragma mark - UITableView DataSources and Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -226,18 +285,6 @@
     }
 }
 
-#pragma mark 右上角按钮方法监听
-- (void)edit:(UIButton *)btn
-{
-    [btn setSelected:!btn.selected];
-    if (btn.selected) {
-        
-        [self.babyListTableView setEditing:YES animated:YES];
-    }else
-    {
-        [self.babyListTableView setEditing:NO animated:YES];
-    }
-}
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -272,6 +319,8 @@
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+    _keyword = textField.text;
+    [self filterBabys];
     [textField resignFirstResponder];
     return YES;
 }
