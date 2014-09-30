@@ -10,5 +10,7 @@
 
 @interface ImageDisplayView : CommonAlert
 @property (nonatomic,strong) NSString * path;
+@property (nonatomic,strong) NSArray * images;
 - (id)initWithFrame:(CGRect)frame withPath:(NSString *)path;
+- (id)initWithFrame:(CGRect)frame withPath:(NSString *)path withAllImages:(NSArray *)images;
 @end

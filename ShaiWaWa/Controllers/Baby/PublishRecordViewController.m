@@ -1063,7 +1063,7 @@
         
         if([path hasSuffix:@"png"] || [path hasSuffix:@"jpg"])
         {
-            ImageDisplayView * displayView = [[ImageDisplayView alloc] initWithFrame:self.navigationController.view.bounds withPath:path];
+            ImageDisplayView * displayView = [[ImageDisplayView alloc] initWithFrame:self.navigationController.view.bounds withPath:path withAllImages:_images];
             [self.navigationController.view addSubview:displayView];
             [displayView show];
         }
