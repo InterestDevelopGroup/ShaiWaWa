@@ -275,8 +275,8 @@
     {
         //推荐给好友
         [_invitationView removeFromSuperview];
-        _invitationView.frame = self.view.bounds;
-        [self.view addSubview:_invitationView];
+        //_invitationView.frame = self.view.bounds;
+        [self.navigationController.view addSubview:_invitationView];
     }
     else if(indexPath.section == 3 && indexPath.row == 1)
     {
@@ -508,7 +508,7 @@
         MFMessageComposeViewController *picker = [[MFMessageComposeViewController alloc] init];
         picker.messageComposeDelegate = self;
         
-        NSString *smsBody = [NSString stringWithFormat:@"亲爱的,我发现一个很不错的手机应用'晒娃娃', 可以用来晒宝宝的照片和视频。你也下一个一起玩吧。下载地址: http://www.shaiwawa.com/download"];
+        NSString *smsBody = [NSString stringWithFormat:Invitation_Msg_Content];
         picker.body=smsBody;
         [self presentViewController:picker animated:YES completion:nil];
     }
@@ -523,7 +523,12 @@
 - (IBAction)wechatInvitation:(id)sender
 {
     [_invitationView removeFromSuperview];
-    [[ShareManager sharePlatform] shareToWeiXinFriend];
+    [[ShareManager sharePlatform] invitationWeXinFriend:Invitation_Msg_Content];
+}
+
+- (IBAction)hideInvitationView:(id)sender
+{
+    [_invitationView removeFromSuperview];
 }
 
 

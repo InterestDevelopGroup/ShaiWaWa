@@ -534,6 +534,8 @@
 
 - (void)showShareGrayView
 {
+    [self.view endEditing:YES];
+    [self resignFirstResponder];
     if (!isShareViewShown) {
         _grayShareView.hidden = NO;
         isShareViewShown = YES;

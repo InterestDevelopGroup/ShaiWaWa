@@ -32,9 +32,11 @@
 #import "FriendHomeViewController.h"
 #import "PersonCenterViewController.h"
 #import "AudioView.h"
+#import "ShareView.h"
+#import "ShareManager.h"
 @import MediaPlayer;
-@interface DynamicDetailViewController ()
-
+@interface DynamicDetailViewController ()<UIActionSheetDelegate>
+@property (nonatomic,strong) ShareView * sv;
 @end
 
 @implementation DynamicDetailViewController
@@ -89,22 +91,145 @@
     bgImgView.image = [UIImage imageNamed:@"baby_4-bg-2.png"];
     [_pinLunListTableView setBackgroundView:bgImgView];
     
-    ShareView *sv = [[ShareView alloc] initWithFrame:CGRectMake(0, 0, 320, 162)];
+    _sv = [[ShareView alloc] initWithFrame:CGRectMake(0, 0, 320, 162)];
     
-    sv.deleteButton.hidden = YES;
-    
-    [sv setDeleteBlock:^(){
-        
+    __weak DynamicDetailViewController * weakSelf = self;
+    [_sv setDeleteBlock:^(){
+        weakSelf.grayShareView.hidden = YES;
+        isShareViewShown = NO;
+        [weakSelf deleteRecord:_babyRecord];
     }];
-    [_shareView addSubview:sv];
+    
+    [_sv setCollectionBlock:^(){
+        weakSelf.grayShareView.hidden = YES;
+        isShareViewShown = NO;
+        [weakSelf collectionRecord:_babyRecord];
+    }];
+    
+    [_sv setReportBlock:^(){
+        weakSelf.grayShareView.hidden = YES;
+        isShareViewShown = NO;
+
+        UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"色情",@"反动",@"敏感话题",@"其他", nil];
+        [actionSheet showInView:weakSelf.view];
+        actionSheet = nil;
+
+    }];
+    
+    [_sv setQzoneBlock:^(){
+        weakSelf.grayShareView.hidden = YES;
+        isShareViewShown = NO;
+        
+        [weakSelf shareWityType:ShareTypeQQSpace babyRecord:_babyRecord];
+    }];
+    
+    [_sv setXinLanWbBlock:^(){
+        weakSelf.grayShareView.hidden = YES;
+        isShareViewShown = NO;
+        [weakSelf shareWityType:ShareTypeSinaWeibo babyRecord:_babyRecord];
+    }];
+    
+    [_sv setWeiXinBlock:^(){
+        weakSelf.grayShareView.hidden = YES;
+        isShareViewShown = NO;
+        [weakSelf shareWityType:ShareTypeWeixiSession babyRecord:_babyRecord];
+    }];
+    
+    [_sv setWeiXinCycleBlock:^{
+        weakSelf.grayShareView.hidden = YES;
+        isShareViewShown = NO;
+        [weakSelf shareWityType:ShareTypeWeixiTimeline babyRecord:_babyRecord];
+    }];
+    
+    
+    
+    [_shareView addSubview:_sv];
     
     pinLunArray = [[NSMutableArray alloc] init];
-    
     [_pinLunListTableView addHeaderWithTarget:self action:@selector(refresh)];
     [_pinLunListTableView setHeaderRefreshingText:NSLocalizedString(@"DataLoading", nil)];
     [_pinLunListTableView headerBeginRefreshing];
 
 }
+
+- (void)shareWityType:(ShareType)type babyRecord:(BabyRecord *)babyRecord
+{
+    if(babyRecord == nil) return;
+    
+    if(babyRecord.video != nil && [babyRecord.video length] != 0)
+    {
+        UIImage * image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:babyRecord.video];
+        [[ShareManager sharePlatform] shareWithType:type withContent:babyRecord.content withImage:image];
+    }
+    else if([babyRecord.images count] > 0)
+    {
+        [[ShareManager sharePlatform] shareWithType:type withContent:babyRecord.content withImagePath:babyRecord.images[0]];
+    }
+    else
+    {
+        [[ShareManager sharePlatform] shareWithType:type withContent:babyRecord.content withImage:nil];
+    }
+}
+
+- (void)deleteRecord:(BabyRecord *)babyRecord
+{
+    if(babyRecord == nil) return;
+    UserInfo * users = [[UserDefault sharedInstance] userInfo];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+    [[HttpService sharedInstance] deleteRecord:@{@"uid":users.uid,@"rid":babyRecord.rid} completionBlock:^(id object) {
+        [self popVIewController];
+        [SVProgressHUD showSuccessWithStatus:@"删除成功."];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        NSString * msg = responseString;
+        if(error)
+        {
+            msg = @"删除失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+    }];
+}
+
+
+- (void)collectionRecord:(BabyRecord *)babyRecord
+{
+    if(babyRecord == nil) return;
+    UserInfo * users = [[UserDefault sharedInstance] userInfo];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+    [[HttpService sharedInstance] addFavorite:@{@"uid":users.uid,@"rid":babyRecord.rid} completionBlock:^(id object) {
+        
+        [SVProgressHUD showSuccessWithStatus:@"收藏成功."];
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        NSString * msg = responseString;
+        if(error)
+        {
+            msg = @"收藏失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+        
+    }];
+}
+
+- (void)reportRecord:(BabyRecord *)babyRecord type:(NSString *)type
+{
+    if(babyRecord == nil) return;
+    UserInfo * users = [[UserDefault sharedInstance] userInfo];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+    [[HttpService sharedInstance] addReport:@{@"uid":users.uid,@"rid":babyRecord.rid,@"type":type,@"remark":@"举报动态"} completionBlock:^(id object) {
+        
+        [SVProgressHUD showSuccessWithStatus:@"举报成功."];
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        NSString * msg = responseString;
+        if(error)
+        {
+            msg = @"举报失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+        
+    }];
+}
+
 
 //下拉刷新数据
 - (void)refresh
@@ -136,6 +261,17 @@
 
 - (void)showShareGrayView
 {
+    [_pinLunContextTextField resignFirstResponder];
+    UserInfo * user = [[UserDefault sharedInstance] userInfo];
+    if([user.uid isEqualToString:_babyRecord.uid])
+    {
+        [_sv showDelBtn];
+    }
+    else
+    {
+        [_sv hideDelBtn];
+    }
+    
     if (!isShareViewShown) {
         _grayShareView.hidden = NO;
         isShareViewShown = YES;
@@ -203,10 +339,6 @@
 
 }
 
-- (void)moreAction:(id)sender
-{
-    
-}
 
 - (IBAction)pinLunEvent:(id)sender
 {
@@ -403,9 +535,9 @@
         [detailCell.likeBtn setTitle:_babyRecord.like_count forState:UIControlStateNormal];
         [detailCell.commentBtn setTitle:_babyRecord.comment_count forState:UIControlStateNormal];
         [detailCell.likeBtn addTarget:self action:@selector(likeAction:) forControlEvents:UIControlEventTouchUpInside];
-        [detailCell.moreBtn addTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
         NSTimeInterval timeInterval = [_babyRecord.add_time doubleValue];
         detailCell.publishTimeLabel.text = [[NSDate dateWithTimeIntervalSince1970:timeInterval] formatDateString:@"yyyy-MM-dd"];
+        [detailCell.moreBtn addTarget:self action:@selector(showShareGrayView) forControlEvents:UIControlEventTouchUpInside];
         
         //显示赞用户头像
         if([_babyRecord.top_3_likes count] > 0)
@@ -530,6 +662,22 @@
     
     return YES;
 }
+
+#pragma mark - UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    //NSLog(@"%i",buttonIndex);
+    if(buttonIndex== actionSheet.cancelButtonIndex)
+    {
+
+        return ;
+    }
+    
+    NSString * type = [NSString stringWithFormat:@"%i",buttonIndex + 1];
+    
+    [self reportRecord:_babyRecord type:type];
+}
+
 
 
 @end
