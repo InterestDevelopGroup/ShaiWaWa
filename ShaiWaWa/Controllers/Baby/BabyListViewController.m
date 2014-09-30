@@ -41,6 +41,7 @@
 {
     self.title = @"宝宝列表";
     [self setLeftCusBarItem:@"square_back" action:nil];
+    [self setRightCustomBarItem:@"user_gengduo" action:@selector(edit:)];
     sectionArr = [[NSArray alloc] initWithObjects:@"我的宝宝",@"好友宝宝",nil];
     myBabyList = [[NSMutableArray alloc] init];
     friendsBabyList =  [[NSMutableArray alloc] init];
@@ -49,8 +50,6 @@
     [_babyListTableView addHeaderWithTarget:self action:@selector(refresh)];
     [_babyListTableView setHeaderRefreshingText:NSLocalizedString(@"DataLoading", nil)];
     [_babyListTableView headerBeginRefreshing];
-
-    
 }
 
 - (void)refresh
@@ -65,26 +64,23 @@
     UserInfo *user = [[UserDefault sharedInstance] userInfo];
     //获取我的宝宝
     [self getMyBabysWithUid:user.uid];
-    //获取我好友的宝宝
-    [self getMyFriendBabysWithUid:user.uid];
-    //关闭刷新状态
-    //[_babyListTableView headerEndRefreshing];
-    //刷新数据
-    //[_babyListTableView reloadData];
 }
 
 #pragma mark - 获取往我的宝宝
 - (void)getMyBabysWithUid:(NSString *)uid
 {
+
     [[HttpService sharedInstance] getBabyList:@{@"offset":@"0",@"pagesize":@"10000",@"uid":uid} completionBlock:^(id object) {
-        [_babyListTableView headerEndRefreshing];
+//        [_babyListTableView headerEndRefreshing];
+
         if(object == nil || [object count] == 0)
         {
             [SVProgressHUD showErrorWithStatus:@"您还没有添加宝宝."];
             return  ;
         }
         myBabyList = object;
-        [_babyListTableView reloadData];
+        //获取我好友的宝宝
+        [self getMyFriendBabysWithUid:uid];
     } failureBlock:^(NSError *error, NSString *responseString) {
         NSString * msg = responseString;
         if (error) {
@@ -98,7 +94,9 @@
 #pragma mark - 获取往我好友的宝宝
 - (void)getMyFriendBabysWithUid:(NSString *)uid
 {
+
     [[HttpService sharedInstance] getBabyListByFriend:@{@"offset":@"0",@"pagesize":@"10000",@"uid":uid} completionBlock:^(id object) {
+
         [_babyListTableView headerEndRefreshing];
         if(object == nil || [object count] == 0)
         {
@@ -106,6 +104,7 @@
             return  ;
         }
         friendsBabyList = object;
+
         [_babyListTableView reloadData];
     } failureBlock:^(NSError *error, NSString *responseString) {
         NSString * msg = responseString;
@@ -195,10 +194,12 @@
     return 20.0f;
 }
 
+#pragma mark - 点击cell的监听方法
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     BabyHomePageViewController *babyHomePageVC = [[BabyHomePageViewController alloc] initWithNibName:nil bundle:nil];
+
     BabyInfo * babyInfo ;
     if(indexPath.section == 0)
     {
@@ -208,7 +209,6 @@
     {
         babyInfo = friendsBabyList[indexPath.row];
     }
-    
     
     babyHomePageVC.babyInfo = babyInfo;
     [self.navigationController pushViewController:babyHomePageVC animated:YES];
@@ -226,6 +226,19 @@
     }
 }
 
+#pragma mark 右上角按钮方法监听
+- (void)edit:(UIButton *)btn
+{
+    [btn setSelected:!btn.selected];
+    if (btn.selected) {
+        
+        [self.babyListTableView setEditing:YES animated:YES];
+    }else
+    {
+        [self.babyListTableView setEditing:NO animated:YES];
+    }
+}
+
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return UITableViewCellEditingStyleDelete;
@@ -237,9 +250,21 @@
     {
         return ;
     }
-    
-    [myBabyList removeObjectAtIndex:indexPath.row];
-    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+    //调用网络删除宝宝借口
+    UserInfo * users = [[UserDefault sharedInstance] userInfo];
+    BabyInfo * b = myBabyList[indexPath.row];
+    [[HttpService sharedInstance] deleteBaby:@{@"uid":users.uid,@"baby_id":b.baby_id} completionBlock:^(id object) {
+        [SVProgressHUD showSuccessWithStatus:@"删除成功"];
+        [myBabyList removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        NSString * msg = responseString;
+        if(error)
+        {
+            msg = @"删除失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+    }];
     
 }
 
