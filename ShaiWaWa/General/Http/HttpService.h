@@ -19,6 +19,8 @@
 #define Update_System_Notification                  @"update_system_notification"
 #define Add_Baby                                    @"add_baby"
 #define Get_Baby_List                               @"get_baby_list"
+#define Delete_Baby                                 @"delete_baby"
+#define Search_Baby                                 @"search_baby"
 #define Get_Baby_List_By_Friend                     @"get_baby_list_by_friend"
 #define Get_Baby_Info                               @"get_baby_info"
 #define Add_Baby_Grow_Record                        @"add_baby_grow_record"
@@ -160,6 +162,18 @@ typedef enum {
  */
 //TODO:添加宝宝
 - (void)addBaby:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
+
+/**
+ @desc 删除宝宝
+ */
+//TODO:删除宝宝
+- (void)deleteBaby:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
+
+/**
+ @desc 搜索宝宝
+ */
+//TODO:搜索宝宝
+- (void)searchBaby:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
 
 /**
  @desc 获取宝宝列表

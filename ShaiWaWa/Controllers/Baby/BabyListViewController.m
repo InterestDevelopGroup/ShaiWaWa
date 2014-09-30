@@ -41,6 +41,7 @@
 {
     self.title = @"宝宝列表";
     [self setLeftCusBarItem:@"square_back" action:nil];
+    [self setRightCustomBarItem:@"user_gengduo" action:@selector(edit:)];
     sectionArr = [[NSArray alloc] initWithObjects:@"我的宝宝",@"好友宝宝",nil];
     myBabyList = [[NSMutableArray alloc] init];
     friendsBabyList =  [[NSMutableArray alloc] init];
@@ -63,14 +64,6 @@
     UserInfo *user = [[UserDefault sharedInstance] userInfo];
     //获取我的宝宝
     [self getMyBabysWithUid:user.uid];
-
-    //获取我好友的宝宝
-    [self getMyFriendBabysWithUid:user.uid];
-    //关闭刷新状态
-    //[_babyListTableView headerEndRefreshing];
-    //刷新数据
-    //[_babyListTableView reloadData];
-
 }
 
 #pragma mark - 获取往我的宝宝
@@ -78,7 +71,7 @@
 {
 
     [[HttpService sharedInstance] getBabyList:@{@"offset":@"0",@"pagesize":@"10000",@"uid":uid} completionBlock:^(id object) {
-        [_babyListTableView headerEndRefreshing];
+//        [_babyListTableView headerEndRefreshing];
 
         if(object == nil || [object count] == 0)
         {
@@ -86,12 +79,8 @@
             return  ;
         }
         myBabyList = object;
-
         //获取我好友的宝宝
         [self getMyFriendBabysWithUid:uid];
-        //刷新数据
-        [_babyListTableView reloadData];
-
     } failureBlock:^(NSError *error, NSString *responseString) {
         NSString * msg = responseString;
         if (error) {
@@ -237,6 +226,19 @@
     }
 }
 
+#pragma mark 右上角按钮方法监听
+- (void)edit:(UIButton *)btn
+{
+    [btn setSelected:!btn.selected];
+    if (btn.selected) {
+        
+        [self.babyListTableView setEditing:YES animated:YES];
+    }else
+    {
+        [self.babyListTableView setEditing:NO animated:YES];
+    }
+}
+
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return UITableViewCellEditingStyleDelete;
@@ -248,9 +250,21 @@
     {
         return ;
     }
-    
-    [myBabyList removeObjectAtIndex:indexPath.row];
-    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+    //调用网络删除宝宝借口
+    UserInfo * users = [[UserDefault sharedInstance] userInfo];
+    BabyInfo * b = myBabyList[indexPath.row];
+    [[HttpService sharedInstance] deleteBaby:@{@"uid":users.uid,@"baby_id":b.baby_id} completionBlock:^(id object) {
+        [SVProgressHUD showSuccessWithStatus:@"删除成功"];
+        [myBabyList removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        NSString * msg = responseString;
+        if(error)
+        {
+            msg = @"删除失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+    }];
     
 }
 

@@ -499,6 +499,41 @@
 }
 
 /**
+ @desc 删除宝宝
+ */
+//TODO:删除宝宝
+- (void)deleteBaby:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self postJSON:[self mergeURL:Delete_Baby] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+        if (success) {
+            success(obj);
+        }
+    } failureBlock:failure];
+}
+
+/**
+ @desc 搜索宝宝
+ */
+//TODO:搜索宝宝
+- (void)searchBaby:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self postJSON:[self mergeURL:Search_Baby] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+        if (success)
+        {
+            success([self mapModelsProcess:obj[@"result"] withClass:[BabyInfo class]]);
+        }
+    } failureBlock:failure];
+}
+
+/**
  @desc 获取宝宝列表
  */
 //TODO:获取宝宝列表
@@ -515,6 +550,8 @@
         }
     } failureBlock:failure];
 }
+
+
 
 /**
  @desc 获取好友宝宝列表
