@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIView *likeUserView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
+@property (weak, nonatomic) IBOutlet UIImageView *locationImageView;
 @property (weak, nonatomic) IBOutlet UIButton *commentBtn;
 
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;

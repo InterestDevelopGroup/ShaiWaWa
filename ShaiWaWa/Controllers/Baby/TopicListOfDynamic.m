@@ -545,6 +545,17 @@
         dynamicCell.topicView.hidden = YES;
     }
     dynamicCell.addressLabel.text = recrod.address;
+    
+    if(recrod.address == nil || [recrod.address length] == 0)
+    {
+        dynamicCell.locationImageView.hidden = YES;
+    }
+    else
+    {
+        dynamicCell.locationImageView.hidden = NO;
+    }
+
+    
     dynamicCell.dyContentTextView.attributedText = [NSStringUtil makeTopicString:recrod.content];
     [dynamicCell.babyAvatarImageView sd_setImageWithURL:[NSURL URLWithString:recrod.avatar] placeholderImage:Default_Avatar];
     

@@ -168,6 +168,7 @@
                 <outlet property="contentTextView" destination="NUw-pW-P9Q" id="BWq-yc-Yre"/>
                 <outlet property="likeBtn" destination="mmI-BY-Vaf" id="RaL-ZG-gc9"/>
                 <outlet property="likeView" destination="K5L-4H-vC1" id="Msy-gn-SUg"/>
+                <outlet property="locationImageView" destination="PQE-7v-Vik" id="egl-Xk-cfz"/>
                 <outlet property="moreBtn" destination="T1o-e9-xZH" id="b2t-c6-Gq1"/>
                 <outlet property="praiseUserFirstBtn" destination="Cd1-Cc-N98" id="biH-lG-lnb"/>
                 <outlet property="praiseUserSecondBtn" destination="mHf-ex-Cia" id="zpB-uj-ODf"/>

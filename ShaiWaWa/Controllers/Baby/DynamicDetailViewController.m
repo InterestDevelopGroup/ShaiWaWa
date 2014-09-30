@@ -554,12 +554,15 @@
         
         detailCell.babyNameLabel.text = _babyRecord.baby_nickname;
         detailCell.addressLabel.text = _babyRecord.address;
+        if(_babyRecord.address == nil || [_babyRecord.address length] == 0)
+        {
+            detailCell.locationImageView.hidden = YES;
+        }
         detailCell.contentTextView.attributedText = [NSStringUtil makeTopicString:_babyRecord.content];
 
         [detailCell.likeBtn setTitle:_babyRecord.like_count forState:UIControlStateNormal];
         [detailCell.commentBtn setTitle:_babyRecord.comment_count forState:UIControlStateNormal];
         [detailCell.likeBtn addTarget:self action:@selector(likeAction:) forControlEvents:UIControlEventTouchUpInside];
-        //[detailCell.moreBtn addTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
         NSTimeInterval timeInterval = [_babyRecord.add_time doubleValue];
         detailCell.publishTimeLabel.text = [[NSDate dateWithTimeIntervalSince1970:timeInterval] formatDateString:@"yyyy-MM-dd"];
         [detailCell.moreBtn addTarget:self action:@selector(showShareGrayView) forControlEvents:UIControlEventTouchUpInside];

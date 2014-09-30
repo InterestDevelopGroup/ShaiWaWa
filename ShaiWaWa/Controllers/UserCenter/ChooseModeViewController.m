@@ -1047,6 +1047,14 @@ int _lastPosition;    //A variable define in headfile
     dynamicCell.selectionStyle = UITableViewCellSelectionStyleNone;
     BabyRecord * recrod = [dyArray objectAtIndex:indexPath.row];
     dynamicCell.addressLabel.text = recrod.address;
+    if(recrod.address == nil || [recrod.address length] == 0)
+    {
+        dynamicCell.locationImageView.hidden = YES;
+    }
+    else
+    {
+        dynamicCell.locationImageView.hidden = NO;
+    }
     //dynamicCell.dyContentTextView.text = recrod.content;
     dynamicCell.dyContentTextView.attributedText = [NSStringUtil makeTopicString:recrod.content];
     [dynamicCell.babyAvatarImageView sd_setImageWithURL:[NSURL URLWithString:recrod.avatar] placeholderImage:Default_Avatar];
