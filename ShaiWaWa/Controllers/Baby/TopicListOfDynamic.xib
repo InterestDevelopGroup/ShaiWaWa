@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -8,6 +8,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TopicListOfDynamic">
             <connections>
                 <outlet property="dynamicPageTableView" destination="Yqy-8R-qWm" id="vwS-5K-aZ8"/>
+                <outlet property="grayShareView" destination="axZ-io-0M6" id="XD3-qc-P3g"/>
+                <outlet property="shareView" destination="dVZ-xx-n3N" id="B1R-lB-T2F"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -28,6 +30,20 @@
                         <outlet property="delegate" destination="-1" id="w89-58-VX8"/>
                     </connections>
                 </tableView>
+                <view hidden="YES" contentMode="scaleToFill" id="axZ-io-0M6">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" id="dVZ-xx-n3N">
+                            <rect key="frame" x="0.0" y="344" width="320" height="162"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                            <color key="backgroundColor" red="0.82685391870000002" green="0.82223462300000005" blue="0.83147321429999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <gestureRecognizers/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <gestureRecognizers/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.84099014945652173" green="0.84099014945652173" blue="0.84099014945652173" alpha="1" colorSpace="calibratedRGB"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

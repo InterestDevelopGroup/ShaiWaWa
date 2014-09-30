@@ -30,8 +30,8 @@
         record.latitude = dic[@"latitude"] == [NSNull null] ? @"" : dic[@"latitude"];
         record.longitude = dic[@"longitude"] == [NSNull null] ? @"" : dic[@"longitude"];
         record.visibility = dic[@"visibility"];
-        record.baby_name = dic[@"baby_name"];
-        record.baby_nickname = dic[@"baby_nickname"];
+        record.baby_name = dic[@"baby_name"] == [NSNull null] ? @"" : dic[@"baby_name"];
+        record.baby_nickname = dic[@"baby_nickname"] == [NSNull null] ? @"" : dic[@"baby_nickname"];
         record.like_count = dic[@"like_count"];
         record.is_like = dic[@"is_like"];
         record.comment_count = dic[@"comment_count"];

@@ -26,10 +26,19 @@
 #import "PublishImageView.h"
 #import "ImageDisplayView.h"
 #import "BabyHomePageViewController.h"
+#import "ShareView.h"
+#import "ShareManager.h"
+#import "AudioView.h"
+#import "PersonCenterViewController.h"
+#import "FriendHomeViewController.h"
+#import "PraiseViewController.h"
 @import MediaPlayer;
-@interface TopicListOfDynamic ()
+@interface TopicListOfDynamic ()<UIActionSheetDelegate>
 @property (nonatomic,assign) int currentOffset;
 @property (nonatomic,strong) NSMutableArray * dyArray;
+@property (nonatomic,assign) BOOL isShareViewShown;
+@property (nonatomic,strong) ShareView * sv;
+@property (nonatomic,strong) BabyRecord * selectedRecord;
 @end
 
 @implementation TopicListOfDynamic
@@ -40,6 +49,7 @@
     if (self) {
         // Custom initialization
         _currentOffset = 0;
+        _isShareViewShown = NO;
         _dyArray = [@[] mutableCopy];
     }
     return self;
@@ -80,7 +90,149 @@
     }];
     
     [_dynamicPageTableView headerBeginRefreshing];
+    
+    [self configShareView];
 }
+
+- (void)configShareView
+{
+    _isShareViewShown = NO;
+    _sv = [[ShareView alloc] initWithFrame:CGRectMake(0, 0, 320, 162)];
+    
+    __weak TopicListOfDynamic * weakSelf = self;
+    [_sv setDeleteBlock:^(){
+        
+        weakSelf.grayShareView.hidden = YES;
+        weakSelf.isShareViewShown = NO;
+        [weakSelf deleteRecord:weakSelf.selectedRecord];
+    }];
+    
+    [_sv setCollectionBlock:^(){
+        weakSelf.grayShareView.hidden = YES;
+        weakSelf.isShareViewShown = NO;
+        [weakSelf collectionRecord:weakSelf.selectedRecord];
+    }];
+    
+    [_sv setReportBlock:^(){
+        weakSelf.grayShareView.hidden = YES;
+        weakSelf.isShareViewShown = NO;
+        
+        UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:weakSelf cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"色情",@"反动",@"敏感话题",@"其他", nil];
+        [actionSheet showInView:weakSelf.view];
+        actionSheet = nil;
+        
+    }];
+    
+    
+    [_sv setWeiXinBlock:^(){
+        weakSelf.grayShareView.hidden = YES;
+        weakSelf.isShareViewShown = NO;
+        [weakSelf shareWityType:ShareTypeWeixiSession babyRecord:weakSelf.selectedRecord];
+    }];
+    
+    [_sv setWeiXinCycleBlock:^(){
+        weakSelf.grayShareView.hidden = YES;
+        weakSelf.isShareViewShown = NO;
+        [weakSelf shareWityType:ShareTypeWeixiTimeline babyRecord:weakSelf.selectedRecord];
+    }];
+    
+    [_sv setQzoneBlock:^(){
+        weakSelf.grayShareView.hidden = YES;
+        weakSelf.isShareViewShown = NO;
+        [weakSelf shareWityType:ShareTypeQQSpace babyRecord:weakSelf.selectedRecord];
+    }];
+    
+    [_sv setXinLanWbBlock:^(){
+        weakSelf.grayShareView.hidden = YES;
+        weakSelf.isShareViewShown = NO;
+        [weakSelf shareWityType:ShareTypeSinaWeibo babyRecord:weakSelf.selectedRecord];
+    }];
+    [_shareView addSubview:_sv];
+}
+
+- (void)shareWityType:(ShareType)type babyRecord:(BabyRecord *)babyRecord
+{
+    if(babyRecord == nil) return;
+    
+    if(babyRecord.video != nil && [babyRecord.video length] != 0)
+    {
+        UIImage * image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:babyRecord.video];
+        [[ShareManager sharePlatform] shareWithType:type withContent:babyRecord.content withImage:image];
+    }
+    else if([babyRecord.images count] > 0)
+    {
+        [[ShareManager sharePlatform] shareWithType:type withContent:babyRecord.content withImagePath:babyRecord.images[0]];
+    }
+    else
+    {
+        [[ShareManager sharePlatform] shareWithType:type withContent:babyRecord.content withImage:nil];
+    }
+}
+
+- (void)deleteRecord:(BabyRecord *)babyRecord
+{
+    if(babyRecord == nil) return;
+     UserInfo * users = [[UserDefault sharedInstance] userInfo];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+    [[HttpService sharedInstance] deleteRecord:@{@"uid":users.uid,@"rid":babyRecord.rid} completionBlock:^(id object) {
+        if([_dyArray containsObject:babyRecord])
+        {
+            [_dyArray removeObject:babyRecord];
+            [_dynamicPageTableView reloadData];
+        }
+        [SVProgressHUD showSuccessWithStatus:@"删除成功."];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        NSString * msg = responseString;
+        if(error)
+        {
+            msg = @"删除失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+    }];
+}
+
+
+- (void)collectionRecord:(BabyRecord *)babyRecord
+{
+    if(babyRecord == nil) return;
+     UserInfo * users = [[UserDefault sharedInstance] userInfo];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+    [[HttpService sharedInstance] addFavorite:@{@"uid":users.uid,@"rid":babyRecord.rid} completionBlock:^(id object) {
+        
+        [SVProgressHUD showSuccessWithStatus:@"收藏成功."];
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        NSString * msg = responseString;
+        if(error)
+        {
+            msg = @"收藏失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+        
+    }];
+}
+
+- (void)reportRecord:(BabyRecord *)babyRecord type:(NSString *)type
+{
+    if(babyRecord == nil) return;
+     UserInfo * users = [[UserDefault sharedInstance] userInfo];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+    [[HttpService sharedInstance] addReport:@{@"uid":users.uid,@"rid":babyRecord.rid,@"type":type,@"remark":@"举报动态"} completionBlock:^(id object) {
+        
+        [SVProgressHUD showSuccessWithStatus:@"举报成功."];
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        NSString * msg = responseString;
+        if(error)
+        {
+            msg = @"举报失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+        
+    }];
+}
+
+
 
 
 - (void)refresh
@@ -99,7 +251,7 @@
 - (void)getTopicRecod
 {
     UserInfo * user = [[UserDefault sharedInstance] userInfo];
-    NSLog(@"%@",[_topic stringByReplacingOccurrencesOfString:@"#" withString:@""]);
+    //NSLog(@"%@",[_topic stringByReplacingOccurrencesOfString:@"#" withString:@""]);
     [[HttpService sharedInstance] getRecordByTopic:@{@"topic":[_topic stringByReplacingOccurrencesOfString:@"#" withString:@""],@"offset":[NSString stringWithFormat:@"%i",_currentOffset], @"pagesize":[NSString stringWithFormat:@"%i",CommonPageSize],@"uid":user.uid} completionBlock:^(id object) {
         [_dynamicPageTableView headerEndRefreshing];
         [_dynamicPageTableView footerEndRefreshing];
@@ -227,6 +379,118 @@
     }];
 }
 
+- (void)showShareGrayView:(UIButton *)button
+{
+    
+    UIButton * btn = (UIButton *)button;
+    DynamicCell * cell;
+    UserInfo * users = [[UserDefault sharedInstance] userInfo];
+    if([btn.superview.superview.superview.superview isKindOfClass:[DynamicCell class]])
+    {
+        cell = (DynamicCell *)btn.superview.superview.superview.superview;
+    }
+    else if([btn.superview.superview.superview isKindOfClass:[DynamicCell class]])
+    {
+        cell = (DynamicCell *)btn.superview.superview.superview;
+    }
+    else
+    {
+        cell = (DynamicCell *)btn.superview.superview;
+    }
+    NSIndexPath * indexPath = [_dynamicPageTableView indexPathForCell:cell];
+    BabyRecord * record = _dyArray[indexPath.row];
+    self.selectedRecord = record;
+    if([record.uid isEqualToString:users.uid])
+    {
+        [_sv showDelBtn];
+    }
+    else
+    {
+        [_sv hideDelBtn];
+    }
+    
+    
+    
+    if (!_isShareViewShown) {
+        _grayShareView.hidden = NO;
+        _isShareViewShown = YES;
+    }
+    else
+    {
+        _grayShareView.hidden = YES;
+        _isShareViewShown = NO;
+    }
+}
+
+- (void)showHomePage:(UITapGestureRecognizer *)gesture
+{
+    
+    if(![gesture.view isKindOfClass:[UILabel class]])
+    {
+        return ;
+    }
+    UserInfo * users = [[UserDefault sharedInstance] userInfo];
+    UILabel * label = (UILabel *)gesture.view;
+    DynamicCell * cell ;
+    if([label.superview.superview.superview.superview isKindOfClass:[DynamicCell class]])
+    {
+        cell = (DynamicCell *)label.superview.superview.superview.superview;
+    }
+    else if ([label.superview.superview.superview isKindOfClass:[DynamicCell class]])
+    {
+        cell = (DynamicCell *)label.superview.superview.superview;
+    }
+    else
+    {
+        cell = (DynamicCell *)label.superview.superview;
+    }
+    
+    NSIndexPath * indexPath = [_dynamicPageTableView indexPathForCell:cell];
+    BabyRecord * record = [_dyArray objectAtIndex:indexPath.row];
+    if([record.uid isEqualToString:users.uid])
+    {
+        PersonCenterViewController * vc = [[PersonCenterViewController alloc] initWithNibName:nil bundle:nil];
+        [self push:vc];
+        vc = nil;
+    }
+    else
+    {
+        FriendHomeViewController * vc = [[FriendHomeViewController alloc] initWithNibName:nil bundle:nil];
+        vc.friendId = record.uid;
+        [self push:vc];
+        vc = nil;
+    }
+    
+}
+
+
+- (void)showPraiseListVC:(UIButton *)sender
+{
+    
+    UIButton * btn = (UIButton *)sender;
+    DynamicCell * cell;
+    
+    if([btn.superview.superview.superview.superview.superview isKindOfClass:[DynamicCell class]])
+    {
+        cell = (DynamicCell *)btn.superview.superview.superview.superview.superview;
+    }
+    else if([btn.superview.superview.superview.superview isKindOfClass:[DynamicCell class]])
+    {
+        cell = (DynamicCell *)btn.superview.superview.superview.superview;
+    }
+    else
+    {
+        cell = (DynamicCell *)btn.superview.superview.superview;
+    }
+    NSIndexPath * indexPath = [_dynamicPageTableView indexPathForCell:cell];
+    BabyRecord * record = _dyArray[indexPath.row];
+    
+    
+    PraiseViewController *praiseListVC = [[PraiseViewController alloc] init];
+    praiseListVC.record = record;
+    [self.navigationController pushViewController:praiseListVC animated:YES];
+}
+
 
 
 #pragma mark - UITableView DataSources and Delegate
@@ -301,27 +565,35 @@
     }
     dynamicCell.whoLabel.text = who;
 
-    
+    UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHomePage:)];
+    [dynamicCell.whoLabel addGestureRecognizer:tapGesture];
+    dynamicCell.whoLabel.userInteractionEnabled = YES;
+    tapGesture = nil;
     dynamicCell.babyNameLabel.text = recrod.baby_nickname;
     [dynamicCell.zanButton setTitle:recrod.like_count forState:UIControlStateNormal];
     [dynamicCell.commentBtn setTitle:recrod.comment_count forState:UIControlStateNormal];
     [dynamicCell.zanButton addTarget:self action:@selector(likeAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [dynamicCell.moreBtn addTarget:self action:@selector(showShareGrayView:) forControlEvents:UIControlEventTouchUpInside];
     
     if([recrod.top_3_likes count] > 0)
     {
         dynamicCell.likeUserView.hidden = NO;
         NSDictionary * userDic = recrod.top_3_likes[0];
         [dynamicCell.praiseUserFirstBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal placeholderImage:Default_Avatar];
+        [dynamicCell.praiseUserFirstBtn addTarget:self action:@selector(showPraiseListVC:) forControlEvents:UIControlEventTouchUpInside];
         if([recrod.top_3_likes count] > 1)
         {
             userDic = recrod.top_3_likes[1];
             [dynamicCell.praiseUserSecondBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal placeholderImage:Default_Avatar];
+            [dynamicCell.praiseUserSecondBtn addTarget:self action:@selector(showPraiseListVC:) forControlEvents:UIControlEventTouchUpInside];
         }
         
         if([recrod.top_3_likes count] > 2)
         {
             userDic = recrod.top_3_likes[2];
             [dynamicCell.praiseUserThirdBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal placeholderImage:Default_Avatar];
+            [dynamicCell.praiseUserThirdBtn addTarget:self action:@selector(showPraiseListVC:) forControlEvents:UIControlEventTouchUpInside];
         }
     }
     else
@@ -388,6 +660,15 @@
     }
 
 
+    [[dynamicCell.contentView viewWithTag:20000] removeFromSuperview];
+    if(recrod.audio != nil && [recrod.audio length] > 0)
+    {
+        
+        AudioView * audioView = [[AudioView alloc] initWithFrame:CGRectMake(123, 180, 82, 50) withPath:recrod.audio];
+        audioView.tag = 20000;
+        [audioView setCloseHidden];
+        [dynamicCell.contentView addSubview:audioView];
+    }
     return dynamicCell;
     
 }
@@ -401,4 +682,20 @@
     dynamicDetailVC.babyRecord = record;
     [self.navigationController pushViewController:dynamicDetailVC animated:YES];
 }
+
+#pragma mark - UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    //NSLog(@"%i",buttonIndex);
+    if(buttonIndex== actionSheet.cancelButtonIndex)
+    {
+        _selectedRecord = nil;
+        return ;
+    }
+    
+    NSString * type = [NSString stringWithFormat:@"%i",buttonIndex + 1];
+    
+    [self reportRecord:_selectedRecord type:type];
+}
+
 @end

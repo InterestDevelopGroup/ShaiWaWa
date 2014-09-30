@@ -33,6 +33,9 @@
 #import "PraiseViewController.h"
 #import "TopicListOfDynamic.h"
 #import "BabyHomePageViewController.h"
+#import "PersonCenterViewController.h"
+#import "FriendHomeViewController.h"
+#import "AudioView.h"
 @interface MyCollectionViewController ()
 {
      NSMutableArray *dyArray;
@@ -274,6 +277,49 @@
     }];
 }
 
+- (void)showHomePage:(UITapGestureRecognizer *)gesture
+{
+    
+    if(![gesture.view isKindOfClass:[UILabel class]])
+    {
+        return ;
+    }
+    
+    UILabel * label = (UILabel *)gesture.view;
+    UserInfo * users = [[UserDefault sharedInstance] userInfo];
+    DynamicCell * cell ;
+    if([label.superview.superview.superview.superview isKindOfClass:[DynamicCell class]])
+    {
+        cell = (DynamicCell *)label.superview.superview.superview.superview;
+    }
+    else if ([label.superview.superview.superview isKindOfClass:[DynamicCell class]])
+    {
+        cell = (DynamicCell *)label.superview.superview.superview;
+    }
+    else
+    {
+        cell = (DynamicCell *)label.superview.superview;
+    }
+    
+    NSIndexPath * indexPath = [_myFavoriveList indexPathForCell:cell];
+    BabyRecord * record = [dyArray objectAtIndex:indexPath.row];
+    if([record.uid isEqualToString:users.uid])
+    {
+        PersonCenterViewController * vc = [[PersonCenterViewController alloc] initWithNibName:nil bundle:nil];
+        [self push:vc];
+        vc = nil;
+    }
+    else
+    {
+        FriendHomeViewController * vc = [[FriendHomeViewController alloc] initWithNibName:nil bundle:nil];
+        vc.friendId = record.uid;
+        [self push:vc];
+        vc = nil;
+    }
+    
+}
+
+
 #pragma mark - UITableView DataSources and Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -306,6 +352,10 @@
         who = [NSString stringWithFormat:@"%@(妈妈)",who];
     }
     dynamicCell.whoLabel.text = who;
+    UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHomePage:)];
+    [dynamicCell.whoLabel addGestureRecognizer:tapGesture];
+    dynamicCell.whoLabel.userInteractionEnabled = YES;
+    tapGesture = nil;
     
     //添加头像点击手势
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showBabyHomePage:)];
@@ -449,6 +499,16 @@
         [imageView setCloseHidden];
         [dynamicCell.scrollView addSubview:imageView];
         imageView = nil;
+    }
+    
+    [[dynamicCell.contentView viewWithTag:20000] removeFromSuperview];
+    if(recrod.audio != nil && [recrod.audio length] > 0)
+    {
+        
+        AudioView * audioView = [[AudioView alloc] initWithFrame:CGRectMake(123, 180, 82, 50) withPath:recrod.audio];
+        audioView.tag = 20000;
+        [audioView setCloseHidden];
+        [dynamicCell.contentView addSubview:audioView];
     }
     
     return dynamicCell;

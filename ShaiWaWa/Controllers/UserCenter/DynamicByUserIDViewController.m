@@ -25,6 +25,9 @@
 #import "TopicListOfDynamic.h"
 #import "PublishImageView.h"
 #import "ImageDisplayView.h"
+#import "AudioView.h"
+#import "BabyHomePageViewController.h"
+#import "PraiseViewController.h"
 @import MediaPlayer;
 @interface DynamicByUserIDViewController ()
 {
@@ -189,6 +192,78 @@
 }
 
 
+- (void)showBabyHomePage:(UITapGestureRecognizer *)gesture
+{
+    if(![gesture.view isKindOfClass:[UIImageView class]])
+    {
+        return ;
+    }
+    
+    UIImageView * imageView = (UIImageView *)gesture.view;
+    DynamicCell * cell ;
+    if([imageView.superview.superview.superview.superview isKindOfClass:[DynamicCell class]])
+    {
+        cell = (DynamicCell *)imageView.superview.superview.superview.superview;
+    }
+    else if ([imageView.superview.superview.superview isKindOfClass:[DynamicCell class]])
+    {
+        cell = (DynamicCell *)imageView.superview.superview.superview;
+    }
+    else
+    {
+        cell = (DynamicCell *)imageView.superview.superview;
+    }
+    
+    NSIndexPath * indexPath = [_dyTableView indexPathForCell:cell];
+    BabyRecord * record = [dyArray objectAtIndex:indexPath.row];
+    
+    [SVProgressHUD showWithStatus:@"加载中..."];
+    [[HttpService sharedInstance] getBabyInfo:@{@"baby_id":record.baby_id} completionBlock:^(id object) {
+        [SVProgressHUD dismiss];
+        BabyHomePageViewController * vc = [[BabyHomePageViewController alloc] initWithNibName:nil bundle:nil];
+        vc.babyInfo = object;
+        [self push:vc];
+        vc = nil;
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        NSString * msg = responseString;
+        if(error)
+        {
+            msg = @"加载失败.";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+    }];
+}
+
+- (void)showPraiseListVC:(UIButton *)sender
+{
+    
+    UIButton * btn = (UIButton *)sender;
+    DynamicCell * cell;
+    
+    if([btn.superview.superview.superview.superview.superview isKindOfClass:[DynamicCell class]])
+    {
+        cell = (DynamicCell *)btn.superview.superview.superview.superview.superview;
+    }
+    else if([btn.superview.superview.superview.superview isKindOfClass:[DynamicCell class]])
+    {
+        cell = (DynamicCell *)btn.superview.superview.superview.superview;
+    }
+    else
+    {
+        cell = (DynamicCell *)btn.superview.superview.superview;
+    }
+    NSIndexPath * indexPath = [_dyTableView indexPathForCell:cell];
+    BabyRecord * record = dyArray[indexPath.row];
+    
+    
+    PraiseViewController *praiseListVC = [[PraiseViewController alloc] init];
+    praiseListVC.record = record;
+    [self.navigationController pushViewController:praiseListVC animated:YES];
+}
+
+
+
 
 #pragma mark - UITableView DataSources and Delegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -253,26 +328,36 @@
     dynamicCell.addressLabel.text = recrod.address;
     dynamicCell.dyContentTextView.attributedText = [NSStringUtil makeTopicString:recrod.content];
     [dynamicCell.babyAvatarImageView sd_setImageWithURL:[NSURL URLWithString:recrod.avatar] placeholderImage:Default_Avatar];
+    //添加头像点击手势
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showBabyHomePage:)];
+    dynamicCell.babyAvatarImageView.userInteractionEnabled = YES;
+    [dynamicCell.babyAvatarImageView addGestureRecognizer:tap];
+    tap = nil;
+
     dynamicCell.babyNameLabel.text = recrod.baby_nickname;
     [dynamicCell.zanButton setTitle:recrod.like_count forState:UIControlStateNormal];
     [dynamicCell.commentBtn setTitle:recrod.comment_count forState:UIControlStateNormal];
     [dynamicCell.zanButton addTarget:self action:@selector(likeAction:) forControlEvents:UIControlEventTouchUpInside];
+    dynamicCell.moreBtn.hidden = YES;
     //显示赞用户列表
     if([recrod.top_3_likes count] > 0)
     {
         dynamicCell.likeUserView.hidden = NO;
         NSDictionary * userDic = recrod.top_3_likes[0];
-        [dynamicCell.praiseUserFirstBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal];
+        [dynamicCell.praiseUserFirstBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal placeholderImage:Default_Avatar];
+        [dynamicCell.praiseUserFirstBtn addTarget:self action:@selector(showPraiseListVC:) forControlEvents:UIControlEventTouchUpInside];
         if([recrod.top_3_likes count] > 1)
         {
             userDic = recrod.top_3_likes[1];
-            [dynamicCell.praiseUserSecondBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal];
+            [dynamicCell.praiseUserSecondBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal placeholderImage:Default_Avatar];
+            [dynamicCell.praiseUserSecondBtn addTarget:self action:@selector(showPraiseListVC:) forControlEvents:UIControlEventTouchUpInside];
         }
         
         if([recrod.top_3_likes count] > 2)
         {
             userDic = recrod.top_3_likes[2];
-            [dynamicCell.praiseUserThirdBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal];
+            [dynamicCell.praiseUserThirdBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal placeholderImage:Default_Avatar];
+            [dynamicCell.praiseUserThirdBtn addTarget:self action:@selector(showPraiseListVC:) forControlEvents:UIControlEventTouchUpInside];
         }
     }
     else
@@ -336,6 +421,16 @@
         [imageView setCloseHidden];
         [dynamicCell.scrollView addSubview:imageView];
         imageView = nil;
+    }
+    
+    [[dynamicCell.contentView viewWithTag:20000] removeFromSuperview];
+    if(recrod.audio != nil && [recrod.audio length] > 0)
+    {
+        
+        AudioView * audioView = [[AudioView alloc] initWithFrame:CGRectMake(123, 180, 82, 50) withPath:recrod.audio];
+        audioView.tag = 20000;
+        [audioView setCloseHidden];
+        [dynamicCell.contentView addSubview:audioView];
     }
 
     return dynamicCell;

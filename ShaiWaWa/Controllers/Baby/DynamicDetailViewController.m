@@ -473,6 +473,27 @@
     }
 }
 
+- (void)showHomePage:(UITapGestureRecognizer *)gesture
+{
+    
+    UserInfo * users = [[UserDefault sharedInstance] userInfo];
+    if([_babyRecord.uid isEqualToString:users.uid])
+    {
+        PersonCenterViewController * vc = [[PersonCenterViewController alloc] initWithNibName:nil bundle:nil];
+        [self push:vc];
+        vc = nil;
+    }
+    else
+    {
+        FriendHomeViewController * vc = [[FriendHomeViewController alloc] initWithNibName:nil bundle:nil];
+        vc.friendId = _babyRecord.uid;
+        [self push:vc];
+        vc = nil;
+    }
+    
+}
+
+
 #pragma mark - UITableView DataSources and Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -526,7 +547,10 @@
             who = [NSString stringWithFormat:@"%@(妈妈)",who];
         }
         detailCell.whoLabel.text = who;
-
+        UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHomePage:)];
+        [detailCell.whoLabel addGestureRecognizer:tapGesture];
+        detailCell.whoLabel.userInteractionEnabled = YES;
+        tapGesture = nil;
         
         detailCell.babyNameLabel.text = _babyRecord.baby_nickname;
         detailCell.addressLabel.text = _babyRecord.address;
@@ -535,6 +559,7 @@
         [detailCell.likeBtn setTitle:_babyRecord.like_count forState:UIControlStateNormal];
         [detailCell.commentBtn setTitle:_babyRecord.comment_count forState:UIControlStateNormal];
         [detailCell.likeBtn addTarget:self action:@selector(likeAction:) forControlEvents:UIControlEventTouchUpInside];
+        //[detailCell.moreBtn addTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
         NSTimeInterval timeInterval = [_babyRecord.add_time doubleValue];
         detailCell.publishTimeLabel.text = [[NSDate dateWithTimeIntervalSince1970:timeInterval] formatDateString:@"yyyy-MM-dd"];
         [detailCell.moreBtn addTarget:self action:@selector(showShareGrayView) forControlEvents:UIControlEventTouchUpInside];
@@ -624,6 +649,16 @@
             [dynamicCell.scrollView addSubview:imageView];
             imageView = nil;
         }
+        
+        [[dynamicCell.contentView viewWithTag:20000] removeFromSuperview];
+        if(_babyRecord.audio != nil && [_babyRecord.audio length] > 0)
+        {
+            
+            AudioView * audioView = [[AudioView alloc] initWithFrame:CGRectMake(115, 140, 82, 50) withPath:_babyRecord.audio];
+            audioView.tag = 20000;
+            [audioView setCloseHidden];
+            [dynamicCell.contentView addSubview:audioView];
+        }
 
         
     }
@@ -640,6 +675,8 @@
         [pinLunCell.usernameLabel addGestureRecognizer:tap];
         tap = nil;
     }
+    
+
  
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
