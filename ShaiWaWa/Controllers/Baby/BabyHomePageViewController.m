@@ -167,7 +167,16 @@
     //身高体重
     _heightAndWeightTableView.frame = CGRectMake(320*2, 0, 320, _segScrollView.bounds.size.height);
     [_segScrollView addSubview:_heightAndWeightTableView];
-    UITableView *gridView = [[UITableView alloc] initWithFrame:CGRectMake(10, 45, 300, 250)];
+   CGFloat height = 0.0f;
+    if ([[UIScreen mainScreen] bounds].size.height < 500)
+    {
+        height = 180.f;
+    }
+    else
+    {
+        height = 250.f;
+    }
+    UITableView *gridView = [[UITableView alloc] initWithFrame:CGRectMake(10, 45, 300, height)];
     gridView.delegate = self;
     gridView.dataSource = self;
 //    [gridView clearSeperateLine];
