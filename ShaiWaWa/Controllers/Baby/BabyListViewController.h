@@ -14,5 +14,7 @@
     NSMutableArray *myBabyList, *friendsBabyList;
 }
 @property (strong, nonatomic) IBOutlet UITableView *babyListTableView;
+- (IBAction)searchBaby:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextField *searchText;
 
 @end

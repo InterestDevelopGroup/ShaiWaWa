@@ -41,7 +41,7 @@
 {
     self.title = @"宝宝列表";
     [self setLeftCusBarItem:@"square_back" action:nil];
-    //[self setRightCustomBarItem:@"user_gengduo" action:@selector(edit:)];
+    [self setRightCustomBarItem:@"user_gengduo" action:@selector(edit:)];
     sectionArr = [[NSArray alloc] initWithObjects:@"我的宝宝",@"好友宝宝",nil];
     myBabyList = [[NSMutableArray alloc] init];
     friendsBabyList =  [[NSMutableArray alloc] init];
@@ -325,4 +325,9 @@
     return YES;
 }
 
+#pragma mark - 搜索宝宝按钮的监听
+- (IBAction)searchBaby:(id)sender {
+    _keyword = _searchText.text;
+    [self filterBabys];
+}
 @end
