@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BabyListViewController">
             <connections>
                 <outlet property="babyListTableView" destination="GYP-gF-UyA" id="W3b-94-DY9"/>
+                <outlet property="searchText" destination="kYI-1Q-BBS" id="0Ei-fY-xM0"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -22,6 +23,9 @@
                     <state key="normal" image="main_search.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="searchBaby:" destination="-1" eventType="touchUpInside" id="0oZ-4q-33n"/>
+                    </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main_sousuokuang.png" id="Tw8-wp-LEn">
                     <rect key="frame" x="47" y="15" width="258" height="30"/>

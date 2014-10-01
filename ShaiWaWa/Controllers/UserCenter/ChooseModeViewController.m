@@ -1047,6 +1047,14 @@ int _lastPosition;    //A variable define in headfile
     dynamicCell.selectionStyle = UITableViewCellSelectionStyleNone;
     BabyRecord * recrod = [dyArray objectAtIndex:indexPath.row];
     dynamicCell.addressLabel.text = recrod.address;
+    if(recrod.address == nil || [recrod.address length] == 0)
+    {
+        dynamicCell.locationImageView.hidden = YES;
+    }
+    else
+    {
+        dynamicCell.locationImageView.hidden = NO;
+    }
     //dynamicCell.dyContentTextView.text = recrod.content;
     dynamicCell.dyContentTextView.attributedText = [NSStringUtil makeTopicString:recrod.content];
     [dynamicCell.babyAvatarImageView sd_setImageWithURL:[NSURL URLWithString:recrod.avatar] placeholderImage:Default_Avatar];
@@ -1190,7 +1198,7 @@ int _lastPosition;    //A variable define in headfile
         {
             PublishImageView * imageView = [[PublishImageView alloc] initWithFrame:CGRectMake(i * width, 0, width, CGRectGetHeight(dynamicCell.scrollView.bounds)) withPath:recrod.images[i]];
             imageView.tapBlock = ^(NSString * path){
-                ImageDisplayView * displayView = [[ImageDisplayView alloc] initWithFrame:self.navigationController.view.bounds withPath:path];
+                ImageDisplayView * displayView = [[ImageDisplayView alloc] initWithFrame:self.navigationController.view.bounds withPath:path withAllImages:recrod.images];
                 [self.navigationController.view addSubview:displayView];
                 [displayView show];
             };

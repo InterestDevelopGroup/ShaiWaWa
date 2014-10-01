@@ -65,6 +65,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.80458135190000002" green="0.80458135190000002" blue="0.80458135190000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <gestureRecognizers/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="PsW-b7-cNY" appends="YES" id="aLY-hG-9aR"/>
+                    </connections>
                 </view>
                 <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="baby_4-bg-1.png" id="Hy8-N2-JcS">
                     <rect key="frame" x="0.0" y="202" width="320" height="100"/>
@@ -95,6 +99,11 @@
             <gestureRecognizers/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
+        <tapGestureRecognizer id="PsW-b7-cNY">
+            <connections>
+                <action selector="hideInvitationView:" destination="-1" id="Pa0-ph-Q5j"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="baby_4-bg-1.png" width="320" height="100"/>

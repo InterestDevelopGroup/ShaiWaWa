@@ -11,4 +11,6 @@
 @interface TopicListOfDynamic : CommonViewController
 @property (weak, nonatomic) IBOutlet UITableView *dynamicPageTableView;
 @property (strong, nonatomic) NSString * topic;
+@property (weak, nonatomic) IBOutlet UIView *grayShareView;
+@property (weak, nonatomic) IBOutlet UIView *shareView;
 @end

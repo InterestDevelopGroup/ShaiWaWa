@@ -24,5 +24,7 @@
 - (IBAction)quitCurAccountEvent:(id)sender;
 - (IBAction)msgInvitation:(id)sender;
 - (IBAction)wechatInvitation:(id)sender;
+- (IBAction)hideInvitationView:(id)sender;
+
 
 @end
