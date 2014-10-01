@@ -235,6 +235,9 @@
     UserInfo * user = [[UserDefault sharedInstance] userInfo];
     if([user.uid isEqualToString:_babyInfo.fid] || [user.uid isEqualToString:_babyInfo.mid])
     {
+        _addButton.hidden = NO;
+    }else
+    {
         _addButton.hidden = YES;
     }
 }
