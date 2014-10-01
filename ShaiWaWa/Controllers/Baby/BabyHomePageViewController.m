@@ -1163,8 +1163,6 @@
     }
 }
 
-
-
 #pragma mark - MFMessageComposeViewControllerDelegate Methods
 
 // 处理发送完的响应结果
@@ -1185,4 +1183,5 @@
         NSLog(@"Message failed");
     }
 }
+
 @end

@@ -21,7 +21,11 @@
 #import "MJRefresh.h"
 #import "UIImageView+WebCache.h"
 #import "AppMacros.h"
-@interface BabyListViewController ()
+#import "BabyResultController.h"
+@interface BabyListViewController () <UISearchBarDelegate>
+{
+    BabyResultController *_searchResult;
+}
 @property (nonatomic,strong) NSString * keyword;
 @end
 
@@ -299,7 +303,7 @@
     {
         return ;
     }
-    //调用网络删除宝宝借口
+    //调用网络删除宝宝接口
     UserInfo * users = [[UserDefault sharedInstance] userInfo];
     BabyInfo * b = myBabyList[indexPath.row];
     [[HttpService sharedInstance] deleteBaby:@{@"uid":users.uid,@"baby_id":b.baby_id} completionBlock:^(id object) {
@@ -340,14 +344,60 @@
     return YES;
 }
 
-//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-//{
-//    if (_searchText.text.length == 0) {
-//        [self getBabys];
-//        [self.view endEditing:YES];
-//    }
-//    return YES;
-//}
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+
+    NSLog(@"%@",textField.text);
+    return YES;
+}
+
+#pragma mark 搜索框代理方法
+#pragma mark 监听搜索框的文字改变
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    if (searchText.length == 0) {
+        // 隐藏搜索界面
+        [_searchResult.view removeFromSuperview];
+    } else {
+        // 显示搜索界面
+        if (_searchResult == nil) {
+            _searchResult = [[BabyResultController alloc] init];
+            _searchResult.view.frame = _babyListTableView.frame;
+            [self addChildViewController:_searchResult];
+        }
+        //把数据交给搜索控制器处理
+        _searchResult.myBabyList = myBabyList;
+        _searchResult.friendsBabyList = friendsBabyList;
+        _searchResult.searchText = searchText;
+        [self.view addSubview:_searchResult.view];
+    }
+}
+
+#pragma mark 搜索框开始编辑（开始聚焦）
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    // 1.显示取消按钮
+    [searchBar setShowsCancelButton:YES animated:YES];
+    
+    
+}
+
+#pragma mark 当退出搜索框的键盘时（失去焦点）
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+{
+    // 1.隐藏取消按钮
+    [_searchBar setShowsCancelButton:NO animated:YES];
+    // 2.退出键盘
+    [_searchBar resignFirstResponder];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    // 1.隐藏取消按钮
+    [_searchBar setShowsCancelButton:NO animated:YES];
+    // 2.退出键盘
+    [_searchBar resignFirstResponder];
+}
 
 
 
