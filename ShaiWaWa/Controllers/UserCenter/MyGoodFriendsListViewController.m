@@ -245,4 +245,12 @@
     [_goodFriendListTableView headerBeginRefreshing];
     return YES;
 }
+
+- (IBAction)searchFriend:(id)sender {
+    [self.view endEditing:YES];
+    keyword = _keyworkField.text;
+    [self searchFriends];
+}
+
+
 @end

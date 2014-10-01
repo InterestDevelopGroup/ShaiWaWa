@@ -167,7 +167,16 @@
     //身高体重
     _heightAndWeightTableView.frame = CGRectMake(320*2, 0, 320, _segScrollView.bounds.size.height);
     [_segScrollView addSubview:_heightAndWeightTableView];
-    UITableView *gridView = [[UITableView alloc] initWithFrame:CGRectMake(10, 45, 300, 250)];
+   CGFloat height = 0.0f;
+    if ([[UIScreen mainScreen] bounds].size.height < 500)
+    {
+        height = 180.f;
+    }
+    else
+    {
+        height = 250.f;
+    }
+    UITableView *gridView = [[UITableView alloc] initWithFrame:CGRectMake(10, 45, 300, height)];
     gridView.delegate = self;
     gridView.dataSource = self;
 //    [gridView clearSeperateLine];
@@ -225,6 +234,9 @@
     
     UserInfo * user = [[UserDefault sharedInstance] userInfo];
     if([user.uid isEqualToString:_babyInfo.fid] || [user.uid isEqualToString:_babyInfo.mid])
+    {
+        _addButton.hidden = NO;
+    }else
     {
         _addButton.hidden = YES;
     }
@@ -1151,8 +1163,6 @@
     }
 }
 
-
-
 #pragma mark - MFMessageComposeViewControllerDelegate Methods
 
 // 处理发送完的响应结果
@@ -1173,4 +1183,5 @@
         NSLog(@"Message failed");
     }
 }
+
 @end

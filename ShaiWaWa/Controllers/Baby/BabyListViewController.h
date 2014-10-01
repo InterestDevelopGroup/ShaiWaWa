@@ -16,5 +16,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *babyListTableView;
 - (IBAction)searchBaby:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *searchText;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+
 
 @end

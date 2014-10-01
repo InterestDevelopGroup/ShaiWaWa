@@ -14,5 +14,6 @@
 }
 @property (strong, nonatomic) IBOutlet UITableView *goodFriendListTableView;
 @property (weak, nonatomic) IBOutlet UITextField *keyworkField;
+- (IBAction)searchFriend:(id)sender;
 
 @end
