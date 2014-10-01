@@ -164,6 +164,7 @@
 #pragma mark 右上角按钮方法监听
 - (void)edit:(UIButton *)btn
 {
+    [self.view endEditing:YES];
     [btn setSelected:!btn.selected];
     if (btn.selected) {
         
@@ -256,6 +257,7 @@
 #pragma mark - 点击cell的监听方法
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self.view endEditing:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     BabyHomePageViewController *babyHomePageVC = [[BabyHomePageViewController alloc] initWithNibName:nil bundle:nil];
 
