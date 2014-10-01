@@ -327,7 +327,26 @@
 
 #pragma mark - 搜索宝宝按钮的监听
 - (IBAction)searchBaby:(id)sender {
+    [self.view endEditing:YES];
     _keyword = _searchText.text;
     [self filterBabys];
 }
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField
+{
+    [self getBabys];
+    return YES;
+}
+
+//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+//{
+//    if (_searchText.text.length == 0) {
+//        [self getBabys];
+//        [self.view endEditing:YES];
+//    }
+//    return YES;
+//}
+
+
+
 @end

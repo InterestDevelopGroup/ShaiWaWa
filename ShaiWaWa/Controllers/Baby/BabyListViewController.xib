@@ -31,7 +31,7 @@
                     <rect key="frame" x="47" y="15" width="258" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="搜索宝宝" minimumFontSize="14" id="kYI-1Q-BBS">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="搜索宝宝" clearsOnBeginEditing="YES" minimumFontSize="14" clearButtonMode="whileEditing" id="kYI-1Q-BBS">
                     <rect key="frame" x="59" y="15" width="234" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
