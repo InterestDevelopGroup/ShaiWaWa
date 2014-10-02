@@ -168,6 +168,8 @@
 {
     NSString * babyName = [InputHelper trim:_babyNicknameField.text];
     NSString * birthday = [InputHelper trim:_birthDayField.text];
+    NSInteger timeInterval = [[NSDate dateFromString:birthday withFormat:@"yyyy-MM-dd"] timeIntervalSince1970];
+    NSString * timeIntervalStr = [NSString stringWithFormat:@"%d",timeInterval];
     UserInfo *user = [[UserDefault sharedInstance] userInfo];
     NSMutableDictionary * params = [@{} mutableCopy];
     params[@"uid"] = user.uid;
@@ -177,7 +179,7 @@
     params[@"avatar"] = imageFullUrlStr != nil ? imageFullUrlStr : @"";
     params[@"sex"] = isBoy? @"1" : @"0";
     params[@"nickname"] = babyName;
-    params[@"birthday"] = birthday;
+    params[@"birthday"] = timeIntervalStr;
     params[@"birth_height"] = _birthStatureField.text != nil ? _birthStatureField.text : @"";
     params[@"birth_weight"] = _birthWeightField.text != nil ? _birthWeightField.text : @"";
     params[@"country"] = @"中国";

@@ -9,7 +9,7 @@
 #import "BabyHomePageViewController.h"
 #import "UIViewController+BarItemAdapt.h"
 #import "SummaryCell.h"
-#import "DynamicCell.h"
+#import "BabyHomeDynamicCell.h"
 #import "NetCell.h"
 #import "PraiseViewController.h"
 #import "DynamicDetailViewController.h"
@@ -146,7 +146,7 @@
     [_segScrollView addSubview:_summaryView];
     
     [_dynamicListTableView clearSeperateLine];
-    [_dynamicListTableView registerNibWithName:@"DynamicCell" reuseIdentifier:@"Celler"];
+    [_dynamicListTableView registerNibWithName:@"BabyHomeDynamicCell" reuseIdentifier:@"Celler"];
     _dynamicListView.frame = CGRectMake(320, 0, 320, _segScrollView.bounds.size.height);
     [_segScrollView addSubview:_dynamicListView];
     
@@ -627,7 +627,9 @@
     params[@"country"] = @"中国";
     params[@"birth_height"] = _babyInfo.birth_height;
     params[@"birth_weight"] = _babyInfo.birth_weight;
-    params[@"birthday"] = _babyInfo.birthday;
+    NSInteger timeInterval = [[NSDate dateFromString:_babyInfo.birthday withFormat:@"yyyy-MM-dd"] timeIntervalSince1970];
+    NSString * timeIntervalStr = [NSString stringWithFormat:@"%d",timeInterval];
+    params[@"birthday"] = timeIntervalStr;
     
     //更新宝宝信息
     [[HttpService sharedInstance] updateBabyInfo:params completionBlock:^(id object) {
@@ -649,18 +651,18 @@
 {
     UserInfo * users = [[UserDefault sharedInstance] userInfo];
     UIButton * btn = (UIButton *)sender;
-    DynamicCell * cell;
-    if([btn.superview.superview.superview.superview isKindOfClass:[DynamicCell class]])
+    BabyHomeDynamicCell * cell;
+    if([btn.superview.superview.superview.superview isKindOfClass:[BabyHomeDynamicCell class]])
     {
-        cell = (DynamicCell *)btn.superview.superview.superview.superview;
+        cell = (BabyHomeDynamicCell *)btn.superview.superview.superview.superview;
     }
-    else if([btn.superview.superview.superview isKindOfClass:[DynamicCell class]])
+    else if([btn.superview.superview.superview isKindOfClass:[BabyHomeDynamicCell class]])
     {
-        cell = (DynamicCell *)btn.superview.superview.superview;
+        cell = (BabyHomeDynamicCell *)btn.superview.superview.superview;
     }
     else
     {
-        cell = (DynamicCell *)btn.superview.superview;
+        cell = (BabyHomeDynamicCell *)btn.superview.superview;
     }
     NSIndexPath * indexPath = [_dynamicListTableView indexPathForCell:cell];
     BabyRecord * record = _babyPersonalDyArray[indexPath.row];
@@ -886,7 +888,7 @@
     }
     else if(tableView == _dynamicListTableView)
     {
-        DynamicCell * dynamicCell = [tableView dequeueReusableCellWithIdentifier:@"Celler"];
+        BabyHomeDynamicCell * dynamicCell = [tableView dequeueReusableCellWithIdentifier:@"Celler"];
         BabyRecord * recrod = [_babyPersonalDyArray objectAtIndex:indexPath.row];
         dynamicCell.addressLabel.text = recrod.address;
         if(recrod.address == nil || [recrod.address length] == 0)

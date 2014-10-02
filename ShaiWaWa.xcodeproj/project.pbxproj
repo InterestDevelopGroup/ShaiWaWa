@@ -82,6 +82,8 @@
 		C39AAE1B19B30A3200C8A7BE /* Topic.m in Sources */ = {isa = PBXBuildFile; fileRef = C39AAE1A19B30A3200C8A7BE /* Topic.m */; };
 		C39AAE1E19B3124200C8A7BE /* CommonAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = C39AAE1D19B3124200C8A7BE /* CommonAlert.m */; };
 		C3DA093A19D9C75000A6C80D /* 爱心@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C3DA093919D9C75000A6C80D /* 爱心@2x.png */; };
+		C3DEA19A19DCD161003C86A8 /* BabyHomeDynamicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3DEA19819DCD161003C86A8 /* BabyHomeDynamicCell.m */; };
+		C3DEA19B19DCD161003C86A8 /* BabyHomeDynamicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3DEA19919DCD161003C86A8 /* BabyHomeDynamicCell.xib */; };
 		F41389C5197F48D000ABC8AE /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F41389C4197F48D000ABC8AE /* UserInfo.m */; };
 		F41F654A1981F01400089E42 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F41F65491981F01400089E42 /* SystemConfiguration.framework */; };
 		F41F654C1981F01D00089E42 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F41F654B1981F01D00089E42 /* QuartzCore.framework */; };
@@ -619,6 +621,9 @@
 		C39AAE1C19B3124200C8A7BE /* CommonAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonAlert.h; sourceTree = "<group>"; };
 		C39AAE1D19B3124200C8A7BE /* CommonAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonAlert.m; sourceTree = "<group>"; };
 		C3DA093919D9C75000A6C80D /* 爱心@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "爱心@2x.png"; sourceTree = "<group>"; };
+		C3DEA19719DCD161003C86A8 /* BabyHomeDynamicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BabyHomeDynamicCell.h; sourceTree = "<group>"; };
+		C3DEA19819DCD161003C86A8 /* BabyHomeDynamicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BabyHomeDynamicCell.m; sourceTree = "<group>"; };
+		C3DEA19919DCD161003C86A8 /* BabyHomeDynamicCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BabyHomeDynamicCell.xib; sourceTree = "<group>"; };
 		F41389C3197F48D000ABC8AE /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
 		F41389C4197F48D000ABC8AE /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
 		F41F65491981F01400089E42 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -2314,6 +2319,9 @@
 				C3121CFF19B57197004353EF /* SquareCollectionCell.xib */,
 				C350622919CFFA520096006C /* AudioView.h */,
 				C350622A19CFFA520096006C /* AudioView.m */,
+				C3DEA19719DCD161003C86A8 /* BabyHomeDynamicCell.h */,
+				C3DEA19819DCD161003C86A8 /* BabyHomeDynamicCell.m */,
+				C3DEA19919DCD161003C86A8 /* BabyHomeDynamicCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2474,6 +2482,7 @@
 				F432BE0919762AC80086BBE9 /* main_weixin@2x.png in Resources */,
 				F4A57AA11998A8E900283B88 /* MyCollectionViewController.xib in Resources */,
 				F433882F1974C28600464D43 /* QRCodeCardViewController.xib in Resources */,
+				C3DEA19B19DCD161003C86A8 /* BabyHomeDynamicCell.xib in Resources */,
 				F432BE2819762AC80086BBE9 /* square_biaotilan@2x.png in Resources */,
 				F432BDDA19762AC80086BBE9 /* baby_dongtai-@2x.png in Resources */,
 				F432BE2E19762AC80086BBE9 /* square_fenxiang-1@2x.png in Resources */,
@@ -2850,6 +2859,7 @@
 				F4E363BC1986009900A018A5 /* ShareView.m in Sources */,
 				F4A7782219DC09D0000F5401 /* ChineseToPinyinResource.m in Sources */,
 				F43388321974C28600464D43 /* ResetPwdNextStepViewController.m in Sources */,
+				C3DEA19A19DCD161003C86A8 /* BabyHomeDynamicCell.m in Sources */,
 				F47F54FC197FACE7006DCA75 /* DynamicCell.m in Sources */,
 				F47F54F4197FACE7006DCA75 /* ControlCenter.m in Sources */,
 				F47F5511197FACE7006DCA75 /* SearchRSCell.m in Sources */,
