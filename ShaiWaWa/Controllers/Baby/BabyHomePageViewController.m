@@ -170,7 +170,7 @@
    CGFloat height = 0.0f;
     if ([[UIScreen mainScreen] bounds].size.height < 500)
     {
-        height = 180.f;
+        height = 170.f;
     }
     else
     {
@@ -180,6 +180,7 @@
     gridView.delegate = self;
     gridView.dataSource = self;
 //    [gridView clearSeperateLine];
+    gridView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     [_heightAndWeightTableView addSubview:gridView];
     _gridView = gridView;
     [_gridView registerNibWithName:@"NetCell" reuseIdentifier:@"CellID"];
@@ -356,7 +357,6 @@
      }];
 }
 
-#warning 须待完成
 //获取宝宝成长记录
 - (void)getGrowRecords
 {
@@ -427,11 +427,38 @@
     }
 }
 
-- (IBAction)fullScreen:(UIButton *)sender {
-    NSLog(@"全屏");
-//    [UIView animateWithDuration:1.0 animations:^{
-//        [sender.superview ]
-//    }];
+- (IBAction)fullScreen:(UIButton *)btn {
+    
+    [btn setSelected:!btn.selected];
+    CGRect full = [UIScreen mainScreen].applicationFrame;
+    if (btn.selected) {
+        NSLog(@"全屏");
+        [_heightAndWeightTableView removeFromSuperview];
+        [UIView animateWithDuration:0.5 animations:^{
+            _heightAndWeightTableView.frame = full;
+        }];
+        _gridView.frame = CGRectMake(10, 45, 300,_heightAndWeightTableView.bounds.size.height - 105);
+        [self.inStatusView addSubview:_heightAndWeightTableView];
+    }else
+    {
+        NSLog(@"非全屏");
+        [_heightAndWeightTableView removeFromSuperview];
+        [UIView animateWithDuration:0.5 animations:^{
+            _heightAndWeightTableView.frame = CGRectMake(320*2, 0, 320, _segScrollView.bounds.size.height);
+        }];
+        CGFloat height;
+        if ([[UIScreen mainScreen] bounds].size.height < 500)
+        {
+            height = 170.f;
+        }
+        else
+        {
+            height = 250.f;
+        }
+        _gridView.frame = CGRectMake(10, 45, 300,height);
+        [_segScrollView addSubview:_heightAndWeightTableView];
+        
+    }
 }
 
 - (IBAction)isYaoQing:(id)sender

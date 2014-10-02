@@ -169,7 +169,7 @@
             <color key="backgroundColor" red="0.89571526408859004" green="0.90601084183673475" blue="0.90601084183673475" alpha="1" colorSpace="calibratedRGB"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
         <view contentMode="scaleToFill" id="l1y-d5-dFD">
             <rect key="frame" x="0.0" y="0.0" width="320" height="302"/>
