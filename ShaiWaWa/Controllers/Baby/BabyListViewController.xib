@@ -9,7 +9,6 @@
             <connections>
                 <outlet property="babyListTableView" destination="GYP-gF-UyA" id="W3b-94-DY9"/>
                 <outlet property="searchBar" destination="zqF-kY-gqc" id="0KD-Ih-pgv"/>
-                <outlet property="searchText" destination="kYI-1Q-BBS" id="0Ei-fY-xM0"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -32,15 +31,6 @@
                     <rect key="frame" x="16" y="15" width="289" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="搜索宝宝" clearsOnBeginEditing="YES" minimumFontSize="14" clearButtonMode="whileEditing" id="kYI-1Q-BBS">
-                    <rect key="frame" x="59" y="15" width="234" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" returnKeyType="search"/>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="ESH-As-5BI"/>
-                    </connections>
-                </textField>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="70" sectionHeaderHeight="1" sectionFooterHeight="1" id="GYP-gF-UyA">
                     <rect key="frame" x="0.0" y="57" width="320" height="459"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

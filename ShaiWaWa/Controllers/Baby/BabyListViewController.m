@@ -121,7 +121,7 @@
         [_babyListTableView headerEndRefreshing];
     }];
 }
-
+/*
 - (void)filterBabys
 {
     if(_keyword == nil || [_keyword length] == 0)
@@ -163,7 +163,7 @@
         [_babyListTableView reloadData];
 
     }
-}
+}*/
 
 #pragma mark 右上角按钮方法监听
 - (void)edit:(UIButton *)btn
@@ -322,20 +322,20 @@
 }
 
 
-#pragma mark - UITextFieldDelegate
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    _keyword = textField.text;
-    [self filterBabys];
-    [textField resignFirstResponder];
-    return YES;
-}
+//#pragma mark - UITextFieldDelegate
+//- (BOOL)textFieldShouldReturn:(UITextField *)textField
+//{
+//    _keyword = textField.text;
+//    [self filterBabys];
+//    [textField resignFirstResponder];
+//    return YES;
+//}
 
 #pragma mark - 搜索宝宝按钮的监听
 - (IBAction)searchBaby:(id)sender {
-    [self.view endEditing:YES];
-    _keyword = _searchText.text;
-    [self filterBabys];
+//    [self.view endEditing:YES];
+//    _keyword = _searchText.text;
+//    [self filterBabys];
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField

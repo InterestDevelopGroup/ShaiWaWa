@@ -72,7 +72,7 @@
             ([pinyin rangeOfString:searchText.uppercaseString].length != 0)||
             ([pinyinHeader rangeOfString:searchText.uppercaseString].length != 0))
         {
-            // 说明城市名中包含了搜索条件
+            // 说明宝宝昵称中包含了搜索条件
             [_resultBabys addObject:baby];
         }
     }
