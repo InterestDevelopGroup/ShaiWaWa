@@ -26,10 +26,12 @@
 - (void)setBabyGrowRecord:(BabyGrowRecord *)babyGrowRecord
 {
     _babyGrowRecord = babyGrowRecord;
-    _recordDay.text = babyGrowRecord.add_time;
+    
+    _recordDay.text = [babyGrowRecord.add_time componentsSeparatedByString:@" "][0];
     _height.text = babyGrowRecord.height;
     _weight.text = babyGrowRecord.weight;
     NSString *bodyType = nil;
+    NSLog(@"%d",babyGrowRecord.body_type);
     switch (babyGrowRecord.body_type) {
         case 1:
             bodyType = @"基本正常";

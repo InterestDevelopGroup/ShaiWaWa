@@ -37,6 +37,7 @@
 #import "PersonCenterViewController.h"
 #import "FriendHomeViewController.h"
 #import "ShareManager.h"
+#import "LineChartController.h"
 @import MediaPlayer;
 @interface BabyHomePageViewController ()
 {
@@ -418,13 +419,17 @@
 
 #pragma mark - 表格，折线图切换
 - (IBAction)changDisplayStyle:(UIButton *)sender {
-    if (sender.selected) {
-        [sender setSelected:NO];
-        [sender setBackgroundImage:[UIImage imageNamed:@"yuanquan.png"] forState:UIControlStateNormal];
-    }else{
-        [sender setSelected:YES];
-        [sender setBackgroundImage:[UIImage imageNamed:@"baby_baba"] forState:UIControlStateSelected];
-    }
+//    if (sender.selected) {
+//        [sender setSelected:NO];
+//        [sender setBackgroundImage:[UIImage imageNamed:@"yuanquan.png"] forState:UIControlStateNormal];
+//    }else{
+//        [sender setSelected:YES];
+//        [sender setBackgroundImage:[UIImage imageNamed:@"baby_baba"] forState:UIControlStateSelected];
+//    }
+
+    //折线图测试
+    LineChartController *line = [[LineChartController alloc] init];
+    [self.navigationController pushViewController:line animated:YES];
 }
 
 - (IBAction)fullScreen:(UIButton *)btn {

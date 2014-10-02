@@ -85,6 +85,8 @@
 		C3DEA19A19DCD161003C86A8 /* BabyHomeDynamicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3DEA19819DCD161003C86A8 /* BabyHomeDynamicCell.m */; };
 		C3DEA19B19DCD161003C86A8 /* BabyHomeDynamicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3DEA19919DCD161003C86A8 /* BabyHomeDynamicCell.xib */; };
 		F41389C5197F48D000ABC8AE /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F41389C4197F48D000ABC8AE /* UserInfo.m */; };
+		F414E7EA19DD1FCC001AC4C3 /* LineChartController.m in Sources */ = {isa = PBXBuildFile; fileRef = F414E7E919DD1FCC001AC4C3 /* LineChartController.m */; };
+		F414E7EC19DD254D001AC4C3 /* LineChartController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F414E7EB19DD254D001AC4C3 /* LineChartController.xib */; };
 		F41F654A1981F01400089E42 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F41F65491981F01400089E42 /* SystemConfiguration.framework */; };
 		F41F654C1981F01D00089E42 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F41F654B1981F01D00089E42 /* QuartzCore.framework */; };
 		F41F654E1981F02400089E42 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F41F654D1981F02400089E42 /* MessageUI.framework */; };
@@ -626,6 +628,9 @@
 		C3DEA19919DCD161003C86A8 /* BabyHomeDynamicCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BabyHomeDynamicCell.xib; sourceTree = "<group>"; };
 		F41389C3197F48D000ABC8AE /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
 		F41389C4197F48D000ABC8AE /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
+		F414E7E819DD1FCC001AC4C3 /* LineChartController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineChartController.h; sourceTree = "<group>"; };
+		F414E7E919DD1FCC001AC4C3 /* LineChartController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineChartController.m; sourceTree = "<group>"; };
+		F414E7EB19DD254D001AC4C3 /* LineChartController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LineChartController.xib; sourceTree = "<group>"; };
 		F41F65491981F01400089E42 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		F41F654B1981F01D00089E42 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F41F654D1981F02400089E42 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -1891,6 +1896,9 @@
 				F43386751974C28500464D43 /* BabyHomePageViewController.h */,
 				F43386761974C28500464D43 /* BabyHomePageViewController.m */,
 				F43386771974C28500464D43 /* BabyHomePageViewController.xib */,
+				F414E7E819DD1FCC001AC4C3 /* LineChartController.h */,
+				F414E7E919DD1FCC001AC4C3 /* LineChartController.m */,
+				F414E7EB19DD254D001AC4C3 /* LineChartController.xib */,
 				F4348FEF19779C4600347195 /* DynamicDetailViewController.h */,
 				F4348FF019779C4600347195 /* DynamicDetailViewController.m */,
 				F4348FF119779C4600347195 /* DynamicDetailViewController.xib */,
@@ -2540,6 +2548,7 @@
 				F43388031974C28600464D43 /* SearchGoodFriendsViewController.xib in Resources */,
 				F432BE1119762AC80086BBE9 /* pb_logo-2@2x.png in Resources */,
 				F432BE1A19762AC80086BBE9 /* pd_6-pic@2x.png in Resources */,
+				F414E7EC19DD254D001AC4C3 /* LineChartController.xib in Resources */,
 				F43388071974C28600464D43 /* SearchRSViewController.xib in Resources */,
 				F43EA3731990A6980048081E /* bg_023@2x.png in Resources */,
 				F432BDE119762AC80086BBE9 /* baby_shengaotizhong@2x.png in Resources */,
@@ -2929,6 +2938,7 @@
 				F4A7782319DC09D0000F5401 /* HanyuPinyinOutputFormat.m in Sources */,
 				F4AE507B199AFBEE007683E9 /* QiniuConfig.m in Sources */,
 				F43387FE1974C28600464D43 /* SearchAddressListViewController.m in Sources */,
+				F414E7EA19DD1FCC001AC4C3 /* LineChartController.m in Sources */,
 				F43388F51974C28600464D43 /* main.m in Sources */,
 				F41F68D61982081E00089E42 /* UITableView+Addition.m in Sources */,
 				C361F85719AE0F9D00AA5248 /* RecordComment.m in Sources */,
