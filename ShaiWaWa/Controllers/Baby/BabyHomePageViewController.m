@@ -37,6 +37,7 @@
 #import "PersonCenterViewController.h"
 #import "FriendHomeViewController.h"
 #import "ShareManager.h"
+#import "AudioView.h"
 @import MediaPlayer;
 @interface BabyHomePageViewController ()
 {
@@ -1026,6 +1027,17 @@
             [dynamicCell.scrollView addSubview:imageView];
             imageView = nil;
         }
+        
+        [[dynamicCell.contentView viewWithTag:20000] removeFromSuperview];
+        if(recrod.audio != nil && [recrod.audio length] > 0)
+        {
+            
+            AudioView * audioView = [[AudioView alloc] initWithFrame:CGRectMake(123, 127, 82, 50) withPath:recrod.audio];
+            audioView.tag = 20000;
+            [audioView setCloseHidden];
+            [dynamicCell.contentView addSubview:audioView];
+        }
+
 
         return dynamicCell;
     }

@@ -84,6 +84,7 @@
 		C3DA093A19D9C75000A6C80D /* 爱心@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C3DA093919D9C75000A6C80D /* 爱心@2x.png */; };
 		C3DEA19A19DCD161003C86A8 /* BabyHomeDynamicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3DEA19819DCD161003C86A8 /* BabyHomeDynamicCell.m */; };
 		C3DEA19B19DCD161003C86A8 /* BabyHomeDynamicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3DEA19919DCD161003C86A8 /* BabyHomeDynamicCell.xib */; };
+		C3DEA19F19DCEF01003C86A8 /* icon-03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C3DEA19E19DCEF01003C86A8 /* icon-03@2x.png */; };
 		F41389C5197F48D000ABC8AE /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F41389C4197F48D000ABC8AE /* UserInfo.m */; };
 		F41F654A1981F01400089E42 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F41F65491981F01400089E42 /* SystemConfiguration.framework */; };
 		F41F654C1981F01D00089E42 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F41F654B1981F01D00089E42 /* QuartzCore.framework */; };
@@ -624,6 +625,7 @@
 		C3DEA19719DCD161003C86A8 /* BabyHomeDynamicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BabyHomeDynamicCell.h; sourceTree = "<group>"; };
 		C3DEA19819DCD161003C86A8 /* BabyHomeDynamicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BabyHomeDynamicCell.m; sourceTree = "<group>"; };
 		C3DEA19919DCD161003C86A8 /* BabyHomeDynamicCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BabyHomeDynamicCell.xib; sourceTree = "<group>"; };
+		C3DEA19E19DCEF01003C86A8 /* icon-03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-03@2x.png"; sourceTree = "<group>"; };
 		F41389C3197F48D000ABC8AE /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
 		F41389C4197F48D000ABC8AE /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
 		F41F65491981F01400089E42 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -1642,6 +1644,7 @@
 		F432BD3A19762AC80086BBE9 /* baby */ = {
 			isa = PBXGroup;
 			children = (
+				C3DEA19E19DCEF01003C86A8 /* icon-03@2x.png */,
 				C3DA093919D9C75000A6C80D /* 爱心@2x.png */,
 				24A3231B197BB168005CFEA4 /* lvse.png */,
 				24A3231C197BB168005CFEA4 /* shengao@2x.png */,
@@ -2666,6 +2669,7 @@
 				24A32324197BB168005CFEA4 /* yuanquan2.png in Resources */,
 				F432BE5F19762AC80086BBE9 /* user_3-kongjian@2x.png in Resources */,
 				F432BE2B19762AC80086BBE9 /* square_cebinlan@2x.png in Resources */,
+				C3DEA19F19DCEF01003C86A8 /* icon-03@2x.png in Resources */,
 				F432BDFF19762AC80086BBE9 /* main_search@2x.png in Resources */,
 				F432BDF219762AC80086BBE9 /* main_2-pic@2x.png in Resources */,
 				F43388391974C28600464D43 /* TopicViewController.xib in Resources */,

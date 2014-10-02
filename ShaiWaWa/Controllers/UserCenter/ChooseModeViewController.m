@@ -110,18 +110,36 @@ typedef enum{
 #pragma mark - Private Methods
 - (void)initUI
 {
+    /*
     UIBarButtonItem * leftItem;
     if ([OSHelper iOS7])
     {
-        leftItem = [self customBarItem:@"square_cebinlan" action:@selector(showMenu) size:CGSizeMake(40, 30) imageEdgeInsets:UIEdgeInsetsMake(0, -40, 0, 0)];
+        leftItem = [self customBarItem:@"square_cebinlan" action:@selector(showMenu) size:CGSizeMake(40, 35) imageEdgeInsets:UIEdgeInsetsMake(0, -40, 0, 0)];
 
     }
     else
     {
         leftItem = [self customBarItem:@"square_cebinlan" action:@selector(showMenu)];
     }
+    */
+    //self.navigationItem.leftBarButtonItem = leftItem;
+    if([OSHelper iOS7])
+    {
+        [_leftButton_1 setImageEdgeInsets:UIEdgeInsetsMake(0, -35, 0, 0)];
+        [_leftButton_2 setImageEdgeInsets:UIEdgeInsetsMake(0, -40, 0, 0)];
+    }
     
+    _leftButton_1.userInteractionEnabled = NO;
+    _leftButton_2.userInteractionEnabled = NO;
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showMenu)];
+    _itemView.userInteractionEnabled = YES;
+    [_itemView addGestureRecognizer:tap];
+    tap = nil;
+    
+    UIBarButtonItem * leftItem = [[UIBarButtonItem alloc] initWithCustomView:_itemView];
     self.navigationItem.leftBarButtonItem = leftItem;
+    
+    
     UIImageView *titileImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"square_shaiwawa"]];
     [titileImage setUserInteractionEnabled:YES];
     [titileImage addGestureRecognizer:_guoLVTap];
@@ -737,6 +755,30 @@ typedef enum{
         _menuGray.hidden = YES;
         isMenuShown = NO;
     }
+    
+    //判断是否显示，如果显示则调整按钮的位置
+    if(isMenuShown)
+    {
+        [_leftButton_1 setImageEdgeInsets:UIEdgeInsetsMake(0, -50, 0, 0)];
+        [_leftButton_2 setImageEdgeInsets:UIEdgeInsetsMake(0, -50, 0, 0)];
+
+        if([OSHelper iOS7])
+        {
+            [_leftButton_1 setImageEdgeInsets:UIEdgeInsetsMake(0, -60, 0, 0)];
+            [_leftButton_2 setImageEdgeInsets:UIEdgeInsetsMake(0, -60, 0, 0)];
+        }
+    }
+    else
+    {
+        [_leftButton_1 setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+        [_leftButton_2 setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+        if([OSHelper iOS7])
+        {
+            [_leftButton_1 setImageEdgeInsets:UIEdgeInsetsMake(0, -35, 0, 0)];
+            [_leftButton_2 setImageEdgeInsets:UIEdgeInsetsMake(0, -40, 0, 0)];
+        }
+    }
+    
 }
 
 

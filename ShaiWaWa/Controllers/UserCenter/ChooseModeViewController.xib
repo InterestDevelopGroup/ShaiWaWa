@@ -15,6 +15,9 @@
                 <outlet property="grayDropView" destination="kKp-LA-VcK" id="qdz-S9-wAL"/>
                 <outlet property="grayShareView" destination="vva-64-Wub" id="8u5-nC-qbx"/>
                 <outlet property="guoLVTap" destination="D3U-dV-bbN" id="9KC-gN-paj"/>
+                <outlet property="itemView" destination="9Bu-YW-2lT" id="E1q-2D-nfy"/>
+                <outlet property="leftButton_1" destination="zRq-qb-qCF" id="8Ae-iL-A5M"/>
+                <outlet property="leftButton_2" destination="FAd-Ac-zKi" id="oA7-eE-LkB"/>
                 <outlet property="mainAddView" destination="wG9-vy-acb" id="ePO-Re-KFR"/>
                 <outlet property="menuGray" destination="Tnt-u6-ewy" id="s7C-eN-DBu"/>
                 <outlet property="releaseBtn" destination="eoj-p0-rPJ" id="82s-SM-8ND"/>
@@ -178,11 +181,35 @@
             </connections>
         </tapGestureRecognizer>
         <tapGestureRecognizer id="NJl-CZ-BcI"/>
+        <view contentMode="scaleToFill" id="9Bu-YW-2lT">
+            <rect key="frame" x="0.0" y="0.0" width="70" height="35"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zRq-qb-qCF">
+                    <rect key="frame" x="5" y="6" width="9" height="23"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="square_cebinlan.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="FAd-Ac-zKi">
+                    <rect key="frame" x="26" y="1" width="34" height="34"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="icon-03.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        </view>
     </objects>
     <resources>
+        <image name="icon-03.png" width="34" height="34"/>
         <image name="login_chazhao.png" width="57" height="62"/>
         <image name="login_suibian.png" width="57" height="62"/>
         <image name="login_tianjia.png" width="57" height="62"/>
+        <image name="square_cebinlan.png" width="9" height="18"/>
         <image name="square_tianxie.png" width="44" height="46"/>
     </resources>
 </document>

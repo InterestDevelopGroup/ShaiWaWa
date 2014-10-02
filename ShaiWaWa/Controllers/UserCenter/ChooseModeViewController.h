@@ -32,15 +32,14 @@ typedef void(^SpecialBlock)(NSMutableArray *);
 @property (weak, nonatomic) IBOutlet UIButton *btnView;
 @property (weak, nonatomic) IBOutlet UITableView *dynamicPageTableView;
 @property (weak, nonatomic) IBOutlet UIView *grayShareView;
-
 @property (weak, nonatomic) IBOutlet UIButton *releaseBtn;
 @property (weak, nonatomic) IBOutlet UIView *mainAddView;
-
 @property (weak, nonatomic) IBOutlet UIView *shareView;
 @property (nonatomic, strong) NSMutableArray *dyArray;
-
 @property (nonatomic, strong) SpecialBlock specialBlock;
-
+@property (strong, nonatomic) IBOutlet UIView *itemView;
+@property (weak, nonatomic) IBOutlet UIButton *leftButton_1;
+@property (weak, nonatomic) IBOutlet UIButton *leftButton_2;
 
 - (IBAction)showSearchFriendsVC:(id)sender;
 - (IBAction)showReleaseVC:(id)sender;
