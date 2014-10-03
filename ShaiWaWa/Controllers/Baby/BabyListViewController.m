@@ -45,7 +45,7 @@
 {
     self.title = @"宝宝列表";
     [self setLeftCusBarItem:@"square_back" action:nil];
-    [self setRightCustomBarItem:@"user_gengduo" action:@selector(edit:)];
+    //[self setRightCustomBarItem:@"user_gengduo" action:@selector(edit:)];
     sectionArr = [[NSArray alloc] initWithObjects:@"我的宝宝",@"好友宝宝",nil];
     myBabyList = [[NSMutableArray alloc] init];
     friendsBabyList =  [[NSMutableArray alloc] init];
@@ -274,6 +274,9 @@
     {
         babyInfo = friendsBabyList[indexPath.row];
     }
+    
+    NSInteger timeInterval = [[NSDate dateFromString:babyInfo.birthday withFormat:@"yyyy-MM-dd"] timeIntervalSince1970];
+    babyInfo.birthday = [NSString stringWithFormat:@"%d",timeInterval];
     
     babyHomePageVC.babyInfo = babyInfo;
     [self.navigationController pushViewController:babyHomePageVC animated:YES];

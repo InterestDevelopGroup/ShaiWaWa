@@ -530,7 +530,7 @@
         cell = [tableView dequeueReusableCellWithIdentifier:@"DynamicDetailCell"];
         DynamicDetailCell * detailCell = (DynamicDetailCell *)cell;
         [detailCell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:_babyRecord.avatar] placeholderImage:Default_Avatar];
-        
+
         //添加头像点击手势
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showBabyHomePage:)];
         detailCell.avatarImageView.userInteractionEnabled = YES;
@@ -551,6 +551,8 @@
         [detailCell.whoLabel addGestureRecognizer:tapGesture];
         detailCell.whoLabel.userInteractionEnabled = YES;
         tapGesture = nil;
+        
+        detailCell.publishTimeLabel.text = [NSStringUtil calculateTime:_babyRecord.add_time];
         
         detailCell.babyNameLabel.text = _babyRecord.baby_nickname;
         detailCell.addressLabel.text = _babyRecord.address;

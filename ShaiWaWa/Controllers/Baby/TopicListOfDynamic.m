@@ -584,6 +584,9 @@
     [dynamicCell.whoLabel addGestureRecognizer:tapGesture];
     dynamicCell.whoLabel.userInteractionEnabled = YES;
     tapGesture = nil;
+    
+    dynamicCell.releaseTimeLabel.text = [NSStringUtil calculateTime:recrod.add_time];
+    
     dynamicCell.babyNameLabel.text = recrod.baby_nickname;
     [dynamicCell.zanButton setTitle:recrod.like_count forState:UIControlStateNormal];
     if([recrod.is_like isEqualToString:@"1"])

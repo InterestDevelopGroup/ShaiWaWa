@@ -81,4 +81,87 @@
     return (NSArray *)arr;
 }
 
+
++ (NSString *)calculateTime:(NSString *)timeIntervalStr
+{
+    if(timeIntervalStr == nil)
+    {
+        return @"未知";
+    }
+    
+    NSTimeInterval timeInterval = [timeIntervalStr longLongValue];
+    NSTimeInterval currentTime = [[NSDate date] timeIntervalSince1970];
+    NSTimeInterval delta = currentTime - timeInterval;
+    
+    NSString * str = @"刚才";
+    
+    int miniutes = delta/60;
+    
+    if(miniutes == 0)
+    {
+        str = @"刚才";
+    }
+    else if(miniutes < 30)
+    {
+        str = [NSString stringWithFormat:@"%i分钟前",miniutes];
+    }
+    else if(miniutes < 60)
+    {
+        str = @"半小时前";
+    }
+    else if(miniutes < 120)
+    {
+        str = @"1小时以前";
+    }
+    else if(miniutes < 180)
+    {
+        str = @"2小时以前";
+    }
+    else
+    {
+        str = [[NSDate dateWithTimeIntervalSince1970:timeInterval] formatDateString:@"yyyy-MM-dd"];
+    }
+    
+    return str;
+}
+
++ (NSString *)calculateAge:(NSString *)timeIntervalStr
+{
+    if(timeIntervalStr == nil)
+    {
+        return @"未知";
+    }
+    
+    NSTimeInterval timeInterval = [timeIntervalStr longLongValue];
+    NSTimeInterval currentTime = [[NSDate date] timeIntervalSince1970];
+    NSTimeInterval delta = currentTime - timeInterval;
+    //算出多少个月
+    float mouths = delta/(60 * 60 * 12 * 30.0);
+    NSString * str = @"";
+    if(mouths < 12)
+    {
+        if(mouths < 1.0)
+        {
+            str = [NSString stringWithFormat:@"%i天",(int)delta/(60 * 60 * 12)];
+        }
+        else
+        {
+            str = [NSString stringWithFormat:@"%i个月",(int)mouths];
+        }
+    }
+    else if(mouths == 12)
+    {
+        str = @"一年";
+    }
+    else
+    {
+        int allMouth = ceilf(mouths);
+        int year = allMouth/12;
+        int mouth = allMouth%12;
+        str = [NSString stringWithFormat:@"%i岁%i个月",year,mouth];
+    }
+    
+    return str;
+}
+
 @end

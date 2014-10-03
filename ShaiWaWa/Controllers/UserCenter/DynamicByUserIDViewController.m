@@ -328,6 +328,7 @@
         who = [NSString stringWithFormat:@"%@(妈妈)",who];
     }
     dynamicCell.whoLabel.text = who;
+    dynamicCell.releaseTimeLabel.text = [NSStringUtil calculateTime:recrod.add_time];
 
     dynamicCell.addressLabel.text = recrod.address;
     

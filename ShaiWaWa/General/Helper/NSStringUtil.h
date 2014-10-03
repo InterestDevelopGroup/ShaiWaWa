@@ -13,4 +13,6 @@
 + (NSMutableAttributedString *)makeTopicString:(NSString *)text;
 + (NSArray *)getTopicStringArray:(NSString *)text;
 + (NSArray *)getUserStringRangeArray:(NSString *)text;
++ (NSString *)calculateTime:(NSString *)timeIntervalStr;
++ (NSString *)calculateAge:(NSString *)timeIntervalStr;
 @end

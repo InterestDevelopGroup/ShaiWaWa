@@ -367,6 +367,8 @@
     dynamicCell.whoLabel.userInteractionEnabled = YES;
     tapGesture = nil;
     
+    dynamicCell.releaseTimeLabel.text = [NSStringUtil calculateTime:recrod.add_time];
+    
     //添加头像点击手势
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showBabyHomePage:)];
     dynamicCell.babyAvatarImageView.userInteractionEnabled = YES;

@@ -252,7 +252,7 @@
         UserInfo * user = (UserInfo *)object;
         if([type isEqualToString:@"1"])
         {
-            [_dadButton sd_setImageWithURL:[NSURL URLWithString:user.avatar] forState:UIControlStateNormal placeholderImage:Default_Avatar];
+            [_dadButton sd_setImageWithURL:[NSURL URLWithString:user.avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"baby_baba"]];
         }
         else if([type isEqualToString:@"2"])
         {
@@ -866,7 +866,7 @@
             cell.summaryValueField.text = nil;
             cell.summaryValueField.inputAccessoryView = _toolBar;
             cell.summaryValueField.inputView = _datePicker;
-            cell.summaryValueField.text = _babyInfo.birthday;
+            cell.summaryValueField.text = [[NSDate dateWithTimeIntervalSince1970:[_babyInfo.birthday integerValue]] formatDateString:@"yyyy-MM-dd"];
         }
         if (indexPath.row == 4)
         {
@@ -1156,7 +1156,8 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     NSString * text = [InputHelper trim:textField.text];
-    
+    NSInteger timeInterval = [[NSDate dateFromString:text withFormat:@"yyyy-MM-dd"] timeIntervalSince1970];
+    text = [NSString stringWithFormat:@"%d",timeInterval];
     if(textField.tag == 2)
     {
         if(![_babyInfo.birthday isEqualToString:text])

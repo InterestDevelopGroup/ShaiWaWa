@@ -185,6 +185,9 @@
         return ;
     }
     
+    
+    NSInteger timeInterval = [[NSDate dateFromString:babyInfo.birthday withFormat:@"yyyy-MM-dd"] timeIntervalSince1970];
+    babyInfo.birthday = [NSString stringWithFormat:@"%d",timeInterval];
     babyHomePageVC.babyInfo = babyInfo;
     [self.navigationController pushViewController:babyHomePageVC animated:YES];
     

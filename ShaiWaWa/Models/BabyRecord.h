@@ -31,4 +31,5 @@
 @property (nonatomic,strong) NSString * audio;
 @property (nonatomic,strong) NSString * user_avatar;
 @property (nonatomic,strong) NSString * username;
+@property (nonatomic,strong) NSString * birthday;
 @end

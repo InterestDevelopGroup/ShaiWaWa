@@ -110,19 +110,7 @@ typedef enum{
 #pragma mark - Private Methods
 - (void)initUI
 {
-    /*
-    UIBarButtonItem * leftItem;
-    if ([OSHelper iOS7])
-    {
-        leftItem = [self customBarItem:@"square_cebinlan" action:@selector(showMenu) size:CGSizeMake(40, 35) imageEdgeInsets:UIEdgeInsetsMake(0, -40, 0, 0)];
 
-    }
-    else
-    {
-        leftItem = [self customBarItem:@"square_cebinlan" action:@selector(showMenu)];
-    }
-    */
-    //self.navigationItem.leftBarButtonItem = leftItem;
     if([OSHelper iOS7])
     {
         [_leftButton_1 setImageEdgeInsets:UIEdgeInsetsMake(0, -35, 0, 0)];
@@ -169,29 +157,11 @@ typedef enum{
 {
     [_dynamicPageTableView clearSeperateLine];
     [_dynamicPageTableView registerNibWithName:@"DynamicCell" reuseIdentifier:@"Cell"];
-    
-    /*
-    if ([OSHelper iOS7]) {
-        _releaseBtn.frame = CGRectMake(_dynamicPageTableView.bounds.size.width-60, _dynamicPageTableView.bounds.size.height-100 , 44, 46);
-    }
-    else
-    {
-        if ([UIScreen mainScreen].bounds.size.height < 490) {
-            _releaseBtn.frame = CGRectMake(_dynamicPageTableView.bounds.size.width-60, [UIScreen mainScreen].bounds.size.height-150 , 44, 46);
-        }
-        else
-        {
-            _releaseBtn.frame = CGRectMake(_dynamicPageTableView.bounds.size.width-60, [UIScreen mainScreen].bounds.size.height-50 , 44, 46);
-        }
-    }
-    */
-    
     [_dynamicPageTableView addHeaderWithTarget:self action:@selector(refreshData:)];
     [_dynamicPageTableView setHeaderRefreshingText:NSLocalizedString(@"DataLoading", nil)];
     [_dynamicPageTableView addFooterWithTarget:self action:@selector(loadMoreData)];
     [_dynamicPageTableView setFooterPullToRefreshText:NSLocalizedString(@"PullTOLoad", nil)];
     [_dynamicPageTableView setFooterRefreshingText:NSLocalizedString(@"DataLoading", nil)];
-    
     if([users.baby_count intValue] != 0 || [users.record_count intValue] != 0)
     {
         [_dynamicPageTableView headerBeginRefreshing];
@@ -739,6 +709,14 @@ typedef enum{
 {
     _menuGray.hidden = YES;
     isMenuShown = NO;
+    
+    [_leftButton_1 setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    [_leftButton_2 setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    if([OSHelper iOS7])
+    {
+        [_leftButton_1 setImageEdgeInsets:UIEdgeInsetsMake(0, -35, 0, 0)];
+        [_leftButton_2 setImageEdgeInsets:UIEdgeInsetsMake(0, -40, 0, 0)];
+    }
 }
 
 //显示菜单
@@ -1100,6 +1078,8 @@ int _lastPosition;    //A variable define in headfile
     //dynamicCell.dyContentTextView.text = recrod.content;
     dynamicCell.dyContentTextView.attributedText = [NSStringUtil makeTopicString:recrod.content];
     [dynamicCell.babyAvatarImageView sd_setImageWithURL:[NSURL URLWithString:recrod.avatar] placeholderImage:Default_Avatar];
+    dynamicCell.babyBirthdayLabel.text = [NSStringUtil calculateAge:nil];
+    
     NSString * who = recrod.username;
     if([recrod.sex isEqualToString:@"1"])
     {
@@ -1267,8 +1247,11 @@ int _lastPosition;    //A variable define in headfile
         imageView = nil;
     }
     
+    /*
     NSTimeInterval timeInterval = [recrod.add_time doubleValue];
     dynamicCell.releaseTimeLabel.text = [[NSDate dateWithTimeIntervalSince1970:timeInterval] formatDateString:@"yyyy-MM-dd"];
+    */
+    dynamicCell.releaseTimeLabel.text = [NSStringUtil calculateTime:recrod.add_time];
     
     [[dynamicCell.contentView viewWithTag:20000] removeFromSuperview];
     if(recrod.audio != nil && [recrod.audio length] > 0)
