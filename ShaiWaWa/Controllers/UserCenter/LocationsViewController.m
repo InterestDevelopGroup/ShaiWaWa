@@ -9,10 +9,10 @@
 #import "LocationsViewController.h"
 #import "UIViewController+BarItemAdapt.h"
 #import "UIView+CutLayer.h"
-
+#import "SVProgressHUD.h"
 @interface LocationsViewController ()
 @property (nonatomic,strong) CLLocationManager * locationManager;
-@property (nonatomic,strong) NSArray * placemarks;
+@property (nonatomic,strong) NSMutableArray * placemarks;
 @end
 
 @implementation LocationsViewController
@@ -22,7 +22,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        _placemarks = @[];
+        _placemarks = [@[] mutableCopy];
     }
     return self;
 }
@@ -41,12 +41,14 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
     [_locationManager startUpdatingLocation];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [SVProgressHUD dismiss];
     [_locationManager stopUpdatingLocation];
 }
 
@@ -117,7 +119,7 @@
 //清楚地址
 - (void)clearLocation
 {
-    _placemarks = @[];
+    _placemarks = [@[] mutableCopy];
     [_addrTableView reloadData];
 }
 
@@ -136,28 +138,14 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identify];
     }
     
-    CLPlacemark * placemark = _placemarks[indexPath.row];
-    DDLogInfo(@"%@,%@,%@,%@,%@,%@,%@",placemark.thoroughfare,placemark.locality,placemark.subLocality,placemark.subThoroughfare,placemark.country,placemark.subLocality,placemark.administrativeArea);
+    
+    NSDictionary * info = _placemarks[indexPath.row];
     cell.textLabel.textColor = [UIColor darkGrayColor];
     cell.textLabel.font = [UIFont systemFontOfSize:15];
-    
-    NSString * address = @"";
-    if(placemark.subLocality != nil)
-    {
-        address = [address stringByAppendingString:placemark.subLocality];
-    }
-    if(placemark.thoroughfare != nil)
-    {
-        address = [address stringByAppendingString:placemark.thoroughfare];
-    }
-    if(placemark.subThoroughfare)
-    {
-        address = [address stringByAppendingString:placemark.subThoroughfare];
-    }
-    cell.textLabel.text = address;
+    cell.textLabel.text = info[@"name"];
     cell.detailTextLabel.textColor = [UIColor darkGrayColor];
     cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
-    cell.detailTextLabel.text = placemark.name;
+    cell.detailTextLabel.text = info[@"address"];
     cell.backgroundColor = [UIColor clearColor];
     return cell;
     
@@ -166,7 +154,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    CLPlacemark * placemark = _placemarks[indexPath.row];
+    NSDictionary * placemark = _placemarks[indexPath.row];
     if(self.didSelectPlacemark)
     {
         self.didSelectPlacemark(placemark);
@@ -185,40 +173,103 @@
 #pragma mark CLLocationManagerDelegate Methods
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-    CLGeocoder * geocoder = [[CLGeocoder alloc] init];
-    [geocoder reverseGeocodeLocation:newLocation completionHandler:^(NSArray *placemarks, NSError *error) {
-        
-        if(error)
-        {
-            UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"定位失败!" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
-            [alertView show];
-            alertView = nil;
+    
 
-            DDLogError(@"定位失败");
+    NSString * locationStr = [NSString stringWithFormat:@"%f,%f",newLocation.coordinate.latitude,newLocation.coordinate.longitude];
+    NSString * urlStr = [NSString stringWithFormat:@"http://api.map.baidu.com/geocoder/v2/?ak=B56b08182a6df5a96b58a04eda049deb&location=%@&output=json&pois=1",locationStr];
+    
+    [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlStr]] queue:[NSOperationQueue currentQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        
+        [SVProgressHUD dismiss];
+        
+        if(connectionError)
+        {
+            [self showAlertViewWithMessage:@"定位失败."];
             return ;
         }
         
-        if([placemarks count] > 0)
-        {
-            [_locationManager stopUpdatingLocation];
-            _placemarks = placemarks;
-            [_addrTableView reloadData];
-            
-//            CLPlacemark * placemark = placemarks[0];
-//            _addrField.text = placemark.name;
+        NSError * error;
+        NSDictionary * info = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+        
+        //NSLog(@"%@",info);
+        
+        //先判断解析定位是否成功
+        if (error) {
+            [self showAlertViewWithMessage:@"地理位置解析错误."];
+            return;
         }
         
+        if(info[@"status"] == nil || ![info[@"status"] isEqual:@0])
+        {
+            [self showAlertViewWithMessage:@"地理位置解析错误."];
+            return;
+        }
+        
+        if(info[@"result"] == nil)
+        {
+            [self showAlertViewWithMessage:@"地理位置解析错误."];
+            return;
+        }
+        
+        //可变数组，用于存放解析得到的地理位置
+        NSMutableArray * results = [@[] mutableCopy];
+        //获取解析到的地理信息
+        NSDictionary * resultInfo = info[@"result"];
+        //解析第一个地理信息
+        NSMutableDictionary * addressInfo = [@{} mutableCopy];
+        if(resultInfo[@"location"] != nil)
+        {
+            addressInfo[@"latitude"] = resultInfo[@"location"][@"lat"];
+            addressInfo[@"longitude"] = resultInfo[@"location"][@"lng"];
+        }
+        
+        if(resultInfo[@"formatted_address"] != nil)
+        {
+            addressInfo[@"address"] = resultInfo[@"formatted_address"];
+            addressInfo[@"name"] = resultInfo[@"formatted_address"];
+        }
+        //判断信息是否完整
+        if([addressInfo count] == 4)
+        {
+            [results addObject:addressInfo];
+        }
+        
+        //解析周边地理信息
+        if(resultInfo[@"pois"] != nil)
+        {
+            
+            for(NSDictionary * tmpInfo in resultInfo[@"pois"])
+            {
+                NSMutableDictionary * addressInfo = [@{} mutableCopy];
+                addressInfo[@"latitude"] = tmpInfo[@"point"][@"y"];
+                addressInfo[@"longitude"] = tmpInfo[@"point"][@"x"];
+                addressInfo[@"name"] = tmpInfo[@"name"];
+                addressInfo[@"address"] = tmpInfo[@"addr"];
+                
+                [results addObject:addressInfo];
+                
+                addressInfo = nil;
+            }
+            
+        }
+        
+        _placemarks = results;
+        [_addrTableView reloadData];
+        
     }];
+    
 }
 
 
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
+    [SVProgressHUD dismiss];
     [_locationManager stopUpdatingLocation];
     UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"定位失败!" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
     [alertView show];
     alertView = nil;
 }
+
 
 #pragma mark - UIAlertViewDelegate Methods
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

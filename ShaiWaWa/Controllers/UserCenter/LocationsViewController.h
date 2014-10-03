@@ -9,7 +9,7 @@
 #import "CommonViewController.h"
 @import CoreLocation;
 typedef void(^LocationInfoBlock)(NSString *);
-typedef void(^DidSelectPlacemark)(CLPlacemark * placemark);
+typedef void(^DidSelectPlacemark)(NSDictionary * info);
 @interface LocationsViewController : CommonViewController<UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate,CLLocationManagerDelegate,UIAlertViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *addrTableView;
 @property (strong, nonatomic) IBOutlet UITextField *addrField;

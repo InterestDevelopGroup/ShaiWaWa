@@ -45,16 +45,17 @@
                         <rect key="frame" x="11" y="252" width="279" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mmI-BY-Vaf">
-                                <rect key="frame" x="12" y="5" width="55" height="21"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oiP-8S-wCz">
+                                <rect key="frame" x="12" y="5" width="69" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                <inset key="contentEdgeInsets" minX="-10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="261" backgroundImage="square_xihuan.png">
+                                <inset key="imageEdgeInsets" minX="45" minY="3" maxX="8" maxY="3"/>
+                                <state key="normal" title="261" image="爱心-未选中.png" backgroundImage="square_chengzhangzuji].png">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="selected" image="爱心.png" backgroundImage="square_chengzhangzuji].png"/>
                             </button>
                             <view contentMode="scaleToFill" id="K5L-4H-vC1">
                                 <rect key="frame" x="75" y="5" width="85" height="21"/>
@@ -166,7 +167,7 @@
                 <outlet property="birthdayLabel" destination="et0-zs-tbV" id="vmr-PK-aEK"/>
                 <outlet property="commentBtn" destination="tnZ-6H-l1i" id="Fa7-Ki-qur"/>
                 <outlet property="contentTextView" destination="NUw-pW-P9Q" id="BWq-yc-Yre"/>
-                <outlet property="likeBtn" destination="mmI-BY-Vaf" id="RaL-ZG-gc9"/>
+                <outlet property="likeBtn" destination="oiP-8S-wCz" id="9sT-eY-jZb"/>
                 <outlet property="likeView" destination="K5L-4H-vC1" id="Msy-gn-SUg"/>
                 <outlet property="locationImageView" destination="PQE-7v-Vik" id="egl-Xk-cfz"/>
                 <outlet property="moreBtn" destination="T1o-e9-xZH" id="b2t-c6-Gq1"/>
@@ -181,9 +182,11 @@
     </objects>
     <resources>
         <image name="baby_baobei.png" width="69" height="68"/>
+        <image name="square_chengzhangzuji].png" width="72" height="15"/>
         <image name="square_pinglun-2.png" width="21" height="19"/>
         <image name="square_pinglun-3.png" width="21" height="19"/>
-        <image name="square_xihuan.png" width="55" height="15"/>
         <image name="square_zizhi.png" width="7" height="8"/>
+        <image name="爱心-未选中.png" width="24" height="20"/>
+        <image name="爱心.png" width="24" height="20"/>
     </resources>
 </document>

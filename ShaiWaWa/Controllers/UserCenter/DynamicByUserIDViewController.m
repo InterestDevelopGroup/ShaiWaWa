@@ -162,6 +162,8 @@
         [[HttpService sharedInstance] addLike:@{@"rid":record.rid,@"uid":user.uid} completionBlock:^(id object) {
             //成功之后设置为1，表示已经赞过
             record.is_like = @"1";
+            record.like_count = [NSString stringWithFormat:@"%i",[record.like_count intValue] + 1];
+            [_dyTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
             [SVProgressHUD showSuccessWithStatus:@"谢谢您的参与."];
             
         } failureBlock:^(NSError *error, NSString *responseString) {
@@ -178,6 +180,8 @@
         [[HttpService sharedInstance] cancelLike:@{@"rid":record.rid,@"uid":user.uid} completionBlock:^(id object) {
             //成功之后设置为0，表示没有赞过
             record.is_like = @"0";
+            record.like_count = [NSString stringWithFormat:@"%i",[record.like_count intValue] - 1];
+            [_dyTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
             [SVProgressHUD showSuccessWithStatus:@"取消赞成功."];
             
         } failureBlock:^(NSError *error, NSString *responseString) {
@@ -347,6 +351,17 @@
 
     dynamicCell.babyNameLabel.text = recrod.baby_nickname;
     [dynamicCell.zanButton setTitle:recrod.like_count forState:UIControlStateNormal];
+    if([recrod.is_like isEqualToString:@"1"])
+    {
+        dynamicCell.zanButton.selected = YES;
+    }
+    else
+    {
+        dynamicCell.zanButton.selected = NO;
+    }
+
+    
+    
     [dynamicCell.commentBtn setTitle:recrod.comment_count forState:UIControlStateNormal];
     [dynamicCell.zanButton addTarget:self action:@selector(likeAction:) forControlEvents:UIControlEventTouchUpInside];
     dynamicCell.moreBtn.hidden = YES;

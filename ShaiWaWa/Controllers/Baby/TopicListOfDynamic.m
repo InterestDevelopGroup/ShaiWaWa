@@ -304,6 +304,8 @@
     {
         [[HttpService sharedInstance] addLike:@{@"rid":record.rid,@"uid":user.uid} completionBlock:^(id object) {
             record.is_like = @"1";
+            record.like_count = [NSString stringWithFormat:@"%i",[record.like_count intValue] + 1];
+            [_dynamicPageTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
             [SVProgressHUD showSuccessWithStatus:@"谢谢您的参与."];
             
         } failureBlock:^(NSError *error, NSString *responseString) {
@@ -320,6 +322,8 @@
     {
         [[HttpService sharedInstance] cancelLike:@{@"rid":record.rid,@"uid":user.uid} completionBlock:^(id object) {
             record.is_like = @"0";
+            record.like_count = [NSString stringWithFormat:@"%i",[record.like_count intValue] - 1];
+            [_dynamicPageTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
             [SVProgressHUD showSuccessWithStatus:@"取消赞成功."];
             
         } failureBlock:^(NSError *error, NSString *responseString) {
@@ -582,6 +586,17 @@
     tapGesture = nil;
     dynamicCell.babyNameLabel.text = recrod.baby_nickname;
     [dynamicCell.zanButton setTitle:recrod.like_count forState:UIControlStateNormal];
+    if([recrod.is_like isEqualToString:@"1"])
+    {
+        dynamicCell.zanButton.selected = YES;
+    }
+    else
+    {
+        dynamicCell.zanButton.selected = NO;
+    }
+
+    
+    
     [dynamicCell.commentBtn setTitle:recrod.comment_count forState:UIControlStateNormal];
     [dynamicCell.zanButton addTarget:self action:@selector(likeAction:) forControlEvents:UIControlEventTouchUpInside];
     

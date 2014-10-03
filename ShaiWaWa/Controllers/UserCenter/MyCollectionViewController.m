@@ -377,7 +377,15 @@
     [dynamicCell.zanButton setTitle:recrod.like_count forState:UIControlStateNormal];
     [dynamicCell.commentBtn setTitle:recrod.comment_count forState:UIControlStateNormal];
     [dynamicCell.zanButton addTarget:self action:@selector(likeAction:) forControlEvents:UIControlEventTouchUpInside];
-    
+    if([recrod.is_like isEqualToString:@"1"])
+    {
+        dynamicCell.zanButton.selected = YES;
+    }
+    else
+    {
+        dynamicCell.zanButton.selected = NO;
+    }
+
     //[dynamicCell.moreBtn addTarget:self action:@selector(showShareGrayView:) forControlEvents:UIControlEventTouchUpInside];
     dynamicCell.moreBtn.hidden = YES;
     //显示话题

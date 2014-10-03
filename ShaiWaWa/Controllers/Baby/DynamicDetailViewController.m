@@ -561,6 +561,16 @@
         detailCell.contentTextView.attributedText = [NSStringUtil makeTopicString:_babyRecord.content];
 
         [detailCell.likeBtn setTitle:_babyRecord.like_count forState:UIControlStateNormal];
+        
+        if([_babyRecord.is_like isEqualToString:@"1"])
+        {
+            detailCell.likeBtn.selected = YES;
+        }
+        else
+        {
+            detailCell.likeBtn.selected = NO;
+        }
+        
         [detailCell.commentBtn setTitle:_babyRecord.comment_count forState:UIControlStateNormal];
         [detailCell.likeBtn addTarget:self action:@selector(likeAction:) forControlEvents:UIControlEventTouchUpInside];
         NSTimeInterval timeInterval = [_babyRecord.add_time doubleValue];

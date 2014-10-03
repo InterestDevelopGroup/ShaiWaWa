@@ -39,7 +39,7 @@
 @property (nonatomic,strong) BabyInfo * babyInfo;
 @property (nonatomic,strong) UserInfo * userInfo;
 @property (nonatomic,strong) Setting * setting;
-@property (nonatomic,strong) CLPlacemark * placemark; //位置
+@property (nonatomic,strong) NSDictionary * placemark; //位置
 @property (nonatomic,strong) NSString * visibility; //可见性
 @property (nonatomic,strong) NSMutableArray * images; //图片路径数组
 @property (nonatomic,strong) NSMutableArray * imageViews;  //图片对应的imageview数组
@@ -388,9 +388,9 @@
     params[@"latitude"] = @"";
     if(_placemark != nil)
     {
-        params[@"address"] = _placemark.name;
-        params[@"longitude"] = [NSString stringWithFormat:@"%f",_placemark.location.coordinate.longitude];
-        params[@"latitude"] = [NSString stringWithFormat:@"%f",_placemark.location.coordinate.latitude];
+        params[@"address"] = _placemark[@"address"];
+        params[@"longitude"] = _placemark[@"longitude"];
+        params[@"latitude"] = _placemark[@"latitude"];
     }
     
     //params[@"video"] = _videoPath != nil ? _videoPath : @"";
@@ -439,11 +439,10 @@
     params[@"latitude"] = @"";
     if(_placemark != nil)
     {
-        params[@"address"] = _placemark.name;
-        params[@"longitude"] = [NSString stringWithFormat:@"%f",_placemark.location.coordinate.longitude];
-        params[@"latitude"] = [NSString stringWithFormat:@"%f",_placemark.location.coordinate.latitude];
+        params[@"address"] = _placemark[@"address"];
+        params[@"longitude"] = _placemark[@"longitude"];
+        params[@"latitude"] = _placemark[@"latitude"];
     }
-    
     //params[@"video"] = _videoPath != nil ? [NSString stringWithFormat:@"%@%@",QN_URL,[_videoPath lastPathComponent]] : @"";
     params[@"video"] = self.uploadedVideoPath == nil ? @"" : self.uploadedVideoPath;
     params[@"audio"] = self.uploadedAudioPath == nil ? @"" : self.uploadedAudioPath;
@@ -588,11 +587,11 @@
 {
     //__weak PublishRecordViewController *rself = self;
     LocationsViewController *locationVC = [[LocationsViewController alloc] init];
-    locationVC.didSelectPlacemark = ^(CLPlacemark * placemark){
+    locationVC.didSelectPlacemark = ^(NSDictionary * placemark){
         _placemark = placemark;
         if(_placemark != nil)
         {
-            _addressLabel.text = placemark.name;
+            _addressLabel.text = placemark[@"address"];
         }
     };
     [self.navigationController pushViewController:locationVC animated:YES];
@@ -1186,8 +1185,15 @@
         if([placemarks count] > 0)
         {
             [_locationManager stopUpdatingLocation];
-            _placemark = placemarks[0];
-            _addressLabel.text = _placemark.name;
+            CLPlacemark * placemark = placemarks[0];
+            _addressLabel.text = placemark.name;
+            
+            NSMutableDictionary * addressInfo = [@{} mutableCopy];
+            addressInfo[@"name"] = placemark.name;
+            addressInfo[@"address"] = placemark.name;
+            addressInfo[@"latitude"] = [NSString stringWithFormat:@"%f",placemark.location.coordinate.latitude];
+            addressInfo[@"longitude"] = [NSString stringWithFormat:@"%f",placemark.location.coordinate.longitude];
+            _placemark = (NSDictionary *)addressInfo;
         }
         
     }];
