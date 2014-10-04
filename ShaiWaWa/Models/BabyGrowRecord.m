@@ -15,7 +15,7 @@
     if (self = [super init]) {
         self.add_time = dict[@"add_time"];
         self.baby_id = dict[@"baby_id"];
-        self.body_type = [dict[@"boby_type"] intValue];
+        self.body_type = [dict[@"body_type"] intValue];
         self.height = dict[@"height"];
         self.record_id = dict[@"record_id"];
         self.uid = dict[@"uid"];

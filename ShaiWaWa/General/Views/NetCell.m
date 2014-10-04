@@ -38,22 +38,29 @@
             break;
         case 2:
             bodyType = @"非常完美";
+            [_bodyType setTextColor:[UIColor greenColor]];
             break;
         case 3:
             bodyType = @"偏瘦";
+            [_bodyType setTextColor:[UIColor redColor]];
+
             break;
         case 4:
             bodyType = @"偏胖";
+            [_bodyType setTextColor:[UIColor redColor]];
             break;
         case 5:
             bodyType = @"偏高";
+            [_bodyType setTextColor:[UIColor redColor]];
             break;
         case 6:
             bodyType = @"偏矮";
+            [_bodyType setTextColor:[UIColor redColor]];
             break;
             
         default:
             bodyType = @"未知";
+            [_bodyType setTextColor:[UIColor redColor]];
             break;
     }
     _bodyType.text = bodyType;
