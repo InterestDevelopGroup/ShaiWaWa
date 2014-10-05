@@ -161,6 +161,22 @@
         _visibilityLabel.text = @"仅父母可见";
         _visibility = @"3";
     }
+    
+    //设置分享平台
+    if([_setting.is_share isEqualToString:@"1"])
+    {
+        if(_userInfo.tecent_openId != nil)
+        {
+            _tecentWeiboBtn.selected = YES;
+            _qqSpaceBtn.selected = YES;
+        }
+        
+        if(_userInfo.sina_openId != nil)
+        {
+            _sinaWeiboBtn.selected = YES;
+        }
+        
+    }
 }
 
 //获取宝宝列表
@@ -869,6 +885,57 @@
         [_recorder stopRecording];
     }
 
+}
+
+- (IBAction)shareToQQSpace:(id)sender
+{
+    if(_qqSpaceBtn.selected)
+    {
+        _qqSpaceBtn.selected = NO;
+        return ;
+    }
+    
+    if(_userInfo.tecent_openId == nil)
+    {
+        [self showAlertViewWithMessage:@"还没有绑定QQ空间,现在绑定?"];
+        return ;
+    }
+    
+    _qqSpaceBtn.selected = YES;
+}
+
+- (IBAction)shareToSinaWeibo:(id)sender
+{
+    if(_sinaWeiboBtn.selected)
+    {
+        _sinaWeiboBtn.selected = NO;
+        return ;
+    }
+    
+    if(_userInfo.sina_openId == nil)
+    {
+        [self showAlertViewWithMessage:@"还没有绑定新浪微博,现在绑定?"];
+        return ;
+    }
+    
+    _sinaWeiboBtn.selected = YES;
+}
+
+- (IBAction)shareToTecentWeibo:(id)sender
+{
+    if(_tecentWeiboBtn.selected)
+    {
+        _tecentWeiboBtn.selected = NO;
+        return ;
+    }
+    
+    if(_userInfo.tecent_openId == nil)
+    {
+        [self showAlertViewWithMessage:@"你还没有绑定腾讯微博,现在绑定?"];
+        return ;
+    }
+    
+    _tecentWeiboBtn.selected = YES;
 }
 
 

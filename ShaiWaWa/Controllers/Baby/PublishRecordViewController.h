@@ -27,6 +27,9 @@
 @property (strong, nonatomic) IBOutlet UIView *recrodView;
 @property (strong, nonatomic) IBOutlet UIView *shareView;
 @property (strong, nonatomic) IBOutlet UIImageView *voiceImageView;
+@property (weak, nonatomic) IBOutlet UIButton *tecentWeiboBtn;
+@property (weak, nonatomic) IBOutlet UIButton *sinaWeiboBtn;
+@property (weak, nonatomic) IBOutlet UIButton *qqSpaceBtn;
 
 
 @property (strong, nonatomic) IBOutlet UIView *overlayView;
@@ -45,6 +48,9 @@
 - (IBAction)showShare:(id)sender;
 - (IBAction)startRecord:(id)sender;
 - (IBAction)stopRecord:(id)sender;
+- (IBAction)shareToQQSpace:(id)sender;
+- (IBAction)shareToSinaWeibo:(id)sender;
+- (IBAction)shareToTecentWeibo:(id)sender;
 
 
 @end
