@@ -307,9 +307,9 @@
         return ;
     }
     //调用网络删除宝宝接口
-    UserInfo * users = [[UserDefault sharedInstance] userInfo];
+//    UserInfo * users = [[UserDefault sharedInstance] userInfo];
     BabyInfo * b = myBabyList[indexPath.row];
-    [[HttpService sharedInstance] deleteBaby:@{@"uid":users.uid,@"baby_id":b.baby_id} completionBlock:^(id object) {
+    [[HttpService sharedInstance] deleteBaby:@{@"uid":b.uid,@"baby_id":b.baby_id} completionBlock:^(id object) {
         [SVProgressHUD showSuccessWithStatus:@"删除成功"];
         [myBabyList removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
