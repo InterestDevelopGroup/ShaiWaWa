@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -14,7 +14,6 @@
                 <outlet property="bottomView" destination="IlJ-2G-sRi" id="Kva-ms-8dU"/>
                 <outlet property="button3View" destination="pBi-Dc-tsP" id="fp1-Ol-ytj"/>
                 <outlet property="containView" destination="JeM-Np-V63" id="PE1-dl-dgs"/>
-                <outlet property="moreButton" destination="C1y-lp-2PX" id="a7y-aQ-JeC"/>
                 <outlet property="overlayView" destination="Rrp-FS-tdZ" id="ILY-92-GLc"/>
                 <outlet property="qqSpaceBtn" destination="NUh-ZZ-Za5" id="Wu7-PS-DUj"/>
                 <outlet property="recordBtn" destination="Ufw-Ru-3Zz" id="qI5-YX-bmL"/>
@@ -57,22 +56,26 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </imageView>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小龙李" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gh3-jI-LV8">
-                                    <rect key="frame" x="70" y="20" width="54" height="16"/>
+                                    <rect key="frame" x="70" y="20" width="141" height="16"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="textColor" red="0.51372551919999998" green="0.66274511810000003" blue="0.34509804840000002" alpha="1" colorSpace="deviceRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="C1y-lp-2PX">
-                                    <rect key="frame" x="152" y="18" width="14" height="19"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main_jiantou.png" id="iPc-ju-NjT">
+                                    <rect key="frame" x="252" y="20" width="10" height="15"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <state key="normal" backgroundImage="main_jiantou.png">
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="oRs-Jc-Hu5">
+                                    <rect key="frame" x="0.0" y="0.0" width="298" height="52"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal">
+                                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <action selector="showMoreBaby:" destination="-1" eventType="touchUpInside" id="JXa-FX-8uF"/>
+                                        <action selector="showMoreBaby:" destination="-1" eventType="touchUpInside" id="lCf-6D-Ylg"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -96,7 +99,7 @@
                             <rect key="frame" x="20" y="198" width="275" height="203"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             <connections>

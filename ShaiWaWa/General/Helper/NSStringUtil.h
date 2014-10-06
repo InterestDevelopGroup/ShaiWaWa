@@ -15,4 +15,5 @@
 + (NSArray *)getUserStringRangeArray:(NSString *)text;
 + (NSString *)calculateTime:(NSString *)timeIntervalStr;
 + (NSString *)calculateAge:(NSString *)timeIntervalStr;
++ (int)calculateDay:(NSString *)timeIntervalStr;
 @end

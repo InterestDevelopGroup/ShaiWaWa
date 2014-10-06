@@ -33,6 +33,7 @@
 
 
 @property (strong, nonatomic) IBOutlet UIView *overlayView;
+
 - (IBAction)showMoreBaby:(id)sender;
 - (IBAction)showButtonsAction:(id)sender;
 - (IBAction)hideOverlay:(id)sender;
