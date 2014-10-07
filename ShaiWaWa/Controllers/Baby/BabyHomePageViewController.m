@@ -77,8 +77,12 @@
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];
+    //自动刷新
+    [_dynamicListTableView headerBeginRefreshing];
+    
     //获取宝宝成长记录
     [self getGrowRecords];
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -155,17 +159,15 @@
     
 //    [_gridView registerNibWithName:@"NetCell" reuseIdentifier:@"CellID"];
 //    [_segScrollView addSubview:_gridView];
-    
-    //下拉刷新
-    [_dynamicListTableView addHeaderWithCallback:^{
-        [self refreshRecords];
-    }];
     //上拉加载更多
     [_dynamicListTableView addFooterWithCallback:^{
         [self loadRecords];
     }];
-    //自动刷新
-    [_dynamicListTableView headerBeginRefreshing];
+    //下拉刷新
+    [_dynamicListTableView addHeaderWithCallback:^{
+        [self refreshRecords];
+    }];
+
         
     //身高体重
     _heightAndWeightTableView.frame = CGRectMake(320*2, 0, 320, _segScrollView.bounds.size.height);
@@ -708,6 +710,14 @@
             [SVProgressHUD showSuccessWithStatus:@"取消赞成功."];
             record.is_like = @"0";
             record.like_count = [NSString stringWithFormat:@"%i",[record.like_count intValue] - 1];
+            //取出宝宝被点赞的前三个
+            NSMutableArray *tempArr = [NSMutableArray arrayWithArray:record.top_3_likes];
+            for (NSDictionary *dict in record.top_3_likes) {
+                if ([dict[@"uid"] isEqualToString:users.uid]) {
+                    [tempArr removeObject:dict];
+                }
+            }
+            record.top_3_likes = (NSArray *)tempArr;
             [_dynamicListTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
         } failureBlock:^(NSError *error, NSString *responseString) {
             NSString * msg = responseString;
@@ -726,6 +736,18 @@
             [SVProgressHUD showSuccessWithStatus:@"谢谢您的参与."];
             record.is_like = @"1";
             record.like_count = [NSString stringWithFormat:@"%i",[record.like_count intValue] + 1];
+            NSMutableArray *tempArr = [NSMutableArray arrayWithCapacity:[record.top_3_likes count] + 1];
+            [tempArr addObjectsFromArray:record.top_3_likes];
+            //生成一个字典
+            NSMutableDictionary *zanDict = [@{} mutableCopy];
+            zanDict[@"uid"] = users.uid;
+            zanDict[@"avatar"] = users.avatar;
+            zanDict[@"username"] = @"";
+            zanDict[@"rid"] = @"";
+            zanDict[@"add_time"] = @"";
+            [tempArr insertObject:zanDict atIndex:0];
+            record.top_3_likes = (NSArray *)tempArr;
+
             [_dynamicListTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
         } failureBlock:^(NSError *error, NSString *responseString) {
             NSString * msg = responseString;
