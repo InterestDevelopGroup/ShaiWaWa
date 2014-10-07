@@ -583,6 +583,16 @@
         if (isError) {
             return ;
         }
+        
+        if(obj[@"result"] == nil || obj[@"result"] == [NSNull null])
+        {
+            if(failure)
+            {
+                failure(nil,@"数据出错啦.");
+            }
+            return ;
+        }
+        
         if (success) {
             success([self mapModel:obj[@"result"][0] withClass:[BabyInfo class]]);
         }

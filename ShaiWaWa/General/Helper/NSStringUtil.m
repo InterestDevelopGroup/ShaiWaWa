@@ -97,25 +97,17 @@
     
     int miniutes = delta/60;
     
-    if(miniutes == 0)
+    if(miniutes < 10)
     {
         str = @"刚才";
     }
-    else if(miniutes < 30)
+    else if(miniutes < 60)
     {
         str = [NSString stringWithFormat:@"%i分钟前",miniutes];
     }
-    else if(miniutes < 60)
+    else if(miniutes < 60 *24)
     {
-        str = @"半小时前";
-    }
-    else if(miniutes < 120)
-    {
-        str = @"1小时以前";
-    }
-    else if(miniutes < 180)
-    {
-        str = @"2小时以前";
+        str = [NSString stringWithFormat:@"%d小时前",miniutes/60];
     }
     else
     {

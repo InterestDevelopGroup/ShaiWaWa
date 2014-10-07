@@ -243,7 +243,8 @@
     //[SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
     [[HttpService sharedInstance] getCommentList:@{@"rid":_babyRecord.rid,@"offset":@"0",@"pagesize":@"200"} completionBlock:^(id object) {
         //[SVProgressHUD dismiss];
-        pinLunArray = object;
+        pinLunArray = [[[object reverseObjectEnumerator] allObjects] mutableCopy];
+
         [_pinLunListTableView reloadData];
         [_pinLunListTableView headerEndRefreshing];
     } failureBlock:^(NSError *error, NSString *responseString) {
@@ -527,7 +528,7 @@
     {
         return 285.0f;
     }
-    return 68.0f;
+    return 45.0f;
 }
 
 
