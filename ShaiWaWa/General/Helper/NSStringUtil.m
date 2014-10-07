@@ -136,7 +136,7 @@
     NSTimeInterval currentTime = [[NSDate date] timeIntervalSince1970];
     NSTimeInterval delta = currentTime - timeInterval;
     //算出多少个月
-    float mouths = delta/(60 * 60 * 12 * 30.0);
+    float mouths = delta/(60 * 60 * 24 * 30.0);
     NSString * str = @"";
     if(mouths < 12)
     {
