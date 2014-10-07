@@ -1078,7 +1078,7 @@ int _lastPosition;    //A variable define in headfile
     //dynamicCell.dyContentTextView.text = recrod.content;
     dynamicCell.dyContentTextView.attributedText = [NSStringUtil makeTopicString:recrod.content];
     [dynamicCell.babyAvatarImageView sd_setImageWithURL:[NSURL URLWithString:recrod.avatar] placeholderImage:Default_Avatar];
-    dynamicCell.babyBirthdayLabel.text = [NSStringUtil calculateAge:nil];
+    dynamicCell.babyBirthdayLabel.text = [NSStringUtil calculateAge:recrod.birthday];
     
     NSString * who = recrod.username;
     if([recrod.sex isEqualToString:@"1"])

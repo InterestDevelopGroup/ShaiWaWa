@@ -164,4 +164,16 @@
     return str;
 }
 
+#pragma mark -计算某天与宝宝出生那天相差的天数
++ (int)calculateDay:(NSString *)timeIntervalStr
+{
+    //将生日转换成NSDate对象
+    NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
+    fmt.dateFormat = @"YY-MM-dd";
+    NSDate *birthday = [fmt dateFromString:timeIntervalStr];
+    //获取今天的日期
+    NSDate *today = [NSDate date];
+    return (int)([today timeIntervalSinceDate:birthday] / (60 * 60 * 24));
+}
+
 @end

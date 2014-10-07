@@ -15,11 +15,29 @@
     // Initialization code
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+- (void)layoutSubviews
 {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+    CGFloat nameX = _babyNameLabel.frame.origin.x;
+    CGFloat nameY = _babyNameLabel.frame.origin.y;
+    //根据文字的大小获得宽高
+    CGSize nameSize = [_babyNameLabel.text sizeWithFont:[UIFont systemFontOfSize:17]];
+    //设置昵称的frame
+    _babyNameLabel.frame = (CGRect){{nameX,nameY},nameSize};
+    //设置性别
+    CGFloat sexX = CGRectGetMaxX(_babyNameLabel.frame) + 10;
+    CGFloat sexY = nameY + (nameSize.height - _babySexImage.frame.size.height) * 0.5;
+    CGFloat sexW = _babySexImage.frame.size.width;
+    CGFloat sexH = _babySexImage.frame.size.height;
+    _babySexImage.frame = CGRectMake(sexX, sexY, sexW, sexH);
+    
+    //设置特别关注
+    if (!_focusImageView.hidden) {
+        CGFloat focusX = CGRectGetMaxX(_babySexImage.frame) + 10;
+        CGFloat focusY = sexY;
+        CGFloat focusW = _focusImageView.frame.size.width;
+        CGFloat focusH = _focusImageView.frame.size.height;
+        _focusImageView.frame = CGRectMake(focusX, focusY, focusW, focusH);
+    }
 }
 
 @end

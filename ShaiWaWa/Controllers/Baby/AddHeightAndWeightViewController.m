@@ -8,7 +8,7 @@
 
 #import "AddHeightAndWeightViewController.h"
 #import "UIViewController+BarItemAdapt.h"
-
+#import "NSStringUtil.h"
 #import "HttpService.h"
 #import "SVProgressHUD.h"
 #import "UserDefault.h"
@@ -111,7 +111,7 @@
 - (int)judgeShapeWithSex:(int)sex Age:(NSString *)birthday Height:(CGFloat)height Weight:(CGFloat)weight
 {
     //计算今天与宝宝出生日期相差的天数
-    int deltaDay = [self calculateDeltaDay:birthday];
+    int deltaDay = [NSStringUtil calculateDay:birthday];
     //初始化身高体重数组
     NSArray *heightArray = nil;
     NSArray *weightArray = nil;
@@ -182,18 +182,6 @@
     }
     
     return 0;
-}
-
-#pragma mark - 计算今天与宝宝出生日期相差的天数
-- (int)calculateDeltaDay:(NSString *)birth
-{
-    //将生日转换成NSDate对象
-    NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
-    fmt.dateFormat = @"YY-MM-dd";
-    NSDate *birthday = [fmt dateFromString:birth];
-    //获取今天的日期
-    NSDate *today = [NSDate date];
-    return (int)([today timeIntervalSinceDate:birthday] / (60 * 60 * 24));
 }
 
 - (NSArray *)loadArrayWithName:(NSString *)fileName
