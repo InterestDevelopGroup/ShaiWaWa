@@ -465,6 +465,7 @@
         if([recrod.top_3_likes count] > 1)
         {
             userDic = recrod.top_3_likes[1];
+            dynamicCell.praiseUserSecondBtn.hidden = NO;
             [dynamicCell.praiseUserSecondBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal placeholderImage:Default_Avatar];
             [dynamicCell.praiseUserSecondBtn addTarget:self action:@selector(showPraiseListVC:) forControlEvents:UIControlEventTouchUpInside];
         }
@@ -472,6 +473,7 @@
         if([recrod.top_3_likes count] > 2)
         {
             userDic = recrod.top_3_likes[2];
+            dynamicCell.praiseUserThirdBtn.hidden = NO;
             [dynamicCell.praiseUserThirdBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal placeholderImage:Default_Avatar];
             [dynamicCell.praiseUserThirdBtn addTarget:self action:@selector(showPraiseListVC:) forControlEvents:UIControlEventTouchUpInside];
         }
