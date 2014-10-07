@@ -21,8 +21,8 @@
     CGFloat nameY = _babyNameLabel.frame.origin.y;
     //根据文字的大小获得宽高
     CGSize nameSize = [_babyNameLabel.text sizeWithFont:[UIFont systemFontOfSize:17]];
-    if (nameSize.width >160) {
-        nameSize = CGSizeMake(160, nameSize.height);
+    if (nameSize.width >150) {
+        nameSize = CGSizeMake(150, nameSize.height);
     }
     //设置昵称的frame
     _babyNameLabel.frame = (CGRect){{nameX,nameY},nameSize};

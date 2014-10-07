@@ -527,8 +527,10 @@
     if(indexPath.section == 0)
     {
         return 285.0f;
+    }else{
+        return 45;
     }
-    return 45.0f;
+    
 }
 
 

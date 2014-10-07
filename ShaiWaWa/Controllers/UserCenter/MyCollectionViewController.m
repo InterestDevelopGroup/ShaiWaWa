@@ -201,6 +201,14 @@
             [SVProgressHUD showSuccessWithStatus:@"取消赞成功."];
             record.is_like = @"0";
             record.like_count = [NSString stringWithFormat:@"%i",[record.like_count intValue] - 1];
+            //取出宝宝被点赞的前三个
+            NSMutableArray *tempArr = [NSMutableArray arrayWithArray:record.top_3_likes];
+            for (NSDictionary *dict in record.top_3_likes) {
+                if ([dict[@"uid"] isEqualToString:users.uid]) {
+                    [tempArr removeObject:dict];
+                }
+            }
+            record.top_3_likes = (NSArray *)tempArr;
             [_myFavoriveList reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
         } failureBlock:^(NSError *error, NSString *responseString) {
             NSString * msg = responseString;
@@ -219,6 +227,17 @@
             [SVProgressHUD showSuccessWithStatus:@"谢谢您的参与."];
             record.is_like = @"1";
             record.like_count = [NSString stringWithFormat:@"%i",[record.like_count intValue] + 1];
+            NSMutableArray *tempArr = [NSMutableArray arrayWithCapacity:[record.top_3_likes count] + 1];
+            [tempArr addObjectsFromArray:record.top_3_likes];
+            //生成一个字典
+            NSMutableDictionary *zanDict = [@{} mutableCopy];
+            zanDict[@"uid"] = users.uid;
+            zanDict[@"avatar"] = users.avatar;
+            zanDict[@"username"] = @"";
+            zanDict[@"rid"] = @"";
+            zanDict[@"add_time"] = @"";
+            [tempArr insertObject:zanDict atIndex:0];
+            record.top_3_likes = (NSArray *)tempArr;
             [_myFavoriveList reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
         } failureBlock:^(NSError *error, NSString *responseString) {
             NSString * msg = responseString;
