@@ -572,7 +572,6 @@
         [detailCell.whoLabel addGestureRecognizer:tapGesture];
         detailCell.whoLabel.userInteractionEnabled = YES;
         tapGesture = nil;
-        
         detailCell.publishTimeLabel.text = [NSStringUtil calculateTime:_babyRecord.add_time];
         
         detailCell.babyNameLabel.text = _babyRecord.baby_nickname;
@@ -712,7 +711,8 @@
         PinLunCell * pinLunCell = (PinLunCell *)cell;
         pinLunCell.usernameLabel.text = comment.username;
         pinLunCell.contentLabel.text = comment.content;
-        pinLunCell.addTimeLabel.text = [NSString stringWithFormat:@"(%@)",[[NSDate dateWithTimeIntervalSince1970:[comment.add_time intValue]] formatDateString:@"yyyy-MM-dd"]];
+//        pinLunCell.addTimeLabel.text = [NSString stringWithFormat:@"(%@)",[[NSDate dateWithTimeIntervalSince1970:[comment.add_time intValue]] formatDateString:@"yyyy-MM-dd"]];
+        pinLunCell.addTimeLabel.text = [NSStringUtil calculateTime:comment.add_time];
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPersonalHome:)];
         pinLunCell.usernameLabel.userInteractionEnabled = YES;
         [pinLunCell.usernameLabel addGestureRecognizer:tap];

@@ -93,7 +93,7 @@
     NSTimeInterval currentTime = [[NSDate date] timeIntervalSince1970];
     NSTimeInterval delta = currentTime - timeInterval;
     
-    NSString * str = @"刚才";
+    NSString * str = @"";
     
     int miniutes = delta/60;
     
