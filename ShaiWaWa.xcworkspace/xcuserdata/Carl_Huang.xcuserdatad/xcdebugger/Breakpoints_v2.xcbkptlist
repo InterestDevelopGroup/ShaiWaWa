@@ -9,14 +9,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ShaiWaWa/Controllers/Baby/DynamicDetailViewController.m"
-            timestampString = "429441761.17827"
+            filePath = "ShaiWaWa/Controllers/UserCenter/DynamicByUserIDViewController.m"
+            timestampString = "434364024.852844"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "206"
-            endingLineNumber = "206"
-            landmarkName = "@implementation DynamicDetailViewController"
-            landmarkType = "3">
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

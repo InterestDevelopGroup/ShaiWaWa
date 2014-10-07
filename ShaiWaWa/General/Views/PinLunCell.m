@@ -15,11 +15,12 @@
     // Initialization code
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
+//- (void)layoutSubviews
+//{
+//    CGSize contentSize = [_addTimeLabel.text sizeWithFont:[UIFont systemFontOfSize:12.0f]];
+//    _addTimeLabel.frame = (CGRect){{31 ,23},contentSize};
+//    self.bounds = CGRectMake(0, 0, 320, 23.0 + contentSize.height + 10);
+//    
+//}
 
 @end

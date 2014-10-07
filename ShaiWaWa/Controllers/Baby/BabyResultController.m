@@ -133,14 +133,15 @@
 }
 
 #pragma mark - Table view delegate
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.tableView endEditing:YES];
+    [self.tableView removeFromSuperview];
     BabyInfo *baby = _resultBabys[indexPath.row];
     BabyHomePageViewController *vc = [[BabyHomePageViewController alloc]init];
     vc.babyInfo = baby;
     [self.navigationController pushViewController:vc animated:YES];
+//    [self.parentViewController push:vc];
 }
 
 

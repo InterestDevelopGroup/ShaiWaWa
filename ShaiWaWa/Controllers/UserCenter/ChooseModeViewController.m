@@ -94,6 +94,7 @@ typedef enum{
     users = [[UserDefault sharedInstance] userInfo];
     //判断是否有宝宝和动态
     [self isNoBabyAndFriend];
+    [self.dynamicPageTableView headerBeginRefreshing];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -164,7 +165,7 @@ typedef enum{
     [_dynamicPageTableView setFooterRefreshingText:NSLocalizedString(@"DataLoading", nil)];
     if([users.baby_count intValue] != 0 || [users.record_count intValue] != 0)
     {
-        [_dynamicPageTableView headerBeginRefreshing];
+        //[_dynamicPageTableView headerBeginRefreshing];
     }
 
 }
@@ -575,6 +576,7 @@ typedef enum{
 
 }
 
+#pragma mark - 点赞按钮
 - (void)likeAction:(id)sender
 {
     UIButton * btn = (UIButton *)sender;
@@ -605,6 +607,14 @@ typedef enum{
             [SVProgressHUD showSuccessWithStatus:@"取消赞成功."];
             record.is_like = @"0";
             record.like_count = [NSString stringWithFormat:@"%i",[record.like_count intValue] - 1];
+            //取出宝宝被点赞的前三个
+            NSMutableArray *tempArr = [NSMutableArray arrayWithArray:record.top_3_likes];
+            for (NSDictionary *dict in record.top_3_likes) {
+                if ([dict[@"uid"] isEqualToString:users.uid]) {
+                    [tempArr removeObject:dict];
+                }
+            }
+            record.top_3_likes = (NSArray *)tempArr;
             [_dynamicPageTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
         } failureBlock:^(NSError *error, NSString *responseString) {
             NSString * msg = responseString;
@@ -623,6 +633,17 @@ typedef enum{
             [SVProgressHUD showSuccessWithStatus:@"谢谢您的参与."];
             record.is_like = @"1";
             record.like_count = [NSString stringWithFormat:@"%i",[record.like_count intValue] + 1];
+            NSMutableArray *tempArr = [NSMutableArray arrayWithCapacity:[record.top_3_likes count] + 1];
+            [tempArr addObjectsFromArray:record.top_3_likes];
+            //生成一个字典
+            NSMutableDictionary *zanDict = [@{} mutableCopy];
+            zanDict[@"uid"] = users.uid;
+            zanDict[@"avatar"] = users.avatar;
+            zanDict[@"username"] = @"";
+            zanDict[@"rid"] = @"";
+            zanDict[@"add_time"] = @"";
+            [tempArr insertObject:zanDict atIndex:0];
+            record.top_3_likes = (NSArray *)tempArr;
             [_dynamicPageTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
         } failureBlock:^(NSError *error, NSString *responseString) {
             NSString * msg = responseString;
@@ -1103,6 +1124,7 @@ int _lastPosition;    //A variable define in headfile
     
     dynamicCell.babyNameLabel.text = recrod.baby_nickname;
     [dynamicCell.zanButton setTitle:recrod.like_count forState:UIControlStateNormal];
+    [dynamicCell.zanButton setTitle:recrod.like_count forState:UIControlStateSelected];
     [dynamicCell.commentBtn setTitle:recrod.comment_count forState:UIControlStateNormal];
     [dynamicCell.zanButton addTarget:self action:@selector(likeAction:) forControlEvents:UIControlEventTouchUpInside];
     if([recrod.is_like isEqualToString:@"1"])
@@ -1160,9 +1182,8 @@ int _lastPosition;    //A variable define in headfile
     {
         dynamicCell.likeUserView.hidden = NO;
         NSDictionary * userDic = recrod.top_3_likes[0];
-        [dynamicCell.praiseUserFirstBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal placeholderImage:Default_Avatar];
         [dynamicCell.praiseUserFirstBtn addTarget:self action:@selector(showPraiseListVC:) forControlEvents:UIControlEventTouchUpInside];
-        
+        [dynamicCell.praiseUserFirstBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal placeholderImage:Default_Avatar];
         if([recrod.top_3_likes count] == 1)
         {
             dynamicCell.praiseUserSecondBtn.hidden = YES;
@@ -1171,6 +1192,7 @@ int _lastPosition;    //A variable define in headfile
         
         if([recrod.top_3_likes count] > 1)
         {
+            dynamicCell.praiseUserSecondBtn.hidden = NO;
             userDic = recrod.top_3_likes[1];
             [dynamicCell.praiseUserSecondBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal placeholderImage:Default_Avatar];
             [dynamicCell.praiseUserSecondBtn addTarget:self action:@selector(showPraiseListVC:) forControlEvents:UIControlEventTouchUpInside];
@@ -1178,6 +1200,7 @@ int _lastPosition;    //A variable define in headfile
         
         if([recrod.top_3_likes count] > 2)
         {
+            dynamicCell.praiseUserThirdBtn.hidden = NO;
             userDic = recrod.top_3_likes[2];
             [dynamicCell.praiseUserThirdBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal placeholderImage:Default_Avatar];
             [dynamicCell.praiseUserThirdBtn addTarget:self action:@selector(showPraiseListVC:) forControlEvents:UIControlEventTouchUpInside];

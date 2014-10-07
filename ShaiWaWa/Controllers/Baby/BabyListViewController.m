@@ -324,23 +324,6 @@
     
 }
 
-
-//#pragma mark - UITextFieldDelegate
-//- (BOOL)textFieldShouldReturn:(UITextField *)textField
-//{
-//    _keyword = textField.text;
-//    [self filterBabys];
-//    [textField resignFirstResponder];
-//    return YES;
-//}
-
-#pragma mark - 搜索宝宝按钮的监听
-- (IBAction)searchBaby:(id)sender {
-//    [self.view endEditing:YES];
-//    _keyword = _searchText.text;
-//    [self filterBabys];
-}
-
 - (BOOL)textFieldShouldClear:(UITextField *)textField
 {
     [self getBabys];

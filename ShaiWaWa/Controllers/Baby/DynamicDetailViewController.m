@@ -243,7 +243,8 @@
     //[SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
     [[HttpService sharedInstance] getCommentList:@{@"rid":_babyRecord.rid,@"offset":@"0",@"pagesize":@"200"} completionBlock:^(id object) {
         //[SVProgressHUD dismiss];
-        pinLunArray = object;
+        pinLunArray = [[[object reverseObjectEnumerator] allObjects] mutableCopy];
+
         [_pinLunListTableView reloadData];
         [_pinLunListTableView headerEndRefreshing];
     } failureBlock:^(NSError *error, NSString *responseString) {
@@ -289,6 +290,7 @@
     isShareViewShown = NO;
 }
 
+#pragma mark -点赞按钮
 - (void)likeAction:(id)sender
 {
     UserInfo * user = [[UserDefault sharedInstance] userInfo];
@@ -305,7 +307,19 @@
             //成功之后设置为1，表示已经赞过
             _babyRecord.is_like = @"1";
             _babyRecord.like_count = [NSString stringWithFormat:@"%i",[_babyRecord.like_count intValue] + 1];
+            NSMutableArray *tempArr = [NSMutableArray arrayWithCapacity:[_babyRecord.top_3_likes count] + 1];
+            [tempArr addObjectsFromArray:_babyRecord.top_3_likes];
+            //生成一个字典
+            NSMutableDictionary *zanDict = [@{} mutableCopy];
+            zanDict[@"uid"] = user.uid;
+            zanDict[@"avatar"] = user.avatar;
+            zanDict[@"username"] = @"";
+            zanDict[@"rid"] = @"";
+            zanDict[@"add_time"] = @"";
+            [tempArr insertObject:zanDict atIndex:0];
+            _babyRecord.top_3_likes = (NSArray *)tempArr;
             [_pinLunListTableView reloadData];
+            
             [SVProgressHUD showSuccessWithStatus:@"谢谢您的参与."];
             
         } failureBlock:^(NSError *error, NSString *responseString) {
@@ -323,6 +337,14 @@
             //成功之后设置为0，表示没有赞过
             _babyRecord.is_like = @"0";
             _babyRecord.like_count = [NSString stringWithFormat:@"%i",[_babyRecord.like_count intValue] - 1];
+            //取出宝宝被点赞的前三个
+            NSMutableArray *tempArr = [NSMutableArray arrayWithArray:_babyRecord.top_3_likes];
+            for (NSDictionary *dict in _babyRecord.top_3_likes) {
+                if ([dict[@"uid"] isEqualToString:user.uid]) {
+                    [tempArr removeObject:dict];
+                }
+            }
+            _babyRecord.top_3_likes = (NSArray *)tempArr;
             [_pinLunListTableView reloadData];
             [SVProgressHUD showSuccessWithStatus:@"取消赞成功."];
             
@@ -505,8 +527,10 @@
     if(indexPath.section == 0)
     {
         return 285.0f;
+    }else{
+        return 45;
     }
-    return 68.0f;
+    
 }
 
 
@@ -551,7 +575,6 @@
         [detailCell.whoLabel addGestureRecognizer:tapGesture];
         detailCell.whoLabel.userInteractionEnabled = YES;
         tapGesture = nil;
-        
         detailCell.publishTimeLabel.text = [NSStringUtil calculateTime:_babyRecord.add_time];
         
         detailCell.babyNameLabel.text = _babyRecord.baby_nickname;
@@ -583,18 +606,25 @@
         if([_babyRecord.top_3_likes count] > 0)
         {
             detailCell.likeView.hidden = NO;
+            detailCell.praiseUserFirstBtn.hidden = NO;
             NSDictionary * userDic = _babyRecord.top_3_likes[0];
             [detailCell.praiseUserFirstBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal placeholderImage:Default_Avatar];
             [detailCell.praiseUserFirstBtn addTarget:self action:@selector(showPraiseListVC:) forControlEvents:UIControlEventTouchUpInside];
+            if (_babyRecord.top_3_likes.count == 1) {
+                detailCell.praiseUserSecondBtn.hidden = YES;
+                detailCell.praiseUserThirdBtn.hidden = YES;
+            }
             if([_babyRecord.top_3_likes count] > 1)
             {
+                detailCell.praiseUserSecondBtn.hidden = NO;
                 userDic = _babyRecord.top_3_likes[1];
                 [detailCell.praiseUserSecondBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal placeholderImage:Default_Avatar];
-                [detailCell.praiseUserSecondBtn addTarget:self action:@selector(showPraiseListVC:) forControlEvents:UIControlEventTouchUpInside];;
+                [detailCell.praiseUserSecondBtn addTarget:self action:@selector(showPraiseListVC:) forControlEvents:UIControlEventTouchUpInside];
             }
             
             if([_babyRecord.top_3_likes count] > 2)
             {
+                detailCell.praiseUserThirdBtn.hidden = NO;
                 userDic = _babyRecord.top_3_likes[2];
                 [detailCell.praiseUserThirdBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal placeholderImage:Default_Avatar];
                 [detailCell.praiseUserThirdBtn addTarget:self action:@selector(showPraiseListVC:) forControlEvents:UIControlEventTouchUpInside];
@@ -684,7 +714,8 @@
         PinLunCell * pinLunCell = (PinLunCell *)cell;
         pinLunCell.usernameLabel.text = comment.username;
         pinLunCell.contentLabel.text = comment.content;
-        pinLunCell.addTimeLabel.text = [NSString stringWithFormat:@"(%@)",[[NSDate dateWithTimeIntervalSince1970:[comment.add_time intValue]] formatDateString:@"yyyy-MM-dd"]];
+//        pinLunCell.addTimeLabel.text = [NSString stringWithFormat:@"(%@)",[[NSDate dateWithTimeIntervalSince1970:[comment.add_time intValue]] formatDateString:@"yyyy-MM-dd"]];
+        pinLunCell.addTimeLabel.text = [NSStringUtil calculateTime:comment.add_time];
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPersonalHome:)];
         pinLunCell.usernameLabel.userInteractionEnabled = YES;
         [pinLunCell.usernameLabel addGestureRecognizer:tap];
@@ -697,10 +728,6 @@
     return cell;
     
 }
-
-
-
-
 
 #pragma mark - UITextFieldDelegate Methods
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
