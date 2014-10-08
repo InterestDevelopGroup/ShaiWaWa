@@ -37,6 +37,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _nextBtn.enabled = NO;
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -95,9 +96,6 @@
     }
 }
 
-
-
-
 - (void)countBackwards
 {
     countBacki--;
@@ -126,12 +124,13 @@
         return ;
     }
     //判断长度是否是6
-    if(![InputHelper isLength:6 withString:code])
-    {
-        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"InvalidateCode", nil)];
-        return ;
-    }
-    
+//#warning 注意
+//    if(![InputHelper isLength:6 withString:code])
+//    {
+//        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"InvalidateCode", nil)];
+//        return ;
+//    }
+   
     if(_isBinding)
     {
         void (^BindBlock)(void) = ^(void){
@@ -244,6 +243,17 @@
 {
     [textField resignFirstResponder];
     return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+//    NSLog(@"%d--%@--%d--%@",range.location,_validateCoreTextField.text,_validateCoreTextField.text.length,string);
+    BOOL shouNext = range.location >= 6;
+//    NSString *content = [NSString stringWithFormat:@"%@%@",_validateCoreTextField.text,string];
+//    NSLog(@"%@",content);
+#warning 有缺陷
+    _nextBtn.enabled = shouNext;
+    return !shouNext;
 }
 
 @end

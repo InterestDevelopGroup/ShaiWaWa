@@ -20,6 +20,6 @@ typedef void(^StrBlock)(NSString *);
 @property (strong, nonatomic) IBOutlet UITextField *userNameField;
 @property (strong, nonatomic) IBOutlet UITextField *pwdField;
 - (IBAction)disableSecure:(id)sender;
-- (IBAction)finishRegisterAndLogin:(id)sender;
+- (IBAction)finishRegisterAndLogin:(UIButton *)sender;
 
 @end

@@ -82,7 +82,9 @@
 
 - (IBAction)showRegisterVC:(id)sender
 {
-    [ControlCenter pushToRegisterVC];
+    [ControlCenter pushToRegisterVC];//zhengchang de push
+//    [ControlCenter pushToFinishRegisterVC];
+//    [ControlCenter pushToPostValidateVC];
 }
 
 - (IBAction)showMainVC:(id)sender
@@ -120,7 +122,7 @@
         _pwdField.text = nil;
         [self showChooseModeVC];
     } failureBlock:^(NSError *error, NSString *responseString){
-        [SVProgressHUD showErrorWithStatus:responseString];
+        [SVProgressHUD showErrorWithStatus:@"手机号或密码错误."];
     }];
     
 }
