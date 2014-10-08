@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PostValidateViewController">
             <connections>
                 <outlet property="getCoreAgainButton" destination="s3F-21-bh3" id="mzb-lQ-Ogs"/>
+                <outlet property="nextBtn" destination="EmG-S3-ZDs" id="4lu-wm-hgD"/>
                 <outlet property="phoneNumberLabel" destination="zFb-EL-VWP" id="Wqc-yP-KmC"/>
                 <outlet property="validateCoreTextField" destination="4Jq-Ej-vjR" id="OEx-Xy-akL"/>
                 <outlet property="view" destination="1" id="3"/>
@@ -43,7 +44,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                    <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="DYs-WH-3Yv"/>
                     </connections>

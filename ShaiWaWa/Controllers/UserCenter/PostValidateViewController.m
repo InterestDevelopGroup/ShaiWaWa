@@ -37,6 +37,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [_validateCoreTextField addTarget:self action:@selector(textChange:) forControlEvents:UIControlEventEditingChanged];
+    _nextBtn.enabled = NO;
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -95,9 +97,6 @@
     }
 }
 
-
-
-
 - (void)countBackwards
 {
     countBacki--;
@@ -126,12 +125,13 @@
         return ;
     }
     //判断长度是否是6
-    if(![InputHelper isLength:6 withString:code])
-    {
-        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"InvalidateCode", nil)];
-        return ;
-    }
-    
+//#warning 注意
+//    if(![InputHelper isLength:6 withString:code])
+//    {
+//        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"InvalidateCode", nil)];
+//        return ;
+//    }
+   
     if(_isBinding)
     {
         void (^BindBlock)(void) = ^(void){
@@ -244,6 +244,21 @@
 {
     [textField resignFirstResponder];
     return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    BOOL shouNext = range.location >= 6;
+    return !shouNext;
+}
+
+- (void)textChange:(UITextField *)textField
+{
+    if (textField.text.length == 6) {
+        _nextBtn.enabled = YES;
+    }else{
+        _nextBtn.enabled = NO;
+    }
 }
 
 @end

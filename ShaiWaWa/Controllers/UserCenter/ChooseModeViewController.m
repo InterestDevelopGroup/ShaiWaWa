@@ -78,6 +78,7 @@ typedef enum{
         _recordType = All_Record;
         users = [[UserDefault sharedInstance] userInfo];
         _currentOffset = 0;
+        _isNeedRefresh = YES;
     }
     return self;
 }
@@ -94,7 +95,9 @@ typedef enum{
     users = [[UserDefault sharedInstance] userInfo];
     //判断是否有宝宝和动态
     [self isNoBabyAndFriend];
-    [self.dynamicPageTableView headerBeginRefreshing];
+    if (_isNeedRefresh) {
+        [self.dynamicPageTableView headerBeginRefreshing];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -933,6 +936,7 @@ typedef enum{
 {
     
     PublishRecordViewController * vc = [[PublishRecordViewController alloc] initWithNibName:nil bundle:nil];
+    vc.parentCtrl = self;
     [self push:vc];
     vc = nil;
     
@@ -1123,9 +1127,11 @@ int _lastPosition;    //A variable define in headfile
     tap = nil;
     
     dynamicCell.babyNameLabel.text = recrod.baby_nickname;
+    [dynamicCell.babyNameLabel addGestureRecognizer:[[UIGestureRecognizer alloc] initWithTarget:self action:@selector(showBabyHomePage:)]];
     [dynamicCell.zanButton setTitle:recrod.like_count forState:UIControlStateNormal];
     [dynamicCell.zanButton setTitle:recrod.like_count forState:UIControlStateSelected];
     [dynamicCell.commentBtn setTitle:recrod.comment_count forState:UIControlStateNormal];
+    dynamicCell.commentBtn.userInteractionEnabled = NO;
     [dynamicCell.zanButton addTarget:self action:@selector(likeAction:) forControlEvents:UIControlEventTouchUpInside];
     if([recrod.is_like isEqualToString:@"1"])
     {
@@ -1236,6 +1242,8 @@ int _lastPosition;    //A variable define in headfile
             
         };
         [imageView setCloseHidden];
+        dynamicCell.scrollView.hidden = NO;
+        imageView.hidden = NO;
         [dynamicCell.scrollView addSubview:imageView];
         imageView = nil;
     }
@@ -1256,6 +1264,8 @@ int _lastPosition;    //A variable define in headfile
                 [displayView show];
             };
             [imageView setCloseHidden];
+            dynamicCell.scrollView.hidden = NO;
+            imageView.hidden = NO;
             [dynamicCell.scrollView addSubview:imageView];
             imageView = nil;
         }
@@ -1267,6 +1277,8 @@ int _lastPosition;    //A variable define in headfile
         PublishImageView * imageView = [[PublishImageView alloc] initWithFrame:dynamicCell.scrollView.bounds withPath:nil];
         [imageView setCloseHidden];
         [dynamicCell.scrollView addSubview:imageView];
+        dynamicCell.scrollView.hidden = YES;
+        imageView.hidden = YES;
         imageView = nil;
     }
     
@@ -1299,6 +1311,16 @@ int _lastPosition;    //A variable define in headfile
     dynamicDetailVC.babyRecord = record;
     [self.navigationController pushViewController:dynamicDetailVC animated:YES];
 }
+
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    BabyRecord * record = dyArray[indexPath.row];
+//    if (record.images.count == 0) {
+//        return 340.0 - 134.0;
+//    }else{
+//        return 340.0;
+//    }
+//}
 
 #pragma mark - UIActionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex

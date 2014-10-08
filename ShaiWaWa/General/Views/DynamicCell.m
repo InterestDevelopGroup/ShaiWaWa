@@ -22,4 +22,15 @@
     // Configure the view for the selected state
 }
 
+//- (void)layoutSubviews
+//{
+//    if (!_scrollView.hidden)
+//    {
+//        [super layoutSubviews];
+//        return;
+//    }
+//    _detailView.frame = CGRectMake(_detailView.frame.origin.x, _detailView.frame.origin.y - 134, _detailView.bounds.size.width, _detailView.bounds.size.height);
+//    self.bounds = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height - 134);
+//}
+
 @end

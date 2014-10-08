@@ -852,7 +852,6 @@
         }
         
         if (success) {
-            
             success([ResponseHelper transformToBabyRecords:obj[@"result"]]);
             
         }

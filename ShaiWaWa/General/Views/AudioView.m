@@ -8,6 +8,13 @@
 
 #import "AudioView.h"
 
+@interface AudioView()<AVAudioPlayerDelegate>
+{
+    UIButton * _button;
+}
+
+@end
+
 @implementation AudioView
 
 - (id)initWithFrame:(CGRect)frame withPath:(NSString *)path
@@ -24,6 +31,7 @@
         
         UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake((CGRectGetWidth(frame) - 10) * .5, (CGRectGetHeight(frame) - 10) * .5, 10, 10)];
         imageView.image = [UIImage imageNamed:@"square_bofang"];
+        imageView.tag = 1000;
         [self addSubview:imageView];
         
         
@@ -68,7 +76,7 @@
     /*
 
     */
-    
+    //_localPlayer.delegate = self;
     if(![_path hasPrefix:@"http"])
     {
         
@@ -84,23 +92,34 @@
         _localPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:_path] error:nil];
         [_localPlayer prepareToPlay];
         [_localPlayer play];
+        
+        UIImageView * imageView = (UIImageView *)[self viewWithTag:1000];
+        [imageView setImage:[UIImage imageNamed:@"停止"]];
     }
     else
     {
-        ;
         if(_player != nil && [_player isProcessing])
         {
             [_player stop];
             _player = nil;
+            UIImageView * imageView = (UIImageView *)[self viewWithTag:1000];
+            [imageView setImage:[UIImage imageNamed:@"square_bofang"]];
             return ;
         }
         
         _player = [[AudioPlayer alloc] init];
         _player.url = [NSURL URLWithString:_path];
         [_player play];
-
+        UIImageView * imageView = (UIImageView *)[self viewWithTag:1000];
+        [imageView setImage:[UIImage imageNamed:@"停止"]];
     }
-    
-    
 }
+
+//#pragma mark - 音频播放完毕代理方法
+//- (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
+//{
+//    UIImageView * imageView = (UIImageView *)[self viewWithTag:1000];
+//    [imageView setImage:[UIImage imageNamed:@"square_bofang"]];
+//}
+
 @end

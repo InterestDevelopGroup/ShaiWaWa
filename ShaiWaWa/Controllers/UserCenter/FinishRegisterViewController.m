@@ -12,7 +12,9 @@
 #import "HttpService.h"
 #import "SVProgressHUD.h"
 #import "InputHelper.h"
-@interface FinishRegisterViewController ()
+#import "ChooseModeViewController.h"
+
+@interface FinishRegisterViewController ()/*<UITextFieldDelegate>*/
 
 @end
 
@@ -45,16 +47,19 @@
 
     
 }
-- (IBAction)disableSecure:(id)sender
+- (IBAction)disableSecure:(UIButton *)sender
 {
-    [pwdField setSecureTextEntry:NO];
+    [pwdField setSecureTextEntry:sender.selected];
+    sender.selected = !sender.selected;
 }
     
 - (IBAction)finishRegisterAndLogin:(id)sender
 {
     
     NSString * username = [InputHelper trim:userNameField.text];
-    NSString * pass = [InputHelper trim:pwdField.text];
+    NSString * pass = [self checkPWD:pwdField.text];
+    if (pass == nil) return;
+//    NSString * pass = [InputHelper trim:pwdField.text];
     
     if([InputHelper isEmpty:username])
     {
@@ -79,13 +84,33 @@
     
 }
 
+#pragma mark - 判断用户密码的合理性
+- (NSString *)checkPWD:(NSString *)pwd
+{
+    //判断密码长度
+    if (pwd.length< 6 ||pwd.length > 10) {
+        [self showAlertViewWithMessage:@"您的密码长度不正确，请重新输入"];
+        pwdField.text = @"";
+        return nil;
+    }
+    //判断密码字符的合理性
+//    if (condition) {
+//        statements
+//    }
+#warning 暂时不处理，应该判断字符的合法性
+    return [InputHelper trim:pwd];
+}
+
 - (void)registerWithNum:(NSString *)sww_Num
 {
     NSString * username = [InputHelper trim:userNameField.text];
     NSString * pass = [InputHelper trim:pwdField.text];
     [[HttpService sharedInstance] userRegister:@{@"username":username,@"password":pass,@"phone":_currentPhone,@"sww_number":sww_Num,@"validate_code":_validateCode} completionBlock:^(id object) {
         [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"RegisterSuccess", nil)];
-        [self popToRoot];
+//        [self popToRoot];
+        //注册成功后登陆
+        [self loginWith:_currentPhone pwd:pass];
+//        [self showChooseModeVC];
     } failureBlock:^(NSError *error, NSString *responseString) {
         NSString * msg = NSLocalizedString(@"RegisterError", nil);
         if(error == nil)
@@ -93,6 +118,27 @@
         [SVProgressHUD showErrorWithStatus:msg];
     }];
 
+}
+
+#pragma mark - 注册成功后登陆
+- (void)loginWith:(NSString *)phone pwd:(NSString *)pass
+{
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+    [SVProgressHUD setStatus:NSLocalizedString(@"Logining", nil)];
+    [[HttpService sharedInstance] userLogin:@{@"phone":phone,@"password":pass}completionBlock:^(id object){
+        [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"LoginSuccess", nil)];
+        userNameField.text = nil;
+        pwdField.text = nil;
+        [self showChooseModeVC];
+    } failureBlock:^(NSError *error, NSString *responseString){
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
+}
+
+- (void)showChooseModeVC
+{
+    ChooseModeViewController *chooseModeVC = [[ChooseModeViewController alloc] initWithNibName:nil bundle:nil];
+    [self.navigationController pushViewController:chooseModeVC animated:YES];
 }
 
 #pragma mark - UITextFieldDelegate

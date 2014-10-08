@@ -128,7 +128,14 @@
     
     specialCareBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [specialCareBtn setBackgroundColor:[UIColor whiteColor]];
-    [specialCareBtn setTitle:@"特别关心" forState:UIControlStateNormal];
+    int isFous = [_babyInfo.is_focus intValue];
+    NSString *foucus = nil;
+    if (isFous == 1) {
+        foucus = @"特别关心";
+    }else{
+        foucus = @"取消关心";
+    }
+    [specialCareBtn setTitle:foucus forState:UIControlStateNormal];
     [specialCareBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
     specialCareBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     specialCareBtn.frame = CGRectMake(self.navigationController.navigationBar.bounds.size.width-90, self.navigationController.navigationBar.bounds.size.height+51, 84, 41);
@@ -663,9 +670,11 @@
     params[@"country"] = @"中国";
     params[@"birth_height"] = _babyInfo.birth_height;
     params[@"birth_weight"] = _babyInfo.birth_weight;
+    /*
     NSInteger timeInterval = [[NSDate dateFromString:_babyInfo.birthday withFormat:@"yyyy-MM-dd"] timeIntervalSince1970];
     NSString * timeIntervalStr = [NSString stringWithFormat:@"%d",timeInterval];
-    params[@"birthday"] = timeIntervalStr;
+    */
+    params[@"birthday"] = _babyInfo.birthday;
     
     //更新宝宝信息
     [[HttpService sharedInstance] updateBabyInfo:params completionBlock:^(id object) {
