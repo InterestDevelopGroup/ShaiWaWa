@@ -663,9 +663,11 @@
     params[@"country"] = @"中国";
     params[@"birth_height"] = _babyInfo.birth_height;
     params[@"birth_weight"] = _babyInfo.birth_weight;
+    /*
     NSInteger timeInterval = [[NSDate dateFromString:_babyInfo.birthday withFormat:@"yyyy-MM-dd"] timeIntervalSince1970];
     NSString * timeIntervalStr = [NSString stringWithFormat:@"%d",timeInterval];
-    params[@"birthday"] = timeIntervalStr;
+    */
+    params[@"birthday"] = _babyInfo.birthday;
     
     //更新宝宝信息
     [[HttpService sharedInstance] updateBabyInfo:params completionBlock:^(id object) {

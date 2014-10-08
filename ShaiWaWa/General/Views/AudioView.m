@@ -24,6 +24,7 @@
         
         UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake((CGRectGetWidth(frame) - 10) * .5, (CGRectGetHeight(frame) - 10) * .5, 10, 10)];
         imageView.image = [UIImage imageNamed:@"square_bofang"];
+        imageView.tag = 1000;
         [self addSubview:imageView];
         
         
@@ -84,6 +85,9 @@
         _localPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:_path] error:nil];
         [_localPlayer prepareToPlay];
         [_localPlayer play];
+        
+        UIImageView * imageView = (UIImageView *)[self viewWithTag:1000];
+        [imageView setImage:[UIImage imageNamed:@"停止"]];
     }
     else
     {
@@ -92,12 +96,16 @@
         {
             [_player stop];
             _player = nil;
+            UIImageView * imageView = (UIImageView *)[self viewWithTag:1000];
+            [imageView setImage:[UIImage imageNamed:@"square_bofang"]];
             return ;
         }
         
         _player = [[AudioPlayer alloc] init];
         _player.url = [NSURL URLWithString:_path];
         [_player play];
+        UIImageView * imageView = (UIImageView *)[self viewWithTag:1000];
+        [imageView setImage:[UIImage imageNamed:@"停止"]];
 
     }
     
