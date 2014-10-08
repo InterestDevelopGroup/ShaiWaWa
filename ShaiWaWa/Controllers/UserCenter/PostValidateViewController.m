@@ -37,6 +37,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [_validateCoreTextField addTarget:self action:@selector(textChange:) forControlEvents:UIControlEventEditingChanged];
     _nextBtn.enabled = NO;
     // Do any additional setup after loading the view from its nib.
 }
@@ -247,13 +248,17 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-//    NSLog(@"%d--%@--%d--%@",range.location,_validateCoreTextField.text,_validateCoreTextField.text.length,string);
     BOOL shouNext = range.location >= 6;
-//    NSString *content = [NSString stringWithFormat:@"%@%@",_validateCoreTextField.text,string];
-//    NSLog(@"%@",content);
-#warning 有缺陷
-    _nextBtn.enabled = shouNext;
     return !shouNext;
+}
+
+- (void)textChange:(UITextField *)textField
+{
+    if (textField.text.length == 6) {
+        _nextBtn.enabled = YES;
+    }else{
+        _nextBtn.enabled = NO;
+    }
 }
 
 @end

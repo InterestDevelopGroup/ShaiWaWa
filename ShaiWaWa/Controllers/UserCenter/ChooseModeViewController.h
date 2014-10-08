@@ -40,7 +40,7 @@ typedef void(^SpecialBlock)(NSMutableArray *);
 @property (strong, nonatomic) IBOutlet UIView *itemView;
 @property (weak, nonatomic) IBOutlet UIButton *leftButton_1;
 @property (weak, nonatomic) IBOutlet UIButton *leftButton_2;
-
+@property (nonatomic,assign) BOOL isNeedRefresh;
 - (IBAction)showSearchFriendsVC:(id)sender;
 - (IBAction)showReleaseVC:(id)sender;
 - (IBAction)showAddBabyVC:(id)sender;

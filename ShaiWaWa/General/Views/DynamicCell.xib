@@ -26,7 +26,7 @@
                                 <rect key="frame" x="12" y="6" width="45" height="45"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小龙李" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zaO-M2-dW6">
+                            <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小龙李" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zaO-M2-dW6">
                                 <rect key="frame" x="69" y="11" width="53" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -178,6 +178,7 @@
                 <outlet property="babyBirthdayLabel" destination="Txg-c2-wzn" id="scK-4u-ewy"/>
                 <outlet property="babyNameLabel" destination="zaO-M2-dW6" id="ijb-6Y-cPH"/>
                 <outlet property="commentBtn" destination="EAE-B8-67F" id="tWs-fs-BJM"/>
+                <outlet property="detailView" destination="pBw-ah-t6J" id="dQg-Df-QwK"/>
                 <outlet property="dyContentTextView" destination="rg2-QV-IuH" id="jS0-AC-yH5"/>
                 <outlet property="likeUserView" destination="6bo-Vm-OC3" id="ZZw-XD-Ygx"/>
                 <outlet property="locationImageView" destination="jnX-LJ-6sd" id="vig-VI-XQc"/>

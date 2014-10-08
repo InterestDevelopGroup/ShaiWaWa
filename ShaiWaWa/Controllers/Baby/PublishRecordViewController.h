@@ -7,6 +7,7 @@
 //
 
 #import "CommonViewController.h"
+@class ChooseModeViewController;
 
 @interface PublishRecordViewController : CommonViewController
 @property (weak, nonatomic) IBOutlet UIView *containView;
@@ -30,7 +31,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *tecentWeiboBtn;
 @property (weak, nonatomic) IBOutlet UIButton *sinaWeiboBtn;
 @property (weak, nonatomic) IBOutlet UIButton *qqSpaceBtn;
-
+@property (weak, nonatomic) ChooseModeViewController *parentCtrl;
 
 @property (strong, nonatomic) IBOutlet UIView *overlayView;
 

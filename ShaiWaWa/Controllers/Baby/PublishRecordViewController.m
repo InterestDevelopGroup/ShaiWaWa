@@ -32,6 +32,8 @@
 #import "Mp3RecordWriter.h"
 #import "MLAudioMeterObserver.h"
 #import "MLAudioRecorder.h"
+#import "ChooseModeViewController.h"
+
 @import AVFoundation;
 @import MediaPlayer;
 #define PlaceHolder @"关于宝宝的开心事情..."
@@ -115,7 +117,7 @@
 - (void)initUI
 {
     self.title = NSLocalizedString(@"PublishVCTitle", nil);
-    [self setLeftCusBarItem:@"square_back" action:nil];
+    [self setLeftCusBarItem:@"square_back" action:@selector(backUp:)];
     self.navigationItem.rightBarButtonItem = [self customBarItem:@"pb_fabu" action:@selector(publishAction:) size:CGSizeMake(57, 27)];
     
     _textView.allowsEditingTextAttributes = YES;
@@ -225,6 +227,12 @@
     _babyNameLabel.text = babyInfo.nickname;
 }
 
+
+- (void)backUp:(id)sender
+{
+    self.parentCtrl.isNeedRefresh = NO;
+    [self popVIewController];
+}
 
 //提交方法
 - (void)publishAction:(id)sender
@@ -418,7 +426,8 @@
         [SVProgressHUD showSuccessWithStatus:@"上传成功."];
         //清楚数据
         [self cleanUp];
-        
+        //需要刷新页面
+        self.parentCtrl.isNeedRefresh = YES;
         //返回上个页面
         [self popVIewController];
         
@@ -468,7 +477,7 @@
         [SVProgressHUD showSuccessWithStatus:@"上传成功."];
         //清楚数据
         [self cleanUp];
-        
+        self.parentCtrl.isNeedRefresh =YES;
         //返回上个页面
         [self popVIewController];
         
@@ -1362,6 +1371,7 @@
     [alertView dismissWithClickedButtonIndex:alertView.cancelButtonIndex animated:YES];
     if(buttonIndex == 0)
     {
+        self.parentCtrl.isNeedRefresh = YES;
         [self popVIewController];
         return ;
     }
