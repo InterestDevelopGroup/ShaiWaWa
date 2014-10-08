@@ -26,8 +26,8 @@
 @property (weak, nonatomic) IBOutlet UITextView *dyContentTextView;
 @property (weak, nonatomic) IBOutlet UILabel *babyNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *babyBirthdayLabel;
-
 @property (weak, nonatomic) IBOutlet UIButton *zanButton;
 @property (weak, nonatomic) IBOutlet UIImageView *babyAvatarImageView;
+@property (weak, nonatomic) IBOutlet UIView *detailView;
 
 @end

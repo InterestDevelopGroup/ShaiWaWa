@@ -16,6 +16,7 @@
 }
 @property (nonatomic,strong) NSString * currentPhone;
 @property (weak, nonatomic) IBOutlet UILabel *phoneNumberLabel;
+@property (weak, nonatomic) IBOutlet UIButton *nextBtn;//下一步按钮
 @property (weak, nonatomic) IBOutlet UITextField *validateCoreTextField;
 @property (weak, nonatomic) IBOutlet UIButton *getCoreAgainButton;
 @property (assign, nonatomic) BOOL isBinding;

@@ -128,7 +128,14 @@
     
     specialCareBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [specialCareBtn setBackgroundColor:[UIColor whiteColor]];
-    [specialCareBtn setTitle:@"特别关心" forState:UIControlStateNormal];
+    int isFous = [_babyInfo.is_focus intValue];
+    NSString *foucus = nil;
+    if (isFous == 1) {
+        foucus = @"特别关心";
+    }else{
+        foucus = @"取消关心";
+    }
+    [specialCareBtn setTitle:foucus forState:UIControlStateNormal];
     [specialCareBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
     specialCareBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     specialCareBtn.frame = CGRectMake(self.navigationController.navigationBar.bounds.size.width-90, self.navigationController.navigationBar.bounds.size.height+51, 84, 41);

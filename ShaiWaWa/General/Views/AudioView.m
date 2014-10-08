@@ -8,6 +8,13 @@
 
 #import "AudioView.h"
 
+@interface AudioView()<AVAudioPlayerDelegate>
+{
+    UIButton * _button;
+}
+
+@end
+
 @implementation AudioView
 
 - (id)initWithFrame:(CGRect)frame withPath:(NSString *)path
@@ -69,7 +76,7 @@
     /*
 
     */
-    
+    //_localPlayer.delegate = self;
     if(![_path hasPrefix:@"http"])
     {
         
@@ -91,7 +98,6 @@
     }
     else
     {
-        ;
         if(_player != nil && [_player isProcessing])
         {
             [_player stop];
@@ -106,9 +112,14 @@
         [_player play];
         UIImageView * imageView = (UIImageView *)[self viewWithTag:1000];
         [imageView setImage:[UIImage imageNamed:@"停止"]];
-
     }
-    
-    
 }
+
+//#pragma mark - 音频播放完毕代理方法
+//- (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
+//{
+//    UIImageView * imageView = (UIImageView *)[self viewWithTag:1000];
+//    [imageView setImage:[UIImage imageNamed:@"square_bofang"]];
+//}
+
 @end
