@@ -40,13 +40,16 @@
 #import "AudioView.h"
 #import "LineChartController.h"
 #import "BabyRemark.h"
+#import "QNUploadHelper.h"
 
 @import MediaPlayer;
-@interface BabyHomePageViewController ()
+@interface BabyHomePageViewController () <UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate>
 {
     UITableView *_gridView;   ///身高体重显示的tableView
     NSArray *_growRecordArray; //存放宝宝成长记录的数组
     BabyRemark *_remark;
+    UIImage *_image;
+    NSString *_filePath;
 }
 @property (nonatomic, strong) NSMutableArray *babyPersonalDyArray;
 @property (nonatomic, strong) NSString *dyNum;
@@ -108,6 +111,10 @@
 {
     [self getBabyRemarkInfo];
     self.title = _babyInfo.nickname;
+    //判断宝宝是不是我的，如果不是，头像按钮禁止点击
+     UserInfo * user = [[UserDefault sharedInstance] userInfo];
+    if(![_babyInfo.uid isEqualToString:user.uid]){_babyAvatarImgView.enabled = NO;}
+    
     [self setLeftCusBarItem:@"square_back" action:nil];
     _babyPersonalDyArray = [[NSMutableArray alloc] init];
     if ([OSHelper iOS7])
@@ -218,17 +225,19 @@
     
     
     //设置宝宝头像
-    _babyAvatarImgView.userInteractionEnabled = YES;
-    UIGestureRecognizer *gr = [[UIGestureRecognizer alloc] initWithTarget:self action:@selector(changeAvator)];
-    [_babyAvatarImgView addGestureRecognizer:gr];
-    [_babyAvatarImgView sd_setImageWithURL:[NSURL URLWithString:_babyInfo.avatar] placeholderImage:[UIImage imageNamed:@"baby_baobei"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        
-        if(image)
-        {
-            _babyAvatarImgView.image = [image ellipseImageWithDefaultSetting];
-        }
-        
-    }];
+//    [_babyAvatarImgView sd_setImageWithURL:[NSURL URLWithString:_babyInfo.avatar] placeholderImage:[UIImage imageNamed:@"baby_baobei"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//        
+//        if(image)
+//        {
+//            _babyAvatarImgView.image = [image ellipseImageWithDefaultSetting];
+//        }
+//        
+//    }];
+    if (_babyAvatarImgView.enabled) {
+        [_babyAvatarImgView sd_setBackgroundImageWithURL:[NSURL URLWithString:_babyInfo.avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"baby_baobei.png"]];
+    }else{
+        [_babyAvatarImgView sd_setBackgroundImageWithURL:[NSURL URLWithString:_babyInfo.avatar] forState:UIControlStateDisabled placeholderImage:[UIImage imageNamed:@"baby_baobei.png"]];
+    }
     
     //获取爸爸或者妈妈头像
     if(_babyInfo.fid != nil && ![_babyInfo.fid isEqualToString:@"0"])
@@ -252,7 +261,7 @@
         //[_monButton setImage:nil forState:UIControlStateNormal];
     }
     
-    UserInfo * user = [[UserDefault sharedInstance] userInfo];
+//    UserInfo * user = [[UserDefault sharedInstance] userInfo];
     if([user.uid isEqualToString:_babyInfo.fid] || [user.uid isEqualToString:_babyInfo.mid])
     {
         _addButton.hidden = NO;
@@ -864,6 +873,11 @@
             _babyInfo.province = locateView.locate.state;
             [self updateBabyInfo];
         }
+    }else if(actionSheet.tag == 999)
+    {
+        NSLog(@"%d",buttonIndex);
+        //根据用户点击了那个按钮选择头像更换方式
+        [self selectPhotoWithButtonIndex:buttonIndex];
     }
     else
     {
@@ -892,6 +906,32 @@
     }
 }
 
+#pragma mark - 根据用户选择照片上传方式
+- (void)selectPhotoWithButtonIndex:(NSInteger)index
+{
+    // 判断是否支持相机
+    //先设定sourceType为相机，然后判断相机是否可用（ipod）没相机，不可用将sourceType设定为相片库
+    UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
+    
+    switch (index) {
+        case 0:
+            // 相机
+            sourceType = UIImagePickerControllerSourceTypeCamera;
+            break;
+        case 1:
+            // 相册
+            sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            break;
+        case 2:
+            // 取消
+            return;
+    }
+    UIImagePickerController *imagePickerController =[[UIImagePickerController alloc] init];
+    imagePickerController.delegate = self;
+    imagePickerController.allowsEditing = YES;
+    imagePickerController.sourceType = sourceType;
+    [self presentViewController:imagePickerController animated:YES completion:^{}];
+}
 
 #pragma mark - UITableView Delegate and DataSources
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -1301,9 +1341,70 @@
 }
 
 #pragma mark - 点击宝宝头像更改头像
-- (void)changeAvator
+- (IBAction)changeAvator:(UIButton *)sender
 {
-    
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"拍照" otherButtonTitles:@"相册", nil];
+    actionSheet.tag = 999;
+    [actionSheet showFromRect:CGRectMake(0, 0, 320, 100) inView:self.view animated:YES];
+}
+
+#pragma mark - 照片选择器代理方法
+//点击相册中的图片 货照相机照完后点击use  后触发的方法
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    [picker dismissViewControllerAnimated:YES completion:^{}];
+    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+    _image = image;
+    NSString * fileName = [[IO generateRndString] stringByAppendingPathExtension:@"png"];
+    NSString *filePath = [IO pathForResource:fileName inDirectory:Avatar_Folder];
+    _filePath = filePath;
+    //保存到本地
+    if(![IO writeFileToPath:filePath withData:UIImageJPEGRepresentation(image, 0.5)])
+    {
+        [SVProgressHUD showErrorWithStatus:@"保存失败."];
+        return ;
+    }
+    [self uploadPhotoWithImage:image filePath:filePath];
+}
+
+#pragma mark - 上传图片到服务器
+- (void)uploadPhotoWithImage:(UIImage *)image filePath:(NSString *)filePath
+{
+    //先把头像传到七牛
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+    //上传图片到服务器
+    [[QNUploadHelper sharedHelper] uploadFileData:UIImageJPEGRepresentation(image, 0.5f) withKey:[filePath lastPathComponent]];
+    //上传失败调用方法
+    [[QNUploadHelper sharedHelper] setUploadFailure:^(NSString * path){
+        
+        [SVProgressHUD dismiss];
+        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:nil message:@"图片上传失败" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"重试", nil];
+        [alertView show];
+        alertView = nil;
+    }];
+    //上传成功调用方法
+    [[QNUploadHelper sharedHelper] setUploadSuccess:^(NSString * path){
+        _babyInfo.avatar = [NSString stringWithFormat:@"%@%@",QN_URL,[path lastPathComponent]];;
+        [self updateBabyInfo];  //更新服务器宝宝信息
+        [_babyAvatarImgView setImage:image forState:UIControlStateNormal]; //设置头像
+        [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];//删除本地缓存
+    }];
+
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissViewControllerAnimated:YES completion:^{}];
+}
+
+#pragma mark - alertView提示用户是否重新上传图片
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 0)
+    {
+        return ;
+    }
+    [self uploadPhotoWithImage:_image filePath:_filePath];
 }
 
 @end
