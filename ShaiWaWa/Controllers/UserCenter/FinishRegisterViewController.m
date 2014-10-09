@@ -13,7 +13,7 @@
 #import "SVProgressHUD.h"
 #import "InputHelper.h"
 #import "ChooseModeViewController.h"
-
+#import "SSCheckBoxView.h"
 @interface FinishRegisterViewController ()/*<UITextFieldDelegate>*/
 
 @end
@@ -24,7 +24,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        
     }
     return self;
 }
@@ -44,13 +44,20 @@
 {
     self.title = @"完成注册";
     [self setLeftCusBarItem:@"square_back" action:nil];
-
+    
+    SSCheckBoxView * checkButton = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(26, 120, 110, 20) style:kSSCheckBoxViewStyleGlossy checked:YES];
+    [checkButton setText:@"显示密码"];
+    [checkButton setStateChangedTarget:self selector:@selector(disableSecure:)];
+    [self.view addSubview:checkButton];
+    [pwdField setSecureTextEntry:YES];
+    
     
 }
-- (IBAction)disableSecure:(UIButton *)sender
+
+
+- (IBAction)disableSecure:(SSCheckBoxView *)sender
 {
-    [pwdField setSecureTextEntry:sender.selected];
-    sender.selected = !sender.selected;
+    [pwdField setSecureTextEntry:sender.checked];
 }
     
 - (IBAction)finishRegisterAndLogin:(id)sender

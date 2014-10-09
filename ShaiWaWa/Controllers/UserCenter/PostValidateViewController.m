@@ -207,12 +207,27 @@
     }
     
     
-    FinishRegisterViewController * vc = [[FinishRegisterViewController alloc] initWithNibName:nil bundle:nil];
-    vc.currentPhone = _currentPhone;
-    vc.validateCode = code;
-    [self push:vc];
-    vc = nil;
-   
+    
+    //验证是否和服务端的一致,才跳转到下个页面
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+    [[HttpService sharedInstance] verifyValidateCode:@{@"phone":_currentPhone,@"validate_code":code} completionBlock:^(id object) {
+        [SVProgressHUD dismiss];
+        FinishRegisterViewController * vc = [[FinishRegisterViewController alloc] initWithNibName:nil bundle:nil];
+        vc.currentPhone = _currentPhone;
+        vc.validateCode = code;
+        [self push:vc];
+        vc = nil;
+
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        NSString * msg = responseString;
+        if(error)
+        {
+            msg = @"校验失败.";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+    }];
+
 }
 - (IBAction)getCoreAgainEvent:(id)sender
 {
@@ -250,13 +265,13 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    BOOL shouNext = range.location >= 6;
+    BOOL shouNext = range.location >= 4;
     return !shouNext;
 }
 
 - (void)textChange:(UITextField *)textField
 {
-    if (textField.text.length == 6) {
+    if (textField.text.length == 4) {
         _nextBtn.enabled = YES;
     }else{
         _nextBtn.enabled = NO;

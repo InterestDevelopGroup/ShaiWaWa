@@ -95,9 +95,12 @@ typedef enum{
     users = [[UserDefault sharedInstance] userInfo];
     //判断是否有宝宝和动态
     [self isNoBabyAndFriend];
+    
+    /*
     if (_isNeedRefresh) {
         [self.dynamicPageTableView headerBeginRefreshing];
     }
+    */
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -168,7 +171,7 @@ typedef enum{
     [_dynamicPageTableView setFooterRefreshingText:NSLocalizedString(@"DataLoading", nil)];
     if([users.baby_count intValue] != 0 || [users.record_count intValue] != 0)
     {
-        //[_dynamicPageTableView headerBeginRefreshing];
+        [_dynamicPageTableView headerBeginRefreshing];
     }
 
 }

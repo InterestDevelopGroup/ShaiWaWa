@@ -275,11 +275,29 @@
         babyInfo = friendsBabyList[indexPath.row];
     }
     
+    /*
     NSInteger timeInterval = [[NSDate dateFromString:babyInfo.birthday withFormat:@"yyyy-MM-dd"] timeIntervalSince1970];
     babyInfo.birthday = [NSString stringWithFormat:@"%d",timeInterval];
-    
     babyHomePageVC.babyInfo = babyInfo;
     [self.navigationController pushViewController:babyHomePageVC animated:YES];
+    */
+    
+    [SVProgressHUD showWithStatus:@"加载中..."];
+    [[HttpService sharedInstance] getBabyInfo:@{@"baby_id":babyInfo.baby_id} completionBlock:^(id object) {
+        [SVProgressHUD dismiss];
+        BabyHomePageViewController * vc = [[BabyHomePageViewController alloc] initWithNibName:nil bundle:nil];
+        vc.babyInfo = object;
+        [self push:vc];
+        vc = nil;
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        NSString * msg = responseString;
+        if(error)
+        {
+            msg = @"加载失败.";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+    }];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

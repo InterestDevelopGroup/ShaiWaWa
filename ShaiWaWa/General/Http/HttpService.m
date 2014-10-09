@@ -258,6 +258,7 @@
         [dic setObject:auth[key] forKey:key];
     }
     DDLogVerbose(@"%@",dic);
+    DDLogVerbose(@"%@",url);
     [super postJSON:url withParams:dic completionBlock:success failureBlock:failure];
 }
 
