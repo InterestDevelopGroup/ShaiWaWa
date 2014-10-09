@@ -45,19 +45,21 @@
     self.title = @"完成注册";
     [self setLeftCusBarItem:@"square_back" action:nil];
     
-    SSCheckBoxView * checkButton = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(26, 120, 110, 20) style:kSSCheckBoxViewStyleGlossy checked:YES];
+    SSCheckBoxView * checkButton = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(26, 120, 110, 20) style:kSSCheckBoxViewStyleGlossy checked:NO];
     [checkButton setText:@"显示密码"];
     [checkButton setStateChangedTarget:self selector:@selector(disableSecure:)];
     [self.view addSubview:checkButton];
     [pwdField setSecureTextEntry:YES];
-    
-    
 }
 
 
-- (IBAction)disableSecure:(SSCheckBoxView *)sender
+- (void)disableSecure:(SSCheckBoxView *)sender
 {
-    [pwdField setSecureTextEntry:sender.checked];
+   
+    [pwdField setSecureTextEntry:!sender.checked];
+    if (!pwdField.secureTextEntry) {
+        pwdField.text = pwdField.text;
+    }
 }
     
 - (IBAction)finishRegisterAndLogin:(id)sender

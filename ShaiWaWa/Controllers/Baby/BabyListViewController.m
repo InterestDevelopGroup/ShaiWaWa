@@ -22,6 +22,7 @@
 #import "UIImageView+WebCache.h"
 #import "AppMacros.h"
 #import "BabyResultController.h"
+#import "NSStringUtil.h"
 @interface BabyListViewController () <UISearchBarDelegate>
 {
     BabyResultController *_searchResult;
@@ -229,6 +230,7 @@
         babyListCell.babySexImage.image = [UIImage imageNamed:@"main_girl.png"];
     }
 
+    babyListCell.age.text = [NSStringUtil calculateAge:baby.birthday];
     babyListCell.babyOldLabel.text = [NSString stringWithFormat:@"%@条动态",baby.record_count];
     
     if([baby.is_focus isEqualToString:@"0"])
@@ -263,7 +265,7 @@
 {
     [self.view endEditing:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    BabyHomePageViewController *babyHomePageVC = [[BabyHomePageViewController alloc] initWithNibName:nil bundle:nil];
+//    BabyHomePageViewController *babyHomePageVC = [[BabyHomePageViewController alloc] initWithNibName:nil bundle:nil];
 
     BabyInfo * babyInfo ;
     if(indexPath.section == 0)

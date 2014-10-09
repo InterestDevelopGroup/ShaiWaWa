@@ -82,7 +82,7 @@
 
 - (IBAction)showRegisterVC:(id)sender
 {
-    [ControlCenter pushToRegisterVC];//zhengchang de push
+    [ControlCenter pushToRegisterVC];//正常的push
 //    [ControlCenter pushToFinishRegisterVC];
 //    [ControlCenter pushToPostValidateVC];
 }

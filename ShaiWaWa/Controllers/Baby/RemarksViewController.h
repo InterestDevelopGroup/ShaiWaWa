@@ -8,11 +8,13 @@
 
 #import "CommonViewController.h"
 #import "BabyInfo.h"
+@class BabyRemark;
 @interface RemarksViewController : CommonViewController<UITextFieldDelegate,UITextViewDelegate>
 @property (strong, nonatomic) IBOutlet UITextField *remarksField;
 @property (strong, nonatomic) IBOutlet UITextView *remarksTextField;
 @property (strong, nonatomic) NSString *babyID;
 @property (strong, nonatomic) BabyInfo * babyInfo;
+@property (strong, nonatomic) BabyRemark * babyRemark;
 - (IBAction)btn_OK:(id)sender;
 
 @end

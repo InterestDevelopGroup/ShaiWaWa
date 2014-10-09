@@ -100,10 +100,12 @@
 - (void)countBackwards
 {
     countBacki--;
-    [_getCoreAgainButton setBackgroundImage:[UIImage imageNamed:@"login_box-5.png"] forState:UIControlStateNormal];
-    [_getCoreAgainButton setTitle:[NSString stringWithFormat:@"重发(%d)",countBacki] forState:UIControlStateNormal];
+    [_getCoreAgainButton setEnabled:NO];
+    [_getCoreAgainButton setBackgroundImage:[UIImage imageNamed:@"login_box-5.png"] forState:UIControlStateDisabled];
+    [_getCoreAgainButton setTitle:[NSString stringWithFormat:@"重发(%d)",countBacki] forState:UIControlStateDisabled];
     if(countBacki <= 0)
     {
+        [_getCoreAgainButton setEnabled:YES];
         [_getCoreAgainButton setTitle:[NSString stringWithFormat:@"重发"] forState:UIControlStateNormal];
         [_getCoreAgainButton setBackgroundImage:[UIImage imageNamed:@"login_box3.png"] forState:UIControlStateNormal];
         _getCoreAgainButton.enabled = YES;

@@ -39,12 +39,14 @@
 #import "ShareManager.h"
 #import "AudioView.h"
 #import "LineChartController.h"
+#import "BabyRemark.h"
 
 @import MediaPlayer;
 @interface BabyHomePageViewController ()
 {
     UITableView *_gridView;   ///身高体重显示的tableView
     NSArray *_growRecordArray; //存放宝宝成长记录的数组
+    BabyRemark *_remark;
 }
 @property (nonatomic, strong) NSMutableArray *babyPersonalDyArray;
 @property (nonatomic, strong) NSString *dyNum;
@@ -104,6 +106,7 @@
 #pragma mark - Private Methods
 - (void)initUI
 {
+    [self getBabyRemarkInfo];
     self.title = _babyInfo.nickname;
     [self setLeftCusBarItem:@"square_back" action:nil];
     _babyPersonalDyArray = [[NSMutableArray alloc] init];
@@ -131,10 +134,11 @@
     int isFous = [_babyInfo.is_focus intValue];
     NSString *foucus = nil;
     if (isFous == 1) {
-        foucus = @"特别关心";
+        foucus = @"特别关注";
     }else{
-        foucus = @"取消关心";
+        foucus = @"取消关注";
     }
+//    [specialCareBtn setImage:[UIImage imageNamed:@"爱心.png"] forState:UIControlStateNormal];
     [specialCareBtn setTitle:foucus forState:UIControlStateNormal];
     [specialCareBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
     specialCareBtn.titleLabel.font = [UIFont systemFontOfSize:15];
@@ -214,6 +218,9 @@
     
     
     //设置宝宝头像
+    _babyAvatarImgView.userInteractionEnabled = YES;
+    UIGestureRecognizer *gr = [[UIGestureRecognizer alloc] initWithTarget:self action:@selector(changeAvator)];
+    [_babyAvatarImgView addGestureRecognizer:gr];
     [_babyAvatarImgView sd_setImageWithURL:[NSURL URLWithString:_babyInfo.avatar] placeholderImage:[UIImage imageNamed:@"baby_baobei"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
         if(image)
@@ -255,7 +262,19 @@
     }
 }
 
-
+- (void)getBabyRemarkInfo
+{
+    UserInfo *users = [[UserDefault sharedInstance] userInfo];
+    
+    [[HttpService sharedInstance] getBabyRemark:@{@"uid":users.uid,@"baby_id":_babyInfo.baby_id} completionBlock:^(id object) {
+        _remark = (BabyRemark *)object;
+        if (_remark != nil || _remark.alias != nil) {
+            self.title = _remark.alias;
+        }
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
+}
 
 - (void)getUserInfo:(NSString *)type withUid:(NSString *)uid
 {
@@ -627,6 +646,7 @@
     [self showList:nil];
     RemarksViewController *remarksVC = [[RemarksViewController alloc] initWithNibName:nil bundle:nil];
     remarksVC.babyInfo = _babyInfo;
+    remarksVC.babyRemark = _remark;
     [self.navigationController pushViewController:remarksVC animated:YES];
 }
 
@@ -634,16 +654,24 @@
 - (void)specialCare
 {
     UserInfo *users = [[UserDefault sharedInstance] userInfo];
-    [[HttpService sharedInstance] followBaby:@{@"uid":users.uid,@"baby_id":_babyInfo.baby_id} completionBlock:^(id object) {
-        [self showList:nil];
-        [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
-    } failureBlock:^(NSError *error, NSString *responseString) {
-        NSString * msg = responseString;
-        if (error) {
-            msg = @"加载失败";
-        }
-        [SVProgressHUD showErrorWithStatus:msg];
-    }];
+    //判断当前宝宝的是否关注了
+    if ([_babyInfo.is_focus intValue] == 1) {//1为表示已关注
+#warning 此处应该调用取消关注的接口方法
+    }else                                     //2为表示未关注
+    {
+        [[HttpService sharedInstance] followBaby:@{@"uid":users.uid,@"baby_id":_babyInfo.baby_id} completionBlock:^(id object) {
+            [self showList:nil];
+            [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
+        } failureBlock:^(NSError *error, NSString *responseString) {
+            NSString * msg = responseString;
+            if (error) {
+                msg = @"加载失败";
+            }
+            [SVProgressHUD showErrorWithStatus:msg];
+        }];
+    }
+    
+    
     
     
 }
@@ -1270,6 +1298,12 @@
     {
         NSLog(@"Message failed");
     }
+}
+
+#pragma mark - 点击宝宝头像更改头像
+- (void)changeAvator
+{
+    
 }
 
 @end

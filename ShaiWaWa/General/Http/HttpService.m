@@ -1198,7 +1198,11 @@
             return ;
         }
         if (success) {
-            success(obj);
+            BabyRemark *remark = nil;
+            if ([obj objectForKey:@"result"] != nil && [obj objectForKey:@"result"] != [NSNull null]) {
+                remark = [self mapModel:[obj objectForKey:@"result"][0] withClass:[BabyRemark class]];
+            }
+            success(remark);
         }
     } failureBlock:failure];
 }
@@ -1409,6 +1413,31 @@
         {
             success([NSNumber numberWithInt:[obj[@"err_code"] intValue]]);
         }
+        
+    } failureBlock:failure];
+}
+
+/**
+ @desc 判断是否特别关注
+ */
+//TODO:判断是否特别关注
+- (void)isFocus:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self postJSON:[self mergeURL:Is_Friend] withParams:params completionBlock:^(id obj) {
+        
+        if([obj[@"err_code"] intValue] == No_Error_Code)
+        {
+            if(success)
+            {
+                success([NSNumber numberWithInt:[obj[@"err_code"] intValue]]);
+            }
+        }else
+        {
+            failure(nil,[self getErrorMsgByCode:[obj[@"err_code"] intValue]]);
+            return ;
+        }
+        
+        
         
     } failureBlock:failure];
 }
