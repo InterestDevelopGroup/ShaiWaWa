@@ -10,7 +10,11 @@
 #import "UIViewController+BarItemAdapt.h"
 #import "UIView+CutLayer.h"
 #import "SVProgressHUD.h"
+#import "CSqlite.h"
 @interface LocationsViewController ()
+{
+    CSqlite *m_sqlite;
+}
 @property (nonatomic,strong) CLLocationManager * locationManager;
 @property (nonatomic,strong) NSMutableArray * placemarks;
 @end
@@ -23,6 +27,8 @@
     if (self) {
         // Custom initialization
         _placemarks = [@[] mutableCopy];
+        m_sqlite = [[CSqlite alloc]init];
+        [m_sqlite openSqlite];
     }
     return self;
 }
@@ -30,12 +36,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
     _locationManager = [[CLLocationManager alloc] init];
     _locationManager.delegate = self;
-    _locationManager.delegate = self;
+    _locationManager.distanceFilter=0.5;
     _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     [_locationManager startUpdatingLocation];
-
+     
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -102,9 +110,9 @@
     }
     
     NSMutableArray * tmp = [@[] mutableCopy];
-    for(CLPlacemark * placemark in _placemarks)
+    for(NSDictionary * placemark in _placemarks)
     {
-        NSRange range = [placemark.name rangeOfString:_addrField.text];
+        NSRange range = [placemark[@"address"] rangeOfString:_addrField.text];
         if(range.location != NSNotFound)
         {
             [tmp addObject:placemark];
@@ -163,6 +171,30 @@
 }
 
 
+-(CLLocationCoordinate2D)zzTransGPS:(CLLocationCoordinate2D)yGps
+{
+    int TenLat=0;
+    int TenLog=0;
+    TenLat = (int)(yGps.latitude*10);
+    TenLog = (int)(yGps.longitude*10);
+    NSString *sql = [[NSString alloc]initWithFormat:@"select offLat,offLog from gpsT where lat=%d and log = %d",TenLat,TenLog];
+    //NSLog(sql);
+    sqlite3_stmt* stmtL = [m_sqlite NSRunSql:sql];
+    int offLat=0;
+    int offLog=0;
+    while (sqlite3_step(stmtL)==SQLITE_ROW)
+    {
+        offLat = sqlite3_column_int(stmtL, 0);
+        offLog = sqlite3_column_int(stmtL, 1);
+        
+    }
+    
+    yGps.latitude = yGps.latitude+offLat*0.0001;
+    yGps.longitude = yGps.longitude + offLog*0.0001;
+    return yGps;
+    
+}
+
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -174,9 +206,11 @@
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
     
-
-    NSString * locationStr = [NSString stringWithFormat:@"%f,%f",newLocation.coordinate.latitude,newLocation.coordinate.longitude];
+    CLLocationCoordinate2D mylocation = [self zzTransGPS:newLocation.coordinate];
+    NSString * locationStr = [NSString stringWithFormat:@"%f,%f",mylocation.latitude,mylocation.longitude];
     NSString * urlStr = [NSString stringWithFormat:@"http://api.map.baidu.com/geocoder/v2/?ak=B56b08182a6df5a96b58a04eda049deb&location=%@&output=json&pois=1",locationStr];
+    
+    NSLog(@"%@",locationStr);
     
     [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlStr]] queue:[NSOperationQueue currentQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         
@@ -269,6 +303,7 @@
     [alertView show];
     alertView = nil;
 }
+
 
 
 #pragma mark - UIAlertViewDelegate Methods

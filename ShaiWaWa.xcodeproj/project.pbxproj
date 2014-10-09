@@ -19,6 +19,8 @@
 		24FAD0BD1986935F00FFE11E /* UserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 24FAD0BB1986935F00FFE11E /* UserDefault.m */; };
 		C3121CFE19B57182004353EF /* SquareCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3121CFD19B57182004353EF /* SquareCollectionCell.m */; };
 		C3121D0019B57197004353EF /* SquareCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3121CFF19B57197004353EF /* SquareCollectionCell.xib */; };
+		C320609419E6B75600C80FF7 /* CSqlite.m in Sources */ = {isa = PBXBuildFile; fileRef = C320608E19E6B75600C80FF7 /* CSqlite.m */; };
+		C320609519E6B75600C80FF7 /* gps.db in Resources */ = {isa = PBXBuildFile; fileRef = C320608F19E6B75600C80FF7 /* gps.db */; };
 		C32B41831965B5B8003979EE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C32B41821965B5B8003979EE /* Foundation.framework */; };
 		C32B41851965B5B8003979EE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C32B41841965B5B8003979EE /* CoreGraphics.framework */; };
 		C32B41871965B5B8003979EE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C32B41861965B5B8003979EE /* UIKit.framework */; };
@@ -81,6 +83,7 @@
 		C39AAE1719B3093100C8A7BE /* PersistentStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C39AAE1619B3093100C8A7BE /* PersistentStore.m */; };
 		C39AAE1B19B30A3200C8A7BE /* Topic.m in Sources */ = {isa = PBXBuildFile; fileRef = C39AAE1A19B30A3200C8A7BE /* Topic.m */; };
 		C39AAE1E19B3124200C8A7BE /* CommonAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = C39AAE1D19B3124200C8A7BE /* CommonAlert.m */; };
+		C3A9828719E6B35E007448C0 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A9828619E6B35E007448C0 /* libsqlite3.0.dylib */; };
 		C3DA093A19D9C75000A6C80D /* 爱心@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C3DA093919D9C75000A6C80D /* 爱心@2x.png */; };
 		C3DEA19A19DCD161003C86A8 /* BabyHomeDynamicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3DEA19819DCD161003C86A8 /* BabyHomeDynamicCell.m */; };
 		C3DEA19B19DCD161003C86A8 /* BabyHomeDynamicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3DEA19919DCD161003C86A8 /* BabyHomeDynamicCell.xib */; };
@@ -90,7 +93,6 @@
 		F41389C5197F48D000ABC8AE /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F41389C4197F48D000ABC8AE /* UserInfo.m */; };
 		F414E7EA19DD1FCC001AC4C3 /* LineChartController.m in Sources */ = {isa = PBXBuildFile; fileRef = F414E7E919DD1FCC001AC4C3 /* LineChartController.m */; };
 		F414E7EC19DD254D001AC4C3 /* LineChartController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F414E7EB19DD254D001AC4C3 /* LineChartController.xib */; };
-		F41F654A1981F01400089E42 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F41F65491981F01400089E42 /* SystemConfiguration.framework */; };
 		F41F654C1981F01D00089E42 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F41F654B1981F01D00089E42 /* QuartzCore.framework */; };
 		F41F654E1981F02400089E42 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F41F654D1981F02400089E42 /* MessageUI.framework */; };
 		F41F65501981F03500089E42 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F41F654F1981F03500089E42 /* libicucore.dylib */; };
@@ -138,7 +140,6 @@
 		F41F69001982081F00089E42 /* ShareSDKShareActionSheet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F41F68D51982081E00089E42 /* ShareSDKShareActionSheet.framework */; };
 		F41F690219820AB600089E42 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F41F690119820AB600089E42 /* CoreTelephony.framework */; };
 		F41F690419820ABF00089E42 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F41F690319820ABF00089E42 /* libz.1.2.5.dylib */; };
-		F41F690619820ACC00089E42 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F41F690519820ACC00089E42 /* Security.framework */; };
 		F41F690819820B3100089E42 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F41F690719820B3100089E42 /* libstdc++.dylib */; };
 		F41F690A19820B4400089E42 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F41F690919820B4400089E42 /* libsqlite3.dylib */; };
 		F41F690C19820B5000089E42 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F41F690B19820B5000089E42 /* CoreMotion.framework */; };
@@ -514,6 +515,11 @@
 		C3121CFC19B57182004353EF /* SquareCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SquareCollectionCell.h; sourceTree = "<group>"; };
 		C3121CFD19B57182004353EF /* SquareCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SquareCollectionCell.m; sourceTree = "<group>"; };
 		C3121CFF19B57197004353EF /* SquareCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SquareCollectionCell.xib; sourceTree = "<group>"; };
+		C320608D19E6B75600C80FF7 /* CSqlite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSqlite.h; sourceTree = "<group>"; };
+		C320608E19E6B75600C80FF7 /* CSqlite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSqlite.m; sourceTree = "<group>"; };
+		C320608F19E6B75600C80FF7 /* gps.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = gps.db; sourceTree = "<group>"; };
+		C320609319E6B75600C80FF7 /* sqlite3ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sqlite3ext.h; sourceTree = "<group>"; };
+		C320609819E6B81700C80FF7 /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sqlite3.h; sourceTree = "<group>"; };
 		C32B417F1965B5B8003979EE /* ShaiWaWa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShaiWaWa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C32B41821965B5B8003979EE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C32B41841965B5B8003979EE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -624,6 +630,8 @@
 		C39AAE1A19B30A3200C8A7BE /* Topic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Topic.m; sourceTree = "<group>"; };
 		C39AAE1C19B3124200C8A7BE /* CommonAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonAlert.h; sourceTree = "<group>"; };
 		C39AAE1D19B3124200C8A7BE /* CommonAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonAlert.m; sourceTree = "<group>"; };
+		C3A9827819E68C90007448C0 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		C3A9828619E6B35E007448C0 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		C3DA093919D9C75000A6C80D /* 爱心@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "爱心@2x.png"; sourceTree = "<group>"; };
 		C3DEA19719DCD161003C86A8 /* BabyHomeDynamicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BabyHomeDynamicCell.h; sourceTree = "<group>"; };
 		C3DEA19819DCD161003C86A8 /* BabyHomeDynamicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BabyHomeDynamicCell.m; sourceTree = "<group>"; };
@@ -1167,6 +1175,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3A9828719E6B35E007448C0 /* libsqlite3.0.dylib in Frameworks */,
 				F41F6929198228FA00089E42 /* AudioToolbox.framework in Frameworks */,
 				C37E536D19A847AA00C55861 /* CoreMedia.framework in Frameworks */,
 				F45375C8199604350009274E /* AVFoundation.framework in Frameworks */,
@@ -1177,7 +1186,6 @@
 				F41F65501981F03500089E42 /* libicucore.dylib in Frameworks */,
 				F41F6927198228F000089E42 /* CFNetwork.framework in Frameworks */,
 				F41F690E19820B5A00089E42 /* CoreLocation.framework in Frameworks */,
-				F41F690619820ACC00089E42 /* Security.framework in Frameworks */,
 				F41F6925198228CD00089E42 /* libz.1.1.3.dylib in Frameworks */,
 				F41F6923198228C000089E42 /* MobileCoreServices.framework in Frameworks */,
 				F41F6921198228A600089E42 /* StoreKit.framework in Frameworks */,
@@ -1194,7 +1202,6 @@
 				F41F68E51982081E00089E42 /* QQConnection.framework in Frameworks */,
 				F41F68E81982081E00089E42 /* TencentWeiboConnection.framework in Frameworks */,
 				F41F654C1981F01D00089E42 /* QuartzCore.framework in Frameworks */,
-				F41F654A1981F01400089E42 /* SystemConfiguration.framework in Frameworks */,
 				F41F68EA1982081E00089E42 /* AGCommon.framework in Frameworks */,
 				F41F68EE1982081E00089E42 /* TencentOpenAPI.framework in Frameworks */,
 				F41F68F81982081F00089E42 /* ShareSDKiPadDefaultShareViewUI.framework in Frameworks */,
@@ -1270,6 +1277,18 @@
 			path = UserDefault;
 			sourceTree = "<group>";
 		};
+		C320608C19E6B75600C80FF7 /* Sqlite */ = {
+			isa = PBXGroup;
+			children = (
+				C320609819E6B81700C80FF7 /* sqlite3.h */,
+				C320608D19E6B75600C80FF7 /* CSqlite.h */,
+				C320608E19E6B75600C80FF7 /* CSqlite.m */,
+				C320608F19E6B75600C80FF7 /* gps.db */,
+				C320609319E6B75600C80FF7 /* sqlite3ext.h */,
+			);
+			path = Sqlite;
+			sourceTree = "<group>";
+		};
 		C32B41761965B5B8003979EE = {
 			isa = PBXGroup;
 			children = (
@@ -1293,6 +1312,8 @@
 		C32B41811965B5B8003979EE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C3A9828619E6B35E007448C0 /* libsqlite3.0.dylib */,
+				C3A9827819E68C90007448C0 /* OpenGLES.framework */,
 				C37E536C19A847AA00C55861 /* CoreMedia.framework */,
 				F4C4C607199F4C4B00B348A5 /* AddressBookUI.framework */,
 				F4AE5081199AFC12007683E9 /* libz.dylib */,
@@ -1447,6 +1468,7 @@
 		F41F68861982081E00089E42 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				C320608C19E6B75600C80FF7 /* Sqlite */,
 				F4A7781319DC09D0000F5401 /* PinYin4Objc */,
 				C362BFF519D6A23E00753082 /* AudioPlayer */,
 				C34E55E519D294CF0026E23D /* MLAudioRecorder */,
@@ -2658,6 +2680,7 @@
 				F432BDEC19762AC80086BBE9 /* login_suibian@2x.png in Resources */,
 				C398E00319A50016000F08DB /* PublishRecordViewController.xib in Resources */,
 				F432BE0719762AC80086BBE9 /* main_tianjiabaobei@2x.png in Resources */,
+				C320609519E6B75600C80FF7 /* gps.db in Resources */,
 				F432BE4619762AC80086BBE9 /* square_shaiwawa@2x.png in Resources */,
 				F421621919D65B4A00F01C18 /* 男孩体重.plist in Resources */,
 				F432BE4C19762AC80086BBE9 /* square_zan-@2x.png in Resources */,
@@ -2908,6 +2931,7 @@
 				C350622F19D1315F0096006C /* HisFriendsViewController.m in Sources */,
 				C35DFB2219B4B7B80023B4CF /* QRCodeGenerator.m in Sources */,
 				C362C00219D6A23E00753082 /* AudioPlayer.m in Sources */,
+				C320609419E6B75600C80FF7 /* CSqlite.m in Sources */,
 				C360009F19AA427C00940421 /* GTMBase64.m in Sources */,
 				F43388141974C28600464D43 /* FinishRegisterViewController.m in Sources */,
 				C35DFA6B19B412160023B4CF /* ImageDisplayView.m in Sources */,
@@ -3104,6 +3128,8 @@
 					"$(PROJECT_DIR)/ShaiWaWa/General/Helper/AudioFormat/VoiceConvert/lib",
 					"$(PROJECT_DIR)/ShaiWaWa/General/Vendors/MLAudioRecorder/amr_en_de/lib",
 					"$(PROJECT_DIR)/ShaiWaWa/General/Vendors/MLAudioRecorder/mp3_en_de",
+					"$(PROJECT_DIR)/ShaiWaWa/General/Vendors/BaiduMap_IOSSDK/Release-iphoneos",
+					"$(PROJECT_DIR)/ShaiWaWa/General/Vendors/BaiduMap_IOSSDK/Release-iphonesimulator",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3142,6 +3168,8 @@
 					"$(PROJECT_DIR)/ShaiWaWa/General/Helper/AudioFormat/VoiceConvert/lib",
 					"$(PROJECT_DIR)/ShaiWaWa/General/Vendors/MLAudioRecorder/amr_en_de/lib",
 					"$(PROJECT_DIR)/ShaiWaWa/General/Vendors/MLAudioRecorder/mp3_en_de",
+					"$(PROJECT_DIR)/ShaiWaWa/General/Vendors/BaiduMap_IOSSDK/Release-iphoneos",
+					"$(PROJECT_DIR)/ShaiWaWa/General/Vendors/BaiduMap_IOSSDK/Release-iphonesimulator",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

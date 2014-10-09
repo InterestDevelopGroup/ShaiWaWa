@@ -19,11 +19,13 @@
     #import "DDLog.h"
     #import "DDTTYLogger.h"
     #import "DDASLLogger.h"
-#endif
 
 #ifdef DEBUG
 static int ddLogLevel = LOG_LEVEL_VERBOSE;
 #else
 static int ddLogLevel = LOG_LEVEL_OFF;
 #endif
+#endif
+
+
 
