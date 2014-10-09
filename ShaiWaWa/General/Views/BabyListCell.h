@@ -14,4 +14,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *babyNameLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *babySexImage;
 @property (strong, nonatomic) IBOutlet UILabel *babyOldLabel;
+@property (weak, nonatomic) IBOutlet UILabel *age;
+
+
 @end

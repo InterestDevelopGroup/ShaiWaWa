@@ -54,6 +54,7 @@
 #define Get_Addressbook_Friend                      @"get_contacts_friends"
 #define Get_User_Info                               @"get_user_info"
 #define Follow_Baby                                 @"follow"
+#define Is_Focus                                    @"is_focus"
 #define Get_User_Setting                            @"get_user_setting"
 #define Add_Feedback                                @"add_feedback"
 #define Get_Baby_Remark                             @"get_baby_remark"
@@ -453,7 +454,11 @@ typedef enum {
  */
 //TODO:判断是否为好友
 - (void)isFriend:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
-
+/**
+ @desc 判断是否特别关注
+ */
+//TODO:判断是否特别关注
+- (void)isFocus:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
 
 /**
  @desc 解除绑定
