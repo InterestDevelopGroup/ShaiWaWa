@@ -8,7 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BabyHomePageViewController">
             <connections>
                 <outlet property="addButton" destination="wdJ-dD-0D7" id="PAG-Yb-P5c"/>
-                <outlet property="babyAvatarImgView" destination="DuL-Dh-kd1" id="Y1F-Zq-FiZ"/>
+                <outlet property="babyAvatarImgView" destination="srL-aW-Rpx" id="l1i-pE-lst"/>
                 <outlet property="babyBackgroundImgView" destination="CFV-LV-Xsp" id="Wol-XY-9fJ"/>
                 <outlet property="dadButton" destination="w3O-Ne-G3w" id="ll6-TW-9ab"/>
                 <outlet property="datePicker" destination="rh0-5P-Lyb" id="ImD-G8-L0M"/>
@@ -122,8 +122,21 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="164"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="srL-aW-Rpx" userLabel="Button - 宝宝">
+                    <rect key="frame" x="120" y="78" width="69" height="68"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <inset key="titleEdgeInsets" minX="-46" minY="50" maxX="0.0" maxY="0.0"/>
+                    <inset key="imageEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" backgroundImage="baby_baobei.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="changeAvator:" destination="-1" eventType="touchUpInside" id="GQj-n4-1pf"/>
+                    </connections>
+                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="w3O-Ne-G3w">
-                    <rect key="frame" x="70" y="18" width="65" height="60"/>
+                    <rect key="frame" x="47" y="18" width="65" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <inset key="titleEdgeInsets" minX="-46" minY="50" maxX="0.0" maxY="0.0"/>
@@ -136,7 +149,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wgj-WL-Y1h">
-                    <rect key="frame" x="185" y="18" width="65" height="60"/>
+                    <rect key="frame" x="197" y="18" width="65" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <inset key="titleEdgeInsets" minX="-46" minY="50" maxX="0.0" maxY="0.0"/>
@@ -148,10 +161,6 @@
                         <action selector="isYaoQing:" destination="-1" eventType="touchUpInside" id="s0o-02-p5A"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="baby_baobei.png" id="DuL-Dh-kd1">
-                    <rect key="frame" x="120" y="63" width="69" height="69"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
                 <view contentMode="scaleToFill" id="JAJ-a9-ZOT">
                     <rect key="frame" x="0.0" y="164" width="320" height="35"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

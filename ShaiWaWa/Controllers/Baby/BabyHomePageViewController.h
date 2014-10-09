@@ -44,7 +44,7 @@
 @property (strong, nonatomic) IBOutlet UIView *inStatusView;
 @property (strong, nonatomic) IBOutlet UIView *heightAndWeightTableView;
 @property (weak, nonatomic) IBOutlet UIImageView *babyBackgroundImgView;
-@property (weak, nonatomic) IBOutlet UIImageView *babyAvatarImgView;
+@property (weak, nonatomic) IBOutlet UIButton *babyAvatarImgView;
 
 @property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (strong, nonatomic) IBOutlet UIToolbar *toolBar;
@@ -60,5 +60,5 @@
 - (IBAction)hideCurView:(id)sender;
 - (IBAction)dismissKeyboard:(id)sender;
 - (IBAction)hideInvitationView:(id)sender;
-
+- (IBAction)changeAvator:(UIButton *)sender;
 @end
