@@ -24,7 +24,7 @@
         
         
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.text = @"第三方账号登陆";
+        _titleLabel.text = @"第三方账号登录";
         _titleLabel.font = [UIFont systemFontOfSize:16];
         _titleLabel.textColor = [UIColor lightGrayColor];
         _titleLabel.frame = CGRectMake(62, 15, 119, 21);
@@ -310,14 +310,13 @@
         [self registerWithUserInfo:userInfo openid:openid type:type];
     }];
 
-
-
 }
 
 
 
 #pragma mark -- 随机生成一个八位数
-- (NSString *)randomNum{
+- (NSString *)randomNum
+{
     //自动生成8位随机密码
     NSTimeInterval random=[NSDate timeIntervalSinceReferenceDate];
     NSString *randomString = [NSString stringWithFormat:@"%.8f",random];
