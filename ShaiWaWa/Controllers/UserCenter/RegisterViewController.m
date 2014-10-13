@@ -51,11 +51,12 @@
     self.title = NSLocalizedString(@"RegisterVCTitle", nil);
     [self.navigationItem setHidesBackButton:YES];
     myDelegate = [[UIApplication sharedApplication] delegate];
+    /*
     NSMutableAttributedString * attrString = [[NSMutableAttributedString alloc] initWithString:_hoverLoginLabel.text];
     [attrString addAttributes:@{NSUnderlineStyleAttributeName:[NSNumber numberWithInt:NSUnderlineStyleSingle]} range:NSMakeRange(0, attrString.length)];
     _hoverLoginLabel.attributedText = attrString;
     _hoverLoginLabel.textColor = [UIColor lightGrayColor];
-    
+    */
     TheThirdPartyLoginView *thirdLoginView = [[TheThirdPartyLoginView alloc] initWithFrame:CGRectMake(0, 0, 242, 116)];
     
     

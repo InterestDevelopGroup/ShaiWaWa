@@ -18,7 +18,7 @@
 #import "DynamicByUserIDViewController.h"
 #import "MybabyListViewController.h"
 #import "HisFriendsViewController.h"
-@interface FriendHomeViewController ()
+@interface FriendHomeViewController ()<UIAlertViewDelegate>
 {
     NSMutableArray *babyList;
     UserInfo * user;
@@ -148,19 +148,9 @@
 
 - (void)addAction:(id)sender
 {
-    UserInfo * userInfo = [[UserDefault sharedInstance] userInfo];
-    [[HttpService sharedInstance] applyFriend:@{@"uid":userInfo.uid,@"friend_id":user.uid,@"remark":@"申请好友"} completionBlock:^(id object) {
-        [SVProgressHUD showSuccessWithStatus:@"已提交申请"];
-        self.navigationItem.rightBarButtonItem = nil;
-    } failureBlock:^(NSError *error, NSString *responseString) {
-        NSString * msg = responseString;
-        if(error)
-        {
-            msg = @"申请好友失败";
-        }
-        [SVProgressHUD showErrorWithStatus:msg];
-
-    }];
+    UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"请输入备注" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"提交", nil];
+    alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alertView show];
 }
 
 - (void)babyCell
@@ -293,6 +283,34 @@
 - (void)back
 {
     [self tapView];
+}
+
+
+#pragma mark - UIAlertViewDelegate Methods
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == alertView.cancelButtonIndex)
+    {
+        return ;
+    }
+    
+    UITextField * textField = [alertView textFieldAtIndex:0];
+    NSString * remark = textField.text == nil ? @"" : textField.text;
+    
+    UserInfo * userInfo = [[UserDefault sharedInstance] userInfo];
+    [[HttpService sharedInstance] applyFriend:@{@"uid":userInfo.uid,@"friend_id":user.uid,@"remark":remark} completionBlock:^(id object) {
+        [SVProgressHUD showSuccessWithStatus:@"已提交申请"];
+        self.navigationItem.rightBarButtonItem = nil;
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        NSString * msg = responseString;
+        if(error)
+        {
+            msg = @"申请好友失败";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+        
+    }];
+
 }
 
 @end

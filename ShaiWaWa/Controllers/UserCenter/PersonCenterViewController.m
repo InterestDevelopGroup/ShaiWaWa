@@ -70,16 +70,37 @@
 {
 
     [self setLeftCusBarItem:@"square_back" action:nil];
-    [self babyCell];
-    [self dynamicCell];
-    [self goodFriendCell];
-    [self twoDimensionCodeCell];
-    [self myCollectionCell];
-    [self socialPlatformBindCell];
-    [self topViewData];
-    
+
+    [self getUserInfo];
 }
 
+- (void)getUserInfo
+{
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+    [[HttpService sharedInstance] getUserInfo:@{@"uid":users.uid} completionBlock:^(id object) {
+        [SVProgressHUD dismiss];
+        users = (UserInfo *)object;
+        [[UserDefault sharedInstance] setUserInfo:users];
+        
+        [self babyCell];
+        [self dynamicCell];
+        [self goodFriendCell];
+        [self twoDimensionCodeCell];
+        [self myCollectionCell];
+        [self socialPlatformBindCell];
+        [self topViewData];
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        
+        NSString * msg = responseString;
+        if(error)
+        {
+            msg = @"加载失败.";
+        }
+        
+        [SVProgressHUD showErrorWithStatus:msg];
+    }];
+}
 
 
 - (void)topViewData

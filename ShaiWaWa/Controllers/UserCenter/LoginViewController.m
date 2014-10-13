@@ -62,10 +62,12 @@
 - (void)initUI
 {
     self.title = NSLocalizedString(@"LoginVCTitle", nil);
+    /*
     NSMutableAttributedString * attrString = [[NSMutableAttributedString alloc] initWithString:_hoverRegisterLabel.text];
     [attrString addAttributes:@{NSUnderlineStyleAttributeName:[NSNumber numberWithInt:NSUnderlineStyleSingle]} range:NSMakeRange(0, attrString.length)];
     _hoverRegisterLabel.attributedText = attrString;
     _hoverRegisterLabel.textColor = [UIColor lightGrayColor];
+    */
     TheThirdPartyLoginView *thirdLoginView = [[TheThirdPartyLoginView alloc] initWithFrame:CGRectMake(0, 0, 242, 116)];
     thirdLoginView.unbindBlock = ^(NSString * token,NSString * type){
         

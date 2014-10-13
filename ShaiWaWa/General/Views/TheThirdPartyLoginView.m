@@ -7,9 +7,7 @@
 //
 
 #import "TheThirdPartyLoginView.h"
-
 #import <ShareSDK/ShareSDK.h>
-
 #import "HttpService.h"
 #import "SVProgressHUD.h"
 #import "UserInfo.h"
@@ -21,8 +19,6 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        
-        
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.text = @"第三方账号登录";
         _titleLabel.font = [UIFont systemFontOfSize:16];
@@ -38,7 +34,6 @@
         [_xinlanButton setImage:[UIImage imageNamed:@"login_xinlang.png"] forState:UIControlStateNormal];
         [_xinlanButton addTarget:self action:@selector(xinlanBtnClick) forControlEvents:UIControlEventTouchUpInside];
         _xinlanButton.titleLabel.font = [UIFont systemFontOfSize:10.0];
-        
         _qqButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_qqButton setTitle:@"腾讯QQ" forState:UIControlStateNormal];
         [_qqButton setTitleEdgeInsets:UIEdgeInsetsMake(60, -45, 0, 0)];
@@ -47,8 +42,6 @@
         [_qqButton setImage:[UIImage imageNamed:@"login_qq.png"] forState:UIControlStateNormal];
         [_qqButton addTarget:self action:@selector(qqBtnClick) forControlEvents:UIControlEventTouchUpInside];
         _qqButton.titleLabel.font = [UIFont systemFontOfSize:10.0];
-        
-        
         [self addSubview:_titleLabel];
         [self addSubview:_xinlanButton];
         [self addSubview:_qqButton];

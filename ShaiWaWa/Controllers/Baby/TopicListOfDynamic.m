@@ -310,7 +310,7 @@
             //生成一个字典
             NSMutableDictionary *zanDict = [@{} mutableCopy];
             zanDict[@"uid"] = user.uid;
-            zanDict[@"avatar"] = user.avatar;
+            zanDict[@"avatar"] = user.avatar == nil ? @"" : user.avatar;
             zanDict[@"username"] = @"";
             zanDict[@"rid"] = @"";
             zanDict[@"add_time"] = @"";

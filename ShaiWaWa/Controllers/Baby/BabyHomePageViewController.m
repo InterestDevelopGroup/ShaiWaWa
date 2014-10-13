@@ -145,7 +145,7 @@
     }else{
         foucus = @"取消关注";
     }
-//    [specialCareBtn setImage:[UIImage imageNamed:@"爱心.png"] forState:UIControlStateNormal];
+
     [specialCareBtn setTitle:foucus forState:UIControlStateNormal];
     [specialCareBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
     specialCareBtn.titleLabel.font = [UIFont systemFontOfSize:15];
@@ -175,8 +175,6 @@
     _dynamicListView.frame = CGRectMake(320, 0, 320, _segScrollView.bounds.size.height);
     [_segScrollView addSubview:_dynamicListView];
     
-//    [_gridView registerNibWithName:@"NetCell" reuseIdentifier:@"CellID"];
-//    [_segScrollView addSubview:_gridView];
     //上拉加载更多
     [_dynamicListTableView addFooterWithCallback:^{
         [self loadRecords];
@@ -209,34 +207,33 @@
     [_gridView registerNibWithName:@"NetCell" reuseIdentifier:@"CellID"];
     _gridView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _gridView.showsVerticalScrollIndicator = NO;
-//    NetCell *header = [[NetCell alloc] init];
-//    header.recordDay.text = @"日期";
-//    header.height.text = @"身高(cm)";
-//    header.weight.text = @"体重(kg)";
-//    header.bodyType.text = @"体型";
-//    _gridView.tableHeaderView = header;
-//    _matrix = [[NALLabelsMatrix alloc] initWithFrame:CGRectMake(0, 0, 300, 250) andColumnsWidths:@[@78,@75,@75,@75]];
-//    [_matrix addRecord:@[@"日期",@"身高(cm)",@"体重(kg)",@"体型"]];
-//    _matrix.backgroundColor = [UIColor whiteColor];
-//    [gridView setTableHeaderView:_matrix];
     //宝宝出生日期时间选择器
     [_datePicker addTarget:self action:@selector(dateChange:) forControlEvents:UIControlEventValueChanged];
     [_datePicker setMaximumDate:[NSDate date]];
     
     
-    //设置宝宝头像
-//    [_babyAvatarImgView sd_setImageWithURL:[NSURL URLWithString:_babyInfo.avatar] placeholderImage:[UIImage imageNamed:@"baby_baobei"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-//        
-//        if(image)
-//        {
-//            _babyAvatarImgView.image = [image ellipseImageWithDefaultSetting];
-//        }
-//        
-//    }];
-    if (_babyAvatarImgView.enabled) {
-        [_babyAvatarImgView sd_setBackgroundImageWithURL:[NSURL URLWithString:_babyInfo.avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"baby_baobei.png"]];
-    }else{
-        [_babyAvatarImgView sd_setBackgroundImageWithURL:[NSURL URLWithString:_babyInfo.avatar] forState:UIControlStateDisabled placeholderImage:[UIImage imageNamed:@"baby_baobei.png"]];
+    if (_babyAvatarImgView.enabled)
+    {
+        [_babyAvatarImgView sd_setImageWithURL:[NSURL URLWithString:_babyInfo.avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"baby_baobei.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            
+            if(image)
+            {
+                [_babyAvatarImgView setImage:[image ellipseImageWithDefaultSetting]  forState:UIControlStateNormal];
+            }
+            
+        }];
+    }
+    else
+    {
+        
+        [_babyAvatarImgView sd_setImageWithURL:[NSURL URLWithString:_babyInfo.avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"baby_baobei.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            if(image)
+            {
+                [_babyAvatarImgView setImage:[image ellipseImageWithDefaultSetting]  forState:UIControlStateNormal];
+                [_babyAvatarImgView setImage:[image ellipseImageWithDefaultSetting] forState:UIControlStateDisabled];
+            }
+
+        }];
     }
     
     //获取爸爸或者妈妈头像
@@ -260,8 +257,8 @@
         [_monButton setTitle:@"邀请" forState:UIControlStateNormal];
         //[_monButton setImage:nil forState:UIControlStateNormal];
     }
+
     
-//    UserInfo * user = [[UserDefault sharedInstance] userInfo];
     if([user.uid isEqualToString:_babyInfo.fid] || [user.uid isEqualToString:_babyInfo.mid])
     {
         _addButton.hidden = NO;

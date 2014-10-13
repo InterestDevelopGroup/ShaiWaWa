@@ -150,7 +150,7 @@
     //设置可见性
     if([_setting.visibility isEqualToString:@"1"])
     {
-        _visibilityLabel.text = @"所有都可见";
+        _visibilityLabel.text = @"公开";
         _visibility = @"1";
     }
     else if([_setting.visibility isEqualToString:@"2"])
@@ -626,7 +626,7 @@
 //选择可见性
 - (IBAction)setVisibilityAction:(id)sender
 {
-    NSString *strOne = @"所有都可见";
+    NSString *strOne = @"公开";
     NSString *strTwo = @"仅好友可见";
     NSString *strThree = @"仅父母可见";
     UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:strOne,strTwo,strThree, nil];

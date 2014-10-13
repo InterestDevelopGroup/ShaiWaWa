@@ -36,8 +36,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    
     _locationManager = [[CLLocationManager alloc] init];
     _locationManager.delegate = self;
     _locationManager.distanceFilter=0.5;
@@ -206,6 +204,7 @@
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
     
+    //转为火星坐标
     CLLocationCoordinate2D mylocation = [self zzTransGPS:newLocation.coordinate];
     NSString * locationStr = [NSString stringWithFormat:@"%f,%f",mylocation.latitude,mylocation.longitude];
     NSString * urlStr = [NSString stringWithFormat:@"http://api.map.baidu.com/geocoder/v2/?ak=B56b08182a6df5a96b58a04eda049deb&location=%@&output=json&pois=1",locationStr];

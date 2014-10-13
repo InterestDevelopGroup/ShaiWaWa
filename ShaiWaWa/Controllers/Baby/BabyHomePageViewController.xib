@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -123,12 +123,12 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="srL-aW-Rpx" userLabel="Button - 宝宝">
-                    <rect key="frame" x="120" y="78" width="69" height="68"/>
+                    <rect key="frame" x="125" y="91" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <inset key="titleEdgeInsets" minX="-46" minY="50" maxX="0.0" maxY="0.0"/>
                     <inset key="imageEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" backgroundImage="baby_baobei.png">
+                    <state key="normal" backgroundImage="947844A2-0FC3-4E5F-B196-6FB54C1D566C">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -136,12 +136,11 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="w3O-Ne-G3w">
-                    <rect key="frame" x="47" y="18" width="65" height="60"/>
+                    <rect key="frame" x="52" y="18" width="50" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <inset key="titleEdgeInsets" minX="-46" minY="50" maxX="0.0" maxY="0.0"/>
-                    <inset key="imageEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="爸 爸" image="baby_baba.png">
+                    <inset key="titleEdgeInsets" minX="0.0" minY="30" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="爸爸" backgroundImage="baby_baba.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -149,12 +148,11 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wgj-WL-Y1h">
-                    <rect key="frame" x="197" y="18" width="65" height="60"/>
+                    <rect key="frame" x="216" y="18" width="50" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <inset key="titleEdgeInsets" minX="-46" minY="50" maxX="0.0" maxY="0.0"/>
-                    <inset key="imageEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="妈 妈" image="baby_mama.png">
+                    <inset key="titleEdgeInsets" minX="0.0" minY="30" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="妈妈" backgroundImage="baby_mama.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -354,10 +352,26 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         </tapGestureRecognizer>
     </objects>
     <resources>
+        <image name="947844A2-0FC3-4E5F-B196-6FB54C1D566C" width="69" height="68">
+            <mutableData key="keyedArchiveRepresentation">
+YnBsaXN0MDDUAQIDBAUGPD1YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBMU
+GR4fJSYtMDY5VSRudWxs1QkKCwwNDg8QERJWTlNTaXplViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBz
+V05TQ29sb3KAAoAMEiTAAACAA4AKWHs2OSwgNjh90hUKFhhaTlMub2JqZWN0c6EXgASACdIVChoYohsc
+gAWABoAJEAXTIAohIiMkV05TLmJhc2VbTlMucmVsYXRpdmWAAIAIgAdfEN1maWxlOi8vL0FwcGxpY2F0
+aW9ucy9YY29kZSUyMDUuMS5hcHAvQ29udGVudHMvRGV2ZWxvcGVyL1BsYXRmb3Jtcy9pUGhvbmVTaW11
+bGF0b3IucGxhdGZvcm0vRGV2ZWxvcGVyL0xpYnJhcnkvWGNvZGUvUHJpdmF0ZVBsdWdJbnMvSURFSW50
+ZXJmYWNlQnVpbGRlckNvY29hVG91Y2hJbnRlZ3JhdGlvbi5pZGVwbHVnaW4vQ29udGVudHMvUmVzb3Vy
+Y2VzL0lCVUlNaXNzaW5nSW1hZ2UudGlmZtInKCkqWiRjbGFzc25hbWVYJGNsYXNzZXNVTlNVUkyiKyxV
+TlNVUkxYTlNPYmplY3TSJyguL1dOU0FycmF5oi4s0zEyCjM0NVdOU1doaXRlXE5TQ29sb3JTcGFjZUQw
+IDAAEAOAC9InKDc4V05TQ29sb3KiNyzSJyg6O1dOU0ltYWdlojosXxAPTlNLZXllZEFyY2hpdmVy0T4/
+VHJvb3SAAQAIABEAGgAjAC0AMgA3AEUASwBWAF0AZABxAHgAgACCAIQAiQCLAI0AlgCbAKYAqACqAKwA
+sQC0ALYAuAC6ALwAwwDLANcA2QDbAN0BvQHCAc0B1gHcAd8B5QHuAfMB+wH+AgUCDQIaAh8CIQIjAigC
+MAIzAjgCQAJDAlUCWAJdAAAAAAAAAgEAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAl8
+</mutableData>
+        </image>
         <image name="baby_4-bg-1.png" width="320" height="100"/>
         <image name="baby_4-bg.png" width="320" height="165"/>
         <image name="baby_baba.png" width="41" height="41"/>
-        <image name="baby_baobei.png" width="69" height="68"/>
         <image name="baby_duanxinyaoqing.png" width="95" height="80"/>
         <image name="baby_mama.png" width="41" height="41"/>
         <image name="baby_weixinyaoqing.png" width="95" height="80"/>
