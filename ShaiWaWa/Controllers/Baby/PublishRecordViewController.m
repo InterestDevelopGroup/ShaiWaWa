@@ -38,6 +38,9 @@
 @import MediaPlayer;
 #define PlaceHolder @"关于宝宝的开心事情..."
 @interface PublishRecordViewController ()<UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate,UIActionSheetDelegate,CLLocationManagerDelegate>
+{
+    AudioView *_audioView;
+}
 @property (nonatomic,strong) BabyInfo * babyInfo;
 @property (nonatomic,strong) UserInfo * userInfo;
 @property (nonatomic,strong) Setting * setting;
@@ -915,6 +918,7 @@
     
 }
 
+#pragma mark - 停止录音
 - (IBAction)stopRecord:(id)sender
 {
     
@@ -928,6 +932,19 @@
     if([_recorder isRecording])
     {
         [_recorder stopRecording];
+    }
+    
+    //计算录音时间长度是否大于两秒,否则不允许提交
+    AVAudioSession * session = [AVAudioSession sharedInstance];
+    [session setCategory:AVAudioSessionCategoryPlayback error:nil];
+    [session setActive:YES error:nil];
+    AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:_audioPath] error:nil];
+    if (player.duration < 2.0) {
+        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"AudioRecord cann't less than 2 seconds，please try again", nil)];
+        _recordBtn.enabled = YES;
+        _uploadedAudioPath = nil;
+        _audioPath = nil;
+        [_audioView removeFromSuperview];
     }
 }
 
@@ -996,7 +1013,7 @@
     [self showRecord:nil];
     
     AudioView * audio = [[AudioView alloc] initWithFrame:CGRectMake(123, 149, 82, 50) withPath:self.audioPath];
-    
+    _audioView = audio;
     audio.deleteBlock = ^(NSString * path){
         
         _recordBtn.enabled = YES;

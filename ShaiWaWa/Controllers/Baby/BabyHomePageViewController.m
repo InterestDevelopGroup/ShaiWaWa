@@ -1117,6 +1117,19 @@
         dynamicCell.dyContentTextView.attributedText = [NSStringUtil makeTopicString:recrod.content];
         [dynamicCell.babyAvatarImageView sd_setImageWithURL:[NSURL URLWithString:recrod.avatar] placeholderImage:Default_Avatar];
         dynamicCell.babyNameLabel.text = recrod.baby_nickname;
+        NSString *usersex = nil;
+        if ([users.sex intValue] == 0) {
+            usersex = @"保密";
+        }else if([users.sex intValue] == 1)
+        {
+            usersex = @"爸爸";
+        }else
+        {
+            usersex = @"妈妈";
+        }
+        
+        dynamicCell.whoLabel.text = [NSString stringWithFormat:@"%@(%@)",recrod.username,usersex];
+        dynamicCell.releaseTimeLabel.text = [NSStringUtil calculateTime:recrod.add_time];
         [dynamicCell.zanButton setTitle:recrod.like_count forState:UIControlStateNormal];
         if([recrod.is_like isEqualToString:@"1"])
         {
