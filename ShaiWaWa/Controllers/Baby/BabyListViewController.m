@@ -284,7 +284,12 @@
     babyHomePageVC.babyInfo = babyInfo;
     [self.navigationController pushViewController:babyHomePageVC animated:YES];
     */
-    
+    BabyHomePageViewController * vc = [[BabyHomePageViewController alloc] initWithNibName:nil bundle:nil];
+   
+    vc.babyInfo = babyInfo;
+//    NSLog(@"%@",babyInfo.is_focus);
+    [self push:vc];
+   /*
     [SVProgressHUD showWithStatus:@"加载中..."];
     [[HttpService sharedInstance] getBabyInfo:@{@"baby_id":babyInfo.baby_id} completionBlock:^(id object) {
         [SVProgressHUD dismiss];
@@ -301,6 +306,7 @@
         }
         [SVProgressHUD showErrorWithStatus:msg];
     }];
+    */
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
