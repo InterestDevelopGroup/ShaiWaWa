@@ -63,5 +63,5 @@
 - (IBAction)hideCurView:(id)sender;
 - (IBAction)dismissKeyboard:(id)sender;
 - (IBAction)hideInvitationView:(id)sender;
-- (IBAction)changeAvator:(UIButton *)sender;
+- (IBAction)changeAvator:(UIButton *)sender;    //修改头像按钮
 @end
