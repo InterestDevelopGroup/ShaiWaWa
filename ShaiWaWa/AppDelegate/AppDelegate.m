@@ -35,6 +35,7 @@
     [self customUI];
     [self firstLaunch];
     [self fetchConfig];
+
     return YES;
 }
 
@@ -75,6 +76,7 @@
 {
     // Saves changes in the application's managed object context before the application terminates.
     [MagicalRecord cleanUp];
+
     
 }
 

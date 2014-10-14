@@ -1423,7 +1423,7 @@
 //TODO:判断是否特别关注
 - (void)isFocus:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
 {
-    [self postJSON:[self mergeURL:Is_Friend] withParams:params completionBlock:^(id obj) {
+    [self postJSON:[self mergeURL:Is_Focus] withParams:params completionBlock:^(id obj) {
         
         if([obj[@"err_code"] intValue] == No_Error_Code)
         {
@@ -1518,5 +1518,27 @@
         
     } failureBlock:failure];
 }
+
+
+/**
+ @desc 取消特别关注宝宝
+ */
+//TODO:取消特别关注宝宝
+- (void)unfollowBaby:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self postJSON:[self mergeURL:Unfollow_Baby] withParams:params completionBlock:^(id obj) {
+        
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+        
+        if (success) {
+            success(obj);
+        }
+        
+    } failureBlock:failure];
+}
+
 
 @end

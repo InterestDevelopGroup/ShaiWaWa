@@ -24,6 +24,8 @@
 #import "VideoConvertHelper.h"
 #import "FriendHomeViewController.h"
 #import "PersonCenterViewController.h"
+#import "BabyHomePageViewController.h"
+#import "NSStringUtil.h"
 @interface ShaiWaSquareViewController ()
 @property (nonatomic,strong) NSMutableArray * newestDyArray;
 @property (nonatomic,strong) NSMutableArray * hotDyArray;
@@ -62,14 +64,14 @@
     self.title = @"晒娃广场";
     [self setLeftCusBarItem:@"square_back" action:nil];
       UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
-
+    [self HMSegmentedControlInitMethod];
     collectionNew = [[UICollectionView alloc]initWithFrame:CGRectMake(0,0,self.view.bounds.size.width, _segScrollView.frame.size.height) collectionViewLayout:layout];
     collectionNew.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    collectionNew.showsVerticalScrollIndicator = NO;
         
-    collectionHot = [[UICollectionView alloc]initWithFrame:CGRectMake(320,0,self.view.bounds.size.width, _segScrollView.frame.size.height) collectionViewLayout:layout];
-
+    collectionHot = [[UICollectionView alloc]initWithFrame:CGRectMake(0,0,self.view.bounds.size.width, _segScrollView.frame.size.height) collectionViewLayout:layout];
     collectionHot.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    [self HMSegmentedControlInitMethod];
+    collectionHot.showsVerticalScrollIndicator = NO;
     
     
     collectionNew.dataSource = self;
@@ -102,8 +104,17 @@
         [weakSelf loadMore];
     }];
     
-    [_segScrollView addSubview:collectionNew];
-    [_segScrollView addSubview:collectionHot];
+    
+    UIView * view_1 = [UIView new];
+    view_1.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.segScrollView.frame.size.height);
+    [view_1 addSubview:collectionNew];
+    UIView * view_2 = [UIView new];
+    view_2.frame = CGRectMake(self.view.bounds.size.width, 0, self.view.bounds.size.width, self.segScrollView.frame.size.height);
+    [view_2 addSubview:collectionHot];
+    
+    
+    [_segScrollView addSubview:view_1];
+    [_segScrollView addSubview:view_2];
     
     
     [_segScrollView setContentSize:CGSizeMake(2 * CGRectGetWidth(_segScrollView.frame), CGRectGetHeight(_segScrollView.frame))];
@@ -261,6 +272,7 @@
     }
     
     
+    /*
     UserInfo * user = [[UserDefault sharedInstance] userInfo];
     if(user != nil && [user.uid isEqualToString:record.uid])
     {
@@ -273,6 +285,25 @@
     vc.friendId = record.uid;
     [self push:vc];
     vc = nil;
+    */
+    
+    [SVProgressHUD showWithStatus:@"加载中..."];
+    [[HttpService sharedInstance] getBabyInfo:@{@"baby_id":record.baby_id} completionBlock:^(id object) {
+        [SVProgressHUD dismiss];
+        BabyHomePageViewController * vc = [[BabyHomePageViewController alloc] initWithNibName:nil bundle:nil];
+        vc.babyInfo = object;
+        [self push:vc];
+        vc = nil;
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        NSString * msg = responseString;
+        if(error)
+        {
+            msg = @"加载失败.";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+    }];
+
 }
 
 
@@ -373,11 +404,12 @@
     
     [cell.usernameLabel setText:record.baby_nickname];
     [cell.contentLabel setText:record.content];
-    [cell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:(record.user_avatar == [NSNull null] ? @"" : record.user_avatar)] placeholderImage:[UIImage imageNamed:@"square_pic-2"]];
+    [cell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:(record.avatar == [NSNull null] ? @"" : record.avatar)] placeholderImage:Default_Avatar];
     cell.avatarImageView.userInteractionEnabled = YES;
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showFriendInfo:)];
     [cell.avatarImageView addGestureRecognizer:tap];
     cell.avatarImageView.tag = indexPath.row;
+    cell.timeLabel.text = [NSStringUtil calculateTime:record.add_time];
     tap = nil;
     return cell;
 }

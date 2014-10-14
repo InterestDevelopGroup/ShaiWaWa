@@ -17,6 +17,7 @@
 #import "BabyInfo.h"
 #import "InputHelper.h"
 #import "PostValidateViewController.h"
+#import "ChooseModeViewController.h"
 @interface RegisterViewController ()
 
 @end
@@ -51,17 +52,33 @@
     self.title = NSLocalizedString(@"RegisterVCTitle", nil);
     [self.navigationItem setHidesBackButton:YES];
     myDelegate = [[UIApplication sharedApplication] delegate];
+    /*
     NSMutableAttributedString * attrString = [[NSMutableAttributedString alloc] initWithString:_hoverLoginLabel.text];
     [attrString addAttributes:@{NSUnderlineStyleAttributeName:[NSNumber numberWithInt:NSUnderlineStyleSingle]} range:NSMakeRange(0, attrString.length)];
     _hoverLoginLabel.attributedText = attrString;
     _hoverLoginLabel.textColor = [UIColor lightGrayColor];
-    
+    */
     TheThirdPartyLoginView *thirdLoginView = [[TheThirdPartyLoginView alloc] initWithFrame:CGRectMake(0, 0, 242, 116)];
-    
+    thirdLoginView.unbindBlock = ^(NSString * token,NSString * type){
+        
+        
+        
+    };
+    thirdLoginView.bindBlock = ^(UserInfo * user){
+        [self showChooseModeVC];
+    };
     
     [_thirdSuperView addSubview:thirdLoginView];
     
 }
+
+
+- (void)showChooseModeVC
+{
+    ChooseModeViewController *chooseModeVC = [[ChooseModeViewController alloc] initWithNibName:nil bundle:nil];
+    [self.navigationController pushViewController:chooseModeVC animated:YES];
+}
+
 
 - (IBAction)showLoginVC:(id)sender
 {

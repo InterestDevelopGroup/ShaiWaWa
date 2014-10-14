@@ -29,5 +29,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *zanButton;
 @property (weak, nonatomic) IBOutlet UIImageView *babyAvatarImageView;
 @property (weak, nonatomic) IBOutlet UIView *detailView;
+@property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
 
 @end

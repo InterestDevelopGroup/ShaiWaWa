@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -167,31 +167,34 @@
                     </connections>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0mC-69-gNj">
-                    <rect key="frame" x="183" y="331" width="30" height="25"/>
+                    <rect key="frame" x="179" y="331" width="25" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" image="xinlang.png">
+                    <state key="normal" image="WB1.png">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="selected" image="WB2.png"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mYO-nm-NdM">
-                    <rect key="frame" x="215" y="331" width="30" height="25"/>
+                    <rect key="frame" x="216" y="331" width="25" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" image="qq.png">
+                    <state key="normal" image="QQ1.png">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="selected" image="QQ2.png"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cbl-nh-XIu">
-                    <rect key="frame" x="247" y="331" width="30" height="25"/>
+                    <rect key="frame" x="253" y="331" width="25" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" image="phone.png">
+                    <state key="normal" image="tel1.png">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="selected" image="tel2.png"/>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.93725496530532837" green="0.93725496530532837" blue="0.93725496530532837" alpha="1" colorSpace="deviceRGB"/>
@@ -216,13 +219,16 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
+        <image name="QQ1.png" width="40" height="40"/>
+        <image name="QQ2.png" width="40" height="40"/>
+        <image name="WB1.png" width="40" height="40"/>
+        <image name="WB2.png" width="40" height="40"/>
         <image name="main_jiantou.png" width="7" height="11"/>
-        <image name="phone.png" width="30" height="25"/>
-        <image name="qq.png" width="30" height="25"/>
+        <image name="tel1.png" width="40" height="40"/>
+        <image name="tel2.png" width="40" height="40"/>
         <image name="user_1-bg.png" width="266" height="41"/>
         <image name="user_2-bg.png" width="266" height="82"/>
         <image name="user_3-bg.png" width="266" height="147"/>
         <image name="user_touxiang.png" width="74" height="70"/>
-        <image name="xinlang.png" width="30" height="25"/>
     </resources>
 </document>

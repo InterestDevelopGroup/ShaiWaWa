@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -16,7 +16,7 @@
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="baby_4-bg-2.png" id="yPD-Tn-663">
                         <rect key="frame" x="11" y="12" width="299" height="327"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </imageView>
                     <view contentMode="scaleToFill" id="xgf-sj-W71">
                         <rect key="frame" x="11" y="12" width="299" height="56"/>
@@ -54,11 +54,11 @@
                     </view>
                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="3HT-Sy-QDq">
                         <rect key="frame" x="11" y="68" width="299" height="143"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </scrollView>
                     <view contentMode="scaleToFill" id="pBw-ah-t6J">
                         <rect key="frame" x="11" y="210" width="299" height="114"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="老头李(爸爸)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3ci-zv-cJx">
                                 <rect key="frame" x="12" y="3" width="76" height="17"/>
@@ -177,6 +177,7 @@
                 <outlet property="babyAvatarImageView" destination="16n-xU-92a" id="M7A-Aj-eeG"/>
                 <outlet property="babyBirthdayLabel" destination="Txg-c2-wzn" id="scK-4u-ewy"/>
                 <outlet property="babyNameLabel" destination="zaO-M2-dW6" id="ijb-6Y-cPH"/>
+                <outlet property="bgImageView" destination="yPD-Tn-663" id="o0r-Pc-Irr"/>
                 <outlet property="commentBtn" destination="EAE-B8-67F" id="tWs-fs-BJM"/>
                 <outlet property="detailView" destination="pBw-ah-t6J" id="dQg-Df-QwK"/>
                 <outlet property="dyContentTextView" destination="rg2-QV-IuH" id="jS0-AC-yH5"/>

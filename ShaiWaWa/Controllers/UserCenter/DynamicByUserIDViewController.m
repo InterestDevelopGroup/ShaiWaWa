@@ -168,7 +168,7 @@
             //生成一个字典
             NSMutableDictionary *zanDict = [@{} mutableCopy];
             zanDict[@"uid"] = user.uid;
-            zanDict[@"avatar"] = user.avatar;
+            zanDict[@"avatar"] = user.avatar == nil ? @"" : user.avatar;
             zanDict[@"username"] = @"";
             zanDict[@"rid"] = @"";
             zanDict[@"add_time"] = @"";
@@ -498,14 +498,12 @@ int _lastPosition;    //A variable define in headfile
     if (currentPostion - _lastPosition > 280) {
         _lastPosition = currentPostion;
         [self.navigationController setNavigationBarHidden:YES animated:YES];
-        //NSLog(@"ScrollUp now");
         
     }
     else if (_lastPosition - currentPostion > 280)
     {
         _lastPosition = currentPostion;
         [self.navigationController setNavigationBarHidden:NO animated:YES];
-        //NSLog(@"ScrollDown now");
     }
 }
 

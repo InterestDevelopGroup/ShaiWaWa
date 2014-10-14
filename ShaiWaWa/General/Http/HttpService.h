@@ -55,6 +55,7 @@
 #define Get_User_Info                               @"get_user_info"
 #define Follow_Baby                                 @"follow"
 #define Is_Focus                                    @"is_focus"
+#define Unfollow_Baby                               @"unfollow"
 #define Get_User_Setting                            @"get_user_setting"
 #define Add_Feedback                                @"add_feedback"
 #define Get_Baby_Remark                             @"get_baby_remark"
@@ -483,5 +484,13 @@ typedef enum {
  */
 //TODO:举报动态
 - (void)addReport:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
+
+
+/**
+ @desc 取消特别关注宝宝
+ */
+//TODO:取消特别关注宝宝
+- (void)unfollowBaby:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
+
 
 @end

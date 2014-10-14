@@ -16,6 +16,7 @@
 #import "MBProgressHUD.h"
 #import "SVProgressHUD.h"
 #import "InputHelper.h"
+#import "SSCheckBoxView.h"
 @interface LoginViewController ()
 
 @end
@@ -62,10 +63,12 @@
 - (void)initUI
 {
     self.title = NSLocalizedString(@"LoginVCTitle", nil);
+    /*
     NSMutableAttributedString * attrString = [[NSMutableAttributedString alloc] initWithString:_hoverRegisterLabel.text];
     [attrString addAttributes:@{NSUnderlineStyleAttributeName:[NSNumber numberWithInt:NSUnderlineStyleSingle]} range:NSMakeRange(0, attrString.length)];
     _hoverRegisterLabel.attributedText = attrString;
     _hoverRegisterLabel.textColor = [UIColor lightGrayColor];
+    */
     TheThirdPartyLoginView *thirdLoginView = [[TheThirdPartyLoginView alloc] initWithFrame:CGRectMake(0, 0, 242, 116)];
     thirdLoginView.unbindBlock = ^(NSString * token,NSString * type){
         
@@ -78,6 +81,20 @@
     [_thirdSuperView addSubview:thirdLoginView];
     
     
+    SSCheckBoxView * checkButton = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(26, 107, 110, 20) style:kSSCheckBoxViewStyleGlossy checked:NO];
+    [checkButton setText:@"显示密码"];
+    [checkButton setStateChangedTarget:self selector:@selector(disableSecure:)];
+    [self.view addSubview:checkButton];
+    
+}
+
+
+- (void)disableSecure:(SSCheckBoxView *)sender
+{
+    [_pwdField setSecureTextEntry:!sender.checked];
+    if (!_pwdField.secureTextEntry) {
+        _pwdField.text = _pwdField.text;
+    }
 }
 
 - (IBAction)showRegisterVC:(id)sender

@@ -243,8 +243,8 @@
     //[SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
     [[HttpService sharedInstance] getCommentList:@{@"rid":_babyRecord.rid,@"offset":@"0",@"pagesize":@"200"} completionBlock:^(id object) {
         //[SVProgressHUD dismiss];
-        pinLunArray = [[[object reverseObjectEnumerator] allObjects] mutableCopy];
-
+        //pinLunArray = [[[object reverseObjectEnumerator] allObjects] mutableCopy];
+        [pinLunArray addObjectsFromArray:object];
         [_pinLunListTableView reloadData];
         [_pinLunListTableView headerEndRefreshing];
     } failureBlock:^(NSError *error, NSString *responseString) {
@@ -312,7 +312,7 @@
             //生成一个字典
             NSMutableDictionary *zanDict = [@{} mutableCopy];
             zanDict[@"uid"] = user.uid;
-            zanDict[@"avatar"] = user.avatar;
+            zanDict[@"avatar"] = user.avatar == nil ? @"" : user.avatar;
             zanDict[@"username"] = @"";
             zanDict[@"rid"] = @"";
             zanDict[@"add_time"] = @"";
@@ -526,8 +526,23 @@
 {
     if(indexPath.section == 0)
     {
-        return 285.0f;
-    }else{
+        float height = 285.0f;
+        if([_babyRecord.images count] == 0 && (_babyRecord.video == nil || [_babyRecord.video length] == 0))
+        {
+            height -= 109;
+        }
+        
+        /*
+         if(babyRecord.address == nil || [babyRecord.address length] == 0)
+         {
+         height -= 17;
+         }
+         */
+        return height;
+
+    }
+    else
+    {
         return 45;
     }
     
@@ -576,6 +591,7 @@
         detailCell.whoLabel.userInteractionEnabled = YES;
         tapGesture = nil;
         detailCell.publishTimeLabel.text = [NSStringUtil calculateTime:_babyRecord.add_time];
+        detailCell.birthdayLabel.text = [NSStringUtil calculateAge:_babyRecord.birthday];
         
         detailCell.babyNameLabel.text = _babyRecord.baby_nickname;
         detailCell.addressLabel.text = _babyRecord.address;
@@ -598,8 +614,8 @@
         
         [detailCell.commentBtn setTitle:_babyRecord.comment_count forState:UIControlStateNormal];
         [detailCell.likeBtn addTarget:self action:@selector(likeAction:) forControlEvents:UIControlEventTouchUpInside];
-        NSTimeInterval timeInterval = [_babyRecord.add_time doubleValue];
-        detailCell.publishTimeLabel.text = [[NSDate dateWithTimeIntervalSince1970:timeInterval] formatDateString:@"yyyy-MM-dd"];
+  
+        detailCell.publishTimeLabel.text = [NSStringUtil calculateTime:_babyRecord.add_time];
         [detailCell.moreBtn addTarget:self action:@selector(showShareGrayView) forControlEvents:UIControlEventTouchUpInside];
         
         //显示赞用户头像
@@ -662,6 +678,7 @@
             };
             [imageView setCloseHidden];
             [dynamicCell.scrollView addSubview:imageView];
+            dynamicCell.scrollView.hidden = NO;
             imageView = nil;
         }
         else if([recrod.images count] != 0)
@@ -682,6 +699,7 @@
                 };
                 [imageView setCloseHidden];
                 [dynamicCell.scrollView addSubview:imageView];
+                dynamicCell.scrollView.hidden = NO;
                 imageView = nil;
             }
             [dynamicCell.scrollView setContentSize:CGSizeMake([recrod.images count] * width, CGRectGetHeight(dynamicCell.scrollView.bounds))];
@@ -689,17 +707,41 @@
         }
         else
         {
+            /*
             PublishImageView * imageView = [[PublishImageView alloc] initWithFrame:dynamicCell.scrollView.bounds withPath:nil];
             [imageView setCloseHidden];
             [dynamicCell.scrollView addSubview:imageView];
             imageView = nil;
+            */
+            dynamicCell.scrollView.hidden = YES;
         }
+        
+        if([recrod.images count] == 0 && (recrod.video == nil || [recrod.video length] == 0))
+        {
+            CGRect detailRect = dynamicCell.detailView.frame;
+            detailRect.origin.y = 58;
+            dynamicCell.detailView.frame = detailRect;
+        }
+        else
+        {
+            CGRect detailRect = dynamicCell.detailView.frame;
+            detailRect.origin.y = 170;
+            dynamicCell.detailView.frame = detailRect;
+            
+        }
+
         
         [[dynamicCell.contentView viewWithTag:20000] removeFromSuperview];
         if(_babyRecord.audio != nil && [_babyRecord.audio length] > 0)
         {
+            CGRect rect = CGRectMake(123, 180, 82, 50);
+            if([recrod.images count] == 0 && (recrod.video == nil || [recrod.video length] == 0))
+            {
+                rect = CGRectMake(123, 40, 82, 50);
+            }
+
             
-            AudioView * audioView = [[AudioView alloc] initWithFrame:CGRectMake(115, 140, 82, 50) withPath:_babyRecord.audio];
+            AudioView * audioView = [[AudioView alloc] initWithFrame:rect withPath:_babyRecord.audio];
             audioView.tag = 20000;
             [audioView setCloseHidden];
             [dynamicCell.contentView addSubview:audioView];
@@ -714,7 +756,6 @@
         PinLunCell * pinLunCell = (PinLunCell *)cell;
         pinLunCell.usernameLabel.text = comment.username;
         pinLunCell.contentLabel.text = comment.content;
-//        pinLunCell.addTimeLabel.text = [NSString stringWithFormat:@"(%@)",[[NSDate dateWithTimeIntervalSince1970:[comment.add_time intValue]] formatDateString:@"yyyy-MM-dd"]];
         pinLunCell.addTimeLabel.text = [NSStringUtil calculateTime:comment.add_time];
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPersonalHome:)];
         pinLunCell.usernameLabel.userInteractionEnabled = YES;

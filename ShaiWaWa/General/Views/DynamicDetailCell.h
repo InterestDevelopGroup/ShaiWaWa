@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *praiseUserThirdBtn;
 @property (weak, nonatomic) IBOutlet UIView *likeView;
 @property (weak, nonatomic) IBOutlet UIImageView *locationImageView;
+@property (weak, nonatomic) IBOutlet UIView *detailView;
 
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;

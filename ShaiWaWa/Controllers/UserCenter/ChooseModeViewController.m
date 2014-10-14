@@ -608,6 +608,7 @@ typedef enum{
     if([record.is_like isEqualToString:@"1"])
     {
         //取消赞
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
         [[HttpService sharedInstance] cancelLike:@{@"rid":record.rid,@"uid":users.uid} completionBlock:^(id object) {
             
             [SVProgressHUD showSuccessWithStatus:@"取消赞成功."];
@@ -634,6 +635,7 @@ typedef enum{
     }
     else
     {
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
         [[HttpService sharedInstance] addLike:@{@"rid":record.rid,@"uid":users.uid} completionBlock:^(id object) {
             
             [SVProgressHUD showSuccessWithStatus:@"谢谢您的参与."];
@@ -644,7 +646,7 @@ typedef enum{
             //生成一个字典
             NSMutableDictionary *zanDict = [@{} mutableCopy];
             zanDict[@"uid"] = users.uid;
-            zanDict[@"avatar"] = users.avatar;
+            zanDict[@"avatar"] = users.avatar == nil ? @"" : users.avatar;
             zanDict[@"username"] = @"";
             zanDict[@"rid"] = @"";
             zanDict[@"add_time"] = @"";
@@ -1088,6 +1090,24 @@ int _lastPosition;    //A variable define in headfile
     return [dyArray count];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    BabyRecord * babyRecord = [dyArray objectAtIndex:indexPath.row];
+    float height = 340.0f;
+    if([babyRecord.images count] == 0 && (babyRecord.video == nil || [babyRecord.video length] == 0))
+    {
+        height -= 143;
+    }
+    
+    /*
+    if(babyRecord.address == nil || [babyRecord.address length] == 0)
+    {
+        height -= 17;
+    }
+    */
+    return height;
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -1230,7 +1250,7 @@ int _lastPosition;    //A variable define in headfile
             [view removeFromSuperview];
         }
     }
-    
+
     //显示动态图片或者视频
     if(recrod.video != nil && [recrod.video length] != 0)
     {
@@ -1277,30 +1297,59 @@ int _lastPosition;    //A variable define in headfile
     }
     else
     {
+        /*
         PublishImageView * imageView = [[PublishImageView alloc] initWithFrame:dynamicCell.scrollView.bounds withPath:nil];
         [imageView setCloseHidden];
         [dynamicCell.scrollView addSubview:imageView];
-        dynamicCell.scrollView.hidden = YES;
         imageView.hidden = YES;
         imageView = nil;
+        */
+        dynamicCell.scrollView.hidden = YES;
+    
     }
     
-    /*
-    NSTimeInterval timeInterval = [recrod.add_time doubleValue];
-    dynamicCell.releaseTimeLabel.text = [[NSDate dateWithTimeIntervalSince1970:timeInterval] formatDateString:@"yyyy-MM-dd"];
-    */
+    if([recrod.images count] == 0 && (recrod.video == nil || [recrod.video length] == 0))
+    {
+        CGRect detailRect = dynamicCell.detailView.frame;
+        detailRect.origin.y = 68;
+        dynamicCell.detailView.frame = detailRect;
+        
+        CGRect bgRect = dynamicCell.bgImageView.frame;
+        bgRect.size.height = 184;
+        dynamicCell.bgImageView.frame = bgRect;
+    }
+    else
+    {
+        CGRect detailRect = dynamicCell.detailView.frame;
+        detailRect.origin.y = 210;
+        dynamicCell.detailView.frame = detailRect;
+        
+        CGRect bgRect = dynamicCell.bgImageView.frame;
+        bgRect.size.height = 327;
+        dynamicCell.bgImageView.frame = bgRect;
+
+    }
+    
     dynamicCell.releaseTimeLabel.text = [NSStringUtil calculateTime:recrod.add_time];
     
     [[dynamicCell.contentView viewWithTag:20000] removeFromSuperview];
     if(recrod.audio != nil && [recrod.audio length] > 0)
     {
+        CGRect rect = CGRectMake(123, 180, 82, 50);
+        if([recrod.images count] == 0 && (recrod.video == nil || [recrod.video length] == 0))
+        {
+            rect = CGRectMake(123, 40, 82, 50);
+        }
         
-        AudioView * audioView = [[AudioView alloc] initWithFrame:CGRectMake(123, 180, 82, 50) withPath:recrod.audio];
+        AudioView * audioView = [[AudioView alloc] initWithFrame:rect withPath:recrod.audio];
         audioView.tag = 20000;
         [audioView setCloseHidden];
         [dynamicCell.contentView addSubview:audioView];
     }
     
+    
+    
+    [dynamicCell layoutSubviews];
     return dynamicCell;
     
 }

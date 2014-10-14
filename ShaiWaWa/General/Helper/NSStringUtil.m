@@ -109,6 +109,10 @@
     {
         str = [NSString stringWithFormat:@"%d小时前",miniutes/60];
     }
+    else if(miniutes < 60 * 24 * 2)
+    {
+        str = @"昨天";
+    }
     else
     {
         str = [[NSDate dateWithTimeIntervalSince1970:timeInterval] formatDateString:@"yyyy-MM-dd"];
