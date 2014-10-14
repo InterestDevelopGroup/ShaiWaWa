@@ -47,7 +47,7 @@
 {
     UITableView *_gridView;   ///身高体重显示的tableView
     NSArray *_growRecordArray; //存放宝宝成长记录的数组
-    BabyRemark *_remark;
+    
     UIImage *_image;
     NSString *_filePath;
 }
@@ -82,12 +82,19 @@
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];
-    //自动刷新
-    [_dynamicListTableView headerBeginRefreshing];
     
-    //获取宝宝成长记录
-    [self getGrowRecords];
-    
+    //获取宝宝的备注信息
+    if (!self.isFromRemarkController) {
+//
+        //自动刷新
+        [_dynamicListTableView headerBeginRefreshing];
+        
+        //获取宝宝成长记录
+        [self getGrowRecords];
+    }else
+    {
+        [self getBabyRemarkInfo];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -110,7 +117,13 @@
 - (void)initUI
 {
     [self getBabyRemarkInfo];
-    self.title = _babyInfo.nickname;
+    if ([_remark.alias isEqualToString:@"备注名"]) {
+        self.title = _babyInfo.nickname;
+    }
+    else
+    {
+        self.title = _remark.alias;
+    }
     //判断宝宝是不是我的，如果不是，头像按钮禁止点击
      UserInfo * user = [[UserDefault sharedInstance] userInfo];
     if(![_babyInfo.uid isEqualToString:user.uid]){_babyAvatarImgView.enabled = NO;}
@@ -279,7 +292,14 @@
     [[HttpService sharedInstance] getBabyRemark:@{@"uid":users.uid,@"baby_id":_babyInfo.baby_id} completionBlock:^(id object) {
         _remark = (BabyRemark *)object;
         if (_remark != nil || _remark.alias != nil) {
-            self.title = _remark.alias;
+            if ([_remark.alias isEqualToString:@"备注名"]) {
+                self.title = _babyInfo.nickname;
+            }
+            else
+            {
+                self.title = _remark.alias;
+            }
+            
         }
     } failureBlock:^(NSError *error, NSString *responseString) {
         [SVProgressHUD showErrorWithStatus:responseString];
@@ -697,6 +717,7 @@
     [self showList:nil];
     RemarksViewController *remarksVC = [[RemarksViewController alloc] initWithNibName:nil bundle:nil];
     remarksVC.babyInfo = _babyInfo;
+    remarksVC.babyHomeVC = self;
     remarksVC.babyRemark = _remark;
     [self.navigationController pushViewController:remarksVC animated:YES];
 }
