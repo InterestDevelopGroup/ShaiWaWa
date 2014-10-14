@@ -12,6 +12,7 @@
 #import <MessageUI/MFMessageComposeViewController.h>
 #import "TSLocateView.h"
 #import "BabyInfo.h"
+@class BabyRemark;
 @interface BabyHomePageViewController : CommonViewController<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,MFMessageComposeViewControllerDelegate,UIActionSheetDelegate>
 {
     HMSegmentedControl *segMentedControl;
@@ -25,6 +26,8 @@
     TSLocateView *locateView;
     
 }
+@property (strong, nonatomic) BabyRemark *remark;
+@property (assign, nonatomic) BOOL isFromRemarkController;
 @property (strong, nonatomic) IBOutlet UIView *tabSelectionBar;
 @property (strong, nonatomic) IBOutlet UIScrollView *segScrollView;
 @property (strong, nonatomic) IBOutlet UIView *summaryView;
@@ -60,5 +63,5 @@
 - (IBAction)hideCurView:(id)sender;
 - (IBAction)dismissKeyboard:(id)sender;
 - (IBAction)hideInvitationView:(id)sender;
-- (IBAction)changeAvator:(UIButton *)sender;
+- (IBAction)changeAvator:(UIButton *)sender;    //修改头像按钮
 @end

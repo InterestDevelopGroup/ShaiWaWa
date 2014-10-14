@@ -813,6 +813,7 @@
     }
     else
     {
+        
         //显示分享按钮，并调整位置
         _isOffset = YES;
         CGRect shareRect = _shareView.frame;
@@ -928,7 +929,6 @@
     {
         [_recorder stopRecording];
     }
-
 }
 
 - (IBAction)shareToQQSpace:(id)sender

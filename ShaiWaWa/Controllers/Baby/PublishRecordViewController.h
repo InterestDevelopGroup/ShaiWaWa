@@ -48,7 +48,7 @@
 - (IBAction)showFriendAction:(id)sender;
 - (IBAction)showRecord:(id)sender;
 - (IBAction)showShare:(id)sender;
-- (IBAction)startRecord:(id)sender;
+- (IBAction)startRecord:(id)sender;    //录音按钮
 - (IBAction)stopRecord:(id)sender;
 - (IBAction)shareToQQSpace:(id)sender;
 - (IBAction)shareToSinaWeibo:(id)sender;

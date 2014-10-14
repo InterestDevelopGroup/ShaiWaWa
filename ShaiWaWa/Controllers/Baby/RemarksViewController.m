@@ -49,7 +49,7 @@
 //    [self getBabyRemarkInfo];
     _remarksField.text = _babyRemark.alias;
     _remarksTextField.text = _babyRemark.remark;
-    if (_remarksTextField == nil || [_remarksTextField.text isEqualToString:@""]){
+    if (_remarksTextField == nil || [_remarksTextField.text isEqualToString:@"" ] || [_remarksTextField.text isEqualToString:@"关于宝宝的描述" ]){
         [_remarksTextField setPlaceholder:@"关于宝宝的描述"];
     }
     _remarksTextField.delegate =self;
@@ -85,21 +85,50 @@
 {
     UserInfo *users = [[UserDefault sharedInstance] userInfo];
     
+    //用户没有修改内容
+    if ([_remarksField.text isEqualToString:_babyRemark.alias] && [_remarksTextField.text isEqualToString:_babyRemark.remark]) {
+        _babyHomeVC.remark = _babyRemark;
+        [self popVIewController];
+    }
+    
     //判断一下这个宝宝是否有备注信息
     if (_babyRemark) {
-        [[HttpService sharedInstance] updateBabyRemark:@{@"uid":users.uid,@"baby_id":_babyInfo.baby_id,@"alias":_remarksField.text, @"remark":_remarksTextField.text} completionBlock:^(id object) {
-            _remarksField.text = nil;
-            _remarksTextField.text = nil;
-            [self popVIewController];
-        } failureBlock:^(NSError *error, NSString *responseString) {
-            [SVProgressHUD showErrorWithStatus:responseString];
-        }];
+        if (_remarksField.text.length <1 && _remarksTextField.text.length <1) {//如果客户什么也没写，表示删除备注
+            [[HttpService sharedInstance] deleteBabyRemark:@{@"uid":users.uid,@"baby_id":_babyInfo.baby_id} completionBlock:^(id object) {
+                _babyHomeVC.isFromRemarkController = YES;
+                [self popVIewController];
+                _remarksField.text = nil;
+                _remarksTextField.text = nil;
+                
+            } failureBlock:^(NSError *error, NSString *responseString) {
+                [SVProgressHUD showErrorWithStatus:responseString];
+            }];
+        }
+        else{
+            NSString *alias = _remarksField.text.length?_remarksField.text:@"备注名";
+            NSString *remark = _remarksTextField.text.length?_remarksTextField.text:@"关于宝宝的描述";
+            [[HttpService sharedInstance] updateBabyRemark:@{@"uid":users.uid,@"baby_id":_babyInfo.baby_id,@"alias":alias, @"remark":remark} completionBlock:^(id object) {
+                _remarksField.text = nil;
+                _remarksTextField.text = nil;
+                _babyHomeVC.isFromRemarkController = YES;
+                [self popVIewController];
+            } failureBlock:^(NSError *error, NSString *responseString) {
+                [SVProgressHUD showErrorWithStatus:responseString];
+            }];
+        }
+        
     }else
     {
-        [[HttpService sharedInstance] addBabyRemark:@{@"uid":users.uid,@"baby_id":_babyInfo.baby_id,@"alias":_remarksField.text, @"remark":_remarksTextField.text} completionBlock:^(id object) {
+        if (_remarksField.text.length <1 && _remarksTextField.text.length < 1) {
+            return;
+        }
+        NSString *alias = _remarksField.text.length?_remarksField.text:@"备注名";
+        NSString *remark = _remarksTextField.text.length?_remarksTextField.text:@"关于宝宝的描述";
+        [[HttpService sharedInstance] addBabyRemark:@{@"uid":users.uid,@"baby_id":_babyInfo.baby_id,@"alias":alias, @"remark":remark} completionBlock:^(id object) {
             [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
             _remarksField.text = nil;
             _remarksTextField.text = nil;
+            _babyHomeVC.isFromRemarkController = YES;
             [self popVIewController];
         } failureBlock:^(NSError *error, NSString *responseString) {
             [SVProgressHUD showErrorWithStatus:responseString];

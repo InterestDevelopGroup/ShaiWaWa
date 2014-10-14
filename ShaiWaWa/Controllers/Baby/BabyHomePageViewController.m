@@ -47,7 +47,7 @@
 {
     UITableView *_gridView;   ///身高体重显示的tableView
     NSArray *_growRecordArray; //存放宝宝成长记录的数组
-    BabyRemark *_remark;
+    
     UIImage *_image;
     NSString *_filePath;
 }
@@ -82,12 +82,19 @@
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];
-    //自动刷新
-    [_dynamicListTableView headerBeginRefreshing];
     
-    //获取宝宝成长记录
-    [self getGrowRecords];
-    
+    //获取宝宝的备注信息
+    if (!self.isFromRemarkController) {
+//
+        //自动刷新
+        [_dynamicListTableView headerBeginRefreshing];
+        
+        //获取宝宝成长记录
+        [self getGrowRecords];
+    }else
+    {
+        [self getBabyRemarkInfo];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -110,7 +117,13 @@
 - (void)initUI
 {
     [self getBabyRemarkInfo];
-    self.title = _babyInfo.nickname;
+    if ([_remark.alias isEqualToString:@"备注名"]) {
+        self.title = _babyInfo.nickname;
+    }
+    else
+    {
+        self.title = _remark.alias;
+    }
     //判断宝宝是不是我的，如果不是，头像按钮禁止点击
      UserInfo * user = [[UserDefault sharedInstance] userInfo];
     if(![_babyInfo.uid isEqualToString:user.uid]){_babyAvatarImgView.enabled = NO;}
@@ -138,17 +151,19 @@
     
     specialCareBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [specialCareBtn setBackgroundColor:[UIColor whiteColor]];
-    int isFous = [_babyInfo.is_focus intValue];
+//    int isFous = [_babyInfo.is_focus intValue];
     NSString *foucus = nil;
-    if (isFous == 1) {
+    if ([_babyInfo.is_focus isEqualToString:@"1"]) {
         foucus = @"取消关注";
     }else{
         foucus = @"特别关注";
     }
     
-    [self isFocus];
-
     [specialCareBtn setTitle:foucus forState:UIControlStateNormal];
+    
+//    [self isFocus];
+
+    
     [specialCareBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
     specialCareBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     specialCareBtn.frame = CGRectMake(self.navigationController.navigationBar.bounds.size.width-90, self.navigationController.navigationBar.bounds.size.height+51, 84, 41);
@@ -277,7 +292,14 @@
     [[HttpService sharedInstance] getBabyRemark:@{@"uid":users.uid,@"baby_id":_babyInfo.baby_id} completionBlock:^(id object) {
         _remark = (BabyRemark *)object;
         if (_remark != nil || _remark.alias != nil) {
-            self.title = _remark.alias;
+            if ([_remark.alias isEqualToString:@"备注名"]) {
+                self.title = _babyInfo.nickname;
+            }
+            else
+            {
+                self.title = _remark.alias;
+            }
+            
         }
     } failureBlock:^(NSError *error, NSString *responseString) {
         [SVProgressHUD showErrorWithStatus:responseString];
@@ -695,6 +717,7 @@
     [self showList:nil];
     RemarksViewController *remarksVC = [[RemarksViewController alloc] initWithNibName:nil bundle:nil];
     remarksVC.babyInfo = _babyInfo;
+    remarksVC.babyHomeVC = self;
     remarksVC.babyRemark = _remark;
     [self.navigationController pushViewController:remarksVC animated:YES];
 }
@@ -1076,6 +1099,7 @@
         }
         return cell;
     }
+
     else if(tableView == _dynamicListTableView)
     {
         BabyHomeDynamicCell * dynamicCell = [tableView dequeueReusableCellWithIdentifier:@"Celler"];
@@ -1181,6 +1205,7 @@
         //显示动态图片或者视频
         if(recrod.video != nil && [recrod.video length] != 0)
         {
+            dynamicCell.scrollView.hidden = NO;
             PublishImageView * imageView = [[PublishImageView alloc] initWithFrame:dynamicCell.scrollView.bounds withPath:recrod.video];
             imageView.tapBlock = ^(NSString * path){
                 
@@ -1197,6 +1222,7 @@
         }
         else if([recrod.images count] != 0)
         {
+            dynamicCell.scrollView.hidden = NO;
             int count = [recrod.images count];
             if(count > 3)
             {
@@ -1220,17 +1246,18 @@
         }
         else
         {
-            PublishImageView * imageView = [[PublishImageView alloc] initWithFrame:dynamicCell.scrollView.bounds withPath:nil];
-            [imageView setCloseHidden];
-            [dynamicCell.scrollView addSubview:imageView];
-            imageView = nil;
+//            PublishImageView * imageView = [[PublishImageView alloc] initWithFrame:dynamicCell.scrollView.bounds withPath:nil];
+//            [imageView setCloseHidden];
+//            [dynamicCell.scrollView addSubview:imageView];
+            dynamicCell.scrollView.hidden = YES;
+//            imageView = nil;
         }
         
         [[dynamicCell.contentView viewWithTag:20000] removeFromSuperview];
         if(recrod.audio != nil && [recrod.audio length] > 0)
         {
             
-            AudioView * audioView = [[AudioView alloc] initWithFrame:CGRectMake(123, 127, 82, 50) withPath:recrod.audio];
+            AudioView * audioView = [[AudioView alloc] initWithFrame:CGRectMake(125, 100, 82, 50) withPath:recrod.audio];
             audioView.tag = 20000;
             [audioView setCloseHidden];
             [dynamicCell.contentView addSubview:audioView];
@@ -1272,6 +1299,15 @@
     if (tableView == _gridView) {
         cell =(NetCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
         return cell.frame.size.height - 2;
+    }else if(tableView == _dynamicListTableView)
+    {
+        BabyRecord *record = _babyPersonalDyArray[indexPath.row];
+        if ((record.video && record.video.length) || record.images.count) {
+            return 293.0f;
+        }else
+        {
+            return 293.0f - 143.0f;
+        }
     }else
     {
         cell =[self tableView:tableView cellForRowAtIndexPath:indexPath];

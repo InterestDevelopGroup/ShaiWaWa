@@ -16,7 +16,7 @@
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="baby_4-bg-2.png" id="yPD-Tn-663">
                         <rect key="frame" x="11" y="12" width="299" height="272"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </imageView>
                     <view hidden="YES" contentMode="scaleToFill" id="xgf-sj-W71">
                         <rect key="frame" x="11" y="12" width="299" height="56"/>
@@ -58,7 +58,7 @@
                     </scrollView>
                     <view contentMode="scaleToFill" id="pBw-ah-t6J">
                         <rect key="frame" x="11" y="155" width="299" height="114"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="老头李(爸爸)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3ci-zv-cJx">
                                 <rect key="frame" x="12" y="3" width="76" height="17"/>
