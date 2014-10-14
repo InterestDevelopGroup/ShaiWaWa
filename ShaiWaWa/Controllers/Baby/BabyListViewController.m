@@ -216,6 +216,7 @@
     {
         //保密
         babyListCell.babySexImage.hidden = YES;
+        
     }
     else if([baby.sex isEqualToString:@"1"])
     {

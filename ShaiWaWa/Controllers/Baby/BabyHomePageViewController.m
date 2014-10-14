@@ -1099,6 +1099,7 @@
         }
         return cell;
     }
+
     else if(tableView == _dynamicListTableView)
     {
         BabyHomeDynamicCell * dynamicCell = [tableView dequeueReusableCellWithIdentifier:@"Celler"];
@@ -1204,6 +1205,7 @@
         //显示动态图片或者视频
         if(recrod.video != nil && [recrod.video length] != 0)
         {
+            dynamicCell.scrollView.hidden = NO;
             PublishImageView * imageView = [[PublishImageView alloc] initWithFrame:dynamicCell.scrollView.bounds withPath:recrod.video];
             imageView.tapBlock = ^(NSString * path){
                 
@@ -1220,6 +1222,7 @@
         }
         else if([recrod.images count] != 0)
         {
+            dynamicCell.scrollView.hidden = NO;
             int count = [recrod.images count];
             if(count > 3)
             {
@@ -1243,17 +1246,18 @@
         }
         else
         {
-            PublishImageView * imageView = [[PublishImageView alloc] initWithFrame:dynamicCell.scrollView.bounds withPath:nil];
-            [imageView setCloseHidden];
-            [dynamicCell.scrollView addSubview:imageView];
-            imageView = nil;
+//            PublishImageView * imageView = [[PublishImageView alloc] initWithFrame:dynamicCell.scrollView.bounds withPath:nil];
+//            [imageView setCloseHidden];
+//            [dynamicCell.scrollView addSubview:imageView];
+            dynamicCell.scrollView.hidden = YES;
+//            imageView = nil;
         }
         
         [[dynamicCell.contentView viewWithTag:20000] removeFromSuperview];
         if(recrod.audio != nil && [recrod.audio length] > 0)
         {
             
-            AudioView * audioView = [[AudioView alloc] initWithFrame:CGRectMake(123, 127, 82, 50) withPath:recrod.audio];
+            AudioView * audioView = [[AudioView alloc] initWithFrame:CGRectMake(125, 100, 82, 50) withPath:recrod.audio];
             audioView.tag = 20000;
             [audioView setCloseHidden];
             [dynamicCell.contentView addSubview:audioView];
@@ -1295,6 +1299,15 @@
     if (tableView == _gridView) {
         cell =(NetCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
         return cell.frame.size.height - 2;
+    }else if(tableView == _dynamicListTableView)
+    {
+        BabyRecord *record = _babyPersonalDyArray[indexPath.row];
+        if ((record.video && record.video.length) || record.images.count) {
+            return 293.0f;
+        }else
+        {
+            return 293.0f - 143.0f;
+        }
     }else
     {
         cell =[self tableView:tableView cellForRowAtIndexPath:indexPath];
