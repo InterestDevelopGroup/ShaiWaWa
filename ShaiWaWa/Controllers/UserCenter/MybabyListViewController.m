@@ -22,7 +22,7 @@
 
 #import "AppMacros.h"
 #import "UIImageView+WebCache.h"
-
+#import "NSStringUtil.h"
 @interface MybabyListViewController ()
 {
     NSMutableArray *myBabyList;
@@ -165,6 +165,10 @@
         babyListCell.babySexImage.image = [UIImage imageNamed:@"main_girl.png"];
     }
     
+    
+    NSInteger timeInterval = [[NSDate dateFromString:baby.birthday withFormat:@"yyyy-MM-dd"] timeIntervalSince1970];
+    NSString * age = [NSStringUtil calculateAge:[NSString stringWithFormat:@"%d",timeInterval]];
+    babyListCell.age.text = age;
     babyListCell.babyOldLabel.text = [NSString stringWithFormat:@"%@条动态",baby.record_count];
 
     babyListCell.focusImageView.hidden = YES;

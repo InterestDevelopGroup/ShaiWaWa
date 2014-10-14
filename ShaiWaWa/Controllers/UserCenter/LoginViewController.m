@@ -16,6 +16,7 @@
 #import "MBProgressHUD.h"
 #import "SVProgressHUD.h"
 #import "InputHelper.h"
+#import "SSCheckBoxView.h"
 @interface LoginViewController ()
 
 @end
@@ -80,6 +81,20 @@
     [_thirdSuperView addSubview:thirdLoginView];
     
     
+    SSCheckBoxView * checkButton = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(26, 107, 110, 20) style:kSSCheckBoxViewStyleGlossy checked:NO];
+    [checkButton setText:@"显示密码"];
+    [checkButton setStateChangedTarget:self selector:@selector(disableSecure:)];
+    [self.view addSubview:checkButton];
+    
+}
+
+
+- (void)disableSecure:(SSCheckBoxView *)sender
+{
+    [_pwdField setSecureTextEntry:!sender.checked];
+    if (!_pwdField.secureTextEntry) {
+        _pwdField.text = _pwdField.text;
+    }
 }
 
 - (IBAction)showRegisterVC:(id)sender

@@ -21,5 +21,4 @@
 #define Invitation_Msg_Content @"亲爱的,我发现一个很不错的手机应用'晒娃娃', 可以用来晒宝宝的照片和视频。你也下一个一起玩吧。下载地址: http://www.shaiwawa.com/download"
 #define QN_URL @"http://shaiwawa-app.qiniudn.com/"
 
-
-#define BMap_Key @"bzybxxDrOWGzyCSTb6VA2H0b"
+#define Default_Baby_ID @"Default_Baby_ID"

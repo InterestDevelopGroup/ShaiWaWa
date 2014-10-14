@@ -186,7 +186,7 @@
 {
     UserInfo *user = [[UserDefault sharedInstance] userInfo];
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
-    [[HttpService sharedInstance] getBabyList:@{@"offset":@"0",@"pagesize":@"10",@"uid":user.uid}completionBlock:^(id object) {
+    [[HttpService sharedInstance] getBabyList:@{@"offset":@"0",@"pagesize":@"1000",@"uid":user.uid}completionBlock:^(id object) {
         [SVProgressHUD dismiss];
         if([object count] == 0)
         {
@@ -197,16 +197,43 @@
             alertView = nil;
             return ;
         }
-        _babyInfo = object[0];
-        [self updateBabyInfo:_babyInfo];
+        
+        
         if([object count] > 1)
         {
             _moreButton.hidden = NO;
+            NSString * defaultBabyID = [[NSUserDefaults standardUserDefaults] objectForKey:Default_Baby_ID];
+            
+            if(defaultBabyID == nil)
+            {
+                _babyInfo = object[0];
+            }
+            else
+            {
+                for(BabyInfo * babyInfo in object)
+                {
+                    if([babyInfo.baby_id isEqualToString:defaultBabyID])
+                    {
+                        _babyInfo = babyInfo;
+                        break ;
+                    }
+                }
+
+            }
+            
+            [self updateBabyInfo:_babyInfo];
+            [[NSUserDefaults standardUserDefaults] setObject:_babyInfo.baby_id forKey:Default_Baby_ID];
+            [[NSUserDefaults standardUserDefaults] synchronize];
         }
         else
         {
             _moreButton.hidden = YES;
+            _babyInfo = object[0];
+            [self updateBabyInfo:_babyInfo];
+            [[NSUserDefaults standardUserDefaults] setObject:_babyInfo.baby_id forKey:Default_Baby_ID];
+            [[NSUserDefaults standardUserDefaults] synchronize];
         }
+        
     } failureBlock:^(NSError *error, NSString *responseString) {
         [SVProgressHUD dismiss];
         UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"GetBabyError", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Back", nil) otherButtonTitles:NSLocalizedString(@"TryAgain", nil),nil];
@@ -410,6 +437,9 @@
     params[@"address"] = @"";
     params[@"longitude"] = @"";
     params[@"latitude"] = @"";
+    
+    [[NSUserDefaults standardUserDefaults] setObject:_babyInfo.baby_id forKey:Default_Baby_ID];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     if(_placemark != nil)
     {
         params[@"address"] = _placemark[@"address"];
@@ -472,6 +502,10 @@
     params[@"video"] = self.uploadedVideoPath == nil ? @"" : self.uploadedVideoPath;
     params[@"audio"] = self.uploadedAudioPath == nil ? @"" : self.uploadedAudioPath;
     params[@"images"] = @"";
+    
+    [[NSUserDefaults standardUserDefaults] setObject:_babyInfo.baby_id forKey:Default_Baby_ID];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     [[HttpService sharedInstance] publishRecord:params completionBlock:^(id object) {
         
         [SVProgressHUD showSuccessWithStatus:@"上传成功."];

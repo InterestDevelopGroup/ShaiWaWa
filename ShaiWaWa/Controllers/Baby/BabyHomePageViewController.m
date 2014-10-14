@@ -141,10 +141,12 @@
     int isFous = [_babyInfo.is_focus intValue];
     NSString *foucus = nil;
     if (isFous == 1) {
-        foucus = @"特别关注";
-    }else{
         foucus = @"取消关注";
+    }else{
+        foucus = @"特别关注";
     }
+    
+    [self isFocus];
 
     [specialCareBtn setTitle:foucus forState:UIControlStateNormal];
     [specialCareBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
@@ -289,11 +291,11 @@
         UserInfo * user = (UserInfo *)object;
         if([type isEqualToString:@"1"])
         {
-            [_dadButton sd_setImageWithURL:[NSURL URLWithString:user.avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"baby_baba"]];
+            [_dadButton sd_setBackgroundImageWithURL:[NSURL URLWithString:user.avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"baby_baba"]];
         }
         else if([type isEqualToString:@"2"])
         {
-            [_monButton sd_setImageWithURL:[NSURL URLWithString:user.avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"baby_mama"]];
+            [_monButton sd_setBackgroundImageWithURL:[NSURL URLWithString:user.avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"baby_mama"]];
         }
         
     } failureBlock:^(NSError *error, NSString *responseString) {
@@ -311,6 +313,47 @@
 }
 
 
+
+- (void)isFocus
+{
+    UserInfo * user = [[UserDefault sharedInstance] userInfo];
+    if(user == nil)
+    {
+        return ;
+    }
+    
+    [[HttpService sharedInstance] isFocus:@{@"baby_id":_babyInfo.baby_id,@"uid":user.uid} completionBlock:^(id object) {
+        
+        if(object == nil)
+        {
+            _babyInfo.is_focus = @"0";
+            return ;
+        }
+        
+        if([object intValue] == 1)
+        {
+            _babyInfo.is_focus = @"1";
+            [specialCareBtn setTitle:@"取消关注" forState:UIControlStateNormal];
+        }
+        else
+        {
+            _babyInfo.is_focus = @"0";
+            [specialCareBtn setTitle:@"特别关注" forState:UIControlStateNormal];
+        }
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        
+        NSString * msg = @"获取关系失败.";
+        if(error != nil)
+        {
+            msg = @"加载失败.";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+        
+        _babyInfo.is_focus = @"0";
+        [specialCareBtn setTitle:@"特别关注" forState:UIControlStateNormal];
+    }];
+}
 
 
 - (void)HMSegmentedControlInitMethod
@@ -659,19 +702,34 @@
 
 - (void)specialCare
 {
+    [self showList:nil];
     UserInfo *users = [[UserDefault sharedInstance] userInfo];
     //判断当前宝宝的是否关注了
     if ([_babyInfo.is_focus intValue] == 1) {//1为表示已关注
-#warning 此处应该调用取消关注的接口方法
-    }else                                     //2为表示未关注
-    {
-        [[HttpService sharedInstance] followBaby:@{@"uid":users.uid,@"baby_id":_babyInfo.baby_id} completionBlock:^(id object) {
-            [self showList:nil];
+        
+        [[HttpService sharedInstance] unfollowBaby:@{@"uid":users.uid,@"baby_id":_babyInfo.baby_id} completionBlock:^(id object) {
             [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
+            _babyInfo.is_focus = @"0";
+            [specialCareBtn setTitle:@"特别关注" forState:UIControlStateNormal];
         } failureBlock:^(NSError *error, NSString *responseString) {
             NSString * msg = responseString;
             if (error) {
-                msg = @"加载失败";
+                msg = @"取消关注失败";
+            }
+            [SVProgressHUD showErrorWithStatus:msg];
+        }];
+    }
+    else                                     //2为表示未关注
+    {
+        
+        [[HttpService sharedInstance] followBaby:@{@"uid":users.uid,@"baby_id":_babyInfo.baby_id} completionBlock:^(id object) {
+            [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
+            _babyInfo.is_focus = @"1";
+            [specialCareBtn setTitle:@"取消关注" forState:UIControlStateNormal];
+        } failureBlock:^(NSError *error, NSString *responseString) {
+            NSString * msg = responseString;
+            if (error) {
+                msg = @"关注失败";
             }
             [SVProgressHUD showErrorWithStatus:msg];
         }];

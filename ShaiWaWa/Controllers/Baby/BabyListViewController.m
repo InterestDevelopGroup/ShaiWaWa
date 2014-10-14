@@ -230,7 +230,8 @@
         babyListCell.babySexImage.image = [UIImage imageNamed:@"main_girl.png"];
     }
 
-    babyListCell.age.text = [NSStringUtil calculateAge:baby.birthday];
+    NSInteger timeInterval = [[NSDate dateFromString:baby.birthday withFormat:@"yyyy-MM-dd"] timeIntervalSince1970];
+    babyListCell.age.text = [NSStringUtil calculateAge:[NSString stringWithFormat:@"%d",timeInterval]];
     babyListCell.babyOldLabel.text = [NSString stringWithFormat:@"%@条动态",baby.record_count];
     
     if([baby.is_focus isEqualToString:@"0"])

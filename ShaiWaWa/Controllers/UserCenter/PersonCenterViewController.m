@@ -57,6 +57,35 @@
     users = [[UserDefault sharedInstance] userInfo];
     self.title = users.username;
     //[self topViewData];
+    
+    if(users.sina_openId == nil)
+    {
+        _xinlanButton.selected = YES;
+    }
+    else
+    {
+        _xinlanButton.selected = NO;
+    }
+    
+    if(users.tecent_openId == nil)
+    {
+        _qqButton.selected = YES;
+    }
+    else
+    {
+        _qqButton.selected = NO;
+    }
+    
+    if(users.phone == nil)
+    {
+        _addressbookButton.selected = YES;
+    }
+    else
+    {
+        _addressbookButton.selected = NO;
+    }
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
