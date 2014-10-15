@@ -85,7 +85,7 @@
 
 - (void)refresh
 {
-    _currentOffset = 0;
+//    _currentOffset = 0;
     [self getLikeUsers];
 }
 
@@ -101,7 +101,10 @@
     [[HttpService sharedInstance] getLikingList:@{@"rid":_record.rid,@"offset":[NSString stringWithFormat:@"%i",_currentOffset],@"pagesize":[NSString stringWithFormat:@"%i",CommonPageSize]} completionBlock:^(id object) {
         [_praisePersonListTableView headerEndRefreshing];
         [_praisePersonListTableView footerEndRefreshing];
+        
+        
         [praisePersonArr addObjectsFromArray:object];
+        _currentOffset += CommonPageSize;
         [_praisePersonListTableView reloadData];
         
         self.title = [NSString stringWithFormat:@"%i人觉得很赞",[praisePersonArr count]];
@@ -150,13 +153,11 @@
         FriendHomeViewController * vc = [[FriendHomeViewController alloc] initWithNibName:nil bundle:nil];
         vc.friendId = likeUser.uid;
         [self push:vc];
-        vc = nil;
     }
     else
     {
         PersonCenterViewController * vc = [[PersonCenterViewController alloc] initWithNibName:nil bundle:nil];
         [self push:vc];
-        vc = nil;
     }
 
 }

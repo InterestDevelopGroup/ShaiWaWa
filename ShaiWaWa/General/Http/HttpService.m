@@ -1160,7 +1160,12 @@
         if (isError) {
             return ;
         }
-        UserInfo *user = [self mapModel:[[obj objectForKey:@"result"] objectAtIndex:0] withClass:[UserInfo class]];
+        UserInfo *user = nil;
+        if ([obj objectForKey:@"result"] ==nil || [[obj objectForKey:@"result"] isKindOfClass:[NSNull class]]) {
+            success(user);
+            return;
+        }
+        user = [self mapModel:[[obj objectForKey:@"result"] objectAtIndex:0] withClass:[UserInfo class]];
         if (success) {
             success(user);
         }
