@@ -401,16 +401,18 @@
     }
     else
     {
-        cell.babyImageView.image = [UIImage imageNamed:@"square_pic-1"];
+//        cell.babyImageView.image = [UIImage imageNamed:@"square_pic-1"];
+        cell.babyImageView.hidden = YES;
     }
     
     [cell.usernameLabel setText:record.baby_nickname];
     [cell.contentLabel setText:record.content];
-    [cell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:(record.avatar == [NSNull null] ? @"" : record.avatar)] placeholderImage:Default_Avatar];
-    cell.avatarImageView.userInteractionEnabled = YES;
-    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showFriendInfo:)];
-    [cell.avatarImageView addGestureRecognizer:tap];
-    cell.avatarImageView.tag = indexPath.row;
+    
+        [cell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:(record.avatar == nil ? @"" : record.avatar)] placeholderImage:Default_Avatar];
+        cell.avatarImageView.userInteractionEnabled = YES;
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showFriendInfo:)];
+        [cell.avatarImageView addGestureRecognizer:tap];
+        cell.avatarImageView.tag = indexPath.row;
     cell.timeLabel.text = [NSStringUtil calculateTime:record.add_time];
     tap = nil;
     return cell;
@@ -424,7 +426,23 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(146, 240);
+    BabyRecord * record;
+    if(segMentedControl.selectedSegmentIndex == 0)
+    {
+        record = _newestDyArray[indexPath.row];
+    }
+    else
+    {
+        record = _hotDyArray[indexPath.row];
+    }
+        //说明有图片
+    if (record.images.count > 0 || (record.video != nil&& [record.video length] != 0)) {
+        return CGSizeMake(146, 240);
+    }else
+    {
+        return CGSizeMake(146, 240-161.0);
+    }
+    
 }
 
 
