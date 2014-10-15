@@ -36,6 +36,7 @@
 #import "ShareManager.h"
 @import MediaPlayer;
 @interface DynamicDetailViewController ()<UIActionSheetDelegate>
+
 @property (nonatomic,strong) ShareView * sv;
 @end
 
@@ -237,16 +238,21 @@
     [self getComments];
 }
 
-//请求评论列表
+
+#pragma mark 请求评论列表
 - (void)getComments
 {
     //[SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
     [[HttpService sharedInstance] getCommentList:@{@"rid":_babyRecord.rid,@"offset":@"0",@"pagesize":@"200"} completionBlock:^(id object) {
         //[SVProgressHUD dismiss];
         //pinLunArray = [[[object reverseObjectEnumerator] allObjects] mutableCopy];
+//        _commentOffset += pinLunArray.count;    //
+        if (pinLunArray.count > 0) {
+            [pinLunArray removeAllObjects];
+        }
         [pinLunArray addObjectsFromArray:object];
-        [_pinLunListTableView reloadData];
         [_pinLunListTableView headerEndRefreshing];
+        [_pinLunListTableView reloadData];
     } failureBlock:^(NSError *error, NSString *responseString) {
         NSString * msg = responseString;
         if(error)
@@ -754,8 +760,8 @@
         cell = [tableView dequeueReusableCellWithIdentifier:@"PinLunCell"];
         RecordComment * comment = pinLunArray[indexPath.row];
         PinLunCell * pinLunCell = (PinLunCell *)cell;
-        pinLunCell.usernameLabel.text = comment.username;
-        pinLunCell.contentLabel.text = comment.content;
+        pinLunCell.usernameLabel.text = comment.username?@"":comment.username;
+        pinLunCell.contentLabel.text = comment.content?@"":comment.content;
         pinLunCell.addTimeLabel.text = [NSStringUtil calculateTime:comment.add_time];
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPersonalHome:)];
         pinLunCell.usernameLabel.userInteractionEnabled = YES;

@@ -22,6 +22,8 @@
 #import "NotificationMsg.h"
 #import "UIImageView+WebCache.h"
 #import "FriendHomeViewController.h"
+#import "NSStringUtil.h"
+
 @interface MessageViewController ()
 {
     
@@ -396,8 +398,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    
     NotificationMsg * msg ;
     if(segMentedControl.selectedSegmentIndex == 0)
     {
@@ -412,24 +412,31 @@
     {
         MessageCell * msgCell = (MessageCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
         UILabel *temp = [[UILabel alloc] init];
+//        [msgCell.sendImgView sd_setImageWithURL:[NSURL URLWithString:msg.avatar] placeholderImage:[UIImage imageNamed:@"user_touxiang.png"]];
+        //计算时间
+        msgCell.timeLabel.text = [NSStringUtil calculateTime:msg.add_time];
         switch ([msg.type intValue]) {
             case 1:     //动态被评论
                 msgCell.agreeButton.hidden = YES;
                 msgCell.ignoreButton.hidden = YES;
                 msgCell.refuseButton.hidden = YES;
-                msgCell.actionLabel.text = @"评论了你的动态";
+//                msgCell.actionLabel.text = @"评论了你的动态";
+                msgCell.actionLabel.text = msg.content;
                 break;
             case 2:     //动态被赞
                 msgCell.agreeButton.hidden = YES;
                 msgCell.ignoreButton.hidden = YES;
                 msgCell.refuseButton.hidden = YES;
                 msgCell.contentLabel.hidden = YES;
-                msgCell.actionLabel.text = @"赞了你的动态";
+//                msgCell.actionLabel.text = @"赞了你的动态";
+                msgCell.actionLabel.text = msg.content;
                 break;
             case 3:     //申请成为好友
+//                msgCell.sendNameLabel.text = msg.content;
                 msgCell.receiveImgView.hidden = YES;
                 msgCell.timeLabel.hidden = YES;
-                msgCell.actionLabel.text = @"请求加你为好友";
+//                msgCell.actionLabel.text = @"请求加你为好友";
+                msgCell.actionLabel.text = msg.content;
                 msgCell.contentLabel.text = msg.remark;
                 
                 [msgCell.agreeButton addTarget:self action:@selector(agreeAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -442,7 +449,8 @@
                 msgCell.refuseButton.hidden = YES;
                 msgCell.receiveImgView.hidden = YES;
                 msgCell.contentLabel.hidden = YES;
-                msgCell.actionLabel.text = @"同意了你的好友请求";
+//                msgCell.actionLabel.text = @"同意了你的好友请求";
+                msgCell.actionLabel.text = msg.content;
                 break;
             case 5:     //好友申请被拒绝
                 msgCell.agreeButton.hidden = YES;
@@ -508,7 +516,7 @@
             //申请成为好友
             msgCell.receiveImgView.hidden = YES;
             msgCell.timeLabel.hidden = YES;
-            msgCell.actionLabel.text = @"请求加你为好友";
+            msgCell.actionLabel.text = msg.content;
             msgCell.contentLabel.text = msg.remark;
         }
         if ([typeId isEqualToString:@"4"]) {
@@ -569,6 +577,18 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if(segMentedControl.selectedSegmentIndex == 0)
+    {
+        NotificationMsg *msg = _newestMsgArray[indexPath.row];
+        //如果消息为好友请求，那么不作处理
+        if ([msg.type intValue] != 3 ) {
+            [[HttpService sharedInstance] updateSystemNotification:@{@"notification_id":msg.notification_id,@"status":@"1"} completionBlock:^(id object) {
+                //点击该行调用网络接口，标记为已读，并且删除
+                [_newestMsgArray removeObjectAtIndex:indexPath.row];
+                [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+            } failureBlock:nil];
+        }
+    }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
