@@ -33,11 +33,13 @@
 #import "MLAudioMeterObserver.h"
 #import "MLAudioRecorder.h"
 #import "ChooseModeViewController.h"
+#import "ELCImagePickerController.H"
+#import <MobileCoreServices/UTCoreTypes.h>
 
 @import AVFoundation;
 @import MediaPlayer;
 #define PlaceHolder @"关于宝宝的开心事情..."
-@interface PublishRecordViewController ()<UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate,UIActionSheetDelegate,CLLocationManagerDelegate>
+@interface PublishRecordViewController ()<UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate,UIActionSheetDelegate,CLLocationManagerDelegate,ELCImagePickerControllerDelegate>
 {
     AudioView *_audioView;
 }
@@ -586,6 +588,8 @@
     vc = nil;
 }
 
+
+#pragma mark 添加更多图片
 - (IBAction)showButtonsAction:(id)sender
 {
     _overlayView.frame = self.view.bounds;
@@ -604,15 +608,91 @@
 }
 
 
+
+#pragma -开始拍照按钮监听
 - (IBAction)openPictureAction:(id)sender
 {
     [_overlayView removeFromSuperview];
-    UIImagePickerController * picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    picker.allowsEditing = YES;
-    [self presentViewController:picker animated:YES completion:nil];
-    picker = nil;
+    
+//    UIImagePickerController * picker = [[UIImagePickerController alloc] init];
+//    picker.delegate = self;
+//    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+//    picker.allowsEditing = YES;
+//    [self presentViewController:picker animated:YES completion:nil];
+//    picker = nil;
+    
+    ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] initImagePicker];
+    
+    elcPicker.maximumImagesCount = 9 - _images.count;
+    elcPicker.returnsOriginalImage = YES; //Only return the fullScreenImage, not the fullResolutionImage
+    elcPicker.returnsImage = YES; //Return UIimage if YES. If NO, only return asset location information
+    elcPicker.onOrder = YES; //For multiple image selection, display and return order of selected images
+    elcPicker.mediaTypes = @[(NSString *)kUTTypeImage]; //Supports image and movie types
+    
+	elcPicker.imagePickerDelegate = self;
+
+    [self presentViewController:elcPicker animated:YES completion:nil];
+
+}
+
+#pragma mark --多选照片选择器代理放法
+- (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [_overlayView removeFromSuperview];
+    
+	//初始化数组存放图片
+    NSMutableArray *images = [NSMutableArray arrayWithCapacity:[info count]];
+    //遍历，拿出图片
+    for (NSDictionary *dict in info) {
+        
+        if ([dict objectForKey:UIImagePickerControllerOriginalImage]){
+            UIImage* image=[dict objectForKey:UIImagePickerControllerOriginalImage];
+            [images addObject:image];
+            
+            UIImageView *imageview = [[UIImageView alloc] initWithImage:image];
+            [imageview setContentMode:UIViewContentModeScaleAspectFit];
+            
+        } else {
+            NSLog(@"UIImagePickerControllerReferenceURL = %@", dict);
+        }
+    }
+   //保存数据
+    [self pickPictureProcess:images];
+}
+
+- (void)elcImagePickerControllerDidCancel:(ELCImagePickerController *)picker
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+#pragma mark - UIImagePickerControllerDelegate Methods
+//点击相册中的图片 或照相机照完后点击use  后触发的方法
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    [picker dismissViewControllerAnimated:YES completion:^{
+        NSString * mediaType = [info objectForKey:UIImagePickerControllerMediaType];
+        if ([mediaType isEqualToString:@"public.image"])
+        {
+            UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+            [self pickPictureProcess:image];
+        }
+        else if([mediaType isEqualToString:@"public.movie"])
+        {
+            NSURL *videoURL = [info objectForKey:UIImagePickerControllerMediaURL];
+            //DDLogVerbose(@"%@",videoURL);
+            [self pickVideoProcess:videoURL];
+        }
+        
+    }];
+    
+}
+
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:^{}];
 }
 
 //显示拍照控制器
@@ -1079,7 +1159,7 @@
     [self push:vc];
     vc = nil;
 }
-
+/*
 //选择图片后的处理
 - (void)pickPictureProcess:(UIImage *)image
 {
@@ -1131,6 +1211,69 @@
         _addMoreButton.hidden = YES;
     }
 
+}
+*/
+
+- (void)pickPictureProcess:(NSArray *)images
+{
+    int offx = 5;
+    
+    for (int i = 0; i< images.count; i++) {
+        UIImage *image = images[i];
+        //先保存图片
+        NSString * fileName = [[IO generateRndString] stringByAppendingPathExtension:@"png"];
+        NSString * path = [IO pathForResource:fileName inDirectory:Publish_Image_Folder];
+        if(![IO writeFileToPath:path withData:UIImageJPEGRepresentation(image, 0.6)])
+        {
+            [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"SaveError", nil)];
+            return ;
+        }
+        
+        //设置生产imageView的宽高
+         __weak PublishImageView * imageView = [self generateImageViewWithPath:path];
+        imageView.frame = CGRectMake(offx * (i + 1) + i * CGRectGetWidth(imageView.frame), 0, CGRectGetWidth(imageView.frame), CGRectGetHeight(imageView.frame));
+        //删除按钮的block
+        imageView.deleteBlock = ^(NSString * path){
+            [_images removeObject:path];
+            [_imageViews removeObject:imageView];
+            if([_imageViews count] > 0)
+            {
+                [self reRangeImageView];
+            }
+            [_scrollView setContentSize:CGSizeMake(([_images count] + 1) * offx + [_images count] * CGRectGetWidth(_scrollView.frame), CGRectGetHeight(_scrollView.frame))];
+            [_addMoreButton setTitle:[NSString stringWithFormat:@"添加更多(%i/9)",[_images count]] forState:UIControlStateNormal];
+            if([_images count] == 0)
+            {
+                
+                _addMoreButton.hidden = YES;
+                [self.view addSubview:_button3View];
+                
+            }
+        };
+        
+        [_images addObject:path];
+        [_imageViews addObject:imageView];
+        [_scrollView addSubview:imageView];
+        [_scrollView setContentSize:CGSizeMake(([_images count] + 1) * offx + [_images count] * CGRectGetWidth(imageView.frame), CGRectGetHeight(_scrollView.frame))];
+        [self reRangeImageView];
+        //隐藏按钮
+        [_button3View removeFromSuperview];
+        
+        if([_images count] < 9)
+        {
+            //显示添加按钮，设置标题
+            _addMoreButton.hidden = NO;
+            [_addMoreButton setTitle:[NSString stringWithFormat:@"添加更多(%i/9)",[_images count]] forState:UIControlStateNormal];
+        }
+        else
+        {
+            //9个图片，隐藏按钮
+            _addMoreButton.hidden = YES;
+        }
+    }
+    
+    
+    
 }
 
 //选择视频后的处理
@@ -1268,33 +1411,7 @@
 
 
 
-#pragma mark - UIImagePickerControllerDelegate Methods
-//点击相册中的图片 或照相机照完后点击use  后触发的方法
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-    [picker dismissViewControllerAnimated:YES completion:^{
-        NSString * mediaType = [info objectForKey:UIImagePickerControllerMediaType];
-        if ([mediaType isEqualToString:@"public.image"])
-        {
-            UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
-            [self pickPictureProcess:image];
-        }
-        else if([mediaType isEqualToString:@"public.movie"])
-        {
-            NSURL *videoURL = [info objectForKey:UIImagePickerControllerMediaURL];
-            //DDLogVerbose(@"%@",videoURL);
-            [self pickVideoProcess:videoURL];
-        }
 
-    }];
-    
-}
-
-
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-    [picker dismissViewControllerAnimated:YES completion:^{}];
-}
 
 #pragma mark CLLocationManagerDelegate Methods
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation

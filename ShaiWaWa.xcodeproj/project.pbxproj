@@ -491,6 +491,18 @@
 		F4AE507F199AFBEE007683E9 /* QiniuSimpleUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AE5076199AFBEE007683E9 /* QiniuSimpleUploader.m */; };
 		F4AE5080199AFBEE007683E9 /* QiniuUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AE5079199AFBEE007683E9 /* QiniuUtils.m */; };
 		F4AE5082199AFC12007683E9 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F4AE5081199AFC12007683E9 /* libz.dylib */; };
+		F4C2D4EA19EE44A100521BFE /* ELCAlbumPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C2D4D419EE44A100521BFE /* ELCAlbumPickerController.m */; };
+		F4C2D4EB19EE44A100521BFE /* ELCAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C2D4D619EE44A100521BFE /* ELCAsset.m */; };
+		F4C2D4EC19EE44A100521BFE /* ELCAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C2D4D819EE44A100521BFE /* ELCAssetCell.m */; };
+		F4C2D4ED19EE44A100521BFE /* ELCAssetTablePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C2D4DC19EE44A100521BFE /* ELCAssetTablePicker.m */; };
+		F4C2D4EE19EE44A100521BFE /* ELCConsole.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C2D4DE19EE44A100521BFE /* ELCConsole.m */; };
+		F4C2D4EF19EE44A100521BFE /* ELCImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C2D4E019EE44A100521BFE /* ELCImagePickerController.m */; };
+		F4C2D4F019EE44A100521BFE /* ELCOverlayImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C2D4E319EE44A100521BFE /* ELCOverlayImageView.m */; };
+		F4C2D4F119EE44A100521BFE /* ELCAlbumPickerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4C2D4E519EE44A100521BFE /* ELCAlbumPickerController.xib */; };
+		F4C2D4F219EE44A100521BFE /* ELCAssetPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4C2D4E619EE44A100521BFE /* ELCAssetPicker.xib */; };
+		F4C2D4F319EE44A100521BFE /* ELCAssetTablePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4C2D4E719EE44A100521BFE /* ELCAssetTablePicker.xib */; };
+		F4C2D4F419EE44A100521BFE /* Overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C2D4E819EE44A100521BFE /* Overlay.png */; };
+		F4C2D4F519EE44A100521BFE /* Overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C2D4E919EE44A100521BFE /* Overlay@2x.png */; };
 		F4C4C608199F4C4B00B348A5 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4C4C607199F4C4B00B348A5 /* AddressBookUI.framework */; };
 		F4E363B91985ECC100A018A5 /* TheThirdPartyLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4E363B81985ECC100A018A5 /* TheThirdPartyLoginView.m */; };
 		F4E363BC1986009900A018A5 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4E363BB1986009900A018A5 /* ShareView.m */; };
@@ -1179,6 +1191,28 @@
 		F4AE5078199AFBEE007683E9 /* QiniuUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiniuUtils.h; sourceTree = "<group>"; };
 		F4AE5079199AFBEE007683E9 /* QiniuUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiniuUtils.m; sourceTree = "<group>"; };
 		F4AE5081199AFC12007683E9 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		F4C2D4D319EE44A100521BFE /* ELCAlbumPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAlbumPickerController.h; sourceTree = "<group>"; };
+		F4C2D4D419EE44A100521BFE /* ELCAlbumPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAlbumPickerController.m; sourceTree = "<group>"; };
+		F4C2D4D519EE44A100521BFE /* ELCAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAsset.h; sourceTree = "<group>"; };
+		F4C2D4D619EE44A100521BFE /* ELCAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAsset.m; sourceTree = "<group>"; };
+		F4C2D4D719EE44A100521BFE /* ELCAssetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetCell.h; sourceTree = "<group>"; };
+		F4C2D4D819EE44A100521BFE /* ELCAssetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAssetCell.m; sourceTree = "<group>"; };
+		F4C2D4D919EE44A100521BFE /* ELCAssetPickerFilterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetPickerFilterDelegate.h; sourceTree = "<group>"; };
+		F4C2D4DA19EE44A100521BFE /* ELCAssetSelectionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetSelectionDelegate.h; sourceTree = "<group>"; };
+		F4C2D4DB19EE44A100521BFE /* ELCAssetTablePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetTablePicker.h; sourceTree = "<group>"; };
+		F4C2D4DC19EE44A100521BFE /* ELCAssetTablePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAssetTablePicker.m; sourceTree = "<group>"; };
+		F4C2D4DD19EE44A100521BFE /* ELCConsole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCConsole.h; sourceTree = "<group>"; };
+		F4C2D4DE19EE44A100521BFE /* ELCConsole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCConsole.m; sourceTree = "<group>"; };
+		F4C2D4DF19EE44A100521BFE /* ELCImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCImagePickerController.h; sourceTree = "<group>"; };
+		F4C2D4E019EE44A100521BFE /* ELCImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCImagePickerController.m; sourceTree = "<group>"; };
+		F4C2D4E119EE44A100521BFE /* ELCImagePickerHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCImagePickerHeader.h; sourceTree = "<group>"; };
+		F4C2D4E219EE44A100521BFE /* ELCOverlayImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCOverlayImageView.h; sourceTree = "<group>"; };
+		F4C2D4E319EE44A100521BFE /* ELCOverlayImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCOverlayImageView.m; sourceTree = "<group>"; };
+		F4C2D4E519EE44A100521BFE /* ELCAlbumPickerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ELCAlbumPickerController.xib; sourceTree = "<group>"; };
+		F4C2D4E619EE44A100521BFE /* ELCAssetPicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ELCAssetPicker.xib; sourceTree = "<group>"; };
+		F4C2D4E719EE44A100521BFE /* ELCAssetTablePicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ELCAssetTablePicker.xib; sourceTree = "<group>"; };
+		F4C2D4E819EE44A100521BFE /* Overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Overlay.png; sourceTree = "<group>"; };
+		F4C2D4E919EE44A100521BFE /* Overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Overlay@2x.png"; sourceTree = "<group>"; };
 		F4C4C607199F4C4B00B348A5 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		F4E363B71985ECC100A018A5 /* TheThirdPartyLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheThirdPartyLoginView.h; sourceTree = "<group>"; };
 		F4E363B81985ECC100A018A5 /* TheThirdPartyLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheThirdPartyLoginView.m; sourceTree = "<group>"; };
@@ -1485,6 +1519,7 @@
 		F41F68861982081E00089E42 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				F4C2D4D219EE44A100521BFE /* ELCImagePicker */,
 				C320608C19E6B75600C80FF7 /* Sqlite */,
 				F4A7781319DC09D0000F5401 /* PinYin4Objc */,
 				C362BFF519D6A23E00753082 /* AudioPlayer */,
@@ -2435,6 +2470,43 @@
 			path = QiniuSDK;
 			sourceTree = "<group>";
 		};
+		F4C2D4D219EE44A100521BFE /* ELCImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				F4C2D4D319EE44A100521BFE /* ELCAlbumPickerController.h */,
+				F4C2D4D419EE44A100521BFE /* ELCAlbumPickerController.m */,
+				F4C2D4D519EE44A100521BFE /* ELCAsset.h */,
+				F4C2D4D619EE44A100521BFE /* ELCAsset.m */,
+				F4C2D4D719EE44A100521BFE /* ELCAssetCell.h */,
+				F4C2D4D819EE44A100521BFE /* ELCAssetCell.m */,
+				F4C2D4D919EE44A100521BFE /* ELCAssetPickerFilterDelegate.h */,
+				F4C2D4DA19EE44A100521BFE /* ELCAssetSelectionDelegate.h */,
+				F4C2D4DB19EE44A100521BFE /* ELCAssetTablePicker.h */,
+				F4C2D4DC19EE44A100521BFE /* ELCAssetTablePicker.m */,
+				F4C2D4DD19EE44A100521BFE /* ELCConsole.h */,
+				F4C2D4DE19EE44A100521BFE /* ELCConsole.m */,
+				F4C2D4DF19EE44A100521BFE /* ELCImagePickerController.h */,
+				F4C2D4E019EE44A100521BFE /* ELCImagePickerController.m */,
+				F4C2D4E119EE44A100521BFE /* ELCImagePickerHeader.h */,
+				F4C2D4E219EE44A100521BFE /* ELCOverlayImageView.h */,
+				F4C2D4E319EE44A100521BFE /* ELCOverlayImageView.m */,
+				F4C2D4E419EE44A100521BFE /* Resources */,
+			);
+			path = ELCImagePicker;
+			sourceTree = "<group>";
+		};
+		F4C2D4E419EE44A100521BFE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F4C2D4E519EE44A100521BFE /* ELCAlbumPickerController.xib */,
+				F4C2D4E619EE44A100521BFE /* ELCAssetPicker.xib */,
+				F4C2D4E719EE44A100521BFE /* ELCAssetTablePicker.xib */,
+				F4C2D4E819EE44A100521BFE /* Overlay.png */,
+				F4C2D4E919EE44A100521BFE /* Overlay@2x.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2541,6 +2613,7 @@
 				F432BDDA19762AC80086BBE9 /* baby_dongtai-@2x.png in Resources */,
 				F432BE2E19762AC80086BBE9 /* square_fenxiang-1@2x.png in Resources */,
 				F432BE5E19762AC80086BBE9 /* user_3-bg@2x.png in Resources */,
+				F4C2D4F519EE44A100521BFE /* Overlay@2x.png in Resources */,
 				F432BDE819762AC80086BBE9 /* login_box-7@2x.png in Resources */,
 				F47F54F9197FACE7006DCA75 /* AddrBookCell.xib in Resources */,
 				F432BDEF19762AC80086BBE9 /* main_2-bg2@2x.png in Resources */,
@@ -2669,6 +2742,7 @@
 				F43EA3791990A6980048081E /* btn_021@2x.png in Resources */,
 				F43EA3761990A6980048081E /* btn_020@2x.png in Resources */,
 				F432BE5C19762AC80086BBE9 /* user_1-bg@2x.png in Resources */,
+				F4C2D4F319EE44A100521BFE /* ELCAssetTablePicker.xib in Resources */,
 				F43387FB1974C28600464D43 /* ScannerQRCodeViewController.xib in Resources */,
 				F47F5514197FACE7006DCA75 /* SummaryCell.xib in Resources */,
 				F421621719D65B4A00F01C18 /* 女孩体重.plist in Resources */,
@@ -2699,7 +2773,9 @@
 				F432BE6519762AC80086BBE9 /* xiaoxinlang@2x.png in Resources */,
 				F43388191974C28600464D43 /* FriendHomeViewController.xib in Resources */,
 				F432BDFE19762AC80086BBE9 /* main_quanbudongtai@2x.png in Resources */,
+				F4C2D4F119EE44A100521BFE /* ELCAlbumPickerController.xib in Resources */,
 				F43388351974C28600464D43 /* ResetPwdViewController.xib in Resources */,
+				F4C2D4F419EE44A100521BFE /* Overlay.png in Resources */,
 				F432BDDD19762AC80086BBE9 /* baby_jianjie-@2x.png in Resources */,
 				F433882D1974C28600464D43 /* PraiseViewController.xib in Resources */,
 				F43387F51974C28600464D43 /* BabyHomePageViewController.xib in Resources */,
@@ -2760,6 +2836,7 @@
 				F432BDDF19762AC80086BBE9 /* baby_mama@2x.png in Resources */,
 				F432BE4E19762AC80086BBE9 /* square_zizhi@2x.png in Resources */,
 				F433883F1974C28600464D43 /* UserGenderUpdateViewController.xib in Resources */,
+				F4C2D4F219EE44A100521BFE /* ELCAssetPicker.xib in Resources */,
 				F432BE3419762AC80086BBE9 /* square_jubao@2x.png in Resources */,
 				C3DEA1A119DE829B003C86A8 /* 爱心-未选中@2x.png in Resources */,
 				C365F98619CB2E870094377F /* SetPasswordStepOneViewController.xib in Resources */,
@@ -2868,10 +2945,12 @@
 				F4A7782519DC09D0000F5401 /* PinyinFormatter.m in Sources */,
 				F41F68E01982081E00089E42 /* UIColor+Utils.m in Sources */,
 				C3891B3119C01A390039F29D /* RHPerson.m in Sources */,
+				F4C2D4EC19EE44A100521BFE /* ELCAssetCell.m in Sources */,
 				F47F5505197FACE7006DCA75 /* MessageCell.m in Sources */,
 				C39AAE1B19B30A3200C8A7BE /* Topic.m in Sources */,
 				F47F5504197FACE7006DCA75 /* MainMenu.m in Sources */,
 				F41F68D71982081E00089E42 /* UITextView+Placeholder.m in Sources */,
+				F4C2D4F019EE44A100521BFE /* ELCOverlayImageView.m in Sources */,
 				C365F98A19CB31ED0094377F /* SetPassStepTwoViewController.m in Sources */,
 				F43388081974C28600464D43 /* SearchWeiboFriendViewController.m in Sources */,
 				F4A7782419DC09D0000F5401 /* NSString+PinYin4Cocoa.m in Sources */,
@@ -2890,6 +2969,7 @@
 				C34E560519D294CF0026E23D /* Mp3RecordWriter.m in Sources */,
 				C398DFFE19A4D9B0000F08DB /* QNUploadHelper.m in Sources */,
 				F47F54FA197FACE7006DCA75 /* BabyListCell.m in Sources */,
+				F4C2D4EE19EE44A100521BFE /* ELCConsole.m in Sources */,
 				C350724719C17F690046D4A3 /* ContactUser.m in Sources */,
 				F43388261974C28600464D43 /* PersonCenterViewController.m in Sources */,
 				F41389C5197F48D000ABC8AE /* UserInfo.m in Sources */,
@@ -2925,6 +3005,7 @@
 				C3DEA19A19DCD161003C86A8 /* BabyHomeDynamicCell.m in Sources */,
 				F47F54FC197FACE7006DCA75 /* DynamicCell.m in Sources */,
 				F47F54F4197FACE7006DCA75 /* ControlCenter.m in Sources */,
+				F4C2D4EA19EE44A100521BFE /* ELCAlbumPickerController.m in Sources */,
 				F47F5511197FACE7006DCA75 /* SearchRSCell.m in Sources */,
 				F47F550D197FACE7006DCA75 /* QQCell.m in Sources */,
 				F4A777FD19DBFC19000F5401 /* BabyResultController.m in Sources */,
@@ -2966,15 +3047,18 @@
 				C362C00219D6A23E00753082 /* AudioPlayer.m in Sources */,
 				C320609419E6B75600C80FF7 /* CSqlite.m in Sources */,
 				C360009F19AA427C00940421 /* GTMBase64.m in Sources */,
+				F4C2D4EF19EE44A100521BFE /* ELCImagePickerController.m in Sources */,
 				F43388141974C28600464D43 /* FinishRegisterViewController.m in Sources */,
 				C35DFA6B19B412160023B4CF /* ImageDisplayView.m in Sources */,
 				F433882E1974C28600464D43 /* QRCodeCardViewController.m in Sources */,
 				C3891B2919C01A390039F29D /* NSThread+RHBlockAdditions.m in Sources */,
+				F4C2D4ED19EE44A100521BFE /* ELCAssetTablePicker.m in Sources */,
 				F4E363B91985ECC100A018A5 /* TheThirdPartyLoginView.m in Sources */,
 				F4AE507C199AFBEE007683E9 /* QiniuHttpClient.m in Sources */,
 				F43387FC1974C28600464D43 /* SearchAddressBookViewController.m in Sources */,
 				C3C0FA1219ED512800E4D7AE /* AddFriendViewController.m in Sources */,
 				F43387FA1974C28600464D43 /* ScannerQRCodeViewController.m in Sources */,
+				F4C2D4EB19EE44A100521BFE /* ELCAsset.m in Sources */,
 				C3891B3019C01A390039F29D /* RHMultiValue.m in Sources */,
 				F44CF76D199A3CB7003B7F7D /* UIView+Extension.m in Sources */,
 				F433881E1974C28600464D43 /* MessageViewController.m in Sources */,

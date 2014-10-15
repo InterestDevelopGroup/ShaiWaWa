@@ -588,7 +588,6 @@
                 [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
             } failureBlock:nil];
         }
-        
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
