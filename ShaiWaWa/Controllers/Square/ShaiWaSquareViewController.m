@@ -107,9 +107,11 @@
     
     UIView * view_1 = [UIView new];
     view_1.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.segScrollView.frame.size.height);
+    view_1.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [view_1 addSubview:collectionNew];
     UIView * view_2 = [UIView new];
     view_2.frame = CGRectMake(self.view.bounds.size.width, 0, self.view.bounds.size.width, self.segScrollView.frame.size.height);
+    view_2.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [view_2 addSubview:collectionHot];
     
     

@@ -36,9 +36,7 @@
 #import "ShareManager.h"
 @import MediaPlayer;
 @interface DynamicDetailViewController ()<UIActionSheetDelegate>
-{
-    int _commentOffset;
-}
+
 @property (nonatomic,strong) ShareView * sv;
 @end
 
@@ -47,7 +45,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        _commentOffset = 0;
+        
     }
     return self;
 }
@@ -245,13 +243,13 @@
 - (void)getComments
 {
     //[SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
-    int pageSize = 200;
-    [[HttpService sharedInstance] getCommentList:@{@"rid":_babyRecord.rid,@"offset":@(_commentOffset),@"pagesize":@(pageSize)} completionBlock:^(id object) {
+    [[HttpService sharedInstance] getCommentList:@{@"rid":_babyRecord.rid,@"offset":@"0",@"pagesize":@"200"} completionBlock:^(id object) {
         //[SVProgressHUD dismiss];
         //pinLunArray = [[[object reverseObjectEnumerator] allObjects] mutableCopy];
 //        _commentOffset += pinLunArray.count;    //
-        [pinLunArray removeAllObjects];
-
+        if (pinLunArray.count > 0) {
+            [pinLunArray removeAllObjects];
+        }
         [pinLunArray addObjectsFromArray:object];
         [_pinLunListTableView headerEndRefreshing];
         [_pinLunListTableView reloadData];
@@ -762,8 +760,8 @@
         cell = [tableView dequeueReusableCellWithIdentifier:@"PinLunCell"];
         RecordComment * comment = pinLunArray[indexPath.row];
         PinLunCell * pinLunCell = (PinLunCell *)cell;
-        pinLunCell.usernameLabel.text = comment.username;
-        pinLunCell.contentLabel.text = comment.content;
+        pinLunCell.usernameLabel.text = comment.username?@"":comment.username;
+        pinLunCell.contentLabel.text = comment.content?@"":comment.content;
         pinLunCell.addTimeLabel.text = [NSStringUtil calculateTime:comment.add_time];
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPersonalHome:)];
         pinLunCell.usernameLabel.userInteractionEnabled = YES;

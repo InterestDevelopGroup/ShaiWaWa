@@ -1490,7 +1490,7 @@
     [[QNUploadHelper sharedHelper] setUploadSuccess:^(NSString * path){
         _babyInfo.avatar = [NSString stringWithFormat:@"%@%@",QN_URL,[path lastPathComponent]];;
         [self updateBabyInfo];  //更新服务器宝宝信息
-        [_babyAvatarImgView setImage:image forState:UIControlStateNormal]; //设置头像
+        [_babyAvatarImgView setImage:[image ellipseImageWithDefaultSetting] forState:UIControlStateNormal]; //设置头像
         [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];//删除本地缓存
     }];
 
