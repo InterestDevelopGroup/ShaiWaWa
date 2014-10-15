@@ -127,6 +127,13 @@
 {
     _placemarks = [@[] mutableCopy];
     [_addrTableView reloadData];
+    
+    if(self.didSelectPlacemark)
+    {
+        self.didSelectPlacemark(nil);
+    }
+    
+    [self popVIewController];
 }
 
 

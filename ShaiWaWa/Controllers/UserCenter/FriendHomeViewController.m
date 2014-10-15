@@ -8,7 +8,6 @@
 
 #import "FriendHomeViewController.h"
 #import "UIViewController+BarItemAdapt.h"
-
 #import "HttpService.h"
 #import "SVProgressHUD.h"
 #import "UserDefault.h"
@@ -18,6 +17,7 @@
 #import "DynamicByUserIDViewController.h"
 #import "MybabyListViewController.h"
 #import "HisFriendsViewController.h"
+#import "AddFriendViewController.h"
 @interface FriendHomeViewController ()<UIAlertViewDelegate>
 {
     NSMutableArray *babyList;
@@ -148,9 +148,15 @@
 
 - (void)addAction:(id)sender
 {
+    /*
     UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"请输入备注" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"提交", nil];
     alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
     [alertView show];
+    */
+    AddFriendViewController * vc = [[AddFriendViewController alloc] initWithNibName:nil bundle:nil];
+    vc.friendID = user.uid;
+    [self push:vc];
+    vc = nil;
 }
 
 - (void)babyCell

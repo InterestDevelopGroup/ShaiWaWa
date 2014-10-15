@@ -90,6 +90,8 @@
 		C39AAE1B19B30A3200C8A7BE /* Topic.m in Sources */ = {isa = PBXBuildFile; fileRef = C39AAE1A19B30A3200C8A7BE /* Topic.m */; };
 		C39AAE1E19B3124200C8A7BE /* CommonAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = C39AAE1D19B3124200C8A7BE /* CommonAlert.m */; };
 		C3A9828719E6B35E007448C0 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A9828619E6B35E007448C0 /* libsqlite3.0.dylib */; };
+		C3C0FA1219ED512800E4D7AE /* AddFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C0FA1019ED512800E4D7AE /* AddFriendViewController.m */; };
+		C3C0FA1319ED512800E4D7AE /* AddFriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3C0FA1119ED512800E4D7AE /* AddFriendViewController.xib */; };
 		C3DA093A19D9C75000A6C80D /* 爱心@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C3DA093919D9C75000A6C80D /* 爱心@2x.png */; };
 		C3DEA19A19DCD161003C86A8 /* BabyHomeDynamicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3DEA19819DCD161003C86A8 /* BabyHomeDynamicCell.m */; };
 		C3DEA19B19DCD161003C86A8 /* BabyHomeDynamicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3DEA19919DCD161003C86A8 /* BabyHomeDynamicCell.xib */; };
@@ -644,6 +646,9 @@
 		C39AAE1D19B3124200C8A7BE /* CommonAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonAlert.m; sourceTree = "<group>"; };
 		C3A9827819E68C90007448C0 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		C3A9828619E6B35E007448C0 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		C3C0FA0F19ED512800E4D7AE /* AddFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendViewController.h; sourceTree = "<group>"; };
+		C3C0FA1019ED512800E4D7AE /* AddFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendViewController.m; sourceTree = "<group>"; };
+		C3C0FA1119ED512800E4D7AE /* AddFriendViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFriendViewController.xib; sourceTree = "<group>"; };
 		C3DA093919D9C75000A6C80D /* 爱心@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "爱心@2x.png"; sourceTree = "<group>"; };
 		C3DEA19719DCD161003C86A8 /* BabyHomeDynamicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BabyHomeDynamicCell.h; sourceTree = "<group>"; };
 		C3DEA19819DCD161003C86A8 /* BabyHomeDynamicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BabyHomeDynamicCell.m; sourceTree = "<group>"; };
@@ -2118,6 +2123,9 @@
 				C350622C19D1315F0096006C /* HisFriendsViewController.h */,
 				C350622D19D1315F0096006C /* HisFriendsViewController.m */,
 				C350622E19D1315F0096006C /* HisFriendsViewController.xib */,
+				C3C0FA0F19ED512800E4D7AE /* AddFriendViewController.h */,
+				C3C0FA1019ED512800E4D7AE /* AddFriendViewController.m */,
+				C3C0FA1119ED512800E4D7AE /* AddFriendViewController.xib */,
 			);
 			path = UserCenter;
 			sourceTree = "<group>";
@@ -2598,6 +2606,7 @@
 				F43388131974C28600464D43 /* ChooseModeViewController.xib in Resources */,
 				F432BE4319762AC80086BBE9 /* square_pinglun-big@2x.png in Resources */,
 				C362C00519D6A23E00753082 /* play.png in Resources */,
+				C3C0FA1319ED512800E4D7AE /* AddFriendViewController.xib in Resources */,
 				F432BE2A19762AC80086BBE9 /* square_bofang@2x.png in Resources */,
 				F43387F31974C28600464D43 /* AddHeightAndWeightViewController.xib in Resources */,
 				F43EA37A1990A6980048081E /* ProvincesAndCities.plist in Resources */,
@@ -2964,6 +2973,7 @@
 				F4E363B91985ECC100A018A5 /* TheThirdPartyLoginView.m in Sources */,
 				F4AE507C199AFBEE007683E9 /* QiniuHttpClient.m in Sources */,
 				F43387FC1974C28600464D43 /* SearchAddressBookViewController.m in Sources */,
+				C3C0FA1219ED512800E4D7AE /* AddFriendViewController.m in Sources */,
 				F43387FA1974C28600464D43 /* ScannerQRCodeViewController.m in Sources */,
 				C3891B3019C01A390039F29D /* RHMultiValue.m in Sources */,
 				F44CF76D199A3CB7003B7F7D /* UIView+Extension.m in Sources */,

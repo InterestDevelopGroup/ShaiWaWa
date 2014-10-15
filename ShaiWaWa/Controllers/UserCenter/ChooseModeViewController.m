@@ -47,6 +47,7 @@
 #import <ShareSDK/ShareSDK.h>
 #import "ShareManager.h"
 #import "SDImageCache.h"
+#import "BBBadgeBarButtonItem.h"
 #import "FriendHomeViewController.h"
 @import MediaPlayer;
 @import QuartzCore;
@@ -101,6 +102,8 @@ typedef enum{
         [self.dynamicPageTableView headerBeginRefreshing];
     }
     */
+    
+    [self getNewMessages];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -1061,6 +1064,40 @@ typedef enum{
     }
     
 }
+
+
+- (void)getNewMessages
+{
+    UserInfo *user = [[UserDefault sharedInstance] userInfo];
+    [[HttpService sharedInstance] getSystemNotification:@{@"receive_uid":user.uid,@"offset":@"0", @"pagesize":@"100000",@"status":@"0"} completionBlock:^(id object)
+     {
+         
+         if([object count] > 0)
+         {
+             UIBarButtonItem * rightItem_1 = [self customBarItem:@"square_yanjing" action:@selector(showSquareVC)];
+             UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
+             btn.frame = CGRectMake(0, 0, 32, 22);
+             [btn setImage:[UIImage imageNamed:@"square_pinglun-4"] forState:UIControlStateNormal];
+             [btn addTarget:self action:@selector(showMsgVC) forControlEvents:UIControlEventTouchUpInside];
+             BBBadgeBarButtonItem * rightItem_2 = [[BBBadgeBarButtonItem alloc] initWithCustomUIButton:btn];
+             rightItem_2.badgeValue = [NSString stringWithFormat:@"%i",[object count]];
+             rightItem_2.badgeOriginX = 20;
+             rightItem_2.shouldAnimateBadge = YES;
+             //UIBarButtonItem * rightItem_2 = [self customBarItem:@"square_pinglun-4" action:@selector(showMsgVC)];
+             self.navigationItem.rightBarButtonItems = @[rightItem_2,rightItem_1];
+         }
+         
+     } failureBlock:^(NSError *error, NSString *responseString) {
+
+         NSString * msg = responseString;
+         if (error) {
+             msg = NSLocalizedString(@"LoadError", nil);
+         }
+         [SVProgressHUD showErrorWithStatus:msg];
+     }];
+    
+}
+
 
 
 #pragma mark -  UIScrollViewDelegate Methods
