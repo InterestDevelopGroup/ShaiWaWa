@@ -44,3 +44,6 @@
 "DataLoading"="数据正在加载";
 "PullTOLoad"="上拉加载更多";
 "PullToRefresh"="下拉刷新";
+
+//audioRecord
+"AudioRecord cann't less than 2 seconds，please try again"="录音长度不能低于两秒，请重试";
