@@ -17,6 +17,7 @@
 		24A32324197BB168005CFEA4 /* yuanquan2.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A3231F197BB168005CFEA4 /* yuanquan2.png */; };
 		24FAD0BC1986935F00FFE11E /* ShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 24FAD0B81986935F00FFE11E /* ShareManager.m */; };
 		24FAD0BD1986935F00FFE11E /* UserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 24FAD0BB1986935F00FFE11E /* UserDefault.m */; };
+		488541DE19EEEEB100E9AAAB /* UICollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 488541DD19EEEEB100E9AAAB /* UICollectionViewWaterfallLayout.m */; };
 		C3121CFE19B57182004353EF /* SquareCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3121CFD19B57182004353EF /* SquareCollectionCell.m */; };
 		C3121D0019B57197004353EF /* SquareCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3121CFF19B57197004353EF /* SquareCollectionCell.xib */; };
 		C320609419E6B75600C80FF7 /* CSqlite.m in Sources */ = {isa = PBXBuildFile; fileRef = C320608E19E6B75600C80FF7 /* CSqlite.m */; };
@@ -531,6 +532,8 @@
 		24FAD0B81986935F00FFE11E /* ShareManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareManager.m; sourceTree = "<group>"; };
 		24FAD0BA1986935F00FFE11E /* UserDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefault.h; sourceTree = "<group>"; };
 		24FAD0BB1986935F00FFE11E /* UserDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefault.m; sourceTree = "<group>"; };
+		488541DC19EEEEB100E9AAAB /* UICollectionViewWaterfallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewWaterfallLayout.h; sourceTree = "<group>"; };
+		488541DD19EEEEB100E9AAAB /* UICollectionViewWaterfallLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewWaterfallLayout.m; sourceTree = "<group>"; };
 		9066DBF5432D412091E6A49A /* libPods-ShaiWaWa.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ShaiWaWa.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3121CFC19B57182004353EF /* SquareCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SquareCollectionCell.h; sourceTree = "<group>"; };
 		C3121CFD19B57182004353EF /* SquareCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SquareCollectionCell.m; sourceTree = "<group>"; };
@@ -1328,6 +1331,15 @@
 			path = UserDefault;
 			sourceTree = "<group>";
 		};
+		488541DB19EEEEB100E9AAAB /* UICollectionViewWaterfall */ = {
+			isa = PBXGroup;
+			children = (
+				488541DC19EEEEB100E9AAAB /* UICollectionViewWaterfallLayout.h */,
+				488541DD19EEEEB100E9AAAB /* UICollectionViewWaterfallLayout.m */,
+			);
+			path = UICollectionViewWaterfall;
+			sourceTree = "<group>";
+		};
 		C320608C19E6B75600C80FF7 /* Sqlite */ = {
 			isa = PBXGroup;
 			children = (
@@ -1519,6 +1531,7 @@
 		F41F68861982081E00089E42 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				488541DB19EEEEB100E9AAAB /* UICollectionViewWaterfall */,
 				F4C2D4D219EE44A100521BFE /* ELCImagePicker */,
 				C320608C19E6B75600C80FF7 /* Sqlite */,
 				F4A7781319DC09D0000F5401 /* PinYin4Objc */,
@@ -2923,6 +2936,7 @@
 				C350724A19C28E4A0046D4A3 /* LikeUser.m in Sources */,
 				F43388281974C28600464D43 /* PlatformBindViewController.m in Sources */,
 				F431482A199C57F000CAB2CD /* DynamicByUserIDViewController.m in Sources */,
+				488541DE19EEEEB100E9AAAB /* UICollectionViewWaterfallLayout.m in Sources */,
 				F44CF76B199A3CB7003B7F7D /* UIScrollView+Extension.m in Sources */,
 				F43388201974C28600464D43 /* MybabyListViewController.m in Sources */,
 				C3891B2E19C01A390039F29D /* RHAddressBookThreadMain.m in Sources */,
