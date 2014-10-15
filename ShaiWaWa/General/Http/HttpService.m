@@ -321,7 +321,6 @@
 - (void)openLogin:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
 {
     [self postJSON:[self mergeURL:Open_Login] withParams:params completionBlock:^(id obj) {
-        
         if([obj[@"err_code"] intValue] != No_Error_Code && [obj[@"err_code"] intValue] != Open_Platform_Unbind_Error_Code)
         {
             if(failure)

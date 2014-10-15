@@ -657,7 +657,7 @@
             NSLog(@"UIImagePickerControllerReferenceURL = %@", dict);
         }
     }
-   //保存数据
+   //图片后续处理
     [self pickPictureProcess:images];
 }
 
@@ -676,7 +676,7 @@
         if ([mediaType isEqualToString:@"public.image"])
         {
             UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
-            [self pickPictureProcess:image];
+            [self pickPictureProcess:@[image]];
         }
         else if([mediaType isEqualToString:@"public.movie"])
         {

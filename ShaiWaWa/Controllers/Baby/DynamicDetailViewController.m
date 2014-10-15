@@ -36,6 +36,9 @@
 #import "ShareManager.h"
 @import MediaPlayer;
 @interface DynamicDetailViewController ()<UIActionSheetDelegate>
+{
+    int _commentOffset;
+}
 @property (nonatomic,strong) ShareView * sv;
 @end
 
@@ -44,7 +47,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        
+        _commentOffset = 0;
     }
     return self;
 }
@@ -237,16 +240,21 @@
     [self getComments];
 }
 
-//请求评论列表
+
+#pragma mark 请求评论列表
 - (void)getComments
 {
     //[SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
-    [[HttpService sharedInstance] getCommentList:@{@"rid":_babyRecord.rid,@"offset":@"0",@"pagesize":@"200"} completionBlock:^(id object) {
+    int pageSize = 200;
+    [[HttpService sharedInstance] getCommentList:@{@"rid":_babyRecord.rid,@"offset":@(_commentOffset),@"pagesize":@(pageSize)} completionBlock:^(id object) {
         //[SVProgressHUD dismiss];
         //pinLunArray = [[[object reverseObjectEnumerator] allObjects] mutableCopy];
+//        _commentOffset += pinLunArray.count;    //
+        [pinLunArray removeAllObjects];
+
         [pinLunArray addObjectsFromArray:object];
-        [_pinLunListTableView reloadData];
         [_pinLunListTableView headerEndRefreshing];
+        [_pinLunListTableView reloadData];
     } failureBlock:^(NSError *error, NSString *responseString) {
         NSString * msg = responseString;
         if(error)
