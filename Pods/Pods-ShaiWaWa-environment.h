@@ -48,6 +48,12 @@
 #define COCOAPODS_VERSION_MINOR_AFNetworking_UIKit 2
 #define COCOAPODS_VERSION_PATCH_AFNetworking_UIKit 4
 
+// BBBadgeBarButtonItem
+#define COCOAPODS_POD_AVAILABLE_BBBadgeBarButtonItem
+#define COCOAPODS_VERSION_MAJOR_BBBadgeBarButtonItem 1
+#define COCOAPODS_VERSION_MINOR_BBBadgeBarButtonItem 1
+#define COCOAPODS_VERSION_PATCH_BBBadgeBarButtonItem 0
+
 // CocoaLumberjack
 #define COCOAPODS_POD_AVAILABLE_CocoaLumberjack
 #define COCOAPODS_VERSION_MAJOR_CocoaLumberjack 1

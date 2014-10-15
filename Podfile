@@ -14,6 +14,7 @@ pod 'MBProgressHUD', '~> 0.8'
 pod 'SDWebImage', '~> 3.6'
 pod 'MagicalRecord', '~> 2.2'
 pod 'SSCheckBoxView', '~> 0.0.1'
+pod 'BBBadgeBarButtonItem'
 end
 
 target "ShaiWaWaTests" do

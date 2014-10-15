@@ -2,64 +2,137 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>Pods-ShaiWaWa-AFNetworking.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-ShaiWaWa-BBBadgeBarButtonItem.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-ShaiWaWa-CocoaLumberjack.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-ShaiWaWa-CorePlot.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-ShaiWaWa-HMSegmentedControl.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-ShaiWaWa-MBProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-ShaiWaWa-MagicalRecord.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-ShaiWaWa-SDWebImage.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-ShaiWaWa-SSCheckBoxView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-ShaiWaWa-SVProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-ShaiWaWa-ZBarSDK.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-ShaiWaWa-libqrencode.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-ShaiWaWa.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>06FDD3ED3B1C4760A028760D</key>
+		<key>0D1548CA636747038277F7D5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>0773BF8A43514C629BB485A0</key>
+		<key>19A3BD8E577B42F6B5ACE04B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3143304B813743DCAEE305B8</key>
+		<key>655F08DFF2FA435BA9AD0C67</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3FA248D30F754287A7ED3FF7</key>
+		<key>80A8FA309F11428B8FCA1830</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4AFD2C9C1B8940F7979A7035</key>
+		<key>979DD3E818FE4546B25CED77</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>683CB66F38CE4500B8F9FE94</key>
+		<key>9936A0570A444E5B8A8644DF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C798A609DB964101B7E512D9</key>
+		<key>B8EFF9E7EF344FD399F2535F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CB89EB12918443D0A0EF397C</key>
+		<key>D9F11F9966FD4D49B2BE11C7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DEF1096B98F6409FA6D8E3FB</key>
+		<key>E2AD1A5A9A9F478C9C285AFD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DF877F9B9B7A4532A4BD6272</key>
+		<key>E9D9ECC6F0BE474C874270E8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>EBF898057FD14F489504D3D2</key>
+		<key>EE688D9D7F3C4BE5A4A2A6D3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>EFB509B352124B508016DEDC</key>
+		<key>F40AA53F40054BEB95D5377D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F98D2363E84244E89A452761</key>
 		<dict>
 			<key>primary</key>
 			<true/>

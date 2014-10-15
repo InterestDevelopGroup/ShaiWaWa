@@ -294,6 +294,25 @@
     return [dyArray count];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    BabyRecord * babyRecord = [dyArray objectAtIndex:indexPath.row];
+    float height = 340.0f;
+    if([babyRecord.images count] == 0 && (babyRecord.video == nil || [babyRecord.video length] == 0))
+    {
+        height -= 143;
+    }
+    
+    /*
+     if(babyRecord.address == nil || [babyRecord.address length] == 0)
+     {
+     height -= 17;
+     }
+     */
+    return height;
+}
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DynamicCell * dynamicCell = (DynamicCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
@@ -348,7 +367,7 @@
     }
     dynamicCell.whoLabel.text = who;
     dynamicCell.releaseTimeLabel.text = [NSStringUtil calculateTime:recrod.add_time];
-
+    dynamicCell.babyBirthdayLabel.text = [NSStringUtil calculateAge:recrod.birthday];
     dynamicCell.addressLabel.text = recrod.address;
     
     if(recrod.address == nil || [recrod.address length] == 0)
@@ -436,6 +455,7 @@
         };
         [imageView setCloseHidden];
         [dynamicCell.scrollView addSubview:imageView];
+        dynamicCell.scrollView.hidden = NO;
         imageView = nil;
     }
     else if([recrod.images count] != 0)
@@ -459,21 +479,51 @@
             imageView = nil;
         }
         [dynamicCell.scrollView setContentSize:CGSizeMake([recrod.images count] * width, CGRectGetHeight(dynamicCell.scrollView.bounds))];
-        
+        dynamicCell.scrollView.hidden = NO;
     }
     else
     {
+        /*
         PublishImageView * imageView = [[PublishImageView alloc] initWithFrame:dynamicCell.scrollView.bounds withPath:nil];
         [imageView setCloseHidden];
         [dynamicCell.scrollView addSubview:imageView];
         imageView = nil;
+        */
+        dynamicCell.scrollView.hidden = YES;
     }
     
+    if([recrod.images count] == 0 && (recrod.video == nil || [recrod.video length] == 0))
+    {
+        CGRect detailRect = dynamicCell.detailView.frame;
+        detailRect.origin.y = 68;
+        dynamicCell.detailView.frame = detailRect;
+        
+        CGRect bgRect = dynamicCell.bgImageView.frame;
+        bgRect.size.height = 184;
+        dynamicCell.bgImageView.frame = bgRect;
+    }
+    else
+    {
+        CGRect detailRect = dynamicCell.detailView.frame;
+        detailRect.origin.y = 210;
+        dynamicCell.detailView.frame = detailRect;
+        
+        CGRect bgRect = dynamicCell.bgImageView.frame;
+        bgRect.size.height = 327;
+        dynamicCell.bgImageView.frame = bgRect;
+        
+    }
     [[dynamicCell.contentView viewWithTag:20000] removeFromSuperview];
     if(recrod.audio != nil && [recrod.audio length] > 0)
     {
         
-        AudioView * audioView = [[AudioView alloc] initWithFrame:CGRectMake(123, 180, 82, 50) withPath:recrod.audio];
+        CGRect rect = CGRectMake(123, 180, 82, 50);
+        if([recrod.images count] == 0 && (recrod.video == nil || [recrod.video length] == 0))
+        {
+            rect = CGRectMake(123, 40, 82, 50);
+        }
+        
+        AudioView * audioView = [[AudioView alloc] initWithFrame:rect withPath:recrod.audio];
         audioView.tag = 20000;
         [audioView setCloseHidden];
         [dynamicCell.contentView addSubview:audioView];

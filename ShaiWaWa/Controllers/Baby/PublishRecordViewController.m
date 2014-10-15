@@ -653,6 +653,10 @@
         {
             _addressLabel.text = placemark[@"address"];
         }
+        else
+        {
+            _addressLabel.text = @"添加位置";
+        }
     };
     [self.navigationController pushViewController:locationVC animated:YES];
 }
