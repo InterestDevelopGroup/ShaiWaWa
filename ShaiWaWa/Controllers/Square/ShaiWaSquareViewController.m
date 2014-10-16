@@ -26,7 +26,8 @@
 #import "PersonCenterViewController.h"
 #import "BabyHomePageViewController.h"
 #import "NSStringUtil.h"
-@interface ShaiWaSquareViewController ()
+#import "UICollectionViewWaterfallLayout.h"
+@interface ShaiWaSquareViewController () <UICollectionViewDelegateWaterfallLayout>
 @property (nonatomic,strong) NSMutableArray * newestDyArray;
 @property (nonatomic,strong) NSMutableArray * hotDyArray;
 @property (nonatomic,assign) int currentOffset;
@@ -63,7 +64,12 @@
 {
     self.title = @"晒娃广场";
     [self setLeftCusBarItem:@"square_back" action:nil];
-      UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
+//      UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
+    UICollectionViewWaterfallLayout *layout = [[UICollectionViewWaterfallLayout alloc] init];
+    layout.itemWidth = 146;
+    layout.columnCount = self.view.bounds.size.width / 146;
+    layout.sectionInset = UIEdgeInsetsMake(1, 9, 1, 9);
+    layout.delegate = self;
     [self HMSegmentedControlInitMethod];
     collectionNew = [[UICollectionView alloc]initWithFrame:CGRectMake(0,0,self.view.bounds.size.width, _segScrollView.frame.size.height) collectionViewLayout:layout];
     collectionNew.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
@@ -401,16 +407,18 @@
     }
     else
     {
-        cell.babyImageView.image = [UIImage imageNamed:@"square_pic-1"];
+//        cell.babyImageView.image = [UIImage imageNamed:@"square_pic-1"];
+        cell.babyImageView.hidden = YES;
     }
     
     [cell.usernameLabel setText:record.baby_nickname];
     [cell.contentLabel setText:record.content];
-    [cell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:(record.avatar == [NSNull null] ? @"" : record.avatar)] placeholderImage:Default_Avatar];
-    cell.avatarImageView.userInteractionEnabled = YES;
-    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showFriendInfo:)];
-    [cell.avatarImageView addGestureRecognizer:tap];
-    cell.avatarImageView.tag = indexPath.row;
+    
+        [cell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:(record.avatar == nil ? @"" : record.avatar)] placeholderImage:Default_Avatar];
+        cell.avatarImageView.userInteractionEnabled = YES;
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showFriendInfo:)];
+        [cell.avatarImageView addGestureRecognizer:tap];
+        cell.avatarImageView.tag = indexPath.row;
     cell.timeLabel.text = [NSStringUtil calculateTime:record.add_time];
     tap = nil;
     return cell;
@@ -422,9 +430,47 @@
 //    return 210;
 //}
 
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewWaterfallLayout *)collectionViewLayout heightForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    BabyRecord * record;
+    if(segMentedControl.selectedSegmentIndex == 0)
+    {
+        record = _newestDyArray[indexPath.row];
+    }
+    else
+    {
+        record = _hotDyArray[indexPath.row];
+    }
+    //说明有图片
+    if (record.images.count > 0 || (record.video != nil&& [record.video length] != 0)) {
+//        return CGSizeMake(146, 240);
+        return 240;
+    }else
+    {
+//        return CGSizeMake(146, 240-161.0);
+        return 79;
+    }
+}
+
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(146, 240);
+    BabyRecord * record;
+    if(segMentedControl.selectedSegmentIndex == 0)
+    {
+        record = _newestDyArray[indexPath.row];
+    }
+    else
+    {
+        record = _hotDyArray[indexPath.row];
+    }
+        //说明有图片
+    if (record.images.count > 0 || (record.video != nil&& [record.video length] != 0)) {
+        return CGSizeMake(146, 240);
+    }else
+    {
+        return CGSizeMake(146, 240-161.0);
+    }
+    
 }
 
 

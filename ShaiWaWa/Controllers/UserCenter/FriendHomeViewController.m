@@ -84,7 +84,7 @@
     [delBtn addTarget:self action:@selector(deleteFriend) forControlEvents:UIControlEventTouchUpInside];
     
     [self getUserInfo];
-    [self isFriends];
+    
 }
 
 
@@ -94,6 +94,11 @@
     [[HttpService sharedInstance] getUserInfo:@{@"uid":friendId} completionBlock:^(id object) {
         
         user = (UserInfo *)object;
+        if (user == nil) {
+            [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"该用户不存在", nil)];
+            [self.navigationController popVIewController];
+            return ;
+        }
         [_friendAvatarImgView sd_setImageWithURL:[NSURL URLWithString:user.avatar] placeholderImage:[UIImage imageNamed:@"user_touxiang"]];
         _friendUserNameTextField.text = user.username;
         _friendSwwNumTextField.text = user.sww_number;
@@ -103,6 +108,8 @@
         [self goodFriendCell];
         
         [SVProgressHUD showSuccessWithStatus:@"加载成功"];
+        //判断用户是否为好友
+        [self isFriends];
     } failureBlock:^(NSError *error, NSString *responseString) {
         NSString * msg = responseString;
         if(error)
