@@ -9,9 +9,9 @@
 #import "AudioView.h"
 
 @interface AudioView()<AVAudioPlayerDelegate>
-{
-    UIButton * _button;
-}
+//{
+//    UIButton * _button;
+//}
 
 @end
 
@@ -48,9 +48,10 @@
         {
             player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:path] error:nil];
         }
+        _player = player;
+        _player.delegate = self;
         
-        
-        //显示录音秒数
+        //显示录音秒数的label
         UILabel * secondLabl = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMidX(imageView.frame) + 10, (CGRectGetHeight(frame) - 10) * .5, 20, 10)];
         secondLabl.text = [NSString stringWithFormat:@"%.f\"",player.duration];
         secondLabl.textAlignment = NSTextAlignmentCenter;
@@ -93,79 +94,30 @@
     [self removeFromSuperview];
 }
 
+#pragma mark - 播放与暂停按钮
 - (void)clickAction:(id)sender
 {
     if(_path == nil) return ;
-    /*
-
-    */
-    //_localPlayer.delegate = self;
-    if(![_path hasPrefix:@"http"])
+    
+    
+    if(_player != nil && [_player isPlaying])  //判断录音是否为空或者正在播放
     {
+        [_player stop];
         
-        if(_localPlayer != nil && [_localPlayer isPlaying])
-        {
-            [_localPlayer stop];
-            _localPlayer = nil;
-            UIImageView * imageView = (UIImageView *)[self viewWithTag:1000];
-            [imageView setImage:[UIImage imageNamed:@"square_bofang"]];
-            return ;
-        }
-        AVAudioSession * session = [AVAudioSession sharedInstance];
-        [session setCategory:AVAudioSessionCategoryPlayback error:nil];
-        [session setActive:YES error:nil];
-        _localPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:_path] error:nil];
-        _localPlayer.delegate = self;
-        
-        [_localPlayer prepareToPlay];
         UIImageView * imageView = (UIImageView *)[self viewWithTag:1000];
-        
-        [_localPlayer play];
-        [imageView setImage:[UIImage imageNamed:@"停止"]];
-        
-        
+        [imageView setImage:[UIImage imageNamed:@"square_bofang"]];
+        return ;
     }
-    else
-    {
-//        if(_player != nil && [_player isProcessing])
-//        {
-//            [_player stop];
-//            _player = nil;
-//            UIImageView * imageView = (UIImageView *)[self viewWithTag:1000];
-//            [imageView setImage:[UIImage imageNamed:@"square_bofang.png"]];
-//            return ;
-//        }
-//        
-//        _player = [[AudioPlayer alloc] init];
-//        _player.url = [NSURL URLWithString:_path];
-//        [_player play];
-//        UIImageView * imageView = (UIImageView *)[self viewWithTag:1000];
-//        [imageView setImage:[UIImage imageNamed:@"停止.png"]];
-        
-        if(_localPlayer != nil && [_localPlayer isPlaying])
-        {
-            [_localPlayer stop];
-            _localPlayer = nil;
-            UIImageView * imageView = (UIImageView *)[self viewWithTag:1000];
-            [imageView setImage:[UIImage imageNamed:@"square_bofang"]];
-            return ;
-        }
-        AVAudioSession * session = [AVAudioSession sharedInstance];
-        [session setCategory:AVAudioSessionCategoryPlayback error:nil];
-        [session setActive:YES error:nil];
-        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:_path]];
-        _localPlayer = [[AVAudioPlayer alloc] initWithData:data error:nil];
-        _localPlayer.delegate = self;
-        
-        [_localPlayer prepareToPlay];
-        UIImageView * imageView = (UIImageView *)[self viewWithTag:1000];
-        
-        [_localPlayer play];
-        [imageView setImage:[UIImage imageNamed:@"停止"]];
-    }
+    
+    [_player prepareToPlay];
+    UIImageView * imageView = (UIImageView *)[self viewWithTag:1000];
+    
+    [_player play];
+    [imageView setImage:[UIImage imageNamed:@"停止"]];
+    
 }
 
-//#pragma mark - 音频播放完毕代理方法
+#pragma mark - 音频播放完毕代理方法
 - (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 {
     UIImageView * imageView = (UIImageView *)[self viewWithTag:1000];

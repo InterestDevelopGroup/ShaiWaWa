@@ -13,8 +13,8 @@ typedef void (^DeleteBlock)(NSString * path);
 @interface AudioView : UIView
 @property (nonatomic,copy) DeleteBlock deleteBlock;
 @property (nonatomic,strong) NSString * path;
-@property (nonatomic,strong) AudioPlayer * player;
-@property (nonatomic,strong) AVAudioPlayer * localPlayer;
+//@property (nonatomic,strong) AudioPlayer * player;
+@property (nonatomic,strong) AVAudioPlayer * player;
 - (id)initWithFrame:(CGRect)frame withPath:(NSString *)path;
 - (void)setCloseHidden;
 @end
