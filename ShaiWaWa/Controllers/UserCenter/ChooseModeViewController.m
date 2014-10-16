@@ -1066,15 +1066,14 @@ typedef enum{
     
 }
 
-
+#pragma mark 获取消息数量
 - (void)getNewMessages
 {
     UserInfo *user = [[UserDefault sharedInstance] userInfo];
     [[HttpService sharedInstance] getSystemNotification:@{@"receive_uid":user.uid,@"offset":@"0", @"pagesize":@"100000",@"status":@"0"} completionBlock:^(id object)
      {
-         
-         if([object count] > 0)
-         {
+//         if([object count] > 0)
+//         {
              UIBarButtonItem * rightItem_1 = [self customBarItem:@"square_yanjing" action:@selector(showSquareVC)];
              UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
              btn.frame = CGRectMake(0, 0, 32, 22);
@@ -1086,7 +1085,7 @@ typedef enum{
              rightItem_2.shouldAnimateBadge = YES;
              //UIBarButtonItem * rightItem_2 = [self customBarItem:@"square_pinglun-4" action:@selector(showMsgVC)];
              self.navigationItem.rightBarButtonItems = @[rightItem_2,rightItem_1];
-         }
+//         }
          
      } failureBlock:^(NSError *error, NSString *responseString) {
 

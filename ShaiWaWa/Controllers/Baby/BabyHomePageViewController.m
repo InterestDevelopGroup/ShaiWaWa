@@ -793,7 +793,7 @@
     
     //更新宝宝信息
     [[HttpService sharedInstance] updateBabyInfo:params completionBlock:^(id object) {
-        [_summaryTableView reloadData];
+//        [_summaryTableView reloadData];
         [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
     } failureBlock:^(NSError *error, NSString *responseString) {
         NSString *msg = responseString;
@@ -1073,10 +1073,11 @@
         }
         if (indexPath.row == 2)
         {
-            cell.summaryValueField.text = nil;
+            
             cell.summaryValueField.inputAccessoryView = _toolBar;
             cell.summaryValueField.inputView = _datePicker;
-            cell.summaryValueField.text = [[NSDate dateWithTimeIntervalSince1970:[_babyInfo.birthday integerValue]] formatDateString:@"yyyy-MM-dd"];
+            cell.summaryValueField.text = _babyInfo.birthday;
+//            cell.summaryValueField.text = [[NSDate dateWithTimeIntervalSince1970:[_babyInfo.birthday integerValue]] formatDateString:@"yyyy-MM-dd"];
         }
         if (indexPath.row == 4)
         {

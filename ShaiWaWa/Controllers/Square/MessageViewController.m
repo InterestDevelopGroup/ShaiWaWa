@@ -496,6 +496,9 @@
         msgCell.sendNameLabel.text = msg.username;
         [msgCell.sendImgView sd_setImageWithURL:[NSURL URLWithString:msg.avatar] placeholderImage:Default_Avatar];
         msgCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHomePage:)];
+        msgCell.sendImgView.userInteractionEnabled = YES;
+        [msgCell.sendImgView addGestureRecognizer:tap];
         return msgCell;
     }
     else

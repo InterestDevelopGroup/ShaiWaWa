@@ -194,7 +194,7 @@
         <image name="square_pinglun-2.png" width="21" height="19"/>
         <image name="square_pinglun-3.png" width="21" height="19"/>
         <image name="square_zizhi.png" width="7" height="8"/>
-        <image name="爱心-未选中.png" width="24" height="20"/>
+        <image name="爱心-未选中.png" width="580" height="492"/>
         <image name="爱心.png" width="24" height="20"/>
     </resources>
 </document>

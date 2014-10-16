@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
-
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -129,8 +127,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <inset key="titleEdgeInsets" minX="-46" minY="50" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" backgroundImage="8B6CA86A-7E79-45E3-B28E-C231DE62EF7C">
-
+                    <state key="normal" backgroundImage="73659FE2-8671-41C4-BBBA-44164EF2D900">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -354,9 +351,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         </tapGestureRecognizer>
     </objects>
     <resources>
-
-        <image name="8B6CA86A-7E79-45E3-B28E-C231DE62EF7C" width="69" height="68">
-
+        <image name="73659FE2-8671-41C4-BBBA-44164EF2D900" width="69" height="68">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPD1YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBMU
 GR4fJSYtMDY5VSRudWxs1QkKCwwNDg8QERJWTlNTaXplViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBz
@@ -380,7 +375,6 @@ MAIzAjgCQAJDAlUCWAJdAAAAAAAAAgEAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAl8
         <image name="baby_mama.png" width="41" height="41"/>
         <image name="baby_weixinyaoqing.png" width="95" height="80"/>
         <image name="lvse.png" width="29" height="29"/>
-        <image name="main_baobaotouxiang.png" width="104" height="104"/>
         <image name="square_fenxiang-1.png" width="64" height="64"/>
         <image name="square_fenxiang-2.png" width="64" height="64"/>
         <image name="square_fenxiang-3.png" width="64" height="64"/>
