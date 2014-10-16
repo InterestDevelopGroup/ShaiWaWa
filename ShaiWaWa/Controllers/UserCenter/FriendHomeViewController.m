@@ -90,7 +90,13 @@
 
 - (void)getUserInfo
 {
+    if (friendId == nil) {
+        [SVProgressHUD showErrorWithStatus:@"该用户不存在！"];
+        return;
+    }
+    
     [SVProgressHUD showWithStatus:@"加载中" maskType:SVProgressHUDMaskTypeGradient];
+    
     [[HttpService sharedInstance] getUserInfo:@{@"uid":friendId} completionBlock:^(id object) {
         
         user = (UserInfo *)object;
