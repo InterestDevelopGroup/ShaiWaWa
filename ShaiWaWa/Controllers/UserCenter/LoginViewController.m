@@ -18,7 +18,9 @@
 #import "InputHelper.h"
 #import "SSCheckBoxView.h"
 @interface LoginViewController ()
-
+{
+    SSCheckBoxView *_checkButton;
+}
 @end
 
 @implementation LoginViewController
@@ -36,6 +38,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    //默认不勾选显示密码
+    _checkButton.checked = NO;
 }
 
 
@@ -81,10 +86,11 @@
     [_thirdSuperView addSubview:thirdLoginView];
     
     
-    SSCheckBoxView * checkButton = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(26, 107, 110, 20) style:kSSCheckBoxViewStyleGlossy checked:NO];
-    [checkButton setText:@"显示密码"];
-    [checkButton setStateChangedTarget:self selector:@selector(disableSecure:)];
-    [self.view addSubview:checkButton];
+    
+    _checkButton = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(26, 107, 110, 20) style:kSSCheckBoxViewStyleGlossy checked:NO];
+    [_checkButton setText:@"显示密码"];
+    [_checkButton setStateChangedTarget:self selector:@selector(disableSecure:)];
+    [self.view addSubview:_checkButton];
     
 }
 
