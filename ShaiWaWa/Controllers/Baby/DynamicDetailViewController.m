@@ -760,8 +760,8 @@
         cell = [tableView dequeueReusableCellWithIdentifier:@"PinLunCell"];
         RecordComment * comment = pinLunArray[indexPath.row];
         PinLunCell * pinLunCell = (PinLunCell *)cell;
-        pinLunCell.usernameLabel.text = comment.username?@"":comment.username;
-        pinLunCell.contentLabel.text = comment.content?@"":comment.content;
+        pinLunCell.usernameLabel.text = comment.username?comment.username:@"";
+        pinLunCell.contentLabel.text = comment.content?comment.content:@"";
         pinLunCell.addTimeLabel.text = [NSStringUtil calculateTime:comment.add_time];
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPersonalHome:)];
         pinLunCell.usernameLabel.userInteractionEnabled = YES;
@@ -769,7 +769,6 @@
         tap = nil;
     }
     
-
  
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;

@@ -9,9 +9,9 @@
 #import "AudioView.h"
 
 @interface AudioView()<AVAudioPlayerDelegate>
-{
-    UIButton * _button;
-}
+//{
+//    UIButton * _button;
+//}
 
 @end
 
@@ -25,15 +25,39 @@
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.frame = CGRectMake(5, 5, CGRectGetWidth(self.frame) - 10, CGRectGetHeight(self.frame) - 10);
         [button setImage:[UIImage imageNamed:@"square_bofang-bg"] forState:UIControlStateNormal];
+//        [button setTitle:@"hahahaha" forState:UIControlStateNormal];
         [button addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:button];
         
         
-        UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake((CGRectGetWidth(frame) - 10) * .5, (CGRectGetHeight(frame) - 10) * .5, 10, 10)];
+        UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake((CGRectGetWidth(frame) - 10) * 0.35, (CGRectGetHeight(frame) - 10) * .5, 10, 10)];
         imageView.image = [UIImage imageNamed:@"square_bofang"];
         imageView.tag = 1000;
         [self addSubview:imageView];
         
+        //根据路径拿到音频，并计算期长度
+        AVAudioSession * session = [AVAudioSession sharedInstance];
+        [session setCategory:AVAudioSessionCategoryPlayback error:nil];
+        [session setActive:YES error:nil];
+        AVAudioPlayer *player = nil;
+        if([_path hasPrefix:@"http"])   //说明录音文件来自网络
+        {
+            NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:path]];
+            player = [[AVAudioPlayer alloc] initWithData:data error:nil];
+        }else                          //说明录音文件来自本地
+        {
+            player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:path] error:nil];
+        }
+        _player = player;
+        _player.delegate = self;
+        
+        //显示录音秒数的label
+        UILabel * secondLabl = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMidX(imageView.frame) + 10, (CGRectGetHeight(frame) - 10) * .5, 20, 10)];
+        secondLabl.text = [NSString stringWithFormat:@"%.f\"",player.duration];
+        secondLabl.textAlignment = NSTextAlignmentCenter;
+        secondLabl.font = [UIFont systemFontOfSize:11.0];
+        secondLabl.textColor = [UIColor colorWithRed:104/255.0 green:178.0/255 blue:0.0 alpha:1];
+        [self addSubview:secondLabl];
         
         CGRect closeRect = CGRectMake(CGRectGetWidth(frame) - 20, 8, 15, 15);
         UIButton * closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -70,56 +94,34 @@
     [self removeFromSuperview];
 }
 
+#pragma mark - 播放与暂停按钮
 - (void)clickAction:(id)sender
 {
     if(_path == nil) return ;
-    /*
-
-    */
-    //_localPlayer.delegate = self;
-    if(![_path hasPrefix:@"http"])
+    
+    
+    if(_player != nil && [_player isPlaying])  //判断录音是否为空或者正在播放
     {
-        
-        if(_localPlayer != nil && [_localPlayer isPlaying])
-        {
-            [_localPlayer stop];
-            _localPlayer = nil;
-            return ;
-        }
-        AVAudioSession * session = [AVAudioSession sharedInstance];
-        [session setCategory:AVAudioSessionCategoryPlayback error:nil];
-        [session setActive:YES error:nil];
-        _localPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:_path] error:nil];
-        [_localPlayer prepareToPlay];
-        [_localPlayer play];
+        [_player stop];
         
         UIImageView * imageView = (UIImageView *)[self viewWithTag:1000];
-        [imageView setImage:[UIImage imageNamed:@"停止"]];
+        [imageView setImage:[UIImage imageNamed:@"square_bofang"]];
+        return ;
     }
-    else
-    {
-        if(_player != nil && [_player isProcessing])
-        {
-            [_player stop];
-            _player = nil;
-            UIImageView * imageView = (UIImageView *)[self viewWithTag:1000];
-            [imageView setImage:[UIImage imageNamed:@"square_bofang"]];
-            return ;
-        }
-        
-        _player = [[AudioPlayer alloc] init];
-        _player.url = [NSURL URLWithString:_path];
-        [_player play];
-        UIImageView * imageView = (UIImageView *)[self viewWithTag:1000];
-        [imageView setImage:[UIImage imageNamed:@"停止"]];
-    }
+    
+    [_player prepareToPlay];
+    UIImageView * imageView = (UIImageView *)[self viewWithTag:1000];
+    
+    [_player play];
+    [imageView setImage:[UIImage imageNamed:@"停止"]];
+    
 }
 
-//#pragma mark - 音频播放完毕代理方法
-//- (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
-//{
-//    UIImageView * imageView = (UIImageView *)[self viewWithTag:1000];
-//    [imageView setImage:[UIImage imageNamed:@"square_bofang"]];
-//}
+#pragma mark - 音频播放完毕代理方法
+- (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
+{
+    UIImageView * imageView = (UIImageView *)[self viewWithTag:1000];
+    [imageView setImage:[UIImage imageNamed:@"square_bofang"]];
+}
 
 @end

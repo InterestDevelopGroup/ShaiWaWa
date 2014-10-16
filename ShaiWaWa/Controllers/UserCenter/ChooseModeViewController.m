@@ -115,6 +115,7 @@ typedef enum{
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    
 }
 
 #pragma mark - Private Methods
@@ -1065,15 +1066,14 @@ typedef enum{
     
 }
 
-
+#pragma mark 获取消息数量
 - (void)getNewMessages
 {
     UserInfo *user = [[UserDefault sharedInstance] userInfo];
     [[HttpService sharedInstance] getSystemNotification:@{@"receive_uid":user.uid,@"offset":@"0", @"pagesize":@"100000",@"status":@"0"} completionBlock:^(id object)
      {
-         
-         if([object count] > 0)
-         {
+//         if([object count] > 0)
+//         {
              UIBarButtonItem * rightItem_1 = [self customBarItem:@"square_yanjing" action:@selector(showSquareVC)];
              UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
              btn.frame = CGRectMake(0, 0, 32, 22);
@@ -1085,7 +1085,7 @@ typedef enum{
              rightItem_2.shouldAnimateBadge = YES;
              //UIBarButtonItem * rightItem_2 = [self customBarItem:@"square_pinglun-4" action:@selector(showMsgVC)];
              self.navigationItem.rightBarButtonItems = @[rightItem_2,rightItem_1];
-         }
+//         }
          
      } failureBlock:^(NSError *error, NSString *responseString) {
 
@@ -1372,10 +1372,10 @@ int _lastPosition;    //A variable define in headfile
     [[dynamicCell.contentView viewWithTag:20000] removeFromSuperview];
     if(recrod.audio != nil && [recrod.audio length] > 0)
     {
-        CGRect rect = CGRectMake(123, 180, 82, 50);
+        CGRect rect = CGRectMake(123, 175, 82, 50);
         if([recrod.images count] == 0 && (recrod.video == nil || [recrod.video length] == 0))
         {
-            rect = CGRectMake(123, 40, 82, 50);
+            rect = CGRectMake(123, 35, 82, 50);
         }
         
         AudioView * audioView = [[AudioView alloc] initWithFrame:rect withPath:recrod.audio];

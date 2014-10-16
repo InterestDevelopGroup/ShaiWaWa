@@ -224,11 +224,10 @@
 
 - (void)bindSina
 {
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+//    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
     [ShareSDK getUserInfoWithType:ShareTypeSinaWeibo authOptions:nil
                            result:^(BOOL result, id<ISSPlatformUser> userInfo, id<ICMErrorInfo> error)
      {
-         
          if(error)
          {
              NSLog(@"%@",error);
@@ -408,10 +407,11 @@
     switch (indexPath.row) {
         case 0:
             cell.platformIconView.image = [UIImage imageNamed:@"user_3-weibo"];
-            cell.platformNameLabel.text = @"微博";
+            cell.platformNameLabel.text = [NSString stringWithFormat:@"新浪微博(%@)",users.username];
 
             if(users.sina_openId == nil)
             {
+                cell.platformNameLabel.text = @"新浪微博";
                 //cell.platformCurBindButton.hidden = NO;
                 [cell.platformCurBindButton setImage:[UIImage imageNamed:@"bangding.png"] forState:UIControlStateNormal];
             }
@@ -424,10 +424,11 @@
             break;
         case 1:
             cell.platformIconView.image = [UIImage imageNamed:@"qq"];
-            cell.platformNameLabel.text = @"QQ";
+            cell.platformNameLabel.text = [NSString stringWithFormat:@"QQ(%@)",users.username];
             if (users.tecent_openId == nil) {
                 
                 //cell.platformCurBindButton.hidden = NO;
+                cell.platformNameLabel.text = @"QQ";
                 [cell.platformCurBindButton setImage:[UIImage imageNamed:@"bangding.png"] forState:UIControlStateNormal];
             }
             else
@@ -438,10 +439,11 @@
             break;
         case 2:
             cell.platformIconView.image = [UIImage imageNamed:@"dianhua2"];
-            cell.platformNameLabel.text = @"手机";
+            cell.platformNameLabel.text = [NSString stringWithFormat:@"手机(%@)",users.phone];
             if (users.phone == nil)
             {
                //cell.platformCurBindButton.hidden = NO;
+                cell.platformNameLabel.text = @"手机";
                [cell.platformCurBindButton setImage:[UIImage imageNamed:@"bangding.png"] forState:UIControlStateNormal];
             }
             else
