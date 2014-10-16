@@ -42,7 +42,7 @@
 - (IBAction)openPictureAction:(id)sender;
 - (IBAction)takePictureAction:(id)sender;
 - (IBAction)takeMovieAction:(id)sender;
-- (IBAction)showAddressAction:(id)sender;
+- (IBAction)showAddressAction:(id)sender; //定位按钮
 - (IBAction)setVisibilityAction:(id)sender;
 - (IBAction)showTopicAction:(id)sender;
 - (IBAction)showFriendAction:(id)sender;

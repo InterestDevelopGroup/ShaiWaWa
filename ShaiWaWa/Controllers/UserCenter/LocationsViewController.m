@@ -40,8 +40,7 @@
     _locationManager.delegate = self;
     _locationManager.distanceFilter=0.5;
     _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    [_locationManager startUpdatingLocation];
-     
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated

@@ -1427,6 +1427,7 @@
             alertView = nil;
             */
             [_locationManager stopUpdatingLocation];
+           
             DDLogError(@"定位失败");
             return ;
         }
