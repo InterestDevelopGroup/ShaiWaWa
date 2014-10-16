@@ -403,6 +403,7 @@
     }
     else if([record.images count] > 0)
     {
+        cell.babyImageView.hidden = NO;
         [cell.babyImageView sd_setImageWithURL:[NSURL URLWithString:record.images[0]] placeholderImage:[UIImage imageNamed:@"square_pic-1"]];
     }
     else

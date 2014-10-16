@@ -769,7 +769,6 @@
         tap = nil;
     }
     
-
  
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
