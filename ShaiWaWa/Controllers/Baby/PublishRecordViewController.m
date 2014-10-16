@@ -918,6 +918,7 @@
 
 }
 
+#pragma mark - 开始录音
 - (IBAction)startRecord:(id)sender
 {
     if (_voiceImageView.superview)
@@ -1096,7 +1097,7 @@
     _recordBtn.enabled = NO;
     [self showRecord:nil];
     
-    AudioView * audio = [[AudioView alloc] initWithFrame:CGRectMake(123, 149, 82, 50) withPath:self.audioPath];
+    AudioView * audio = [[AudioView alloc] initWithFrame:CGRectMake(123, 160, 82, 50) withPath:self.audioPath];
     _audioView = audio;
     audio.deleteBlock = ^(NSString * path){
         

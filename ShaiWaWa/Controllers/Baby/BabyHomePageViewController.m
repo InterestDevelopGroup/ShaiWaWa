@@ -1271,7 +1271,14 @@
         if(recrod.audio != nil && [recrod.audio length] > 0)
         {
             
-            AudioView * audioView = [[AudioView alloc] initWithFrame:CGRectMake(125, 100, 82, 50) withPath:recrod.audio];
+            CGRect rect = CGRectMake(123, 123, 82, 50);
+            if([recrod.images count] == 0 && (recrod.video == nil || [recrod.video length] == 0))
+            {
+                rect = CGRectMake(123, 20, 82, 50);
+            }
+
+            
+            AudioView * audioView = [[AudioView alloc] initWithFrame:rect withPath:recrod.audio];
             audioView.tag = 20000;
             [audioView setCloseHidden];
             [dynamicCell.contentView addSubview:audioView];

@@ -1372,10 +1372,10 @@ int _lastPosition;    //A variable define in headfile
     [[dynamicCell.contentView viewWithTag:20000] removeFromSuperview];
     if(recrod.audio != nil && [recrod.audio length] > 0)
     {
-        CGRect rect = CGRectMake(123, 180, 82, 50);
+        CGRect rect = CGRectMake(123, 175, 82, 50);
         if([recrod.images count] == 0 && (recrod.video == nil || [recrod.video length] == 0))
         {
-            rect = CGRectMake(123, 40, 82, 50);
+            rect = CGRectMake(123, 35, 82, 50);
         }
         
         AudioView * audioView = [[AudioView alloc] initWithFrame:rect withPath:recrod.audio];
