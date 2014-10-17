@@ -32,4 +32,5 @@
 @property (nonatomic,strong) NSString * user_avatar;
 @property (nonatomic,strong) NSString * username;
 @property (nonatomic,strong) NSString * birthday;
+@property (nonatomic,strong) NSString * baby_alias;
 @end

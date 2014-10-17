@@ -600,6 +600,11 @@
         detailCell.birthdayLabel.text = [NSStringUtil calculateAge:_babyRecord.birthday];
         
         detailCell.babyNameLabel.text = _babyRecord.baby_nickname;
+        if([_babyRecord.baby_alias length] != 0)
+        {
+            detailCell.babyNameLabel.text = _babyRecord.baby_alias;
+        }
+        
         detailCell.addressLabel.text = _babyRecord.address;
         if(_babyRecord.address == nil || [_babyRecord.address length] == 0)
         {

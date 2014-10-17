@@ -627,6 +627,10 @@
     dynamicCell.releaseTimeLabel.text = [NSStringUtil calculateTime:recrod.add_time];
     
     dynamicCell.babyNameLabel.text = recrod.baby_nickname;
+    if([recrod.baby_alias length] != 0)
+    {
+        dynamicCell.babyNameLabel.text = recrod.baby_alias;
+    }
     [dynamicCell.zanButton setTitle:recrod.like_count forState:UIControlStateNormal];
     if([recrod.is_like isEqualToString:@"1"])
     {
