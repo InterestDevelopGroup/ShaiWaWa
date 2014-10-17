@@ -65,6 +65,7 @@
         _dyOffset = 0;
         _babyPersonalDyArray = [@[] mutableCopy];
         summaryKey = [NSArray arrayWithObjects:@"昵称",@"姓名",@"出生日期",@"性别",@"所在城市",@"出生身高",@"出生体重", nil];
+        
     }
     return self;
 }
@@ -85,13 +86,13 @@
     
     //获取宝宝的备注信息
     if (!self.isFromRemarkController) {
-//
         //自动刷新
         [_dynamicListTableView headerBeginRefreshing];
         
         //获取宝宝成长记录
         [self getGrowRecords];
-    }else
+    }
+    else
     {
         [self getBabyRemarkInfo];
     }
@@ -116,14 +117,10 @@
 #pragma mark - Private Methods
 - (void)initUI
 {
-    [self getBabyRemarkInfo];
-    if ([_remark.alias isEqualToString:@"备注名"]) {
-        self.title = _babyInfo.nickname;
-    }
-    else
-    {
-        self.title = _remark.alias;
-    }
+    self.title = _babyInfo.nickname;
+    
+    [self getBabyRemarkInfo]; //获得宝宝信息，如果获取到，顺便显示备注名称
+
     //判断宝宝是不是我的，如果不是，头像按钮禁止点击
      UserInfo * user = [[UserDefault sharedInstance] userInfo];
     if(![_babyInfo.uid isEqualToString:user.uid]){_babyAvatarImgView.enabled = NO;}
@@ -283,6 +280,16 @@
     {
         _addButton.hidden = YES;
     }
+    
+    //修改爸爸妈妈头像按钮风格
+    _dadButton.layer.cornerRadius = 8 ;
+    _dadButton.layer.masksToBounds = YES;
+    _dadButton.layer.borderColor = [[UIColor whiteColor] CGColor];
+    _dadButton.layer.borderWidth = 2.5;
+    _monButton.layer.cornerRadius = 8 ;
+    _monButton.layer.masksToBounds = YES;
+    _monButton.layer.borderColor = [[UIColor whiteColor] CGColor];
+    _monButton.layer.borderWidth = 2.5;
 }
 
 - (void)getBabyRemarkInfo
@@ -292,14 +299,9 @@
     [[HttpService sharedInstance] getBabyRemark:@{@"uid":users.uid,@"baby_id":_babyInfo.baby_id} completionBlock:^(id object) {
         _remark = (BabyRemark *)object;
         if (_remark != nil || _remark.alias != nil) {
-            if ([_remark.alias isEqualToString:@"备注名"]) {
-                self.title = _babyInfo.nickname;
-            }
-            else
-            {
+            if (![_remark.alias isEqualToString:@"备注名"]) {
                 self.title = _remark.alias;
             }
-            
         }
     } failureBlock:^(NSError *error, NSString *responseString) {
         [SVProgressHUD showErrorWithStatus:responseString];
@@ -502,9 +504,14 @@
         
         [_dynamicListTableView headerEndRefreshing];
         [_dynamicListTableView footerEndRefreshing];
-        
+        if (_dyOffset == 0) {                                 //根据offset判断下拉还是上拉，如果上啦就清空数组
+            [_babyPersonalDyArray removeAllObjects];
+        }
         [_babyPersonalDyArray addObjectsFromArray:object];
+
+        
         [_dynamicListTableView reloadData];
+        
     } failureBlock:^(NSError *error, NSString *responseString) {
         [_dynamicListTableView headerEndRefreshing];
         [_dynamicListTableView footerEndRefreshing];
@@ -1518,5 +1525,17 @@
     }
     [self uploadPhotoWithImage:_image filePath:_filePath];
 }
+
+/*
+#pragma mark -  UIScrollViewDelegate Methods
+int _lastPosition;    //A variable define in headfile
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    int currentPostion = scrollView.contentOffset.y;
+    NSLog(@"%d",currentPostion);
+    
+    
+}
+*/
 
 @end

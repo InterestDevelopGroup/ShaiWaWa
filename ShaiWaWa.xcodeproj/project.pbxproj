@@ -477,6 +477,16 @@
 		F47F5516197FACE7006DCA75 /* WeiBoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F47F54F1197FACE7006DCA75 /* WeiBoCell.xib */; };
 		F4A57AA01998A8E900283B88 /* MyCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A57A9E1998A8E900283B88 /* MyCollectionViewController.m */; };
 		F4A57AA11998A8E900283B88 /* MyCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4A57A9F1998A8E900283B88 /* MyCollectionViewController.xib */; };
+		F4A6386319F0AF46001C9BB1 /* mic-0.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A6385919F0AF46001C9BB1 /* mic-0.png */; };
+		F4A6386419F0AF46001C9BB1 /* mic-1.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A6385A19F0AF46001C9BB1 /* mic-1.png */; };
+		F4A6386519F0AF46001C9BB1 /* mic-2.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A6385B19F0AF46001C9BB1 /* mic-2.png */; };
+		F4A6386619F0AF46001C9BB1 /* mic-3.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A6385C19F0AF46001C9BB1 /* mic-3.png */; };
+		F4A6386719F0AF46001C9BB1 /* mic-4.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A6385D19F0AF46001C9BB1 /* mic-4.png */; };
+		F4A6386819F0AF46001C9BB1 /* mic-5.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A6385E19F0AF46001C9BB1 /* mic-5.png */; };
+		F4A6386919F0AF46001C9BB1 /* mic-6.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A6385F19F0AF46001C9BB1 /* mic-6.png */; };
+		F4A6386A19F0AF46001C9BB1 /* mic-7.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A6386019F0AF46001C9BB1 /* mic-7.png */; };
+		F4A6386B19F0AF46001C9BB1 /* mic-8.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A6386119F0AF46001C9BB1 /* mic-8.png */; };
+		F4A6386C19F0AF46001C9BB1 /* mic-9.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A6386219F0AF46001C9BB1 /* mic-9.png */; };
 		F4A777FD19DBFC19000F5401 /* BabyResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A777FC19DBFC19000F5401 /* BabyResultController.m */; };
 		F4A7782219DC09D0000F5401 /* ChineseToPinyinResource.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A7781619DC09D0000F5401 /* ChineseToPinyinResource.m */; };
 		F4A7782319DC09D0000F5401 /* HanyuPinyinOutputFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A7781819DC09D0000F5401 /* HanyuPinyinOutputFormat.m */; };
@@ -1164,6 +1174,16 @@
 		F4A57A9D1998A8E900283B88 /* MyCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCollectionViewController.h; sourceTree = "<group>"; };
 		F4A57A9E1998A8E900283B88 /* MyCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCollectionViewController.m; sourceTree = "<group>"; };
 		F4A57A9F1998A8E900283B88 /* MyCollectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCollectionViewController.xib; sourceTree = "<group>"; };
+		F4A6385919F0AF46001C9BB1 /* mic-0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mic-0.png"; sourceTree = "<group>"; };
+		F4A6385A19F0AF46001C9BB1 /* mic-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mic-1.png"; sourceTree = "<group>"; };
+		F4A6385B19F0AF46001C9BB1 /* mic-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mic-2.png"; sourceTree = "<group>"; };
+		F4A6385C19F0AF46001C9BB1 /* mic-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mic-3.png"; sourceTree = "<group>"; };
+		F4A6385D19F0AF46001C9BB1 /* mic-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mic-4.png"; sourceTree = "<group>"; };
+		F4A6385E19F0AF46001C9BB1 /* mic-5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mic-5.png"; sourceTree = "<group>"; };
+		F4A6385F19F0AF46001C9BB1 /* mic-6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mic-6.png"; sourceTree = "<group>"; };
+		F4A6386019F0AF46001C9BB1 /* mic-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mic-7.png"; sourceTree = "<group>"; };
+		F4A6386119F0AF46001C9BB1 /* mic-8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mic-8.png"; sourceTree = "<group>"; };
+		F4A6386219F0AF46001C9BB1 /* mic-9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mic-9.png"; sourceTree = "<group>"; };
 		F4A777FB19DBFC18000F5401 /* BabyResultController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BabyResultController.h; sourceTree = "<group>"; };
 		F4A777FC19DBFC19000F5401 /* BabyResultController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BabyResultController.m; sourceTree = "<group>"; };
 		F4A7781519DC09D0000F5401 /* ChineseToPinyinResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChineseToPinyinResource.h; sourceTree = "<group>"; };
@@ -1829,6 +1849,7 @@
 		F432BD7719762AC80086BBE9 /* publish_dynamic_1 */ = {
 			isa = PBXGroup;
 			children = (
+				F4A6385819F0AF46001C9BB1 /* voice */,
 				F432BD7819762AC80086BBE9 /* pb_bofang@2x.png */,
 				F432BD7919762AC80086BBE9 /* pb_fabu@2x.png */,
 				F432BD7A19762AC80086BBE9 /* pb_logo-1@2x.png */,
@@ -2426,6 +2447,23 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		F4A6385819F0AF46001C9BB1 /* voice */ = {
+			isa = PBXGroup;
+			children = (
+				F4A6385919F0AF46001C9BB1 /* mic-0.png */,
+				F4A6385A19F0AF46001C9BB1 /* mic-1.png */,
+				F4A6385B19F0AF46001C9BB1 /* mic-2.png */,
+				F4A6385C19F0AF46001C9BB1 /* mic-3.png */,
+				F4A6385D19F0AF46001C9BB1 /* mic-4.png */,
+				F4A6385E19F0AF46001C9BB1 /* mic-5.png */,
+				F4A6385F19F0AF46001C9BB1 /* mic-6.png */,
+				F4A6386019F0AF46001C9BB1 /* mic-7.png */,
+				F4A6386119F0AF46001C9BB1 /* mic-8.png */,
+				F4A6386219F0AF46001C9BB1 /* mic-9.png */,
+			);
+			path = voice;
+			sourceTree = "<group>";
+		};
 		F4A7781319DC09D0000F5401 /* PinYin4Objc */ = {
 			isa = PBXGroup;
 			children = (
@@ -2603,6 +2641,7 @@
 			files = (
 				C3870F4219EBBD5E0030AD8B /* tel1@2x.png in Resources */,
 				F432BE2719762AC80086BBE9 /* square_back@2x.png in Resources */,
+				F4A6386A19F0AF46001C9BB1 /* mic-7.png in Resources */,
 				F432BE1319762AC80086BBE9 /* pb_logo-4@2x.png in Resources */,
 				F432BE0619762AC80086BBE9 /* main_tianjia@2x.png in Resources */,
 				F41F68F91982081F00089E42 /* ShareSDKiPadSimpleShareViewUI.bundle in Resources */,
@@ -2626,6 +2665,7 @@
 				F432BDDA19762AC80086BBE9 /* baby_dongtai-@2x.png in Resources */,
 				F432BE2E19762AC80086BBE9 /* square_fenxiang-1@2x.png in Resources */,
 				F432BE5E19762AC80086BBE9 /* user_3-bg@2x.png in Resources */,
+				F4A6386B19F0AF46001C9BB1 /* mic-8.png in Resources */,
 				F4C2D4F519EE44A100521BFE /* Overlay@2x.png in Resources */,
 				F432BDE819762AC80086BBE9 /* login_box-7@2x.png in Resources */,
 				F47F54F9197FACE7006DCA75 /* AddrBookCell.xib in Resources */,
@@ -2647,6 +2687,7 @@
 				F432BE3319762AC80086BBE9 /* square_huabian-bg@2x.png in Resources */,
 				F43387F71974C28600464D43 /* BabyListViewController.xib in Resources */,
 				F432BDDB19762AC80086BBE9 /* baby_dongtai@2x.png in Resources */,
+				F4A6386619F0AF46001C9BB1 /* mic-3.png in Resources */,
 				F432BE0319762AC80086BBE9 /* main_sousuokuang-souso@2x.png in Resources */,
 				F432BE5719762AC80086BBE9 /* jiahaoyou@2x.png in Resources */,
 				F432BDEA19762AC80086BBE9 /* login_chazhao@2x.png in Resources */,
@@ -2699,6 +2740,7 @@
 				F432BE3C19762AC80086BBE9 /* square_pic-7@2x.png in Resources */,
 				F432BE5319762AC80086BBE9 /* bangding@2x.png in Resources */,
 				F432BE1B19762AC80086BBE9 /* pd_anzhushuohua@2x.png in Resources */,
+				F4A6386319F0AF46001C9BB1 /* mic-0.png in Resources */,
 				C362C00619D6A23E00753082 /* screenshots.png in Resources */,
 				F432BE2619762AC80086BBE9 /* pd_xiaokuang@2x.png in Resources */,
 				F432BDEE19762AC80086BBE9 /* login_xinlang@2x.png in Resources */,
@@ -2741,6 +2783,7 @@
 				24A32311197AEFF8005CFEA4 /* TopicListOfDynamic.xib in Resources */,
 				F433881D1974C28600464D43 /* LoginViewController.xib in Resources */,
 				F432BE5919762AC80086BBE9 /* phone@2x.png in Resources */,
+				F4A6386919F0AF46001C9BB1 /* mic-6.png in Resources */,
 				F432BE3119762AC80086BBE9 /* square_fenxiang-4@2x.png in Resources */,
 				F432BE2419762AC80086BBE9 /* pd_xiala@2x.png in Resources */,
 				F432BE3A19762AC80086BBE9 /* square_pic-5@2x.png in Resources */,
@@ -2786,7 +2829,9 @@
 				F432BE6519762AC80086BBE9 /* xiaoxinlang@2x.png in Resources */,
 				F43388191974C28600464D43 /* FriendHomeViewController.xib in Resources */,
 				F432BDFE19762AC80086BBE9 /* main_quanbudongtai@2x.png in Resources */,
+				F4A6386C19F0AF46001C9BB1 /* mic-9.png in Resources */,
 				F4C2D4F119EE44A100521BFE /* ELCAlbumPickerController.xib in Resources */,
+				F4A6386819F0AF46001C9BB1 /* mic-5.png in Resources */,
 				F43388351974C28600464D43 /* ResetPwdViewController.xib in Resources */,
 				F4C2D4F419EE44A100521BFE /* Overlay.png in Resources */,
 				F432BDDD19762AC80086BBE9 /* baby_jianjie-@2x.png in Resources */,
@@ -2805,6 +2850,7 @@
 				C320609519E6B75600C80FF7 /* gps.db in Resources */,
 				F432BE4619762AC80086BBE9 /* square_shaiwawa@2x.png in Resources */,
 				F421621919D65B4A00F01C18 /* 男孩体重.plist in Resources */,
+				F4A6386719F0AF46001C9BB1 /* mic-4.png in Resources */,
 				F432BE4C19762AC80086BBE9 /* square_zan-@2x.png in Resources */,
 				F432BE5119762AC80086BBE9 /* square_zuixin-@2x.png in Resources */,
 				F433880B1974C28600464D43 /* FeebackViewController.xib in Resources */,
@@ -2852,11 +2898,13 @@
 				F4C2D4F219EE44A100521BFE /* ELCAssetPicker.xib in Resources */,
 				F432BE3419762AC80086BBE9 /* square_jubao@2x.png in Resources */,
 				C3DEA1A119DE829B003C86A8 /* 爱心-未选中@2x.png in Resources */,
+				F4A6386519F0AF46001C9BB1 /* mic-2.png in Resources */,
 				C365F98619CB2E870094377F /* SetPasswordStepOneViewController.xib in Resources */,
 				F43388411974C28600464D43 /* UserInfoPageViewController.xib in Resources */,
 				F432BE5B19762AC80086BBE9 /* qrcode.png in Resources */,
 				F432BE5D19762AC80086BBE9 /* user_2-bg@2x.png in Resources */,
 				F432BE2F19762AC80086BBE9 /* square_fenxiang-2@2x.png in Resources */,
+				F4A6386419F0AF46001C9BB1 /* mic-1.png in Resources */,
 				F432BE5619762AC80086BBE9 /* jiahaoyou2@2x.png in Resources */,
 				F432BE4D19762AC80086BBE9 /* square_zan@2x.png in Resources */,
 				F432BE4A19762AC80086BBE9 /* square_xihuan@2x.png in Resources */,

@@ -190,6 +190,21 @@
         case Open_Platform_Unbind_Error_Code:
             msg = @"第三方账号未绑定.";
             break;
+        case Is_Spouses_Error_Code:
+            msg = @"配偶关系";
+            break;
+        case Open_Platform_Bind_Error_Code:
+            msg = @"第三方账号已绑定";
+            break;
+        case No_Password_Error_Code:
+            msg = @"请先设置密码";
+            break;
+        case Not_Friend_Error_Code:
+            msg = @"不存在朋友关系";
+            break;
+        case Normal_Friend_Error_Code:
+            msg = @"普通朋友";
+            break;
         default:
             msg = @"请求失败.";
             break;
@@ -944,6 +959,8 @@
         if (isError) {
             return ;
         }
+    
+        
         
         if (success) {
             success([ResponseHelper transformToBabyRecords:obj[@"result"]]);

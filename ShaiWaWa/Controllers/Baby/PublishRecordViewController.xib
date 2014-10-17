@@ -405,7 +405,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pd_huatong.png" id="UWB-Wr-vIR">
-            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
         </imageView>
     </objects>

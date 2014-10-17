@@ -414,6 +414,10 @@
     tap = nil;
     
     dynamicCell.babyNameLabel.text = recrod.baby_nickname;
+    if([recrod.baby_alias length] != 0)
+    {
+        dynamicCell.babyNameLabel.text = recrod.baby_alias;
+    }
     [dynamicCell.zanButton setTitle:recrod.like_count forState:UIControlStateNormal];
     [dynamicCell.commentBtn setTitle:recrod.comment_count forState:UIControlStateNormal];
     [dynamicCell.zanButton addTarget:self action:@selector(likeAction:) forControlEvents:UIControlEventTouchUpInside];

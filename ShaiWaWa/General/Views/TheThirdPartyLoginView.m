@@ -192,6 +192,17 @@
 
 
 
+//更新用户资料block
+void (^UpdateUserInfoBlock)(UserInfo * user) = ^(UserInfo * user)
+{
+    [[HttpService sharedInstance] updateUserInfo:@{@"user_id":user.uid,@"username":user.username,@"avatar":user.avatar == nil ? @"" : user.avatar,@"sex":user.sex == nil ? @"" : user.sex,@"qq":user.qq == nil ? @"" : user.qq,@"weibo":user.weibo == nil ? @"" : user.weibo,@"wechat":user.wechat == nil ? @"" : user.wechat} completionBlock:^(id object) {
+        //[SVProgressHUD showSuccessWithStatus:@"更新成功"];
+        [[UserDefault sharedInstance] setUserInfo:user];
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        [SVProgressHUD showErrorWithStatus:responseString];
+    }];
+};
+
 - (void)loginWithUserInfo:(id<ISSPlatformUser>)userInfo openid:(NSString *)openid type:(NSString *)type
 {
      [[HttpService sharedInstance] openLogin:@{@"open_id":openid,
@@ -219,6 +230,15 @@
          [userDefault setObject:[[userInfo credential] token] forKey:key];
          [userDefault synchronize];
 
+         
+         UserInfo * user = (UserInfo *)object;
+         if(user.avatar == nil || [user.avatar length] == 0)
+         {
+             user.avatar = [userInfo profileImage];
+             [[UserDefault sharedInstance] setUserInfo:user];
+             UpdateUserInfoBlock(user);
+         }
+         
          if(_bindBlock)
          {
              _bindBlock(object);
@@ -239,6 +259,8 @@
 {
     NSString *sww_Num = [self fitSwwNum];
     
+    
+    //注册block
     void (^RegisterBlock)(id<ISSPlatformUser>info,NSString * t);
     RegisterBlock = ^(id<ISSPlatformUser>info,NSString * t){
         
@@ -267,8 +289,10 @@
             [userDefault synchronize];
             
             UserInfo *curUser = [[HttpService sharedInstance] mapModel:[[object objectForKey:@"result"] objectAtIndex:0] withClass:[UserInfo class]];
-            
+            curUser.avatar = [userInfo profileImage];
             [[UserDefault sharedInstance] setUserInfo:curUser];
+            
+            UpdateUserInfoBlock(curUser);
             
             if(_bindBlock)
             {
@@ -286,7 +310,7 @@
     
 
     
-    
+    //先判断晒娃娃号是否存在
     [[HttpService sharedInstance] isExists:@{@"sww_number":sww_Num} completionBlock:^(id object) {
         
         RegisterBlock(userInfo,type);

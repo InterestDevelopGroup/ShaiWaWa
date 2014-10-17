@@ -25,7 +25,6 @@
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.frame = CGRectMake(5, 5, CGRectGetWidth(self.frame) - 10, CGRectGetHeight(self.frame) - 10);
         [button setImage:[UIImage imageNamed:@"square_bofang-bg"] forState:UIControlStateNormal];
-//        [button setTitle:@"hahahaha" forState:UIControlStateNormal];
         [button addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:button];
         
@@ -40,6 +39,7 @@
         [session setCategory:AVAudioSessionCategoryPlayback error:nil];
         [session setActive:YES error:nil];
         AVAudioPlayer *player = nil;
+        
         if([_path hasPrefix:@"http"])   //说明录音文件来自网络
         {
             NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:path]];
@@ -52,12 +52,12 @@
         _player.delegate = self;
         
         //显示录音秒数的label
-        UILabel * secondLabl = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMidX(imageView.frame) + 10, (CGRectGetHeight(frame) - 10) * .5, 20, 10)];
-        secondLabl.text = [NSString stringWithFormat:@"%.f\"",player.duration];
-        secondLabl.textAlignment = NSTextAlignmentCenter;
-        secondLabl.font = [UIFont systemFontOfSize:11.0];
-        secondLabl.textColor = [UIColor colorWithRed:104/255.0 green:178.0/255 blue:0.0 alpha:1];
-        [self addSubview:secondLabl];
+        UILabel * secondsLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMidX(imageView.frame) + 10, (CGRectGetHeight(frame) - 10) * .5, 20, 10)];
+        secondsLabel.text = [NSString stringWithFormat:@"%.f\"",player.duration];
+        secondsLabel.textAlignment = NSTextAlignmentCenter;
+        secondsLabel.font = [UIFont systemFontOfSize:11.0];
+        secondsLabel.textColor = [UIColor colorWithRed:104/255.0 green:178.0/255 blue:0.0 alpha:1];
+        [self addSubview:secondsLabel];
         
         CGRect closeRect = CGRectMake(CGRectGetWidth(frame) - 20, 8, 15, 15);
         UIButton * closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
