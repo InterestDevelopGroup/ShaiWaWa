@@ -49,10 +49,11 @@
     // Do any additional setup after loading the view from its nib.
 }
 
-- (void)didReceiveMemoryWarning
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
+    [super viewWillAppear:animated];
+    [_babyListTableView headerBeginRefreshing];
 }
 
 #pragma mark - Private Methods
@@ -81,7 +82,7 @@
         [weakSelf loadMore];
     }];
 
-    [_babyListTableView headerBeginRefreshing];
+    
 }
 
 - (void)refresh
@@ -195,7 +196,7 @@
     babyHomePageVC.babyInfo = babyInfo;
     [self.navigationController pushViewController:babyHomePageVC animated:YES];
     */
-    
+    /*
     [SVProgressHUD showWithStatus:@"加载中..."];
     [[HttpService sharedInstance] getBabyInfo:@{@"baby_id":babyInfo.baby_id} completionBlock:^(id object) {
         [SVProgressHUD dismiss];
@@ -211,7 +212,12 @@
             msg = @"加载失败.";
         }
         [SVProgressHUD showErrorWithStatus:msg];
-    }];
+    }];*/
+    
+//    BabyInfo *b = myBabyList[indexPath.row];
+    BabyHomePageViewController * vc = [[BabyHomePageViewController alloc] initWithNibName:nil bundle:nil];
+    vc.babyInfo = babyInfo;
+    [self push:vc];
     
 }
 @end

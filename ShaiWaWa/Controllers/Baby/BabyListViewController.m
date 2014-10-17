@@ -54,6 +54,11 @@
     [_babyListTableView registerNibWithName:@"BabyListCell" reuseIdentifier:@"Cell"];
     [_babyListTableView addHeaderWithTarget:self action:@selector(refresh)];
     [_babyListTableView setHeaderRefreshingText:NSLocalizedString(@"DataLoading", nil)];
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
     [_babyListTableView headerBeginRefreshing];
 }
 

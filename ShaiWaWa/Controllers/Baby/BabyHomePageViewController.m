@@ -65,6 +65,7 @@
         _dyOffset = 0;
         _babyPersonalDyArray = [@[] mutableCopy];
         summaryKey = [NSArray arrayWithObjects:@"昵称",@"姓名",@"出生日期",@"性别",@"所在城市",@"出生身高",@"出生体重", nil];
+        
     }
     return self;
 }
@@ -279,6 +280,16 @@
     {
         _addButton.hidden = YES;
     }
+    
+    //修改爸爸妈妈头像按钮风格
+    _dadButton.layer.cornerRadius = 8 ;
+    _dadButton.layer.masksToBounds = YES;
+    _dadButton.layer.borderColor = [[UIColor whiteColor] CGColor];
+    _dadButton.layer.borderWidth = 2.5;
+    _monButton.layer.cornerRadius = 8 ;
+    _monButton.layer.masksToBounds = YES;
+    _monButton.layer.borderColor = [[UIColor whiteColor] CGColor];
+    _monButton.layer.borderWidth = 2.5;
 }
 
 - (void)getBabyRemarkInfo

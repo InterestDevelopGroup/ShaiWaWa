@@ -166,7 +166,7 @@
 
 - (void)bindQQ
 {
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+//    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
     [ShareSDK getUserInfoWithType:ShareTypeQQSpace authOptions:nil
                            result:^(BOOL result, id<ISSPlatformUser> userInfo, id<ICMErrorInfo> error)
      {
@@ -285,6 +285,7 @@
     if([type isEqualToString:@"1"])
     {
         [[HttpService sharedInstance] get:@"https://graph.qq.com/oauth2.0/me" parameters:@{@"access_token":[[userInfo credential] token]} completionBlock:^(id obj) {
+            
             //不需要处理成功返回的数据，因为服务端返回的数据不是json根式
         } failureBlock:^(NSError *error, NSString *responseString) {
             
@@ -343,7 +344,7 @@
         
     } failureBlock:^(NSError *error, NSString *responseString) {
         //错误提示
-        NSString * msg = @"绑定失败.";
+        NSString * msg = responseString;
         if(error)
         {
             msg = @"绑定失败.";

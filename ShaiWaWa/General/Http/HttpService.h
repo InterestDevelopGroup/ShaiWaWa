@@ -92,7 +92,8 @@ typedef enum {
     No_Password_Error_Code,
     Not_Friend_Error_Code,
     Normal_Friend_Error_Code,
-    Is_Spouses_Error_Code
+    Is_Spouses_Error_Code,
+    Open_Platform_Bind_Error_Code
 }API_Error_Code;
 
 @interface HttpService : AFHttp
