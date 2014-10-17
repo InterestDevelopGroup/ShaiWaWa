@@ -43,6 +43,7 @@
         record.avatar = dic[@"avatar"] == [NSNull null] ? @"" : dic[@"avatar"];
         record.username = dic[@"username"] == [NSNull null] ? @"" : dic[@"username"];
         record.birthday = dic[@"birthday"] == [NSNull null] ? @"" : dic[@"birthday"];
+        record.baby_alias = dic[@"baby_alias"] == [NSNull null] ? @"" : dic[@"baby_alias"];
         [results addObject:record];
         record = nil;
     }

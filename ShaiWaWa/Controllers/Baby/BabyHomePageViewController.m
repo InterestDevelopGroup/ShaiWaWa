@@ -85,13 +85,13 @@
     
     //获取宝宝的备注信息
     if (!self.isFromRemarkController) {
-//
         //自动刷新
         [_dynamicListTableView headerBeginRefreshing];
         
         //获取宝宝成长记录
         [self getGrowRecords];
-    }else
+    }
+    else
     {
         [self getBabyRemarkInfo];
     }

@@ -1187,6 +1187,11 @@ int _lastPosition;    //A variable define in headfile
     tap = nil;
     
     dynamicCell.babyNameLabel.text = recrod.baby_nickname;
+    if([recrod.baby_alias length] != 0)
+    {
+        dynamicCell.babyNameLabel.text = recrod.baby_alias;
+    }
+    
     [dynamicCell.babyNameLabel addGestureRecognizer:[[UIGestureRecognizer alloc] initWithTarget:self action:@selector(showBabyHomePage:)]];
     [dynamicCell.zanButton setTitle:recrod.like_count forState:UIControlStateNormal];
     [dynamicCell.zanButton setTitle:recrod.like_count forState:UIControlStateSelected];
