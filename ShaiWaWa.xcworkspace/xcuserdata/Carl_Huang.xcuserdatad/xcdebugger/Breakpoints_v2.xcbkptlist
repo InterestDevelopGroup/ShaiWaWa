@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ShaiWaWa/Controllers/UserCenter/PlatformBindViewController.m"
-            timestampString = "435227549.727933"
+            timestampString = "435231817.750969"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "316"
-            endingLineNumber = "316"
+            startingLineNumber = "317"
+            endingLineNumber = "317"
             landmarkName = "-bindWithType:userInfo:"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ShaiWaWa/Controllers/UserCenter/PlatformBindViewController.m"
-            timestampString = "435227757.301901"
+            timestampString = "435231817.750969"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "233"
-            endingLineNumber = "233"
+            startingLineNumber = "234"
+            endingLineNumber = "234"
             landmarkName = "-bindSina"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ShaiWaWa/Controllers/UserCenter/PlatformBindViewController.m"
-            timestampString = "435230677.914036"
+            timestampString = "435231817.750969"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "300"
-            endingLineNumber = "300"
+            startingLineNumber = "301"
+            endingLineNumber = "301"
             landmarkName = "-bindWithType:userInfo:"
             landmarkType = "5">
          </BreakpointContent>
