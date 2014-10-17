@@ -157,7 +157,6 @@
     [self.navigationController pushViewController:chooseModeVC animated:YES];
 }
 
-
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {

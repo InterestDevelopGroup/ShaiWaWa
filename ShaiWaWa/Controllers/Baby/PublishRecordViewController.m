@@ -963,7 +963,12 @@
     
     MLAudioMeterObserver *meterObserver = [[MLAudioMeterObserver alloc]init];
     meterObserver.actionBlock = ^(NSArray *levelMeterStates,MLAudioMeterObserver *meterObserver){
-        NSLog(@"volume:%f",[MLAudioMeterObserver volumeForLevelMeterStates:levelMeterStates]);
+        NSLog(@"音量:%f",[MLAudioMeterObserver volumeForLevelMeterStates:levelMeterStates]);
+        
+        NSString *voiceName = [NSString stringWithFormat:@"mic-%.f",[MLAudioMeterObserver volumeForLevelMeterStates:levelMeterStates] * 10];
+       
+        [_voiceImageView setImage:[UIImage imageNamed:voiceName]];
+
     };
     meterObserver.errorBlock = ^(NSError *error,MLAudioMeterObserver *meterObserver){
         [[[UIAlertView alloc]initWithTitle:@"错误" message:error.userInfo[NSLocalizedDescriptionKey] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil]show];
