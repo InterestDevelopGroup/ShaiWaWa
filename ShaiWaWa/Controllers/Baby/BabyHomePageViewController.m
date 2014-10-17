@@ -116,14 +116,10 @@
 #pragma mark - Private Methods
 - (void)initUI
 {
-    [self getBabyRemarkInfo];
-    if ([_remark.alias isEqualToString:@"备注名"]) {
-        self.title = _babyInfo.nickname;
-    }
-    else
-    {
-        self.title = _remark.alias;
-    }
+    self.title = _babyInfo.nickname;
+    
+    [self getBabyRemarkInfo]; //获得宝宝信息，如果获取到，顺便显示备注名称
+
     //判断宝宝是不是我的，如果不是，头像按钮禁止点击
      UserInfo * user = [[UserDefault sharedInstance] userInfo];
     if(![_babyInfo.uid isEqualToString:user.uid]){_babyAvatarImgView.enabled = NO;}
@@ -292,14 +288,9 @@
     [[HttpService sharedInstance] getBabyRemark:@{@"uid":users.uid,@"baby_id":_babyInfo.baby_id} completionBlock:^(id object) {
         _remark = (BabyRemark *)object;
         if (_remark != nil || _remark.alias != nil) {
-            if ([_remark.alias isEqualToString:@"备注名"]) {
-                self.title = _babyInfo.nickname;
-            }
-            else
-            {
+            if (![_remark.alias isEqualToString:@"备注名"]) {
                 self.title = _remark.alias;
             }
-            
         }
     } failureBlock:^(NSError *error, NSString *responseString) {
         [SVProgressHUD showErrorWithStatus:responseString];
@@ -502,9 +493,14 @@
         
         [_dynamicListTableView headerEndRefreshing];
         [_dynamicListTableView footerEndRefreshing];
-        
+        if (_dyOffset == 0) {                                 //根据offset判断下拉还是上拉，如果上啦就清空数组
+            [_babyPersonalDyArray removeAllObjects];
+        }
         [_babyPersonalDyArray addObjectsFromArray:object];
+
+        
         [_dynamicListTableView reloadData];
+        
     } failureBlock:^(NSError *error, NSString *responseString) {
         [_dynamicListTableView headerEndRefreshing];
         [_dynamicListTableView footerEndRefreshing];
@@ -1525,20 +1521,9 @@ int _lastPosition;    //A variable define in headfile
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     int currentPostion = scrollView.contentOffset.y;
-    if (currentPostion - _lastPosition > 280) {
-        _lastPosition = currentPostion;
-        _releaseBtn.hidden = YES;
-        [self.navigationController setNavigationBarHidden:YES animated:YES];
-        //NSLog(@"ScrollUp now");
-        
-    }
-    else if (_lastPosition - currentPostion > 280)
-    {
-        _lastPosition = currentPostion;
-        _releaseBtn.hidden = NO;
-        [self.navigationController setNavigationBarHidden:NO animated:YES];
-        //NSLog(@"ScrollDown now");
-    }
+    NSLog(@"%d",currentPostion);
+    
+    
 }
 */
 
