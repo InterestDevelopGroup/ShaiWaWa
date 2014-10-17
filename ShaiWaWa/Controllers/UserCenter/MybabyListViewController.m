@@ -145,7 +145,10 @@
     
     BabyInfo * baby = myBabyList[indexPath.row];
     babyListCell.babyNameLabel.text = baby.nickname;
-    
+    if([baby.alias length] != 0)
+    {
+        babyListCell.babyNameLabel.text = baby.alias;
+    }
     [babyListCell.babyImage sd_setImageWithURL:[NSURL URLWithString:baby.avatar] placeholderImage:Default_Avatar];
     
     if([baby.sex isEqualToString:@"0"])
