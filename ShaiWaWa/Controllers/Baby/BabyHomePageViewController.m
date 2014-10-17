@@ -1519,4 +1519,27 @@
     [self uploadPhotoWithImage:_image filePath:_filePath];
 }
 
+/*
+#pragma mark -  UIScrollViewDelegate Methods
+int _lastPosition;    //A variable define in headfile
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    int currentPostion = scrollView.contentOffset.y;
+    if (currentPostion - _lastPosition > 280) {
+        _lastPosition = currentPostion;
+        _releaseBtn.hidden = YES;
+        [self.navigationController setNavigationBarHidden:YES animated:YES];
+        //NSLog(@"ScrollUp now");
+        
+    }
+    else if (_lastPosition - currentPostion > 280)
+    {
+        _lastPosition = currentPostion;
+        _releaseBtn.hidden = NO;
+        [self.navigationController setNavigationBarHidden:NO animated:YES];
+        //NSLog(@"ScrollDown now");
+    }
+}
+*/
+
 @end
