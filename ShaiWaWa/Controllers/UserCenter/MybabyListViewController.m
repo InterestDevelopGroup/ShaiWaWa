@@ -100,8 +100,8 @@
 //获取宝宝列表
 - (void)getBabys
 {
-
-    [[HttpService sharedInstance] getBabyList:@{@"offset":[NSString stringWithFormat:@"%i",_currentOffset],@"pagesize":[NSString stringWithFormat:@"%i",CommonPageSize],@"uid":_user.uid}completionBlock:^(id object) {
+    UserInfo * currentUser = [[UserDefault sharedInstance] userInfo];
+    [[HttpService sharedInstance] getBabyList:@{@"offset":[NSString stringWithFormat:@"%i",_currentOffset],@"pagesize":[NSString stringWithFormat:@"%i",CommonPageSize],@"uid":_user.uid,@"current_uid":currentUser.uid}completionBlock:^(id object) {
         
         [_babyListTableView headerEndRefreshing];
         [_babyListTableView footerEndRefreshing];
@@ -171,8 +171,15 @@
     NSString * age = [NSStringUtil calculateAge:[NSString stringWithFormat:@"%d",timeInterval]];
     babyListCell.age.text = age;
     babyListCell.babyOldLabel.text = [NSString stringWithFormat:@"%@条动态",baby.record_count];
-
-    babyListCell.focusImageView.hidden = YES;
+    
+    if([baby.is_focus isEqualToString:@"0"])
+    {
+        babyListCell.focusImageView.hidden = YES;
+    }
+    else
+    {
+        babyListCell.focusImageView.hidden = NO;
+    }
     return babyListCell;
    
 }
@@ -196,7 +203,7 @@
     babyHomePageVC.babyInfo = babyInfo;
     [self.navigationController pushViewController:babyHomePageVC animated:YES];
     */
-    /*
+    
     [SVProgressHUD showWithStatus:@"加载中..."];
     [[HttpService sharedInstance] getBabyInfo:@{@"baby_id":babyInfo.baby_id} completionBlock:^(id object) {
         [SVProgressHUD dismiss];
@@ -212,12 +219,10 @@
             msg = @"加载失败.";
         }
         [SVProgressHUD showErrorWithStatus:msg];
-    }];*/
+    }];
     
-//    BabyInfo *b = myBabyList[indexPath.row];
-    BabyHomePageViewController * vc = [[BabyHomePageViewController alloc] initWithNibName:nil bundle:nil];
-    vc.babyInfo = babyInfo;
-    [self push:vc];
+    
+
     
 }
 @end
