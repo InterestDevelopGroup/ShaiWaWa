@@ -1035,6 +1035,8 @@
         _uploadedAudioPath = nil;
         _audioPath = nil;
         [_audioView removeFromSuperview];
+    }else{
+        [_audioView clickAction:nil];     //如果录音大于两秒，那么就播放一次
     }
 }
 

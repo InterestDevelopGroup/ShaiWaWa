@@ -119,27 +119,27 @@
     
     [_sv setQzoneBlock:^(){
         weakSelf.grayShareView.hidden = YES;
-        _isShareViewShown = NO;
+        weakSelf.isShareViewShown = NO;
         
-        [weakSelf shareWityType:ShareTypeQQSpace babyRecord:_babyRecord];
+        [weakSelf shareWityType:ShareTypeQQSpace babyRecord:weakSelf.babyRecord];
     }];
     
     [_sv setXinLanWbBlock:^(){
         weakSelf.grayShareView.hidden = YES;
-        _isShareViewShown = NO;
-        [weakSelf shareWityType:ShareTypeSinaWeibo babyRecord:_babyRecord];
+        weakSelf.isShareViewShown = NO;
+        [weakSelf shareWityType:ShareTypeSinaWeibo babyRecord:weakSelf.babyRecord];
     }];
     
     [_sv setWeiXinBlock:^(){
         weakSelf.grayShareView.hidden = YES;
-        _isShareViewShown = NO;
-        [weakSelf shareWityType:ShareTypeWeixiSession babyRecord:_babyRecord];
+        weakSelf.isShareViewShown = NO;
+        [weakSelf shareWityType:ShareTypeWeixiSession babyRecord:weakSelf.babyRecord];
     }];
     
     [_sv setWeiXinCycleBlock:^{
         weakSelf.grayShareView.hidden = YES;
-        _isShareViewShown = NO;
-        [weakSelf shareWityType:ShareTypeWeixiTimeline babyRecord:_babyRecord];
+        weakSelf.isShareViewShown = NO;
+        [weakSelf shareWityType:ShareTypeWeixiTimeline babyRecord:weakSelf.babyRecord];
     }];
     
     
