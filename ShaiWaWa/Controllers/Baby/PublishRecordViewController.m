@@ -191,7 +191,7 @@
 {
     UserInfo *user = [[UserDefault sharedInstance] userInfo];
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
-    [[HttpService sharedInstance] getBabyList:@{@"offset":@"0",@"pagesize":@"1000",@"uid":user.uid}completionBlock:^(id object) {
+    [[HttpService sharedInstance] getBabyList:@{@"offset":@"0",@"pagesize":@"1000",@"uid":user.uid,@"current_uid":user.uid} completionBlock:^(id object) {
         [SVProgressHUD dismiss];
         if([object count] == 0)
         {
