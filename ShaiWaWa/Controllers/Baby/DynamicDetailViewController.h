@@ -10,7 +10,7 @@
 #import "BabyRecord.h"
 @interface DynamicDetailViewController : CommonViewController<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 {
-    BOOL isShareViewShown;
+//    BOOL isShareViewShown;
     UITextField *temp_txt;
     NSMutableArray *pinLunArray;
 }
@@ -19,7 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIView *shareView;
 @property (weak, nonatomic) IBOutlet UITextField *pinLunContextTextField;
 @property (strong,nonatomic) BabyRecord * babyRecord;
-
+@property (assign, nonatomic) BOOL isShareViewShown;
 
 - (IBAction)hideGrayShareV:(id)sender;
 - (IBAction)pinLunEvent:(id)sender;
