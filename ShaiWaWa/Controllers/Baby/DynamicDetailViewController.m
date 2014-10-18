@@ -79,7 +79,7 @@
 #pragma mark - Private Methods
 - (void)initUI
 {
-    isShareViewShown = NO;
+    _isShareViewShown = NO;
     self.title = @"动态详情";
     [self setLeftCusBarItem:@"square_back" action:nil];
     [_pinLunListTableView clearSeperateLine];
@@ -97,21 +97,21 @@
     __weak DynamicDetailViewController * weakSelf = self;
     [_sv setDeleteBlock:^(){
         weakSelf.grayShareView.hidden = YES;
-        isShareViewShown = NO;
-        [weakSelf deleteRecord:_babyRecord];
+        weakSelf.isShareViewShown = NO;
+        [weakSelf deleteRecord:weakSelf.babyRecord];
     }];
     
     [_sv setCollectionBlock:^(){
         weakSelf.grayShareView.hidden = YES;
-        isShareViewShown = NO;
-        [weakSelf collectionRecord:_babyRecord];
+        weakSelf.isShareViewShown = NO;
+        [weakSelf collectionRecord:weakSelf.babyRecord];
     }];
     
     [_sv setReportBlock:^(){
         weakSelf.grayShareView.hidden = YES;
-        isShareViewShown = NO;
+        weakSelf.isShareViewShown = NO;
 
-        UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"色情",@"反动",@"敏感话题",@"其他", nil];
+        UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:weakSelf cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"色情",@"反动",@"敏感话题",@"其他", nil];
         [actionSheet showInView:weakSelf.view];
         actionSheet = nil;
 
@@ -119,27 +119,27 @@
     
     [_sv setQzoneBlock:^(){
         weakSelf.grayShareView.hidden = YES;
-        isShareViewShown = NO;
+        weakSelf.isShareViewShown = NO;
         
-        [weakSelf shareWityType:ShareTypeQQSpace babyRecord:_babyRecord];
+        [weakSelf shareWityType:ShareTypeQQSpace babyRecord:weakSelf.babyRecord];
     }];
     
     [_sv setXinLanWbBlock:^(){
         weakSelf.grayShareView.hidden = YES;
-        isShareViewShown = NO;
-        [weakSelf shareWityType:ShareTypeSinaWeibo babyRecord:_babyRecord];
+        weakSelf.isShareViewShown = NO;
+        [weakSelf shareWityType:ShareTypeSinaWeibo babyRecord:weakSelf.babyRecord];
     }];
     
     [_sv setWeiXinBlock:^(){
         weakSelf.grayShareView.hidden = YES;
-        isShareViewShown = NO;
-        [weakSelf shareWityType:ShareTypeWeixiSession babyRecord:_babyRecord];
+        weakSelf.isShareViewShown = NO;
+        [weakSelf shareWityType:ShareTypeWeixiSession babyRecord:weakSelf.babyRecord];
     }];
     
     [_sv setWeiXinCycleBlock:^{
         weakSelf.grayShareView.hidden = YES;
-        isShareViewShown = NO;
-        [weakSelf shareWityType:ShareTypeWeixiTimeline babyRecord:_babyRecord];
+        weakSelf.isShareViewShown = NO;
+        [weakSelf shareWityType:ShareTypeWeixiTimeline babyRecord:weakSelf.babyRecord];
     }];
     
     
@@ -279,21 +279,21 @@
         [_sv hideDelBtn];
     }
     
-    if (!isShareViewShown) {
+    if (!_isShareViewShown) {
         _grayShareView.hidden = NO;
-        isShareViewShown = YES;
+        _isShareViewShown = YES;
     }
     else
     {
         _grayShareView.hidden = YES;
-        isShareViewShown = NO;
+        _isShareViewShown = NO;
     }
 }
 
 - (IBAction)hideGrayShareV:(id)sender
 {
     _grayShareView.hidden = YES;
-    isShareViewShown = NO;
+    _isShareViewShown = NO;
 }
 
 #pragma mark -点赞按钮

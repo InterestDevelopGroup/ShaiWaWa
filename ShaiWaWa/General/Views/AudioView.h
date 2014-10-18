@@ -17,4 +17,5 @@ typedef void (^DeleteBlock)(NSString * path);
 @property (nonatomic,strong) AVAudioPlayer * player;
 - (id)initWithFrame:(CGRect)frame withPath:(NSString *)path;
 - (void)setCloseHidden;
+- (void)clickAction:(id)sender;
 @end

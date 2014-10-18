@@ -6,6 +6,11 @@
 //  Copyright (c) 2014年 helloworld. All rights reserved.
 //
 
+/**
+ *
+ *   这个类只是是用来测试的，测试完毕可以删除掉
+ *
+ */
 #import "LineChartController.h"
 #import "CorePlot-CocoaTouch.h"
 
