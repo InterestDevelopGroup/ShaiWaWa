@@ -45,13 +45,14 @@
     fmt.toneType = ToneTypeWithoutTone;
     fmt.vCharType = VCharTypeWithUUnicode;
     NSMutableArray *searahArr = [NSMutableArray array];
+    
     for (BabyInfo *b in _myBabyList) {
         [searahArr addObject:b];
     }
     for (BabyInfo *b in _friendsBabyList) {
         [searahArr addObject:b];
     }
-    
+    //昵称搜索
     for (BabyInfo *baby in searahArr) {
         // 1.拼音
         NSString *pinyin = [PinyinHelper toHanyuPinyinStringWithNSString:baby.nickname withHanyuPinyinOutputFormat:fmt withNSString:@"#"];
@@ -76,6 +77,40 @@
             [_resultBabys addObject:baby];
         }
     }
+    
+    //备注搜索
+    for (BabyInfo *baby in searahArr) {
+        
+        if (baby.alias == nil) {                //判断宝宝是否有备注名称，没有的话就跳出本次循环
+            continue;
+        }
+        // 1.拼音
+        NSString *pinyin = [PinyinHelper toHanyuPinyinStringWithNSString:baby.alias withHanyuPinyinOutputFormat:fmt withNSString:@"#"];
+        // 2.拼音首字母
+        NSArray *words = [pinyin componentsSeparatedByString:@"#"];
+        NSMutableString *pinyinHeader = [NSMutableString string];
+        for (NSString *word in words) {
+            
+            [pinyinHeader appendString:[word substringToIndex:1]];
+        }
+        
+        // 去掉所有的#
+        pinyin = [pinyin stringByReplacingOccurrencesOfString:@"#" withString:@""];
+        
+        // 3.宝宝备注名中包含了搜索条件
+        // 拼音中包含了搜索条件
+        // 拼音首字母中包含了搜索条件
+        if (([baby.alias rangeOfString:searchText].length != 0) ||
+            ([pinyin rangeOfString:searchText.uppercaseString].length != 0)||
+            ([pinyinHeader rangeOfString:searchText.uppercaseString].length != 0))
+        {
+            // 说明宝宝昵称中包含了搜索条件
+            if (![_resultBabys containsObject:baby]) {    //避免元素重复
+                [_resultBabys addObject:baby];
+            }
+            
+        }
+    }
 
     // 3.刷新表格
     [self.tableView reloadData];
@@ -97,7 +132,13 @@
     BabyListCell * babyListCell = (BabyListCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
     
     BabyInfo *baby = _resultBabys[indexPath.row];
-    babyListCell.babyNameLabel.text = baby.nickname;
+    
+    if (baby.alias == nil) {                                        //判断宝宝是否有备注名称，没有的话就显示nickname
+        babyListCell.babyNameLabel.text = baby.nickname;
+    }else{
+        babyListCell.babyNameLabel.text = baby.alias;
+    }
+    
     
     [babyListCell.babyImage sd_setImageWithURL:[NSURL URLWithString:baby.avatar] placeholderImage:[UIImage imageNamed:@"user_touxiang"]];
     

@@ -366,7 +366,6 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-
     NSLog(@"%@",textField.text);
     return YES;
 }
@@ -398,8 +397,6 @@
 {
     // 1.显示取消按钮
     [searchBar setShowsCancelButton:YES animated:YES];
-    
-    
 }
 
 #pragma mark 当退出搜索框的键盘时（失去焦点）
