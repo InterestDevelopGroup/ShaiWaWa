@@ -48,6 +48,8 @@
 @property (strong, nonatomic) IBOutlet UIView *heightAndWeightTableView;
 @property (weak, nonatomic) IBOutlet UIImageView *babyBackgroundImgView;
 @property (weak, nonatomic) IBOutlet UIButton *babyAvatarImgView;
+@property (weak, nonatomic) IBOutlet UILabel *dadLabel;
+@property (weak, nonatomic) IBOutlet UILabel *monLabel;
 
 @property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (strong, nonatomic) IBOutlet UIToolbar *toolBar;

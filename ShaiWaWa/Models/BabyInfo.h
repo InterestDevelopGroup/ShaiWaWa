@@ -47,5 +47,6 @@
 @property(nonatomic, retain) NSString *add_time;
 @property(nonatomic, retain) NSString *record_count;
 @property(nonatomic, retain) NSString *is_focus;
+@property(nonatomic, retain) NSString *alias;
 
 @end

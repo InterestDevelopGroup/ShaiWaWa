@@ -3308,8 +3308,6 @@
 					"$(PROJECT_DIR)/ShaiWaWa/General/Helper/AudioFormat/VoiceConvert/lib",
 					"$(PROJECT_DIR)/ShaiWaWa/General/Vendors/MLAudioRecorder/amr_en_de/lib",
 					"$(PROJECT_DIR)/ShaiWaWa/General/Vendors/MLAudioRecorder/mp3_en_de",
-					"$(PROJECT_DIR)/ShaiWaWa/General/Vendors/BaiduMap_IOSSDK/Release-iphoneos",
-					"$(PROJECT_DIR)/ShaiWaWa/General/Vendors/BaiduMap_IOSSDK/Release-iphonesimulator",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3348,8 +3346,6 @@
 					"$(PROJECT_DIR)/ShaiWaWa/General/Helper/AudioFormat/VoiceConvert/lib",
 					"$(PROJECT_DIR)/ShaiWaWa/General/Vendors/MLAudioRecorder/amr_en_de/lib",
 					"$(PROJECT_DIR)/ShaiWaWa/General/Vendors/MLAudioRecorder/mp3_en_de",
-					"$(PROJECT_DIR)/ShaiWaWa/General/Vendors/BaiduMap_IOSSDK/Release-iphoneos",
-					"$(PROJECT_DIR)/ShaiWaWa/General/Vendors/BaiduMap_IOSSDK/Release-iphonesimulator",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

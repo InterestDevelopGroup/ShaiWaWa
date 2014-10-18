@@ -82,7 +82,7 @@
 - (void)getMyBabysWithUid:(NSString *)uid
 {
 
-    [[HttpService sharedInstance] getBabyList:@{@"offset":@"0",@"pagesize":@"10000",@"uid":uid} completionBlock:^(id object) {
+    [[HttpService sharedInstance] getBabyList:@{@"offset":@"0",@"pagesize":@"10000",@"uid":uid,@"current_uid":uid} completionBlock:^(id object) {
         [_babyListTableView headerEndRefreshing];
 
         if(object == nil || [object count] == 0)
@@ -127,6 +127,7 @@
         [_babyListTableView headerEndRefreshing];
     }];
 }
+
 /*
 - (void)filterBabys
 {
@@ -214,7 +215,11 @@
     }
     
     babyListCell.babyNameLabel.text = baby.nickname;
-    
+    if([baby.alias length] != 0)
+    {
+        babyListCell.babyNameLabel.text = baby.alias;
+    }
+
     [babyListCell.babyImage sd_setImageWithURL:[NSURL URLWithString:baby.avatar] placeholderImage:Default_Avatar];
 
     if([baby.sex isEqualToString:@"0"])
@@ -290,12 +295,8 @@
     babyHomePageVC.babyInfo = babyInfo;
     [self.navigationController pushViewController:babyHomePageVC animated:YES];
     */
-    BabyHomePageViewController * vc = [[BabyHomePageViewController alloc] initWithNibName:nil bundle:nil];
+
    
-    vc.babyInfo = babyInfo;
-//    NSLog(@"%@",babyInfo.is_focus);
-    [self push:vc];
-   /*
     [SVProgressHUD showWithStatus:@"加载中..."];
     [[HttpService sharedInstance] getBabyInfo:@{@"baby_id":babyInfo.baby_id} completionBlock:^(id object) {
         [SVProgressHUD dismiss];
@@ -312,7 +313,7 @@
         }
         [SVProgressHUD showErrorWithStatus:msg];
     }];
-    */
+    
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

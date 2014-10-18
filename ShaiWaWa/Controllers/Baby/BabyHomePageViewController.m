@@ -158,7 +158,7 @@
     
     [specialCareBtn setTitle:foucus forState:UIControlStateNormal];
     
-//    [self isFocus];
+    [self isFocus];
 
     
     [specialCareBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
@@ -257,9 +257,7 @@
     }
     else
     {
-        [_dadButton setTitle:@"邀请" forState:UIControlStateNormal];
-        //[_dadButton setImage:nil forState:UIControlStateNormal];
-        //[_dadButton setBackgroundColor:[UIColor whiteColor]];
+        _dadLabel.text = @"邀请";
     }
     
     if(_babyInfo.mid != nil && ![_babyInfo.mid isEqualToString:@"0"])
@@ -268,8 +266,7 @@
     }
     else
     {
-        [_monButton setTitle:@"邀请" forState:UIControlStateNormal];
-        //[_monButton setImage:nil forState:UIControlStateNormal];
+        _monLabel.text = @"邀请";
     }
 
     
@@ -1083,8 +1080,8 @@
             
             cell.summaryValueField.inputAccessoryView = _toolBar;
             cell.summaryValueField.inputView = _datePicker;
-            cell.summaryValueField.text = _babyInfo.birthday;
-//            cell.summaryValueField.text = [[NSDate dateWithTimeIntervalSince1970:[_babyInfo.birthday integerValue]] formatDateString:@"yyyy-MM-dd"];
+            //cell.summaryValueField.text = _babyInfo.birthday;
+            cell.summaryValueField.text = [[NSDate dateWithTimeIntervalSince1970:[_babyInfo.birthday integerValue]] formatDateString:@"yyyy-MM-dd"];
         }
         if (indexPath.row == 4)
         {
