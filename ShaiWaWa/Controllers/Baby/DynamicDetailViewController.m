@@ -96,9 +96,16 @@
     
     __weak DynamicDetailViewController * weakSelf = self;
     [_sv setDeleteBlock:^(){
+        /*
         weakSelf.grayShareView.hidden = YES;
         weakSelf.isShareViewShown = NO;
         [weakSelf deleteRecord:weakSelf.babyRecord];
+        */
+        [weakSelf popVIewController];
+        if(weakSelf.deleteBlock)
+        {
+            weakSelf.deleteBlock(weakSelf.babyRecord);
+        }
     }];
     
     [_sv setCollectionBlock:^(){
@@ -406,11 +413,12 @@
 
 - (void)showBabyHomePage:(UITapGestureRecognizer *)gesture
 {
+    /*
     if(![gesture.view isKindOfClass:[UIImageView class]])
     {
         return ;
     }
-    
+    */
     BabyRecord * record = _babyRecord;
     
     [SVProgressHUD showWithStatus:@"加载中..."];
@@ -604,6 +612,10 @@
         {
             detailCell.babyNameLabel.text = _babyRecord.baby_alias;
         }
+        
+        [detailCell.babyNameLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showBabyHomePage:)]];
+        detailCell.babyNameLabel.userInteractionEnabled = YES;
+
         
         detailCell.addressLabel.text = _babyRecord.address;
         if(_babyRecord.address == nil || [_babyRecord.address length] == 0)

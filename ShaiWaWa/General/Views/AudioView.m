@@ -29,7 +29,7 @@
         [self addSubview:button];
         
         
-        UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake((CGRectGetWidth(frame) - 10) * 0.35, (CGRectGetHeight(frame) - 10) * .5, 10, 10)];
+        UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake((CGRectGetWidth(frame) - 35) , (CGRectGetHeight(frame) - 10) * .5, 10, 10)];
         imageView.image = [UIImage imageNamed:@"square_bofang"];
         imageView.tag = 1000;
         [self addSubview:imageView];
@@ -52,7 +52,7 @@
         _player.delegate = self;
         
         //显示录音秒数的label
-        UILabel * secondsLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMidX(imageView.frame) + 10, (CGRectGetHeight(frame) - 10) * .5, 20, 10)];
+        UILabel * secondsLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(imageView.frame) - 25, (CGRectGetHeight(frame) - 10) * .5, 20, 10)];
         secondsLabel.text = [NSString stringWithFormat:@"%.f\"",player.duration];
         secondsLabel.textAlignment = NSTextAlignmentCenter;
         secondsLabel.font = [UIFont systemFontOfSize:11.0];

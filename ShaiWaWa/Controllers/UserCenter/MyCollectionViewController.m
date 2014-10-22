@@ -255,12 +255,13 @@
 
 - (void)showBabyHomePage:(UITapGestureRecognizer *)gesture
 {
+    /*
     if(![gesture.view isKindOfClass:[UIImageView class]])
     {
         return ;
     }
-    
-    UIImageView * imageView = (UIImageView *)gesture.view;
+    */
+    UIView * imageView = (UIView *)gesture.view;
     DynamicCell * cell ;
     if([imageView.superview.superview.superview.superview isKindOfClass:[DynamicCell class]])
     {
@@ -418,6 +419,10 @@
     {
         dynamicCell.babyNameLabel.text = recrod.baby_alias;
     }
+    
+    [dynamicCell.babyNameLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showBabyHomePage:)]];
+    dynamicCell.babyNameLabel.userInteractionEnabled = YES;
+
     [dynamicCell.zanButton setTitle:recrod.like_count forState:UIControlStateNormal];
     [dynamicCell.commentBtn setTitle:recrod.comment_count forState:UIControlStateNormal];
     [dynamicCell.zanButton addTarget:self action:@selector(likeAction:) forControlEvents:UIControlEventTouchUpInside];

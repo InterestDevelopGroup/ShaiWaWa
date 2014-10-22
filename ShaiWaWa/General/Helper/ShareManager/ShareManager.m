@@ -52,8 +52,8 @@
      appSecret:@"aed9b0303e3ed1e27bae87c33761161d"];
      */
     
-    [ShareSDK connectQZoneWithAppKey:@"1102927704"
-                           appSecret:@"kXvZ57IaEyknuUiy"
+    [ShareSDK connectQZoneWithAppKey:@"1102109842"
+                           appSecret:@"tOwcoJihUTQGd12L"
                    qqApiInterfaceCls:[QQApiInterface class]
                      tencentOAuthCls:[TencentOAuth class]];
     

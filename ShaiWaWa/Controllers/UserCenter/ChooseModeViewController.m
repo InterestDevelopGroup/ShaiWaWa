@@ -710,6 +710,8 @@ typedef enum{
 {
     [self hideMenuGray:nil];
     [[UserDefault sharedInstance] setUserInfo:nil];
+    //[ShareSDK cancelAuthWithType:ShareTypeQQSpace];
+    //[ShareSDK cancelAuthWithType:ShareTypeSinaWeibo];
     if([self.navigationController.viewControllers count] > 1)
     {
         [self popToRoot];
@@ -984,12 +986,14 @@ typedef enum{
 
 - (void)showBabyHomePage:(UITapGestureRecognizer *)gesture
 {
+    /*
     if(![gesture.view isKindOfClass:[UIImageView class]])
     {
         return ;
     }
+    */
     
-    UIImageView * imageView = (UIImageView *)gesture.view;
+    UIView * imageView = (UIView *)gesture.view;
     DynamicCell * cell ;
     if([imageView.superview.superview.superview.superview isKindOfClass:[DynamicCell class]])
     {
@@ -1192,7 +1196,8 @@ int _lastPosition;    //A variable define in headfile
         dynamicCell.babyNameLabel.text = recrod.baby_alias;
     }
     
-    [dynamicCell.babyNameLabel addGestureRecognizer:[[UIGestureRecognizer alloc] initWithTarget:self action:@selector(showBabyHomePage:)]];
+    [dynamicCell.babyNameLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showBabyHomePage:)]];
+    dynamicCell.babyNameLabel.userInteractionEnabled = YES;
     [dynamicCell.zanButton setTitle:recrod.like_count forState:UIControlStateNormal];
     [dynamicCell.zanButton setTitle:recrod.like_count forState:UIControlStateSelected];
     [dynamicCell.commentBtn setTitle:recrod.comment_count forState:UIControlStateNormal];
@@ -1403,6 +1408,11 @@ int _lastPosition;    //A variable define in headfile
     DynamicDetailViewController *dynamicDetailVC = [[DynamicDetailViewController alloc] initWithNibName:nil bundle:nil];
     BabyRecord * record = dyArray[indexPath.row];
     dynamicDetailVC.babyRecord = record;
+    
+    dynamicDetailVC.deleteBlock = ^(BabyRecord * record){
+        [self deleteRecord:record];
+    };
+    
     [self.navigationController pushViewController:dynamicDetailVC animated:YES];
 }
 

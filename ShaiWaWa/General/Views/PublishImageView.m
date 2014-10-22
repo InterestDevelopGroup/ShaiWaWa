@@ -20,14 +20,14 @@
         UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(4, 4, CGRectGetWidth(frame) - 8, CGRectGetHeight(frame) - 8)];
         if(path == nil || [path length] == 0)
         {
-            imageView.image = [UIImage imageNamed:@"square_pic-3"];
+            //imageView.image = [UIImage imageNamed:@"square_pic-3"];
         }
         else if([path hasSuffix:@"png"] || [path hasSuffix:@"jpg"])
         {
             
             if([path hasPrefix:@"http"])
             {
-                [imageView sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"square_pic-3"]];
+                [imageView sd_setImageWithURL:[NSURL URLWithString:path]];
             }
             else
             {
@@ -42,11 +42,12 @@
                 //如果是网络视频，则取得第一帧然后缓存
                 if([[SDWebImageManager sharedManager] cachedImageExistsForURL:[NSURL URLWithString:path]])
                 {
-                    [imageView sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"square_pic-3"]];
+                    //[imageView sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"square_pic-3"]];
+                    [imageView sd_setImageWithURL:[NSURL URLWithString:path]];
                 }
                 else
                 {
-                    imageView.image = [UIImage imageNamed:@"square_pic-3"];
+                    //imageView.image = [UIImage imageNamed:@"square_pic-3"];
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                         UIImage * image = [[VideoConvertHelper sharedHelper] getVideoThumb:path];
                         [[SDWebImageManager sharedManager] saveImageToCache:image forURL:[NSURL URLWithString:path]];
@@ -60,7 +61,7 @@
             else
             {
                 //本地视频
-                imageView.image = [UIImage imageNamed:@"square_pic-3"];
+                //imageView.image = [UIImage imageNamed:@"square_pic-3"];
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                     UIImage * image = [[VideoConvertHelper sharedHelper] getVideoThumb:path];
                     dispatch_async(dispatch_get_main_queue(), ^{

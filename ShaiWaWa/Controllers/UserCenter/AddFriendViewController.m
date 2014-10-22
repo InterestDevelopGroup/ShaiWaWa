@@ -50,6 +50,12 @@
 {
     NSString * remark = _remarkField.text;
     
+    if([remark length] == 0)
+    {
+        [SVProgressHUD showErrorWithStatus:@"备注不能为空."];
+        return;
+    }
+    
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
     UserInfo * userInfo = [[UserDefault sharedInstance] userInfo];
     [[HttpService sharedInstance] applyFriend:@{@"uid":userInfo.uid,@"friend_id":_friendID,@"remark":remark} completionBlock:^(id object) {

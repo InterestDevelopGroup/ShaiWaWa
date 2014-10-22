@@ -631,6 +631,8 @@
     {
         dynamicCell.babyNameLabel.text = recrod.baby_alias;
     }
+    [dynamicCell.babyNameLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showBabyHomePage:)]];
+    dynamicCell.babyNameLabel.userInteractionEnabled = YES;
     [dynamicCell.zanButton setTitle:recrod.like_count forState:UIControlStateNormal];
     if([recrod.is_like isEqualToString:@"1"])
     {

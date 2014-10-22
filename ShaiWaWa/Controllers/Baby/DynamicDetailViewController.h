@@ -8,6 +8,7 @@
 
 #import "CommonViewController.h"
 #import "BabyRecord.h"
+typedef void (^DeleteRecord)(BabyRecord * record);
 @interface DynamicDetailViewController : CommonViewController<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 {
 //    BOOL isShareViewShown;
@@ -20,7 +21,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *pinLunContextTextField;
 @property (strong,nonatomic) BabyRecord * babyRecord;
 @property (assign, nonatomic) BOOL isShareViewShown;
-
+@property (nonatomic,copy) DeleteRecord deleteBlock;
 - (IBAction)hideGrayShareV:(id)sender;
 - (IBAction)pinLunEvent:(id)sender;
 

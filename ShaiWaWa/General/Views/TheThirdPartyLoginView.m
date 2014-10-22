@@ -62,101 +62,162 @@
 - (void)sinaLoginEvent
 {
 
-    [ShareSDK getUserInfoWithType:ShareTypeSinaWeibo authOptions:nil
-                           result:^(BOOL result, id<ISSPlatformUser> userInfo, id<ICMErrorInfo> error)
-     {
-         
-         if(error)
+    id<ISSAuthOptions> authOptions = [ShareSDK authOptionsWithAutoAuth:YES
+                                                         allowCallback:YES
+                                                         authViewStyle:SSAuthViewStyleFullScreenPopup
+                                                          viewDelegate:nil
+                                               authManagerViewDelegate:nil];
+    
+    [ShareSDK authWithType:ShareTypeSinaWeibo options:authOptions result:^(SSAuthState state, id<ICMErrorInfo> error) {
+        if(state == 2)
+        {
+            UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"授权失败." delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alertView show];
+            alertView = nil;
+            
+            return ;
+        }
+        
+        if(state == 3)
+        {
+            return ;
+        }
+        
+        
+        [ShareSDK getUserInfoWithType:ShareTypeSinaWeibo authOptions:authOptions
+                               result:^(BOOL result, id<ISSPlatformUser> userInfo, id<ICMErrorInfo> error)
          {
-             NSLog(@"%@",error);
-             UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"授权失败." delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-             [alertView show];
-             alertView = nil;
-             return  ;
-         }
-         
-         if(!result)
-         {
-             UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"登陆失败." delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-             [alertView show];
-             alertView = nil;
-             return ;
              
-         }
-         
-         NSLog(@"获取用户所属平台类型:%d",[userInfo type]);
-         NSLog(@"获取用户个人主页:%@",[userInfo url]);
-         NSLog(@"获取用户认证类型:%d",[userInfo verifyType]);
-         NSLog(@"获取用户职业信息:%@",[userInfo works]);
-         NSLog(@"获取用户id:%@",[userInfo uid]);
-         NSLog(@"获取用户昵称:%@",[userInfo nickname]);
-         NSLog(@"获取用户个人简介:%@",[userInfo aboutMe]);
-         NSLog(@"获取用户所属的应用:%@",[userInfo app]);
-         NSLog(@"获取用户的原始数据信息:%@",[userInfo sourceData]);
-         NSLog(@"获取用户分享数:%d",[userInfo shareCount]);
-         NSLog(@"获取用户注册时间:%f",[userInfo regAt]);
-         NSLog(@"获取用户个人头像:%@",[userInfo profileImage]);
-         NSLog(@"获取用户等级%d",[userInfo level]);
-         NSLog(@"获取用户性别:%d",[userInfo gender]);
-         NSLog(@"获取用户关注数:%d",[userInfo friendCount]);
-         NSLog(@"获取用户粉丝数:%d",[userInfo followerCount]);
-         NSLog(@"获取用户的教育信息列表:%@",[userInfo educations]);
-         NSLog(@"获取用户生日:%@",[userInfo birthday]);
-         NSLog(@"token:%@",[[userInfo credential] token]);
-         NSLog(@"secret:%@",[[userInfo credential] secret]);
-         
-         [self loginWithUserInfo:userInfo openid:[userInfo uid] type:@"2"];
-     }];
+             if(error)
+             {
+                 NSLog(@"%@",error);
+                 /*
+                  UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"授权失败." delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                  [alertView show];
+                  alertView = nil;
+                  */
+                 return  ;
+             }
+             
+             if(!result)
+             {
+                 UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"登陆失败." delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                 [alertView show];
+                 alertView = nil;
+                 return ;
+                 
+             }
+             
+             NSLog(@"获取用户所属平台类型:%d",[userInfo type]);
+             NSLog(@"获取用户个人主页:%@",[userInfo url]);
+             NSLog(@"获取用户认证类型:%d",[userInfo verifyType]);
+             NSLog(@"获取用户职业信息:%@",[userInfo works]);
+             NSLog(@"获取用户id:%@",[userInfo uid]);
+             NSLog(@"获取用户昵称:%@",[userInfo nickname]);
+             NSLog(@"获取用户个人简介:%@",[userInfo aboutMe]);
+             NSLog(@"获取用户所属的应用:%@",[userInfo app]);
+             NSLog(@"获取用户的原始数据信息:%@",[userInfo sourceData]);
+             NSLog(@"获取用户分享数:%d",[userInfo shareCount]);
+             NSLog(@"获取用户注册时间:%f",[userInfo regAt]);
+             NSLog(@"获取用户个人头像:%@",[userInfo profileImage]);
+             NSLog(@"获取用户等级%d",[userInfo level]);
+             NSLog(@"获取用户性别:%d",[userInfo gender]);
+             NSLog(@"获取用户关注数:%d",[userInfo friendCount]);
+             NSLog(@"获取用户粉丝数:%d",[userInfo followerCount]);
+             NSLog(@"获取用户的教育信息列表:%@",[userInfo educations]);
+             NSLog(@"获取用户生日:%@",[userInfo birthday]);
+             NSLog(@"token:%@",[[userInfo credential] token]);
+             NSLog(@"secret:%@",[[userInfo credential] secret]);
+             
+             [self loginWithUserInfo:userInfo openid:[userInfo uid] type:@"2"];
+         }];
+
+
+    }];
+    
+    
     
 }
 
 - (void)qqLoginEvent
 {
 
-    [ShareSDK getUserInfoWithType:ShareTypeQQSpace authOptions:nil
-                           result:^(BOOL result, id<ISSPlatformUser> userInfo, id<ICMErrorInfo> error)
-     {
-         
-         if(error)
-         {
-             UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"授权失败." delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-             [alertView show];
-             alertView = nil;
-             return ;
-         }
-         
-         if(!result)
-         {
-             UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"登陆失败." delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-             [alertView show];
-             alertView = nil;
-             return ;
+    
+    id<ISSAuthOptions> authOptions = [ShareSDK authOptionsWithAutoAuth:YES
+                                                         allowCallback:YES
+                                                         authViewStyle:SSAuthViewStyleFullScreenPopup
+                                                          viewDelegate:nil
+                                               authManagerViewDelegate:nil];
+    
+    
+    [ShareSDK authWithType:ShareTypeQQSpace options:authOptions result:^(SSAuthState state, id<ICMErrorInfo> error) {
+        
+        if(state == 2)
+        {
+            UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"授权失败." delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alertView show];
+            alertView = nil;
 
-         }
-         
-         NSLog(@"获取用户所属平台类型:%d",[userInfo type]);
-         NSLog(@"获取用户个人主页:%@",[userInfo url]);
-         NSLog(@"获取用户认证类型:%d",[userInfo verifyType]);
-         NSLog(@"获取用户职业信息:%@",[userInfo works]);
-         NSLog(@"获取用户id:%@",[userInfo uid]);
-         NSLog(@"获取用户昵称:%@",[userInfo nickname]);
-         NSLog(@"获取用户个人简介:%@",[userInfo aboutMe]);
-         NSLog(@"获取用户所属的应用:%@",[userInfo app]);
-         NSLog(@"获取用户的原始数据信息:%@",[userInfo sourceData]);
-         NSLog(@"获取用户分享数:%d",[userInfo shareCount]);
-         NSLog(@"获取用户注册时间:%f",[userInfo regAt]);
-         NSLog(@"获取用户个人头像:%@",[userInfo profileImage]);
-         NSLog(@"获取用户等级%d",[userInfo level]);
-         NSLog(@"获取用户性别:%d",[userInfo gender]);
-         NSLog(@"获取用户关注数:%d",[userInfo friendCount]);
-         NSLog(@"获取用户粉丝数:%d",[userInfo followerCount]);
-         NSLog(@"获取用户的教育信息列表:%@",[userInfo educations]);
-         NSLog(@"获取用户生日:%@",[userInfo birthday]);
-         NSLog(@"token:%@",[[userInfo credential] token]);
-         NSLog(@"secret:%@",[[userInfo credential] secret]);
-         //[self loginWithUserInfo:userInfo type:@"1"];
-         [self getOpenIDWithUserInfo:userInfo type:@"1"];
-     }];
+            return ;
+        }
+        
+        if(state == 3)
+        {
+            return ;
+        }
+        
+        
+        [ShareSDK getUserInfoWithType:ShareTypeQQSpace authOptions:nil
+                               result:^(BOOL result, id<ISSPlatformUser> userInfo, id<ICMErrorInfo> error)
+         {
+             
+             if(error)
+             {
+                 /*
+                  UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"授权失败." delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                  [alertView show];
+                  alertView = nil;
+                  */
+                 return ;
+             }
+             
+             if(!result)
+             {
+                 UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"登陆失败." delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                 [alertView show];
+                 alertView = nil;
+                 return ;
+                 
+             }
+             
+             NSLog(@"获取用户所属平台类型:%d",[userInfo type]);
+             NSLog(@"获取用户个人主页:%@",[userInfo url]);
+             NSLog(@"获取用户认证类型:%d",[userInfo verifyType]);
+             NSLog(@"获取用户职业信息:%@",[userInfo works]);
+             NSLog(@"获取用户id:%@",[userInfo uid]);
+             NSLog(@"获取用户昵称:%@",[userInfo nickname]);
+             NSLog(@"获取用户个人简介:%@",[userInfo aboutMe]);
+             NSLog(@"获取用户所属的应用:%@",[userInfo app]);
+             NSLog(@"获取用户的原始数据信息:%@",[userInfo sourceData]);
+             NSLog(@"获取用户分享数:%d",[userInfo shareCount]);
+             NSLog(@"获取用户注册时间:%f",[userInfo regAt]);
+             NSLog(@"获取用户个人头像:%@",[userInfo profileImage]);
+             NSLog(@"获取用户等级%d",[userInfo level]);
+             NSLog(@"获取用户性别:%d",[userInfo gender]);
+             NSLog(@"获取用户关注数:%d",[userInfo friendCount]);
+             NSLog(@"获取用户粉丝数:%d",[userInfo followerCount]);
+             NSLog(@"获取用户的教育信息列表:%@",[userInfo educations]);
+             NSLog(@"获取用户生日:%@",[userInfo birthday]);
+             NSLog(@"token:%@",[[userInfo credential] token]);
+             NSLog(@"secret:%@",[[userInfo credential] secret]);
+             //[self loginWithUserInfo:userInfo type:@"1"];
+             [self getOpenIDWithUserInfo:userInfo type:@"1"];
+         }];
+
+        
+    }];
+    
+    
 }
 
 

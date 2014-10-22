@@ -49,11 +49,10 @@
 //    [self getBabyRemarkInfo];
     _remarksField.text = _babyRemark.alias;
     _remarksTextField.text = _babyRemark.remark;
-    if (_remarksTextField == nil || [_remarksTextField.text isEqualToString:@"" ] || [_remarksTextField.text isEqualToString:@"关于宝宝的描述" ]){
+    if (_remarksTextField == nil || [_remarksTextField.text isEqualToString:@""] || [_remarksTextField.text isEqualToString:@"关于宝宝的描述" ]){
         [_remarksTextField setPlaceholder:@"关于宝宝的描述"];
     }
     _remarksTextField.delegate =self;
-//    [self copyOfWeb];
 }
 
 //- (void)getBabyRemarkInfo
@@ -92,8 +91,11 @@
     }
     
     //判断一下这个宝宝是否有备注信息
-    if (_babyRemark) {
-        if (_remarksField.text.length <1 && _remarksTextField.text.length <1) {//如果客户什么也没写，表示删除备注
+    if (_babyRemark)
+    {
+        if (_remarksField.text.length <1)
+        {
+            //如果客户什么也没写，表示删除备注
             [[HttpService sharedInstance] deleteBabyRemark:@{@"uid":users.uid,@"baby_id":_babyInfo.baby_id} completionBlock:^(id object) {
                 _babyHomeVC.isFromRemarkController = YES;
                 [self popVIewController];
@@ -104,9 +106,10 @@
                 [SVProgressHUD showErrorWithStatus:responseString];
             }];
         }
-        else{
-            NSString *alias = _remarksField.text.length?_remarksField.text:@"备注名";
-            NSString *remark = _remarksTextField.text.length?_remarksTextField.text:@"关于宝宝的描述";
+        else
+        {
+            NSString *alias = _remarksField.text;
+            NSString *remark = _remarksTextField.text.length?_remarksTextField.text:@"";
             [[HttpService sharedInstance] updateBabyRemark:@{@"uid":users.uid,@"baby_id":_babyInfo.baby_id,@"alias":alias, @"remark":remark} completionBlock:^(id object) {
                 _remarksField.text = nil;
                 _remarksTextField.text = nil;
@@ -117,13 +120,15 @@
             }];
         }
         
-    }else
+    }
+    else
     {
-        if (_remarksField.text.length <1 && _remarksTextField.text.length < 1) {
+        if (_remarksField.text.length <1 && _remarksTextField.text.length < 1)
+        {
             return;
         }
-        NSString *alias = _remarksField.text.length?_remarksField.text:@"备注名";
-        NSString *remark = _remarksTextField.text.length?_remarksTextField.text:@"关于宝宝的描述";
+        NSString *alias = _remarksField.text;
+        NSString *remark = _remarksTextField.text.length?_remarksTextField.text:@"";
         [[HttpService sharedInstance] addBabyRemark:@{@"uid":users.uid,@"baby_id":_babyInfo.baby_id,@"alias":alias, @"remark":remark} completionBlock:^(id object) {
             [SVProgressHUD showSuccessWithStatus:[object objectForKey:@"err_msg"]];
             _remarksField.text = nil;

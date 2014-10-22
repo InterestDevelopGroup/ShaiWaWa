@@ -434,7 +434,7 @@
             case 3:     //申请成为好友
 //                msgCell.sendNameLabel.text = msg.content;
                 msgCell.receiveImgView.hidden = YES;
-                msgCell.timeLabel.hidden = YES;
+                //msgCell.timeLabel.hidden = YES;
 //                msgCell.actionLabel.text = @"请求加你为好友";
                 msgCell.actionLabel.text = msg.content;
                 msgCell.contentLabel.text = msg.remark;
@@ -449,7 +449,6 @@
                 msgCell.refuseButton.hidden = YES;
                 msgCell.receiveImgView.hidden = YES;
                 msgCell.contentLabel.hidden = YES;
-//                msgCell.actionLabel.text = @"同意了你的好友请求";
                 msgCell.actionLabel.text = msg.content;
                 break;
             case 5:     //好友申请被拒绝
@@ -476,11 +475,9 @@
                 msgCell.refuseButton.hidden = YES;
                 msgCell.receiveImgView.hidden = YES;
                 msgCell.actionLabel.hidden = YES;
-                msgCell.timeLabel.hidden = YES;
-                
+                //msgCell.timeLabel.hidden = YES;
                 temp.text = @"张山";
                 temp.textColor = [UIColor greenColor];
-                //            NSString *babyName =
                 msgCell.contentLabel.text = [NSString stringWithFormat:@"你关注的宝宝%@有新的动态",temp];
                 break;
             case 8:     //被@了
@@ -498,6 +495,7 @@
         msgCell.selectionStyle = UITableViewCellSelectionStyleNone;
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHomePage:)];
         msgCell.sendImgView.userInteractionEnabled = YES;
+        
         [msgCell.sendImgView addGestureRecognizer:tap];
         return msgCell;
     }
@@ -518,7 +516,7 @@
         if ([typeId isEqualToString:@"3"]) {
             //申请成为好友
             msgCell.receiveImgView.hidden = YES;
-            msgCell.timeLabel.hidden = YES;
+            //msgCell.timeLabel.hidden = YES;
             msgCell.actionLabel.text = msg.content;
             msgCell.contentLabel.text = msg.remark;
         }
@@ -537,9 +535,10 @@
             //自己的宝宝有新动态
             msgCell.receiveImgView.hidden = YES;
             msgCell.actionLabel.hidden = YES;
-            msgCell.timeLabel.hidden = YES;
+            //msgCell.timeLabel.hidden = YES;
         }
-        if ([typeId isEqualToString:@"7"]) {
+        if ([typeId isEqualToString:@"7"])
+        {
             //特别关注的宝宝有新动态
             msgCell.sendNameLabel.text = @"系统消息";
             msgCell.sendNameLabel.textColor = [UIColor lightGrayColor];
@@ -547,7 +546,7 @@
 
             msgCell.receiveImgView.hidden = YES;
             msgCell.actionLabel.hidden = YES;
-            msgCell.timeLabel.hidden = YES;
+            //msgCell.timeLabel.hidden = YES;
             
             NSString *babyName = @"博城";
             NSMutableAttributedString * attrString = [[NSMutableAttributedString alloc] initWithString:babyName];
@@ -572,6 +571,10 @@
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHomePage:)];
         msgCell.sendImgView.userInteractionEnabled = YES;
         [msgCell.sendImgView addGestureRecognizer:tap];
+        
+        
+        //计算时间
+        msgCell.timeLabel.text = [NSStringUtil calculateTime:msg.add_time];
         
         return msgCell;
     }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -129,7 +129,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <inset key="titleEdgeInsets" minX="-46" minY="50" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" backgroundImage="98E76582-1314-45BF-ACD0-27A1A040A4E9">
+                    <state key="normal" backgroundImage="4C9FBD57-214B-45F6-9F03-3D3352A75904">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -137,12 +137,12 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="w3O-Ne-G3w">
-                    <rect key="frame" x="82" y="20" width="50" height="50"/>
+                    <rect key="frame" x="88" y="23" width="40" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.93725496529999996" green="0.93725496529999996" blue="0.93725496529999996" alpha="1" colorSpace="deviceRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <inset key="titleEdgeInsets" minX="0.0" minY="30" maxX="0.0" maxY="0.0"/>
                     <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
-                    <state key="normal" backgroundImage="baby_baba.png">
+                    <state key="normal">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -150,11 +150,11 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wgj-WL-Y1h">
-                    <rect key="frame" x="190" y="20" width="50" height="50"/>
+                    <rect key="frame" x="195" y="23" width="40" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.93725496529999996" green="0.93725496529999996" blue="0.93725496529999996" alpha="1" colorSpace="deviceRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <inset key="titleEdgeInsets" minX="0.0" minY="30" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" backgroundImage="baby_mama.png">
+                    <state key="normal">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -174,14 +174,14 @@
                         <outlet property="delegate" destination="-1" id="Kuc-Qj-kqt"/>
                     </connections>
                 </scrollView>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="爸爸" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6Ew-0I-ON4">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="爸爸" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6Ew-0I-ON4">
                     <rect key="frame" x="86" y="64" width="42" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="妈妈" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Jo6-MZ-gKJ">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="妈妈" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Jo6-MZ-gKJ">
                     <rect key="frame" x="194" y="64" width="42" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -368,28 +368,27 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         </tapGestureRecognizer>
     </objects>
     <resources>
-        <image name="98E76582-1314-45BF-ACD0-27A1A040A4E9" width="69" height="68">
+        <image name="4C9FBD57-214B-45F6-9F03-3D3352A75904" width="69" height="68">
             <mutableData key="keyedArchiveRepresentation">
-YnBsaXN0MDDUAQIDBAUGPD1YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBMU
-GR4fJSYtMDY5VSRudWxs1QkKCwwNDg8QERJWTlNTaXplViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBz
+YnBsaXN0MDDUAQIDBAUGP0BYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBMU
+GR4fJSYtMTc7VSRudWxs1QkKCwwNDg8QERJWTlNTaXplViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBz
 V05TQ29sb3KAAoAMEiTAAACAA4AKWHs2OSwgNjh90hUKFhhaTlMub2JqZWN0c6EXgASACdIVChoYohsc
 gAWABoAJEAXTIAohIiMkV05TLmJhc2VbTlMucmVsYXRpdmWAAIAIgAdfEN1maWxlOi8vL0FwcGxpY2F0
 aW9ucy9YY29kZSUyMDUuMS5hcHAvQ29udGVudHMvRGV2ZWxvcGVyL1BsYXRmb3Jtcy9pUGhvbmVTaW11
 bGF0b3IucGxhdGZvcm0vRGV2ZWxvcGVyL0xpYnJhcnkvWGNvZGUvUHJpdmF0ZVBsdWdJbnMvSURFSW50
 ZXJmYWNlQnVpbGRlckNvY29hVG91Y2hJbnRlZ3JhdGlvbi5pZGVwbHVnaW4vQ29udGVudHMvUmVzb3Vy
 Y2VzL0lCVUlNaXNzaW5nSW1hZ2UudGlmZtInKCkqWiRjbGFzc25hbWVYJGNsYXNzZXNVTlNVUkyiKyxV
-TlNVUkxYTlNPYmplY3TSJyguL1dOU0FycmF5oi4s0zEyCjM0NVdOU1doaXRlXE5TQ29sb3JTcGFjZUQw
-IDAAEAOAC9InKDc4V05TQ29sb3KiNyzSJyg6O1dOU0ltYWdlojosXxAPTlNLZXllZEFyY2hpdmVy0T4/
-VHJvb3SAAQAIABEAGgAjAC0AMgA3AEUASwBWAF0AZABxAHgAgACCAIQAiQCLAI0AlgCbAKYAqACqAKwA
-sQC0ALYAuAC6ALwAwwDLANcA2QDbAN0BvQHCAc0B1gHcAd8B5QHuAfMB+wH+AgUCDQIaAh8CIQIjAigC
-MAIzAjgCQAJDAlUCWAJdAAAAAAAAAgEAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAl8
+TlNVUkxYTlNPYmplY3TSJyguL1dOU0FycmF5ojAsV05TQXJyYXnTMjMKNDU2V05TV2hpdGVcTlNDb2xv
+clNwYWNlRDAgMAAQA4AL0icoODlXTlNDb2xvcqI6LFdOU0NvbG9y0icoPD1XTlNJbWFnZaI+LFdOU0lt
+YWdlXxAPTlNLZXllZEFyY2hpdmVy0UFCVHJvb3SAAQAIABEAGgAjAC0AMgA3AEUASwBWAF0AZABxAHgA
+gACCAIQAiQCLAI0AlgCbAKYAqACqAKwAsQC0ALYAuAC6ALwAwwDLANcA2QDbAN0BvQHCAc0B1gHcAd8B
+5QHuAfMB+wH+AgYCDQIVAiICJwIpAisCMAI4AjsCQwJIAlACUwJbAm0CcAJ1AAAAAAAAAgEAAAAAAAAA
+QwAAAAAAAAAAAAAAAAAAAnc
 </mutableData>
         </image>
         <image name="baby_4-bg-1.png" width="320" height="100"/>
         <image name="baby_4-bg.png" width="320" height="165"/>
-        <image name="baby_baba.png" width="41" height="41"/>
         <image name="baby_duanxinyaoqing.png" width="95" height="80"/>
-        <image name="baby_mama.png" width="41" height="41"/>
         <image name="baby_weixinyaoqing.png" width="95" height="80"/>
         <image name="lvse.png" width="29" height="29"/>
         <image name="square_fenxiang-1.png" width="64" height="64"/>

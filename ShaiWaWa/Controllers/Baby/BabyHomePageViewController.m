@@ -148,7 +148,6 @@
     
     specialCareBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [specialCareBtn setBackgroundColor:[UIColor whiteColor]];
-//    int isFous = [_babyInfo.is_focus intValue];
     NSString *foucus = nil;
     if ([_babyInfo.is_focus isEqualToString:@"1"]) {
         foucus = @"取消关注";
@@ -214,7 +213,6 @@
     UITableView *gridView = [[UITableView alloc] initWithFrame:CGRectMake(10, 45, 300, height)];
     gridView.delegate = self;
     gridView.dataSource = self;
-//    [gridView clearSeperateLine];
     gridView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     [_heightAndWeightTableView addSubview:gridView];
     _gridView = gridView;
@@ -257,7 +255,11 @@
     }
     else
     {
-        _dadLabel.text = @"邀请";
+        //_dadLabel.text = @"邀请";
+        _dadLabel.hidden = YES;
+        _dadButton.titleLabel.numberOfLines = 2;
+        [_dadButton setTitle:@"邀请\n爸爸" forState:UIControlStateNormal];
+        [_dadButton setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
     }
     
     if(_babyInfo.mid != nil && ![_babyInfo.mid isEqualToString:@"0"])
@@ -266,7 +268,11 @@
     }
     else
     {
-        _monLabel.text = @"邀请";
+        //_monLabel.text = @"邀请";
+        _monLabel.hidden = YES;
+        _monButton.titleLabel.numberOfLines = 2;
+        [_monButton setTitle:@"邀请\n妈妈" forState:UIControlStateNormal];
+        [_monButton setTitleColor: [UIColor darkTextColor] forState:UIControlStateNormal];
     }
 
     
@@ -282,11 +288,11 @@
     _dadButton.layer.cornerRadius = 8 ;
     _dadButton.layer.masksToBounds = YES;
     _dadButton.layer.borderColor = [[UIColor whiteColor] CGColor];
-    _dadButton.layer.borderWidth = 2.5;
+    _dadButton.layer.borderWidth = 1.0;
     _monButton.layer.cornerRadius = 8 ;
     _monButton.layer.masksToBounds = YES;
     _monButton.layer.borderColor = [[UIColor whiteColor] CGColor];
-    _monButton.layer.borderWidth = 2.5;
+    _monButton.layer.borderWidth = 1.0;
 }
 
 - (void)getBabyRemarkInfo

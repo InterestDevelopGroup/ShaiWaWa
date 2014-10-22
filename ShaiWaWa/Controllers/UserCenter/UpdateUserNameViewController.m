@@ -65,10 +65,6 @@
     }
     
     user.username = _userNameField.text;
-    
-
-    
-    
     [[HttpService sharedInstance] updateUserInfo:@{@"user_id":user.uid,@"username":user.username,@"avatar":user.avatar,@"sex":user.sex,@"qq":user.qq,@"weibo":user.weibo,@"wechat":user.wechat} completionBlock:^(id object) {
          [SVProgressHUD showSuccessWithStatus:@"更新成功"];
          [[UserDefault sharedInstance] setUserInfo:user];

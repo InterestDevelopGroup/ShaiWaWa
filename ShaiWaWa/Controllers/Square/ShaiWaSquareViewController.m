@@ -264,11 +264,13 @@
 
 - (void)showFriendInfo:(UITapGestureRecognizer *)gesture
 {
+    /*
     if(![gesture.view isKindOfClass:[UIImageView class]])
     {
         return ;
     }
-    UIImageView * imageView = (UIImageView *)gesture.view;
+    */
+    UIView * imageView = (UIView *)gesture.view;
     BabyRecord * record ;
     if(segMentedControl.selectedSegmentIndex == 0)
     {
@@ -404,7 +406,7 @@
     else if([record.images count] > 0)
     {
         cell.babyImageView.hidden = NO;
-        [cell.babyImageView sd_setImageWithURL:[NSURL URLWithString:record.images[0]] placeholderImage:[UIImage imageNamed:@"square_pic-1"]];
+        [cell.babyImageView sd_setImageWithURL:[NSURL URLWithString:record.images[0]]];
     }
     else
     {
@@ -413,9 +415,15 @@
     }
     
     [cell.usernameLabel setText:record.baby_nickname];
+    if([record.baby_alias length] != 0)
+    {
+        cell.usernameLabel.text = record.baby_alias;
+    }
+    [cell.usernameLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showFriendInfo:)]];
+    cell.usernameLabel.userInteractionEnabled = YES;
     [cell.contentLabel setText:record.content];
     
-        [cell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:(record.avatar == nil ? @"" : record.avatar)] placeholderImage:Default_Avatar];
+    [cell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:(record.avatar == nil ? @"" : record.avatar)] placeholderImage:Default_Avatar];
         cell.avatarImageView.userInteractionEnabled = YES;
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showFriendInfo:)];
         [cell.avatarImageView addGestureRecognizer:tap];

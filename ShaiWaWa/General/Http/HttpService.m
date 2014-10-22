@@ -1450,15 +1450,13 @@
         {
             if(success)
             {
-                success([NSNumber numberWithInt:[obj[@"err_code"] intValue]]);
+                success([NSNumber numberWithInt:[obj[@"result"] intValue]]);
             }
-        }else
+        }
+        else
         {
             failure(nil,[self getErrorMsgByCode:[obj[@"err_code"] intValue]]);
-            return ;
         }
-        
-        
         
     } failureBlock:failure];
 }

@@ -257,6 +257,10 @@
 {
     [_avatarImageView sd_setImageWithURL:[NSURL URLWithString:babyInfo.avatar] placeholderImage:Default_Avatar];
     _babyNameLabel.text = babyInfo.nickname;
+    if([babyInfo.alias length] != 0)
+    {
+        _babyNameLabel.text = babyInfo.alias;
+    }
 }
 
 
@@ -734,7 +738,7 @@
         _placemark = placemark;
         if(_placemark != nil)
         {
-            _addressLabel.text = placemark[@"address"];
+            _addressLabel.text = placemark[@"name"];
         }
         else
         {
@@ -913,7 +917,6 @@
         _bottomView.frame = bottomRect;
         _shareView.frame = shareRect;
         [self.view addSubview:_shareView];
-
     }
 
 }
@@ -926,8 +929,24 @@
         [_voiceImageView removeFromSuperview];
     }
     
-    _voiceImageView.center = self.navigationController.view.center;
-    [self.view addSubview:_voiceImageView];
+    [[self.view viewWithTag:100001] removeFromSuperview];
+    
+    UIView * view = [UIView new];
+    CGRect rect = self.view.bounds;
+    rect.size.height -= 40;
+    view.frame = rect;
+    view.backgroundColor = [UIColor clearColor];
+    view.tag = 100001;
+    
+    UIView * subView = [UIView new];
+    subView.frame = view.bounds;
+    subView.backgroundColor = [UIColor lightGrayColor];
+    subView.alpha = 0.5;
+    [view addSubview:subView];
+    
+    _voiceImageView.frame = CGRectMake((320 - _voiceImageView.frame.size.width) * .5,[OSHelper iPhone5]?200:100, CGRectGetWidth(_voiceImageView.frame), CGRectGetHeight(_voiceImageView.frame));
+    [view addSubview:_voiceImageView];
+    [self.view addSubview:view];
     
     /*
     NSDictionary *recordSetting = [[NSDictionary alloc] initWithObjectsAndKeys:
@@ -977,7 +996,7 @@
         {
             [_voiceImageView removeFromSuperview];
         }
-
+        [[self.view viewWithTag:100001] removeFromSuperview];
         self.audioPath = nil;
     };
     self.meterObserver = meterObserver;
@@ -994,6 +1013,7 @@
             [_voiceImageView removeFromSuperview];
         }
 
+        [[self.view viewWithTag:100001] removeFromSuperview];
         weakSelf.meterObserver.audioQueue = nil;
         [[[UIAlertView alloc]initWithTitle:@"错误" message:error.userInfo[NSLocalizedDescriptionKey] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil]show];
     };
@@ -1100,6 +1120,8 @@
     {
         [_voiceImageView removeFromSuperview];
     }
+    
+    [[self.view viewWithTag:100001] removeFromSuperview];
 
     _recordBtn.enabled = NO;
     [self showRecord:nil];
