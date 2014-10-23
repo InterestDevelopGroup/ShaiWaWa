@@ -177,7 +177,7 @@
 //             [alertView show];
 //             alertView = nil;
              
-             [SVProgressHUD showErrorWithStatus:@"授权失败"];
+             //[SVProgressHUD showErrorWithStatus:@"授权失败"];
              return ;
          }
          
@@ -235,7 +235,7 @@
 //             UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"授权失败." delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
 //             [alertView show];
 //             alertView = nil;
-             [SVProgressHUD showErrorWithStatus:@"授权失败"];
+             //[SVProgressHUD showErrorWithStatus:@"授权失败"];
              return  ;
          }
          

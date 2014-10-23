@@ -139,7 +139,18 @@
     UITapGestureRecognizer *touXiangImgViewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showActionSheetView)];
     [_touXiangView addGestureRecognizer:touXiangImgViewTap];
     
-    [_touXiangView sd_setImageWithURL:[NSURL URLWithString:users.avatar] placeholderImage:[UIImage imageNamed:@"user_touxiang"]];
+    
+    UIImage * image = Unkown_Avatar;
+    if([users.sex isEqualToString:@"1"])
+    {
+        image = Man_Avatar;
+    }
+    else if([users.sex isEqualToString:@"2"])
+    {
+        image = Woman_Avatar;
+    }
+    
+    [_touXiangView sd_setImageWithURL:[NSURL URLWithString:users.avatar] placeholderImage:image];
 }
 
 - (void)showActionSheetView
@@ -312,7 +323,7 @@
     _touXiangView.image = image;
     // 开始上传
     QNUploadHelper * uploadHelper = [QNUploadHelper sharedHelper];
-    [uploadHelper uploadFileData:UIImagePNGRepresentation(image) withKey:fileName];
+    [uploadHelper uploadFileData:UIImageJPEGRepresentation(image, 1.0) withKey:fileName];
     //设置头像
     uploadHelper.uploadSuccess = ^(NSString * str){
         
@@ -324,6 +335,8 @@
             users.avatar = [QN_URL stringByAppendingString:fileName];
             [[UserDefault sharedInstance] setUserInfo:users];
             [SVProgressHUD showSuccessWithStatus:@"上传成功."];
+            
+            [_touXiangView sd_setImageWithURL:[NSURL URLWithString:users.avatar] placeholderImage:image];
         } failureBlock:^(NSError *error, NSString *responseString) {
             NSString * msg = responseString;
             if(error)

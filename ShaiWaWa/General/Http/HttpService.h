@@ -34,6 +34,7 @@
 #define Add_Comment                                 @"add_comment"
 #define Get_Comment_List                            @"get_record_comment_list"
 #define Add_Favorite                                @"add_favorite"
+#define Unfavorite                                  @"unfavorite"
 #define Delete_Record                               @"delete_record"
 #define Get_Record_List                             @"get_record_list"
 #define Get_Record_By_User_ID                       @"get_baby_record_list"
@@ -272,6 +273,12 @@ typedef enum {
  */
 //TODO:添加收藏
 - (void)addFavorite:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
+
+/**
+ @desc 取消收藏
+ */
+//TODO:取消收藏
+- (void)unfavorite:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure;
 
 /**
  @desc 获取收藏列表

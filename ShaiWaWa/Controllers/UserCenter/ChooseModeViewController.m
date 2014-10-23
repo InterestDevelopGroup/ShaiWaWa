@@ -103,7 +103,13 @@ typedef enum{
     }
     */
     
+    //获取短信息
     [self getNewMessages];
+    
+    [[self.view viewWithTag:100000] removeFromSuperview];
+    
+    [self configLeftMenu];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -148,7 +154,7 @@ typedef enum{
     self.navigationItem.rightBarButtonItems = @[rightItem_2,rightItem_1];
 
     //左边菜单
-    [self configLeftMenu];
+    //[self configLeftMenu];
     //顶部菜单
     [self configTopMenu];
     //分享视图
@@ -186,6 +192,7 @@ typedef enum{
     isMenuShown = NO;
     MainMenu *mainMenu = [[MainMenu alloc] initWithFrame:CGRectMake(0, 0, 240, 390)];
     mainMenu.userInteractionEnabled = YES;
+    mainMenu.tag = 100000;
     //设置菜单功能
     [mainMenu setSetBtnBlock:^(UIButton * btn)
      {
@@ -235,7 +242,7 @@ typedef enum{
          
      }];
     
-    
+    users = [[UserDefault sharedInstance] userInfo];
     mainMenu.nameLabel.text = users.username;
     [mainMenu.touXiangImgView sd_setImageWithURL:[NSURL URLWithString:users.avatar] placeholderImage:[UIImage imageNamed:@"user_touxiang"]];
     [_mainAddView addSubview:mainMenu];

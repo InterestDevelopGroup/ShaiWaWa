@@ -18,6 +18,7 @@
 #import "MybabyListViewController.h"
 #import "HisFriendsViewController.h"
 #import "AddFriendViewController.h"
+#import "AppMacros.h"
 @interface FriendHomeViewController ()<UIAlertViewDelegate>
 {
     NSMutableArray *babyList;
@@ -105,7 +106,18 @@
             [self.navigationController popVIewController];
             return ;
         }
-        [_friendAvatarImgView sd_setImageWithURL:[NSURL URLWithString:user.avatar] placeholderImage:[UIImage imageNamed:@"user_touxiang"]];
+        
+        UIImage * image = Unkown_Avatar;
+        if([user.sex isEqualToString:@"1"])
+        {
+            image = Man_Avatar;
+        }
+        else if([user.sex isEqualToString:@"2"])
+        {
+            image = Woman_Avatar;
+        }
+        
+        [_friendAvatarImgView sd_setImageWithURL:[NSURL URLWithString:user.avatar] placeholderImage:image];
         _friendUserNameTextField.text = user.username;
         _friendSwwNumTextField.text = user.sww_number;
         self.title = user.username;

@@ -15,6 +15,11 @@
 #define Publish_Video_Folder @"Publish_Video"
 #define Publish_Audio_Folder @"Publish_Audio"
 #define Default_Avatar [UIImage imageNamed:@"user_touxiang"]
+#define Unkown_Avatar [UIImage imageNamed:@"Unkown_avatar"]
+#define Man_Avatar [UIImage imageNamed:@"man_avatar"]
+#define Woman_Avatar [UIImage imageNamed:@"woman_avatar"]
+#define Boy_Avatar [UIImage imageNamed:@"boy_avatar"]
+#define Girl_Avatar [UIImage imageNamed:@"girl_avatar"]
 #define QN_ACEESS_KEY @"CXmPmkJtzAeP9dSqa_h684PIUtGX8eCIejkMXp9T"
 #define QN_SECRET_KEY @"VqGtXggvG7010TFozjuHqgSqLIlQpkdizbvhPLA-"
 #define QN_DOMAIN @"shaiwawa-app"

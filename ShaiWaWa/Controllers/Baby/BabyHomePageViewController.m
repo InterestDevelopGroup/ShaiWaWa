@@ -138,14 +138,14 @@
         UIBarButtonItem * right_doWith = [self customBarItem:@"user_gengduo" action:@selector(showList:)];
         self.navigationItem.rightBarButtonItem = right_doWith;
     }
-    remarksBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    remarksBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [remarksBtn setBackgroundColor:[UIColor whiteColor]];
     [remarksBtn setTitle:@"备注信息" forState:UIControlStateNormal];
     [remarksBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
     remarksBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     remarksBtn.frame = CGRectMake(self.navigationController.navigationBar.bounds.size.width-90, self.navigationController.navigationBar.bounds.size.height+10, 84, 41);
     [remarksBtn addTarget:self action:@selector(showRemarkVC) forControlEvents:UIControlEventTouchUpInside];
-    
+    //[remarksBtn setImage:[UIImage imageNamed:@"remark"] forState:UIControlStateNormal];
     specialCareBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [specialCareBtn setBackgroundColor:[UIColor whiteColor]];
     NSString *foucus = nil;
@@ -226,7 +226,7 @@
     
     if (_babyAvatarImgView.enabled)
     {
-        [_babyAvatarImgView sd_setImageWithURL:[NSURL URLWithString:_babyInfo.avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"baby_baobei.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [_babyAvatarImgView sd_setImageWithURL:[NSURL URLWithString:_babyInfo.avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"baby_baobei"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
             if(image)
             {
@@ -601,6 +601,11 @@
         }
         else
         {
+            
+            if(![user.uid isEqualToString:_babyInfo.mid])
+            {
+                return ;
+            }
             [self.navigationController.view addSubview:_yaoQingbgView];
             _yaoQingbgView.hidden = NO;
         }
@@ -625,6 +630,12 @@
         }
         else
         {
+            
+            if(![user.uid isEqualToString:_babyInfo.fid])
+            {
+                return ;
+            }
+            
             [self.navigationController.view addSubview:_yaoQingbgView];
             _yaoQingbgView.hidden = NO;
         }
@@ -1130,16 +1141,16 @@
         dynamicCell.babyNameLabel.text = recrod.baby_nickname;
         NSString *usersex = nil;
         if ([users.sex intValue] == 0) {
-            usersex = @"保密";
+            usersex = @"";
         }else if([users.sex intValue] == 1)
         {
-            usersex = @"爸爸";
+            usersex = @"(爸爸)";
         }else
         {
-            usersex = @"妈妈";
+            usersex = @"(妈妈)";
         }
         
-        dynamicCell.whoLabel.text = [NSString stringWithFormat:@"%@(%@)",recrod.username,usersex];
+        dynamicCell.whoLabel.text = [NSString stringWithFormat:@"%@%@",recrod.username,usersex];
         dynamicCell.releaseTimeLabel.text = [NSStringUtil calculateTime:recrod.add_time];
         [dynamicCell.zanButton setTitle:recrod.like_count forState:UIControlStateNormal];
         if([recrod.is_like isEqualToString:@"1"])

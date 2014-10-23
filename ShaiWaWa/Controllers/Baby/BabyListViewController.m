@@ -220,12 +220,12 @@
         babyListCell.babyNameLabel.text = baby.alias;
     }
 
-    [babyListCell.babyImage sd_setImageWithURL:[NSURL URLWithString:baby.avatar] placeholderImage:Default_Avatar];
-
+    UIImage * image = Unkown_Avatar;
     if([baby.sex isEqualToString:@"0"])
     {
         //保密
         babyListCell.babySexImage.hidden = YES;
+        image = Unkown_Avatar;
         
     }
     else if([baby.sex isEqualToString:@"1"])
@@ -233,13 +233,18 @@
         //男
         babyListCell.babySexImage.hidden = NO;
         babyListCell.babySexImage.image = [UIImage imageNamed:@"main_boy.png"];
+        image = Boy_Avatar;
     }
     else if([baby.sex isEqualToString:@"2"])
     {
         //女
         babyListCell.babySexImage.hidden = NO;
         babyListCell.babySexImage.image = [UIImage imageNamed:@"main_girl.png"];
+        image = Girl_Avatar;
     }
+    
+    [babyListCell.babyImage sd_setImageWithURL:[NSURL URLWithString:baby.avatar] placeholderImage:Boy_Avatar];
+
 
     NSInteger timeInterval = [[NSDate dateFromString:baby.birthday withFormat:@"yyyy-MM-dd"] timeIntervalSince1970];
     babyListCell.age.text = [NSStringUtil calculateAge:[NSString stringWithFormat:@"%d",timeInterval]];

@@ -9,22 +9,17 @@
 #import "MyCollectionViewController.h"
 #import "UIViewController+BarItemAdapt.h"
 #import "DynamicCell.h"
-
 #import "HttpService.h"
 #import "SVProgressHUD.h"
 #import "UserDefault.h"
 #import "UserInfo.h"
 #import "Friend.h"
 #import "BabyInfo.h"
-
 #import "MJRefreshHeaderView.h"
 #import "MJRefreshFooterView.h"
 #import "MJRefresh.h"
 #import "AppMacros.h"
-
 #import "BabyRecord.h"
-@import MediaPlayer;
-
 #import "PublishImageView.h"
 #import "ImageDisplayView.h"
 #import "UIImageView+WebCache.h"
@@ -36,6 +31,7 @@
 #import "PersonCenterViewController.h"
 #import "FriendHomeViewController.h"
 #import "AudioView.h"
+@import MediaPlayer;
 @interface MyCollectionViewController ()
 {
      NSMutableArray *dyArray;
@@ -618,4 +614,27 @@
     return dynamicCell;
     
 }
+
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(editingStyle != UITableViewCellEditingStyleDelete)
+    {
+        return ;
+    }
+    
+    BabyRecord * record = [dyArray objectAtIndex:indexPath.row];
+    
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return @"取消收藏";
+}
+
 @end

@@ -35,7 +35,8 @@
 #import "ChooseModeViewController.h"
 #import "ELCImagePickerController.H"
 #import <MobileCoreServices/UTCoreTypes.h>
-
+#import "PlatformBindViewController.h"
+#import <ShareSDK/ShareSDK.h>
 @import AVFoundation;
 @import MediaPlayer;
 #define PlaceHolder @"关于宝宝的开心事情..."
@@ -1056,7 +1057,7 @@
         _audioPath = nil;
         [_audioView removeFromSuperview];
     }else{
-        [_audioView clickAction:nil];     //如果录音大于两秒，那么就播放一次
+        //[_audioView clickAction:nil];     //如果录音大于两秒，那么就播放一次
     }
 }
 
@@ -1070,7 +1071,10 @@
     
     if(_userInfo.tecent_openId == nil)
     {
-        [self showAlertViewWithMessage:@"还没有绑定QQ空间,现在绑定?"];
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:nil message:@"还没有绑定QQ空间,现在绑定?" delegate:self cancelButtonTitle:@"关闭" otherButtonTitles:@"绑定", nil];
+        alert.tag = 1000001;
+        [alert show];
+        alert = nil;
         return ;
     }
     
@@ -1087,7 +1091,11 @@
     
     if(_userInfo.sina_openId == nil)
     {
-        [self showAlertViewWithMessage:@"还没有绑定新浪微博,现在绑定?"];
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:nil message:@"还没有绑定新浪微博,现在绑定?" delegate:self cancelButtonTitle:@"关闭" otherButtonTitles:@"绑定", nil];
+        alert.tag = 1000002;
+        [alert show];
+        alert = nil;
+
         return ;
     }
     
@@ -1104,7 +1112,10 @@
     
     if(_userInfo.tecent_openId == nil)
     {
-        [self showAlertViewWithMessage:@"你还没有绑定腾讯微博,现在绑定?"];
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:nil message:@"你还没有绑定腾讯微博,现在绑定?" delegate:self cancelButtonTitle:@"关闭" otherButtonTitles:@"绑定", nil];
+        alert.tag = 1000001;
+        [alert show];
+        alert = nil;
         return ;
     }
     
@@ -1441,6 +1452,245 @@
 
 
 
+#pragma mark - Open Platform
+- (void)bindQQ
+{
+    
+    
+    id<ISSAuthOptions> authOptions = [ShareSDK authOptionsWithAutoAuth:YES
+                                                         allowCallback:YES
+                                                         authViewStyle:SSAuthViewStyleFullScreenPopup
+                                                          viewDelegate:nil
+                                               authManagerViewDelegate:nil];
+    
+    [ShareSDK authWithType:ShareTypeQQSpace options:authOptions result:^(SSAuthState state, id<ICMErrorInfo> error) {
+        if(state == 2)
+        {
+            UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"授权失败." delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alertView show];
+            alertView = nil;
+            
+            return ;
+        }
+        
+        if(state == 3)
+        {
+            return ;
+        }
+        
+        [ShareSDK getUserInfoWithType:ShareTypeQQSpace authOptions:nil
+                               result:^(BOOL result, id<ISSPlatformUser> userInfo, id<ICMErrorInfo> error)
+         {
+             
+             if(error)
+             {
+                 //             UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"授权失败." delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                 //             [alertView show];
+                 //             alertView = nil;
+                 
+                 //[SVProgressHUD showErrorWithStatus:@"授权失败"];
+                 return ;
+             }
+             
+             if(!result)
+             {
+                 UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"登陆失败." delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                 [alertView show];
+                 alertView = nil;
+                 [SVProgressHUD dismiss];
+                 return ;
+                 
+             }
+             
+             NSLog(@"获取用户所属平台类型:%d",[userInfo type]);
+             NSLog(@"获取用户个人主页:%@",[userInfo url]);
+             NSLog(@"获取用户认证类型:%d",[userInfo verifyType]);
+             NSLog(@"获取用户职业信息:%@",[userInfo works]);
+             NSLog(@"获取用户id:%@",[userInfo uid]);
+             NSLog(@"获取用户昵称:%@",[userInfo nickname]);
+             NSLog(@"获取用户个人简介:%@",[userInfo aboutMe]);
+             NSLog(@"获取用户所属的应用:%@",[userInfo app]);
+             NSLog(@"获取用户的原始数据信息:%@",[userInfo sourceData]);
+             NSLog(@"获取用户分享数:%d",[userInfo shareCount]);
+             NSLog(@"获取用户注册时间:%f",[userInfo regAt]);
+             NSLog(@"获取用户个人头像:%@",[userInfo profileImage]);
+             NSLog(@"获取用户等级%d",[userInfo level]);
+             NSLog(@"获取用户性别:%d",[userInfo gender]);
+             NSLog(@"获取用户关注数:%d",[userInfo friendCount]);
+             NSLog(@"获取用户粉丝数:%d",[userInfo followerCount]);
+             NSLog(@"获取用户的教育信息列表:%@",[userInfo educations]);
+             NSLog(@"获取用户生日:%@",[userInfo birthday]);
+             NSLog(@"token:%@",[[userInfo credential] token]);
+             NSLog(@"secret:%@",[[userInfo credential] secret]);
+             
+             NSString * key = @"QQ_ACCESS_TOKEN";
+             NSUserDefaults * userDefault = [NSUserDefaults standardUserDefaults];
+             [userDefault setObject:[[userInfo credential] token] forKey:key];
+             [userDefault synchronize];
+             
+             [self bindWithType:@"1" userInfo:userInfo];
+             
+         }];
+    }];
+    
+    
+}
+
+- (void)bindSina
+{
+
+    id<ISSAuthOptions> authOptions = [ShareSDK authOptionsWithAutoAuth:YES
+                                                         allowCallback:YES
+                                                         authViewStyle:SSAuthViewStyleFullScreenPopup
+                                                          viewDelegate:nil
+                                               authManagerViewDelegate:nil];
+    
+    [ShareSDK authWithType:ShareTypeSinaWeibo options:authOptions result:^(SSAuthState state, id<ICMErrorInfo> error) {
+        if(state == 2)
+        {
+            UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"授权失败." delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alertView show];
+            alertView = nil;
+            
+            return ;
+        }
+        
+        if(state == 3)
+        {
+            return ;
+        }
+        
+        [ShareSDK getUserInfoWithType:ShareTypeSinaWeibo authOptions:nil
+                               result:^(BOOL result, id<ISSPlatformUser> userInfo, id<ICMErrorInfo> error)
+         {
+             if(error)
+             {
+                 NSLog(@"%@",error);
+                 //             UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"授权失败." delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                 //             [alertView show];
+                 //             alertView = nil;
+                 //[SVProgressHUD showErrorWithStatus:@"授权失败"];
+                 return  ;
+             }
+             
+             if(!result)
+             {
+                 UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"登陆失败." delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                 [alertView show];
+                 alertView = nil;
+                 [SVProgressHUD dismiss];
+                 return ;
+                 
+             }
+             
+             NSLog(@"获取用户所属平台类型:%d",[userInfo type]);
+             NSLog(@"获取用户个人主页:%@",[userInfo url]);
+             NSLog(@"获取用户认证类型:%d",[userInfo verifyType]);
+             NSLog(@"获取用户职业信息:%@",[userInfo works]);
+             NSLog(@"获取用户id:%@",[userInfo uid]);
+             NSLog(@"获取用户昵称:%@",[userInfo nickname]);
+             NSLog(@"获取用户个人简介:%@",[userInfo aboutMe]);
+             NSLog(@"获取用户所属的应用:%@",[userInfo app]);
+             NSLog(@"获取用户的原始数据信息:%@",[userInfo sourceData]);
+             NSLog(@"获取用户分享数:%d",[userInfo shareCount]);
+             NSLog(@"获取用户注册时间:%f",[userInfo regAt]);
+             NSLog(@"获取用户个人头像:%@",[userInfo profileImage]);
+             NSLog(@"获取用户等级%d",[userInfo level]);
+             NSLog(@"获取用户性别:%d",[userInfo gender]);
+             NSLog(@"获取用户关注数:%d",[userInfo friendCount]);
+             NSLog(@"获取用户粉丝数:%d",[userInfo followerCount]);
+             NSLog(@"获取用户的教育信息列表:%@",[userInfo educations]);
+             NSLog(@"获取用户生日:%@",[userInfo birthday]);
+             NSLog(@"token:%@",[[userInfo credential] token]);
+             NSLog(@"secret:%@",[[userInfo credential] secret]);
+             
+             NSString * key = @"SIAN_ACCESS_TOKEN";
+             NSUserDefaults * userDefault = [NSUserDefaults standardUserDefaults];
+             [userDefault setObject:[[userInfo credential] token] forKey:key];
+             [userDefault synchronize];
+             
+             [self bindWithType:@"2" userInfo:userInfo];
+         }];
+
+        
+    }];
+
+    
+}
+
+
+- (void)bindWithType:(NSString *)type userInfo:(id<ISSPlatformUser>)userInfo
+{
+    if([type isEqualToString:@"1"])
+    {
+        [[HttpService sharedInstance] get:@"https://graph.qq.com/oauth2.0/me" parameters:@{@"access_token":[[userInfo credential] token]} completionBlock:^(id obj) {
+            
+            //不需要处理成功返回的数据，因为服务端返回的数据不是json根式
+        } failureBlock:^(NSError *error, NSString *responseString) {
+            
+            NSRange range1 = [responseString rangeOfString:@"{"];
+            NSRange range2 = [responseString rangeOfString:@"}"];
+            
+            NSString * jsonStr = [responseString substringWithRange:NSMakeRange(range1.location, range2.location + 1 - range1.location)];
+            NSDictionary * info = [NSJSONSerialization JSONObjectWithData:[jsonStr dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];
+            //没有出错
+            if(info[@"openid"] != nil)
+            {
+                [self loginWithOpenID:info[@"openid"] withType:@"1"];
+                return ;
+            }
+            
+            //错误提示
+            NSString * msg = responseString;
+            if(error)
+            {
+                msg = @"绑定失败.";
+            }
+            [SVProgressHUD showErrorWithStatus:msg];
+        }];
+        
+    }
+    else
+    {
+        [self loginWithOpenID:[userInfo uid] withType:@"2"];
+    }
+}
+
+
+- (void)loginWithOpenID:(NSString *)openID withType:(NSString *)type
+{
+    UserInfo * users = [[UserDefault sharedInstance] userInfo];
+    NSMutableDictionary * params = [@{} mutableCopy];
+    params[@"uid"] = users.uid;
+    params[@"open_id"] = openID;
+    params[@"type"] = type;
+    [[HttpService sharedInstance] bindOpenLogin:params completionBlock:^(id object) {
+        
+        [SVProgressHUD showSuccessWithStatus:@"绑定成功."];
+        
+        if([type isEqualToString:@"1"])
+        {
+            users.tecent_openId = openID;
+        }
+        else if([type isEqualToString:@"2"])
+        {
+            users.sina_openId = openID;
+        }
+        
+        [[UserDefault sharedInstance] setUserInfo:users];
+        
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        //错误提示
+        NSString * msg = responseString;
+        if(error)
+        {
+            msg = @"绑定失败.";
+        }
+        [SVProgressHUD showErrorWithStatus:msg];
+    }];
+}
+
 
 
 #pragma mark CLLocationManagerDelegate Methods
@@ -1572,6 +1822,31 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     [alertView dismissWithClickedButtonIndex:alertView.cancelButtonIndex animated:YES];
+    
+    if(alertView.tag == 1000001 || alertView.tag == 1000002)
+    {
+        if(buttonIndex == 0)
+        {
+            return ;
+        }
+        
+//        PlatformBindViewController * vc = [[PlatformBindViewController alloc] initWithNibName:nil bundle:nil];
+//        [self push:vc];
+//        vc = nil;
+        if(alertView.tag == 1000001)
+        {
+            [self bindQQ];
+        }
+        
+        if(alertView.tag == 1000002)
+        {
+            [self bindSina];
+        }
+        
+        return ;
+    }
+    
+    
     if(buttonIndex == 0)
     {
         self.parentCtrl.isNeedRefresh = YES;

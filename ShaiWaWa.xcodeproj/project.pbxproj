@@ -97,6 +97,17 @@
 		C398DFFE19A4D9B0000F08DB /* QNUploadHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C398DFFD19A4D9B0000F08DB /* QNUploadHelper.m */; };
 		C398E00219A50016000F08DB /* PublishRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C398E00019A50016000F08DB /* PublishRecordViewController.m */; };
 		C398E00319A50016000F08DB /* PublishRecordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C398E00119A50016000F08DB /* PublishRecordViewController.xib */; };
+		C39954FB19F7946200C97DA9 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C39954F819F7946200C97DA9 /* libbaidumapapi.a */; };
+		C39954FC19F7946200C97DA9 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C39954FA19F7946200C97DA9 /* libbaidumapapi.a */; };
+		C39954FD19F794D500C97DA9 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A9827819E68C90007448C0 /* OpenGLES.framework */; };
+		C39954FE19F794DC00C97DA9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F41F690519820ACC00089E42 /* Security.framework */; };
+		C39954FF19F794F000C97DA9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F41F65491981F01400089E42 /* SystemConfiguration.framework */; };
+		C399550619F8DA9600C97DA9 /* boy_avatar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C399550019F8DA9600C97DA9 /* boy_avatar@2x.png */; };
+		C399550719F8DA9600C97DA9 /* girl_avatar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C399550119F8DA9600C97DA9 /* girl_avatar@2x.png */; };
+		C399550819F8DA9600C97DA9 /* man_avatar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C399550219F8DA9600C97DA9 /* man_avatar@2x.png */; };
+		C399550919F8DA9600C97DA9 /* remark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C399550319F8DA9600C97DA9 /* remark@2x.png */; };
+		C399550A19F8DA9600C97DA9 /* unkown_avatar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C399550419F8DA9600C97DA9 /* unkown_avatar@2x.png */; };
+		C399550B19F8DA9600C97DA9 /* woman_avatar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C399550519F8DA9600C97DA9 /* woman_avatar@2x.png */; };
 		C39AAE1719B3093100C8A7BE /* PersistentStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C39AAE1619B3093100C8A7BE /* PersistentStore.m */; };
 		C39AAE1B19B30A3200C8A7BE /* Topic.m in Sources */ = {isa = PBXBuildFile; fileRef = C39AAE1A19B30A3200C8A7BE /* Topic.m */; };
 		C39AAE1E19B3124200C8A7BE /* CommonAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = C39AAE1D19B3124200C8A7BE /* CommonAlert.m */; };
@@ -673,6 +684,24 @@
 		C398DFFF19A50016000F08DB /* PublishRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublishRecordViewController.h; sourceTree = "<group>"; };
 		C398E00019A50016000F08DB /* PublishRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublishRecordViewController.m; sourceTree = "<group>"; };
 		C398E00119A50016000F08DB /* PublishRecordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PublishRecordViewController.xib; sourceTree = "<group>"; };
+		C39954ED19F7946200C97DA9 /* BMapKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMapKit.h; sourceTree = "<group>"; };
+		C39954EE19F7946200C97DA9 /* BMKBaseComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKBaseComponent.h; sourceTree = "<group>"; };
+		C39954EF19F7946200C97DA9 /* BMKGeneralDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKGeneralDelegate.h; sourceTree = "<group>"; };
+		C39954F019F7946200C97DA9 /* BMKGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKGeometry.h; sourceTree = "<group>"; };
+		C39954F119F7946200C97DA9 /* BMKMapManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKMapManager.h; sourceTree = "<group>"; };
+		C39954F219F7946200C97DA9 /* BMKNavigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKNavigation.h; sourceTree = "<group>"; };
+		C39954F319F7946200C97DA9 /* BMKTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKTypes.h; sourceTree = "<group>"; };
+		C39954F419F7946200C97DA9 /* BMKUserLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKUserLocation.h; sourceTree = "<group>"; };
+		C39954F519F7946200C97DA9 /* BMKUtilsComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKUtilsComponent.h; sourceTree = "<group>"; };
+		C39954F619F7946200C97DA9 /* BMKVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKVersion.h; sourceTree = "<group>"; };
+		C39954F819F7946200C97DA9 /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
+		C39954FA19F7946200C97DA9 /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
+		C399550019F8DA9600C97DA9 /* boy_avatar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "boy_avatar@2x.png"; sourceTree = "<group>"; };
+		C399550119F8DA9600C97DA9 /* girl_avatar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "girl_avatar@2x.png"; sourceTree = "<group>"; };
+		C399550219F8DA9600C97DA9 /* man_avatar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "man_avatar@2x.png"; sourceTree = "<group>"; };
+		C399550319F8DA9600C97DA9 /* remark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "remark@2x.png"; sourceTree = "<group>"; };
+		C399550419F8DA9600C97DA9 /* unkown_avatar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unkown_avatar@2x.png"; sourceTree = "<group>"; };
+		C399550519F8DA9600C97DA9 /* woman_avatar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "woman_avatar@2x.png"; sourceTree = "<group>"; };
 		C39AAE1519B3093100C8A7BE /* PersistentStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersistentStore.h; sourceTree = "<group>"; };
 		C39AAE1619B3093100C8A7BE /* PersistentStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersistentStore.m; sourceTree = "<group>"; };
 		C39AAE1919B30A3200C8A7BE /* Topic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Topic.h; sourceTree = "<group>"; };
@@ -1249,6 +1278,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C39954FF19F794F000C97DA9 /* SystemConfiguration.framework in Frameworks */,
+				C39954FE19F794DC00C97DA9 /* Security.framework in Frameworks */,
+				C39954FD19F794D500C97DA9 /* OpenGLES.framework in Frameworks */,
 				C3A9828719E6B35E007448C0 /* libsqlite3.0.dylib in Frameworks */,
 				F41F6929198228FA00089E42 /* AudioToolbox.framework in Frameworks */,
 				C37E536D19A847AA00C55861 /* CoreMedia.framework in Frameworks */,
@@ -1268,11 +1300,13 @@
 				F41F691219820B6F00089E42 /* CoreText.framework in Frameworks */,
 				F41F691019820B6400089E42 /* MediaPlayer.framework in Frameworks */,
 				F41F690C19820B5000089E42 /* CoreMotion.framework in Frameworks */,
+				C39954FB19F7946200C97DA9 /* libbaidumapapi.a in Frameworks */,
 				F41F690A19820B4400089E42 /* libsqlite3.dylib in Frameworks */,
 				F41F690819820B3100089E42 /* libstdc++.dylib in Frameworks */,
 				F41F690419820ABF00089E42 /* libz.1.2.5.dylib in Frameworks */,
 				F41F690219820AB600089E42 /* CoreTelephony.framework in Frameworks */,
 				F41F68F61982081E00089E42 /* ShareSDKFlatShareViewUI.framework in Frameworks */,
+				C39954FC19F7946200C97DA9 /* libbaidumapapi.a in Frameworks */,
 				F41F68E51982081E00089E42 /* QQConnection.framework in Frameworks */,
 				F41F68E81982081E00089E42 /* TencentWeiboConnection.framework in Frameworks */,
 				F41F654C1981F01D00089E42 /* QuartzCore.framework in Frameworks */,
@@ -1556,6 +1590,49 @@
 			path = RHAddressBook;
 			sourceTree = "<group>";
 		};
+		C39954EB19F7946200C97DA9 /* BaiduMap_IOSSDK_v2 */ = {
+			isa = PBXGroup;
+			children = (
+				C39954EC19F7946200C97DA9 /* inc */,
+				C39954F719F7946200C97DA9 /* Release-iphoneos */,
+				C39954F919F7946200C97DA9 /* Release-iphonesimulator */,
+			);
+			path = BaiduMap_IOSSDK_v2;
+			sourceTree = "<group>";
+		};
+		C39954EC19F7946200C97DA9 /* inc */ = {
+			isa = PBXGroup;
+			children = (
+				C39954ED19F7946200C97DA9 /* BMapKit.h */,
+				C39954EE19F7946200C97DA9 /* BMKBaseComponent.h */,
+				C39954EF19F7946200C97DA9 /* BMKGeneralDelegate.h */,
+				C39954F019F7946200C97DA9 /* BMKGeometry.h */,
+				C39954F119F7946200C97DA9 /* BMKMapManager.h */,
+				C39954F219F7946200C97DA9 /* BMKNavigation.h */,
+				C39954F319F7946200C97DA9 /* BMKTypes.h */,
+				C39954F419F7946200C97DA9 /* BMKUserLocation.h */,
+				C39954F519F7946200C97DA9 /* BMKUtilsComponent.h */,
+				C39954F619F7946200C97DA9 /* BMKVersion.h */,
+			);
+			path = inc;
+			sourceTree = "<group>";
+		};
+		C39954F719F7946200C97DA9 /* Release-iphoneos */ = {
+			isa = PBXGroup;
+			children = (
+				C39954F819F7946200C97DA9 /* libbaidumapapi.a */,
+			);
+			path = "Release-iphoneos";
+			sourceTree = "<group>";
+		};
+		C39954F919F7946200C97DA9 /* Release-iphonesimulator */ = {
+			isa = PBXGroup;
+			children = (
+				C39954FA19F7946200C97DA9 /* libbaidumapapi.a */,
+			);
+			path = "Release-iphonesimulator";
+			sourceTree = "<group>";
+		};
 		C39AAE1819B309EF00C8A7BE /* CoreDataModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -1568,6 +1645,7 @@
 		F41F68861982081E00089E42 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				C39954EB19F7946200C97DA9 /* BaiduMap_IOSSDK_v2 */,
 				488541DB19EEEEB100E9AAAB /* UICollectionViewWaterfall */,
 				F4C2D4D219EE44A100521BFE /* ELCImagePicker */,
 				C320608C19E6B75600C80FF7 /* Sqlite */,
@@ -1773,6 +1851,12 @@
 		F432BD3A19762AC80086BBE9 /* baby */ = {
 			isa = PBXGroup;
 			children = (
+				C399550019F8DA9600C97DA9 /* boy_avatar@2x.png */,
+				C399550119F8DA9600C97DA9 /* girl_avatar@2x.png */,
+				C399550219F8DA9600C97DA9 /* man_avatar@2x.png */,
+				C399550319F8DA9600C97DA9 /* remark@2x.png */,
+				C399550419F8DA9600C97DA9 /* unkown_avatar@2x.png */,
+				C399550519F8DA9600C97DA9 /* woman_avatar@2x.png */,
 				C3870F3A19EBBD5E0030AD8B /* QQ1@2x.png */,
 				C3870F3B19EBBD5E0030AD8B /* QQ2@2x.png */,
 				C3870F3C19EBBD5E0030AD8B /* tel1@2x.png */,
@@ -2659,6 +2743,7 @@
 				F432BE0919762AC80086BBE9 /* main_weixin@2x.png in Resources */,
 				C36539B619F4EAA400C62CDA /* mic-7@2x.png in Resources */,
 				F4A57AA11998A8E900283B88 /* MyCollectionViewController.xib in Resources */,
+				C399550B19F8DA9600C97DA9 /* woman_avatar@2x.png in Resources */,
 				F433882F1974C28600464D43 /* QRCodeCardViewController.xib in Resources */,
 				C3DEA19B19DCD161003C86A8 /* BabyHomeDynamicCell.xib in Resources */,
 				F432BE2819762AC80086BBE9 /* square_biaotilan@2x.png in Resources */,
@@ -2683,6 +2768,7 @@
 				F432BDFC19762AC80086BBE9 /* main_jiantou@2x.png in Resources */,
 				F433880D1974C28600464D43 /* SettingViewController.xib in Resources */,
 				F43388051974C28600464D43 /* SearchQQFriendViewController.xib in Resources */,
+				C399550619F8DA9600C97DA9 /* boy_avatar@2x.png in Resources */,
 				24A32322197BB168005CFEA4 /* tizhong.png in Resources */,
 				F432BE3319762AC80086BBE9 /* square_huabian-bg@2x.png in Resources */,
 				F43387F71974C28600464D43 /* BabyListViewController.xib in Resources */,
@@ -2727,6 +2813,7 @@
 				F414E7EC19DD254D001AC4C3 /* LineChartController.xib in Resources */,
 				F43388071974C28600464D43 /* SearchRSViewController.xib in Resources */,
 				C36539B419F4EAA400C62CDA /* mic-5@2x.png in Resources */,
+				C399550919F8DA9600C97DA9 /* remark@2x.png in Resources */,
 				F43EA3731990A6980048081E /* bg_023@2x.png in Resources */,
 				F432BDE119762AC80086BBE9 /* baby_shengaotizhong@2x.png in Resources */,
 				F432BE3E19762AC80086BBE9 /* square_pic-9@2x.png in Resources */,
@@ -2760,6 +2847,7 @@
 				F44CF766199A3CB7003B7F7D /* MJRefresh.bundle in Resources */,
 				F4348FF319779C4600347195 /* DynamicDetailViewController.xib in Resources */,
 				F433881F1974C28600464D43 /* MessageViewController.xib in Resources */,
+				C399550A19F8DA9600C97DA9 /* unkown_avatar@2x.png in Resources */,
 				F432BE4419762AC80086BBE9 /* square_pinglun@2x.png in Resources */,
 				F432BDFA19762AC80086BBE9 /* main_fankui@2x.png in Resources */,
 				F428BDCD19D7E520008A7D84 /* NetCell.xib in Resources */,
@@ -2914,10 +3002,12 @@
 				F432BDF119762AC80086BBE9 /* main_2-pic2@2x.png in Resources */,
 				F47F550E197FACE7006DCA75 /* QQCell.xib in Resources */,
 				F432BE4919762AC80086BBE9 /* square_tianxie@2x.png in Resources */,
+				C399550819F8DA9600C97DA9 /* man_avatar@2x.png in Resources */,
 				F432BE4B19762AC80086BBE9 /* square_yanjing@2x.png in Resources */,
 				F432BDD519762AC80086BBE9 /* baby_4-bg-2@2x.png in Resources */,
 				F432BE5519762AC80086BBE9 /* erweima@2x.png in Resources */,
 				F43EA3751990A6980048081E /* btn_020.press@2x.png in Resources */,
+				C399550719F8DA9600C97DA9 /* girl_avatar@2x.png in Resources */,
 				F43387F91974C28600464D43 /* RemarksViewController.xib in Resources */,
 				F43388331974C28600464D43 /* ResetPwdNextStepViewController.xib in Resources */,
 			);
@@ -3308,6 +3398,8 @@
 					"$(PROJECT_DIR)/ShaiWaWa/General/Helper/AudioFormat/VoiceConvert/lib",
 					"$(PROJECT_DIR)/ShaiWaWa/General/Vendors/MLAudioRecorder/amr_en_de/lib",
 					"$(PROJECT_DIR)/ShaiWaWa/General/Vendors/MLAudioRecorder/mp3_en_de",
+					"$(PROJECT_DIR)/ShaiWaWa/General/Vendors/BaiduMap_IOSSDK_v2/Release-iphoneos",
+					"$(PROJECT_DIR)/ShaiWaWa/General/Vendors/BaiduMap_IOSSDK_v2/Release-iphonesimulator",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3346,6 +3438,8 @@
 					"$(PROJECT_DIR)/ShaiWaWa/General/Helper/AudioFormat/VoiceConvert/lib",
 					"$(PROJECT_DIR)/ShaiWaWa/General/Vendors/MLAudioRecorder/amr_en_de/lib",
 					"$(PROJECT_DIR)/ShaiWaWa/General/Vendors/MLAudioRecorder/mp3_en_de",
+					"$(PROJECT_DIR)/ShaiWaWa/General/Vendors/BaiduMap_IOSSDK_v2/Release-iphoneos",
+					"$(PROJECT_DIR)/ShaiWaWa/General/Vendors/BaiduMap_IOSSDK_v2/Release-iphonesimulator",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

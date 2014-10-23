@@ -11,6 +11,7 @@
 #import "UIView+CutLayer.h"
 #import "SVProgressHUD.h"
 #import "CSqlite.h"
+#import "BMapKit.h"
 @interface LocationsViewController ()
 {
     CSqlite *m_sqlite;
@@ -211,9 +212,19 @@
 {
     
     //转为火星坐标
-    CLLocationCoordinate2D mylocation = [self zzTransGPS:newLocation.coordinate];
+    CLLocationCoordinate2D mylocation = newLocation.coordinate;
+    
+    /*
+    //转换 google地图、soso地图、aliyun地图、mapabc地图和amap地图所用坐标至百度坐标
+    NSDictionary* testdic = BMKConvertBaiduCoorFrom(mylocation,BMK_COORDTYPE_COMMON);
+    //转换GPS坐标至百度坐标
+    testdic = BMKConvertBaiduCoorFrom(mylocation,BMK_COORDTYPE_GPS);
+    NSLog(@"x=%@,y=%@",[testdic objectForKey:@"x"],[testdic objectForKey:@"y"]);
+
+    mylocation = BMKCoorDictionaryDecode(testdic);
+    */
     NSString * locationStr = [NSString stringWithFormat:@"%f,%f",mylocation.latitude,mylocation.longitude];
-    NSString * urlStr = [NSString stringWithFormat:@"http://api.map.baidu.com/geocoder/v2/?ak=B56b08182a6df5a96b58a04eda049deb&location=%@&output=json&pois=1",locationStr];
+    NSString * urlStr = [NSString stringWithFormat:@"http://api.map.baidu.com/geocoder/v2/?ak=B56b08182a6df5a96b58a04eda049deb&location=%@&output=json&pois=1&coordtype=wgs84ll",locationStr];
     
     NSLog(@"%@",locationStr);
     

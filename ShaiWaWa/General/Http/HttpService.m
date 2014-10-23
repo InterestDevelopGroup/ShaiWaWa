@@ -838,6 +838,24 @@
 }
 
 /**
+ @desc 取消收藏
+ */
+//TODO:取消收藏
+- (void)unfavorite:(NSDictionary *)params completionBlock:(void (^)(id object))success failureBlock:(void (^)(NSError * error,NSString * responseString))failure
+{
+    [self postJSON:[self mergeURL:Unfavorite] withParams:params completionBlock:^(id obj) {
+        BOOL isError = [self filterError:obj failureBlock:failure];
+        if (isError) {
+            return ;
+        }
+        if (success) {
+            success(obj);
+        }
+    } failureBlock:failure];
+
+}
+
+/**
  @desc 获取收藏列表
  */
 //TODO:获取收藏列表
