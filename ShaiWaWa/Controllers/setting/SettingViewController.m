@@ -523,7 +523,7 @@
 - (IBAction)wechatInvitation:(id)sender
 {
     [_invitationView removeFromSuperview];
-    [[ShareManager sharePlatform] invitationWeXinFriend:Invitation_Msg_Content];
+    [[ShareManager sharePlatform] invitationWeXinFriend:Invitation_Msg_Content withURL:@"http://www.shaiwawa.com/download"];
 }
 
 - (IBAction)hideInvitationView:(id)sender

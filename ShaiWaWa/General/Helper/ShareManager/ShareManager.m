@@ -121,15 +121,15 @@
 }
 
 
-- (void)invitationWeXinFriend:(NSString *)text
+- (void)invitationWeXinFriend:(NSString *)text withURL:(NSString *)url
 {
     id<ISSContent> publishContent = [ShareSDK content:text
                                        defaultContent:text
                                                 image:nil
                                                 title:@"邀请好友"
-                                                  url:nil
+                                                  url:url
                                           description:text
-                                            mediaType:SSPublishContentMediaTypeText];
+                                            mediaType:SSPublishContentMediaTypeNews];
     id<ISSAuthOptions> authOptions = [ShareSDK authOptionsWithAutoAuth:YES
                                                          allowCallback:NO
                                                          authViewStyle:SSAuthViewStyleModal
@@ -197,8 +197,10 @@
         
         if (state == SSPublishContentStateSuccess)
         {
+            /*
             UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:nil message:@"分享成功" delegate:nil cancelButtonTitle:@"关闭" otherButtonTitles:nil, nil];
             [alertView show];
+            */
             NSLog(@"发表成功");
         }
         else if (state == SSPublishContentStateFail)
@@ -251,8 +253,10 @@
         
         if (state == SSPublishContentStateSuccess)
         {
+            /*
             UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:nil message:@"分享成功" delegate:nil cancelButtonTitle:@"关闭" otherButtonTitles:nil, nil];
             [alertView show];
+            */
             NSLog(@"发表成功");
         }
         else if (state == SSPublishContentStateFail)

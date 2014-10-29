@@ -10,5 +10,7 @@
 
 @interface MyCollectionViewController : CommonViewController<UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *myFavoriveList;
-
+@property (weak, nonatomic) IBOutlet UIView *grayShareView;
+@property (weak, nonatomic) IBOutlet UIView *shareView;
+- (IBAction)hideGayShareV:(id)sender;
 @end

@@ -12,4 +12,5 @@
 
 + (NSArray *)transformToBabyRecords:(NSArray *)arr;
 + (NSArray *)transformToRecordComments:(NSArray *)arr;
++ (NSArray *)transformToMessages:(NSArray *)arr;
 @end

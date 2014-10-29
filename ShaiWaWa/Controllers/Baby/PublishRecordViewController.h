@@ -28,6 +28,7 @@
 @property (strong, nonatomic) IBOutlet UIView *recrodView;
 @property (strong, nonatomic) IBOutlet UIView *shareView;
 @property (strong, nonatomic) IBOutlet UIImageView *voiceImageView;
+@property (strong, nonatomic) IBOutlet UIView *voiceContainView;
 @property (weak, nonatomic) IBOutlet UIButton *tecentWeiboBtn;
 @property (weak, nonatomic) IBOutlet UIButton *sinaWeiboBtn;
 @property (weak, nonatomic) IBOutlet UIButton *qqSpaceBtn;

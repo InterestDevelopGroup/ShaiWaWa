@@ -256,7 +256,15 @@
 //更新当前宝宝的头像和名称
 - (void)updateBabyInfo:(BabyInfo *)babyInfo
 {
-    [_avatarImageView sd_setImageWithURL:[NSURL URLWithString:babyInfo.avatar] placeholderImage:Default_Avatar];
+    
+    UIImage * image = Boy_Avatar;
+    if([_babyInfo.sex isEqualToString:@"2"])
+    {
+        image = Girl_Avatar;
+    }
+    
+    
+    [_avatarImageView sd_setImageWithURL:[NSURL URLWithString:babyInfo.avatar] placeholderImage:Boy_Avatar];
     _babyNameLabel.text = babyInfo.nickname;
     if([babyInfo.alias length] != 0)
     {
@@ -925,9 +933,9 @@
 #pragma mark - 开始录音
 - (IBAction)startRecord:(id)sender
 {
-    if (_voiceImageView.superview)
+    if (_voiceContainView.superview)
     {
-        [_voiceImageView removeFromSuperview];
+        [_voiceContainView removeFromSuperview];
     }
     
     [[self.view viewWithTag:100001] removeFromSuperview];
@@ -945,8 +953,8 @@
     subView.alpha = 0.5;
     [view addSubview:subView];
     
-    _voiceImageView.frame = CGRectMake((320 - _voiceImageView.frame.size.width) * .5,[OSHelper iPhone5]?200:100, CGRectGetWidth(_voiceImageView.frame), CGRectGetHeight(_voiceImageView.frame));
-    [view addSubview:_voiceImageView];
+    _voiceContainView.frame = CGRectMake((320 - _voiceContainView.frame.size.width) * .5,[OSHelper iPhone5]?200:100, CGRectGetWidth(_voiceContainView.frame), CGRectGetHeight(_voiceContainView.frame));
+    [view addSubview:_voiceContainView];
     [self.view addSubview:view];
     
     /*
@@ -983,9 +991,21 @@
     
     MLAudioMeterObserver *meterObserver = [[MLAudioMeterObserver alloc]init];
     meterObserver.actionBlock = ^(NSArray *levelMeterStates,MLAudioMeterObserver *meterObserver){
-        NSLog(@"音量:%f",[MLAudioMeterObserver volumeForLevelMeterStates:levelMeterStates]);
+        //NSLog(@"音量:%.2f",[MLAudioMeterObserver volumeForLevelMeterStates:levelMeterStates]);
         
-        NSString *voiceName = [NSString stringWithFormat:@"mic-%.f",[MLAudioMeterObserver volumeForLevelMeterStates:levelMeterStates] * 10];
+        NSString * str = [NSString stringWithFormat:@"%.2f",[MLAudioMeterObserver volumeForLevelMeterStates:levelMeterStates]];
+        int level = (int)([str floatValue] * 100);
+        NSLog(@"%i",level);
+        if(level < 1)
+        {
+            level = 1;
+        }
+        
+        if(level > 10)
+        {
+            level = 10;
+        }
+        NSString *voiceName = [NSString stringWithFormat:@"mic-%i",level - 1];
        
         [_voiceImageView setImage:[UIImage imageNamed:voiceName]];
 
@@ -993,9 +1013,9 @@
     meterObserver.errorBlock = ^(NSError *error,MLAudioMeterObserver *meterObserver){
         [[[UIAlertView alloc]initWithTitle:@"错误" message:error.userInfo[NSLocalizedDescriptionKey] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil]show];
         
-        if (_voiceImageView.superview)
+        if (_voiceContainView.superview)
         {
-            [_voiceImageView removeFromSuperview];
+            [_voiceContainView removeFromSuperview];
         }
         [[self.view viewWithTag:100001] removeFromSuperview];
         self.audioPath = nil;
@@ -1009,9 +1029,9 @@
     };
     recorder.receiveErrorBlock = ^(NSError *error){
         
-        if (_voiceImageView.superview)
+        if (_voiceContainView.superview)
         {
-            [_voiceImageView removeFromSuperview];
+            [_voiceContainView removeFromSuperview];
         }
 
         [[self.view viewWithTag:100001] removeFromSuperview];
@@ -1051,7 +1071,10 @@
     [session setActive:YES error:nil];
     AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:_audioPath] error:nil];
     if (player.duration < 2.0) {
-        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"AudioRecord cann't less than 2 seconds，please try again", nil)];
+        if(player.duration > 0.5)
+        {
+            [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"AudioRecord cann't less than 2 seconds，please try again", nil)];
+        }
         _recordBtn.enabled = YES;
         _uploadedAudioPath = nil;
         _audioPath = nil;
@@ -1127,9 +1150,9 @@
 {
     
     
-    if (_voiceImageView.superview)
+    if (_voiceContainView.superview)
     {
-        [_voiceImageView removeFromSuperview];
+        [_voiceContainView removeFromSuperview];
     }
     
     [[self.view viewWithTag:100001] removeFromSuperview];
@@ -1566,10 +1589,6 @@
              if(error)
              {
                  NSLog(@"%@",error);
-                 //             UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"授权失败." delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-                 //             [alertView show];
-                 //             alertView = nil;
-                 //[SVProgressHUD showErrorWithStatus:@"授权失败"];
                  return  ;
              }
              
@@ -1671,10 +1690,15 @@
         if([type isEqualToString:@"1"])
         {
             users.tecent_openId = openID;
+            _userInfo.tecent_openId = openID;
+            _qqSpaceBtn.selected = YES;
+            _tecentWeiboBtn.selected = YES;
         }
         else if([type isEqualToString:@"2"])
         {
             users.sina_openId = openID;
+            _userInfo.sina_openId = openID;
+            _sinaWeiboBtn.selected = YES;
         }
         
         [[UserDefault sharedInstance] setUserInfo:users];
@@ -1696,36 +1720,78 @@
 #pragma mark CLLocationManagerDelegate Methods
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-    CLGeocoder * geocoder = [[CLGeocoder alloc] init];
-    [geocoder reverseGeocodeLocation:newLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+    //转为火星坐标
+    CLLocationCoordinate2D mylocation = newLocation.coordinate;
+    
+    /*
+     //转换 google地图、soso地图、aliyun地图、mapabc地图和amap地图所用坐标至百度坐标
+     NSDictionary* testdic = BMKConvertBaiduCoorFrom(mylocation,BMK_COORDTYPE_COMMON);
+     //转换GPS坐标至百度坐标
+     testdic = BMKConvertBaiduCoorFrom(mylocation,BMK_COORDTYPE_GPS);
+     NSLog(@"x=%@,y=%@",[testdic objectForKey:@"x"],[testdic objectForKey:@"y"]);
+     
+     mylocation = BMKCoorDictionaryDecode(testdic);
+     */
+    NSString * locationStr = [NSString stringWithFormat:@"%f,%f",mylocation.latitude,mylocation.longitude];
+    NSString * urlStr = [NSString stringWithFormat:@"http://api.map.baidu.com/geocoder/v2/?ak=B56b08182a6df5a96b58a04eda049deb&location=%@&output=json&pois=1&coordtype=wgs84ll",locationStr];
+    
+    NSLog(@"%@",locationStr);
+    
+    [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlStr]] queue:[NSOperationQueue currentQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         
-        if(error)
+        //[SVProgressHUD dismiss];
+        
+        if(connectionError)
         {
-            /*
-            UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"定位失败!" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
-            [alertView show];
-            alertView = nil;
-            */
-            [_locationManager stopUpdatingLocation];
-           
-            DDLogError(@"定位失败");
+            [self showAlertViewWithMessage:@"定位失败."];
             return ;
         }
         
-        if([placemarks count] > 0)
-        {
-            [_locationManager stopUpdatingLocation];
-            CLPlacemark * placemark = placemarks[0];
-            _addressLabel.text = placemark.name;
-            
-            NSMutableDictionary * addressInfo = [@{} mutableCopy];
-            addressInfo[@"name"] = placemark.name;
-            addressInfo[@"address"] = placemark.name;
-            addressInfo[@"latitude"] = [NSString stringWithFormat:@"%f",placemark.location.coordinate.latitude];
-            addressInfo[@"longitude"] = [NSString stringWithFormat:@"%f",placemark.location.coordinate.longitude];
-            _placemark = (NSDictionary *)addressInfo;
+        NSError * error;
+        NSDictionary * info = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+        
+        //NSLog(@"%@",info);
+        
+        //先判断解析定位是否成功
+        if (error) {
+            [self showAlertViewWithMessage:@"地理位置解析错误."];
+            return;
         }
         
+        if(info[@"status"] == nil || ![info[@"status"] isEqual:@0])
+        {
+            [self showAlertViewWithMessage:@"地理位置解析错误."];
+            return;
+        }
+        
+        if(info[@"result"] == nil)
+        {
+            [self showAlertViewWithMessage:@"地理位置解析错误."];
+            return;
+        }
+        
+
+        //获取解析到的地理信息
+        NSDictionary * resultInfo = info[@"result"];
+        //解析第一个地理信息
+        NSMutableDictionary * addressInfo = [@{} mutableCopy];
+        if(resultInfo[@"location"] != nil)
+        {
+            addressInfo[@"latitude"] = resultInfo[@"location"][@"lat"];
+            addressInfo[@"longitude"] = resultInfo[@"location"][@"lng"];
+        }
+        
+        if(resultInfo[@"formatted_address"] != nil)
+        {
+            addressInfo[@"address"] = resultInfo[@"formatted_address"];
+            addressInfo[@"name"] = resultInfo[@"formatted_address"];
+        }
+        //判断信息是否完整
+        if([addressInfo count] == 4)
+        {
+            _placemark = resultInfo;
+            _addressLabel.text = resultInfo[@"name"];
+        }
     }];
 }
 

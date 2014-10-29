@@ -37,5 +37,7 @@
 @property (nonatomic, strong) NSString *read_time;
 @property (nonatomic, strong) NSString *type;
 @property (nonatomic, strong) NSString *avatar;
-@property (nonatomic, strong) NSString * username;
+@property (nonatomic, strong) NSString *username;
+@property (nonatomic, strong) NSDictionary *requester_info;
+@property (nonatomic, strong) NSString * like_id;
 @end

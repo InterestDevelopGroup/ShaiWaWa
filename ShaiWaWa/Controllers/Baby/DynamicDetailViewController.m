@@ -333,7 +333,7 @@
             _babyRecord.top_3_likes = (NSArray *)tempArr;
             [_pinLunListTableView reloadData];
             
-            [SVProgressHUD showSuccessWithStatus:@"谢谢您的参与."];
+            //[SVProgressHUD showSuccessWithStatus:@"谢谢您的参与."];
             
         } failureBlock:^(NSError *error, NSString *responseString) {
             NSString * msg = responseString;
@@ -359,7 +359,7 @@
             }
             _babyRecord.top_3_likes = (NSArray *)tempArr;
             [_pinLunListTableView reloadData];
-            [SVProgressHUD showSuccessWithStatus:@"取消赞成功."];
+            //[SVProgressHUD showSuccessWithStatus:@"取消赞成功."];
             
         } failureBlock:^(NSError *error, NSString *responseString) {
             NSString * msg = responseString;
@@ -389,7 +389,7 @@
         _pinLunContextTextField.text = @"";
         _babyRecord.comment_count = [NSString stringWithFormat:@"%i",[_babyRecord.comment_count intValue] + 1];
         [_pinLunListTableView reloadData];
-        [SVProgressHUD showSuccessWithStatus:@"评论成功,谢谢您的参与."];
+        //[SVProgressHUD showSuccessWithStatus:@"评论成功,谢谢您的参与."];
         //重新刷新数据
         [_pinLunListTableView headerBeginRefreshing];
     } failureBlock:^(NSError *error, NSString *responseString) {

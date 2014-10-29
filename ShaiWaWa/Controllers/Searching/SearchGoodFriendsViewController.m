@@ -238,7 +238,7 @@
             [self.navigationController pushViewController:addressBookVC animated:YES];
             break;
         case 3:
-            [[ShareManager sharePlatform] invitationWeXinFriend:Invitation_Msg_Content];
+            [[ShareManager sharePlatform] invitationWeXinFriend:Invitation_Msg_Content withURL:@"http://www.shaiwawa.com/download"];
             break;
         case 4:
            [self.navigationController pushViewController:scannCodeCardVC animated:YES];

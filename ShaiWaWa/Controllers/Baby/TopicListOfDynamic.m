@@ -317,7 +317,7 @@
             [tempArr insertObject:zanDict atIndex:0];
             record.top_3_likes = (NSArray *)tempArr;
             [_dynamicPageTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-            [SVProgressHUD showSuccessWithStatus:@"谢谢您的参与."];
+            //[SVProgressHUD showSuccessWithStatus:@"谢谢您的参与."];
             
         } failureBlock:^(NSError *error, NSString *responseString) {
             NSString * msg = responseString;
@@ -343,7 +343,7 @@
             }
             record.top_3_likes = (NSArray *)tempArr;
             [_dynamicPageTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-            [SVProgressHUD showSuccessWithStatus:@"取消赞成功."];
+            //[SVProgressHUD showSuccessWithStatus:@"取消赞成功."];
             
         } failureBlock:^(NSError *error, NSString *responseString) {
             NSString * msg = responseString;
@@ -600,7 +600,7 @@
 
     dynamicCell.babyBirthdayLabel.text = [NSStringUtil calculateAge:recrod.birthday];
     dynamicCell.dyContentTextView.attributedText = [NSStringUtil makeTopicString:recrod.content];
-    [dynamicCell.babyAvatarImageView sd_setImageWithURL:[NSURL URLWithString:recrod.avatar] placeholderImage:Default_Avatar];
+    [dynamicCell.babyAvatarImageView sd_setImageWithURL:[NSURL URLWithString:recrod.avatar] placeholderImage:Boy_Avatar];
     
     //添加头像点击手势
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showBabyHomePage:)];
@@ -654,19 +654,19 @@
     {
         dynamicCell.likeUserView.hidden = NO;
         NSDictionary * userDic = recrod.top_3_likes[0];
-        [dynamicCell.praiseUserFirstBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal placeholderImage:Default_Avatar];
+        [dynamicCell.praiseUserFirstBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal placeholderImage:Unkown_Avatar];
         [dynamicCell.praiseUserFirstBtn addTarget:self action:@selector(showPraiseListVC:) forControlEvents:UIControlEventTouchUpInside];
         if([recrod.top_3_likes count] > 1)
         {
             userDic = recrod.top_3_likes[1];
-            [dynamicCell.praiseUserSecondBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal placeholderImage:Default_Avatar];
+            [dynamicCell.praiseUserSecondBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal placeholderImage:Unkown_Avatar];
             [dynamicCell.praiseUserSecondBtn addTarget:self action:@selector(showPraiseListVC:) forControlEvents:UIControlEventTouchUpInside];
         }
         
         if([recrod.top_3_likes count] > 2)
         {
             userDic = recrod.top_3_likes[2];
-            [dynamicCell.praiseUserThirdBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal placeholderImage:Default_Avatar];
+            [dynamicCell.praiseUserThirdBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal placeholderImage:Unkown_Avatar];
             [dynamicCell.praiseUserThirdBtn addTarget:self action:@selector(showPraiseListVC:) forControlEvents:UIControlEventTouchUpInside];
         }
     }

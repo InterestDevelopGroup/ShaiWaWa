@@ -62,7 +62,7 @@
 - (void)initUI
 {
     self.title = [NSString stringWithFormat:@"消息"];
-    [self setLeftCusBarItem:@"square_back" action:nil];
+    [self setLeftCusBarItem:@"square_back" action:@selector(backAction:)];
     
     [self HMSegmentedControlInitMethod];
     
@@ -111,6 +111,35 @@
    
     
    
+}
+
+
+- (void)backAction:(id)sender
+{
+    if([_newestMsgArray count] > 0)
+    {
+        NSString * ids = @"";
+        for(NotificationMsg * msg in _newestMsgArray)
+        {
+            if(![msg.notification_id isEqualToString:@"3"])
+            {
+                ids = [ids stringByAppendingFormat:@"%@,",msg.notification_id];
+            }
+        }
+        
+        if([ids length] != 0)
+        {
+            [[HttpService sharedInstance] updateSystemNotification:@{@"notification_id":ids,@"status":@"1"} completionBlock:^(id object) {
+                
+                NSLog(@"update success.");
+                
+            } failureBlock:^(NSError *error, NSString *responseString) {
+                
+            }];
+        }
+        
+    }
+    [self popVIewController];
 }
 
 - (void)HMSegmentedControlInitMethod
@@ -304,6 +333,7 @@
 
 - (NotificationMsg *)getMessageByCellButton:(UIButton *)sender
 {
+    
     MessageCell * cell;
     if([sender.superview.superview.superview isKindOfClass:[MessageCell class]])
     {
@@ -368,8 +398,13 @@
         msg = [_haveReadMSGArray objectAtIndex:indexPath.row];
     }
     
+    if(msg.requester_info == nil || [msg.requester_info isEqual:[NSNull null]])
+    {
+        return ;
+    }
+    
     FriendHomeViewController * vc = [[FriendHomeViewController alloc] initWithNibName:nil bundle:nil];
-    vc.friendId = msg.send_uid;
+    vc.friendId = msg.requester_info[@"uid"];
     [self push:vc];
     vc = nil;
 }
@@ -412,7 +447,8 @@
     {
         MessageCell * msgCell = (MessageCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
         UILabel *temp = [[UILabel alloc] init];
-//        [msgCell.sendImgView sd_setImageWithURL:[NSURL URLWithString:msg.avatar] placeholderImage:[UIImage imageNamed:@"user_touxiang.png"]];
+        
+        
         //计算时间
         msgCell.timeLabel.text = [NSStringUtil calculateTime:msg.add_time];
         switch ([msg.type intValue]) {
@@ -491,7 +527,15 @@
                 break;
         }
         msgCell.sendNameLabel.text = msg.username;
-        [msgCell.sendImgView sd_setImageWithURL:[NSURL URLWithString:msg.avatar] placeholderImage:Default_Avatar];
+        if(msg.requester_info != nil && ![msg.requester_info isEqual:[NSNull null]])
+        {
+            [msgCell.sendImgView sd_setImageWithURL:msg.requester_info[@"avatar"] placeholderImage:Unkown_Avatar];
+            
+        }
+        else
+        {
+            msgCell.sendImgView.image = Unkown_Avatar;
+        }
         msgCell.selectionStyle = UITableViewCellSelectionStyleNone;
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHomePage:)];
         msgCell.sendImgView.userInteractionEnabled = YES;
@@ -565,7 +609,16 @@
         msgCell.ignoreButton.hidden = YES;
         msgCell.refuseButton.hidden = YES;
         msgCell.sendNameLabel.text = msg.username;
-        [msgCell.sendImgView sd_setImageWithURL:[NSURL URLWithString:msg.avatar] placeholderImage:Default_Avatar];
+        if(msg.requester_info != nil && ![msg.requester_info isEqual:[NSNull null]])
+        {
+            [msgCell.sendImgView sd_setImageWithURL:msg.requester_info[@"avatar"] placeholderImage:Unkown_Avatar];
+            
+        }
+        else
+        {
+            msgCell.sendImgView.image = Unkown_Avatar;
+        }
+
         msgCell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHomePage:)];

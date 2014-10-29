@@ -3403,7 +3403,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "000c4c9e-5ae5-4566-826a-f7719b60b4d1";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
@@ -3442,7 +3442,7 @@
 					"$(PROJECT_DIR)/ShaiWaWa/General/Vendors/BaiduMap_IOSSDK_v2/Release-iphonesimulator",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "000c4c9e-5ae5-4566-826a-f7719b60b4d1";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;

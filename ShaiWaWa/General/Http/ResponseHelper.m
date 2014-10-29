@@ -77,4 +77,34 @@
     return results;
 }
 
++ (NSArray *)transformToMessages:(NSArray *)arr
+{
+    if(arr == nil || [arr isEqual:[NSNull null]] || [arr count] == 0)
+    {
+        return @[];
+    }
+    NSMutableArray * results = [@[] mutableCopy];
+    for(NSDictionary * dic in arr)
+    {
+        NotificationMsg * msg = [[NotificationMsg alloc] init];
+        msg.fid = dic[@"fid"];
+        msg.notification_id = dic[@"notification_id"];
+        msg.add_time = dic[@"add_time"];
+        msg.baby_id = dic[@"baby_id"];
+        msg.comment_id = dic[@"comment_id"];
+        msg.content = dic[@"content"];
+        msg.like_id = dic[@"like_id"];
+        msg.read_time = dic[@"read_time"];
+        msg.receive_uid = dic[@"receive_uid"];
+        msg.remark = dic[@"remark"];
+        msg.requester_info = dic[@"requester_info"];
+        msg.rid = dic[@"rid"];
+        msg.send_uid = dic[@"send_uid"];
+        msg.status = dic[@"status"];
+        msg.type = dic[@"type"];
+        [results addObject:msg];
+    }
+    return results;
+}
+
 @end

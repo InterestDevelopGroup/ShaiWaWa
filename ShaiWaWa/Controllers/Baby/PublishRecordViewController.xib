@@ -26,6 +26,7 @@
                 <outlet property="toolbar" destination="wM0-Er-8Z9" id="XBD-GA-ymP"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="visibilityLabel" destination="SGo-Sn-kpG" id="CBq-eb-8eB"/>
+                <outlet property="voiceContainView" destination="2Lb-yS-uo2" id="aVu-PR-JGU"/>
                 <outlet property="voiceImageView" destination="UWB-Wr-vIR" id="IKM-JN-Liq"/>
             </connections>
         </placeholder>
@@ -404,11 +405,19 @@
             <gestureRecognizers/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
-        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pd_huatong.png" id="UWB-Wr-vIR">
-            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+        <view contentMode="scaleToFill" id="2Lb-yS-uo2">
+            <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-        </imageView>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pd_huatong.png" id="UWB-Wr-vIR">
+                    <rect key="frame" x="12" y="13" width="80" height="80"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        </view>
     </objects>
     <resources>
         <image name="baby_4-bg-1.png" width="320" height="100"/>

@@ -224,9 +224,15 @@
     [_datePicker setMaximumDate:[NSDate date]];
     
     
+    UIImage * placeHolder = Boy_Avatar;
+    if([_babyInfo.sex isEqualToString:@"2"])
+    {
+        placeHolder = Girl_Avatar;
+    }
+    
     if (_babyAvatarImgView.enabled)
     {
-        [_babyAvatarImgView sd_setImageWithURL:[NSURL URLWithString:_babyInfo.avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"baby_baobei"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [_babyAvatarImgView sd_setImageWithURL:[NSURL URLWithString:_babyInfo.avatar] forState:UIControlStateNormal placeholderImage:placeHolder completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
             if(image)
             {
@@ -238,7 +244,7 @@
     else
     {
         
-        [_babyAvatarImgView sd_setImageWithURL:[NSURL URLWithString:_babyInfo.avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"baby_baobei.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [_babyAvatarImgView sd_setImageWithURL:[NSURL URLWithString:_babyInfo.avatar] forState:UIControlStateNormal placeholderImage:placeHolder completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             if(image)
             {
                 [_babyAvatarImgView setImage:[image ellipseImageWithDefaultSetting]  forState:UIControlStateNormal];
@@ -602,7 +608,7 @@
         else
         {
             
-            if(![user.uid isEqualToString:_babyInfo.mid])
+            if(![user.uid isEqualToString:_babyInfo.fid])
             {
                 return ;
             }
@@ -631,7 +637,7 @@
         else
         {
             
-            if(![user.uid isEqualToString:_babyInfo.fid])
+            if(![user.uid isEqualToString:_babyInfo.mid])
             {
                 return ;
             }
@@ -673,7 +679,7 @@
 - (IBAction)weiXinYaoQingButton:(id)sender
 {
     [_yaoQingbgView removeFromSuperview];
-    [[ShareManager sharePlatform] invitationWeXinFriend:Invitation_Msg_Content];
+    [[ShareManager sharePlatform] invitationWeXinFriend:@"亲爱的,我发现一个很不错的手机应用‘晒娃娃’,可以用来晒宝宝的 照片和视频。你也下一个一起玩吧。" withURL:@"http://www.shaiwawa.com/download"];
 }
 
 - (IBAction)hideCurView:(id)sender
@@ -852,7 +858,7 @@
         //取消赞
         [[HttpService sharedInstance] cancelLike:@{@"rid":record.rid,@"uid":users.uid} completionBlock:^(id object) {
             
-            [SVProgressHUD showSuccessWithStatus:@"取消赞成功."];
+            //[SVProgressHUD showSuccessWithStatus:@"取消赞成功."];
             record.is_like = @"0";
             record.like_count = [NSString stringWithFormat:@"%i",[record.like_count intValue] - 1];
             //取出宝宝被点赞的前三个
@@ -878,7 +884,7 @@
     {
         [[HttpService sharedInstance] addLike:@{@"rid":record.rid,@"uid":users.uid} completionBlock:^(id object) {
             
-            [SVProgressHUD showSuccessWithStatus:@"谢谢您的参与."];
+            //[SVProgressHUD showSuccessWithStatus:@"谢谢您的参与."];
             record.is_like = @"1";
             record.like_count = [NSString stringWithFormat:@"%i",[record.like_count intValue] + 1];
             NSMutableArray *tempArr = [NSMutableArray arrayWithCapacity:[record.top_3_likes count] + 1];

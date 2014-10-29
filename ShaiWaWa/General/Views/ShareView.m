@@ -94,9 +94,9 @@
 {
     if (sender == _weiXinButton)
     {
-        if (self.weiXinCycleBlock)
+        if (self.weiXinBlock)
         {
-            _weiXinCycleBlock();
+            _weiXinBlock();
         }
     }
     else if (sender == _weiXinCycleButton)

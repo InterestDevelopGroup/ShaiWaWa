@@ -20,7 +20,7 @@
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>18f7045f-8a02-9c4b-bf16-3ceffa48ebdd++7800</key>
-		<string>../ShaiWaWa/General/Vendors/Sqlite/</string>
+		<string>../ShaiWaWa/General/Vendors/Sqlite</string>
 		<key>73E5D18B8EDC9A0EEFEA19CB7BE24AAD80774135</key>
 		<string>..</string>
 	</dict>

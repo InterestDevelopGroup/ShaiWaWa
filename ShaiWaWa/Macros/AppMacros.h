@@ -15,7 +15,7 @@
 #define Publish_Video_Folder @"Publish_Video"
 #define Publish_Audio_Folder @"Publish_Audio"
 #define Default_Avatar [UIImage imageNamed:@"user_touxiang"]
-#define Unkown_Avatar [UIImage imageNamed:@"Unkown_avatar"]
+#define Unkown_Avatar [UIImage imageNamed:@"unkown_avatar"]
 #define Man_Avatar [UIImage imageNamed:@"man_avatar"]
 #define Woman_Avatar [UIImage imageNamed:@"woman_avatar"]
 #define Boy_Avatar [UIImage imageNamed:@"boy_avatar"]

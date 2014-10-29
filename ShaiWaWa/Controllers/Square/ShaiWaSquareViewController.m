@@ -423,7 +423,7 @@
     cell.usernameLabel.userInteractionEnabled = YES;
     [cell.contentLabel setText:record.content];
     
-    [cell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:(record.avatar == nil ? @"" : record.avatar)] placeholderImage:Default_Avatar];
+    [cell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:(record.avatar == nil ? @"" : record.avatar)] placeholderImage:Boy_Avatar];
         cell.avatarImageView.userInteractionEnabled = YES;
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showFriendInfo:)];
         [cell.avatarImageView addGestureRecognizer:tap];

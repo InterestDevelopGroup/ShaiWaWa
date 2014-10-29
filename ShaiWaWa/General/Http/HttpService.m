@@ -471,7 +471,7 @@
             return ;
         }
         if (success) {
-            success([self mapModelsProcess:obj[@"result"] withClass:[NotificationMsg class]]);
+            success([ResponseHelper transformToMessages:obj[@"result"]]);
         }
     } failureBlock:failure];
 }

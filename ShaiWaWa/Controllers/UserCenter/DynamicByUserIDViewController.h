@@ -11,4 +11,7 @@
 @interface DynamicByUserIDViewController : CommonViewController<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *dyTableView;
 @property (nonatomic,strong) UserInfo * user;
+@property (weak, nonatomic) IBOutlet UIView *grayShareView;
+@property (weak, nonatomic) IBOutlet UIView *shareView;
+- (IBAction)hideGayShareV:(id)sender;
 @end
