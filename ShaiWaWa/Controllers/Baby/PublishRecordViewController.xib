@@ -371,9 +371,10 @@
                     <rect key="frame" x="140" y="10" width="32" height="36"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <state key="normal" image="pd_fenxiang-.png">
+                    <state key="normal" image="pd_fenxiang-1.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="selected" image="pd_fenxiang-.png"/>
                     <connections>
                         <action selector="shareToSinaWeibo:" destination="-1" eventType="touchUpInside" id="JlT-Uv-FqB"/>
                     </connections>
@@ -385,6 +386,7 @@
                     <state key="normal" image="pd_fenxiang-2.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="selected" image="pd_fenxiang-2.png"/>
                     <connections>
                         <action selector="shareToQQSpace:" destination="-1" eventType="touchUpInside" id="f5m-QV-Z90"/>
                     </connections>
@@ -396,6 +398,7 @@
                     <state key="normal" image="pd_fenxiang-3.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="selected" image="tecent_weibo.png"/>
                     <connections>
                         <action selector="shareToTecentWeibo:" destination="-1" eventType="touchUpInside" id="W2V-ev-bQq"/>
                     </connections>
@@ -406,11 +409,11 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
         <view contentMode="scaleToFill" id="2Lb-yS-uo2">
-            <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
+            <rect key="frame" x="0.0" y="0.0" width="140" height="140"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pd_huatong.png" id="UWB-Wr-vIR">
-                    <rect key="frame" x="12" y="13" width="80" height="80"/>
+                    <rect key="frame" x="30" y="29" width="80" height="80"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </imageView>
@@ -433,12 +436,14 @@
         <image name="pb_zhaopian.png" width="54" height="61"/>
         <image name="pd_anzhushuohua.png" width="166" height="24"/>
         <image name="pd_fenxiang-.png" width="31" height="26"/>
+        <image name="pd_fenxiang-1.png" width="31" height="26"/>
         <image name="pd_fenxiang-2.png" width="31" height="26"/>
         <image name="pd_fenxiang-3.png" width="31" height="26"/>
         <image name="pd_huatong.png" width="151" height="150"/>
         <image name="pd_xiala.png" width="320" height="49"/>
         <image name="pd_xiaohuatong.png" width="23" height="22"/>
         <image name="square_zizhi.png" width="7" height="8"/>
+        <image name="tecent_weibo.png" width="31" height="26"/>
         <image name="user_touxiang.png" width="74" height="70"/>
     </resources>
 </document>

@@ -1094,7 +1094,7 @@
     
     if(_userInfo.tecent_openId == nil)
     {
-        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:nil message:@"还没有绑定QQ空间,现在绑定?" delegate:self cancelButtonTitle:@"关闭" otherButtonTitles:@"绑定", nil];
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:nil message:@"还没有绑定QQ空间,现在绑定?" delegate:self cancelButtonTitle:@"以后再说" otherButtonTitles:@"绑定", nil];
         alert.tag = 1000001;
         [alert show];
         alert = nil;
@@ -1114,7 +1114,7 @@
     
     if(_userInfo.sina_openId == nil)
     {
-        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:nil message:@"还没有绑定新浪微博,现在绑定?" delegate:self cancelButtonTitle:@"关闭" otherButtonTitles:@"绑定", nil];
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:nil message:@"还没有绑定新浪微博,现在绑定?" delegate:self cancelButtonTitle:@"以后再说" otherButtonTitles:@"绑定", nil];
         alert.tag = 1000002;
         [alert show];
         alert = nil;
@@ -1135,7 +1135,7 @@
     
     if(_userInfo.tecent_openId == nil)
     {
-        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:nil message:@"你还没有绑定腾讯微博,现在绑定?" delegate:self cancelButtonTitle:@"关闭" otherButtonTitles:@"绑定", nil];
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:nil message:@"你还没有绑定腾讯微博,现在绑定?" delegate:self cancelButtonTitle:@"以后再说" otherButtonTitles:@"绑定", nil];
         alert.tag = 1000001;
         [alert show];
         alert = nil;

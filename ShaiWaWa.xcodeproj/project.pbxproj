@@ -69,6 +69,7 @@
 		C365F98619CB2E870094377F /* SetPasswordStepOneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C365F98419CB2E870094377F /* SetPasswordStepOneViewController.xib */; };
 		C365F98A19CB31ED0094377F /* SetPassStepTwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C365F98819CB31ED0094377F /* SetPassStepTwoViewController.m */; };
 		C365F98B19CB31ED0094377F /* SetPassStepTwoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C365F98919CB31ED0094377F /* SetPassStepTwoViewController.xib */; };
+		C3781E5C1A01138900A40EEB /* tecent_weibo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C3781E5B1A01138900A40EEB /* tecent_weibo@2x.png */; };
 		C37E536D19A847AA00C55861 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C37E536C19A847AA00C55861 /* CoreMedia.framework */; };
 		C3870F4019EBBD5E0030AD8B /* QQ1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C3870F3A19EBBD5E0030AD8B /* QQ1@2x.png */; };
 		C3870F4119EBBD5E0030AD8B /* QQ2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C3870F3B19EBBD5E0030AD8B /* QQ2@2x.png */; };
@@ -632,6 +633,7 @@
 		C365F98719CB31ED0094377F /* SetPassStepTwoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetPassStepTwoViewController.h; sourceTree = "<group>"; };
 		C365F98819CB31ED0094377F /* SetPassStepTwoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetPassStepTwoViewController.m; sourceTree = "<group>"; };
 		C365F98919CB31ED0094377F /* SetPassStepTwoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetPassStepTwoViewController.xib; sourceTree = "<group>"; };
+		C3781E5B1A01138900A40EEB /* tecent_weibo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tecent_weibo@2x.png"; sourceTree = "<group>"; };
 		C37E536C19A847AA00C55861 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		C3870F3A19EBBD5E0030AD8B /* QQ1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QQ1@2x.png"; sourceTree = "<group>"; };
 		C3870F3B19EBBD5E0030AD8B /* QQ2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QQ2@2x.png"; sourceTree = "<group>"; };
@@ -1851,6 +1853,7 @@
 		F432BD3A19762AC80086BBE9 /* baby */ = {
 			isa = PBXGroup;
 			children = (
+				C3781E5B1A01138900A40EEB /* tecent_weibo@2x.png */,
 				C399550019F8DA9600C97DA9 /* boy_avatar@2x.png */,
 				C399550119F8DA9600C97DA9 /* girl_avatar@2x.png */,
 				C399550219F8DA9600C97DA9 /* man_avatar@2x.png */,
@@ -2891,6 +2894,7 @@
 				F432BE5C19762AC80086BBE9 /* user_1-bg@2x.png in Resources */,
 				F4C2D4F319EE44A100521BFE /* ELCAssetTablePicker.xib in Resources */,
 				F43387FB1974C28600464D43 /* ScannerQRCodeViewController.xib in Resources */,
+				C3781E5C1A01138900A40EEB /* tecent_weibo@2x.png in Resources */,
 				F47F5514197FACE7006DCA75 /* SummaryCell.xib in Resources */,
 				F421621719D65B4A00F01C18 /* 女孩体重.plist in Resources */,
 				F43387FD1974C28600464D43 /* SearchAddressBookViewController.xib in Resources */,
