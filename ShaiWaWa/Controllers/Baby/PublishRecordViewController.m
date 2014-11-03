@@ -1019,6 +1019,7 @@
         }
         [[self.view viewWithTag:100001] removeFromSuperview];
         self.audioPath = nil;
+        [self stopTimer];
     };
     self.meterObserver = meterObserver;
     MLAudioRecorder *recorder = [[MLAudioRecorder alloc]init];
@@ -1026,6 +1027,7 @@
     recorder.receiveStoppedBlock = ^{
         weakSelf.meterObserver.audioQueue = nil;
         [self addAudioView];
+        [self stopTimer];
     };
     recorder.receiveErrorBlock = ^(NSError *error){
         
@@ -1033,10 +1035,11 @@
         {
             [_voiceContainView removeFromSuperview];
         }
-
+        
         [[self.view viewWithTag:100001] removeFromSuperview];
         weakSelf.meterObserver.audioQueue = nil;
-        [[[UIAlertView alloc]initWithTitle:@"错误" message:error.userInfo[NSLocalizedDescriptionKey] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil]show];
+        [self stopTimer];
+        [[[UIAlertView alloc]initWithTitle:@"错误" message:error.userInfo[NSLocalizedDescriptionKey] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"知道了", nil] show];
     };
     
     self.recorder = recorder;
@@ -1046,6 +1049,7 @@
     //开始录音
     [self.recorder startRecording];
     self.meterObserver.audioQueue = self.recorder->_audioQueue;
+    [self startTimer];
     
 }
 
@@ -1065,6 +1069,7 @@
         [_recorder stopRecording];
     }
     
+    [self stopTimer];
     //计算录音时间长度是否大于两秒,否则不允许提交
     AVAudioSession * session = [AVAudioSession sharedInstance];
     [session setCategory:AVAudioSessionCategoryPlayback error:nil];
@@ -1196,6 +1201,7 @@
 
 - (void)stopTimer
 {
+    _recordSecond = 0;
     if(![_recordTimer isValid])
     {
         [_recordTimer setFireDate:[NSDate distantFuture]];
@@ -1205,15 +1211,16 @@
 
 - (void)checkoutRecordTime:(NSTimer *)timer
 {
-    if(_recordSecond >= 10)
+    /*
+    if(_recordSecond >= 60)
     {
         [self stopTimer];
         [self stopRecord:nil];
         return ;
     }
-    
+    */
     _recordSecond += 1;
-    
+    _secondLabel.text = [NSString stringWithFormat:@"%i秒",_recordSecond];
 }
 
 //显示添加宝宝页面
@@ -1789,8 +1796,8 @@
         //判断信息是否完整
         if([addressInfo count] == 4)
         {
-            _placemark = resultInfo;
-            _addressLabel.text = resultInfo[@"name"];
+            _placemark = addressInfo;
+            _addressLabel.text = addressInfo[@"name"];
         }
     }];
 }

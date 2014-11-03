@@ -116,6 +116,7 @@
 		C3C0FA1219ED512800E4D7AE /* AddFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C0FA1019ED512800E4D7AE /* AddFriendViewController.m */; };
 		C3C0FA1319ED512800E4D7AE /* AddFriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3C0FA1119ED512800E4D7AE /* AddFriendViewController.xib */; };
 		C3DA093A19D9C75000A6C80D /* 爱心@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C3DA093919D9C75000A6C80D /* 爱心@2x.png */; };
+		C3DB51EC1A036BC500125799 /* QQ空间1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C3DB51EB1A036BC500125799 /* QQ空间1@2x.png */; };
 		C3DEA19A19DCD161003C86A8 /* BabyHomeDynamicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3DEA19819DCD161003C86A8 /* BabyHomeDynamicCell.m */; };
 		C3DEA19B19DCD161003C86A8 /* BabyHomeDynamicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3DEA19919DCD161003C86A8 /* BabyHomeDynamicCell.xib */; };
 		C3DEA19F19DCEF01003C86A8 /* icon-03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C3DEA19E19DCEF01003C86A8 /* icon-03@2x.png */; };
@@ -716,6 +717,7 @@
 		C3C0FA1019ED512800E4D7AE /* AddFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendViewController.m; sourceTree = "<group>"; };
 		C3C0FA1119ED512800E4D7AE /* AddFriendViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFriendViewController.xib; sourceTree = "<group>"; };
 		C3DA093919D9C75000A6C80D /* 爱心@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "爱心@2x.png"; sourceTree = "<group>"; };
+		C3DB51EB1A036BC500125799 /* QQ空间1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QQ空间1@2x.png"; sourceTree = "<group>"; };
 		C3DEA19719DCD161003C86A8 /* BabyHomeDynamicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BabyHomeDynamicCell.h; sourceTree = "<group>"; };
 		C3DEA19819DCD161003C86A8 /* BabyHomeDynamicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BabyHomeDynamicCell.m; sourceTree = "<group>"; };
 		C3DEA19919DCD161003C86A8 /* BabyHomeDynamicCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BabyHomeDynamicCell.xib; sourceTree = "<group>"; };
@@ -1853,6 +1855,7 @@
 		F432BD3A19762AC80086BBE9 /* baby */ = {
 			isa = PBXGroup;
 			children = (
+				C3DB51EB1A036BC500125799 /* QQ空间1@2x.png */,
 				C3781E5B1A01138900A40EEB /* tecent_weibo@2x.png */,
 				C399550019F8DA9600C97DA9 /* boy_avatar@2x.png */,
 				C399550119F8DA9600C97DA9 /* girl_avatar@2x.png */,
@@ -2835,6 +2838,7 @@
 				C362C00619D6A23E00753082 /* screenshots.png in Resources */,
 				F432BE2619762AC80086BBE9 /* pd_xiaokuang@2x.png in Resources */,
 				F432BDEE19762AC80086BBE9 /* login_xinlang@2x.png in Resources */,
+				C3DB51EC1A036BC500125799 /* QQ空间1@2x.png in Resources */,
 				F432BE3D19762AC80086BBE9 /* square_pic-8@2x.png in Resources */,
 				F432BE0119762AC80086BBE9 /* main_sousuodongftai@2x.png in Resources */,
 				F432BE1019762AC80086BBE9 /* pb_logo-1@2x.png in Resources */,

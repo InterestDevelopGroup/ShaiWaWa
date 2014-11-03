@@ -41,7 +41,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        
     }
     return self;
 }
@@ -129,17 +129,26 @@
         
         if([ids length] != 0)
         {
+            [SVProgressHUD showSuccessWithStatus:@"更新中..."];
             [[HttpService sharedInstance] updateSystemNotification:@{@"notification_id":ids,@"status":@"1"} completionBlock:^(id object) {
                 
                 NSLog(@"update success.");
-                
+                [self popVIewController];
             } failureBlock:^(NSError *error, NSString *responseString) {
+                [SVProgressHUD showErrorWithStatus:@"更新失败."];
                 
             }];
         }
-        
+        else
+        {
+            [self popVIewController];
+        }
     }
-    [self popVIewController];
+    else
+    {
+        [self popVIewController];
+    }
+    
 }
 
 - (void)HMSegmentedControlInitMethod
