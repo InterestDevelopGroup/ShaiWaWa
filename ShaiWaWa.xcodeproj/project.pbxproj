@@ -33,6 +33,7 @@
 		C32B41AC1965B5B8003979EE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C32B41AA1965B5B8003979EE /* InfoPlist.strings */; };
 		C32B41AE1965B5B8003979EE /* ShaiWaWaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C32B41AD1965B5B8003979EE /* ShaiWaWaTests.m */; };
 		C32DE98A19A252620041C47E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C32DE98C19A252620041C47E /* Localizable.strings */; };
+		C340429A1A08BAA400EA6D40 /* remark_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C34042991A08BAA400EA6D40 /* remark_1@2x.png */; };
 		C34E560219D294CF0026E23D /* MLAudioMeterObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = C34E55F619D294CF0026E23D /* MLAudioMeterObserver.m */; };
 		C34E560319D294CF0026E23D /* MLAudioRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = C34E55F819D294CF0026E23D /* MLAudioRecorder.m */; };
 		C34E560419D294CF0026E23D /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C34E55FB19D294CF0026E23D /* libmp3lame.a */; };
@@ -578,6 +579,7 @@
 		C32B41AD1965B5B8003979EE /* ShaiWaWaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShaiWaWaTests.m; sourceTree = "<group>"; };
 		C32DE98B19A252620041C47E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C32DE98D19A252BE0041C47E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C34042991A08BAA400EA6D40 /* remark_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "remark_1@2x.png"; sourceTree = "<group>"; };
 		C34E55F519D294CF0026E23D /* MLAudioMeterObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLAudioMeterObserver.h; sourceTree = "<group>"; };
 		C34E55F619D294CF0026E23D /* MLAudioMeterObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLAudioMeterObserver.m; sourceTree = "<group>"; };
 		C34E55F719D294CF0026E23D /* MLAudioRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLAudioRecorder.h; sourceTree = "<group>"; };
@@ -1855,6 +1857,7 @@
 		F432BD3A19762AC80086BBE9 /* baby */ = {
 			isa = PBXGroup;
 			children = (
+				C34042991A08BAA400EA6D40 /* remark_1@2x.png */,
 				C3DB51EB1A036BC500125799 /* QQ空间1@2x.png */,
 				C3781E5B1A01138900A40EEB /* tecent_weibo@2x.png */,
 				C399550019F8DA9600C97DA9 /* boy_avatar@2x.png */,
@@ -2935,6 +2938,7 @@
 				F4C2D4F419EE44A100521BFE /* Overlay.png in Resources */,
 				F432BDDD19762AC80086BBE9 /* baby_jianjie-@2x.png in Resources */,
 				F433882D1974C28600464D43 /* PraiseViewController.xib in Resources */,
+				C340429A1A08BAA400EA6D40 /* remark_1@2x.png in Resources */,
 				F43387F51974C28600464D43 /* BabyHomePageViewController.xib in Resources */,
 				C3870F4419EBBD5E0030AD8B /* WB1@2x.png in Resources */,
 				F432BE2C19762AC80086BBE9 /* square_chengzhangzuji]@2x.png in Resources */,

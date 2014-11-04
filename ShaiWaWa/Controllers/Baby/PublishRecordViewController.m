@@ -39,6 +39,7 @@
 #import <ShareSDK/ShareSDK.h>
 @import AVFoundation;
 @import MediaPlayer;
+@import QuartzCore;
 #define PlaceHolder @"关于宝宝的开心事情..."
 @interface PublishRecordViewController ()<UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate,UIActionSheetDelegate,CLLocationManagerDelegate,ELCImagePickerControllerDelegate>
 {
@@ -185,6 +186,15 @@
         }
         
     }
+    
+    
+    //录音弹出小窗口样式
+    _voiceContainView.layer.cornerRadius = 4.0;
+    _voiceContainView.layer.shadowColor = [UIColor blackColor].CGColor;
+    _voiceContainView.layer.shadowOpacity = 0.5;
+    _voiceContainView.layer.shadowRadius = 4.0;
+    _voiceContainView.layer.shadowOffset = CGSizeMake(2, 2);
+    
 }
 
 //获取宝宝列表

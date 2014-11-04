@@ -145,7 +145,7 @@
     remarksBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     remarksBtn.frame = CGRectMake(self.navigationController.navigationBar.bounds.size.width-90, self.navigationController.navigationBar.bounds.size.height+10, 84, 41);
     [remarksBtn addTarget:self action:@selector(showRemarkVC) forControlEvents:UIControlEventTouchUpInside];
-    //[remarksBtn setImage:[UIImage imageNamed:@"remark"] forState:UIControlStateNormal];
+    [remarksBtn setImage:[UIImage imageNamed:@"remark_1"] forState:UIControlStateNormal];
     specialCareBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [specialCareBtn setBackgroundColor:[UIColor whiteColor]];
     NSString *foucus = nil;
@@ -285,7 +285,8 @@
     if([user.uid isEqualToString:_babyInfo.fid] || [user.uid isEqualToString:_babyInfo.mid])
     {
         _addButton.hidden = NO;
-    }else
+    }
+    else
     {
         _addButton.hidden = YES;
     }

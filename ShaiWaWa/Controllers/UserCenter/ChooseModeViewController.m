@@ -619,10 +619,10 @@ typedef enum{
     if([record.is_like isEqualToString:@"1"])
     {
         //取消赞
-        //[SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
         [[HttpService sharedInstance] cancelLike:@{@"rid":record.rid,@"uid":users.uid} completionBlock:^(id object) {
             
-            //[SVProgressHUD dismiss];
+            [SVProgressHUD dismiss];
             //[SVProgressHUD showSuccessWithStatus:@"取消赞成功."];
             record.is_like = @"0";
             record.like_count = [NSString stringWithFormat:@"%i",[record.like_count intValue] - 1];
@@ -647,9 +647,9 @@ typedef enum{
     }
     else
     {
-        //[SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
         [[HttpService sharedInstance] addLike:@{@"rid":record.rid,@"uid":users.uid} completionBlock:^(id object) {
-            //[SVProgressHUD dismiss];
+            [SVProgressHUD dismiss];
             //[SVProgressHUD showSuccessWithStatus:@"谢谢您的参与."];
             record.is_like = @"1";
             record.like_count = [NSString stringWithFormat:@"%i",[record.like_count intValue] + 1];
