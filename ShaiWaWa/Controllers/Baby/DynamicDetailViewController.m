@@ -582,7 +582,7 @@
     {
         cell = [tableView dequeueReusableCellWithIdentifier:@"DynamicDetailCell"];
         DynamicDetailCell * detailCell = (DynamicDetailCell *)cell;
-        [detailCell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:_babyRecord.avatar] placeholderImage:Default_Avatar];
+        [detailCell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:_babyRecord.avatar] placeholderImage:Boy_Avatar];
 
         //添加头像点击手势
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showBabyHomePage:)];
@@ -647,7 +647,7 @@
             detailCell.likeView.hidden = NO;
             detailCell.praiseUserFirstBtn.hidden = NO;
             NSDictionary * userDic = _babyRecord.top_3_likes[0];
-            [detailCell.praiseUserFirstBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal placeholderImage:Default_Avatar];
+            [detailCell.praiseUserFirstBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal placeholderImage:Unkown_Avatar];
             [detailCell.praiseUserFirstBtn addTarget:self action:@selector(showPraiseListVC:) forControlEvents:UIControlEventTouchUpInside];
             if (_babyRecord.top_3_likes.count == 1) {
                 detailCell.praiseUserSecondBtn.hidden = YES;
@@ -657,7 +657,7 @@
             {
                 detailCell.praiseUserSecondBtn.hidden = NO;
                 userDic = _babyRecord.top_3_likes[1];
-                [detailCell.praiseUserSecondBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal placeholderImage:Default_Avatar];
+                [detailCell.praiseUserSecondBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal placeholderImage:Unkown_Avatar];
                 [detailCell.praiseUserSecondBtn addTarget:self action:@selector(showPraiseListVC:) forControlEvents:UIControlEventTouchUpInside];
             }
             
@@ -665,7 +665,7 @@
             {
                 detailCell.praiseUserThirdBtn.hidden = NO;
                 userDic = _babyRecord.top_3_likes[2];
-                [detailCell.praiseUserThirdBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal placeholderImage:Default_Avatar];
+                [detailCell.praiseUserThirdBtn sd_setImageWithURL:[NSURL URLWithString:userDic[@"avatar"] == [NSNull null] ? @"":userDic[@"avatar"]] forState:UIControlStateNormal placeholderImage:Unkown_Avatar];
                 [detailCell.praiseUserThirdBtn addTarget:self action:@selector(showPraiseListVC:) forControlEvents:UIControlEventTouchUpInside];
             }
         }

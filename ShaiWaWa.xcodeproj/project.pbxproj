@@ -99,8 +99,6 @@
 		C398DFFE19A4D9B0000F08DB /* QNUploadHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C398DFFD19A4D9B0000F08DB /* QNUploadHelper.m */; };
 		C398E00219A50016000F08DB /* PublishRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C398E00019A50016000F08DB /* PublishRecordViewController.m */; };
 		C398E00319A50016000F08DB /* PublishRecordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C398E00119A50016000F08DB /* PublishRecordViewController.xib */; };
-		C39954FB19F7946200C97DA9 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C39954F819F7946200C97DA9 /* libbaidumapapi.a */; };
-		C39954FC19F7946200C97DA9 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C39954FA19F7946200C97DA9 /* libbaidumapapi.a */; };
 		C39954FD19F794D500C97DA9 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A9827819E68C90007448C0 /* OpenGLES.framework */; };
 		C39954FE19F794DC00C97DA9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F41F690519820ACC00089E42 /* Security.framework */; };
 		C39954FF19F794F000C97DA9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F41F65491981F01400089E42 /* SystemConfiguration.framework */; };
@@ -116,6 +114,7 @@
 		C3A9828719E6B35E007448C0 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A9828619E6B35E007448C0 /* libsqlite3.0.dylib */; };
 		C3C0FA1219ED512800E4D7AE /* AddFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C0FA1019ED512800E4D7AE /* AddFriendViewController.m */; };
 		C3C0FA1319ED512800E4D7AE /* AddFriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3C0FA1119ED512800E4D7AE /* AddFriendViewController.xib */; };
+		C3C6FC6A1A0B955600E2B4E8 /* 特别关注_s@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C3C6FC691A0B955600E2B4E8 /* 特别关注_s@2x.png */; };
 		C3DA093A19D9C75000A6C80D /* 爱心@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C3DA093919D9C75000A6C80D /* 爱心@2x.png */; };
 		C3DB51EC1A036BC500125799 /* QQ空间1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C3DB51EB1A036BC500125799 /* QQ空间1@2x.png */; };
 		C3DEA19A19DCD161003C86A8 /* BabyHomeDynamicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3DEA19819DCD161003C86A8 /* BabyHomeDynamicCell.m */; };
@@ -689,18 +688,6 @@
 		C398DFFF19A50016000F08DB /* PublishRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublishRecordViewController.h; sourceTree = "<group>"; };
 		C398E00019A50016000F08DB /* PublishRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublishRecordViewController.m; sourceTree = "<group>"; };
 		C398E00119A50016000F08DB /* PublishRecordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PublishRecordViewController.xib; sourceTree = "<group>"; };
-		C39954ED19F7946200C97DA9 /* BMapKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMapKit.h; sourceTree = "<group>"; };
-		C39954EE19F7946200C97DA9 /* BMKBaseComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKBaseComponent.h; sourceTree = "<group>"; };
-		C39954EF19F7946200C97DA9 /* BMKGeneralDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKGeneralDelegate.h; sourceTree = "<group>"; };
-		C39954F019F7946200C97DA9 /* BMKGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKGeometry.h; sourceTree = "<group>"; };
-		C39954F119F7946200C97DA9 /* BMKMapManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKMapManager.h; sourceTree = "<group>"; };
-		C39954F219F7946200C97DA9 /* BMKNavigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKNavigation.h; sourceTree = "<group>"; };
-		C39954F319F7946200C97DA9 /* BMKTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKTypes.h; sourceTree = "<group>"; };
-		C39954F419F7946200C97DA9 /* BMKUserLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKUserLocation.h; sourceTree = "<group>"; };
-		C39954F519F7946200C97DA9 /* BMKUtilsComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKUtilsComponent.h; sourceTree = "<group>"; };
-		C39954F619F7946200C97DA9 /* BMKVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKVersion.h; sourceTree = "<group>"; };
-		C39954F819F7946200C97DA9 /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
-		C39954FA19F7946200C97DA9 /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
 		C399550019F8DA9600C97DA9 /* boy_avatar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "boy_avatar@2x.png"; sourceTree = "<group>"; };
 		C399550119F8DA9600C97DA9 /* girl_avatar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "girl_avatar@2x.png"; sourceTree = "<group>"; };
 		C399550219F8DA9600C97DA9 /* man_avatar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "man_avatar@2x.png"; sourceTree = "<group>"; };
@@ -718,6 +705,7 @@
 		C3C0FA0F19ED512800E4D7AE /* AddFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendViewController.h; sourceTree = "<group>"; };
 		C3C0FA1019ED512800E4D7AE /* AddFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendViewController.m; sourceTree = "<group>"; };
 		C3C0FA1119ED512800E4D7AE /* AddFriendViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFriendViewController.xib; sourceTree = "<group>"; };
+		C3C6FC691A0B955600E2B4E8 /* 特别关注_s@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "特别关注_s@2x.png"; sourceTree = "<group>"; };
 		C3DA093919D9C75000A6C80D /* 爱心@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "爱心@2x.png"; sourceTree = "<group>"; };
 		C3DB51EB1A036BC500125799 /* QQ空间1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QQ空间1@2x.png"; sourceTree = "<group>"; };
 		C3DEA19719DCD161003C86A8 /* BabyHomeDynamicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BabyHomeDynamicCell.h; sourceTree = "<group>"; };
@@ -1306,13 +1294,11 @@
 				F41F691219820B6F00089E42 /* CoreText.framework in Frameworks */,
 				F41F691019820B6400089E42 /* MediaPlayer.framework in Frameworks */,
 				F41F690C19820B5000089E42 /* CoreMotion.framework in Frameworks */,
-				C39954FB19F7946200C97DA9 /* libbaidumapapi.a in Frameworks */,
 				F41F690A19820B4400089E42 /* libsqlite3.dylib in Frameworks */,
 				F41F690819820B3100089E42 /* libstdc++.dylib in Frameworks */,
 				F41F690419820ABF00089E42 /* libz.1.2.5.dylib in Frameworks */,
 				F41F690219820AB600089E42 /* CoreTelephony.framework in Frameworks */,
 				F41F68F61982081E00089E42 /* ShareSDKFlatShareViewUI.framework in Frameworks */,
-				C39954FC19F7946200C97DA9 /* libbaidumapapi.a in Frameworks */,
 				F41F68E51982081E00089E42 /* QQConnection.framework in Frameworks */,
 				F41F68E81982081E00089E42 /* TencentWeiboConnection.framework in Frameworks */,
 				F41F654C1981F01D00089E42 /* QuartzCore.framework in Frameworks */,
@@ -1596,49 +1582,6 @@
 			path = RHAddressBook;
 			sourceTree = "<group>";
 		};
-		C39954EB19F7946200C97DA9 /* BaiduMap_IOSSDK_v2 */ = {
-			isa = PBXGroup;
-			children = (
-				C39954EC19F7946200C97DA9 /* inc */,
-				C39954F719F7946200C97DA9 /* Release-iphoneos */,
-				C39954F919F7946200C97DA9 /* Release-iphonesimulator */,
-			);
-			path = BaiduMap_IOSSDK_v2;
-			sourceTree = "<group>";
-		};
-		C39954EC19F7946200C97DA9 /* inc */ = {
-			isa = PBXGroup;
-			children = (
-				C39954ED19F7946200C97DA9 /* BMapKit.h */,
-				C39954EE19F7946200C97DA9 /* BMKBaseComponent.h */,
-				C39954EF19F7946200C97DA9 /* BMKGeneralDelegate.h */,
-				C39954F019F7946200C97DA9 /* BMKGeometry.h */,
-				C39954F119F7946200C97DA9 /* BMKMapManager.h */,
-				C39954F219F7946200C97DA9 /* BMKNavigation.h */,
-				C39954F319F7946200C97DA9 /* BMKTypes.h */,
-				C39954F419F7946200C97DA9 /* BMKUserLocation.h */,
-				C39954F519F7946200C97DA9 /* BMKUtilsComponent.h */,
-				C39954F619F7946200C97DA9 /* BMKVersion.h */,
-			);
-			path = inc;
-			sourceTree = "<group>";
-		};
-		C39954F719F7946200C97DA9 /* Release-iphoneos */ = {
-			isa = PBXGroup;
-			children = (
-				C39954F819F7946200C97DA9 /* libbaidumapapi.a */,
-			);
-			path = "Release-iphoneos";
-			sourceTree = "<group>";
-		};
-		C39954F919F7946200C97DA9 /* Release-iphonesimulator */ = {
-			isa = PBXGroup;
-			children = (
-				C39954FA19F7946200C97DA9 /* libbaidumapapi.a */,
-			);
-			path = "Release-iphonesimulator";
-			sourceTree = "<group>";
-		};
 		C39AAE1819B309EF00C8A7BE /* CoreDataModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -1651,7 +1594,6 @@
 		F41F68861982081E00089E42 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
-				C39954EB19F7946200C97DA9 /* BaiduMap_IOSSDK_v2 */,
 				488541DB19EEEEB100E9AAAB /* UICollectionViewWaterfall */,
 				F4C2D4D219EE44A100521BFE /* ELCImagePicker */,
 				C320608C19E6B75600C80FF7 /* Sqlite */,
@@ -1857,6 +1799,7 @@
 		F432BD3A19762AC80086BBE9 /* baby */ = {
 			isa = PBXGroup;
 			children = (
+				C3C6FC691A0B955600E2B4E8 /* 特别关注_s@2x.png */,
 				C34042991A08BAA400EA6D40 /* remark_1@2x.png */,
 				C3DB51EB1A036BC500125799 /* QQ空间1@2x.png */,
 				C3781E5B1A01138900A40EEB /* tecent_weibo@2x.png */,
@@ -2743,6 +2686,7 @@
 				F41F68EC1982081E00089E42 /* Resource.bundle in Resources */,
 				F432BE5419762AC80086BBE9 /* dianhua2@2x.png in Resources */,
 				F43388171974C28600464D43 /* ForgetPwdViewController.xib in Resources */,
+				C3C6FC6A1A0B955600E2B4E8 /* 特别关注_s@2x.png in Resources */,
 				F43388291974C28600464D43 /* PlatformBindViewController.xib in Resources */,
 				F43388091974C28600464D43 /* SearchWeiboFriendViewController.xib in Resources */,
 				C3870F4519EBBD5E0030AD8B /* WB2@2x.png in Resources */,

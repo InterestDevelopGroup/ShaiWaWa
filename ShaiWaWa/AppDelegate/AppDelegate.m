@@ -16,7 +16,6 @@
 #import "UserInfo.h"
 #import "UserDefault.h"
 #import <ShareSDK/ShareSDK.h>
-#import "BMapKit.h"
 @implementation AppDelegate
 @synthesize postValidateType= _postValidateType;
 @synthesize postValidatePhoneNum = _postValidatePhoneNum;
@@ -36,8 +35,8 @@
     [self customUI];
     [self firstLaunch];
     [self fetchConfig];
-    BMKMapManager * manager = [[BMKMapManager alloc] init];
-    [manager start:@"bzybxxDrOWGzyCSTb6VA2H0b" generalDelegate:nil];
+    //BMKMapManager * manager = [[BMKMapManager alloc] init];
+    //[manager start:@"bzybxxDrOWGzyCSTb6VA2H0b" generalDelegate:nil];
     return YES;
 }
 

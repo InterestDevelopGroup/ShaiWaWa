@@ -98,9 +98,11 @@
 - (void)disableSecure:(SSCheckBoxView *)sender
 {
     [_pwdField setSecureTextEntry:!sender.checked];
-    if (!_pwdField.secureTextEntry) {
-        _pwdField.text = _pwdField.text;
-    }
+//    if (!_pwdField.secureTextEntry) {
+//        _pwdField.text = _pwdField.text;
+//    }
+    
+    _pwdField.text = [InputHelper trim:_pwdField.text];
 }
 
 - (IBAction)showRegisterVC:(id)sender

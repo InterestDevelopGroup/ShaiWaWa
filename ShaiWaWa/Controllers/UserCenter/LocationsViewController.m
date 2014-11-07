@@ -11,7 +11,6 @@
 #import "UIView+CutLayer.h"
 #import "SVProgressHUD.h"
 #import "CSqlite.h"
-#import "BMapKit.h"
 @interface LocationsViewController ()
 {
     CSqlite *m_sqlite;

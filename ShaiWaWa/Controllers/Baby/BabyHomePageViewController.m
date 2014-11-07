@@ -41,13 +41,11 @@
 #import "LineChartController.h"
 #import "BabyRemark.h"
 #import "QNUploadHelper.h"
-
 @import MediaPlayer;
 @interface BabyHomePageViewController () <UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate>
 {
     UITableView *_gridView;   ///身高体重显示的tableView
     NSArray *_growRecordArray; //存放宝宝成长记录的数组
-    
     UIImage *_image;
     NSString *_filePath;
 }
@@ -109,10 +107,13 @@
     
 }
 
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
 }
+
+
 
 #pragma mark - Private Methods
 - (void)initUI
@@ -142,11 +143,13 @@
     [remarksBtn setBackgroundColor:[UIColor whiteColor]];
     [remarksBtn setTitle:@"备注信息" forState:UIControlStateNormal];
     [remarksBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-    remarksBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    remarksBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+    
     remarksBtn.frame = CGRectMake(self.navigationController.navigationBar.bounds.size.width-90, self.navigationController.navigationBar.bounds.size.height+10, 84, 41);
     [remarksBtn addTarget:self action:@selector(showRemarkVC) forControlEvents:UIControlEventTouchUpInside];
     [remarksBtn setImage:[UIImage imageNamed:@"remark_1"] forState:UIControlStateNormal];
-    specialCareBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    
+    specialCareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [specialCareBtn setBackgroundColor:[UIColor whiteColor]];
     NSString *foucus = nil;
     if ([_babyInfo.is_focus isEqualToString:@"1"]) {
@@ -161,9 +164,10 @@
 
     
     [specialCareBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-    specialCareBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    specialCareBtn.titleLabel.font = [UIFont systemFontOfSize:12];
     specialCareBtn.frame = CGRectMake(self.navigationController.navigationBar.bounds.size.width-90, self.navigationController.navigationBar.bounds.size.height+51, 84, 41);
     [specialCareBtn addTarget:self action:@selector(specialCare) forControlEvents:UIControlEventTouchUpInside];
+    [specialCareBtn setImage:[UIImage imageNamed:@"特别关注_s"] forState:UIControlStateNormal];
     //[self.view addSubview:_yaoQingbgView];
     isRemarksBtnShown = NO;
     isRightBtnSelected = NO;
@@ -237,6 +241,8 @@
             if(image)
             {
                 [_babyAvatarImgView setImage:[image ellipseImageWithDefaultSetting]  forState:UIControlStateNormal];
+                [_babyAvatarImgView setImage:[image ellipseImageWithDefaultSetting] forState:UIControlStateDisabled];
+
             }
             
         }];
