@@ -62,7 +62,7 @@
 - (void)sinaLoginEvent
 {
 
-    id<ISSAuthOptions> authOptions = [ShareSDK authOptionsWithAutoAuth:YES
+    id<ISSAuthOptions> authOptions = [ShareSDK authOptionsWithAutoAuth:NO
                                                          allowCallback:YES
                                                          authViewStyle:SSAuthViewStyleFullScreenPopup
                                                           viewDelegate:nil
@@ -143,7 +143,7 @@
 {
 
     
-    id<ISSAuthOptions> authOptions = [ShareSDK authOptionsWithAutoAuth:YES
+    id<ISSAuthOptions> authOptions = [ShareSDK authOptionsWithAutoAuth:NO
                                                          allowCallback:YES
                                                          authViewStyle:SSAuthViewStyleFullScreenPopup
                                                           viewDelegate:nil

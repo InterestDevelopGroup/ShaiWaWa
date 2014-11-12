@@ -13,7 +13,8 @@
 #import <TencentOpenAPI/QQApiInterface.h>
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <QZoneConnection/QZoneConnection.h>
-
+#import "UserInfo.h"
+#import "UserDefault.h"
 @implementation ShareManager
 
 + (instancetype)sharePlatform
@@ -38,6 +39,11 @@
      [ShareSDK connectSinaWeiboWithAppKey:@"1000068529"
      appSecret:@"5258f9253910966082e8828fe092841d"
      redirectUri:@"http://www.gzinterest.com"];
+    
+//    [ShareSDK connectSinaWeiboWithAppKey:@"3760443588"
+//                               appSecret:@"13662c0f4a3d11a596e933359ac98849"
+//                             redirectUri:@"http://www.gzinterest.com"];
+
     
 
     //微信
@@ -274,6 +280,48 @@
             
         }
     }];
+}
+
+
+- (void)shareToSinaWeiBoInBackground:(NSString *)text withURL:(NSString *)url
+{
+    //发送微博
+    NSMutableDictionary * dic = [@{} mutableCopy];
+    dic[@"access_token"] = [[NSUserDefaults standardUserDefaults] objectForKey:@"SIAN_ACCESS_TOKEN"];
+    dic[@"status"] = text;
+    dic[@"visible"] = @"0";
+    [[HttpService sharedInstance] post:@"https://api.weibo.com/2/statuses/update.json" withParams:dic completionBlock:^(id obj) {
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        
+    }];
+
+}
+
+
+- (void)shareToQzoneInBackground:(NSString *)text withURL:(NSString *)url
+{
+    //https://graph.qq.com/t/add_t
+    
+    UserInfo * user = [[UserDefault sharedInstance] userInfo];
+    if(user.tecent_openId == nil)
+    {
+        return ;
+    }
+    
+    NSMutableDictionary * dic = [@{} mutableCopy];
+    dic[@"access_token"] = [[NSUserDefaults standardUserDefaults] objectForKey:@"QQ_ACCESS_TOKEN"];
+    dic[@"oauth_consumer_key"] = @"1102109842";
+    dic[@"openid"] = user.tecent_openId;
+    dic[@"content"] = text;
+    dic[@"format"] = @"json";
+    [[HttpService sharedInstance] post:@"https://graph.qq.com/t/add_t" withParams:dic completionBlock:^(id obj) {
+        
+    } failureBlock:^(NSError *error, NSString *responseString) {
+        
+    }];
+
+    
 }
 
 @end

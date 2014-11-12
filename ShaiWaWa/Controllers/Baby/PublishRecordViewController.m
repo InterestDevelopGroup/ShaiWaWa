@@ -482,12 +482,16 @@
     [[HttpService sharedInstance] publishRecord:params completionBlock:^(id object) {
         
         [SVProgressHUD showSuccessWithStatus:@"上传成功."];
+        
+        
         //清楚数据
         [self cleanUp];
         //需要刷新页面
         self.parentCtrl.isNeedRefresh = YES;
         //返回上个页面
         [self popVIewController];
+        
+        //https://api.weibo.com/2/statuses/upload_url_text.json
         
     } failureBlock:^(NSError *error, NSString *responseString) {
         NSString * msg = responseString;
