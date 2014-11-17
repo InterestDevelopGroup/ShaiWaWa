@@ -382,6 +382,7 @@
 {
     UIImageView * imageView = (UIImageView *)gesture.view;
     MessageCell * cell ;
+    NSLog(@"%@",NSStringFromClass([imageView.superview.superview.superview class]));
     if([imageView.superview.superview.superview isKindOfClass:[MessageCell class]])
     {
         cell = (MessageCell *)imageView.superview.superview.superview;
@@ -395,7 +396,21 @@
         cell = (MessageCell *)imageView.superview;
     }
     
-    NSIndexPath * indexPath = [_msgTableView indexPathForCell:cell];
+    NSIndexPath * indexPath ;
+    if(segMentedControl.selectedSegmentIndex == 0)
+    {
+        indexPath = [_msgTableView indexPathForCell:cell];
+    }
+    else
+    {
+        indexPath = [_haveReadMsgTableView indexPathForCell:cell];
+    }
+    
+    if(indexPath == nil)
+    {
+        [SVProgressHUD showErrorWithStatus:@"用户不存在"];
+        return ;
+    }
     
     NotificationMsg * msg ;
     if(segMentedControl.selectedSegmentIndex == 0)
@@ -409,6 +424,7 @@
     
     if(msg.requester_info == nil || [msg.requester_info isEqual:[NSNull null]])
     {
+        [SVProgressHUD showErrorWithStatus:@"用户不存在"];
         return ;
     }
     
@@ -452,12 +468,10 @@
         msg = _haveReadMSGArray[indexPath.row];
     }
 
-    if (tableView == _msgTableView)
+    if (segMentedControl.selectedSegmentIndex == 0)
     {
         MessageCell * msgCell = (MessageCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
         UILabel *temp = [[UILabel alloc] init];
-        
-        
         //计算时间
         msgCell.timeLabel.text = [NSStringUtil calculateTime:msg.add_time];
         switch ([msg.type intValue]) {
@@ -465,7 +479,6 @@
                 msgCell.agreeButton.hidden = YES;
                 msgCell.ignoreButton.hidden = YES;
                 msgCell.refuseButton.hidden = YES;
-//                msgCell.actionLabel.text = @"评论了你的动态";
                 msgCell.actionLabel.text = msg.content;
                 break;
             case 2:     //动态被赞
@@ -473,7 +486,6 @@
                 msgCell.ignoreButton.hidden = YES;
                 msgCell.refuseButton.hidden = YES;
                 msgCell.contentLabel.hidden = YES;
-//                msgCell.actionLabel.text = @"赞了你的动态";
                 msgCell.actionLabel.text = msg.content;
                 break;
             case 3:     //申请成为好友
@@ -548,7 +560,6 @@
         msgCell.selectionStyle = UITableViewCellSelectionStyleNone;
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHomePage:)];
         msgCell.sendImgView.userInteractionEnabled = YES;
-        
         [msgCell.sendImgView addGestureRecognizer:tap];
         return msgCell;
     }

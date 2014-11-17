@@ -16,6 +16,7 @@
 #import "UserInfo.h"
 #import "UserDefault.h"
 #import <ShareSDK/ShareSDK.h>
+//#import "MLBlackTransition.h"
 @implementation AppDelegate
 @synthesize postValidateType= _postValidateType;
 @synthesize postValidatePhoneNum = _postValidatePhoneNum;
@@ -37,6 +38,7 @@
     [self fetchConfig];
     //BMKMapManager * manager = [[BMKMapManager alloc] init];
     //[manager start:@"bzybxxDrOWGzyCSTb6VA2H0b" generalDelegate:nil];
+    //[MLBlackTransition validatePanPackWithMLBlackTransitionGestureRecognizerType:MLBlackTransitionGestureRecognizerTypePan];
     return YES;
 }
 

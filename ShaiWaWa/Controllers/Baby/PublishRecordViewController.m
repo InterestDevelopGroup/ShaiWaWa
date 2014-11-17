@@ -96,6 +96,7 @@
     AVAudioSession * audioSession = [AVAudioSession sharedInstance];
     [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:nil]; //设置音频类别，这里表示当应用启动，停掉后台其他音频
     [audioSession setActive:YES error:nil];//设置当前应用音频活跃性
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
