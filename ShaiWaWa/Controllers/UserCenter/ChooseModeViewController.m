@@ -1154,6 +1154,12 @@ int _lastPosition;    //A variable define in headfile
         height -= 17;
     }
     */
+    
+    if(babyRecord.content == nil || [babyRecord.content length] == 0)
+    {
+        height -= 45;
+    }
+    
     return height;
 }
 
@@ -1368,20 +1374,53 @@ int _lastPosition;    //A variable define in headfile
     {
         CGRect detailRect = dynamicCell.detailView.frame;
         detailRect.origin.y = 68;
+        if(recrod.content == nil || [recrod.content length] == 0)
+        {
+            detailRect.size.height = 70;
+        }
+        else
+        {
+            detailRect.size.height = 114;
+        }
         dynamicCell.detailView.frame = detailRect;
         
         CGRect bgRect = dynamicCell.bgImageView.frame;
-        bgRect.size.height = 184;
+        
+        if(recrod.content == nil || [recrod.content length] == 0)
+        {
+            bgRect.size.height = 140;
+        }
+        else
+        {
+            bgRect.size.height = 184;
+        }
+        
         dynamicCell.bgImageView.frame = bgRect;
     }
     else
     {
         CGRect detailRect = dynamicCell.detailView.frame;
         detailRect.origin.y = 210;
+        if(recrod.content == nil || [recrod.content length] == 0)
+        {
+            detailRect.size.height = 70;
+        }
+        else
+        {
+            detailRect.size.height = 114;
+        }
+
         dynamicCell.detailView.frame = detailRect;
-        
+
         CGRect bgRect = dynamicCell.bgImageView.frame;
-        bgRect.size.height = 327;
+        if(recrod.content == nil || [recrod.content length] == 0)
+        {
+            bgRect.size.height = 282;
+        }
+        else
+        {
+            bgRect.size.height = 327;
+        }
         dynamicCell.bgImageView.frame = bgRect;
 
     }

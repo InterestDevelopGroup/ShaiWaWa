@@ -142,7 +142,8 @@
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
     [SVProgressHUD setStatus:NSLocalizedString(@"Logining", nil)];
     [[HttpService sharedInstance] userLogin:@{@"phone":phone,@"password":pass}completionBlock:^(id object){
-        [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"LoginSuccess", nil)];
+        [SVProgressHUD dismiss];
+        //[SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"LoginSuccess", nil)];
         _phoneField.text = nil;
         _pwdField.text = nil;
         [self showChooseModeVC];
