@@ -471,7 +471,7 @@
     if (segMentedControl.selectedSegmentIndex == 0)
     {
         MessageCell * msgCell = (MessageCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
-        UILabel *temp = [[UILabel alloc] init];
+
         //计算时间
         msgCell.timeLabel.text = [NSStringUtil calculateTime:msg.add_time];
         switch ([msg.type intValue]) {
@@ -480,6 +480,16 @@
                 msgCell.ignoreButton.hidden = YES;
                 msgCell.refuseButton.hidden = YES;
                 msgCell.actionLabel.text = msg.content;
+                if(msg.record_info != nil && [msg.record_info.images count] != 0)
+                {
+                    msgCell.receiveImgView.hidden = NO;
+                    [msgCell.receiveImgView sd_setImageWithURL:[NSURL URLWithString:msg.record_info.images[0]]];
+                }
+                else
+                {
+                    msgCell.receiveImgView.hidden = YES;
+                }
+
                 break;
             case 2:     //动态被赞
                 msgCell.agreeButton.hidden = YES;
@@ -487,12 +497,21 @@
                 msgCell.refuseButton.hidden = YES;
                 msgCell.contentLabel.hidden = YES;
                 msgCell.actionLabel.text = msg.content;
+                if(msg.record_info != nil && [msg.record_info.images count] != 0)
+                {
+                    msgCell.receiveImgView.hidden = NO;
+                    [msgCell.receiveImgView sd_setImageWithURL:[NSURL URLWithString:msg.record_info.images[0]]];
+                }
+                else
+                {
+                    msgCell.receiveImgView.hidden = YES;
+                }
+
                 break;
             case 3:     //申请成为好友
 //                msgCell.sendNameLabel.text = msg.content;
                 msgCell.receiveImgView.hidden = YES;
                 //msgCell.timeLabel.hidden = YES;
-//                msgCell.actionLabel.text = @"请求加你为好友";
                 msgCell.actionLabel.text = msg.content;
                 msgCell.contentLabel.text = msg.remark;
                 
@@ -533,9 +552,7 @@
                 msgCell.receiveImgView.hidden = YES;
                 msgCell.actionLabel.hidden = YES;
                 //msgCell.timeLabel.hidden = YES;
-                temp.text = @"张山";
-                temp.textColor = [UIColor greenColor];
-                msgCell.contentLabel.text = [NSString stringWithFormat:@"你关注的宝宝%@有新的动态",temp];
+                msgCell.contentLabel.text = [NSString stringWithFormat:@"你关注的宝宝有新的动态"];
                 break;
             case 8:     //被@了
                 msgCell.agreeButton.hidden = YES;
@@ -571,11 +588,31 @@
         if ([typeId isEqualToString:@"1"]) {
             //动态被评论
             msgCell.actionLabel.text = @"评论了你的动态";
+            
+            
+            if(msg.record_info != nil && [msg.record_info.images count] != 0)
+            {
+                msgCell.receiveImgView.hidden = NO;
+                [msgCell.receiveImgView sd_setImageWithURL:[NSURL URLWithString:msg.record_info.images[0]]];
+            }
+            else
+            {
+                msgCell.receiveImgView.hidden = YES;
+            }
         }
         if ([typeId isEqualToString:@"2"]) {
             //动态被赞
             msgCell.contentLabel.hidden = YES;
             msgCell.actionLabel.text = @"赞了你的动态";
+            if(msg.record_info != nil && [msg.record_info.images count] != 0)
+            {
+                msgCell.receiveImgView.hidden = NO;
+                [msgCell.receiveImgView sd_setImageWithURL:[NSURL URLWithString:msg.record_info.images[0]]];
+            }
+            else
+            {
+                msgCell.receiveImgView.hidden = YES;
+            }
         }
         if ([typeId isEqualToString:@"3"]) {
             //申请成为好友
@@ -597,7 +634,7 @@
         }
         if ([typeId isEqualToString:@"6"]) {
             //自己的宝宝有新动态
-            msgCell.receiveImgView.hidden = YES;
+            msgCell.receiveImgView.hidden = NO;
             msgCell.actionLabel.hidden = YES;
             //msgCell.timeLabel.hidden = YES;
         }
@@ -611,10 +648,6 @@
             msgCell.receiveImgView.hidden = YES;
             msgCell.actionLabel.hidden = YES;
             //msgCell.timeLabel.hidden = YES;
-            
-            NSString *babyName = @"博城";
-            NSMutableAttributedString * attrString = [[NSMutableAttributedString alloc] initWithString:babyName];
-            [attrString addAttributes:@{NSUnderlineStyleAttributeName:[NSNumber numberWithInt:NSUnderlineStyleNone]} range:NSMakeRange(0, attrString.length)];
             msgCell.contentLabel.text = [NSString stringWithFormat:@"你关注的宝宝有新的动态"];
         }
         if ([typeId isEqualToString:@"8"]) {

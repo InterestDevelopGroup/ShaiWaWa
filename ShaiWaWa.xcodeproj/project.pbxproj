@@ -112,6 +112,9 @@
 		C39AAE1B19B30A3200C8A7BE /* Topic.m in Sources */ = {isa = PBXBuildFile; fileRef = C39AAE1A19B30A3200C8A7BE /* Topic.m */; };
 		C39AAE1E19B3124200C8A7BE /* CommonAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = C39AAE1D19B3124200C8A7BE /* CommonAlert.m */; };
 		C3A9828719E6B35E007448C0 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A9828619E6B35E007448C0 /* libsqlite3.0.dylib */; };
+		C3B5780E1A2379E400934BA4 /* LCPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B578091A2379E400934BA4 /* LCPanGestureRecognizer.m */; };
+		C3B5780F1A2379E400934BA4 /* LCPanNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B5780B1A2379E400934BA4 /* LCPanNavigationController.m */; };
+		C3B578101A2379E400934BA4 /* UIView+Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B5780D1A2379E400934BA4 /* UIView+Snapshot.m */; };
 		C3C0FA1219ED512800E4D7AE /* AddFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C0FA1019ED512800E4D7AE /* AddFriendViewController.m */; };
 		C3C0FA1319ED512800E4D7AE /* AddFriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3C0FA1119ED512800E4D7AE /* AddFriendViewController.xib */; };
 		C3C6FC6A1A0B955600E2B4E8 /* 特别关注_s@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C3C6FC691A0B955600E2B4E8 /* 特别关注_s@2x.png */; };
@@ -702,6 +705,12 @@
 		C39AAE1D19B3124200C8A7BE /* CommonAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonAlert.m; sourceTree = "<group>"; };
 		C3A9827819E68C90007448C0 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		C3A9828619E6B35E007448C0 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		C3B578081A2379E400934BA4 /* LCPanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCPanGestureRecognizer.h; sourceTree = "<group>"; };
+		C3B578091A2379E400934BA4 /* LCPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCPanGestureRecognizer.m; sourceTree = "<group>"; };
+		C3B5780A1A2379E400934BA4 /* LCPanNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCPanNavigationController.h; sourceTree = "<group>"; };
+		C3B5780B1A2379E400934BA4 /* LCPanNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCPanNavigationController.m; sourceTree = "<group>"; };
+		C3B5780C1A2379E400934BA4 /* UIView+Snapshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Snapshot.h"; sourceTree = "<group>"; };
+		C3B5780D1A2379E400934BA4 /* UIView+Snapshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Snapshot.m"; sourceTree = "<group>"; };
 		C3C0FA0F19ED512800E4D7AE /* AddFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendViewController.h; sourceTree = "<group>"; };
 		C3C0FA1019ED512800E4D7AE /* AddFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendViewController.m; sourceTree = "<group>"; };
 		C3C0FA1119ED512800E4D7AE /* AddFriendViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFriendViewController.xib; sourceTree = "<group>"; };
@@ -1591,9 +1600,23 @@
 			path = CoreDataModels;
 			sourceTree = "<group>";
 		};
+		C3B578071A2379E400934BA4 /* PanNavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				C3B578081A2379E400934BA4 /* LCPanGestureRecognizer.h */,
+				C3B578091A2379E400934BA4 /* LCPanGestureRecognizer.m */,
+				C3B5780A1A2379E400934BA4 /* LCPanNavigationController.h */,
+				C3B5780B1A2379E400934BA4 /* LCPanNavigationController.m */,
+				C3B5780C1A2379E400934BA4 /* UIView+Snapshot.h */,
+				C3B5780D1A2379E400934BA4 /* UIView+Snapshot.m */,
+			);
+			path = PanNavigationController;
+			sourceTree = "<group>";
+		};
 		F41F68861982081E00089E42 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				C3B578071A2379E400934BA4 /* PanNavigationController */,
 				488541DB19EEEEB100E9AAAB /* UICollectionViewWaterfall */,
 				F4C2D4D219EE44A100521BFE /* ELCImagePicker */,
 				C320608C19E6B75600C80FF7 /* Sqlite */,
@@ -3025,6 +3048,7 @@
 				C365F98519CB2E870094377F /* SetPasswordStepOneViewController.m in Sources */,
 				F47F5503197FACE7006DCA75 /* MainDropMenu.m in Sources */,
 				C397F57819A6273A006CAFA6 /* PublishImageView.m in Sources */,
+				C3B578101A2379E400934BA4 /* UIView+Snapshot.m in Sources */,
 				F433883C1974C28600464D43 /* UpdateUserNameViewController.m in Sources */,
 				F41F68E11982081E00089E42 /* UIImage+Util.m in Sources */,
 				C350724A19C28E4A0046D4A3 /* LikeUser.m in Sources */,
@@ -3105,6 +3129,7 @@
 				F4AE5080199AFBEE007683E9 /* QiniuUtils.m in Sources */,
 				F41F68DF1982081E00089E42 /* OSHelper.m in Sources */,
 				F43388161974C28600464D43 /* ForgetPwdViewController.m in Sources */,
+				C3B5780E1A2379E400934BA4 /* LCPanGestureRecognizer.m in Sources */,
 				C3891B3219C01A390039F29D /* RHRecord.m in Sources */,
 				F433883A1974C28600464D43 /* UpdatePwdViewController.m in Sources */,
 				F4E363BC1986009900A018A5 /* ShareView.m in Sources */,
@@ -3133,6 +3158,7 @@
 				C3891B2D19C01A390039F29D /* RHAddressBookSharedServices.m in Sources */,
 				F43388341974C28600464D43 /* ResetPwdViewController.m in Sources */,
 				C3891B3319C01A390039F29D /* RHSource.m in Sources */,
+				C3B5780F1A2379E400934BA4 /* LCPanNavigationController.m in Sources */,
 				24FAD0BC1986935F00FFE11E /* ShareManager.m in Sources */,
 				F43387F21974C28600464D43 /* AddHeightAndWeightViewController.m in Sources */,
 				F43387F41974C28600464D43 /* BabyHomePageViewController.m in Sources */,

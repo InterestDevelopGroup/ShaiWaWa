@@ -137,10 +137,11 @@
         NSString * phone = person.phoneNumbers.values[0];
         phone = [phone stringByReplacingOccurrencesOfString:@"-" withString:@""];
         phone = [phone stringByReplacingOccurrencesOfString:@"+" withString:@""];
-        if(phone == nil)
+        if(phone == nil || person.name == nil)
         {
             continue ;
         }
+        
         NSDictionary * dic = @{@"name":person.name,@"phone":phone};
         [arr addObject:dic];
     }

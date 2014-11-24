@@ -16,7 +16,6 @@
 #import "UserInfo.h"
 #import "UserDefault.h"
 #import <ShareSDK/ShareSDK.h>
-//#import "MLBlackTransition.h"
 @implementation AppDelegate
 @synthesize postValidateType= _postValidateType;
 @synthesize postValidatePhoneNum = _postValidatePhoneNum;

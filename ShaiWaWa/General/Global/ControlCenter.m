@@ -9,7 +9,7 @@
 #import "ControlCenter.h"
 #import "UserDefault.h"
 #import "UserInfo.h"
-
+#import "LCPanNavigationController.h"
 @implementation ControlCenter
 
 + (AppDelegate *)appDelegate
@@ -38,11 +38,13 @@
     UserInfo *users = [[UserDefault sharedInstance] userInfo];
     if(users == nil)
     {
-        nav = [[self class] navWithRootVC:[[self class] viewControllerWithName:@"LoginViewController"]];
+        //nav = [[self class] navWithRootVC:[[self class] viewControllerWithName:@"LoginViewController"]];
+        nav = [[LCPanNavigationController alloc] initWithRootViewController:[[self class] viewControllerWithName:@"LoginViewController"]];
     }
     else
     {
-        nav = [[self class] navWithRootVC:[[self class] viewControllerWithName:@"ChooseModeViewController"]];
+        //nav = [[self class] navWithRootVC:[[self class] viewControllerWithName:@"ChooseModeViewController"]];
+        nav = [[LCPanNavigationController alloc] initWithRootViewController:[[self class] viewControllerWithName:@"ChooseModeViewController"]];
     }
     appDelegate.navigationController = nav;
     appDelegate.window.rootViewController = appDelegate.navigationController;

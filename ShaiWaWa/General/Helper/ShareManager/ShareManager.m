@@ -48,7 +48,7 @@
 
     //微信
     //wxac01db4d5123ff1f
-    [ShareSDK connectWeChatWithAppId:@"wxac01db4d5123ff1f" wechatCls:[WXApi class]];
+    [ShareSDK connectWeChatWithAppId:@"wx0ba9b47242b9f770" wechatCls:[WXApi class]];
     [ShareSDK importWeChatClass:[WXApi class]];
     
     //添加QQ空间应用

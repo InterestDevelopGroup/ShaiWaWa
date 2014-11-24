@@ -51,6 +51,7 @@
     {
         self.title = @"查找通讯录好友";
     }
+    
     [self setLeftCusBarItem:@"square_back" action:nil];
 }
 

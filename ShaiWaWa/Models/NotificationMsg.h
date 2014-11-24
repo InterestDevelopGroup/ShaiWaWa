@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "BabyRecord.h"
 @interface NotificationMsg : NSObject 
 {
 
@@ -40,4 +40,5 @@
 @property (nonatomic, strong) NSString *username;
 @property (nonatomic, strong) NSDictionary *requester_info;
 @property (nonatomic, strong) NSString * like_id;
+@property (nonatomic, strong) BabyRecord * record_info;
 @end

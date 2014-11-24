@@ -50,6 +50,41 @@
     return results;
 }
 
++ (BabyRecord *)transformToBabyRecord:(NSDictionary *)dic
+{
+    if(dic == nil || [dic isEqual:[NSNull null]])
+    {
+        return nil;
+    }
+    
+    BabyRecord * record = [[BabyRecord alloc] init];
+    record.baby_id = dic[@"baby_id"];
+    record.uid = dic[@"uid"];
+    record.rid = dic[@"rid"];
+    record.add_time = dic[@"add_time"];
+    record.content = dic[@"content"] == [NSNull null] ? @"" : dic[@"content"];
+    record.address = dic[@"address"] == [NSNull null] ? @"" : dic[@"address"];
+    record.latitude = dic[@"latitude"] == [NSNull null] ? @"" : dic[@"latitude"];
+    record.longitude = dic[@"longitude"] == [NSNull null] ? @"" : dic[@"longitude"];
+    record.visibility = dic[@"visibility"];
+    record.baby_name = dic[@"baby_name"] == [NSNull null] ? @"" : dic[@"baby_name"];
+    record.baby_nickname = dic[@"baby_nickname"] == [NSNull null] ? @"" : dic[@"baby_nickname"];
+    record.like_count = dic[@"like_count"];
+    record.is_like = dic[@"is_like"];
+    record.comment_count = dic[@"comment_count"];
+    record.images = dic[@"image"] == [NSNull null] ? @[] : dic[@"image"];
+    record.video = dic[@"video"] == [NSNull null] ? @"" : dic[@"video"];
+    record.audio = dic[@"audio"] == [NSNull null] ? @"" : dic[@"audio"];
+    record.top_3_likes = dic[@"top_3_likes"] == [NSNull null] ? @[] : dic[@"top_3_likes"];
+    record.user_avatar = dic[@"user_avatar"] == [NSNull null] ? @"" : dic[@"user_avatar"];
+    record.avatar = dic[@"avatar"] == [NSNull null] ? @"" : dic[@"avatar"];
+    record.username = dic[@"username"] == [NSNull null] ? @"" : dic[@"username"];
+    record.birthday = dic[@"birthday"] == [NSNull null] ? @"" : dic[@"birthday"];
+    record.baby_alias = dic[@"baby_alias"] == [NSNull null] ? @"" : dic[@"baby_alias"];
+    
+    return record;
+}
+
 
 + (NSArray *)transformToRecordComments:(NSArray *)arr
 {
@@ -102,6 +137,7 @@
         msg.send_uid = dic[@"send_uid"];
         msg.status = dic[@"status"];
         msg.type = dic[@"type"];
+        msg.record_info = [[self class] transformToBabyRecord:dic[@"record_info"]];
         [results addObject:msg];
     }
     return results;
