@@ -399,7 +399,7 @@
 - (void)HMSegmentedControlInitMethod
 {
     segMentedControl = [[HMSegmentedControl alloc] init];
-    [segMentedControl setSectionTitles:@[@"简介",@"动态",@"身高体重"]];
+    [segMentedControl setSectionTitles:@[@"简介",@"动态"]];
     segMentedControl.font = [UIFont systemFontOfSize:15];
     segMentedControl.textColor = [UIColor darkGrayColor];
     segMentedControl.selectedTextColor = [UIColor colorWithRed:104.0/225.0 green:193.0/255.0 blue:14.0/255.0 alpha:1.0];
@@ -408,7 +408,7 @@
     [segMentedControl setSelectionIndicatorHeight:1.0];
     [segMentedControl setSelectionIndicatorColor:[UIColor colorWithRed:104.0/255.0 green:193.0/255.0 blue:14.0/255.0 alpha:1.0]];
     segMentedControl.frame = CGRectMake(0, 0, _tabSelectionBar.bounds.size.width, _tabSelectionBar.bounds.size.height);
-    segMentedControl.selectedSegmentIndex = 1;
+    //segMentedControl.selectedSegmentIndex = 1;
     [_segScrollView setContentOffset:CGPointMake(segMentedControl.selectedSegmentIndex*320, 0)];
     [segMentedControl addTarget:self action:@selector(changePage:) forControlEvents:UIControlEventValueChanged];
     [_tabSelectionBar addSubview:segMentedControl];
