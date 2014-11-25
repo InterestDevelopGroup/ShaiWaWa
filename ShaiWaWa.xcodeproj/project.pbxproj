@@ -20,8 +20,6 @@
 		488541DE19EEEEB100E9AAAB /* UICollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 488541DD19EEEEB100E9AAAB /* UICollectionViewWaterfallLayout.m */; };
 		C3121CFE19B57182004353EF /* SquareCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3121CFD19B57182004353EF /* SquareCollectionCell.m */; };
 		C3121D0019B57197004353EF /* SquareCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3121CFF19B57197004353EF /* SquareCollectionCell.xib */; };
-		C320609419E6B75600C80FF7 /* CSqlite.m in Sources */ = {isa = PBXBuildFile; fileRef = C320608E19E6B75600C80FF7 /* CSqlite.m */; };
-		C320609519E6B75600C80FF7 /* gps.db in Resources */ = {isa = PBXBuildFile; fileRef = C320608F19E6B75600C80FF7 /* gps.db */; };
 		C32B41831965B5B8003979EE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C32B41821965B5B8003979EE /* Foundation.framework */; };
 		C32B41851965B5B8003979EE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C32B41841965B5B8003979EE /* CoreGraphics.framework */; };
 		C32B41871965B5B8003979EE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C32B41861965B5B8003979EE /* UIKit.framework */; };
@@ -564,11 +562,6 @@
 		C3121CFC19B57182004353EF /* SquareCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SquareCollectionCell.h; sourceTree = "<group>"; };
 		C3121CFD19B57182004353EF /* SquareCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SquareCollectionCell.m; sourceTree = "<group>"; };
 		C3121CFF19B57197004353EF /* SquareCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SquareCollectionCell.xib; sourceTree = "<group>"; };
-		C320608D19E6B75600C80FF7 /* CSqlite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSqlite.h; sourceTree = "<group>"; };
-		C320608E19E6B75600C80FF7 /* CSqlite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSqlite.m; sourceTree = "<group>"; };
-		C320608F19E6B75600C80FF7 /* gps.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = gps.db; sourceTree = "<group>"; };
-		C320609319E6B75600C80FF7 /* sqlite3ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sqlite3ext.h; sourceTree = "<group>"; };
-		C320609819E6B81700C80FF7 /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sqlite3.h; sourceTree = "<group>"; };
 		C32B417F1965B5B8003979EE /* ShaiWaWa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShaiWaWa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C32B41821965B5B8003979EE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C32B41841965B5B8003979EE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1395,18 +1388,6 @@
 			path = UICollectionViewWaterfall;
 			sourceTree = "<group>";
 		};
-		C320608C19E6B75600C80FF7 /* Sqlite */ = {
-			isa = PBXGroup;
-			children = (
-				C320609819E6B81700C80FF7 /* sqlite3.h */,
-				C320608D19E6B75600C80FF7 /* CSqlite.h */,
-				C320608E19E6B75600C80FF7 /* CSqlite.m */,
-				C320608F19E6B75600C80FF7 /* gps.db */,
-				C320609319E6B75600C80FF7 /* sqlite3ext.h */,
-			);
-			path = Sqlite;
-			sourceTree = "<group>";
-		};
 		C32B41761965B5B8003979EE = {
 			isa = PBXGroup;
 			children = (
@@ -1619,7 +1600,6 @@
 				C3B578071A2379E400934BA4 /* PanNavigationController */,
 				488541DB19EEEEB100E9AAAB /* UICollectionViewWaterfall */,
 				F4C2D4D219EE44A100521BFE /* ELCImagePicker */,
-				C320608C19E6B75600C80FF7 /* Sqlite */,
 				F4A7781319DC09D0000F5401 /* PinYin4Objc */,
 				C362BFF519D6A23E00753082 /* AudioPlayer */,
 				C34E55E519D294CF0026E23D /* MLAudioRecorder */,
@@ -2917,7 +2897,6 @@
 				C398E00319A50016000F08DB /* PublishRecordViewController.xib in Resources */,
 				F432BE0719762AC80086BBE9 /* main_tianjiabaobei@2x.png in Resources */,
 				C3870F4319EBBD5E0030AD8B /* tel2@2x.png in Resources */,
-				C320609519E6B75600C80FF7 /* gps.db in Resources */,
 				F432BE4619762AC80086BBE9 /* square_shaiwawa@2x.png in Resources */,
 				F421621919D65B4A00F01C18 /* 男孩体重.plist in Resources */,
 				F432BE4C19762AC80086BBE9 /* square_zan-@2x.png in Resources */,
@@ -3179,7 +3158,6 @@
 				C350622F19D1315F0096006C /* HisFriendsViewController.m in Sources */,
 				C35DFB2219B4B7B80023B4CF /* QRCodeGenerator.m in Sources */,
 				C362C00219D6A23E00753082 /* AudioPlayer.m in Sources */,
-				C320609419E6B75600C80FF7 /* CSqlite.m in Sources */,
 				C360009F19AA427C00940421 /* GTMBase64.m in Sources */,
 				F4C2D4EF19EE44A100521BFE /* ELCImagePickerController.m in Sources */,
 				F43388141974C28600464D43 /* FinishRegisterViewController.m in Sources */,
